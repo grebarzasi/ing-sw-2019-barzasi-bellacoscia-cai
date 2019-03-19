@@ -2,5 +2,5 @@
 
 ### Members:
 * 10573032 - Gregorio Barzasi
-* 10560632 - Carlo Bellacoscia
+* 10560632 - 
 * 10499668 - Yuting Cai
