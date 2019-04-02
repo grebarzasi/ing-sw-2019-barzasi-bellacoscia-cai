@@ -1,12 +1,25 @@
-# ing-sw-2019-barzasi-bellacoscia-cai
+# Prova Finale Ingegneria del Software 2019
+## Gruppo AM14
 
-### Gruppo 
-14
+- ###   10573032    Gregorio Barzasi ([@grebarzasi](https://github.com/grebarzasi))<br>gregorio.barzasi@mail.polimi.it
+- ###   10560632    Carlo Bellacoscia ([@CarloBellacoscia](https://github.com/CarloBellacoscia))<br>carlo.bellacoscia@mail.polimi.it
+- ###   10499668    Yuting Cai ([@theodoretsai](https://github.com/theodoretsai))<br>https://github.com/theodoretsai
 
-### Scaglione 
-Margara
+| Functionality | State |
+|:-----------------------|:------------------------------------:|
+| Basic rules | [![YELLOW](https://placehold.it/15/ffdd00/ffdd00)](#) |
+| Complete rules | [![YELLOW](https://placehold.it/15/ffdd00/ffdd00)](#) |
+| Socket | [![YELLOW](https://placehold.it/15/ffdd00/ffdd00)](#) |
+| RMI | [![YELLOW](https://placehold.it/15/ffdd00/ffdd00)](#) |
+| GUI | [![YELLOW](https://placehold.it/15/ffdd00/ffdd00)](#) |
+| CLI | [![YELLOW](https://placehold.it/15/ffdd00/ffdd00)](#) |
+| Multiple games | [![RED](https://placehold.it/15/f03c15/f03c15)](#) |
+| Persistence | [![RED](https://placehold.it/15/f03c15/f03c15)](#) |
+| Domination or Towers modes | [![RED](https://placehold.it/15/f03c15/f03c15)](#) |
+| Terminator | [![YELLOW](https://placehold.it/15/ffdd00/ffdd00)](#) |
 
-### Members:
-* Barzasi - Gregorio - 868850 - 10573032 - gregorio.barzasi@mail.polimi.it
-* Bellacoscia - Carlo - 866884 - 10560632 - carlo.bellacoscia@mail.polimi.it
-* Cai - Yuting - 846381 - 10499668 - yutin.cai@mail.polimi.it
+<!--
+[![RED](https://placehold.it/15/f03c15/f03c15)](#)
+[![YELLOW](https://placehold.it/15/ffdd00/ffdd00)](#)
+[![GREEN](https://placehold.it/15/44bb44/44bb44)](#)
+-->
