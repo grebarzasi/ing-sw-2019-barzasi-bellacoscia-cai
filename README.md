@@ -3,7 +3,7 @@
 
 - ###   10573032    Gregorio Barzasi ([@grebarzasi](https://github.com/grebarzasi))<br>gregorio.barzasi@mail.polimi.it
 - ###   10560632    Carlo Bellacoscia ([@CarloBellacoscia](https://github.com/CarloBellacoscia))<br>carlo.bellacoscia@mail.polimi.it
-- ###   10499668    Yuting Cai ([@theodoretsai](https://github.com/theodoretsai))<br>https://github.com/theodoretsai
+- ###   10499668    Yuting Cai ([@theodoretsai](https://github.com/theodoretsai))<br>yuting.cai@mail.polimi.it
 
 | Functionality | State |
 |:-----------------------|:------------------------------------:|
