@@ -9,9 +9,9 @@ import java.util.Collection;
 
 public class Square {
 
-    private GameControllerServer master;
+    private GameControllerServer controller;
 
-    private Coordinates position;
+    private Cell position;
 
     //the room to which the square belongs
 
@@ -28,25 +28,21 @@ public class Square {
     //a square belonging to another room in a direction implies the presence of a door
     //a door concept is therefore not needed
 
+
     private Square north;
     private Square east;
     private Square south;
     private Square west;
 
-
-    public Square(GameControllerServer master) {
-        this.master = master;
-    }
-
-
-
-
-
-
     //temporary constructor
 
-    public void spawnRoom(Coordinates position, Room room, boolean isRespawn, Square north, Square east, Square south, Square west){
 
+    public Square(GameControllerServer controller, Cell position, Room room, boolean isRespawn) {
+        this(controller, position, room, isRespawn, null, null, null, null);
+    }
+
+    public Square(GameControllerServer controller, Cell position, Room room, boolean isRespawn, Square north, Square east, Square south, Square west) {
+        this.controller = controller;
         this.position = position;
         this.room = room;
         this.isRespawn = isRespawn;
@@ -54,13 +50,13 @@ public class Square {
         this.east = east;
         this.south = south;
         this.west = west;
-
     }
+
 
     public Collection<Player> playersInSquare(Square where){
         Collection<Player> playersHere = new ArrayList<>();
 
-        for (Player player : master.getPlayers()) {
+        for (Player player : controller.getPlayers()) {
             if (player.getPosition() == where) {
                 playersHere.add(player);
             }
@@ -89,13 +85,30 @@ public class Square {
         return west;
     }
 
-    public Coordinates getPosition() {
+    public Cell getPosition() {
         return position;
     }
 
     public boolean isReapawn() {
         return isRespawn;
     }
+
+    public void setNorth(Square north) {
+        this.north = north;
+    }
+
+    public void setEast(Square east) {
+        this.east = east;
+    }
+
+    public void setSouth(Square south) {
+        this.south = south;
+    }
+
+    public void setWest(Square west) {
+        this.west = west;
+    }
+
 }
 
 
