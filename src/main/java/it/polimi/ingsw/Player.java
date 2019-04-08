@@ -9,6 +9,8 @@ import java.util.*;
 
 public class Player {
 
+    private Terminator termRef;
+
     private String character;
 
     private String username;
