@@ -1,7 +1,7 @@
-package it.polimi.ingsw.main_board.map;
+package it.polimi.ingsw.Board;
 
-import it.polimi.ingsw.control.Master;
-import it.polimi.ingsw.main_board.Player;
+import it.polimi.ingsw.GameControllerServer;
+import it.polimi.ingsw.Player;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,7 +9,7 @@ import java.util.Collection;
 
 public class Square {
 
-    private Master master;
+    private GameControllerServer master;
 
     private Coordinates position;
 
@@ -34,7 +34,7 @@ public class Square {
     private Square west;
 
 
-    public Square(Master master) {
+    public Square(GameControllerServer master) {
         this.master = master;
     }
 

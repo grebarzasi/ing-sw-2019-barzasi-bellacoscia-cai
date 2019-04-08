@@ -1,4 +1,4 @@
-package it.polimi.ingsw.main_board.map;
+package it.polimi.ingsw.Board;
 
 public class Coordinates {
     private int x;

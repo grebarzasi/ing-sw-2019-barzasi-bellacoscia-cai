@@ -1,12 +1,13 @@
-package it.polimi.ingsw.control;
+package it.polimi.ingsw;
 
-import it.polimi.ingsw.main_board.Board;
+import it.polimi.ingsw.Board.Board;
 
-import java.util.*;
+import java.sql.Time;
+import java.util.ArrayList;
 
 public class GameControllerServer implements Controller {
 
-    private ArrayList<Player> playerArrayList;
+    private ArrayList<Player> playerList;
 
     private Player currentPlayer;
 
@@ -20,16 +21,16 @@ public class GameControllerServer implements Controller {
     public void setActions() {
     }
 
-    public void getStatus(Player) {
+    public void getStatus(Player p) {
     }
 
-    public void kill(Player) {
+    public void kill(Player p) {
     }
 
     public void finalFrenzy() {
     }
 
-    public void finalScore(Player) {
+    public void finalScore(Player p) {
     }
 
     public void update() {
@@ -41,4 +42,8 @@ public class GameControllerServer implements Controller {
     public void endTurn() {
     }
 
+
+    public ArrayList<Player> getPlayers() {
+        return this.playerList;
+    }
 }

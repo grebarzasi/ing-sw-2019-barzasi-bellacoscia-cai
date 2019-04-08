@@ -11,7 +11,7 @@ public class Token {
     }
 
     public Player getOwner() {
-
+        return this.owner;
     }
 
 }

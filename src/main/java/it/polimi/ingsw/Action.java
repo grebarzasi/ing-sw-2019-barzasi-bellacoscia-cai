@@ -1,4 +1,4 @@
-package it.polimi.ingsw.cards;
+package it.polimi.ingsw;
 
 import java.util.*;
 
@@ -11,6 +11,8 @@ public abstract class Action {
     public Action() {
     }
 
-    public static abstract void doAction();
+    public static void doAction(){
+
+    }
 
 }

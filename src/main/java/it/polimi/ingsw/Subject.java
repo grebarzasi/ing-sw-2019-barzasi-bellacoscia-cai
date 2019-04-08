@@ -16,7 +16,7 @@ public class Subject {
     public void move() {
     }
 
-    public void notify() {
+    public void notifyObserver() {
 
     }
 

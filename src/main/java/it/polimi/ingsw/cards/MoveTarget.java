@@ -1,4 +1,4 @@
-package it.polimi.ingsw.control;
+package it.polimi.ingsw.cards;
 
 import it.polimi.ingsw.cards.Effect;
 
@@ -9,6 +9,8 @@ public class MoveTarget implements Effect {
     public MoveTarget() {
     }
 
-    public abstract void applyEffect();
+    public void applyEffect(){
+
+    }
 
 }

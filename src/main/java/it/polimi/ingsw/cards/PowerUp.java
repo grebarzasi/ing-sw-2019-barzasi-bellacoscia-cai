@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.cards;
 
 import java.util.*;
 
@@ -8,7 +8,7 @@ public abstract class PowerUp implements Card {
 
     private Ammo ammoOnDiscard;
 
-    private void name: String;
+    private String name;
 
     public PowerUp() {
     }

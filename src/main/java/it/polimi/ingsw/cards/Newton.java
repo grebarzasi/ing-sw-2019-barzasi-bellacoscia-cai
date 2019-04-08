@@ -7,6 +7,8 @@ public class Newton extends PowerUp {
     public Newton() {
     }
 
-    public static void effect();
+    public static void effect(){
+
+    }
 
 }

@@ -1,5 +1,7 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.Board;
 
+import it.polimi.ingsw.Token;
+import it.polimi.ingsw.cards.Ammo;
 import java.util.*;
 
 public class PlayerBoard {
@@ -16,25 +18,25 @@ public class PlayerBoard {
     }
 
 
-    public void addDamage(Token) {
+    public void addDamage(Token t) {
     }
 
     public void resetDamage() {
     }
 
-    public void addMark(Token) {
+    public void addMark(Token t) {
     }
 
-    public void removeMark(Token) {
+    public void removeMark(Token t) {
     }
 
     public void addSkull() {
     }
 
-    public void addAmmo(Ammo) {
+    public void addAmmo(Ammo a) {
     }
 
-    public void removeAmmo(Ammo) {
+    public void removeAmmo(Ammo a) {
     }
 
     public void getPoints() {

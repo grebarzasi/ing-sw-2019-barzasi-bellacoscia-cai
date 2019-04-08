@@ -1,13 +1,13 @@
 package it.polimi.ingsw;
 
-import java.util.*;
+import it.polimi.ingsw.cards.Weapon;
 
 public class ShootFrenzy extends Action {
 
     public ShootFrenzy() {
     }
 
-    public void shoot(Weapon){
+    public void shoot(Weapon w){
 
     }
 

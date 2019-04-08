@@ -1,4 +1,4 @@
-package it.polimi.ingsw.main_board.player_board;
+package it.polimi.ingsw;
 
 import java.util.*;
 
