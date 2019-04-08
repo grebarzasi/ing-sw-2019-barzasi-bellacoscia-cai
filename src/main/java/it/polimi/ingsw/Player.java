@@ -47,10 +47,10 @@ public class Player {
      */
     public boolean canSee(Player p) {
         return getPosition().getRoom() == p.getPosition().getRoom() ||
-                getPosition().getNorth() == p.getPosition() ||
-                getPosition().getEast() == p.getPosition() ||
-                getPosition().getWest() == p.getPosition() ||
-                getPosition().getSouth() == p.getPosition();
+                getPosition().getNorth().getRoom() == p.getPosition().getRoom() ||
+                getPosition().getEast().getRoom() == p.getPosition().getRoom() ||
+                getPosition().getWest().getRoom() == p.getPosition().getRoom() ||
+                getPosition().getSouth().getRoom() == p.getPosition().getRoom();
 
     }
 
