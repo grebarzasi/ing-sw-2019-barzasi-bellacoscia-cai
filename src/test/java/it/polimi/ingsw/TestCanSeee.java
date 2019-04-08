@@ -31,10 +31,7 @@ public class TestCanSeee {
 
         Player player1 = new Player("1", "A", square1);
         Player player2 = new Player("1", "A", square2);
-
-       //System.out.println(player1.getPosition().getRoom());
-        //System.out.println(player2.getPosition().getRoom());
-        //System.out.println(player1.getPosition())
+        
 
         assertTrue(player1.canSee(player2));
 

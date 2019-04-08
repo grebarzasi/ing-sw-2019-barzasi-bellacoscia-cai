@@ -45,6 +45,7 @@ public class Player {
      * @param p    the other player
      * @return true if the current player can see the other one; false otherwise
      */
+
     public boolean canSee(Player p) {
         if (getPosition().getRoom() == p.getPosition().getRoom()) {
             return true;
