@@ -1,4 +1,6 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.cards;
+
+import it.polimi.ingsw.cards.Card;
 
 import java.util.*;
 

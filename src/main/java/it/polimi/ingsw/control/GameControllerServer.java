@@ -1,4 +1,6 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.control;
+
+import it.polimi.ingsw.main_board.Board;
 
 import java.util.*;
 

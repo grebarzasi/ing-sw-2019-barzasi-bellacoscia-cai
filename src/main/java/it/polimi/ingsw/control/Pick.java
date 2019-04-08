@@ -1,6 +1,7 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.control;
 
-import java.util.*;
+import it.polimi.ingsw.cards.Action;
+import it.polimi.ingsw.cards.Card;
 
 public class Pick extends Action {
 

@@ -1,6 +1,6 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.control;
 
-import java.util.*;
+import it.polimi.ingsw.cards.Effect;
 
 public class MoveTarget implements Effect {
 
