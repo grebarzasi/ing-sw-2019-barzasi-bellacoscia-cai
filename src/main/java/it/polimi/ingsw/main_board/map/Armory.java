@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.main_board.map;
 
 import java.util.*;
 

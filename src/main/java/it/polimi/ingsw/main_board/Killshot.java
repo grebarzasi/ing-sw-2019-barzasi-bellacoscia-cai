@@ -1,6 +1,4 @@
-package it.polimi.ingsw;
-
-import java.util.*;
+package it.polimi.ingsw.main_board;
 
 public class Killshot track {
 
