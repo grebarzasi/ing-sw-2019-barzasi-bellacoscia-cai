@@ -34,12 +34,16 @@ public class Square {
     private Square south;
     private Square west;
 
-    //temporary constructor
 
+    //temporary constructor
+    //since the sides of a Square require other Squares they must be first set at null
+    //they must be set after all squares have been instantiated
 
     public Square(GameControllerServer controller, Cell position, Room room, boolean isRespawn) {
         this(controller, position, room, isRespawn, null, null, null, null);
     }
+
+
 
     public Square(GameControllerServer controller, Cell position, Room room, boolean isRespawn, Square north, Square east, Square south, Square west) {
         this.controller = controller;
