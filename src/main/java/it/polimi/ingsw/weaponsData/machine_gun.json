@@ -1,0 +1,63 @@
+{
+  "name": "Mitragliatrice",
+  "chamber": {
+    "blue": 1
+  },
+  "reload": {
+    "blue": 1,
+    "red": 1
+  },
+  "effects": {
+    "basic": {
+      "1": {
+        "targetAcq": {
+          "visible": true,
+          "num": 1
+        },
+        "targetShot": {
+          "damage": 1
+        }
+      },
+      "2": {
+        "targetAcq": {
+          "visible": true,
+          "different": ["base"],
+          "num": 1
+        },
+        "targetShot": {
+          "mark": 1
+        }
+    },
+    "addOne": {
+      "cost": {
+        "yellow": 1
+      },
+      "1":{
+        "targetAcq": {
+          "different": ["addOne"],
+          "equals": ["basic"],
+          "num": 1
+        },
+        "targetShot": {
+          "damage": 1
+        }
+      }
+    },
+    "addTwo": {
+      "cost": {
+        "yellow": 1
+      },
+      "1":{
+        "targetAcq": {
+          "different": false,
+          "num": 1
+        },
+        "targetShot": {
+          "damage": 1
+        }
+      }
+
+    }
+  }
+}
+
