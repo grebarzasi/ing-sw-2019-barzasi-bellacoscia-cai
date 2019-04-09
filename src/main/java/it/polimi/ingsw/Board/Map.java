@@ -10,7 +10,7 @@ public class Map {
 
 
     //takes the selection and initiates squareMatrix with the squares corresponding to the selected map
-
+    //mock commit
 
     public Map(Square[][] squareMatrix, Room[] roomList) {
         this.squareMatrix = squareMatrix;
