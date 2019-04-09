@@ -47,13 +47,25 @@ public class Player {
      * @param p    the other player
      * @return true if the current player can see the other one; false otherwise
      */
-    public boolean canSee(Player p) {
-        return getPosition().getRoom() == p.getPosition().getRoom() ||
-                getPosition().getNorth() == p.getPosition() ||
-                getPosition().getEast() == p.getPosition() ||
-                getPosition().getWest() == p.getPosition() ||
-                getPosition().getSouth() == p.getPosition();
 
+    public boolean canSee(Player p) {
+        if (getPosition().getRoom() == p.getPosition().getRoom()) {
+            return true;
+
+        } else if (getPosition().getNorth() != null && getPosition().getNorth().getRoom() == p.getPosition().getRoom()) {
+            return true;
+
+        } else if (getPosition().getEast() != null && getPosition().getEast().getRoom() == p.getPosition().getRoom()) {
+            return true;
+
+        } else if (getPosition().getWest() != null && getPosition().getWest().getRoom() == p.getPosition().getRoom()) {
+            return true;
+
+        } else if (getPosition().getSouth() != null && getPosition().getSouth().getRoom() == p.getPosition().getRoom()) {
+            return true;
+        }
+
+        return false;
     }
 
 

@@ -1,10 +1,10 @@
 package it.polimi.ingsw.Board;
 
-public class Coordinates {
+public class Cell {
     private int x;
     private int y;
 
-    public Coordinates(int x, int y) {
+    public Cell(int x, int y) {
         this.x = x;
         this.y = y;
     }
