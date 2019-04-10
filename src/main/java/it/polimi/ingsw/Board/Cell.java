@@ -9,11 +9,6 @@ public class Cell {
         this.y = y;
     }
 
-    public boolean equals(Coordinates c){
-        if ((this.x == c.x)&&(this.y==c.y))
-            return true;
-        return false;
-    }
 
     public int getX() {
         return x;
