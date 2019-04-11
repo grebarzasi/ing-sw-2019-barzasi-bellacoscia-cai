@@ -1,9 +1,9 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.Board.PlayerBoard;
-import it.polimi.ingsw.Board.Square;
+import it.polimi.ingsw.board.PlayerBoard;
+import it.polimi.ingsw.board.Square;
 import it.polimi.ingsw.cards.PowerUp;
-import it.polimi.ingsw.cards.Weapon;
+import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.util.*;
 

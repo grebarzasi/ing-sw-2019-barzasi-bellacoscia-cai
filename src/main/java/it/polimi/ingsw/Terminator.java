@@ -1,6 +1,6 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.Board.Square;
+import it.polimi.ingsw.board.Square;
 
 public class Terminator {
 

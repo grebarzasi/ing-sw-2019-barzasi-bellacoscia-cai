@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Board;
+package it.polimi.ingsw.board;
 
 import it.polimi.ingsw.Token;
 import it.polimi.ingsw.cards.Ammo;

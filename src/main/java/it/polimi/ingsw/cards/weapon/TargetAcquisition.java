@@ -1,8 +1,6 @@
-package it.polimi.ingsw.cards;
+package it.polimi.ingsw.cards.weapon;
 
-import java.util.*;
-
-public class TargetAcquisition implements Effect {
+public class TargetAcquisition implements SubEffect {
 
 
     private boolean visible;

@@ -1,6 +1,6 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.Board.Board;
+import it.polimi.ingsw.board.Board;
 
 import java.sql.Time;
 import java.util.ArrayList;

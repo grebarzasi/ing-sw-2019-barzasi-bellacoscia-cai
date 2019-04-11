@@ -1,12 +1,9 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.Board.Cell;
-import it.polimi.ingsw.Board.Room;
-import it.polimi.ingsw.Board.Square;
+import it.polimi.ingsw.board.Cell;
+import it.polimi.ingsw.board.Room;
+import it.polimi.ingsw.board.Square;
 import org.junit.Test;
-
-import java.sql.Time;
-import java.util.ArrayList;
 
 import static org.junit.Assert.assertTrue;
 

@@ -1,6 +1,6 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.cards.Weapon;
+import it.polimi.ingsw.cards.weapon.Weapon;
 
 public class Reload extends Action {
 

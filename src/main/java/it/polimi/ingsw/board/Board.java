@@ -1,8 +1,6 @@
-package it.polimi.ingsw.Board;
+package it.polimi.ingsw.board;
 
 import it.polimi.ingsw.Subject;
-
-import java.util.*;
 
 public class Board extends Subject {
 

@@ -1,6 +1,6 @@
-package it.polimi.ingsw.Board;
+package it.polimi.ingsw.board;
 
-import it.polimi.ingsw.cards.Weapon;
+import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.util.*;
 
