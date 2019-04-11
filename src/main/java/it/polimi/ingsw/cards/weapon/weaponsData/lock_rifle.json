@@ -1,0 +1,45 @@
+{
+    "name": "Distruttore",
+    "chamber": {
+      "blue": 1
+    },
+    "reload": {
+      "blue": 2
+    },
+    "effects": {
+      "basic": {
+        "1": {
+          "isVisible":{
+            "visible":true
+          },
+          "askPlayer":{
+            "number":1
+          },
+          "shootTarget": {
+            "damage": 1,
+            "mark": 1
+          }
+        }
+      },
+      "addOne": {
+        "cost": {
+          "red": 1
+        },
+        "1":{
+          "isVisible":{
+            "visible":true
+          },
+          "compare": {
+             "different": ["last"]
+            },
+          "askPlayer":{
+            "number":1
+          },
+          "shootTarget": {
+            "damage": 1
+          }
+        }
+      }
+    }
+}
+
