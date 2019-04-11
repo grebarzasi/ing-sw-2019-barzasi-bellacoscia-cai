@@ -1,9 +1,9 @@
 package it.polimi.ingsw;
 
 
-import it.polimi.ingsw.Board.Cell;
+import it.polimi.ingsw.board.Cell;
 
-import static it.polimi.ingsw.Board.Map.initiateTerrain;
+import static it.polimi.ingsw.board.Map.initiateTerrain;
 
 /**
  * Hello world!

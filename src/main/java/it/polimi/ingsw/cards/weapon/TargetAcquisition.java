@@ -1,20 +1,23 @@
 package it.polimi.ingsw.cards.weapon;
 
-public class TargetAcquisition implements SubEffect {
+import it.polimi.ingsw.Player;
+
+import java.util.ArrayList;
+
+/**
+ *Used by {@link Effect} class to aim the effect to a specific target.
+ * Works by "filtering" step by step the available target.
+ * @author Gregorio Barzasi
+ */
+
+public abstract class TargetAcquisition implements SubEffect {
 
 
-    private boolean visible;
 
-    private int minRange;
+    private ArrayList<Player> target;
+    private ArrayList<TargetAcquisition> aimRoutine;
 
-    private int maxRange;
-
-    private String direction;
-
-    public TargetAcquisition() {
-
-    }
-
+    public abstract void filter();
     public void applyEffect(){
 
     }

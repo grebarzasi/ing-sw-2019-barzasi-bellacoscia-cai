@@ -6,6 +6,14 @@ import it.polimi.ingsw.cards.Card;
 
 import java.util.*;
 
+/**
+ * Represent the weapon in our model.
+ * Uses {@link Effect} class to implement effects information (e.g cost, damage, aiming...)
+ *
+ * @author Gregorio Barzasi
+ */
+
+
 public abstract class Weapon implements Card {
 
     private String name;
@@ -13,17 +21,19 @@ public abstract class Weapon implements Card {
 
     private boolean loaded;
 
-    //List of subEffect and corresponding Target selected in the execution of the effect
-    //Effects works like a chain of "sub effects".
     private Effect basicEffect;
     private Effect addOneEffect;
     private Effect addTwoEffect;
     private Effect alternativeEffect;
 
-    //additional move that can be done at any point if necessary
+    /**
+     * easy way for implementing the "move before or after" other effect.
+     */
     private Effect extraMove;
 
-    //saves the last Target hit
+    /**
+     * used in some effect in order to act as a chain.
+     */
     private Player lastHit;
 
 
