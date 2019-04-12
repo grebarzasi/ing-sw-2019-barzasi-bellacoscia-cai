@@ -12,7 +12,8 @@ import java.util.ArrayList;
 
 
 public class AimDifferent extends TargetAcquisition {
-    private ArrayList<ArrayList<Player>> sourceList;
+    private ArrayList<String> sourceList;
+    private ArrayList<ArrayList<Player>> returnList;
 
     public void filter() {
 

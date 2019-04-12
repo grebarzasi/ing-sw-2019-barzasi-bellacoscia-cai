@@ -10,7 +10,9 @@ import java.util.ArrayList;
  * @author Gregorio Barzasi
  */
 public class AimEqual extends TargetAcquisition {
-    private ArrayList<ArrayList<Player>> sourceList;
+    private ArrayList<String> sourceList;
+    private ArrayList<ArrayList<Player>> returnList;
+
 
     public void filter() {
 

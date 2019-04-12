@@ -14,12 +14,12 @@ import java.util.*;
  */
 
 
-public abstract class Weapon implements Card {
+public class Weapon implements Card {
 
     private String name;
     private Ammo chamber;
 
-    private boolean loaded;
+    private boolean loaded=false;
 
     private Effect basicEffect;
     private Effect addOneEffect;
@@ -37,18 +37,88 @@ public abstract class Weapon implements Card {
     private Player lastHit;
 
 
-    public Weapon() {
+    public Weapon(String name,Ammo chamber) {
+        this.name=name;
+        this.chamber=chamber;
     }
 
-    public abstract void basic();
+    public void basic(){}
 
-    public abstract void alternative();
+    public void alternative(){}
 
-    public abstract void additionalOne();
+    public void additionalOne(){}
 
-    public abstract void additionalTwo();
+    public void additionalTwo(){}
 
     public void buildWeapon() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Ammo getChamber() {
+        return chamber;
+    }
+
+    public boolean isLoaded() {
+        return loaded;
+    }
+
+    public void setLoaded(boolean loaded) {
+        this.loaded = loaded;
+    }
+
+    public Effect getBasicEffect() {
+        return basicEffect;
+    }
+
+    public void setBasicEffect(Effect basicEffect) {
+        this.basicEffect = basicEffect;
+    }
+
+    public Effect getAddOneEffect() {
+        return addOneEffect;
+    }
+
+    public void setAddOneEffect(Effect addOneEffect) {
+        this.addOneEffect = addOneEffect;
+    }
+
+    public Effect getAddTwoEffect() {
+        return addTwoEffect;
+    }
+
+    public void setAddTwoEffect(Effect addTwoEffect) {
+        this.addTwoEffect = addTwoEffect;
+    }
+
+    public Effect getAlternativeEffect() {
+        return alternativeEffect;
+    }
+
+    public void setAlternativeEffect(Effect alternativeEffect) {
+        this.alternativeEffect = alternativeEffect;
+    }
+
+    public Effect getExtraMove() {
+        return extraMove;
+    }
+
+    public void setExtraMove(Effect extraMove) {
+        this.extraMove = extraMove;
+    }
+
+    public Player getLastHit() {
+        return lastHit;
+    }
+
+    public void setLastHit(Player lastHit) {
+        this.lastHit = lastHit;
     }
 
     public void fetch() {

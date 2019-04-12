@@ -3,11 +3,11 @@
     "chamber": {
       "blue": 1
     },
-    "reload": {
-      "blue": 2
-    },
     "effects": {
       "basic": {
+        "cost": {
+          "red": 1
+        },
         "1": {
           "isVisible":{
             "visible":true
@@ -25,19 +25,23 @@
         "cost": {
           "red": 1
         },
-        "1":{
-          "isVisible":{
-            "visible":true
-          },
-          "compare": {
-             "different": ["last"]
-            },
-          "askPlayer":{
-            "number":1
-          },
-          "shootTarget": {
-            "damage": 1
-          }
+        "subEffects":{
+            "1": {
+              "isVisible": {
+                "visible": true
+              },
+              "compare": {
+                "different": [
+                  "last"
+                ]
+              },
+              "askPlayer": {
+                "number": 1
+              },
+              "shootTarget": {
+                "damage": 1
+              }
+            }
         }
       }
     }
