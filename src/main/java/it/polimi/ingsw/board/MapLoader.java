@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Board;
+package it.polimi.ingsw.board;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
