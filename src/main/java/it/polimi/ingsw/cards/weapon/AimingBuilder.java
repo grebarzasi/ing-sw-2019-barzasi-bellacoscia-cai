@@ -37,7 +37,7 @@ public class AimingBuilder {
                     break;
 
                 case "range":
-                    aimRoutine.add(new AimRange(aimFilterNode.path("min").asInt(), aimFilterNode.path("max").asInt()));
+                    aimRoutine.add(buildRange(aimFilterNode));
                     break;
 
                 case "direction":
@@ -49,8 +49,7 @@ public class AimingBuilder {
                     break;
             }
         }
-
-        return null;
+        return new TargetAcquisition(aimRoutine);
     }
 
     /**
@@ -116,7 +115,24 @@ public class AimingBuilder {
             boolean fromDiffSquare = node.path("diffSquare").asBoolean();
             return new AimAskPlayer(numMax, fromDiffSquare);
         } catch (NullPointerException e) {
-            throw new NullPointerException("Bad json");
+            throw new NullPointerException("Bad json in AskPlayer");
+        }
+    }
+
+    /**
+     * Method that build the AimEqual filter.
+     *
+     * @param node containing well built json
+     * @return {@link AimEqual} Object
+     */
+
+    public static AimRange buildRange(JsonNode node) {
+        try {
+            Integer minRange = node.path("min").asInt();
+            Integer maxRange = node.path("max").asInt();
+            return new AimRange(minRange, maxRange);
+        } catch (NullPointerException e) {
+            throw new NullPointerException("Bad json in BuildRange");
         }
     }
 }

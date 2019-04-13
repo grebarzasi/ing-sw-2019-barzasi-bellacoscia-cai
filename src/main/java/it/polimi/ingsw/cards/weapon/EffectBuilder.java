@@ -2,6 +2,7 @@ package it.polimi.ingsw.cards.weapon;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import it.polimi.ingsw.cards.Ammo;
+import it.polimi.ingsw.cards.weapon.aiming.AimRange;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -19,36 +20,38 @@ public class EffectBuilder {
 
     public static Effect buildEffect(JsonNode effectsNode){
         //initialize effect cost
-        JsonNode costNode = effectsNode.get("cost");
-        Ammo cost = new Ammo(costNode.get("red").asInt(),costNode.get("blue").asInt(),costNode.get("yellow").asInt());
+        Ammo cost = buildCost(effectsNode.get("cost"));
 
-        //generate subEffect
+        /*_BUILD THE ACTUAL EFFECT_*/
+
+        //generate subEffect numeration Node and iterate
         JsonNode subEffNumerationNode = effectsNode.get("subEffects");
-
-        //iterate on sub effect Numeration Node
         Iterator<String> numIterator = subEffNumerationNode.fieldNames();
+
         while(numIterator.hasNext()) {
+            String numeration = numIterator.next();
 
-            //iterate on subEffect Node for each numeration
-            JsonNode subEffNode = subEffNumerationNode.get(numIterator.next());
-            Iterator<String> atomicIterator = subEffNode.fieldNames();
+            //NOW iterate on REAL subEffect Node for each numeration
+            JsonNode subEffNode = subEffNumerationNode.get(numeration);
+            Iterator<String> subEffIterator = subEffNode.fieldNames();
+            while(subEffIterator.hasNext()) {
+                String subEff = subEffIterator.next();
 
-            while(atomicIterator.hasNext()) {
-                switch(atomicIterator.next()) {
+                switch(subEff) {
 
                     //set target acq
                     case "targetAcq":
-                        subEffList.add(AimingBuilder.buildTargetAcquisition(subEffNode.get("targetAcq")));
+                        subEffList.add(AimingBuilder.buildTargetAcquisition(subEffNode.path("targetAcq")));
                         break;
 
                     //set damage and mark
                     case "shootTarget":
-                        subEffList.add(buildShootTarget(subEffNode.get("shootTarget")));
+                        subEffList.add(buildShootTarget(subEffNode.path("shootTarget")));
                         break;
 
                     //set move
                     case "moveTarget":
-                        subEffList.add(buildMoveTarget(subEffNode.get("moveTarget")));
+                        subEffList.add(buildMoveTarget(subEffNode.path("moveTarget")));
                         break;
                 }
             }
@@ -57,12 +60,19 @@ public class EffectBuilder {
         return new Effect(cost,subEffList);
     }
 
-    public static MoveTarget buildMoveTarget(JsonNode moveNode){
-        return null;
+    public static MoveTarget buildMoveTarget(JsonNode node){
+        Integer maxStep = node.path("maxStep").asInt();
+        return new MoveTarget(maxStep);
     }
 
-    public static ShootTarget buildShootTarget(JsonNode shootNode){
-        return null;
+    public static ShootTarget buildShootTarget(JsonNode node){
+            Integer damage = node.path("damage").asInt();
+            Integer mark = node.path("mark").asInt();
+            return new ShootTarget(damage, mark);
+    }
+
+    public static Ammo buildCost(JsonNode node){
+        return new Ammo(node.path("red").asInt(),node.path("blue").asInt(),node.path("yellow").asInt());
     }
 
 }

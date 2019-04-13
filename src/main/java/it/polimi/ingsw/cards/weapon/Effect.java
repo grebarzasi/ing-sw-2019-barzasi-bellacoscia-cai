@@ -22,6 +22,14 @@ public class Effect {
         this.used= false;
     }
 
+    public Ammo getCost() {
+        return cost;
+    }
+
+    public ArrayList<SubEffect> getEffectList() {
+        return effectList;
+    }
+
     public void executeEffect(){
     }
 

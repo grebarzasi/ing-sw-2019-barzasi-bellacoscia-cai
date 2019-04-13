@@ -2,10 +2,7 @@ package it.polimi.ingsw.cards.weapon;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import it.polimi.ingsw.cards.weapon.aiming.AimAskPlayer;
-import it.polimi.ingsw.cards.weapon.aiming.AimDifferent;
-import it.polimi.ingsw.cards.weapon.aiming.AimEqual;
-import it.polimi.ingsw.cards.weapon.aiming.AimVisible;
+import it.polimi.ingsw.cards.weapon.aiming.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,11 +20,18 @@ public class AimingBuilderTest {
     @Test
     public void BuildTargetAcquisition() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        String newString = "{\"isVisible\":{\"visible\":\"true\"},\"different\":[\"ciao\",\"prova\"],\"direction\":null}";
+        String newString = "{\"isVisible\":{\"visible\":true},\"different\":[\"ciao\",\"prova\"]," +
+                "\"equal\":[\"ciao\",\"prova\"],\"direction\":null,\"askPlayer\":{\"num\":3}" +
+                ",\"range\":{\"min\":3}}";
         JsonNode newNode = mapper.readTree(newString);
-        System.out.println(newNode);
         TargetAcquisition target = AimingBuilder.buildTargetAcquisition(newNode);
-        assertTrue(true);
+        assertTrue(target instanceof TargetAcquisition);
+        assertTrue(target.getAimRoutine().get(0) instanceof AimVisible);
+        assertTrue(target.getAimRoutine().get(1) instanceof AimDifferent);
+        assertTrue(target.getAimRoutine().get(2) instanceof AimEqual);
+        assertTrue(target.getAimRoutine().get(3) instanceof AimDirection);
+        assertTrue(target.getAimRoutine().get(4) instanceof AimAskPlayer);
+        assertTrue(target.getAimRoutine().get(5) instanceof AimRange);
 
     }
 
@@ -106,5 +110,37 @@ public class AimingBuilderTest {
         AimAskPlayer target = AimingBuilder.buildAskPlayer(newNode);
         assertTrue(target.isFromDiffSquare());
         assertEquals(3,(int)target.getNumMax());
+    }
+
+
+    /**BUILD RANGE
+     * Method that build the Range filter.
+     *
+     */
+    @Test
+    public void buildRangeComplete() throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        String newString = "{\"min\":3,\"max\":\"5\"}";
+        JsonNode newNode = mapper.readTree(newString);
+        AimRange target = AimingBuilder.buildRange(newNode);
+        assertEquals(3,(int)target.getMinDistance());
+        assertEquals(5,(int)target.getMaxDistance());
+    }
+
+    @Test
+    public void buildRangeSingle() throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        //min
+        String newStringMin = "{\"min\":3}";
+        JsonNode newNodeMin = mapper.readTree(newStringMin);
+        AimRange targetMin = AimingBuilder.buildRange(newNodeMin);
+        assertEquals(3,(int)targetMin.getMinDistance());
+        assertEquals(0,(int)targetMin.getMaxDistance());
+        //max
+        String newStringMax = "{\"max\":5}";
+        JsonNode newNodeMax = mapper.readTree(newStringMax);
+        AimRange targetMax = AimingBuilder.buildRange(newNodeMax);
+        assertEquals(5,(int)targetMax.getMaxDistance());
+        assertEquals(0,(int)targetMax.getMinDistance());
     }
 }

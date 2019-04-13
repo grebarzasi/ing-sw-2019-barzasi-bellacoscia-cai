@@ -14,9 +14,18 @@ import java.util.ArrayList;
  */
 public class AimRange implements AimingFilter {
 
+
+
     private Integer minDistance;
     private Integer maxDistance;
 
+    public Integer getMinDistance() {
+        return minDistance;
+    }
+
+    public Integer getMaxDistance() {
+        return maxDistance;
+    }
     public AimRange(Integer minDistance, Integer maxDistance) {
         this.minDistance = minDistance;
         this.maxDistance = maxDistance;
