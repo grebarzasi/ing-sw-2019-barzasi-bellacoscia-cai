@@ -9,15 +9,17 @@ import java.io.IOException;
 import java.util.Iterator;
 
 /**
+ * class that create a single weapon given the name. It parse a json file containing weapon info.
+ * Uses {@link EffectBuilder} to parse and create the chain of effect.
  * @author Gregorio Barzasi
  */
 public class WeaponBuilder {
-    private static String path = "\\weaponsData\\";
     private static Weapon weaponBuilt;
 
     public static Weapon buildWeapon(String name) {
-
         ObjectMapper mapper = new ObjectMapper();
+        // path of weapons data
+        String path = "\\weaponsData\\";
         File jsonFile = new File(String.format("%s%s.json", path, name));
         try {
 

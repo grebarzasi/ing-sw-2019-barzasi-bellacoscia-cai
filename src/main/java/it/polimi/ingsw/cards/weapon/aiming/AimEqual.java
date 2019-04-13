@@ -1,6 +1,7 @@
 package it.polimi.ingsw.cards.weapon.aiming;
 
 import it.polimi.ingsw.Player;
+import it.polimi.ingsw.cards.weapon.AimingFilter;
 import it.polimi.ingsw.cards.weapon.TargetAcquisition;
 
 import java.util.ArrayList;
@@ -9,12 +10,21 @@ import java.util.ArrayList;
  *
  * @author Gregorio Barzasi
  */
-public class AimEqual extends TargetAcquisition {
+public class AimEqual implements AimingFilter {
     private ArrayList<String> sourceList;
     private ArrayList<ArrayList<Player>> returnList;
 
+    public AimEqual(ArrayList<String> sourceList){
+        this.sourceList=sourceList;
 
-    public void filter() {
+    }
+
+
+    public ArrayList<String> getSourceList() {
+        return sourceList;
+    }
+    public ArrayList<Player> filter() {
+        return null;
 
     }
 }

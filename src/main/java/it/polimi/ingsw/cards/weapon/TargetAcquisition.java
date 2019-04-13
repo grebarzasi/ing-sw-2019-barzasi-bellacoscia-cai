@@ -10,14 +10,26 @@ import java.util.ArrayList;
  * @author Gregorio Barzasi
  */
 
-public abstract class TargetAcquisition implements SubEffect {
+public class TargetAcquisition implements SubEffect {
 
 
 
     private ArrayList<Player> target;
-    private ArrayList<TargetAcquisition> aimRoutine;
+    private ArrayList<AimingFilter> aimRoutine;
 
-    public abstract void filter();
+    public TargetAcquisition( ArrayList<AimingFilter> aimRoutine){
+        this.aimRoutine=aimRoutine;
+
+    }
+
+    public ArrayList<Player> getTarget() {
+        return target;
+    }
+
+    public ArrayList<AimingFilter> getAimRoutine() {
+        return aimRoutine;
+    }
+
     public void applyEffect(){
 
     }

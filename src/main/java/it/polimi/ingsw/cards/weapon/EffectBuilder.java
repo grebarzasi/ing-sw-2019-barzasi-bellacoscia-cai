@@ -7,12 +7,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
+ * class that create a weapon effect given the jsonNode of that effect . It parse the jsonNode creating the effect chain.
+ * Uses {@link AimingBuilder} to parse and create the chain of filters needed for aiming a target.
  * @author Gregorio Barzasi
  */
 public class EffectBuilder {
 
     //create subEffect array
-    private static  ArrayList<SubEffect> subEffList = new ArrayList<SubEffect>();
+    private static  ArrayList<SubEffect> subEffList = new ArrayList<>();
 
 
     public static Effect buildEffect(JsonNode effectsNode){
@@ -36,7 +38,7 @@ public class EffectBuilder {
 
                     //set target acq
                     case "targetAcq":
-                        subEffList.add(buildTargetAcquisition(subEffNode.get("targetAcq")));
+                        subEffList.add(AimingBuilder.buildTargetAcquisition(subEffNode.get("targetAcq")));
                         break;
 
                     //set damage and mark
@@ -60,10 +62,6 @@ public class EffectBuilder {
     }
 
     public static ShootTarget buildShootTarget(JsonNode shootNode){
-        return null;
-    }
-
-    public static TargetAcquisition buildTargetAcquisition(JsonNode targetNode){
         return null;
     }
 
