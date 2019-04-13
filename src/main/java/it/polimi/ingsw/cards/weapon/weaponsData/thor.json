@@ -1,0 +1,61 @@
+{
+  "name": "Torpedine",
+  "chamber": {
+    "blue": 1
+  },
+  "reload": {
+    "blue": 1,
+    "red": 1
+  },
+  "effects": {
+    "basic": {
+      "1": {
+        "isVisible": {
+          "visible": true
+        },
+        "askPlayer":{
+          "number":1
+        },
+        "shootTarget": {
+          "damage": 2
+        }
+      }
+    },
+    "addOne": {
+      "cost": {
+        "blue": 1
+      },
+      "1": {
+        "isVisible":{
+          "visible": true,
+          "from": "Last"
+        },
+        "askPlayer": {
+          "number":1
+        },
+        "shootTarget": {
+          "damage": 1
+        }
+      }
+    },
+    "addTwo": {
+      "cost": {
+        "blue": 1
+      },
+      "1": {
+        "isVisible": {
+          "visible": true,
+          "from": "Last"
+        },
+        "different": ["last"],
+        "askPlayer": {
+          "number": 1
+        },
+        "shootTarget": {
+          "damage": 1
+        }
+      }
+    }
+  }
+}
+
