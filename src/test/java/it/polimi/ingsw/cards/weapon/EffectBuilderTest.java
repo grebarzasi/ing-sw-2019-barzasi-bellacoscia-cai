@@ -3,11 +3,9 @@ package it.polimi.ingsw.cards.weapon;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.polimi.ingsw.cards.Ammo;
-import it.polimi.ingsw.cards.weapon.aiming.AimRange;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
