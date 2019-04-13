@@ -6,7 +6,7 @@ import it.polimi.ingsw.board.Cell;
 import static it.polimi.ingsw.board.Map.initiateTerrain;
 
 /**
- * Hello world!
+ * Hello world! test
  *
  */
 public class App 
