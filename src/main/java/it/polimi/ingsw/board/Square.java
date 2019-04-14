@@ -6,6 +6,10 @@ import it.polimi.ingsw.Player;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ *represents a square in the game as is
+ */
+
 
 public class Square {
 
@@ -23,10 +27,11 @@ public class Square {
     private boolean isRespawn;
 
 
-    //the square adjacent to this in that direction
-    //in case of a wall or an edge of the map the field is NULL
-    //a square belonging to another room in a direction implies the presence of a door
-    //a door concept is therefore not needed
+    /**the square adjacent to this in that direction
+    *in case of a wall or an edge of the map the field is NULL
+    *a square belonging to another room in a direction implies the presence of a door
+    *a door concept is therefore not needed
+     */
 
 
     private Square north;
@@ -35,9 +40,9 @@ public class Square {
     private Square west;
 
 
-    //temporary constructor
-    //since the sides of a Square require other Squares they must be first set at null
-    //they must be set after all squares have been instantiated
+    /**since the sides of a Square require other Squares they must be first set at a default value
+    *they must be set after all squares have been instantiated
+     */
 
     public Square(GameControllerServer controller, Cell position, Room room, boolean isRespawn) {
         this(controller, position, room, isRespawn, null, null, null, null);
@@ -56,7 +61,11 @@ public class Square {
         this.west = west;
     }
 
-
+    /**
+     * scans the list of players and checks whether they are on the square or not
+     * @param  where the Square you want to know the players on
+     * @return the list of players on the queried Square
+     */
     public Collection<Player> playersInSquare(Square where){
         Collection<Player> playersHere = new ArrayList<>();
 
@@ -113,6 +122,20 @@ public class Square {
         this.west = west;
     }
 
+    public void setPosition(Cell position) {
+        this.position = position;
+    }
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public boolean getIsRespawn() {
+        return isRespawn;
+    }
+
+    public void setIsRespawn(boolean respawn) {
+        isRespawn = respawn;
+    }
 }
 
 

@@ -30,7 +30,5 @@ public class Map {
                 terrain[i][k] = new Cell(i, k);
             }
         }
-
-
     }
 }

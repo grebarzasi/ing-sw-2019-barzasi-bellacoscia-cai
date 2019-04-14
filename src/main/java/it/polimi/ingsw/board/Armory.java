@@ -4,7 +4,8 @@ import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.util.*;
 
-public class Armory {
+public class
+Armory {
 
     private ArrayList<Weapon> weaponList;
 

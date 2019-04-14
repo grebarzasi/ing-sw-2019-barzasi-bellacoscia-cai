@@ -48,6 +48,40 @@ public class GameControllerServer implements Controller {
     }
 
 
+    public ArrayList<Player> getPlayerList() {
+        return playerList;
+    }
+
+    public void setPlayerList(ArrayList<Player> playerList) {
+        this.playerList = playerList;
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
+    public Time getTimeTurn() {
+        return timeTurn;
+    }
+
+    public void setTimeTurn(Time timeTurn) {
+        this.timeTurn = timeTurn;
+    }
+
+    public Board getCurrentBoard() {
+        return currentBoard;
+    }
+
+    public void setCurrentBoard(Board currentBoard) {
+        this.currentBoard = currentBoard;
+    }
+
+
+
     public ArrayList<Player> getPlayers() {
         return this.playerList;
     }

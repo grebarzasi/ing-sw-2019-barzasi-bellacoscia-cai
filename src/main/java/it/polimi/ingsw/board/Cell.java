@@ -1,5 +1,11 @@
 package it.polimi.ingsw.board;
 
+
+/**
+ * represents a row;column cell of the matrix
+ */
+
+
 public class Cell {
     private int row;
     private int column;

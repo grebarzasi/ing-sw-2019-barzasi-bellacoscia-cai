@@ -14,24 +14,28 @@
 		"room": "blue",
 		"isRespawn": false
 	},
+
 	{
 		"row": 0,
 		"column": 2,
 		"room": "blue",
 		"isRespawn": true
 	},
+
 	{
 		"row": 0,
 		"column": 3,
 		"room": "green",
 		"isRespawn": false
 	},
+
 	{
 		"row": 1,
 		"column": 0,
 		"room": "red",
 		"isRespawn": false
 	},
+
 	{
 		"row": 1,
 		"column": 1,
@@ -45,24 +49,28 @@
 		"room": "yellow",
 		"isRespawn": false
 	},
+
 	{
 		"row": 1,
 		"column": 3,
 		"room": "yellow",
 		"isRespawn": false
 	},
+
 	{
 		"row": 2,
 		"column": 0,
 		"room": "white",
 		"isRespawn": false
 	},
+
 	{
 		"row": 2,
 		"column": 1,
 		"room": "white",
 		"isRespawn": false
 	},
+
 	{
 		"row": 2,
 		"column": 2,
