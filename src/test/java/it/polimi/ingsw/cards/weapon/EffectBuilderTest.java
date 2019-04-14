@@ -3,11 +3,12 @@ package it.polimi.ingsw.cards.weapon;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.polimi.ingsw.cards.Ammo;
-import org.junit.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.*;
 
 /**Test Efefct creation in different scenario
  * @author Gregorio Barzasi

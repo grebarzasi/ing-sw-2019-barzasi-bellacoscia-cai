@@ -1,21 +1,15 @@
 package it.polimi.ingsw.cards.weapon;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author Gregorio Barzasi
  */
-public class WeaponBuilderTest {
-
-    @Before
-    public void setUp() throws Exception {
-    }
+class WeaponBuilderTest {
 
     @Test
-    public void buildWeapon() {
+    void buildWeapon() {
     }
 }

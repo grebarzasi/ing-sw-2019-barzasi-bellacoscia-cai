@@ -3,14 +3,11 @@ package it.polimi.ingsw.cards.weapon;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.polimi.ingsw.cards.weapon.aiming.*;
-import org.junit.Before;
-import org.junit.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-
-import static org.junit.Assert.*;
 
 /**
  * @author Gregorio Barzasi
@@ -59,13 +56,16 @@ public class AimingBuilderTest {
         assertNull(target.getOrigin());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void buildIsVisibleBadJson() throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        String newString = "{\"ciao\":true}";
-        JsonNode newNode = mapper.readTree(newString);
-        AimVisible target = AimingBuilder.buildIsVisible(newNode);
-        assertNull(target);
+        assertThrows(NullPointerException.class,
+                ()-> {
+                    ObjectMapper mapper = new ObjectMapper();
+                    String newString = "{\"ciao\":true}";
+                    JsonNode newNode = mapper.readTree(newString);
+                    AimVisible target = AimingBuilder.buildIsVisible(newNode);
+                    assertNull(target);
+                });
     }
 
     /**BUILD DIFFERENT AND EQUAL
