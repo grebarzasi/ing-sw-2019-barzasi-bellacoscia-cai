@@ -4,7 +4,6 @@ package it.polimi.ingsw.board;
 import org.junit.Test;
 
 import static it.polimi.ingsw.board.MapLoader.loadMap;
-import it.polimi.ingsw.board.MapLoader;
 import static org.junit.Assert.*;
 
 public class MapLoadingTest {
@@ -29,13 +28,12 @@ public class MapLoadingTest {
 
     }
 
-    @Test
-
     /**Test asserts there are no one way doors, if a square has another square as north that square must have the
-    *first square as south, does not test a method, only verifies that the files have been written correctly.
-     *
+     *first square as south, does not test a method, only verifies that the files have been written correctly.
      * Done for each map.
      * */
+
+    @Test
 
     public void testNoOneWayDoorsLarge() {
 
