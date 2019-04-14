@@ -9,12 +9,6 @@ public class Cell {
         this.column = tmp;
     }
 
-    public boolean equals(Cell c){
-        if ((this.row == c.row)&&(this.column ==c.column))
-            return true;
-        return false;
-    }
-
 
 
     public int getRow() {
