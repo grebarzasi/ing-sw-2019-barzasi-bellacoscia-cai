@@ -34,7 +34,6 @@ public class MapLoadingTest {
     /*Test asserts there are no one way doors, if a square has another square as north that square must have the
     first square as south, does not test a method, only verifies that the files have been written correctly.
 
-    Doesn't pass YET because I messed up the .json files :(
      */
     public void testNoOneWayDoors(){
 
@@ -50,7 +49,7 @@ public class MapLoadingTest {
         for( row = 0 ; row < 3 ; row++){
             for (column = 0; column <4 ; column ++){
 
-                if(squareMatrix[row][column].getNorth() == squareMatrix[row-1][column]){
+                if(row != 0 && squareMatrix[row][column].getNorth() == squareMatrix[row-1][column]){
                     assertEquals(squareMatrix[row-1][column].getSouth(),squareMatrix[row][column]);
                 }
 

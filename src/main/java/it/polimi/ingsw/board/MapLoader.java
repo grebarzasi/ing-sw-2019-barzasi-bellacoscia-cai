@@ -28,7 +28,7 @@ public class MapLoader {
 
         ObjectMapper mapper = new ObjectMapper();
 
-        String PATH = ("data_files/map_data");
+        String PATH = ("data_files/map_data/");
 
         File squareFile = new File(PATH + selection + ".json");
         File confinementFile = new File (PATH + selection + "_confinements.json");
@@ -78,16 +78,16 @@ public class MapLoader {
             for( column = 0; column < 4; column++){
 
 
-                if(confinementList[i].getNorth() == true) {
+                if(row != 0 && confinementList[i].getNorth() == true) {
                     squareMatrix[row][column].setNorth(squareMatrix[row-1][column]);
                 }
-                if(confinementList[i].getEast() == true) {
+                if(column != 3 && confinementList[i].getEast() == true) {
                     squareMatrix[row][column].setNorth(squareMatrix[row][column+1]);
                 }
-                if(confinementList[i].getSouth() == true) {
+                if(row != 2 && confinementList[i].getSouth() == true) {
                     squareMatrix[row][column].setNorth(squareMatrix[row+1][column]);
                 }
-                if(confinementList[i].getWest() == true) {
+                if(column != 0 && confinementList[i].getWest() == true) {
                     squareMatrix[row][column].setNorth(squareMatrix[row][column-1]);
                 }
 
