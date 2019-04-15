@@ -1,6 +1,6 @@
 package it.polimi.ingsw.cards;
 
-public class CarePackage implements Card {
+public class CarePackage extends Card {
 
     public CarePackage() {
     }

@@ -16,7 +16,6 @@ public class SquareConfinementParser {
     private Boolean west;
 
 
-
     public int getRow() {
         return row;
     }
@@ -64,7 +63,4 @@ public class SquareConfinementParser {
     public void setWest(Boolean west) {
         this.west = west;
     }
-
-
-
 }

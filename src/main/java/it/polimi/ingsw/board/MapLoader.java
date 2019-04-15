@@ -1,17 +1,8 @@
 package it.polimi.ingsw.board;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
-import java.util.Iterator;
-import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * loads the map into squareMatrix from .json file
@@ -21,7 +12,6 @@ import java.util.Collection;
 
 
 public class MapLoader {
-
 
 
     public static void loadMap(String selection, Square[][] squareMatrix) {
@@ -41,7 +31,6 @@ public class MapLoader {
         SquareParser[] parserList = new SquareParser[12];
         SquareConfinementParser[] confinementList = new SquareConfinementParser[12];
 
-        Square tmpSquare = new Square(null,null,null,false,null,null,null,null);
 
 
         //loads files into parsers
@@ -60,7 +49,7 @@ public class MapLoader {
         for( row = 0; row < 3; row++){
             for( column = 0; column < 4; column++){
 
-                squareMatrix[row][column] = new Square(null,new Cell(row,column),parserList[i].getRoom(),parserList[i].getIsRespawn(),tmpSquare,tmpSquare,tmpSquare,tmpSquare) ;
+                squareMatrix[row][column] = new Square(null,new Cell(row,column),parserList[i].getRoom(),parserList[i].getIsRespawn(),null,null,null,null) ;
                 squareMatrix[row][column].setRoom(parserList[i].getRoom());
 
                 i++;
@@ -69,7 +58,7 @@ public class MapLoader {
 
         i=0;
 
-        /**
+        /*
          * loads confinement data into each square
          * translates the boolean format field from file into adjacent square
          */
@@ -78,24 +67,33 @@ public class MapLoader {
             for( column = 0; column < 4; column++){
 
 
-                if(row != 0 && confinementList[i].getNorth() == true) {
-                    squareMatrix[row][column].setNorth(squareMatrix[row-1][column]);
+                if(row != 0 && confinementList[i].getNorth()) {
+                    squareMatrix[row][column].setNorth(squareMatrix[row - 1][column]);
                 }
-                if(column != 3 && confinementList[i].getEast() == true) {
-                    squareMatrix[row][column].setNorth(squareMatrix[row][column+1]);
+
+                if(column != 3 && confinementList[i].getEast()) {
+                    squareMatrix[row][column].setEast(squareMatrix[row][column+1]);
                 }
-                if(row != 2 && confinementList[i].getSouth() == true) {
-                    squareMatrix[row][column].setNorth(squareMatrix[row+1][column]);
+
+                if(row != 2 && confinementList[i].getSouth()) {
+                    squareMatrix[row][column].setSouth(squareMatrix[row+1][column]);
                 }
-                if(column != 0 && confinementList[i].getWest() == true) {
-                    squareMatrix[row][column].setNorth(squareMatrix[row][column-1]);
+
+                if(column != 0 && confinementList[i].getWest()) {
+                    squareMatrix[row][column].setWest(squareMatrix[row][column-1]);
                 }
 
                 i++;
             }
         }
 
+        /*for(column = 0, row = 0 ; column < 3; column ++){
+                squareMatrix[row][column].setNorth(null);
+        }
+         */
     }
-    
-    
+
 }
+    
+    
+

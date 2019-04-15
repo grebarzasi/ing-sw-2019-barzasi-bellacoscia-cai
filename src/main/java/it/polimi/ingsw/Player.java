@@ -44,7 +44,7 @@ public class Player {
     /**
      * Verifies whether a player can see another one
      *
-     * @param p    the other player
+     * @param p the player you want to know whether you can see or not
      * @return true if the current player can see the other one; false otherwise
      */
 
@@ -61,11 +61,8 @@ public class Player {
         } else if (getPosition().getWest() != null && getPosition().getWest().getRoom() == p.getPosition().getRoom()) {
             return true;
 
-        } else if (getPosition().getSouth() != null && getPosition().getSouth().getRoom() == p.getPosition().getRoom()) {
-            return true;
-        }
+        } else return getPosition().getSouth() != null && getPosition().getSouth().getRoom() == p.getPosition().getRoom();
 
-        return false;
     }
 
 

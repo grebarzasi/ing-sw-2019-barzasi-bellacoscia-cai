@@ -2,7 +2,7 @@ package it.polimi.ingsw.cards;
 
 import java.util.*;
 
-public abstract class PowerUp implements Card {
+public abstract class PowerUp extends Card {
 
     private String color;
 

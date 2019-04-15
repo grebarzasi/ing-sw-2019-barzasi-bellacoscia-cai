@@ -14,7 +14,7 @@ import java.util.*;
  */
 
 
-public class Weapon implements Card {
+public class Weapon extends Card {
 
     private String name;
     private Ammo chamber;

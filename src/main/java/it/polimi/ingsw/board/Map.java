@@ -1,7 +1,6 @@
 package it.polimi.ingsw.board;
 
 
-import java.util.ArrayList;
 
 public class Map {
 
@@ -16,19 +15,33 @@ public class Map {
         this.roomList = roomList;
     }
 
-    public Room[] getRoomList() {
-        return roomList;
-    }
-
+    /*
     public static void initiateTerrain(Cell[][] terrain) {
 
-        int i = 0;
-        int k = 0;
+        int i;
+        int k;
 
         for (i = 0; i < 3; i++) {
             for (k = 0; k < 4; k++) {
                 terrain[i][k] = new Cell(i, k);
             }
         }
+    }
+     */
+
+    public Square[][] getSquareMatrix() {
+        return squareMatrix;
+    }
+
+    public void setSquareMatrix(Square[][] squareMatrix) {
+        this.squareMatrix = squareMatrix;
+    }
+
+    public Room[] getRoomList() {
+        return roomList;
+    }
+
+    public void setRoomList(Room[] roomList) {
+        this.roomList = roomList;
     }
 }

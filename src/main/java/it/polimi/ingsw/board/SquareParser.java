@@ -44,9 +44,4 @@ public class SquareParser {
         return isRespawn;
     }
 
-    public void setIsRespqwn(Boolean isRespawnwn) {
-        this.isRespawn = isRespawn;
-    }
-
-
 }
