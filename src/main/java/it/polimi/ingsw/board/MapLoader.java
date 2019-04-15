@@ -49,7 +49,7 @@ public class MapLoader {
         for( row = 0; row < 3; row++){
             for( column = 0; column < 4; column++){
 
-                squareMatrix[row][column] = new Square(null,new Cell(row,column),parserList[i].getRoom(),parserList[i].getIsRespawn(),null,null,null,null) ;
+                squareMatrix[row][column] = new Square(new Cell(row,column),parserList[i].getRoom(),parserList[i].getIsRespawn(),null,null,null,null) ;
                 squareMatrix[row][column].setRoom(parserList[i].getRoom());
 
                 i++;

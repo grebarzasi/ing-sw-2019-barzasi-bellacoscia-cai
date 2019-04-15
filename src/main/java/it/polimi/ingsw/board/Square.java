@@ -13,7 +13,8 @@ import java.util.Collection;
 
 public class Square {
 
-    private GameControllerServer controller;
+
+    //position of the square within the matrix
 
     private Cell position;
 
@@ -27,7 +28,7 @@ public class Square {
     private boolean isRespawn;
 
 
-    /**the square adjacent to this in that direction
+    /*the square adjacent to this in that direction
     *in case of a wall or an edge of the map the field is NULL
     *a square belonging to another room in a direction implies the presence of a door
     *a door concept is therefore not needed
@@ -40,18 +41,17 @@ public class Square {
     private Square west;
 
 
-    /**since the sides of a Square require other Squares they must be first set at a default value
+    /*since the sides of a Square require other Squares they must be first set at a default value
     *they must be set after all squares have been instantiated
      */
 
-    public Square(GameControllerServer controller, Cell position, Room room, boolean isRespawn) {
-        this(controller, position, room, isRespawn, null, null, null, null);
+    public Square(Cell position, Room room, boolean isRespawn) {
+        this(position, room, isRespawn, null, null, null, null);
     }
 
 
 
-    public Square(GameControllerServer controller, Cell position, Room room, boolean isRespawn, Square north, Square east, Square south, Square west) {
-        this.controller = controller;
+    public Square(Cell position, Room room, boolean isRespawn, Square north, Square east, Square south, Square west) {
         this.position = position;
         this.room = room;
         this.isRespawn = isRespawn;
@@ -66,10 +66,11 @@ public class Square {
      * @param  where the Square you want to know the players on
      * @return the list of players on the queried Square
      */
-    public Collection<Player> playersInSquare(Square where){
+    public Collection<Player> playersInSquare(Square where, Collection<Player> playerList){
+
         Collection<Player> playersHere = new ArrayList<>();
 
-        for (Player player : controller.getPlayers()) {
+        for (Player player : playerList) {
             if (player.getPosition() == where) {
                 playersHere.add(player);
             }

@@ -5,13 +5,6 @@ import java.util.*;
 public class Token {
 
     private Player owner;
-
-    public Token() {
-
-    }
-
-    public Player getOwner() {
-        return this.owner;
-    }
+    private int value;
 
 }
