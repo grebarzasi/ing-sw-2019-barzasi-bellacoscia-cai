@@ -3,8 +3,10 @@ package it.polimi.ingsw.cards.weapon.aiming;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.cards.weapon.AimingFilter;
 import it.polimi.ingsw.cards.weapon.TargetAcquisition;
+import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 /**
  *Used by {@link TargetAcquisition} class to filter target to only ones selected by the player.
@@ -34,8 +36,8 @@ public class AimAskPlayer implements AimingFilter {
     }
 
 
-    public ArrayList<Player> filter() {
-        return null;
+    public Set<Player> filter(Weapon w, Set<Player> p) {
+        return p;
 
     }
 }

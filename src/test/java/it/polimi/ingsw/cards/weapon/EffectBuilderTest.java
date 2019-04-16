@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import it.polimi.ingsw.cards.Ammo;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import it.polimi.ingsw.cards.weapon.weapon_builder.EffectBuilder;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -55,7 +57,7 @@ public class EffectBuilderTest {
     @Test
     public void buildMoveTarget() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        String newString = "{\"maxStep\":8}";
+        String newString = "{\"step\":8}";
         JsonNode newNode = mapper.readTree(newString);
         MoveTarget target = EffectBuilder.buildMoveTarget(newNode);
         assertEquals(8,(int)target.getMaxSteps());

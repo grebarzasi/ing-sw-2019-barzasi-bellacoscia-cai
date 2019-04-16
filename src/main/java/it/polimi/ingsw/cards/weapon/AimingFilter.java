@@ -2,7 +2,7 @@ package it.polimi.ingsw.cards.weapon;
 
 import it.polimi.ingsw.Player;
 
-import java.util.ArrayList;
+import java.util.Set;
 
 /**
  *Used by {@link TargetAcquisition} class to represent the aiming Filters.
@@ -12,6 +12,6 @@ import java.util.ArrayList;
  */
 public interface AimingFilter {
 
-    public abstract ArrayList<Player> filter();
+    Set<Player> filter(Weapon w, Set<Player> target);
 
 }

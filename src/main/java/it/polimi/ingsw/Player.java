@@ -1,5 +1,6 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.PlayerBoard;
 import it.polimi.ingsw.board.Square;
 import it.polimi.ingsw.cards.PowerUp;
@@ -8,6 +9,7 @@ import it.polimi.ingsw.cards.weapon.Weapon;
 import java.util.*;
 
 public class Player {
+
 
     private Terminator termRef;
 
@@ -24,6 +26,10 @@ public class Player {
     private ArrayList<PowerUp> powerupList;
 
     private PlayerBoard myBoard;
+
+    private Board gameBoard;
+
+    private GameControllerServer controllerServer;
 
     private int maxActions;
 
@@ -63,6 +69,22 @@ public class Player {
 
         } else return getPosition().getSouth() != null && getPosition().getSouth().getRoom() == p.getPosition().getRoom();
 
+    }
+
+    /**
+     * @return a list of all players visible.
+     * @author Gregorio Barzasi
+     */
+
+    public Set<Player> allCanSee(){
+        Set<Player> visible = new HashSet<>();
+        Iterator<Player> playerIterator = controllerServer.getPlayerList().iterator();
+        while(playerIterator.hasNext()){
+            Player p = playerIterator.next();
+            if(this.canSee(p))
+                visible.add(p);
+        }
+        return visible;
     }
 
 

@@ -3,6 +3,8 @@ package it.polimi.ingsw.cards.weapon;
 import it.polimi.ingsw.Player;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  *Used by {@link Effect} class to aim the effect to a specific target.
@@ -12,9 +14,6 @@ import java.util.ArrayList;
 
 public class TargetAcquisition implements SubEffect {
 
-
-
-    private ArrayList<Player> target;
     private ArrayList<AimingFilter> aimRoutine;
 
     public TargetAcquisition( ArrayList<AimingFilter> aimRoutine){
@@ -22,16 +21,15 @@ public class TargetAcquisition implements SubEffect {
 
     }
 
-    public ArrayList<Player> getTarget() {
-        return target;
-    }
-
     public ArrayList<AimingFilter> getAimRoutine() {
         return aimRoutine;
     }
 
-    public void applyEffect(){
-
+    public Set<Player> applyEffect(Weapon w, Set<Player> p){
+        Iterator<AimingFilter> aimingIterator = aimRoutine.iterator();
+        while (aimingIterator.hasNext())
+            p = aimingIterator.next().filter(w,p);
+       return p;
     }
 
 }

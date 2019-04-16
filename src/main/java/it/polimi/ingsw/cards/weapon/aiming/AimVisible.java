@@ -3,8 +3,9 @@ package it.polimi.ingsw.cards.weapon.aiming;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.cards.weapon.AimingFilter;
 import it.polimi.ingsw.cards.weapon.TargetAcquisition;
+import it.polimi.ingsw.cards.weapon.Weapon;
 
-import java.util.ArrayList;
+import java.util.Set;
 
 /**
  *Used by {@link TargetAcquisition} class to filter target only to "Visible" or "Not Visible" ones
@@ -35,8 +36,11 @@ public class AimVisible implements AimingFilter {
         return origin;
     }
 
-    public ArrayList<Player> filter() {
+    public Set<Player> filter(Weapon w, Set<Player> p) {
+        if(origin.isEmpty())
+            return w.getOwner().allCanSee();
+        if(origin =="last")
+            return w.getLastHit().allCanSee();
         return null;
-
     }
 }

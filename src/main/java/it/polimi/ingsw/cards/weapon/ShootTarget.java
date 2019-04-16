@@ -1,5 +1,11 @@
 package it.polimi.ingsw.cards.weapon;
 
+import it.polimi.ingsw.Player;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 /**
  * @author Gregorio Barzasi
  */
@@ -21,8 +27,10 @@ public class ShootTarget implements SubEffect {
         return markNum;
     }
 
-    public void applyEffect(){
+    public Set<Player> applyEffect(Weapon w, Set<Player> p){
 
+        //implement
+        return p;
     }
 
 }

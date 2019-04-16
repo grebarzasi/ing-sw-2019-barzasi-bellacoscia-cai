@@ -1,8 +1,10 @@
-package it.polimi.ingsw.cards.weapon;
+package it.polimi.ingsw.cards.weapon.weapon_builder;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.polimi.ingsw.cards.Ammo;
+import it.polimi.ingsw.cards.weapon.Effect;
+import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +16,6 @@ import java.util.Iterator;
  * @author Gregorio Barzasi
  */
 public class WeaponBuilder {
-    private static Weapon weaponBuilt;
 
     public static Weapon buildWeapon(String name) {
         ObjectMapper mapper = new ObjectMapper();
@@ -31,7 +32,7 @@ public class WeaponBuilder {
             Ammo chamber = EffectBuilder.buildCost(chamberNode);
 
             //create a new weapon with name and chamber
-            weaponBuilt = new Weapon(rootNode.path("name").textValue(), chamber);
+            Weapon weaponBuilt = new Weapon(rootNode.path("name").textValue(), chamber);
 
             //create effects iterating on effects name. set correct place for each effect
             Iterator<String> effectsIterator = rootNode.path("effects").fieldNames();
@@ -39,6 +40,9 @@ public class WeaponBuilder {
                 String effName = effectsIterator.next();
                 //uses effect builder
                 Effect effBuilt = EffectBuilder.buildEffect(rootNode.path("effects").path(effName));
+                //set myWeapon
+                effBuilt.setMyWeapon(weaponBuilt);
+
                 switch (effName) {
                     case "basic":
                         weaponBuilt.setBasicEffect(effBuilt);
@@ -57,9 +61,11 @@ public class WeaponBuilder {
                         break;
                 }
             }
+            return weaponBuilt;
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return weaponBuilt;
+        return null;
     }
 }

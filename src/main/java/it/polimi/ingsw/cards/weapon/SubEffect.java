@@ -1,5 +1,7 @@
 package it.polimi.ingsw.cards.weapon;
 
+import it.polimi.ingsw.Player;
+
 import java.util.*;
 /**
  *Used by {@link Effect} class to represent the sub-level.
@@ -9,6 +11,6 @@ import java.util.*;
  */
 public interface SubEffect {
 
-    public abstract void applyEffect();
+   Set<Player> applyEffect(Weapon w, Set<Player> target);
 
 }

@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import it.polimi.ingsw.cards.weapon.aiming.*;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import it.polimi.ingsw.cards.weapon.weapon_builder.AimingBuilder;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

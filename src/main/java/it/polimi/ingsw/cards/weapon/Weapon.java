@@ -18,7 +18,7 @@ public class Weapon extends Card {
 
     private String name;
     private Ammo chamber;
-
+    private Player owner=null;
     private boolean loaded=false;
 
     private Effect basicEffect;
@@ -50,15 +50,8 @@ public class Weapon extends Card {
 
     public void additionalTwo(){}
 
-    public void buildWeapon() {
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Ammo getChamber() {
@@ -121,7 +114,11 @@ public class Weapon extends Card {
         this.lastHit = lastHit;
     }
 
-    public void fetch() {
+    public Player getOwner() {
+        return owner;
+    }
 
+    public void fetch() {
+        //SET OWNER ON FETCH!
     }
 }

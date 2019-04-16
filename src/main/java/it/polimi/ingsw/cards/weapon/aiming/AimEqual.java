@@ -3,28 +3,26 @@ package it.polimi.ingsw.cards.weapon.aiming;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.cards.weapon.AimingFilter;
 import it.polimi.ingsw.cards.weapon.TargetAcquisition;
+import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  *Used by {@link TargetAcquisition} class to filter target including only ones in the field "sourceList"
  *
  * @author Gregorio Barzasi
  */
-public class AimEqual implements AimingFilter {
-    private ArrayList<String> sourceList;
-    private ArrayList<ArrayList<Player>> returnList;
+public class AimEqual extends AimComparator implements AimingFilter {
 
     public AimEqual(ArrayList<String> sourceList){
-        this.sourceList=sourceList;
-
+        super(sourceList);
     }
 
-
-    public ArrayList<String> getSourceList() {
-        return sourceList;
-    }
-    public ArrayList<Player> filter() {
-        return null;
-
+    //does the intersection between the set of available target and the one from source
+    public Set<Player> filter(Weapon w, Set<Player> p) {
+        p.retainAll(getPlayersFromSource(w));
+        return p;
     }
 }

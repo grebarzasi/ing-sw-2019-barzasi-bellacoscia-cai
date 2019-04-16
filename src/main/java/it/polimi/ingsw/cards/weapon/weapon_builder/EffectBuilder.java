@@ -1,8 +1,12 @@
-package it.polimi.ingsw.cards.weapon;
+package it.polimi.ingsw.cards.weapon.weapon_builder;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import it.polimi.ingsw.cards.Ammo;
-import it.polimi.ingsw.cards.weapon.aiming.AimRange;
+import it.polimi.ingsw.cards.weapon.Effect;
+import it.polimi.ingsw.cards.weapon.MoveTarget;
+import it.polimi.ingsw.cards.weapon.ShootTarget;
+import it.polimi.ingsw.cards.weapon.SubEffect;
+import it.polimi.ingsw.cards.weapon.weapon_builder.AimingBuilder;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,13 +18,11 @@ import java.util.Iterator;
  */
 public class EffectBuilder {
 
-    //create subEffect array
-    private static  ArrayList<SubEffect> subEffList = new ArrayList<>();
-
-
     public static Effect buildEffect(JsonNode effectsNode){
         //initialize effect cost
         Ammo cost = buildCost(effectsNode.get("cost"));
+
+        ArrayList<SubEffect> subEffList = new ArrayList<>();
 
         /*_BUILD THE ACTUAL EFFECT_*/
 

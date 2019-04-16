@@ -3,8 +3,11 @@ package it.polimi.ingsw.cards.weapon.aiming;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.cards.weapon.AimingFilter;
 import it.polimi.ingsw.cards.weapon.TargetAcquisition;
+import it.polimi.ingsw.cards.weapon.Weapon;
+
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Set;
 
 /**
  *Used by {@link TargetAcquisition} class to filter target excluding ones in the field "sourceList"
@@ -13,22 +16,19 @@ import java.util.Iterator;
  */
 
 
-public class AimDifferent implements AimingFilter {
-    private ArrayList<String> sourceList;
+public class AimDifferent extends AimComparator implements AimingFilter{
 
-    private ArrayList<ArrayList<Player>> returnList;
 
     public AimDifferent(ArrayList<String> sourceList){
-        this.sourceList=sourceList;
+        super(sourceList);
 
     }
 
-    public ArrayList<String> getSourceList() {
-        return sourceList;
+    //does the exclusion between the set of available target and the one from source
+    public Set<Player> filter(Weapon w, Set<Player> p) {
+        p.removeAll(getPlayersFromSource(w));
+        return p;
     }
 
-    public ArrayList<Player> filter() {
-        return null;
 
-    }
 }

@@ -1,0 +1,359 @@
+{
+  "name": "Test",
+  "chamber": {
+    "blue": 1,
+    "red": 2,
+    "yellow": 3
+  },
+  "effects": {
+    "basic": {
+      "cost": {
+        "red": 1,
+        "blue": 4,
+        "yellow": 6
+      },
+      "subEffects": {
+        "1": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": true,
+              "origin": "last"
+            },
+            "askPlayer": {
+              "num": 1,
+              "diffSquare": true
+            },
+            "range": {
+              "min": 1,
+              "max": 9
+            },
+            "different":["addOne","addTwo","last"],
+            "equal":["addOne","addTwo","last"],
+            "direction": true
+          },
+          "shootTarget": {
+            "damage": 1,
+            "mark": 1
+          },
+          "moveTarget": {
+            "step": 11
+          }
+        },
+        "2": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": true,
+              "origin": "last"
+            },
+            "askPlayer": {
+              "num": 1,
+              "diffSquare": true
+            },
+            "range": {
+              "min": 1,
+              "max": 9
+            },
+            "different":["addOne","addTwo","last"],
+            "equal":["addOne","addTwo","last"],
+            "direction": true
+          },
+          "shootTarget": {
+            "damage": 1,
+            "mark": 2
+          },
+          "moveTarget": {
+            "step": 12
+          }
+        },
+        "3": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": true,
+              "origin": "last"
+            },
+            "askPlayer": {
+              "num": 1,
+              "diffSquare": true
+            },
+            "range": {
+              "min": 1,
+              "max": 9
+            },
+            "different":["addOne","addTwo","last"],
+            "equal":["addOne","addTwo","last"],
+            "direction": true
+          },
+          "shootTarget": {
+            "damage": 1,
+            "mark": 3
+          },
+          "moveTarget": {
+            "step": 13
+          }
+        }
+      }
+    },
+    "addOne": {
+      "cost": {
+        "red": 1,
+        "blue": 4,
+        "yellow": 6
+      },
+      "subEffects": {
+        "1": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": true,
+              "origin": "last"
+            },
+            "askPlayer": {
+              "num": 1,
+              "diffSquare": true
+            },
+            "range": {
+              "min": 1,
+              "max": 9
+            },
+            "different":["addOne","addTwo","last"],
+            "equal":["addOne","addTwo","last"],
+            "direction": true
+          },
+          "shootTarget": {
+            "damage": 2,
+            "mark": 1
+          },
+          "moveTarget": {
+            "step": 21
+          }
+        },
+        "2": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": true,
+              "origin": "last"
+            },
+            "askPlayer": {
+              "num": 1,
+              "diffSquare": true
+            },
+            "range": {
+              "min": 1,
+              "max": 9
+            },
+            "different":["addOne","addTwo","last"],
+            "equal":["addOne","addTwo","last"],
+            "direction": true
+          },
+          "shootTarget": {
+            "damage": 2,
+            "mark": 2
+          },
+          "moveTarget": {
+            "step": 22
+          }
+        },
+        "3": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": true,
+              "origin": "last"
+            },
+            "askPlayer": {
+              "num": 1,
+              "diffSquare": true
+            },
+            "range": {
+              "min": 1,
+              "max": 9
+            },
+            "different":["addOne","addTwo","last"],
+            "equal":["addOne","addTwo","last"],
+            "direction": true
+          },
+          "shootTarget": {
+            "damage": 2,
+            "mark": 3
+          },
+          "moveTarget": {
+            "step": 23
+          }
+        }
+      }
+    },
+    "addTwo": {
+      "cost": {
+        "red": 1,
+        "blue": 4,
+        "yellow": 6
+      },
+      "subEffects": {
+        "1": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": true,
+              "origin": "last"
+            },
+            "askPlayer": {
+              "num": 1,
+              "diffSquare": true
+            },
+            "range": {
+              "min": 1,
+              "max": 9
+            },
+            "different":["addOne","addTwo","last"],
+            "equal":["addOne","addTwo","last"],
+            "direction": true
+          },
+          "shootTarget": {
+            "damage": 1,
+            "mark": 1
+          },
+          "moveTarget": {
+            "step": 3
+          }
+        },
+        "2": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": true,
+              "origin": "last"
+            },
+            "askPlayer": {
+              "num": 1,
+              "diffSquare": true
+            },
+            "range": {
+              "min": 1,
+              "max": 9
+            },
+            "different":["addOne","addTwo","last"],
+            "equal":["addOne","addTwo","last"],
+            "direction": true
+          },
+          "shootTarget": {
+            "damage": 1,
+            "mark": 1
+          },
+          "moveTarget": {
+            "step": 3
+          }
+        },
+        "3": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": true,
+              "origin": "last"
+            },
+            "askPlayer": {
+              "num": 1,
+              "diffSquare": true
+            },
+            "range": {
+              "min": 1,
+              "max": 9
+            },
+            "different":["addOne","addTwo","last"],
+            "equal":["addOne","addTwo","last"],
+            "direction": true
+          },
+          "shootTarget": {
+            "damage": 1,
+            "mark": 1
+          },
+          "moveTarget": {
+            "step": 3
+          }
+        }
+      }
+    },
+    "alternative": {
+      "cost": {
+        "red": 1,
+        "blue": 4,
+        "yellow": 6
+      },
+      "subEffects": {
+        "1": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": true,
+              "origin": "last"
+            },
+            "askPlayer": {
+              "num": 1,
+              "diffSquare": true
+            },
+            "range": {
+              "min": 1,
+              "max": 9
+            },
+            "different":["addOne","addTwo","last"],
+            "equal":["addOne","addTwo","last"],
+            "direction": true
+          },
+          "shootTarget": {
+            "damage": 1,
+            "mark": 1
+          },
+          "moveTarget": {
+            "step": 3
+          }
+        },
+        "2": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": true,
+              "origin": "last"
+            },
+            "askPlayer": {
+              "num": 1,
+              "diffSquare": true
+            },
+            "range": {
+              "min": 1,
+              "max": 9
+            },
+            "different":["addOne","addTwo","last"],
+            "equal":["addOne","addTwo","last"],
+            "direction": true
+          },
+          "shootTarget": {
+            "damage": 1,
+            "mark": 1
+          },
+          "moveTarget": {
+            "step": 3
+          }
+        },
+        "3": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": true,
+              "origin": "last"
+            },
+            "askPlayer": {
+              "num": 1,
+              "diffSquare": true
+            },
+            "range": {
+              "min": 1,
+              "max": 9
+            },
+            "different":["addOne","addTwo","last"],
+            "equal":["addOne","addTwo","last"],
+            "direction": true
+          },
+          "shootTarget": {
+            "damage": 1,
+            "mark": 1
+          },
+          "moveTarget": {
+            "step": 3
+          }
+        }
+      }
+    }
+  }
+  }
+
