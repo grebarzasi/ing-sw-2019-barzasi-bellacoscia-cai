@@ -39,8 +39,8 @@ public class AimVisible implements AimingFilter {
     public Set<Player> filter(Weapon w, Set<Player> p) {
         if(origin.isEmpty())
             return w.getOwner().allCanSee();
-        if(origin =="last")
+        if(origin.equals("last"))
             return w.getLastHit().allCanSee();
-        return null;
+        return p;
     }
 }
