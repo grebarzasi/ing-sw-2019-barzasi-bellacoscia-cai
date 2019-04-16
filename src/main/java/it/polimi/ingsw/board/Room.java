@@ -1,10 +1,15 @@
 package it.polimi.ingsw.board;
 
+import it.polimi.ingsw.GameControllerServer;
+import it.polimi.ingsw.Player;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class Room {
 
-    public String getColor() {
-        return color;
-    }
+
+    private GameControllerServer controller;
 
     public void setColor(String color) {
         this.color = color;
@@ -14,6 +19,10 @@ public class Room {
 
     public Room(String color) {
         this.color = color;
+    }
+
+    public String getColor() {
+        return color;
     }
 }
 

@@ -9,7 +9,6 @@ public class CarePackage extends Card {
 
     private Ammo content;
 
-
     public void useCare() {
     }
 
