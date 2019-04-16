@@ -1,52 +1,53 @@
 {
-    "name": "Distruttore",
-    "chamber": {
-      "blue": 1
-    },
-    "effects": {
-      "basic": {
-        "cost": {
-          "red": 1
-        },
+  "name": "Distruttore",
+  "chamber": {
+    "blue": 1
+  },
+  "effects": {
+    "basic": {
+      "cost": {
+        "red": 1
+      },
+      "subEffects": {
         "1": {
           "targetAcq": {
-            "isVisible":{
-              "visible":true
+            "isVisible": {
+              "visible": true
             },
-            "askPlayer":{
-              "number":1
+            "askPlayer": {
+              "num": 1
             }
           },
-
           "shootTarget": {
             "damage": 1,
             "mark": 1
           }
         }
+      }
+    },
+    "addOne": {
+      "cost": {
+        "red": 1
       },
-      "addOne": {
-        "cost": {
-          "red": 1
-        },
-        "subEffects":{
-            "1": {
-              "isVisible": {
-                "visible": true
-              },
-              "compare": {
-                "different": [
-                  "last"
-                ]
-              },
-              "askPlayer": {
-                "number": 1
-              },
-              "shootTarget": {
-                "damage": 1
-              }
+      "subEffects": {
+        "1": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": true
+            },
+            "different": [
+              "last"
+            ],
+            "askPlayer": {
+              "num": 1
             }
+          },
+            "shootTarget": {
+              "damage": 1
+            }
+          }
         }
       }
     }
-}
+  }
 

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 
-public class TestCanSeee {
+public class CanSeeTest {
 
     @Test
     public void testCanSee() {

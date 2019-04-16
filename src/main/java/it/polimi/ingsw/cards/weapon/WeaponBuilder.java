@@ -19,7 +19,7 @@ public class WeaponBuilder {
     public static Weapon buildWeapon(String name) {
         ObjectMapper mapper = new ObjectMapper();
         // path of weapons data
-        String path = "\\weaponsData\\";
+        String path = "src\\main\\java\\it\\polimi\\ingsw\\cards\\weapon\\weaponsData\\";
         File jsonFile = new File(String.format("%s%s.json", path, name));
         try {
 
@@ -27,19 +27,18 @@ public class WeaponBuilder {
             JsonNode rootNode = mapper.readTree(jsonFile);
 
             //parse the chamber value
-            JsonNode chamberNode = rootNode.get("chamber");
-            Ammo chamber = new Ammo(chamberNode.get("red").asInt(), chamberNode.get("blue").asInt(), chamberNode.get("yellow").asInt());
+            JsonNode chamberNode = rootNode.path("chamber");
+            Ammo chamber = EffectBuilder.buildCost(chamberNode);
 
             //create a new weapon with name and chamber
-            weaponBuilt = new Weapon(rootNode.get("name").textValue(), chamber);
+            weaponBuilt = new Weapon(rootNode.path("name").textValue(), chamber);
 
             //create effects iterating on effects name. set correct place for each effect
-            Iterator<String> effectsIterator = rootNode.get("effects").fieldNames();
+            Iterator<String> effectsIterator = rootNode.path("effects").fieldNames();
             while (effectsIterator.hasNext()) {
                 String effName = effectsIterator.next();
-
                 //uses effect builder
-                Effect effBuilt = EffectBuilder.buildEffect(rootNode.get("effects").get(effName));
+                Effect effBuilt = EffectBuilder.buildEffect(rootNode.path("effects").path(effName));
                 switch (effName) {
                     case "basic":
                         weaponBuilt.setBasicEffect(effBuilt);

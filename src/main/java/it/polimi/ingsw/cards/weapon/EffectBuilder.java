@@ -61,7 +61,7 @@ public class EffectBuilder {
     }
 
     public static MoveTarget buildMoveTarget(JsonNode node){
-        Integer maxStep = node.path("maxStep").asInt();
+        Integer maxStep = node.path("step").asInt();
         return new MoveTarget(maxStep);
     }
 
