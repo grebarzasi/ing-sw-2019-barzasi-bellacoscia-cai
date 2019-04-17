@@ -44,6 +44,7 @@ public class Effect {
     }
 
     public void executeEffect() {
+        targetHitSet=myWeapon.getOwner().allPlayers();
         for (SubEffect e : effectList)
             targetHitSet = e.applyEffect(myWeapon, targetHitSet);
     }

@@ -20,7 +20,7 @@ public class EffectBuilder {
 
     public static Effect buildEffect(JsonNode effectsNode){
         //initialize effect cost
-        Ammo cost = buildCost(effectsNode.get("cost"));
+        Ammo cost = buildCost(effectsNode.path("cost"));
 
         ArrayList<SubEffect> subEffList = new ArrayList<>();
 
@@ -64,7 +64,9 @@ public class EffectBuilder {
 
     public static MoveTarget buildMoveTarget(JsonNode node){
         Integer maxStep = node.path("step").asInt();
-        return new MoveTarget(maxStep);
+        String finalPos = node.path("final").asText();
+        boolean directional = node.path("final").asBoolean();
+        return new MoveTarget(maxStep,finalPos,directional);
     }
 
     public static ShootTarget buildShootTarget(JsonNode node){

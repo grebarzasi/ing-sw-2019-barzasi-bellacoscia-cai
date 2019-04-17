@@ -11,7 +11,12 @@ import java.util.Set;
  * @author Gregorio Barzasi
  */
 public interface AimingFilter {
-
-    Set<Player> filter(Weapon w, Set<Player> target);
+    /**
+     *
+     * @param w weapon owner of the effect
+     * @param p set of player previously filtered by other filters ( if first equals to allPlayers in game)
+     * @return
+     */
+    Set<Player> filter(Weapon w, Set<Player> p);
 
 }

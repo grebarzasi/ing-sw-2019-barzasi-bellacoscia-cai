@@ -12,12 +12,13 @@ class WeaponBuilderTest {
 
     @Test
     void buildWeaponCompleteTest(){
-      Weapon wp = WeaponBuilder.buildWeapon("completeTest");
+      Weapon wp = WeaponBuilder.buildWeapon("completeTest2");
       assertEquals("Test",wp.getName());
       assertNotNull(wp.getBasicEffect());
       assertNotNull(wp.getAddOneEffect());
       assertNotNull(wp.getAddTwoEffect());
       assertNotNull(wp.getAlternativeEffect());
+      assertNotNull(wp.getExtraMove());
 
       assertNotEquals(wp.getBasicEffect().getEffectList(),wp.getAddOneEffect().getEffectList());
       assertNotEquals(wp.getBasicEffect().getEffectList(),wp.getAddTwoEffect().getEffectList());

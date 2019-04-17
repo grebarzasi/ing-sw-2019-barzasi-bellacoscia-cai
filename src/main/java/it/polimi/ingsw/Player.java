@@ -77,14 +77,19 @@ public class Player {
      */
 
     public Set<Player> allCanSee(){
-        Set<Player> visible = new HashSet<>();
-        Iterator<Player> playerIterator = controllerServer.getPlayerList().iterator();
-        while(playerIterator.hasNext()){
-            Player p = playerIterator.next();
-            if(this.canSee(p))
-                visible.add(p);
+        Set<Player> visible = new HashSet<>(allPlayers());
+       for(Player p : visible){
+            if(!this.canSee(p))
+                visible.remove(p);
         }
         return visible;
+    }
+    /**
+     * @return a list of all players.
+     * @author Gregorio Barzasi
+     */
+    public Set<Player> allPlayers(){
+        return new HashSet<>(controllerServer.getPlayerList());
     }
 
 
