@@ -43,7 +43,7 @@ public class AimingBuilder {
                     break;
 
                 case "direction":
-                    aimRoutine.add(new AimDirection());
+                    aimRoutine.add(new AimDirection(aimFilterNode.path("wallBang").asBoolean()));
                     break;
 
                 case "askPlayer":
@@ -112,13 +112,12 @@ public class AimingBuilder {
      */
 
     public static AimAskPlayer buildAskPlayer(JsonNode node) {
-        try {
-            Integer numMax = node.get("num").asInt();
+            Integer numMax = node.path("num").asInt();
             boolean fromDiffSquare = node.path("diffSquare").asBoolean();
-            return new AimAskPlayer(numMax, fromDiffSquare);
-        } catch (NullPointerException e) {
-            throw new NullPointerException("Bad json in AskPlayer");
-        }
+            boolean selectSquare = node.path("selectSquare").asBoolean();
+            boolean selectRoom = node.path("selectRoom").asBoolean();
+            String msg= node.path("msg").asText();
+            return new AimAskPlayer(msg,numMax, fromDiffSquare, selectSquare, selectRoom);
     }
 
     /**

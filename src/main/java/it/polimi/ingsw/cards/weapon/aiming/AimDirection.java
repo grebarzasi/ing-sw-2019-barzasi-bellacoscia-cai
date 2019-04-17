@@ -16,6 +16,11 @@ import java.util.Set;
  */
 public class AimDirection implements AimingFilter {
 
+    private boolean wallBang ;
+
+    public AimDirection(boolean wallBang){
+        this.wallBang=wallBang;
+    }
     public Set<Player> filter(Weapon w, Set<Player> p) {
         return p;
 

@@ -29,7 +29,9 @@
             },
             "different":["addOne","addTwo","last"],
             "equal":["addOne","addTwo","last"],
-            "direction": true
+            "direction": {
+              "wallBang": true
+            }
           },
           "shootTarget": {
             "damage": 1,
@@ -55,7 +57,9 @@
             },
             "different":["addOne","addTwo","last"],
             "equal":["addOne","addTwo","last"],
-            "direction": true
+            "direction": {
+              "wallBang": true
+            }
           },
           "shootTarget": {
             "damage": 1,
@@ -81,7 +85,9 @@
             },
             "different":["addOne","addTwo","last"],
             "equal":["addOne","addTwo","last"],
-            "direction": true
+            "direction": {
+              "wallBang": true
+            }
           },
           "shootTarget": {
             "damage": 1,
@@ -116,14 +122,18 @@
             },
             "different":["addOne","addTwo","last"],
             "equal":["addOne","addTwo","last"],
-            "direction": true
+            "direction": {
+              "wallBang": true
+            }
           },
           "shootTarget": {
             "damage": 2,
             "mark": 1
           },
           "moveTarget": {
-            "step": 21
+            "step": 3,
+            "finalPos":"me",
+            "directional": true
           }
         },
         "2": {
@@ -142,7 +152,9 @@
             },
             "different":["addOne","addTwo","last"],
             "equal":["addOne","addTwo","last"],
-            "direction": true
+            "direction": {
+              "wallBang": true
+            }
           },
           "shootTarget": {
             "damage": 2,
@@ -168,7 +180,9 @@
             },
             "different":["addOne","addTwo","last"],
             "equal":["addOne","addTwo","last"],
-            "direction": true
+            "direction": {
+              "wallBang": true
+            }
           },
           "shootTarget": {
             "damage": 2,
@@ -203,7 +217,9 @@
             },
             "different":["addOne","addTwo","last"],
             "equal":["addOne","addTwo","last"],
-            "direction": true
+            "direction": {
+              "wallBang": true
+            }
           },
           "shootTarget": {
             "damage": 1,
@@ -229,7 +245,9 @@
             },
             "different":["addOne","addTwo","last"],
             "equal":["addOne","addTwo","last"],
-            "direction": true
+            "direction": {
+              "wallBang": true
+            }
           },
           "shootTarget": {
             "damage": 1,
@@ -255,7 +273,9 @@
             },
             "different":["addOne","addTwo","last"],
             "equal":["addOne","addTwo","last"],
-            "direction": true
+            "direction": {
+              "wallBang": true
+            }
           },
           "shootTarget": {
             "damage": 1,
@@ -290,7 +310,9 @@
             },
             "different":["addOne","addTwo","last"],
             "equal":["addOne","addTwo","last"],
-            "direction": true
+            "direction": {
+              "wallBang": true
+            }
           },
           "shootTarget": {
             "damage": 1,
@@ -308,7 +330,9 @@
             },
             "askPlayer": {
               "num": 1,
-              "diffSquare": true
+              "direction": {
+                "wallBang": true
+              }
             },
             "range": {
               "min": 1,
@@ -316,7 +340,9 @@
             },
             "different":["addOne","addTwo","last"],
             "equal":["addOne","addTwo","last"],
-            "direction": true
+            "direction": {
+              "wallBang": true
+            }
           },
           "shootTarget": {
             "damage": 1,
@@ -342,7 +368,9 @@
             },
             "different":["addOne","addTwo","last"],
             "equal":["addOne","addTwo","last"],
-            "direction": true
+            "direction": {
+              "wallBang": true
+            }
           },
           "shootTarget": {
             "damage": 1,
