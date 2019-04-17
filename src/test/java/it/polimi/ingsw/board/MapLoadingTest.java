@@ -9,6 +9,10 @@ import static org.junit.Assert.*;
 public class MapLoadingTest {
 
 
+    /**
+     * Tests that the map is loaded correctly
+     */
+
     @Test
     public void testLoading(){
 
@@ -18,16 +22,12 @@ public class MapLoadingTest {
 
         loadMap(selection, squareMatrix);
 
-        System.out.println(squareMatrix[0][0].getIsRespawn());
-        System.out.println(squareMatrix[0][0].getNorth());
-
         assertFalse(squareMatrix[0][0].getIsRespawn());
         assertEquals(squareMatrix[0][0].getRoom().getColor(),"red");
 
         assertEquals(squareMatrix[0][0].getNorth(),null);
         assertEquals(squareMatrix[0][0].getEast(),squareMatrix[0][1]);
         assertEquals(squareMatrix[0][0].getSouth(),squareMatrix[2][0].getNorth());
-
 
 
     }

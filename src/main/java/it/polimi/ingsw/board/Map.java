@@ -1,6 +1,7 @@
 package it.polimi.ingsw.board;
 
 
+import static it.polimi.ingsw.board.MapLoader.loadMap;
 
 public class Map {
 
@@ -8,26 +9,23 @@ public class Map {
     private Room[] roomList;
 
 
-    //takes the selection and initiates squareMatrix with the squares corresponding to the selected map
+
+    //initiates the map
+
+    public void initiateMap(String selection) {
+
+        this.squareMatrix = new Square[3][4];
+        loadMap(selection, squareMatrix);
+
+    }
+
 
     public Map(Square[][] squareMatrix, Room[] roomList) {
         this.squareMatrix = squareMatrix;
         this.roomList = roomList;
     }
 
-    /*
-    public static void initiateTerrain(Cell[][] terrain) {
 
-        int i;
-        int k;
-
-        for (i = 0; i < 3; i++) {
-            for (k = 0; k < 4; k++) {
-                terrain[i][k] = new Cell(i, k);
-            }
-        }
-    }
-     */
 
     public Square[][] getSquareMatrix() {
         return squareMatrix;
