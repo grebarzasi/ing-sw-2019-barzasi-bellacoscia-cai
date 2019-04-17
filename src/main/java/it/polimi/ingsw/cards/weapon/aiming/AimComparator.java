@@ -46,6 +46,19 @@ public class AimComparator {
                 case "last":
                     pSet.add(w.getLastHit());
                     break;
+                case "room":
+                    //implement
+                    break;
+                case "square":
+                    //implement
+                    break;
+                case "myRoom":
+                    //implement
+                    break;
+                case "mySquare":
+                    //implement
+                    break;
+
             }
         }
         return pSet;
