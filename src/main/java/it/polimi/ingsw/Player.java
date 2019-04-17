@@ -2,6 +2,7 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.PlayerBoard;
+import it.polimi.ingsw.board.Room;
 import it.polimi.ingsw.board.Square;
 import it.polimi.ingsw.cards.PowerUp;
 import it.polimi.ingsw.cards.weapon.Weapon;
@@ -50,7 +51,7 @@ public class Player {
     /**
      * Verifies whether a player can see another one
      *
-     * @param p the player you want to know whether you can see or not
+     * @param p the player you want to know whether the current player can see or not
      * @return true if the current player can see the other one; false otherwise
      */
 
@@ -58,18 +59,80 @@ public class Player {
         if (getPosition().getRoom() == p.getPosition().getRoom()) {
             return true;
 
-        } else if (getPosition().getNorth() != null && getPosition().getNorth().getRoom() == p.getPosition().getRoom()) {
+        } else if (this.getPosition().getNorth() != null && getPosition().getNorth().getRoom().equals(p.getPosition().getRoom())) {
             return true;
 
-        } else if (getPosition().getEast() != null && getPosition().getEast().getRoom() == p.getPosition().getRoom()) {
+        } else if (this.getPosition().getEast() != null && getPosition().getEast().getRoom().equals(p.getPosition().getRoom())) {
             return true;
 
-        } else if (getPosition().getWest() != null && getPosition().getWest().getRoom() == p.getPosition().getRoom()) {
+        } else if (this.getPosition().getSouth() != null && getPosition().getSouth().getRoom().equals(p.getPosition().getRoom())){
             return true;
 
-        } else return getPosition().getSouth() != null && getPosition().getSouth().getRoom() == p.getPosition().getRoom();
+        } else if (this.getPosition().getWest() != null && getPosition().getWest().getRoom().equals(p.getPosition().getRoom())) {
+            return true;
+        }
+
+        return false;
 
     }
+
+    /**
+     * Verifies whether a player can see a square
+     * @param s the {@link Square} you want to know whether the current player can see or not
+     * @return true is the current player can see the square; false otherwise
+     */
+
+    public boolean canSeeSquare(Square s){
+
+        if (getPosition().getRoom() == s.getRoom()) {
+            return true;
+
+        } else if (getPosition().getNorth() != null && getPosition().getNorth().getRoom() == s.getRoom()) {
+            return true;
+
+        } else if (getPosition().getEast() != null && getPosition().getNorth().getRoom() == s.getRoom()) {
+            return true;
+
+        } else if (getPosition().getWest() != null && getPosition().getNorth().getRoom() == s.getRoom()) {
+            return true;
+
+        } else if(getPosition().getSouth() != null && getPosition().getNorth().getRoom() == s.getRoom()){
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Verifies whether a player can see a room
+     * @param r the {@link Room} you want to know whether the current player can see or not
+     * @return true is the current player can see the room; false otherwise
+     */
+
+    public boolean canSeeRoom(Room r){
+
+        if (getPosition().getRoom() == r) {
+            return true;
+
+        } else if (getPosition().getNorth() != null && getPosition().getNorth().getRoom().equals(r)) {
+            return true;
+
+        } else if (getPosition().getEast() != null && getPosition().getEast().getRoom().equals(r)) {
+            return true;
+
+        } else if (getPosition().getWest() != null && getPosition().getWest().getRoom().equals(r)) {
+            return true;
+
+        } else if(getPosition().getSouth() != null && getPosition().getSouth().getRoom().equals(r)){
+            return true;
+
+        }
+
+        return false;
+
+
+    }
+
 
     /**
      * @return a list of all players visible.
@@ -95,7 +158,7 @@ public class Player {
     /**
      * Calculates the distance between a player and a square
      * @param s the {@link Square} you wanna know the distance to
-     * @return the distance to that {@Link Square}, -1 if unreachable
+     * @return the distance to that {@Link Square}, -1 if unreachable:
      * meaning that the square is a blank since all maps are completely connected
      *
      * calculated using Breadth-first search
