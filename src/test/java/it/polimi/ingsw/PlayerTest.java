@@ -1,6 +1,5 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.board.Cell;
 import it.polimi.ingsw.board.Room;
 import it.polimi.ingsw.board.Square;
 import org.junit.jupiter.api.Test;

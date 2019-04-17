@@ -12,7 +12,7 @@ public class MapLoadingTest {
     /**
      * Tests that the map is loaded correctly
      */
-
+    
     @Test
     public void testLoading(){
 
