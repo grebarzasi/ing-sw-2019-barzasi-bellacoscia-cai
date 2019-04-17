@@ -27,7 +27,7 @@ public class Weapon extends Card {
     private Effect alternativeEffect;
 
     /**
-     * easy way for implementing the "move before or after" other effect.
+     * easy way for the "move before or after" other basic effect.
      */
     private Effect extraMove;
 

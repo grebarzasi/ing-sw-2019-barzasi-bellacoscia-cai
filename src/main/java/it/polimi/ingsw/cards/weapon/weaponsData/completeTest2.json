@@ -353,6 +353,23 @@
           }
         }
       }
+    },
+    "extraMove": {
+      "cost": {
+        "red":0
+      },
+      "subEffects": {
+        "1": {
+          "targetAcq": {
+            "equal": [
+              "me"
+            ]
+          },
+          "moveTarget": {
+            "step": 2
+          }
+        }
+      }
     }
   }
   }

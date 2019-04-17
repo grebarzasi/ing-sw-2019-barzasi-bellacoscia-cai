@@ -4,6 +4,7 @@ import it.polimi.ingsw.Player;
 import it.polimi.ingsw.cards.Ammo;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -22,7 +23,7 @@ public class Effect {
     public Effect(Ammo cost,ArrayList<SubEffect> EffectList){
         this.cost=cost;
         this.effectList=EffectList;
-        this.targetHitSet=null;
+        this.targetHitSet= new HashSet<Player>();
         this.used= false;
     }
 
@@ -42,10 +43,10 @@ public class Effect {
         return targetHitSet;
     }
 
-    public void executeEffect(){
-        Iterator<SubEffect> effIterator = effectList.iterator();
-        while (effIterator.hasNext())
-            targetHitSet = effIterator.next().applyEffect(myWeapon,targetHitSet);
+    public void executeEffect() {
+        targetHitSet=myWeapon.getOwner().allPlayers();
+        for (SubEffect e : effectList)
+            targetHitSet = e.applyEffect(myWeapon, targetHitSet);
     }
 
 }

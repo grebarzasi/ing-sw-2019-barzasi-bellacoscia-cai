@@ -43,6 +43,9 @@ public class AimComparator {
                 case "extramove":
                     pSet.addAll(w.getAddTwoEffect().getTargetHitSet());
                     break;
+                case "last":
+                    pSet.add(w.getLastHit());
+                    break;
             }
         }
         return pSet;

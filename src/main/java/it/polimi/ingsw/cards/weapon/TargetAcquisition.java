@@ -26,9 +26,8 @@ public class TargetAcquisition implements SubEffect {
     }
 
     public Set<Player> applyEffect(Weapon w, Set<Player> p){
-        Iterator<AimingFilter> aimingIterator = aimRoutine.iterator();
-        while (aimingIterator.hasNext())
-            p = aimingIterator.next().filter(w,p);
+        for(AimingFilter a: aimRoutine)
+            p = a.filter(w,p);
        return p;
     }
 
