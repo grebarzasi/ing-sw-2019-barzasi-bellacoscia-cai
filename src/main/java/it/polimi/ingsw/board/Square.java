@@ -79,6 +79,15 @@ public class Square {
         return playersHere;
     }
 
+    public boolean isAdjacent(Square s){
+
+        if (this.getNorth() == s || this.getEast() == s || this.getSouth() == s || this.getWest() == s){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public Room getRoom(){
         return room;
     }
