@@ -1,0 +1,53 @@
+{
+  "name": "Fucile a pompa",
+  "chamber": {
+    "yellow": 1
+  },
+  "effects": {
+    "basic": {
+      "cost": {
+        "yellow": 2
+      },
+      "subEffect": {
+        "1": {
+          "targetAcq": {
+            "equal": ["mySquare"],
+            "askPlayer": {
+              "msg": "Seleziona 1 Player nel tuo quadrato",
+              "num": 1
+            }
+          },
+          "shootTarget": {
+            "damage": 3
+          },
+          "moveTarget": {
+            "step": 1
+          }
+        }
+      }
+    },
+    "alternative": {
+      "cost": {},
+      "subEffect": {
+        "1": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": true
+            },
+            "range": {
+              "min": 1,
+              "max": 2
+            },
+            "askPlayer": {
+              "msg": "Seleziona 1 Player",
+              "num": 1
+            }
+          },
+          "shootTarget": {
+            "damage": 2
+          }
+        }
+      }
+    }
+  }
+}

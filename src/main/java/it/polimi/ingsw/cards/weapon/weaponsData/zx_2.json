@@ -1,0 +1,50 @@
+{
+  "name": "ZX-2",
+  "chamber": {
+    "yellow": 1
+  },
+  "effects": {
+    "basic": {
+      "cost": {
+        "yellow": 1,
+        "red": 1
+      },
+      "subEffect": {
+        "1": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": true
+            },
+            "askPlayer": {
+              "msg": "Seleziona 1 Player che puoi vedere.",
+              "num": 1
+            }
+          },
+          "shootPlayer": {
+            "damage": 1,
+            "mark": 2
+          }
+        }
+      }
+    },
+    "alternative": {
+      "cost": {},
+      "subEffect": {
+        "1": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": true
+            },
+            "askPlayer": {
+              "msg": "Seleziona 3 Player che puoi vedere.",
+              "num": 3
+            }
+          },
+          "shootTarget": {
+            "mark": 1
+          }
+        }
+      }
+    }
+  }
+}

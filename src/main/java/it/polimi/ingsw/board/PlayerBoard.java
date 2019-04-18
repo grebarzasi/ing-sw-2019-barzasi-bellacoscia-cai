@@ -57,16 +57,19 @@ public class PlayerBoard {
 
     public void addDamage(Token t){
 
+        int i =0;
+
+        while(this.getMark().contains(t)) {
+
+            if (this.getMark().contains(t)){
+                this.mark.remove(t);
+                this.damage(t);
+            }
+
+        }
+
         this.damage(t);
 
-        int i;
-
-        for (i = 0 ; i < this.getMark().size() ; i++ ) {
-            if (this.getMark().get(i).getOwner() == t.getOwner()){
-                this.damage(t);
-                this.getMark().remove(t);
-            }
-        }
 
     }
 
