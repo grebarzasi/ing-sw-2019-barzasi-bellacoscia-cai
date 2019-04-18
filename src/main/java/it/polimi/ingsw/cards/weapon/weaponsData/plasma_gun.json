@@ -47,7 +47,7 @@
       "subEffects": {
         "1": {
           "targetAcq": {
-            "equal": ["me"]
+            "substitute": ["me"]
           },
           "moveTarget": {
             "step": 2

@@ -52,12 +52,19 @@ public class AimComparator {
                 case "square":
                     //implement
                     break;
+                case "oldSquare":
+                   // pSet.add(w.getOwner());
+                    break;
                 case "myRoom":
                     //pSet.add(w.getOwner().getPosition().getRoom().getPlayersInRoom);
                     break;
                 case "mySquare":
                    // pSet.add(w.getOwner().getPosition().playersInSquare());
                     break;
+                case "me":
+                    pSet.add(w.getOwner());
+                    break;
+
 
             }
         }

@@ -38,6 +38,10 @@ public class AimingBuilder {
                     aimRoutine.add(buildEqual(aimFilterNode));
                     break;
 
+                case "substitute":
+                    aimRoutine.add(buildSubstitute(aimFilterNode));
+                    break;
+
                 case "range":
                     aimRoutine.add(buildRange(aimFilterNode));
                     break;
@@ -103,12 +107,26 @@ public class AimingBuilder {
             source.add(element.next().toString().replace("\"", ""));
         return new AimEqual(source);
     }
-
     /**
-     * Method that build the AimEqual filter.
+     * Method that build the AimSubstitute filter.
      *
      * @param node containing well built json
-     * @return {@link AimEqual} Object
+     * @return {@link AimSubstitute} Object
+     */
+
+    public static AimSubstitute buildSubstitute(JsonNode node) {
+        ArrayList<String> source = new ArrayList<>();
+        Iterator<JsonNode> element = node.elements();
+        while (element.hasNext())
+            source.add(element.next().toString().replace("\"", ""));
+        return new AimSubstitute(source);
+    }
+
+    /**
+     * Method that build the AimAskPlayer filter.
+     *
+     * @param node containing well built json
+     * @return {@link AimAskPlayer} Object
      */
 
     public static AimAskPlayer buildAskPlayer(JsonNode node) {
