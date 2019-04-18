@@ -1,13 +1,13 @@
 package it.polimi.ingsw.board;
 
-import it.polimi.ingsw.GameControllerServer;
+import it.polimi.ingsw.Player;
 import it.polimi.ingsw.Token;
 import it.polimi.ingsw.cards.Ammo;
 import java.util.*;
 
 public class PlayerBoard {
 
-    private GameControllerServer server;
+    private final Player owner;
 
     private ArrayList<Token> damage;
 
@@ -27,11 +27,24 @@ public class PlayerBoard {
 
     public void addDamage(Token t) {
 
-        if(this.damage.size() <= 12) {
+        if (this.damage.size()<10){
+
             this.damage.add(t);
-        } else{
-            t.getOwner().getMyBoard().addMark(new Token(this.server.getCurrentPlayer()));
+
+        }else if(this.damage.size() <11){
+
+            this.damage.add(t);
+            //kill(this.owner);
         }
+
+        else if (this.damage.size() == 11) {
+
+            Token v;
+            this.damage.add(t);
+            t.getOwner().getPersonalBoard().addMark(v = new Token(this.owner));
+            //returns an overkill mark token
+        }
+
     }
 
     /**
@@ -49,7 +62,7 @@ public class PlayerBoard {
      * NEEDS TO BE REVISITED, USE AT YOUR OWN AND OTHERS' RISK
      */
 
-    public void addMark(Token t) {
+    public void addMark(Token t){
         this.mark.add(t);
     }
 
@@ -89,11 +102,11 @@ public class PlayerBoard {
 
         Ammo tmp = a;
 
-        tmp.setRed(a.getRed() + this.server.getCurrentPlayer().getMyBoard().getAmmoInventory().getRed());
-        tmp.setRed(a.getBlue() + this.server.getCurrentPlayer().getMyBoard().getAmmoInventory().getBlue());
-        tmp.setRed(a.getYellow() + this.server.getCurrentPlayer().getMyBoard().getAmmoInventory().getYellow());
+        tmp.setRed(a.getRed() + this.owner.getPersonalBoard().getAmmoInventory().getRed());
+        tmp.setRed(a.getBlue() + this.owner.getPersonalBoard().getAmmoInventory().getBlue());
+        tmp.setRed(a.getYellow() + this.owner.getPersonalBoard().getAmmoInventory().getYellow());
 
-        this.server.getCurrentPlayer().getMyBoard().setAmmoInventory(tmp);
+        this.owner.getPersonalBoard().setAmmoInventory(tmp);
     }
 
     /**
@@ -104,22 +117,23 @@ public class PlayerBoard {
      */
 
     public void removeAmmo(Ammo a) {
-        Ammo tmp = this.server.getCurrentPlayer().getMyBoard().getAmmoInventory();
+        Ammo tmp = this.owner.getPersonalBoard().getAmmoInventory();
 
-        tmp.setRed(this.server.getCurrentPlayer().getMyBoard().getAmmoInventory().getRed() - a.getRed());
-        tmp.setRed(this.server.getCurrentPlayer().getMyBoard().getAmmoInventory().getBlue() - a.getBlue());
-        tmp.setRed(this.server.getCurrentPlayer().getMyBoard().getAmmoInventory().getYellow() - a.getYellow());
+        tmp.setRed(this.owner.getPersonalBoard().getAmmoInventory().getRed() - a.getRed());
+        tmp.setRed(this.owner.getPersonalBoard().getAmmoInventory().getBlue() - a.getBlue());
+        tmp.setRed(this.owner.getPersonalBoard().getAmmoInventory().getYellow() - a.getYellow());
     }
 
     /**
      * Initiates the board with default values
-     * @param server the current server
+     * @param owner the board's player
      *
      * NEEDS TO BE REVISITED, USE AT YOUR OWN AND OTHERS' RISK
      */
 
-    public PlayerBoard(GameControllerServer server) {
-        this.server = server;
+    public PlayerBoard(Player owner) {
+
+        this.owner = owner;
         this.damage = new ArrayList<Token>();
         this.pointVec = new int[6];
         this.mark = new ArrayList<Token>();
@@ -133,10 +147,12 @@ public class PlayerBoard {
         this.pointVec[5]=1;
     }
 
-    public PlayerBoard(ArrayList<Token> damage, int[] pointVec, ArrayList<Token> marks, Ammo ammoInventory) {
+    public PlayerBoard(Player owner, ArrayList<Token> damage, int[] pointVec, ArrayList<Token> marks, Ammo ammoInventory) {
+
+        this.owner = owner;
         this.damage = damage;
         this.pointVec = pointVec;
-        this.mark = mark;
+        this.mark = marks;
         this.ammoInventory = ammoInventory;
     }
 
@@ -156,11 +172,11 @@ public class PlayerBoard {
         this.pointVec = pointVec;
     }
 
-    public ArrayList<Token> getMarks() {
+    public ArrayList<Token> getMark() {
         return mark;
     }
 
-    public void setMarks(ArrayList<Token> marks) {
+    public void setMark(ArrayList<Token> marks) {
         this.mark = marks;
     }
 
