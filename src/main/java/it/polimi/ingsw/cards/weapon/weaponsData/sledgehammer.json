@@ -1,0 +1,50 @@
+{
+  "name": "Martello Ionico",
+  "chamber": {
+    "yellow": 1
+  },
+  "effects": {
+    "basic": {
+      "cost": {
+        "yellow": 1
+      },
+      "subEffect": {
+        "1": {
+          "targetAcq": {
+            "equal": ["mySquare"],
+            "askPlayer": {
+              "msg": "Seleziona 1 Player nel tuo quadrato.",
+              "num": 1
+            }
+          },
+          "shootTarget": {
+            "damage": 2
+          }
+        }
+      }
+    },
+    "alternative": {
+      "cost": {
+        "red": 1
+      },
+      "subEffect": {
+        "1": {
+          "targetAcq": {
+            "equal": ["mySquare"],
+            "askPlayer": {
+              "msg": "Seleziona 1 Player nel tuo quadrato.",
+              "num": 1
+          }
+        },
+          "shootTarget": {
+            "damage": 3
+          },
+          "moveTarget": {
+            "step": 2,
+            "directional": true
+          }
+        }
+      }
+    }
+  }
+}

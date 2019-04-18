@@ -1,0 +1,55 @@
+{
+  "name": "Onda d'urto",
+  "chamber": {
+    "yellow": 1
+  },
+  "effects": {
+    "basic":{
+      "cost": {
+        "yellow": 1
+      },
+      "subEffect": {
+        "1": {
+          "targetAcq": {
+            "range": {
+              "min": 1,
+              "max": 2
+            },
+            "askPlayer": {
+              "masg": "Seleziona fino a 3 Player su quadrati differenti.",
+              "num": 3,
+              "diffSquare": true
+            }
+          },
+          "shootTarget": {
+            "damage": 1
+          }
+        }
+      }
+    },
+    "alternative": {
+      "cost": {
+        "yellow": 1
+      },
+      "subEffect": {
+        "1": {
+          "targetAcq": {
+            "range": {
+              "min": 1,
+              "max": 2
+            },
+            "askPlayer": {
+              "masg": "Seleziona fino a 3 Player su quadrati differenti.",
+              "num": 3,
+              "diffSquare": true
+            },
+            "substitute": [square]
+          },
+          "shootTarget": {
+            "damage": 1
+          }
+        }
+      }
+    }
+  }
+}
