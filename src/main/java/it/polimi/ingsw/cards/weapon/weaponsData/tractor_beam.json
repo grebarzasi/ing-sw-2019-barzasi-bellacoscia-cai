@@ -1,0 +1,81 @@
+{
+  "name": "Raggio Traente",
+  "chamber": {
+    "blue": 1
+  },
+  "effects": {
+    "basic": {
+      "cost": {
+        "blue": 1
+      },
+      "subEffects": {
+        "1": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": true
+            },
+            "askPlayer": {
+              "msg": "Seleziona 1 Player visibile.",
+              "num": 1
+            }
+          },
+          "moveTarget": {
+            "step": 2,
+            "finalPos": "visible"
+          }
+        },
+        "2": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": true
+            },
+            "askPlayer": {
+              "num": 1
+            },
+            "equals": ["basic"]
+          },
+          "shootTarget": {
+            "damage": 1
+          }
+        }
+      }
+    },
+    "alternative": {
+      "cost": {
+        "blue": 1,
+        "red": 1
+      },
+      "subEffects": {
+        "1": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": true
+            },
+            "askPlayer": {
+              "msg": "Seleziona 1 Player visibile.",
+              "num": 1
+            }
+          },
+          "moveTarget": {
+            "step": 2,
+            "finalPos": "me"
+          }
+        },
+        "2": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": true
+            },
+            "askPlayer": {
+              "num": 1
+            },
+            "equals": ["basic", "mySquare"]
+          },
+          "shootTarget": {
+            "damage": 3
+          }
+        }
+      }
+    }
+  }
+}
