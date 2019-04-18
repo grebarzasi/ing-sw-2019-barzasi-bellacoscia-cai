@@ -33,21 +33,21 @@
       "subEffects": {
         "1": {
           "targetAcq": {
-            "eqaual": ["basic"]
-          }
+            "equal": ["basic"]
+          },
           "shootTarget": {
-              "damage": 1,
+              "damage": 1
           }
         }
       }
-    }
+    },
     "extraMove": {
       "cost": {
       },
       "subEffects": {
         "1": {
           "targetAcq": {
-            "equal": ["me"]
+            "substitute": ["me"]
           },
           "moveTarget": {
             "step": 2

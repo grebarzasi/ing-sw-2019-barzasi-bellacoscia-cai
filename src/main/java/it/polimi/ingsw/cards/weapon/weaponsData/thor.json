@@ -36,13 +36,14 @@
           "targetAcq": {
             "isVisible": {
               "visible": true,
-              "origin": "last"
+              "origin": "basic"
             },
+            "different": ["basic"],
             "askPlayer": {
               "msg": "Seleziona 1 Player visibile dal bersaglio dell'effetto base.",
               "num": 1
-            },
-            "different": ["basic"]
+            }
+
           },
           "shootTarget": {
             "damage": 1
@@ -59,7 +60,7 @@
           "targetAcq": {
             "isVisible": {
               "visible": true,
-              "origin": "Last"
+              "origin": "addTwo"
             },
             "different": ["addOne", "basic"],
             "askPlayer": {
@@ -68,7 +69,7 @@
             }
           },
           "shootTarget": {
-            "damage": 1
+            "damage": 2
           }
         }
       }

@@ -1,7 +1,7 @@
 package it.polimi.ingsw.cards.weapon.weapon_builder;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import it.polimi.ingsw.cards.weapon.AimingFilter;
+import it.polimi.ingsw.cards.weapon.aiming.AimingFilter;
 import it.polimi.ingsw.cards.weapon.TargetAcquisition;
 import it.polimi.ingsw.cards.weapon.aiming.*;
 
@@ -36,6 +36,10 @@ public class AimingBuilder {
 
                 case "equal":
                     aimRoutine.add(buildEqual(aimFilterNode));
+                    break;
+
+                case "substitute":
+                    aimRoutine.add(buildSubstitute(aimFilterNode));
                     break;
 
                 case "range":
@@ -103,12 +107,26 @@ public class AimingBuilder {
             source.add(element.next().toString().replace("\"", ""));
         return new AimEqual(source);
     }
-
     /**
-     * Method that build the AimEqual filter.
+     * Method that build the AimSubstitute filter.
      *
      * @param node containing well built json
-     * @return {@link AimEqual} Object
+     * @return {@link AimSubstitute} Object
+     */
+
+    public static AimSubstitute buildSubstitute(JsonNode node) {
+        ArrayList<String> source = new ArrayList<>();
+        Iterator<JsonNode> element = node.elements();
+        while (element.hasNext())
+            source.add(element.next().toString().replace("\"", ""));
+        return new AimSubstitute(source);
+    }
+
+    /**
+     * Method that build the AimAskPlayer filter.
+     *
+     * @param node containing well built json
+     * @return {@link AimAskPlayer} Object
      */
 
     public static AimAskPlayer buildAskPlayer(JsonNode node) {

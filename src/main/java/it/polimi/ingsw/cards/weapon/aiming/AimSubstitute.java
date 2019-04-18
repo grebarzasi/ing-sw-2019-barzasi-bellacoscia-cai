@@ -14,17 +14,17 @@ import java.util.Set;
  */
 
 
-public class AimDifferent extends AimComparator implements AimingFilter{
+public class AimSubstitute extends AimComparator implements AimingFilter{
 
 
-    public AimDifferent(ArrayList<String> sourceList){
+    public AimSubstitute(ArrayList<String> sourceList){
         super(sourceList);
 
     }
 
     //does the exclusion between the set of available target and the one from source
     public Set<Player> filter(Weapon w, Set<Player> p) {
-        p.removeAll(getPlayersFromSource(w));
+        p=getPlayersFromSource(w);
         return p;
     }
 
