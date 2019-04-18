@@ -1,0 +1,58 @@
+{
+  "name": "Raggio Traente",
+  "chamber": {
+    "blue": 1
+  },
+  "effects": {
+    "basic": {
+      "cost": {
+        "blue": 1
+      },
+      "subEffects": {
+        "1": {
+          "targetAcq": {
+            "askPlayer": {
+              "msg": "Seleziona 1 Player che mosso di 2 posizioni diventa/resta visibile.",
+              "num": 1
+            }
+          },
+          "moveTarget": {
+            "step": 2,
+            "finalPos": "visible"
+          },
+          "shootTarget": {
+            "damage": 1
+          }
+        }
+      }
+      },
+    "alternative": {
+      "cost": {
+        "blue": 1,
+        "red": 1
+      },
+      "subEffects": {
+        "1": {
+          "targetAcq": {
+            "range": {
+              "min": 0,
+              "max": 3
+            },
+            "askPlayer": {
+              "msg": "Seleziona 1 Player ",
+              "num": 1
+            }
+          },
+          "moveTarget": {
+            "step": 2,
+            "finalPos": "me"
+          },
+          "shootTarget": {
+            "damage": 3
+          }
+        }
+
+        }
+      }
+    }
+  }

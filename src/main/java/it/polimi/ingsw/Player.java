@@ -150,7 +150,7 @@ public class Player {
 
     public Set<Player> allCanSee(){
         Set<Player> visible = new HashSet<>(allPlayers());
-       for(Player p : visible){
+        for(Player p : visible){
             if(!this.canSee(p))
                 visible.remove(p);
         }

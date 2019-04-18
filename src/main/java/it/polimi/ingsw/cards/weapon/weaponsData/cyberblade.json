@@ -1,0 +1,61 @@
+{
+  "name": "Spada Fotonica",
+  "chamber": {
+    "yellow": 1
+  },
+  "effects": {
+    "basic": {
+      "cost": {
+        "yellow": 1,
+        "red": 1
+      },
+      "subEffect": {
+        "1": {
+          "targetAcq": {
+            "equal": ["mySquare"],
+            "askPlayer": {
+              "msg": "Seleziona 1 Player nel quadrato in cui ti trovi.",
+              "num": 1
+            }
+          },
+          "shootTarget": {
+            "damage": 2
+          }
+        }
+      }
+    },
+    "addTwo":{
+      "cost": {
+        "yellow": 1
+      },
+      "subEffect":{
+        "1": {
+          "targetAcq": {
+            "equal": ["mySquare"],
+            "different": ["basic"],
+            "askPlayer": {
+              "msg": "Seleziona 1 Player nel quadrato in cui ti trovi.",
+              "num": 1
+            }
+          },
+          "shootTarget": {
+            "damage": 2
+          }
+        }
+      }
+    },
+    "extraMove": {
+      "cost": {},
+      "subEffect": {
+        "1": {
+          "targetAcq": {
+            "equal": ["me"]
+          },
+          "moveTarget": {
+            "step": 1
+          }
+        }
+      }
+    }
+  }
+}

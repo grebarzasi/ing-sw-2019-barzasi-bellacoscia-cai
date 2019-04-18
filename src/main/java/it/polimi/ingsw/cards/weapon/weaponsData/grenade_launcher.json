@@ -1,49 +1,23 @@
 {
-  "name": "Torpedine",
+  "name": "Lanciagranate",
   "chamber": {
-    "blue": 1
+    "red": 1
   },
-
   "effects": {
     "basic": {
       "cost": {
-        "blue": 1,
         "red": 1
       },
-      "subEffects": {
+      "subEffect": {
         "1": {
           "targetAcq": {
             "isVisible": {
               "visible": true
             },
             "askPlayer": {
-              "msg": "Seleziona 1 Player da colpire.",
+              "msg": "Seleziona 1 Player che puoi vedere",
               "num": 1
             }
-          },
-          "shootTarget": {
-            "damage": 2
-          }
-        }
-      }
-    },
-    "addOne": {
-      "cost": {
-        "blue": 1
-      },
-      "subEffects": {
-        "1": {
-          "targetAcq": {
-            "isVisible": {
-              "visible": true,
-              "origin": "basic"
-            },
-            "different": ["basic"],
-            "askPlayer": {
-              "msg": "Seleziona 1 Player visibile dal bersaglio dell'effetto base.",
-              "num": 1
-            }
-
           },
           "shootTarget": {
             "damage": 1
@@ -51,29 +25,45 @@
         }
       }
     },
-    "addTwo": {
+    "addOne": {
       "cost": {
-        "blue": 1
+        "red": 1
       },
-      "subEffects": {
+      "subEffect": {
         "1": {
           "targetAcq": {
             "isVisible": {
-              "visible": true,
-              "origin": "addTwo"
+              "visible": true
             },
-            "different": ["addOne", "basic"],
             "askPlayer": {
-              "msg": "Seleziona 1 Player visibile dal bersaglio dell'effetto addizionale 1.",
+              "msg": "Seleziona 1 Player il cui quadrato verrà colpito.",
+              "num": 1
+            },
+            "substitute": ["square"]
+          },
+          "shootTarget": {
+            "damage": 1
+          }
+        }
+      }
+    },
+    "extraMove": {
+      "cost": {},
+      "afterBasic": true,
+      "subEffect": {
+        "1": {
+          "targetAcq": {
+            "equal": ["basic"],
+            "askPlayer": {
+              "msg": "Seleziona 1 Player da muovere",
               "num": 1
             }
           },
-          "shootTarget": {
-            "damage": 2
+          "moveTarget": {
+            "step": 1
           }
         }
       }
     }
   }
 }
-

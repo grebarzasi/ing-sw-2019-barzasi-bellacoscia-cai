@@ -1,11 +1,9 @@
 package it.polimi.ingsw.cards.weapon.aiming;
 
 import it.polimi.ingsw.Player;
-import it.polimi.ingsw.cards.weapon.AimingFilter;
 import it.polimi.ingsw.cards.weapon.TargetAcquisition;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 /**

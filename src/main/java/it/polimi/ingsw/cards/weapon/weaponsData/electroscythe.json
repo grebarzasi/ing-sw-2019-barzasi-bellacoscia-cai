@@ -1,0 +1,39 @@
+{
+  "name": "Falce Protonica",
+  "chamber": {
+    "blue": 1
+  },
+  "effects": {
+    "basic": {
+      "cost": {
+        "blue": 1
+      },
+      "subEffects": {
+        "1": {
+          "targetAcq": {
+            "equals": ["mySquare"]
+          },
+          "shootTarget": {
+            "damage": 1
+          }
+        }
+      }
+    },
+    "alternative": {
+      "cost": {
+        "blue": 1,
+        "red": 1
+      },
+      "subEffects": {
+        "1": {
+          "targetAcq": {
+            "equals": ["mySquare"]
+          },
+          "shootTarget": {
+            "damage": 2
+          }
+        }
+      }
+    }
+  }
+}

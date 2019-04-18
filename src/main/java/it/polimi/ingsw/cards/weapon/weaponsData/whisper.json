@@ -1,0 +1,36 @@
+{
+  "name": "Fucile di precisione",
+  "chamber": {
+    "blue": 1
+  },
+
+  "effects": {
+    "basic": {
+      "cost": {
+        "blue": 2,
+        "yellow": 1
+      },
+      "subEffects": {
+        "1": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": true
+            },
+            "range": {
+              "min": 2
+            },
+            "askPlayer": {
+              "msg": "Seleziona 1 Player da colpire.",
+              "num": 1
+            }
+
+          },
+          "shootTarget": {
+            "damage": 3,
+            "mark": 1
+          }
+        }
+      }
+    }
+  }
+}
