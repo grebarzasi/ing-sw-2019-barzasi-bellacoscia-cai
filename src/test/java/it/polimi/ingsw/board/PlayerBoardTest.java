@@ -63,7 +63,7 @@ class PlayerBoardTest {
         assertEquals(trotskyBoard.getDamage().size(),12);
 
         assertFalse(mercaderBoard.getMark().isEmpty());
-        assertTrue(mercaderBoard.getMark().get(0).getOwner() == trotsky);
+        assertSame(mercaderBoard.getMark().get(0).getOwner(), trotsky);
 
 
     }
@@ -144,7 +144,7 @@ class PlayerBoardTest {
         trotskyBoard.addMark(t);
 
         assertFalse(trotskyBoard.getMark().isEmpty());
-        assertTrue(trotskyBoard.getMark().get(0) == t);
+        assertSame(trotskyBoard.getMark().get(0), t);
 
 
         t.getOwner().getPersonalBoard().addMark(v);
@@ -172,7 +172,7 @@ class PlayerBoardTest {
         trotskyBoard.addMark(t);
 
         assertFalse(trotskyBoard.getMark().isEmpty());
-        assertTrue(trotskyBoard.getMark().get(0) == t);
+        assertSame(trotskyBoard.getMark().get(0), t);
 
 
         t.getOwner().getPersonalBoard().addMark(v);
@@ -185,6 +185,9 @@ class PlayerBoardTest {
         assertTrue(trotsky.getPersonalBoard().getMark().isEmpty());
     }
 
+    /**
+     * Verifies that the damage is added correctly considering marks
+     */
 
     @Test
     void addDamage() {
@@ -213,15 +216,115 @@ class PlayerBoardTest {
 
         assertEquals(trotskyBoard.getDamage().size(),0);
 
-        System.out.println("test" + trotskyBoard.getMark().size());
-        System.out.println("test" + trotskyBoard.getDamage().size());
-
         trotskyBoard.addDamage(t);
-
-        System.out.println(trotskyBoard.getDamage().size());
 
         assertEquals(trotskyBoard.getDamage().size(),7);
         assertEquals(trotskyBoard.getMark().size(),0);
+
+        for(i=6;i<20;i++) {
+
+            trotskyBoard.addMark(t);
+
+        }
+
+        trotskyBoard.addDamage(t);
+
+        assertEquals(12,trotskyBoard.getDamage().size());
+        assertTrue(trotskyBoard.getMark().isEmpty());
+
+
+    }
+
+    /**
+     * Verifies the correct interaction of marks from 2 different players
+     */
+
+    @Test
+    void addDamage2Players() {
+
+
+        Player trotsky = new Player("Trotsky","victim",new PlayerBoard (null));
+        PlayerBoard trotskyBoard = new PlayerBoard(trotsky);
+        trotsky.setPersonalBoard(trotskyBoard);
+
+        Player mercader = new Player("Mercader","assassin",new PlayerBoard (null));
+        PlayerBoard mercaderBoard = new PlayerBoard(trotsky);
+        mercader.setPersonalBoard(mercaderBoard);
+
+        Player stalin = new Player("Stalin","contractor",new PlayerBoard (null));
+        PlayerBoard stalinBoard = new PlayerBoard(stalin);
+        stalin.setPersonalBoard(stalinBoard);
+
+        assertTrue(trotskyBoard.getDamage().isEmpty());
+
+        Token t = new Token(mercader);
+        Token c = new Token(stalin);
+
+        int i;
+
+
+        //mercader gives 6 tokens to trotsky
+
+        for(i=0;i<6;i++) {
+
+            trotskyBoard.addMark(t);
+
+        }
+
+        //stalin gives 3 tokens to trotsky
+
+        for(i=0;i<3;i++) {
+
+            trotskyBoard.addMark(c);
+
+        }
+
+        //trotsky should have 6+3 marks
+
+        assertEquals(9,trotskyBoard.getMark().size());
+
+        //nobody has dealt any damage yet
+
+        assertEquals(trotskyBoard.getDamage().size(),0);
+
+        //stalin deals 1 damage
+
+        trotskyBoard.addDamage(c);
+
+        //only mercader's 6 marks should be left
+
+        assertEquals(trotskyBoard.getMark().size(),6);
+
+        //mercarder deals 1 damage
+
+        trotskyBoard.addDamage(t);
+
+        //total damage dealt should now be 11 and all marks should have been applied
+
+        assertEquals(trotskyBoard.getDamage().size(),11);
+        assertEquals(trotskyBoard.getMark().size(),0);
+
+        //mercader applies 20 marks to trotsky because why not
+
+        for(i=6;i<20;i++) {
+
+            trotskyBoard.addMark(t);
+
+        }
+
+        //mercarder applies an ice pick to trotsky's head
+
+        trotskyBoard.addDamage(t);
+
+        //trotsky recieves the ice pick to the head but fights back giving mercarder a mark, but dies in the hospital
+
+        assertEquals(12,trotskyBoard.getDamage().size());
+        assertEquals(1,mercaderBoard.getMark().size());
+
+        //all trotsky's marks should be cleared, mercarder wasted his 20 marks
+
+        assertTrue(trotskyBoard.getMark().isEmpty());
+
 
     }
 
