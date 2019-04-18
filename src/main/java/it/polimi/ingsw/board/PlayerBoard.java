@@ -25,7 +25,7 @@ public class PlayerBoard {
      * NEEDS TO BE REVISITED, USE AT YOUR OWN AND OTHERS' RISK
      */
 
-    public void addDamage(Token t) {
+    public void damage(Token t) {
 
         if (this.damage.size()<10){
 
@@ -48,6 +48,29 @@ public class PlayerBoard {
     }
 
     /**
+     * Adds a damage token to the player's board,
+     * also if a player has a marks of the same owner applies the marks
+     * @param t the token to apply
+     *
+     * NEEDS TO BE REVISITED, USE AT YOUR OWN AND OTHERS' RISK
+     */
+
+    public void addDamage(Token t){
+
+        this.damage(t);
+
+        int i;
+
+        for (i = 0 ; i < this.getMark().size() ; i++ ) {
+            if (this.getMark().get(i).getOwner() == t.getOwner()){
+                this.damage(t);
+                this.getMark().remove(t);
+            }
+        }
+
+    }
+
+    /**
      * Resets the damage to zero
      */
 
@@ -63,7 +86,9 @@ public class PlayerBoard {
      */
 
     public void addMark(Token t){
+
         this.mark.add(t);
+
     }
 
     /**
