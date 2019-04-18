@@ -3,21 +3,26 @@
   "chamber": {
     "blue": 1
   },
-  "reload": {
-    "blue": 1,
-    "yellow": 1
-  },
   "effects": {
     "basic": {
-      "1": {
-        "isVisible": {
-          "visible": true
-        },
-        "askPlayer":{
-          "number":1
-        },
-        "shootTarget": {
-          "damage": 2
+      "cost": {
+        "blue": 1,
+        "yellow": 1
+      },
+      "subEffects": {
+        "1": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": true
+            },
+            "askPlayer": {
+              "msg": "Seleziona 1 Player da colpire",
+              "num": 1
+            }
+          },
+          "shootTarget": {
+            "damage": 2
+          }
         }
       }
     },
@@ -25,34 +30,28 @@
       "cost": {
         "blue": 1
       },
-      "1": {
-        "isVisible":{
-          "visible": true,
-          "from": "Last"
-        },
-        "askPlayer": {
-          "number":1
-        },
-        "shootTarget": {
-          "damage": 1
+      "subEffects": {
+        "1": {
+          "targetAcq": {
+            "eqaual": ["basic"]
+          }
+          "shootTarget": {
+              "damage": 1,
+          }
         }
       }
-    },
-    "addTwo": {
+    }
+    "extraMove": {
       "cost": {
-        "blue": 1
       },
-      "1": {
-        "isVisible": {
-          "visible": true,
-          "from": "Last"
-        },
-        "different": ["last"],
-        "askPlayer": {
-          "number": 1
-        },
-        "shootTarget": {
-          "damage": 1
+      "subEffects": {
+        "1": {
+          "targetAcq": {
+            "equal": ["me"]
+          },
+          "moveTarget": {
+            "step": 2
+          }
         }
       }
     }

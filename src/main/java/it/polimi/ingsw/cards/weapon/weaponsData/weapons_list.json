@@ -2,5 +2,22 @@
   "lock_rifle": 1,
   "machine_gun": 1,
   "thor": 1,
-  "plasma_gun": 1
+  "plasma_gun": 1,
+  "whisper": 1,
+  "electroscythe": 1,
+  "tractor_beam": 1,
+  "vortex_cannon": 1,
+  "furnace": 1,
+  "heatseeker": 1,
+  "hellion": 1,
+  "flamethrower": 1,
+  "grenade_launcher": 1,
+  "rocket_launcher": 1,
+  "railgun": 1,
+  "cyberblade": 1,
+  "zx_2": 1,
+  "shotgun": 1,
+  "power_glove": 1,
+  "shockwave": 1,
+  "sledgehammer": 1
 }
