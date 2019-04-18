@@ -203,14 +203,25 @@ class PlayerBoardTest {
         Token t = new Token(mercader);
 
         int i;
-        for(i=0;i<100;i++) {
+        for(i=0;i<6;i++) {
+
             trotskyBoard.addMark(t);
+
         }
+
+        assertEquals(6,trotskyBoard.getMark().size());
+
+        assertEquals(trotskyBoard.getDamage().size(),0);
+
+        System.out.println("test" + trotskyBoard.getMark().size());
+        System.out.println("test" + trotskyBoard.getDamage().size());
 
         trotskyBoard.addDamage(t);
 
-        assertEquals(trotskyBoard.getMark().size(),4);
-        assertEquals(trotskyBoard.getDamage().size(),5);
+        System.out.println(trotskyBoard.getDamage().size());
+
+        assertEquals(trotskyBoard.getDamage().size(),7);
+        assertEquals(trotskyBoard.getMark().size(),0);
 
     }
 
