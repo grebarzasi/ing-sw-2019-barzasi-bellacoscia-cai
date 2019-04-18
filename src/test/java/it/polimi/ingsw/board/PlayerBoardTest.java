@@ -203,14 +203,15 @@ class PlayerBoardTest {
         Token t = new Token(mercader);
 
         int i;
-        for(i=0;i<100;i++) {
+        for(i=0; i<100; i += 1) {
             trotskyBoard.addMark(t);
         }
 
         trotskyBoard.addDamage(t);
 
-        assertEquals(trotskyBoard.getMark().size(),4);
-        assertEquals(trotskyBoard.getDamage().size(),5);
+        assertEquals(100,trotskyBoard.getMark().size());
+
+        assertEquals(5,trotskyBoard.getDamage().size());
 
     }
 

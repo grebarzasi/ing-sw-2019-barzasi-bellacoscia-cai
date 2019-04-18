@@ -21,6 +21,8 @@ public class Player {
     private int points;
 
     private Square position;
+    //needed in some weapon effect -Gregorio
+    private Square oldPosition;
 
     private ArrayList<Weapon> weaponsList;
 
@@ -165,12 +167,31 @@ public class Player {
     }
 
     /**
+     * Make damage and set marks
+     * @author Gregorio Barzasi
+     */
+    public void inflictDamage(int num,Player target){
+        Token t = new Token(this);
+        for(int i=0; i<=num; i++) {
+            target.getPersonalBoard().addDamage(t);
+        }
+    }
+    public void inflictMark(int num,Player target){
+        Token t = new Token(this);
+        for(int i=0; i<=num; i++) {
+            target.getPersonalBoard().addMark(t);
+        }
+    }
+
+
+    /**
      * Calculates the distance between a player and a square
      * @param s the {@link Square} you wanna know the distance to
      * @return the distance to that {@Link Square}, -1 if unreachable:
      * meaning that the square is a blank since all maps are completely connected
      *
      * calculated using Breadth-first search
+     *
      */
 
     public int distanceTo(Square s) {

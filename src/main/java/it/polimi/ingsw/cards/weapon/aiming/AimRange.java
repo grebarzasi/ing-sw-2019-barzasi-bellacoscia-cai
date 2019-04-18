@@ -26,6 +26,7 @@ public class AimRange implements AimingFilter {
     public Integer getMaxDistance() {
         return maxDistance;
     }
+
     public AimRange(Integer minDistance, Integer maxDistance) {
         this.minDistance = minDistance;
         if(maxDistance==0)

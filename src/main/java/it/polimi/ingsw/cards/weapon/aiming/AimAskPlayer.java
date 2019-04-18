@@ -25,6 +25,10 @@ public class AimAskPlayer implements AimingFilter {
         return numMax;
     }
 
+    public String getMsg(){
+        return this.msg;
+    }
+
     public boolean isFromDiffSquare() {
         return fromDiffSquare;
     }

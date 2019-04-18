@@ -22,7 +22,7 @@ public class AimSubstitute extends AimComparator implements AimingFilter{
 
     }
 
-    //does the exclusion between the set of available target and the one from source
+    //does the substitution between the set of available target and the one from source
     public Set<Player> filter(Weapon w, Set<Player> p) {
         p=getPlayersFromSource(w);
         return p;
