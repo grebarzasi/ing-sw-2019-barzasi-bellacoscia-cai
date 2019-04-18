@@ -6,7 +6,7 @@
   "effects": {
     "basic": {
       "cost": {
-        "red": 1
+        "blue": 2
       },
       "subEffects": {
         "1": {
@@ -15,11 +15,12 @@
               "visible": true
             },
             "askPlayer": {
+              "msg": "Seleziona 1 Player visibile da colpire.",
               "num": 1
             }
           },
           "shootTarget": {
-            "damage": 1,
+            "damage": 2,
             "mark": 1
           }
         }
@@ -35,10 +36,9 @@
             "isVisible": {
               "visible": true
             },
-            "different": [
-              "last"
-            ],
+            "different": ["basic"],
             "askPlayer": {
+              "msg": "Seleziona 1 Player diverso da quello dell'effetto base.",
               "num": 1
             }
           },

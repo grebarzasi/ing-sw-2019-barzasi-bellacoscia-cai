@@ -3,21 +3,25 @@
   "chamber": {
     "blue": 1
   },
-  "reload": {
-    "blue": 1,
-    "red": 1
-  },
+
   "effects": {
     "basic": {
-      "1": {
-        "isVisible": {
-          "visible": true
-         },
-        "askPlayer":{
-          "number":2
-        },
-        "shootTarget": {
-          "damage": 1
+      "cost": {
+        "blue": 1,
+        "red": 1
+      },
+      "subEffects": {
+        "1": {
+          "isVisible": {
+            "visible": true
+          },
+          "askPlayer": {
+            "msg": "Selziona 2 Player visibili.",
+            "num": 2
+          },
+          "shootTarget": {
+            "damage": 1
+          }
         }
       }
     },
@@ -25,16 +29,17 @@
       "cost": {
         "yellow": 1
       },
-      "1": {
-        "compare":{
+      "subEffects": {
+        "1": {
           "equals": ["basic"],
-          "different": ["addTwo"]
-        },
-        "askPlayer": {
-          "number":1
-        },
-        "shootTarget": {
-          "damage": 1
+          "different": ["addTwo"],
+          "askPlayer": {
+            "msg": "Seleziona 1 Player fra quelli colpiti nell'effetto base.",
+            "num": 1
+          },
+          "shootTarget": {
+            "damage": 1
+          }
         }
       }
     },
@@ -42,32 +47,36 @@
       "cost": {
         "blue": 1
       },
-      "1": {
-        "compare":{
+      "subEffects": {
+        "1": {
           "equals": ["basic"],
-          "different": ["addOne"]
+          "different": ["addOne"],
+          "askPlayer": {
+            "msg": "Seleziona 1 Player fra quelli colpiti nell'effetto base.",
+            "num": 1
+          },
+          "shootTarget": {
+            "damage": 1
+          }
         },
-        "askPlayer": {
-          "number":1
-        },
-        "shootTarget": {
-          "damage": 1
+        "2": {
+          "isVisible": {
+            "visible": true
+          },
+          "different": [
+              "addOne",
+              "addTwo",
+              "basic"
+          ]
+          "askPlayer": {
+            "msg": "Seleziona 1 Player differente da quelli colpiti precedentemente.",
+            "num": 1
+          },
+          "shootTarget": {
+            "damage": 1
+          }
         }
-      },
-      "2":{
-        "isVisible": {
-          "visible": true
-        },
-        "compare":{
-          "different": ["addOne","addTwo","Basic"]
-        },
-        "askPlayer": {
-          "number":1
-        },
-        "shootTarget": {
-          "damage": 1
-        }
-    }
+      }
   }
   }
 }

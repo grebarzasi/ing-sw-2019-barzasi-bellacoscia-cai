@@ -3,21 +3,27 @@
   "chamber": {
     "blue": 1
   },
-  "reload": {
-    "blue": 1,
-    "red": 1
-  },
+
   "effects": {
     "basic": {
-      "1": {
-        "isVisible": {
-          "visible": true
-        },
-        "askPlayer":{
-          "number":1
-        },
-        "shootTarget": {
-          "damage": 2
+      "cost": {
+        "blue": 1,
+        "red": 1
+      },
+      "subEffects": {
+        "1": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": true
+            },
+            "askPlayer": {
+              "msg": "Seleziona 1 Player da colpire.",
+              "num": 1
+            }
+          },
+          "shootTarget": {
+            "damage": 2
+          }
         }
       }
     },
@@ -25,16 +31,22 @@
       "cost": {
         "blue": 1
       },
-      "1": {
-        "isVisible":{
-          "visible": true,
-          "from": "Last"
-        },
-        "askPlayer": {
-          "number":1
-        },
-        "shootTarget": {
-          "damage": 1
+      "subEffects": {
+        "1": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": true,
+              "origin": "last"
+            },
+            "askPlayer": {
+              "msg": "Seleziona 1 Player visibile dal bersaglio dell'effetto base.",
+              "num": 1
+            },
+            "different": ["basic"]
+          },
+          "shootTarget": {
+            "damage": 1
+          }
         }
       }
     },
@@ -42,17 +54,22 @@
       "cost": {
         "blue": 1
       },
-      "1": {
-        "isVisible": {
-          "visible": true,
-          "from": "Last"
-        },
-        "different": ["last"],
-        "askPlayer": {
-          "number": 1
-        },
-        "shootTarget": {
-          "damage": 1
+      "subEffects": {
+        "1": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": true,
+              "origin": "Last"
+            },
+            "different": ["addOne", "basic"],
+            "askPlayer": {
+              "msg": "Seleziona 1 Player visibile dal bersaglio dell'effetto addizionale 1.",
+              "num": 1
+            }
+          },
+          "shootTarget": {
+            "damage": 1
+          }
         }
       }
     }
