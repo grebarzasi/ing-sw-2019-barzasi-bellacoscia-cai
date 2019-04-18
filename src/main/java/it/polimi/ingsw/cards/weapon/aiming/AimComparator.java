@@ -47,16 +47,16 @@ public class AimComparator {
                     pSet.add(w.getLastHit());
                     break;
                 case "room":
-                    //implement
+                   //implement
                     break;
                 case "square":
                     //implement
                     break;
                 case "myRoom":
-                    //implement
+                    //pSet.add(w.getOwner().getPosition().getRoom().getPlayersInRoom);
                     break;
                 case "mySquare":
-                    //implement
+                   // pSet.add(w.getOwner().getPosition().playersInSquare());
                     break;
 
             }

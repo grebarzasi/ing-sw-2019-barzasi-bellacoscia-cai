@@ -1,7 +1,7 @@
 package it.polimi.ingsw.cards.weapon.weapon_builder;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import it.polimi.ingsw.cards.weapon.AimingFilter;
+import it.polimi.ingsw.cards.weapon.aiming.AimingFilter;
 import it.polimi.ingsw.cards.weapon.TargetAcquisition;
 import it.polimi.ingsw.cards.weapon.aiming.*;
 

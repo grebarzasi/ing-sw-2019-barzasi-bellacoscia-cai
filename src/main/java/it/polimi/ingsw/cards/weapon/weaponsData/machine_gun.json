@@ -16,7 +16,7 @@
             "visible": true
           },
           "askPlayer": {
-            "msg": "Selziona 2 Player visibili.",
+            "msg": "Seleziona 2 Player visibili.",
             "num": 2
           },
           "shootTarget": {
@@ -67,7 +67,7 @@
               "addOne",
               "addTwo",
               "basic"
-          ]
+          ],
           "askPlayer": {
             "msg": "Seleziona 1 Player differente da quelli colpiti precedentemente.",
             "num": 1

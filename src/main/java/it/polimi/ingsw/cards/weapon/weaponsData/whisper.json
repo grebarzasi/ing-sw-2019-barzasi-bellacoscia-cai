@@ -16,13 +16,14 @@
             "isVisible": {
               "visible": true
             },
+            "range": {
+              "min": 2
+            },
             "askPlayer": {
               "msg": "Seleziona 1 Player da colpire.",
               "num": 1
-            },
-            "range": {
-              "min": 2
             }
+
           },
           "shootTarget": {
             "damage": 3,

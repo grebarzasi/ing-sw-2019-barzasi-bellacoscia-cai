@@ -1,12 +1,6 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.board.Board;
-import it.polimi.ingsw.board.Square;
-import static it.polimi.ingsw.board.MapLoader.loadMap;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.File;
-import java.io.IOException;
 
 
 import java.sql.Time;

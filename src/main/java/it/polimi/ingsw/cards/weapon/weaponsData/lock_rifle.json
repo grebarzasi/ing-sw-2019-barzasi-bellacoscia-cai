@@ -15,7 +15,7 @@
               "visible": true
             },
             "askPlayer": {
-              "msg": "Seleziona 1 Player visibile da colpire.",
+              "msg": "Seleziona 1 Player da colpire.",
               "num": 1
             }
           },
