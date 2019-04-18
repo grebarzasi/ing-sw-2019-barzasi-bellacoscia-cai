@@ -1,0 +1,69 @@
+{
+  "name": "Lanciagranate",
+  "chamber": {
+    "red": 1
+  },
+  "effects": {
+    "basic": {
+      "cost": {
+        "red": 1
+      },
+      "subEffect": {
+        "1": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": true
+            },
+            "askPlayer": {
+              "msg": "Seleziona 1 Player che puoi vedere",
+              "num": 1
+            }
+          },
+          "shootTarget": {
+            "damage": 1
+          }
+        }
+      }
+    },
+    "addOne": {
+      "cost": {
+        "red": 1
+      },
+      "subEffect": {
+        "1": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": true
+            },
+            "askPlayer": {
+              "msg": "Seleziona 1 Player il cui quadrato verrà colpito.",
+              "num": 1
+            },
+            "substitute": ["square"]
+          },
+          "shootTarget": {
+            "damage": 1
+          }
+        }
+      }
+    },
+    "extraMove": {
+      "cost": {},
+      "afterBasic": true,
+      "subEffect": {
+        "1": {
+          "targetAcq": {
+            "equal": ["basic"],
+            "askPlayer": {
+              "msg": "Seleziona 1 Player da muovere",
+              "num": 1
+            }
+          },
+          "moveTarget": {
+            "step": 1
+          }
+        }
+      }
+    }
+  }
+}

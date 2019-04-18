@@ -1,0 +1,63 @@
+{
+  "name": "Lanciafiamme",
+  "chamber": {
+    "red": 1
+  },
+  "effects": {
+    "basic": {
+      "cost": {
+        "red": 1
+      },
+      "subEffect": {
+        "1": {
+          "targetAcq": {
+            "direction": {},
+            "range": {
+              "min": 1,
+              "max": 3
+            },
+            "askPlayer": {
+              "msg": "Seleziona 2 Player sulla stessa direzione",
+              "num": 2,
+              "diffSquare": true
+            }
+          },
+          "shootTarget": {
+            "damage": 1
+          }
+        }
+      }
+    },
+    "alternative": {
+      "cost": {
+        "yellow": 2
+      },
+      "subEffect": {
+        "1": {
+          "targetAcq": {
+            "direction": {},
+            "range": {
+              "min": 1,
+              "max": 3
+            }
+          },
+          "shootTarget": {
+            "damage": 1
+          }
+        },
+        "2": {
+          "targetAcq": {
+            "direction": {},
+            "range": {
+              "min": 1,
+              "max": 2
+            }
+          },
+          "shootTarget": {
+            "damage": 1
+          }
+        }
+      }
+    }
+  }
+}

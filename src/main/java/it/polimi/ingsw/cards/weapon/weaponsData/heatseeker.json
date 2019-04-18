@@ -1,0 +1,30 @@
+{
+  "name": "Razzo Termico",
+  "chamber": {
+    "red": 1
+  },
+  "effects": {
+    "basic": {
+      "cost": {
+        "red": 2,
+        "yellow": 1
+      },
+      "subEffects": {
+        "1": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": false
+            },
+            "askPlayer": {
+              "msg": "Seleziona un Player che non vedi",
+              "num": 1
+            }
+          },
+          "shootTarget": {
+            "damage": 3
+          }
+        }
+      }
+    }
+  }
+}

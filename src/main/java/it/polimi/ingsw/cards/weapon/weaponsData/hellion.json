@@ -1,0 +1,69 @@
+{
+  "name": "Raggio Solare",
+  "chamber": {
+    "red": 1
+  },
+  "effects": {
+    "basic": {
+      "cost": {
+        "red": 1,
+        "yellow": 1
+      },
+      "subEffect": {
+        "1": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": true
+            },
+            "different": ["mySquare"],
+            "askPlayer": {
+              "msg": "Seleziona 1 Player che puoi vedere.",
+              "num": 1
+            }
+          },
+          "shootTarget": {
+            "damage": 1
+          }
+        },
+        "2": {
+          "targetAcq": {
+            "substitute": ["square"]
+          },
+          "shootTarget": {
+            "mark": 1
+          }
+        }
+      }
+    },
+    "alternative": {
+      "cost": {
+        "red": 1
+      },
+      "subEffect": {
+        "1": {
+          "targetAcq": {
+            "isVisible": {
+              "visible": true
+            },
+            "different": ["mySquare"],
+            "askPlayer": {
+              "msg": "Seleziona 1 Player che puoi vedere.",
+              "num": 1
+            }
+          },
+          "shootTarget": {
+            "damage": 1
+          }
+        },
+        "2": {
+          "targetAcq": {
+            "substitute": ["square"]
+          },
+          "shootTarget": {
+            "mark": 2
+          }
+        }
+      }
+    }
+  }
+}
