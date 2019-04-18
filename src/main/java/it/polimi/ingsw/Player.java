@@ -14,9 +14,9 @@ public class Player {
 
     private Terminator termRef;
 
-    private String character;
-
     private String username;
+
+    private String character;
 
     private int points;
 
@@ -26,7 +26,7 @@ public class Player {
 
     private ArrayList<PowerUp> powerupList;
 
-    private PlayerBoard myBoard;
+    private PlayerBoard personalBoard;
 
     private Board gameBoard;
 
@@ -37,10 +37,19 @@ public class Player {
     private ArrayList<Action> actions;
 
 
+    //for testing purposes only
     public Player(String username, String character, Square position) {
         this.username = username;
         this.character = character;
         this.position = position;
+    }
+
+    //for testing purposes only
+    public Player(String username, String character, PlayerBoard personalBoard) {
+
+        this.username = username;
+        this.character = character;
+        this.personalBoard = personalBoard;
     }
 
     public Square getPosition(){
@@ -272,12 +281,12 @@ public class Player {
         this.powerupList = powerupList;
     }
 
-    public PlayerBoard getMyBoard() {
-        return myBoard;
+    public PlayerBoard getPersonalBoard() {
+        return personalBoard;
     }
 
-    public void setMyBoard(PlayerBoard myBoard) {
-        this.myBoard = myBoard;
+    public void setPersonalBoard(PlayerBoard personalBoard) {
+        this.personalBoard = personalBoard;
     }
 
     public Board getGameBoard() {
@@ -311,4 +320,5 @@ public class Player {
     public void setActions(ArrayList<Action> actions) {
         this.actions = actions;
     }
+
 }
