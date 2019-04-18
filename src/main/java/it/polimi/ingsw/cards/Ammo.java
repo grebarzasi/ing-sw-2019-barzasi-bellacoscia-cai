@@ -25,4 +25,16 @@ public class Ammo extends CarePackage {
     public int getYellow() {
         return yellow;
     }
+
+    public void setRed(int red) {
+        this.red = red;
+    }
+
+    public void setBlue(int blue) {
+        this.blue = blue;
+    }
+
+    public void setYellow(int yellow) {
+        this.yellow = yellow;
+    }
 }

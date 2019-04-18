@@ -50,7 +50,7 @@ public class Square {
     }
 
 
-
+    //only for testing purposes
     public Square(Cell position, Room room, boolean isRespawn, Square north, Square east, Square south, Square west) {
         this.position = position;
         this.room = room;
@@ -60,6 +60,7 @@ public class Square {
         this.south = south;
         this.west = west;
     }
+
 
     /**
      * scans the list of players and checks whether they are on the square or not

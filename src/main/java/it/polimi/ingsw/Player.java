@@ -18,7 +18,7 @@ public class Player {
 
     private String username;
 
-    private ArrayList<Token> points;
+    private int points;
 
     private Square position;
 
@@ -210,6 +210,10 @@ public class Player {
 
     }
 
+    public void getPoints(int i){
+        this.points += i;
+    }
+
     public void usePU(PowerUp pu) {
 
     }
@@ -244,11 +248,7 @@ public class Player {
         this.username = username;
     }
 
-    public ArrayList<Token> getPoints() {
-        return points;
-    }
-
-    public void setPoints(ArrayList<Token> points) {
+    public void setPoints(int points) {
         this.points = points;
     }
 

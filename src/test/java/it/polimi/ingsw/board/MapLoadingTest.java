@@ -185,6 +185,7 @@ public class MapLoadingTest {
     /**
      * Test asserts there are no one way walls, if a square has null in a direction, the square
      * adjacent to it in that direction should have null in the opposite corresponding direction
+     * Done for each map
      * */
 
     @Test
