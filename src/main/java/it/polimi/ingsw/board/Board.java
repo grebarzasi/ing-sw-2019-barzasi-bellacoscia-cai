@@ -7,7 +7,7 @@ public class Board extends Subject {
     public Board() {
 
         Map map;
-
+        KillshotTrack track;
 
     }
 

@@ -10,8 +10,6 @@ import java.util.Objects;
 public class Room {
 
 
-    private GameControllerServer controller;
-
     private String color;
 
 

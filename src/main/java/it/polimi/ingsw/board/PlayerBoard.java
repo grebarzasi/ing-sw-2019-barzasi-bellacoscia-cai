@@ -39,9 +39,8 @@ public class PlayerBoard {
 
         else if (this.damage.size() == 11) {
 
-            Token v;
             this.damage.add(t);
-            t.getOwner().getPersonalBoard().addMark(v = new Token(this.owner));
+            t.getOwner().getPersonalBoard().addMark(new Token(this.owner));
             //returns an overkill mark token
         }
 
@@ -61,11 +60,10 @@ public class PlayerBoard {
 
             this.mark.remove(t);
             this.damage(t);
-            
+
         }
 
         this.damage(t);
-
 
     }
 
