@@ -60,7 +60,7 @@
           "targetAcq": {
             "isVisible": {
               "visible": true,
-              "origin": "addTwo"
+              "origin": "addOne"
             },
             "different": ["addOne", "basic"],
             "askPlayer": {

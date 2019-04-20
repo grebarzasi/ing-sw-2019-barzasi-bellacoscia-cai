@@ -12,8 +12,9 @@
       "subEffect": {
         "1": {
           "targetAcq": {
-            "direction": {},
-            "wallBang": true,
+            "direction": {
+              "wallBang": true
+            },
             "askPlayer": {
               "msg": "Seleziona un player sulla direzione scelta",
               "num": 1
@@ -30,12 +31,12 @@
       "subEffect": {
         "1": {
           "targetAcq": {
-            "direction": {},
-            "wallBang": true,
+            "direction": {
+            "wallBang": true
+            },
             "askPlayer": {
-              "msg": "Seleziona un player sulla direzione scelta",
-              "num": 2,
-              "diffSquare": true
+              "msg": "Seleziona 2 player sulla direzione scelta",
+              "num": 2
             }
           },
           "shootTarget": {

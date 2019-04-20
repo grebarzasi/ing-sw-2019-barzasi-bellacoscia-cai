@@ -72,7 +72,7 @@ public class PlayerBoard {
      */
 
     public void resetDamage() {
-        this.damage = new ArrayList<Token>();
+        this.damage = new ArrayList<>();
     }
 
     /**

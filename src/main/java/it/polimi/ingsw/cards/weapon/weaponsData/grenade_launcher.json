@@ -53,11 +53,7 @@
       "subEffect": {
         "1": {
           "targetAcq": {
-            "equal": ["basic"],
-            "askPlayer": {
-              "msg": "Seleziona 1 Player da muovere",
-              "num": 1
-            }
+            "equal": ["basic"]
           },
           "moveTarget": {
             "step": 1

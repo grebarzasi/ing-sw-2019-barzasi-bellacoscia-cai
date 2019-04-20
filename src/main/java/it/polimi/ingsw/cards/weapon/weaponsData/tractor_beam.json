@@ -29,7 +29,7 @@
     "alternative": {
       "cost": {
         "blue": 1,
-        "red": 1
+        "yellow": 1
       },
       "subEffects": {
         "1": {

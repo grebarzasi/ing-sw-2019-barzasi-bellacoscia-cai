@@ -12,15 +12,12 @@
       "subEffect": {
         "1": {
           "targetAcq": {
-            "isVisible": {
-              "visible": true
-            },
             "range": {
               "min": 1,
               "max": 2
             },
             "askPlayer": {
-              "msg": "Seleziona 1 Player visibile.",
+              "msg": "Seleziona 1 Player.",
               "num": 1
             }
           },
@@ -31,10 +28,10 @@
         },
         "2": {
           "targetAcq": {
-            "equals": ["me"]
+            "substitute": ["me"]
           },
           "moveTarget": {
-            "moveTo": ["last"]
+            "finalPos": "last"
           }
         }
       }
@@ -46,16 +43,15 @@
       "subEffect": {
         "1": {
           "targetAcq": {
-            "isVisible": {
-              "visible": true
-            },
+            "direction":{},
             "range": {
               "min": 1,
-              "max": 2
+              "max": 3
             },
             "askPlayer": {
-              "msg": "Seleziona 1 Player visibile.",
-              "num": 1
+              "msg": "Seleziona fino a 2 Player in linea da colpire.",
+              "num": 2,
+              "diffSquare": true
             }
           },
           "shootTarget": {
@@ -64,35 +60,7 @@
         },
         "2": {
           "targetAcq": {
-            "equals": ["me"]
-          },
-          "moveTarget": {
-            "finalPos": "final"
-          }
-        },
-
-        "3": {
-          "targetAcq": {
-            "isVisible": {
-              "visible": true
-            },
-            "different": ["basic"],
-            "range": {
-              "min": 1,
-              "max": 2
-            },
-            "askPlayer": {
-              "msg": "Seleziona 1 Player visibile.",
-              "num": 1
-            }
-          },
-          "shootTarget": {
-            "damage": 2
-          }
-        },
-        "4": {
-          "targetAcq": {
-            "equals": ["me"]
+            "substitute": ["me"]
           },
           "moveTarget": {
             "finalPos": "last"

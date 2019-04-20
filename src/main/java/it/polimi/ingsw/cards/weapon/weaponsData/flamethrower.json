@@ -47,7 +47,6 @@
         },
         "2": {
           "targetAcq": {
-            "direction": {},
             "range": {
               "min": 1,
               "max": 2
