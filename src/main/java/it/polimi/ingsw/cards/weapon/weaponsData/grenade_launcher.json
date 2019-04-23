@@ -49,7 +49,7 @@
     },
     "extraMove": {
       "cost": {},
-      "afterBasic": true,
+      "beforeBasic": false,
       "subEffect": {
         "1": {
           "targetAcq": {

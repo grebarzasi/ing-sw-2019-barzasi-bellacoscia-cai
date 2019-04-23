@@ -24,7 +24,7 @@ public class AimComparator {
     }
 
 
-    public Set<Player> getPlayersFromSource(Weapon w) {
+    public Set<Player> getPlayersFromSource(Weapon w,Player target) {
         Set<Player> pSet = new HashSet<>();
         for (String s : sourceList) {
             switch (s) {
@@ -47,19 +47,18 @@ public class AimComparator {
                     pSet.add(w.getLastHit());
                     break;
                 case "room":
-                   //implement
+                    pSet.addAll(target.getPosition().getRoom().playersInRoom(target.allPlayers()));
                     break;
                 case "square":
-                    //implement
+                    pSet.addAll(target.getPosition().playersInSquare(target.allPlayers()));
                     break;
                 case "oldSquare":
-                   // pSet.add(w.getOwner());
+                   // Implement here
                     break;
                 case "myRoom":
-                    //pSet.add(w.getOwner().getPosition().getRoom().getPlayersInRoom);
-                    break;
+                    pSet.addAll(w.getOwner().getPosition().getRoom().playersInRoom(target.allPlayers()));                    break;
                 case "mySquare":
-                   // pSet.add(w.getOwner().getPosition().playersInSquare());
+                    pSet.addAll(w.getOwner().getPosition().playersInSquare(target.allPlayers()));
                     break;
                 case "me":
                     pSet.add(w.getOwner());

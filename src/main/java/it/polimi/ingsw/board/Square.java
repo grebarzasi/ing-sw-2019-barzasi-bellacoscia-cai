@@ -67,7 +67,7 @@ public class Square {
      * @param  where the Square you want to know the players on
      * @return the list of players on the queried Square
      */
-    public Collection<Player> playersInSquare(Square where, Collection<Player> playerList){
+    private Collection<Player> playersInASquare(Square where, Collection<Player> playerList){
 
         Collection<Player> playersHere = new ArrayList<>();
 
@@ -79,6 +79,18 @@ public class Square {
 
         return playersHere;
     }
+
+    /**
+     * Upgraded version of "playersInSquare"
+     * @author Gregorio Barzasi
+     */
+
+    public Collection<Player> playersInSquare(Collection<Player> allP){
+        return playersInASquare(this,allP);
+    }
+
+
+
 
     public boolean isAdjacent(Square s){
 

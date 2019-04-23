@@ -3,9 +3,7 @@ package it.polimi.ingsw.board;
 import it.polimi.ingsw.GameControllerServer;
 import it.polimi.ingsw.Player;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Objects;
+import java.util.*;
 
 public class Room {
 
@@ -33,6 +31,23 @@ public class Room {
         if (o == null || getClass() != o.getClass()) return false;
         Room room = (Room) o;
         return Objects.equals(color, room.color);
+    }
+
+    /**
+     * @return a collection of all player in this room
+     * @author Gregorio Barzasi
+     */
+    public Collection<Player> playersInRoom(Collection<Player> playerList){
+
+        Collection<Player> playersHere = new HashSet<Player>();
+
+        for (Player player : playerList) {
+            if (player.getPosition().getRoom().equals(this)) {
+                playersHere.add(player);
+            }
+        }
+
+        return playersHere;
     }
 
 }

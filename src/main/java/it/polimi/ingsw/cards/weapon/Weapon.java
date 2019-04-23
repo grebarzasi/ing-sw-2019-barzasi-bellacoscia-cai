@@ -28,8 +28,10 @@ public class Weapon extends Card {
 
     /**
      * easy way for the "move before or after" other basic effect.
+     *
      */
     private Effect extraMove;
+    private boolean beforeBasic=true;
 
     /**
      * used in some effect in order to act as a chain.
@@ -49,6 +51,19 @@ public class Weapon extends Card {
     public void additionalOne(){}
 
     public void additionalTwo(){}
+
+    public void extraMove(){}
+
+    public void getUsableEff(){}
+
+
+    public void fetch() {
+        //SET OWNER ON FETCH!
+    }
+    //setters&getters
+    public void setBeforeBasicExtra(boolean b){
+        this.beforeBasic=false;
+    }
 
     public String getName() {
         return name;
@@ -118,7 +133,5 @@ public class Weapon extends Card {
         return owner;
     }
 
-    public void fetch() {
-        //SET OWNER ON FETCH!
-    }
+
 }

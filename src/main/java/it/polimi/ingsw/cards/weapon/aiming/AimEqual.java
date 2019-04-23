@@ -20,7 +20,8 @@ public class AimEqual extends AimComparator implements AimingFilter {
 
     //does the intersection between the set of available target and the one from source
     public Set<Player> filter(Weapon w, Set<Player> p) {
-        p.retainAll(getPlayersFromSource(w));
+        Player target = (Player)p;
+        p.retainAll(getPlayersFromSource(w,target));
         return p;
     }
 }

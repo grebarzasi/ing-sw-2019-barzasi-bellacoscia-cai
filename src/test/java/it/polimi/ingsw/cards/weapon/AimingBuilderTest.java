@@ -137,7 +137,7 @@ public class AimingBuilderTest {
         JsonNode newNodeMin = mapper.readTree(newStringMin);
         AimRange targetMin = AimingBuilder.buildRange(newNodeMin);
         assertEquals(3,(int)targetMin.getMinDistance());
-        assertEquals(0,(int)targetMin.getMaxDistance());
+        assertEquals(1000,(int)targetMin.getMaxDistance());
         //max
         String newStringMax = "{\"max\":5}";
         JsonNode newNodeMax = mapper.readTree(newStringMax);
