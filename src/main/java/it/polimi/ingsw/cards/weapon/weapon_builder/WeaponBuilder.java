@@ -20,7 +20,7 @@ public class WeaponBuilder {
     public static Weapon buildWeapon(String name) {
         ObjectMapper mapper = new ObjectMapper();
         // path of weapons data
-        String path = "src\\main\\java\\it\\polimi\\ingsw\\cards\\weapon\\weaponsData\\";
+        String path = "src/main/java/it/polimi/ingsw/cards/weapon/weaponsData/";
         File jsonFile = new File(String.format("%s%s.json", path, name));
         try {
 

@@ -6,11 +6,27 @@ import java.util.*;
 
 public class Deck {
 
-    private List<Card> usableCards;
+    private ArrayList<Card> usableCards;
 
-    private List<Card> discardCards;
+    private ArrayList<Card> discardCards;
 
     public Deck() {
+    }
+
+    public ArrayList<Card> getUsableCards() {
+        return usableCards;
+    }
+
+    public void setUsableCards(ArrayList<Card> usableCards) {
+        this.usableCards = usableCards;
+    }
+
+    public ArrayList<Card> getDiscardCards() {
+        return discardCards;
+    }
+
+    public void setDiscardCards(ArrayList<Card> discardCards) {
+        this.discardCards = discardCards;
     }
 
     public void shuffle() {

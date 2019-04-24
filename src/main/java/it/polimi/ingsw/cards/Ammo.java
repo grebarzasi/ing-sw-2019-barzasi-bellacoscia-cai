@@ -14,6 +14,10 @@ public class Ammo extends CarePackage {
         this.blue=blue;
     }
 
+    public Ammo() {
+        super();
+    }
+
     public int getRed() {
         return red;
     }

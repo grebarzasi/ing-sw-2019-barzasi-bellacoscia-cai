@@ -4,7 +4,7 @@ import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.PlayerBoard;
 import it.polimi.ingsw.board.Room;
 import it.polimi.ingsw.board.Square;
-import it.polimi.ingsw.cards.PowerUp;
+import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.util.*;
@@ -52,6 +52,10 @@ public class Player {
         this.username = username;
         this.character = character;
         this.personalBoard = personalBoard;
+    }
+
+    public Player() {
+        super();
     }
 
     public Square getPosition(){
@@ -249,6 +253,11 @@ public class Player {
     }
 
     public void endTurn() {
+
+    }
+
+    // needed in some Power-Up effect -Carlo
+    public void doAction(Action name){
 
     }
 

@@ -7,7 +7,7 @@ public class Move extends Action {
     public Move() {
     }
 
-    public void moveTo(Square s) {
+    public void moveTo(Square s, Player p) {
     }
 
     public static void doAction(){
