@@ -8,9 +8,6 @@ public class Reload implements Action {
     public Reload() {
     }
 
-    public void reload(Weapon w){
-    }
-
     public static void doAction(){
 
     }

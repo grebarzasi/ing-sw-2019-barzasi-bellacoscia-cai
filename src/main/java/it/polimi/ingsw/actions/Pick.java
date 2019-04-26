@@ -7,8 +7,6 @@ public class Pick implements Action {
     public Pick() {
     }
 
-    public void pickCard(Card c) {
-    }
 
     public static void doAction(){
 
