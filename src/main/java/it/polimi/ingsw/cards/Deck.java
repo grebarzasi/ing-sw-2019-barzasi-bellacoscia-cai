@@ -10,7 +10,8 @@ public class Deck {
 
     private ArrayList<Card> discardCards;
 
-    public Deck() {
+    public Deck(ArrayList<Card> cards) {
+        this.usableCards= cards;
     }
 
     public ArrayList<Card> getUsableCards() {

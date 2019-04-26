@@ -8,9 +8,20 @@ import it.polimi.ingsw.board.Square;
 import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 
+/**
+ * The type Targeting scope.
+ *
+ * @author Carlo Bellacoscia
+ */
 public class TargetingScope extends PowerUp {
 
 
+    /**
+     * Instantiates a new Targeting scope.
+     *
+     * @param ammoOnDiscard the ammo on discard
+     * @param name          the name
+     */
     public TargetingScope(Ammo ammoOnDiscard, String name) {
         super(ammoOnDiscard, name);
     }
@@ -27,10 +38,6 @@ public class TargetingScope extends PowerUp {
 
     }
 
-    @Override
-    public void effect() {
-
-    }
 
     @Override
     public void effect(Player p) {

@@ -7,9 +7,20 @@ import it.polimi.ingsw.board.Square;
 import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 
+/**
+ * The type Tagback grenade.
+ *
+ * @author Carlo Bellacoscia
+ */
 public class TagbackGrenade extends PowerUp {
 
 
+    /**
+     * Instantiates a new Tagback grenade.
+     *
+     * @param ammoOnDiscard the ammo on discard
+     * @param name          the name
+     */
     public TagbackGrenade(Ammo ammoOnDiscard, String name) {
         super(ammoOnDiscard, name);
     }
@@ -32,8 +43,4 @@ public class TagbackGrenade extends PowerUp {
 
     }
 
-    @Override
-    public void effect() {
-
-    }
 }
