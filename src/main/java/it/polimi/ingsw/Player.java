@@ -1,5 +1,6 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.actions.Action;
 import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.PlayerBoard;
 import it.polimi.ingsw.board.Room;

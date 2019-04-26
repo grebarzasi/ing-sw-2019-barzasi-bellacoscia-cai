@@ -1,11 +1,9 @@
 package it.polimi.ingsw.cards.power_up;
 
-import it.polimi.ingsw.Action;
-import it.polimi.ingsw.Move;
+import it.polimi.ingsw.actions.Move;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.board.Square;
 import it.polimi.ingsw.cards.Ammo;
-import it.polimi.ingsw.cards.power_up.PowerUp;
 
 /**
  * The type Newton.

@@ -1,8 +1,8 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.actions;
 
 import it.polimi.ingsw.cards.Card;
 
-public class Pick extends Action {
+public class Pick implements Action {
 
     public Pick() {
     }
