@@ -1,13 +1,19 @@
 package it.polimi.ingsw.actions;
 
 
-public class Shoot implements Action {
+import it.polimi.ingsw.Player;
+
+/**
+ * @author Gregorio Barzasi
+ */
+
+public class Shoot implements SubAction {
 
     public Shoot() {
     }
 
-    public static void doAction(){
-
+    public void doAction(Player p){
+        p.getControllerServer().askWeapon().use();
     }
 
 }

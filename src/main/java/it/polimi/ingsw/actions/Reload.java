@@ -1,14 +1,17 @@
 package it.polimi.ingsw.actions;
 
-import it.polimi.ingsw.actions.Action;
-import it.polimi.ingsw.cards.weapon.Weapon;
+import it.polimi.ingsw.Player;
+/**
+ * @author Gregorio Barzasi
+ */
 
-public class Reload implements Action {
+public class Reload implements SubAction {
 
     public Reload() {
     }
 
-    public static void doAction(){
+    public void doAction(Player p){
+        //p.getControllerServer().askWeapon();
 
     }
 }

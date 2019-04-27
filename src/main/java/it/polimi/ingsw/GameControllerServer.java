@@ -1,10 +1,14 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.board.Board;
+import it.polimi.ingsw.board.Square;
+import it.polimi.ingsw.cards.weapon.Effect;
+import it.polimi.ingsw.cards.weapon.Weapon;
 
 
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class GameControllerServer implements Controller {
 
@@ -51,6 +55,24 @@ public class GameControllerServer implements Controller {
 
     public void endTurn() {
     }
+
+
+    /**
+    *ask player
+     * @autor Gregorio Barzasi
+     */
+    public Square askPosition(){
+        return null;
+    }
+    public Set<Player> askTarget(){
+        return null;
+    }
+    public Weapon askWeapon(){
+        return null;
+    }
+    public void askUseEffect(Set<Effect> eff){}
+
+
 
 
     public ArrayList<Player> getPlayerList() {

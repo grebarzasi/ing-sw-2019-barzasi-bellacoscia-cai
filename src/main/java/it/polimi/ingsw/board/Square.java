@@ -151,6 +151,9 @@ public class Square {
         this.room = room;
     }
 
+    //IMPLEMENT HERE
+    public void pickItem(Player p){}
+
 }
 
 

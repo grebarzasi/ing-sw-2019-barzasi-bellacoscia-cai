@@ -1,18 +1,28 @@
 package it.polimi.ingsw.actions;
 
+import it.polimi.ingsw.GameControllerServer;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.board.Square;
 
-public class Move implements Action {
+/**
+ * @author Gregorio Barzasi
+ */
 
-    public Move() {
+public class Move implements SubAction {
+
+    private int maxSteps;
+
+    public Move(int maxSteps) {
+        this.maxSteps=maxSteps;
+
     }
 
-    public void moveTo(Square s, Player p) {
+
+    public void doAction(Player target){
+        Square s;
+        do {
+            s = target.getControllerServer().askPosition();
+        }while(target.distanceTo(s)>maxSteps);
+        target.setPosition(s);
     }
-
-    public static void doAction(){
-
-    }
-
 }

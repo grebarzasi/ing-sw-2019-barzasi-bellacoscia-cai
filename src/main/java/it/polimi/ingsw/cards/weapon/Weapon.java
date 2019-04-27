@@ -54,12 +54,19 @@ public class Weapon extends Card {
 
     public void extraMove(){}
 
-    public void getUsableEff(){}
+    public Set<Effect> getUsableEff(){
+        return null;
+    }
 
 
     public void fetch() {
         //SET OWNER ON FETCH!
     }
+
+    public void use(){
+        owner.getControllerServer().askUseEffect(getUsableEff());
+    }
+
     //setters&getters
     public void setBeforeBasicExtra(boolean b){
         this.beforeBasic=false;

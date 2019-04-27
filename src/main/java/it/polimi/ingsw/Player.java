@@ -22,7 +22,7 @@ public class Player {
     private int points;
 
     private Square position;
-    //needed in some weapon effect -Gregorio
+    //needed in some weapon effect
     private Square oldPosition;
 
     private ArrayList<Weapon> weaponsList;
@@ -256,12 +256,6 @@ public class Player {
     public void endTurn() {
 
     }
-
-    // needed in some Power-Up effect -Carlo
-    public void doAction(Action name){
-
-    }
-
 
 
     public Terminator getTermRef() {
