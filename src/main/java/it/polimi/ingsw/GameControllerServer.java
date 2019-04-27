@@ -17,6 +17,9 @@ public class GameControllerServer implements Controller {
     public Board currentBoard;
 
 
+
+
+
     public GameControllerServer(ArrayList<Player> playerList, Player currentPlayer, Time timeTurn, Board currentBoard) {
         this.playerList = playerList;
         this.currentPlayer = currentPlayer;

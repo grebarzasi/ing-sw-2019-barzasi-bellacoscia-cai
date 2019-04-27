@@ -12,6 +12,7 @@ public class Map {
 
 
 
+
     //initiates the map
 
     public void initiateMap(String selection) {
@@ -37,13 +38,10 @@ public class Map {
 
     }
 
-
     public Map(Square[][] squareMatrix, ArrayList<Room> roomList) {
         this.squareMatrix = squareMatrix;
         this.roomList = roomList;
     }
-
-
 
     public Square[][] getSquareMatrix() {
         return squareMatrix;

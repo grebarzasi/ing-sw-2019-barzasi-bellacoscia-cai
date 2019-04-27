@@ -22,7 +22,7 @@ public class MapLoadingTest {
 
         loadMap(selection, squareMatrix);
 
-        assertFalse(squareMatrix[0][0].getIsRespawn());
+
         assertEquals(squareMatrix[0][0].getRoom().getColor(),"red");
 
         assertNull(squareMatrix[0][0].getNorth());

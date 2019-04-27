@@ -21,8 +21,8 @@ class TeleporterTest {
     private Cell pos2 = new Cell(2, 2);
     private String color = "blue";
     private Room room = new Room(color);
-    private Square s1 = new Square(pos1, room, false);
-    private Square s2 = new Square(pos2, room, false);
+    private Square s1 = new Square(pos1, room);
+    private Square s2 = new Square(pos2, room);
     private Player p = new Player("username", "character", s1);
 
     private Teleporter tel = new Teleporter( a ,"Teletrasporto");

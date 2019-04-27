@@ -1,6 +1,8 @@
 package it.polimi.ingsw.board;
 
+
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -49,10 +51,15 @@ public class MapLoader {
         for( row = 0; row < 3; row++){
             for( column = 0; column < 4; column++){
 
-                squareMatrix[row][column] = new Square(new Cell(row,column),parserList[i].getRoom(),parserList[i].getIsRespawn(),null,null,null,null) ;
-                squareMatrix[row][column].setRoom(parserList[i].getRoom());
-
+                if(parserList[i].getIsRespawn() == false) {
+                    squareMatrix[row][column] = new NonSpawnSquare(new Cell(row, column), parserList[i].getRoom());
+                    squareMatrix[row][column].setRoom(parserList[i].getRoom());
+                } else{
+                    squareMatrix[row][column] = new SpawnSquare(new Cell(row, column), parserList[i].getRoom());
+                    squareMatrix[row][column].setRoom(parserList[i].getRoom());
+                }
                 i++;
+
             }
         }
 
@@ -87,10 +94,6 @@ public class MapLoader {
             }
         }
 
-        /*for(column = 0, row = 0 ; column < 3; column ++){
-                squareMatrix[row][column].setNorth(null);
-        }
-         */
     }
 
 }

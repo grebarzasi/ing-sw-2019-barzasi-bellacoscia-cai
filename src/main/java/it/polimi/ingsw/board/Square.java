@@ -25,8 +25,6 @@ public class Square {
     //1: is a respawn cell with armory
     //0: is an ordinary cell with ammunition package
 
-    private boolean isRespawn;
-
 
     /*the square adjacent to this in that direction
     *in case of a wall or an edge of the map the field is NULL
@@ -45,16 +43,20 @@ public class Square {
     *they must be set after all squares have been instantiated
      */
 
-    public Square(Cell position, Room room, boolean isRespawn) {
-        this(position, room, isRespawn, null, null, null, null);
-    }
-
-
-    //only for testing purposes
-    public Square(Cell position, Room room, boolean isRespawn, Square north, Square east, Square south, Square west) {
+    public Square(Cell position, Room room) {
         this.position = position;
         this.room = room;
-        this.isRespawn = isRespawn;
+        this.north = null;
+        this.east = null;
+        this.south = null;
+        this.west = null;
+
+    }
+
+    //only for testing purposes
+    public Square(Cell position, Room room, Square north, Square east, Square south, Square west) {
+        this.position = position;
+        this.room = room;
         this.north = north;
         this.east = east;
         this.south = south;
@@ -125,10 +127,6 @@ public class Square {
         return position;
     }
 
-    public boolean isReapawn() {
-        return isRespawn;
-    }
-
     public void setNorth(Square north) {
         this.north = north;
     }
@@ -148,17 +146,11 @@ public class Square {
     public void setPosition(Cell position) {
         this.position = position;
     }
+
     public void setRoom(Room room) {
         this.room = room;
     }
 
-    public boolean getIsRespawn() {
-        return isRespawn;
-    }
-
-    public void setIsRespawn(boolean respawn) {
-        isRespawn = respawn;
-    }
 }
 
 
