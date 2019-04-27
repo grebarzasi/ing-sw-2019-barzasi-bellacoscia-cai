@@ -64,7 +64,7 @@ public class GameControllerServer implements Controller {
     public Square askPosition(){
         return null;
     }
-    public Set<Player> askTarget(){
+    public Set<Player> askTarget(int num){
         return null;
     }
     public Weapon askWeapon(){
