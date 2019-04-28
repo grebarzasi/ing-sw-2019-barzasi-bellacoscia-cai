@@ -13,9 +13,8 @@ public class Action {
     private Player owner;
     private String description;
     private ArrayList<SubAction> subActionArrayList;
-    private boolean finalMove =false;
 
-    public Action(String description, ArrayList<SubAction> list, boolean finalMove){
+    public Action(String description, ArrayList<SubAction> list){
         this.description=description;
         this.subActionArrayList=list;
     }
