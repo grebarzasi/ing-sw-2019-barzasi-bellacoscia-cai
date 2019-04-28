@@ -27,7 +27,9 @@ public class TargetingScope extends PowerUp {
     }
 
     @Override
-    public void effect(Player owner, Player target) {
+    public void effect() {
+        Player owner = super.getOwner();
+        Player target = (Player)super.getOwner().getControllerServer().askTarget(1);
         Ammo a = new Ammo();
         Token t = new Token();
         PlayerBoard ownerB = new PlayerBoard(owner);
@@ -35,17 +37,6 @@ public class TargetingScope extends PowerUp {
 
         ownerB.removeAmmo(a);
         targetB.addDamage(t);
-
-    }
-
-
-    @Override
-    public void effect(Player p) {
-
-    }
-
-    @Override
-    public void effect(Square s, Player p) {
 
     }
 }

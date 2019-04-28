@@ -26,21 +26,11 @@ public class TagbackGrenade extends PowerUp {
     }
 
     @Override
-    public void effect(Player p) {
-        PlayerBoard board = new PlayerBoard(p);
+    public void effect() {
+        Player target = (Player)super.getOwner().getControllerServer().askTarget(1);
+        PlayerBoard board = new PlayerBoard(target);
         Token t = new Token();
 
         board.addMark(t);
     }
-
-    @Override
-    public void effect(Player owner, Player target) {
-
-    }
-
-    @Override
-    public void effect(Square s, Player p) {
-
-    }
-
 }

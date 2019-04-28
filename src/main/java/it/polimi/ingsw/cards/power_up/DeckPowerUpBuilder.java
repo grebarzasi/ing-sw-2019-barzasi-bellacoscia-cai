@@ -17,7 +17,12 @@ import java.util.Iterator;
  *
  * @author Carlo Bellacoscia
  */
-public class DeckPowerUpBuilder {
+public class DeckPowerUpBuilder extends Card{
+
+    @Override
+    public void fetch() {
+
+    }
 
     /**
      * Power up builder.
@@ -30,7 +35,7 @@ public class DeckPowerUpBuilder {
 
         String path = "src/main/java/it/polimi/ingsw/cards/power_up/";
 
-        File jsonFile = new File(path + "data/car.json");
+        File jsonFile = new File(path + "power_up_data.json");
 
         ArrayList<Card> usablePU = new ArrayList<>();
 
@@ -92,4 +97,6 @@ public class DeckPowerUpBuilder {
         }
         return occ;
     }
+
+
 }

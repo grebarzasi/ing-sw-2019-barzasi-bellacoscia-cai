@@ -4,6 +4,7 @@ import it.polimi.ingsw.Player;
 import it.polimi.ingsw.board.Square;
 import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.cards.Card;
+import it.polimi.ingsw.cards.Deck;
 
 /**
  * The type Power up.
@@ -17,27 +18,20 @@ public abstract class PowerUp extends Card {
     private String name;
 
     /**
-     * Effect.
-     *
-     * @param p the p
+     * The Deck.
      */
-    public abstract void effect(Player p);
+    DeckPowerUpBuilder deck = new DeckPowerUpBuilder();
+
+    /**
+     * The Deck pu.
+     */
+    Deck deckPU = deck.PowerUpBuilder();
+
 
     /**
      * Effect.
-     *
-     * @param owner  the owner
-     * @param target the target
      */
-    public abstract void effect(Player owner, Player target);
-
-    /**
-     * Effect.
-     *
-     * @param s the s
-     * @param p the p
-     */
-    public abstract void effect(Square s, Player p);
+    public abstract void effect();
 
 
     /**
@@ -88,5 +82,7 @@ public abstract class PowerUp extends Card {
     }
 
 
-    public void fetch(){}
+    public void fetch(){
+        deckPU.getUsableCards();
+    }
 }

@@ -22,21 +22,10 @@ public class Newton extends PowerUp {
         super(ammoOnDiscard, name);
     }
 
-    //edited -gregorio
+    @Override
     public void effect() {
        Player target = (Player)super.getOwner().getControllerServer().askTarget(1);
        new Move(2).doAction(target);
     }
 
-    public void effect(Square s, Player p){}
-
-    @Override
-    public void effect(Player p) {
-
-    }
-
-    @Override
-    public void effect(Player owner, Player target) {
-
-    }
 }

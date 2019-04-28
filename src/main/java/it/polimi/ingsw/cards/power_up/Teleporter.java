@@ -23,18 +23,9 @@ public class Teleporter extends PowerUp {
     }
 
     @Override
-    public void effect(Square s, Player p) {
-        p.setPosition(s);
+    public void effect() {
+        Player target = (Player)super.getOwner().getControllerServer().askTarget(1);
+        Square dest = super.getOwner().getControllerServer().askPosition();
+        target.setPosition(dest);
     }
-
-    @Override
-    public void effect(Player p) {
-
-    }
-
-    @Override
-    public void effect(Player owner, Player target) {
-
-    }
-
 }
