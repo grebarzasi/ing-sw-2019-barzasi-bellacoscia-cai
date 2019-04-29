@@ -5,19 +5,8 @@ import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 
 
-/**
- * The type Teleporter.
- *
- * @author Carlo Bellacoscia
- */
 public class Teleporter extends PowerUp {
 
-    /**
-     * Instantiates a new Teleporter.
-     *
-     * @param ammoOnDiscard the ammo on discard
-     * @param name          the name
-     */
     public Teleporter(Ammo ammoOnDiscard, String name) {
         super(ammoOnDiscard, name);
     }

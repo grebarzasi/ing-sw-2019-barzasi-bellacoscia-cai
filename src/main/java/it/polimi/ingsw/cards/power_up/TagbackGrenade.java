@@ -27,9 +27,10 @@ public class TagbackGrenade extends PowerUp {
 
     @Override
     public void effect() {
+        Player owner = super.getOwner();
         Player target = (Player)super.getOwner().getControllerServer().askTarget(1);
         PlayerBoard board = new PlayerBoard(target);
-        Token t = new Token();
+        Token t = new Token(owner);
 
         board.addMark(t);
     }

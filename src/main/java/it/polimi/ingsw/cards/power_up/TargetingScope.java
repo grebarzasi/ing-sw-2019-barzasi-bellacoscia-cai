@@ -30,8 +30,8 @@ public class TargetingScope extends PowerUp {
     public void effect() {
         Player owner = super.getOwner();
         Player target = (Player)super.getOwner().getControllerServer().askTarget(1);
-        Ammo a = new Ammo();
-        Token t = new Token();
+        Ammo a = super.getOwner().getControllerServer().askAmmo();
+        Token t = new Token(owner);
         PlayerBoard ownerB = new PlayerBoard(owner);
         PlayerBoard targetB = new PlayerBoard(target);
 

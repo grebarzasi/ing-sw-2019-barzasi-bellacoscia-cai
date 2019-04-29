@@ -2,6 +2,7 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.Square;
+import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.cards.weapon.Effect;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
@@ -64,6 +65,7 @@ public class GameControllerServer implements Controller {
     public Square askPosition(){
         return null;
     }
+    public Ammo askAmmo(){return null;}
     public Set<Player> askTarget(int num){
         return null;
     }
