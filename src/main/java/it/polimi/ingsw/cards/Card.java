@@ -18,4 +18,6 @@ public abstract class Card {
 
     public abstract void fetch();
 
+    public Card() {
+    }
 }

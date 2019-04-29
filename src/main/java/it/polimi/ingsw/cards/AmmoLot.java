@@ -1,13 +1,13 @@
 package it.polimi.ingsw.cards;
 
-public class CarePackage extends Card {
+public class AmmoLot extends Card {
 
-    public CarePackage() {
-    }
 
     private boolean powerup;
 
     private Ammo content;
+
+
 
     public void useCare() {
     }
@@ -16,4 +16,8 @@ public class CarePackage extends Card {
 
     }
 
+    public AmmoLot(boolean powerup, Ammo content) {
+        this.powerup = powerup;
+        this.content = content;
+    }
 }

@@ -1,39 +1,63 @@
 package it.polimi.ingsw.cards;
 
-import it.polimi.ingsw.cards.Card;
-
 import java.util.*;
 
 public class Deck {
 
-    private ArrayList<Card> usableCards;
+    private ArrayList<Card> usable;
 
-    private ArrayList<Card> discardCards;
+    private ArrayList<Card> discarded;
+
+
 
     public Deck(ArrayList<Card> cards) {
-        this.usableCards= cards;
+        this.usable = cards;
     }
 
-    public ArrayList<Card> getUsableCards() {
-        return usableCards;
+    public Deck() {
+        this.usable = new ArrayList<>();
+        this.discarded = new ArrayList<>();
     }
 
-    public void setUsableCards(ArrayList<Card> usableCards) {
-        this.usableCards = usableCards;
+    public ArrayList<Card> getUsable() {
+        return usable;
     }
 
-    public ArrayList<Card> getDiscardCards() {
-        return discardCards;
+    public void setUsable(ArrayList<Card> usable) {
+        this.usable = usable;
     }
 
-    public void setDiscardCards(ArrayList<Card> discardCards) {
-        this.discardCards = discardCards;
+    public ArrayList<Card> getDiscarded() {
+        return discarded;
     }
+
+    public void setDiscarded(ArrayList<Card> discarded) {
+        this.discarded = discarded;
+    }
+
+
 
     public void shuffle() {
+        Collections.shuffle(this.usable);
+    }
+
+    public void discard(){
+        this.getDiscarded().add(this.getUsable().get(0));
+        this.getUsable().remove(0);
     }
 
     public void reset() {
+
+
+        while(!this.discarded.isEmpty()){
+
+            this.usable.add(this.discarded.get(0));
+            this.discarded.remove(0);
+
+        }
+
+        Collections.shuffle(this.usable);
+
     }
 
 }

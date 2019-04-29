@@ -1,13 +1,12 @@
 package it.polimi.ingsw.board;
 
-import it.polimi.ingsw.cards.Ammo;
-import it.polimi.ingsw.cards.CarePackage;
+import it.polimi.ingsw.cards.AmmoLot;
 
 public class NonSpawnSquare extends Square{
 
-    private CarePackage drop;
+    private AmmoLot drop;
 
-    public NonSpawnSquare(Cell position, Room room, CarePackage drop) {
+    public NonSpawnSquare(Cell position, Room room, AmmoLot drop) {
         super(position, room);
         this.drop = drop;
     }

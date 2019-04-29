@@ -1,7 +1,5 @@
 package it.polimi.ingsw.cards.power_up;
 
-import it.polimi.ingsw.Player;
-import it.polimi.ingsw.board.Square;
 import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.cards.Card;
 import it.polimi.ingsw.cards.Deck;
@@ -83,6 +81,6 @@ public abstract class PowerUp extends Card {
 
 
     public void fetch(){
-        deckPU.getUsableCards();
+        deckPU.getUsable();
     }
 }

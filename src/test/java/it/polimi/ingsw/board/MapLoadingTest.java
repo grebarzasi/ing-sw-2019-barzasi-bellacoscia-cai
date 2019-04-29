@@ -24,6 +24,9 @@ public class MapLoadingTest {
 
 
         assertEquals(squareMatrix[0][0].getRoom().getColor(),"red");
+        assertTrue(squareMatrix[0][0] instanceof NonSpawnSquare);
+        assertTrue(squareMatrix[0][2] instanceof SpawnSquare);
+        assertTrue(squareMatrix[2][2] instanceof NonSpawnSquare);
 
         assertNull(squareMatrix[0][0].getNorth());
         assertEquals(squareMatrix[0][0].getEast(),squareMatrix[0][1]);

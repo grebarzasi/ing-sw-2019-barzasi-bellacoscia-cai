@@ -2,7 +2,7 @@ package it.polimi.ingsw.cards;
 /**
  * @author Gregorio Barzasi
  */
-public class Ammo extends CarePackage {
+public class Ammo{
 
     private int red;
     private int blue;
@@ -14,9 +14,6 @@ public class Ammo extends CarePackage {
         this.blue=blue;
     }
 
-    public Ammo() {
-        super();
-    }
 
     public int getRed() {
         return red;
