@@ -91,6 +91,10 @@ public class Square {
         return playersInASquare(this,allP);
     }
 
+    public boolean isSpawn(){
+        return true;
+    }
+
 
 
 

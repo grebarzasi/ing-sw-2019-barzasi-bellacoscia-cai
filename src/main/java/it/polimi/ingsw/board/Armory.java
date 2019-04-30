@@ -9,6 +9,27 @@ Armory {
 
     private ArrayList<Weapon> weaponList;
 
+    public boolean isFull(){
+
+        if (this.weaponList.size() == 3){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public Armory(ArrayList<Weapon> weaponList) {
+        this.weaponList = weaponList;
+    }
+
+    public ArrayList<Weapon> getWeaponList() {
+        return weaponList;
+    }
+
+    public void setWeaponList(ArrayList<Weapon> weaponList) {
+        this.weaponList = weaponList;
+    }
+
     public Armory() {
     }
 

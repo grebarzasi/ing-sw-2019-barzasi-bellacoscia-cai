@@ -37,7 +37,7 @@ public class Board extends Subject {
         for(row = 0 ; row < 3; row ++){
             for(column = 0; column < 4 ; column++){
 
-                if(this.map.getSquareMatrix()[row][column] instanceof NonSpawnSquare){
+                if(!this.map.getSquareMatrix()[row][column].isSpawn()){
 
                     NonSpawnSquare tmp = (NonSpawnSquare)this.map.getSquareMatrix()[row][column];
 
@@ -57,14 +57,14 @@ public class Board extends Subject {
         for(row = 0 ; row < 3; row ++){
             for(column = 0; column < 4 ; column++){
 
-                if(this.map.getSquareMatrix()[row][column] instanceof SpawnSquare){
+                if(this.map.getSquareMatrix()[row][column].isSpawn()){
 
                     SpawnSquare tmp = (SpawnSquare)this.map.getSquareMatrix()[row][column];
 
-                    tmp.setArmory(new ArrayList<>());
+                    tmp.setArmory(new Armory(new ArrayList<>()));
 
-                    while(tmp.getArmory().size()<3) {
-                        tmp.getArmory().add((Weapon) this.weaponDeck.getUsable().get(0));
+                    while(!tmp.getArmory().isFull()) {
+                        tmp.getArmory().getWeaponList().add((Weapon) this.weaponDeck.getUsable().get(0));
                         this.weaponDeck.getDiscarded().add(this.weaponDeck.getUsable().get(0));
                         this.weaponDeck.getUsable().remove(0);
 

@@ -6,6 +6,11 @@ public class NonSpawnSquare extends Square{
 
     private AmmoLot drop;
 
+
+    public boolean isSpawn(){
+        return false;
+    }
+
     public NonSpawnSquare(Cell position, Room room, AmmoLot drop) {
         super(position, room);
         this.drop = drop;

@@ -28,17 +28,17 @@ class BoardTest {
 
                 if(mock.getMap().getSquareMatrix()[row][column] instanceof SpawnSquare){
 
-                    SpawnSquare tmp = new SpawnSquare(null,null,null);
+                    SpawnSquare tmp;
                     tmp = (SpawnSquare)mock.getMap().getSquareMatrix()[row][column];
 
-                    System.out.println(tmp.getArmory().get(0).getName());
-                    System.out.println(tmp.getArmory().get(1).getName());
-                    System.out.println(tmp.getArmory().get(2).getName());
+                    System.out.println(tmp.getArmory().getWeaponList().get(0).getName());
+                    System.out.println(tmp.getArmory().getWeaponList().get(1).getName());
+                    System.out.println(tmp.getArmory().getWeaponList().get(2).getName());
 
 
                 }else{
 
-                    NonSpawnSquare tmp = new NonSpawnSquare(null,null,null);
+                    NonSpawnSquare tmp;
                     tmp = (NonSpawnSquare)mock.getMap().getSquareMatrix()[row][column];
 
                     System.out.println(tmp.getDrop().getContent().getRed());

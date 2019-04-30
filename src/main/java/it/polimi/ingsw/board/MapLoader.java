@@ -20,7 +20,7 @@ public class MapLoader {
 
         ObjectMapper mapper = new ObjectMapper();
 
-        String PATH = ("data_files/map_data/");
+        final String PATH = ("data_files/map_data/");
 
         File squareFile = new File(PATH + selection + ".json");
         File confinementFile = new File (PATH + selection + "_confinements.json");

@@ -6,29 +6,30 @@ import java.util.ArrayList;
 
 public class SpawnSquare extends Square {
 
-    private ArrayList<Weapon> Armory;
+    private Armory armory;
 
 
 
-    public SpawnSquare(Cell position, Room room, ArrayList<Weapon> armory) {
+    public SpawnSquare(Cell position, Room room, Armory armory) {
         super(position, room);
-        Armory = armory;
+        this.armory = armory;
     }
 
-    public SpawnSquare(Cell position, Room room, Square north, Square east, Square south, Square west, ArrayList<Weapon> armory) {
+    public SpawnSquare(Cell position, Room room, Square north, Square east, Square south, Square west, Armory armory) {
         super(position, room, north, east, south, west);
-        Armory = armory;
+        this.armory = armory;
     }
+
 
     public SpawnSquare(Cell position, Room room) {
         super(position, room);
     }
 
-    public ArrayList<Weapon> getArmory() {
-        return Armory;
+    public Armory getArmory() {
+        return armory;
     }
 
-    public void setArmory(ArrayList<Weapon> armory) {
-        Armory = armory;
+    public void setArmory(Armory armory) {
+        this.armory = armory;
     }
 }
