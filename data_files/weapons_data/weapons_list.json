@@ -6,7 +6,6 @@
   "whisper": 1,
   "electroscythe": 1,
   "tractor_beam": 1,
-  "vortex_cannon": 1,
   "furnace": 1,
   "heatseeker": 1,
   "hellion": 1,
@@ -18,6 +17,6 @@
   "zx_2": 1,
   "shotgun": 1,
   "power_glove": 1,
-  "shockwave": 1,
+  "shock_wave": 1,
   "sledgehammer": 1
 }

@@ -7,6 +7,7 @@ package it.polimi.ingsw.board;
 
 
 public class Cell {
+
     private int row;
     private int column;
 

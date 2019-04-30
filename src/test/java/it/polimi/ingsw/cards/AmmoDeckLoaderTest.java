@@ -1,13 +1,12 @@
 package it.polimi.ingsw.cards;
 
-import it.polimi.ingsw.cards.DeckLoader;
 import org.junit.jupiter.api.Test;
 
-import static it.polimi.ingsw.cards.DeckLoader.loadDeck;
+import static it.polimi.ingsw.cards.AmmoDeckLoader.loadDeck;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class DeckLoaderTest {
+public class AmmoDeckLoaderTest {
 
     @Test
     public void loadingTest(){

@@ -22,7 +22,7 @@ public class EffectBuilderTest {
         ObjectMapper mapper = new ObjectMapper();
         String newString = "{" +
                 "\"cost\":{\"red\": 1}," +
-                "\"subEffects\":{" +
+                "\"subEffect\":{" +
                     "\"1\":{" +
                         "\"targetAcq\":{\"isVisible\":{\"visible\":true},\"askPlayer\":{\"num\":1}}," +
                         "\"shootTarget\": {\"damage\": 1,\"mark\": 1}," +

@@ -18,6 +18,7 @@ import java.util.Iterator;
 public class WeaponBuilder {
 
     public static Weapon buildWeapon(String name) {
+
         ObjectMapper mapper = new ObjectMapper();
         // path of weapons data
         final String path = "data_files/weapons_data/";

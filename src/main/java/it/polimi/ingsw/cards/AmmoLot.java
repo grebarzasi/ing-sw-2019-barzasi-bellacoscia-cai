@@ -20,4 +20,20 @@ public class AmmoLot extends Card {
         this.powerup = powerup;
         this.content = content;
     }
+
+    public boolean isPowerup() {
+        return powerup;
+    }
+
+    public void setPowerup(boolean powerup) {
+        this.powerup = powerup;
+    }
+
+    public Ammo getContent() {
+        return content;
+    }
+
+    public void setContent(Ammo content) {
+        this.content = content;
+    }
 }

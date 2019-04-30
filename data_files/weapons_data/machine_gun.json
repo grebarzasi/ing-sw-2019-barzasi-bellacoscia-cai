@@ -10,7 +10,7 @@
         "blue": 1,
         "red": 1
       },
-      "subEffects": {
+      "subEffect": {
         "1": {
           "isVisible": {
             "visible": true
@@ -29,7 +29,7 @@
       "cost": {
         "yellow": 1
       },
-      "subEffects": {
+      "subEffect": {
         "1": {
           "equals": ["basic"],
           "different": ["addTwo"],
@@ -47,7 +47,7 @@
       "cost": {
         "blue": 1
       },
-      "subEffects": {
+      "subEffect": {
         "1": {
           "equals": ["basic"],
           "different": ["addOne"],

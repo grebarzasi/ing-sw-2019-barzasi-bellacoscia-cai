@@ -63,12 +63,12 @@ public class Square {
         this.west = west;
     }
 
-
     /**
      * scans the list of players and checks whether they are on the square or not
      * @param  where the Square you want to know the players on
      * @return the list of players on the queried Square
      */
+
     private Collection<Player> playersInASquare(Square where, Collection<Player> playerList){
 
         Collection<Player> playersHere = new ArrayList<>();

@@ -14,4 +14,12 @@ public class NonSpawnSquare extends Square{
     public NonSpawnSquare(Cell position, Room room) {
         super(position, room);
     }
+
+    public AmmoLot getDrop() {
+        return drop;
+    }
+
+    public void setDrop(AmmoLot drop) {
+        this.drop = drop;
+    }
 }

@@ -27,7 +27,7 @@ public class EffectBuilder {
         /*_BUILD THE ACTUAL EFFECT_*/
 
         //generate subEffect numeration Node and iterate
-        JsonNode subEffNumerationNode = effectsNode.get("subEffects");
+        JsonNode subEffNumerationNode = effectsNode.get("subEffect");
         Iterator<String> numIterator = subEffNumerationNode.fieldNames();
 
         while(numIterator.hasNext()) {

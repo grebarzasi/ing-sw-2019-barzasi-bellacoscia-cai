@@ -6,13 +6,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class DeckLoader {
+public class AmmoDeckLoader {
 
     public static void loadDeck(Deck deckToLoad){
 
         ObjectMapper mapper = new ObjectMapper();
 
-        String PATH = ("data_files/deck_data/ammo.json");
+        final String PATH = ("data_files/deck_data/ammo.json");
 
         File deckFile = new File(PATH);
 
@@ -37,6 +37,7 @@ public class DeckLoader {
             tmp.setRed(parserList[i].getRed());
             tmp.setBlue(parserList[i].getBlue());
             tmp.setYellow(parserList[i].getYellow());
+
             deckToLoad.getUsable().add(new AmmoLot(parserList[i].hasPowerup(), tmp));
 
         }
