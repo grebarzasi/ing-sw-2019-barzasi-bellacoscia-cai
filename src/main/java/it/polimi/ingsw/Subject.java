@@ -4,11 +4,12 @@ import java.util.*;
 
 public class Subject {
 
+
+
     public GameControllerServer observer;
 
     public Subject() {
     }
-
 
     public void add() {
     }

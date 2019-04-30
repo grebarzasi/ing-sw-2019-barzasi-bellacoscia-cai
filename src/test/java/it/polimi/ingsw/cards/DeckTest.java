@@ -1,6 +1,7 @@
 package it.polimi.ingsw.cards;
 
 import org.junit.jupiter.api.Test;
+import it.polimi.ingsw.cards.AmmoLot;
 
 import static it.polimi.ingsw.cards.AmmoDeckLoader.loadDeck;
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,6 +31,10 @@ class DeckTest {
         assertTrue(ammoDeck.getDiscarded().isEmpty());
         assertEquals(36,ammoDeck.getUsable().size());
 
+        for(int i=0; i<36 ; i++){
+
+            System.out.println((AmmoLot)ammoDeck.getUsable().get(i));
+        }
 
 
     }

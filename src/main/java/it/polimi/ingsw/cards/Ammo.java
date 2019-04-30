@@ -10,8 +10,8 @@ public class Ammo{
 
     public Ammo(int red,int blue,int yellow) {
         this.red=red;
-        this.yellow=yellow;
         this.blue=blue;
+        this.yellow=yellow;
     }
 
 

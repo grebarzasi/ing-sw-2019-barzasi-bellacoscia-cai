@@ -37,6 +37,7 @@ public class AmmoDeckLoader {
             tmp.setRed(parserList[i].getRed());
             tmp.setBlue(parserList[i].getBlue());
             tmp.setYellow(parserList[i].getYellow());
+
             deckToLoad.getUsable().add(new AmmoLot(parserList[i].hasPowerup(), tmp));
 
         }
