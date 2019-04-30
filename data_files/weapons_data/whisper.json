@@ -10,7 +10,7 @@
         "blue": 2,
         "yellow": 1
       },
-      "subEffects": {
+      "subEffect": {
         "1": {
           "targetAcq": {
             "isVisible": {

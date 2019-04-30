@@ -9,7 +9,7 @@
         "red": 1,
         "blue": 1
       },
-      "subEffects": {
+      "subEffect": {
         "1": {
           "targetAcq": {
             "isVisible": {
@@ -30,7 +30,7 @@
     },
     "alternative": {
       "cost": {},
-      "subEffects": {
+      "subEffect": {
         "1": {
           "targetAcq": {
             "isVisible": {

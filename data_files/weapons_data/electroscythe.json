@@ -8,7 +8,7 @@
       "cost": {
         "blue": 1
       },
-      "subEffects": {
+      "subEffect": {
         "1": {
           "targetAcq": {
             "equals": ["mySquare"]
@@ -24,7 +24,7 @@
         "blue": 1,
         "red": 1
       },
-      "subEffects": {
+      "subEffect": {
         "1": {
           "targetAcq": {
             "equals": ["mySquare"]

@@ -12,6 +12,7 @@ public class Deck {
 
     public Deck(ArrayList<Card> cards) {
         this.usable = cards;
+        this.discarded = new ArrayList<>();
     }
 
     public Deck() {
@@ -41,23 +42,26 @@ public class Deck {
         Collections.shuffle(this.usable);
     }
 
-    public void discard(){
-        this.getDiscarded().add(this.getUsable().get(0));
-        this.getUsable().remove(0);
-    }
 
-    public void reset() {
-
-
-        while(!this.discarded.isEmpty()){
-
-            this.usable.add(this.discarded.get(0));
-            this.discarded.remove(0);
-
+    //NEW
+    public Card fetch(){
+        Card temp = this.usable.get(0);
+        this.usable.remove(0);
+        if(this.usable.isEmpty()){
+            reset();
         }
-
-        Collections.shuffle(this.usable);
-
+        return temp;
     }
+
+    public void reset(){
+        this.usable=this.discarded;
+        this.discarded= new ArrayList<>();
+        shuffle();
+    }
+
+    public void discard(Card c){
+        this.discarded.add(c);
+    }
+
 
 }
