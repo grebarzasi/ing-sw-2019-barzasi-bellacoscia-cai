@@ -245,7 +245,11 @@ public class Player {
 
     }
 
-    public void getPoints(int i){
+    public int getPoints() {
+        return points;
+    }
+
+    public void addPoints(int i){
         this.points += i;
     }
 
