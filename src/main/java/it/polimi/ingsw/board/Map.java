@@ -10,6 +10,8 @@ public class Map {
     private Square[][] squareMatrix;
     private ArrayList<Room> roomList;
 
+    private static final int width = 4;
+    private static final int height = 3;
 
 
 
@@ -17,7 +19,7 @@ public class Map {
 
     public Map(String selection) {
 
-        this.squareMatrix = new Square[3][4];
+        this.squareMatrix = new Square[height][width];
         loadMap(selection, this.squareMatrix);
         this.roomList = new ArrayList<>();
 
@@ -25,8 +27,8 @@ public class Map {
         int row;
         int column;
 
-        for( row = 0 ; row < 3 ; row++ ){
-            for(column = 0 ; column < 4 ; column ++ ){
+        for( row = 0 ; row < height ; row++ ){
+            for(column = 0 ; column < width ; column ++ ){
 
                 if(!this.roomList.contains(this.squareMatrix[row][column].getRoom())){
                     this.getRoomList().add(this.squareMatrix[row][column].getRoom());

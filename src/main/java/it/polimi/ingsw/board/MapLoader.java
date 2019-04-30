@@ -15,6 +15,9 @@ import java.io.IOException;
 
 public class MapLoader {
 
+    private static final int width = 4;
+    private static final int height = 3;
+
 
     public static void loadMap(String selection, Square[][] squareMatrix) {
 
@@ -48,8 +51,8 @@ public class MapLoader {
 
         //loads square data for each cell
 
-        for( row = 0; row < 3; row++){
-            for( column = 0; column < 4; column++){
+        for( row = 0; row < height; row++){
+            for( column = 0; column < width; column++){
 
                 if(parserList[i].getIsRespawn() == false) {
                     squareMatrix[row][column] = new NonSpawnSquare(new Cell(row, column), parserList[i].getRoom());

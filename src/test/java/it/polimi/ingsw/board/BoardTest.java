@@ -12,6 +12,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
 
+    private static final int size = 36;
+    private static final int width = 4;
+    private static final int height = 3;
+
     @Test
     public void instanceTest(){
 
@@ -20,8 +24,8 @@ class BoardTest {
         int row;
         int column;
 
-        for(row = 0; row < 3; row++){
-            for(column = 0; column < 4 ; column ++){
+        for(row = 0; row < height; row++){
+            for(column = 0; column < width ; column ++){
 
                 System.out.println(mock.getMap().getSquareMatrix()[row][column].getPosition().getRow() + "," +
                         mock.getMap().getSquareMatrix()[row][column].getPosition().getColumn());

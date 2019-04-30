@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 public class AmmoDeckLoader {
 
+    private static final int size = 36;
+
     public static void loadDeck(Deck deckToLoad){
 
         ObjectMapper mapper = new ObjectMapper();
@@ -16,7 +18,7 @@ public class AmmoDeckLoader {
 
         File deckFile = new File(PATH);
 
-        AmmoParser[] parserList = new AmmoParser[36];
+        AmmoParser[] parserList = new AmmoParser[size];
 
 
 
@@ -32,7 +34,7 @@ public class AmmoDeckLoader {
 
         Ammo tmp = new Ammo(0,0,0);
 
-        for(int i=0;i<36;i++){
+        for(int i=0;i<size;i++){
 
             tmp.setRed(parserList[i].getRed());
             tmp.setBlue(parserList[i].getBlue());

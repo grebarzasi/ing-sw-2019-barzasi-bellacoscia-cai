@@ -22,6 +22,9 @@ public class Board extends Subject {
     private Deck powerupDeck;
     private WeaponDeck weaponDeck;
 
+    private static final int width = 4;
+    private static final int height = 3;
+
     public Board(String selection){
 
         this.map = new Map(selection);
@@ -34,8 +37,8 @@ public class Board extends Subject {
         int row;
         int column;
 
-        for(row = 0 ; row < 3; row ++){
-            for(column = 0; column < 4 ; column++){
+        for(row = 0 ; row < height; row ++){
+            for(column = 0; column < width ; column++){
 
                 if(!this.map.getSquareMatrix()[row][column].isSpawn()){
 
@@ -54,8 +57,8 @@ public class Board extends Subject {
         this.weaponDeck = WeaponDeckBuilder.buildDeck();
         this.weaponDeck.shuffle();
 
-        for(row = 0 ; row < 3; row ++){
-            for(column = 0; column < 4 ; column++){
+        for(row = 0 ; row < height; row ++){
+            for(column = 0; column < width ; column++){
 
                 if(this.map.getSquareMatrix()[row][column].isSpawn()){
 

@@ -8,6 +8,9 @@ import static org.junit.Assert.*;
 
 public class MapLoadingTest {
 
+    private static final int width = 4;
+    private static final int height = 3;
+
 
     /**
      * Tests that the map is loaded correctly
@@ -18,7 +21,7 @@ public class MapLoadingTest {
 
         String selection = "large";
 
-        Square[][] squareMatrix = new Square[3][4];
+        Square[][] squareMatrix = new Square[height][width];
 
         loadMap(selection, squareMatrix);
 
@@ -47,15 +50,15 @@ public class MapLoadingTest {
 
         String selection = "large";
 
-        Square[][] squareMatrix = new Square[3][4];
+        Square[][] squareMatrix = new Square[height][width];
 
         loadMap(selection, squareMatrix);
 
         int row;
         int column;
 
-        for (row = 0; row < 3; row++) {
-            for (column = 0; column < 4; column++) {
+        for (row = 0; row < height; row++) {
+            for (column = 0; column < width; column++) {
 
                 if (row != 0 && squareMatrix[row][column].getNorth() == squareMatrix[row - 1][column]) {
                     assertEquals(squareMatrix[row - 1][column].getSouth(), squareMatrix[row][column]);
@@ -83,7 +86,7 @@ public class MapLoadingTest {
 
         String selection = "medium1";
 
-        Square[][] squareMatrix = new Square[3][4];
+        Square[][] squareMatrix = new Square[height][width];
 
         loadMap(selection, squareMatrix);
 
@@ -119,15 +122,15 @@ public class MapLoadingTest {
 
         String selection = "medium2";
 
-        Square[][] squareMatrix = new Square[3][4];
+        Square[][] squareMatrix = new Square[height][width];
 
         loadMap(selection, squareMatrix);
 
         int row;
         int column;
 
-        for (row = 0; row < 3; row++) {
-            for (column = 0; column < 4; column++) {
+        for (row = 0; row < height; row++) {
+            for (column = 0; column < width; column++) {
 
                 if (row != 0 && squareMatrix[row][column].getNorth() == squareMatrix[row - 1][column]) {
                     assertEquals(squareMatrix[row - 1][column].getSouth(), squareMatrix[row][column]);
@@ -155,15 +158,15 @@ public class MapLoadingTest {
 
         String selection = "small";
 
-        Square[][] squareMatrix = new Square[3][4];
+        Square[][] squareMatrix = new Square[height][width];
 
         loadMap(selection, squareMatrix);
 
         int row;
         int column;
 
-        for (row = 0; row < 3; row++) {
-            for (column = 0; column < 4; column++) {
+        for (row = 0; row < height; row++) {
+            for (column = 0; column < width; column++) {
 
                 if (row != 0 && squareMatrix[row][column].getNorth() == squareMatrix[row - 1][column]) {
                     assertEquals(squareMatrix[row - 1][column].getSouth(), squareMatrix[row][column]);
@@ -197,15 +200,15 @@ public class MapLoadingTest {
 
         String selection = "large";
 
-        Square[][] squareMatrix = new Square[3][4];
+        Square[][] squareMatrix = new Square[height][width];
 
         loadMap(selection, squareMatrix);
 
         int row;
         int column;
 
-        for (row = 0; row < 3; row++) {
-            for (column = 0; column < 4; column++) {
+        for (row = 0; row < height; row++) {
+            for (column = 0; column < width; column++) {
 
                 if (row != 0 && squareMatrix[row][column].getNorth() == null) {
                     assertNull(squareMatrix[row - 1][column].getSouth());
@@ -232,15 +235,15 @@ public class MapLoadingTest {
 
         String selection = "medium1";
 
-        Square[][] squareMatrix = new Square[3][4];
+        Square[][] squareMatrix = new Square[height][width];
 
         loadMap(selection, squareMatrix);
 
         int row;
         int column;
 
-        for (row = 0; row < 3; row++) {
-            for (column = 0; column < 4; column++) {
+        for (row = 0; row < height; row++) {
+            for (column = 0; column < width; column++) {
 
                 if (row != 0 && squareMatrix[row][column].getNorth() == null) {
                     assertNull(squareMatrix[row - 1][column].getSouth());
@@ -267,15 +270,15 @@ public class MapLoadingTest {
 
         String selection = "medium2";
 
-        Square[][] squareMatrix = new Square[3][4];
+        Square[][] squareMatrix = new Square[height][width];
 
         loadMap(selection, squareMatrix);
 
         int row;
         int column;
 
-        for (row = 0; row < 3; row++) {
-            for (column = 0; column < 4; column++) {
+        for (row = 0; row < height; row++) {
+            for (column = 0; column < width; column++) {
 
                 if (row != 0 && squareMatrix[row][column].getNorth() == null) {
                     assertNull(squareMatrix[row - 1][column].getSouth());
@@ -302,15 +305,15 @@ public class MapLoadingTest {
 
         String selection = "small";
 
-        Square[][] squareMatrix = new Square[3][4];
+        Square[][] squareMatrix = new Square[height][width];
 
         loadMap(selection, squareMatrix);
 
         int row;
         int column;
 
-        for (row = 0; row < 3; row++) {
-            for (column = 0; column < 4; column++) {
+        for (row = 0; row < height; row++) {
+            for (column = 0; column < width; column++) {
 
                 if (row != 0 && squareMatrix[row][column].getNorth() == null) {
                     assertNull(squareMatrix[row - 1][column].getSouth());
