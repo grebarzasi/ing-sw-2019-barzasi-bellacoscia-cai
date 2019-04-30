@@ -23,4 +23,12 @@ public class SpawnSquare extends Square {
     public SpawnSquare(Cell position, Room room) {
         super(position, room);
     }
+
+    public ArrayList<Weapon> getArmory() {
+        return Armory;
+    }
+
+    public void setArmory(ArrayList<Weapon> armory) {
+        Armory = armory;
+    }
 }

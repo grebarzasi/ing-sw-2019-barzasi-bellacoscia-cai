@@ -33,7 +33,7 @@
 		"row": 1,
 		"column": 0,
 		"room": "red",
-		"isRespawn": false
+		"isRespawn": true
 	},
 
 	{
