@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 import static it.polimi.ingsw.cards.AmmoDeckLoader.loadDeck;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Asserts that a fully loaded deck has 36 cards
+ */
 
 public class AmmoDeckLoaderTest {
 

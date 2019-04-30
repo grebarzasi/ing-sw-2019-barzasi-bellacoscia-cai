@@ -32,15 +32,11 @@ public class AmmoDeckLoader {
             e.printStackTrace();
         }
 
-        Ammo tmp = new Ammo(0,0,0);
+
 
         for(int i=0;i<size;i++){
 
-            tmp.setRed(parserList[i].getRed());
-            tmp.setBlue(parserList[i].getBlue());
-            tmp.setYellow(parserList[i].getYellow());
-
-            deckToLoad.getUsable().add(new AmmoLot(parserList[i].hasPowerup(), tmp));
+            deckToLoad.getUsable().add(new AmmoLot(parserList[i].hasPowerup(), new Ammo(parserList[i].getRed(),parserList[i].getBlue(),parserList[i].getYellow())));
 
         }
 

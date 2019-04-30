@@ -27,6 +27,7 @@ public class Board extends Subject {
 
     public Board(String selection){
 
+
         this.map = new Map(selection);
 
         this.ammoDeck = new Deck();
@@ -42,13 +43,11 @@ public class Board extends Subject {
 
                 if(!this.map.getSquareMatrix()[row][column].isSpawn()){
 
-                    NonSpawnSquare tmp = (NonSpawnSquare)this.map.getSquareMatrix()[row][column];
+                    ((NonSpawnSquare)this.map.getSquareMatrix()[row][column]).setDrop((AmmoLot)this.ammoDeck.getUsable().get(0));
 
-                    tmp.setDrop((AmmoLot)this.ammoDeck.getUsable().get(0));
                     this.ammoDeck.getDiscarded().add(this.ammoDeck.getUsable().get(0));
                     this.ammoDeck.getUsable().remove(0);
 
-                    this.map.getSquareMatrix()[row][column] = tmp;
 
                 }
             }
@@ -66,8 +65,8 @@ public class Board extends Subject {
 
                     tmp.setArmory(new Armory(new ArrayList<>()));
 
-                    while(!tmp.getArmory().isFull()) {
-                        tmp.getArmory().getWeaponList().add((Weapon) this.weaponDeck.getUsable().get(0));
+                    while(!((SpawnSquare)this.getMap().getSquareMatrix()[row][column]).getArmory().isFull()) {
+                        ((SpawnSquare)this.getMap().getSquareMatrix()[row][column]).getArmory().getWeaponList().add((Weapon)this.weaponDeck.getUsable().get(0));
                         this.weaponDeck.getDiscarded().add(this.weaponDeck.getUsable().get(0));
                         this.weaponDeck.getUsable().remove(0);
 

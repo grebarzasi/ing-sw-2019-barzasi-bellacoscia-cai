@@ -21,7 +21,7 @@ public class AmmoLot extends Card {
         this.content = content;
     }
 
-    public boolean isPowerup() {
+    public boolean hasPowerup() {
         return powerup;
     }
 
