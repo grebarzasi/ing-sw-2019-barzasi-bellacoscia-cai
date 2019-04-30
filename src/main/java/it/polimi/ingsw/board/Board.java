@@ -1,6 +1,7 @@
 package it.polimi.ingsw.board;
 
 import it.polimi.ingsw.Subject;
+import it.polimi.ingsw.cards.Deck;
 
 public class Board extends Subject {
 
@@ -8,6 +9,10 @@ public class Board extends Subject {
 
         Map map;
         KillshotTrack track;
+
+        Deck ammoDeck;
+        Deck powerupDeck;
+        Deck weaponDeck;
 
     }
 

@@ -6,13 +6,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class DeckLoader {
+public class AmmoDeckLoader {
 
     public static void loadDeck(Deck deckToLoad){
 
         ObjectMapper mapper = new ObjectMapper();
 
-        String PATH = ("data_files/deck_data/ammo.json");
+        final String PATH = ("data_files/deck_data/ammo.json");
 
         File deckFile = new File(PATH);
 

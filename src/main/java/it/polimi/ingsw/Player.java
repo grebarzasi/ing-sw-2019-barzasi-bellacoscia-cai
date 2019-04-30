@@ -188,6 +188,9 @@ public class Player {
         }
     }
 
+    public void pickAmmo(){
+    }
+
 
     /**
      * Calculates the distance between a player and a square
@@ -244,6 +247,7 @@ public class Player {
         return -1;
 
     }
+
 
     public void getPoints(int i){
         this.points += i;
