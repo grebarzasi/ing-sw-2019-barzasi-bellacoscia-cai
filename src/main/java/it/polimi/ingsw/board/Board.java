@@ -3,23 +3,28 @@ package it.polimi.ingsw.board;
 import it.polimi.ingsw.Subject;
 import it.polimi.ingsw.cards.AmmoLot;
 import it.polimi.ingsw.cards.Deck;
+import it.polimi.ingsw.cards.WeaponDeck;
+import it.polimi.ingsw.cards.weapon.Weapon;
+import it.polimi.ingsw.cards.weapon.weapon_builder.WeaponBuilder;
+import it.polimi.ingsw.cards.weapon.weapon_builder.WeaponDeckBuilder;
 
+
+import java.util.ArrayList;
 
 import static it.polimi.ingsw.cards.AmmoDeckLoader.loadDeck;
 
 public class Board extends Subject {
 
-    Map map;
-    KillshotTrack track;
+    private Map map;
+    private KillshotTrack track;
 
-    Deck ammoDeck;
-    Deck powerupDeck;
-    Deck weaponDeck;
+    private Deck ammoDeck;
+    private Deck powerupDeck;
+    private WeaponDeck weaponDeck;
 
-    public void resetBoard(String selection){
+    public Board(String selection){
 
-        this.map = new Map(null,null);
-        this.map.initiateMap(selection);
+        this.map = new Map(selection);
 
         this.ammoDeck = new Deck();
         loadDeck(this.ammoDeck);
@@ -46,19 +51,78 @@ public class Board extends Subject {
             }
         }
 
+        this.weaponDeck = WeaponDeckBuilder.buildDeck();
+        this.weaponDeck.shuffle();
+
+        for(row = 0 ; row < 3; row ++){
+            for(column = 0; column < 4 ; column++){
+
+                if(this.map.getSquareMatrix()[row][column] instanceof SpawnSquare){
+
+                    SpawnSquare tmp = (SpawnSquare)this.map.getSquareMatrix()[row][column];
+
+                    tmp.setArmory(new ArrayList<>());
+
+                    while(tmp.getArmory().size()<3) {
+                        tmp.getArmory().add((Weapon) this.weaponDeck.getUsable().get(0));
+                        this.weaponDeck.getDiscarded().add(this.weaponDeck.getUsable().get(0));
+                        this.weaponDeck.getUsable().remove(0);
+
+                    }
+
+                    this.map.getSquareMatrix()[row][column] = tmp;
+
+
+
+                }
+            }
+        }
+
+
 
     }
 
-    public Board(Map map, KillshotTrack track, Deck ammoDeck, Deck powerupDeck, Deck weaponDeck) {
-        this.map = map;
-        this.track = track;
-        this.ammoDeck = ammoDeck;
-        this.powerupDeck = powerupDeck;
-        this.weaponDeck = weaponDeck;
-    }
 
     public void reachable() {
     }
 
+    public Map getMap() {
+        return map;
+    }
 
+    public void setMap(Map map) {
+        this.map = map;
+    }
+
+    public KillshotTrack getTrack() {
+        return track;
+    }
+
+    public void setTrack(KillshotTrack track) {
+        this.track = track;
+    }
+
+    public Deck getAmmoDeck() {
+        return ammoDeck;
+    }
+
+    public void setAmmoDeck(Deck ammoDeck) {
+        this.ammoDeck = ammoDeck;
+    }
+
+    public Deck getPowerupDeck() {
+        return powerupDeck;
+    }
+
+    public void setPowerupDeck(Deck powerupDeck) {
+        this.powerupDeck = powerupDeck;
+    }
+
+    public WeaponDeck getWeaponDeck() {
+        return weaponDeck;
+    }
+
+    public void setWeaponDeck(WeaponDeck weaponDeck) {
+        this.weaponDeck = weaponDeck;
+    }
 }

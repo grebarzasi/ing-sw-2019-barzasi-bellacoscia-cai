@@ -94,6 +94,8 @@ public class Square {
 
 
 
+
+
     public boolean isAdjacent(Square s){
 
         if (this.getNorth() == s || this.getEast() == s || this.getSouth() == s || this.getWest() == s){

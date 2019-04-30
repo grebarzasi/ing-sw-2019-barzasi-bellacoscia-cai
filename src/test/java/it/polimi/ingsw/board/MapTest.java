@@ -17,11 +17,11 @@ public class MapTest {
     @Test
     public void initiationTest() {
 
-        Map map = new Map(null, null);
-
         String selection = "large";
 
-        map.initiateMap(selection);
+        Map map = new Map(selection);
+
+
 
         assertEquals(map.getSquareMatrix()[0][0].getRoom().getColor(), "red");
 
