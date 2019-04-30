@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
 
-    private static final int size = 36;
     private static final int width = 4;
     private static final int height = 3;
 
