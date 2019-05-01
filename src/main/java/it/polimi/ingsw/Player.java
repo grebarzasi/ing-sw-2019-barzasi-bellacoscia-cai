@@ -47,8 +47,7 @@ public class Player {
         this.weaponsList = new ArrayList<>();
         this.powerupList = new ArrayList<>();
         this.personalBoard = new PlayerBoard(this);
-
-
+        this.actions = new ArrayList<>();
 
     }
 
@@ -97,11 +96,8 @@ public class Player {
         } else if (this.getPosition().getSouth() != null && getPosition().getSouth().getRoom().equals(p.getPosition().getRoom())){
             return true;
 
-        } else if (this.getPosition().getWest() != null && getPosition().getWest().getRoom().equals(p.getPosition().getRoom())) {
-            return true;
-        }
-
-        return false;
+        } else
+            return this.getPosition().getWest() != null && getPosition().getWest().getRoom().equals(p.getPosition().getRoom());
 
     }
 
@@ -125,11 +121,8 @@ public class Player {
         } else if (getPosition().getWest() != null && getPosition().getNorth().getRoom() == s.getRoom()) {
             return true;
 
-        } else if(getPosition().getSouth() != null && getPosition().getNorth().getRoom() == s.getRoom()){
-            return true;
-        }
+        } else return getPosition().getSouth() != null && getPosition().getNorth().getRoom() == s.getRoom();
 
-        return false;
     }
 
     /**
@@ -152,12 +145,7 @@ public class Player {
         } else if (getPosition().getWest() != null && getPosition().getWest().getRoom().equals(r)) {
             return true;
 
-        } else if(getPosition().getSouth() != null && getPosition().getSouth().getRoom().equals(r)){
-            return true;
-
-        }
-
-        return false;
+        } else return getPosition().getSouth() != null && getPosition().getSouth().getRoom().equals(r);
 
 
     }
@@ -206,7 +194,7 @@ public class Player {
         if(this.getPosition().isSpawn()){
             System.out.println("no ammo to pick");
         }
-        if(this.getPosition().isSpawn() == false){
+        if(!this.getPosition().isSpawn()){
             Ammo tmp = ((NonSpawnSquare)this.getPosition()).getDrop().getContent();
             this.getPersonalBoard().addAmmo(tmp);
         }

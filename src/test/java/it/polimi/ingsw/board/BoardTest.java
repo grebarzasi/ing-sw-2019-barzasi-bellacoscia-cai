@@ -37,20 +37,20 @@ class BoardTest {
 
 
 
-                    if(((NonSpawnSquare)mock.getMap().getSquareMatrix()[row][column]).getDrop().hasPowerup() == true) {
+                    if(((NonSpawnSquare) mock.getMap().getSquareMatrix()[row][column]).getDrop().hasPowerup()) {
 
                         //if it is a drop with power up it has 2 ammunition
 
-                        assertTrue(((NonSpawnSquare) mock.getMap().getSquareMatrix()[row][column]).getDrop().getContent().getRed() +
+                        assertEquals(2, ((NonSpawnSquare) mock.getMap().getSquareMatrix()[row][column]).getDrop().getContent().getRed() +
                                 ((NonSpawnSquare) mock.getMap().getSquareMatrix()[row][column]).getDrop().getContent().getBlue() +
-                                ((NonSpawnSquare) mock.getMap().getSquareMatrix()[row][column]).getDrop().getContent().getYellow() == 2);
+                                ((NonSpawnSquare) mock.getMap().getSquareMatrix()[row][column]).getDrop().getContent().getYellow());
                     }else{
 
                         //if not it should have 3 ammunition
 
-                        assertTrue(((NonSpawnSquare) mock.getMap().getSquareMatrix()[row][column]).getDrop().getContent().getRed() +
+                        assertEquals(3, ((NonSpawnSquare) mock.getMap().getSquareMatrix()[row][column]).getDrop().getContent().getRed() +
                                 ((NonSpawnSquare) mock.getMap().getSquareMatrix()[row][column]).getDrop().getContent().getBlue() +
-                                ((NonSpawnSquare) mock.getMap().getSquareMatrix()[row][column]).getDrop().getContent().getYellow() == 3);
+                                ((NonSpawnSquare) mock.getMap().getSquareMatrix()[row][column]).getDrop().getContent().getYellow());
 
                     }
 

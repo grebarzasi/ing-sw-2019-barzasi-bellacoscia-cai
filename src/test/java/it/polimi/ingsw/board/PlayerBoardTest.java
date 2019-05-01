@@ -60,8 +60,8 @@ class PlayerBoardTest {
 
         assertEquals(trotsky.getPersonalBoard().getDamage().size(),12);
 
-        assertFalse(trotsky.getPersonalBoard().getMark().isEmpty());
-        assertSame(trotsky.getPersonalBoard().getMark().get(0).getOwner(), trotsky);
+        assertFalse(mercader.getPersonalBoard().getMark().isEmpty());
+        assertSame(mercader.getPersonalBoard().getMark().get(0).getOwner(), trotsky);
 
 
     }

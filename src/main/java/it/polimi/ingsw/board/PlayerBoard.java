@@ -131,13 +131,11 @@ public class PlayerBoard {
 
     public void addAmmo(Ammo a) {
 
-        Ammo tmp = a;
+        a.setRed(a.getRed() + this.owner.getPersonalBoard().getAmmoInventory().getRed());
+        a.setRed(a.getBlue() + this.owner.getPersonalBoard().getAmmoInventory().getBlue());
+        a.setRed(a.getYellow() + this.owner.getPersonalBoard().getAmmoInventory().getYellow());
 
-        tmp.setRed(a.getRed() + this.owner.getPersonalBoard().getAmmoInventory().getRed());
-        tmp.setRed(a.getBlue() + this.owner.getPersonalBoard().getAmmoInventory().getBlue());
-        tmp.setRed(a.getYellow() + this.owner.getPersonalBoard().getAmmoInventory().getYellow());
-
-        this.owner.getPersonalBoard().setAmmoInventory(tmp);
+        this.owner.getPersonalBoard().setAmmoInventory(a);
 
         if(this.owner.getPersonalBoard().getAmmoInventory().getRed() > maxammo){
             this.owner.getPersonalBoard().getAmmoInventory().setRed(maxammo);

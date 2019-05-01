@@ -54,7 +54,7 @@ public class MapLoader {
         for( row = 0; row < height; row++){
             for( column = 0; column < width; column++){
 
-                if(parserList[i].getIsRespawn() == false) {
+                if(!parserList[i].getIsRespawn()) {
                     squareMatrix[row][column] = new NonSpawnSquare(new Cell(row, column), parserList[i].getRoom());
                     squareMatrix[row][column].setRoom(parserList[i].getRoom());
                 } else{

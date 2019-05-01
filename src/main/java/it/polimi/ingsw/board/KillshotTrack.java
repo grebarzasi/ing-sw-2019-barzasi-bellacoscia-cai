@@ -82,7 +82,6 @@ public class KillshotTrack {
     public void getPoints() {
         if(killsTrack != null) {
             ArrayList<Player> playerList = killerListCreator();
-            ;
             ArrayList<Integer> occ = new ArrayList<>();
 
             for (Player p : playerList) {

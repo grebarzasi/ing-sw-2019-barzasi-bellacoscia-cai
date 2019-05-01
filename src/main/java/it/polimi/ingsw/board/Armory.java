@@ -11,11 +11,7 @@ Armory {
 
     public boolean isFull(){
 
-        if (this.weaponList.size() == 3){
-            return true;
-        }else{
-            return false;
-        }
+        return this.weaponList.size() == 3;
     }
 
     public Armory(ArrayList<Weapon> weaponList) {
