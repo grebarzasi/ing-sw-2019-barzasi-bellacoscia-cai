@@ -1,10 +1,8 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.actions.Action;
-import it.polimi.ingsw.board.Board;
-import it.polimi.ingsw.board.PlayerBoard;
-import it.polimi.ingsw.board.Room;
-import it.polimi.ingsw.board.Square;
+import it.polimi.ingsw.board.*;
+import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
@@ -38,6 +36,21 @@ public class Player {
     private int maxActions;
 
     private ArrayList<Action> actions;
+
+    public Player(String username, String character){
+
+        this.username = username;
+        this.character = character;
+        this.points = 0;
+        this.position = null;
+        this.oldPosition = null;
+        this.weaponsList = new ArrayList<>();
+        this.powerupList = new ArrayList<>();
+        this.personalBoard = new PlayerBoard(this);
+
+
+
+    }
 
 
     //for testing purposes only
@@ -189,6 +202,15 @@ public class Player {
     }
 
     public void pickAmmo(){
+
+        if(this.getPosition().isSpawn()){
+            System.out.println("no ammo to pick");
+        }
+        if(this.getPosition().isSpawn() == false){
+            Ammo tmp = ((NonSpawnSquare)this.getPosition()).getDrop().getContent();
+            this.getPersonalBoard().addAmmo(tmp);
+        }
+
     }
 
 

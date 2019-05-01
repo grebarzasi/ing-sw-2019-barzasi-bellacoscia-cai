@@ -17,6 +17,9 @@ public class PlayerBoard {
 
     private Ammo ammoInventory;
 
+    private static final int maxammo = 3;
+    private static final int maxhealth = 11;
+
 
     /**
      * Adds a damage token to the player's board
@@ -27,22 +30,24 @@ public class PlayerBoard {
 
     public void damage(Token t) {
 
-        if (this.damage.size()<10){
+
+        if (this.damage.size() < maxhealth - 1 ){
 
             this.damage.add(t);
 
-        }else if(this.damage.size() <11){
+        }else if(this.damage.size() < maxhealth){
 
             this.damage.add(t);
             //kill(this.owner);
         }
 
-        else if (this.damage.size() == 11) {
+        else if (this.damage.size() == maxhealth) {
 
             this.damage.add(t);
             t.getOwner().getPersonalBoard().addMark(new Token(this.owner));
             //returns an overkill mark token
         }
+
 
     }
 
@@ -106,11 +111,15 @@ public class PlayerBoard {
      */
 
     public void addSkull() {
+
         int i;
 
         for(i=0;i<4;i++) {
+
             this.pointVec[i] = this.pointVec[i + 1] ;
+
         }
+
     }
 
     /**
@@ -129,6 +138,18 @@ public class PlayerBoard {
         tmp.setRed(a.getYellow() + this.owner.getPersonalBoard().getAmmoInventory().getYellow());
 
         this.owner.getPersonalBoard().setAmmoInventory(tmp);
+
+        if(this.owner.getPersonalBoard().getAmmoInventory().getRed() > maxammo){
+            this.owner.getPersonalBoard().getAmmoInventory().setRed(maxammo);
+        }
+
+        if(this.owner.getPersonalBoard().getAmmoInventory().getBlue() > maxammo){
+            this.owner.getPersonalBoard().getAmmoInventory().setBlue(maxammo);
+        }
+
+        if(this.owner.getPersonalBoard().getAmmoInventory().getYellow() > maxammo){
+            this.owner.getPersonalBoard().getAmmoInventory().setYellow(maxammo);
+        }
     }
 
     /**
@@ -139,11 +160,13 @@ public class PlayerBoard {
      */
 
     public void removeAmmo(Ammo a) {
+
         Ammo tmp = this.owner.getPersonalBoard().getAmmoInventory();
 
         tmp.setRed(this.owner.getPersonalBoard().getAmmoInventory().getRed() - a.getRed());
         tmp.setRed(this.owner.getPersonalBoard().getAmmoInventory().getBlue() - a.getBlue());
         tmp.setRed(this.owner.getPersonalBoard().getAmmoInventory().getYellow() - a.getYellow());
+
     }
 
     /**
@@ -167,6 +190,7 @@ public class PlayerBoard {
         this.pointVec[3]=2;
         this.pointVec[4]=1;
         this.pointVec[5]=1;
+
     }
 
     public PlayerBoard(Player owner, ArrayList<Token> damage, int[] pointVec, ArrayList<Token> marks, Ammo ammoInventory) {
@@ -208,5 +232,9 @@ public class PlayerBoard {
 
     public void setAmmoInventory(Ammo ammoInventory) {
         this.ammoInventory = ammoInventory;
+    }
+
+    public Player getOwner() {
+        return owner;
     }
 }

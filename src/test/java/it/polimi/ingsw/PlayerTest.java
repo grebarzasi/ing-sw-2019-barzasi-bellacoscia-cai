@@ -2,6 +2,7 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.board.Room;
 import it.polimi.ingsw.board.Square;
+import it.polimi.ingsw.board.PlayerBoard;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,6 +11,18 @@ import static it.polimi.ingsw.board.MapLoader.loadMap;
 
 
 public class PlayerTest {
+
+
+
+    @Test
+    public void constructorTest(){
+
+        Player max = new Player("Max","Luna");
+
+        assertEquals("Luna", max.getPersonalBoard().getOwner().getCharacter());
+        assertEquals("Max", max.getPersonalBoard().getOwner().getUsername());
+
+    }
 
 
     /**

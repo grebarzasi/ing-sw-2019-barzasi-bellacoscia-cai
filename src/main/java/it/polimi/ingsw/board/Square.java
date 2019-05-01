@@ -22,9 +22,6 @@ public class Square {
 
     private Room room;
 
-    //1: is a respawn cell with armory
-    //0: is an ordinary cell with ammunition package
-
 
     /*the square adjacent to this in that direction
     *in case of a wall or an edge of the map the field is NULL
