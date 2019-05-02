@@ -3,6 +3,7 @@ package it.polimi.ingsw.board;
 
 /**
  * parses confinement files
+ * @author Yuting Cai
  */
 
 public class SquareConfinementParser {

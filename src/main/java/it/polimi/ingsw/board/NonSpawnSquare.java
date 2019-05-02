@@ -2,6 +2,12 @@ package it.polimi.ingsw.board;
 
 import it.polimi.ingsw.cards.AmmoLot;
 
+/**
+ * A Square that does not contain a spawn point
+ * contains an AmmoLot Drop
+ * @author Yuting Cai
+ */
+
 public class NonSpawnSquare extends Square{
 
     private AmmoLot drop;

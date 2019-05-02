@@ -3,6 +3,7 @@ package it.polimi.ingsw.board;
 
 /**
  * parses map files
+ * @author Yuting Cai
  */
 
 public class SquareParser {

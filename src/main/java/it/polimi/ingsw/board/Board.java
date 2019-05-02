@@ -4,6 +4,7 @@ import it.polimi.ingsw.Subject;
 import it.polimi.ingsw.cards.AmmoLot;
 import it.polimi.ingsw.cards.Deck;
 import it.polimi.ingsw.cards.WeaponDeck;
+import it.polimi.ingsw.cards.power_up.DeckPowerUpBuilder;
 import it.polimi.ingsw.cards.weapon.Weapon;
 import it.polimi.ingsw.cards.weapon.weapon_builder.WeaponBuilder;
 import it.polimi.ingsw.cards.weapon.weapon_builder.WeaponDeckBuilder;
@@ -13,7 +14,14 @@ import java.util.ArrayList;
 
 import static it.polimi.ingsw.cards.AmmoDeckLoader.loadDeck;
 
+/**
+ * Represents the entire board of the game,
+ * has map, the killshot track and the decks.
+ * @author Yuting Cai
+ */
 public class Board extends Subject {
+
+
 
     private Map map;
     private KillshotTrack track;
@@ -25,13 +33,31 @@ public class Board extends Subject {
     private static final int width = 4;
     private static final int height = 3;
 
+    /**
+     * Constructor of the board, initiates the map according to the chosen selection
+     * Initiates all the shuffled decks,
+     * fills the ammo lot drops on the maps and the armories
+     *
+     * @param selection the Map selection to load from json file.
+     *
+     * @author Yuting Cai
+     */
+
     public Board(String selection){
 
 
         this.map = new Map(selection);
 
         this.ammoDeck = new Deck();
+
         loadDeck(this.ammoDeck);
+        this.ammoDeck.shuffle();
+
+        this.weaponDeck = WeaponDeckBuilder.buildDeck();
+        this.weaponDeck.shuffle();
+
+        DeckPowerUpBuilder tmpDeck = new DeckPowerUpBuilder();
+        this.powerupDeck = tmpDeck.PowerUpBuilder();
 
 
 

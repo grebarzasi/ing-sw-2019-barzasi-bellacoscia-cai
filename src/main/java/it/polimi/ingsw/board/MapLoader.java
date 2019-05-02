@@ -10,6 +10,8 @@ import java.io.IOException;
  * loads the map into squareMatrix from .json file
  * map data has been divided into a map file and a confinement file containing
  * information about the confinements of the {@link Square}s. (north, east, south and west)
+ *
+ * @author Yuting Cai
  */
 
 
@@ -17,6 +19,13 @@ public class MapLoader {
 
     private static final int width = 4;
     private static final int height = 3;
+
+    /**
+     * Loads the map information into a given matrix of squares
+     *
+     * @param selection the map selection
+     * @param squareMatrix The SquareMatrix to load
+     */
 
 
     public static void loadMap(String selection, Square[][] squareMatrix) {

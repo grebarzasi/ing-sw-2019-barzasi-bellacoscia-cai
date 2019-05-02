@@ -4,6 +4,12 @@ import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.util.ArrayList;
 
+/**
+ * A Square that includes a respawn spot, also contains an armory where
+ * players can pick a weapon
+ * @author Yuting Cai
+ */
+
 public class SpawnSquare extends Square {
 
     private Armory armory;

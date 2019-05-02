@@ -54,6 +54,9 @@ class BoardTest {
 
                     }
 
+                    assertFalse(mock.getPowerupDeck().getUsable().isEmpty());
+                    assertTrue(mock.getPowerupDeck().getDiscarded().isEmpty());
+
                 }
 
             }

@@ -8,24 +8,47 @@ import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.util.*;
 
+/**
+ * A player in the game
+ *
+ * @author Yuting Cai
+ * Excluding methods unless otherwise stated
+ */
+
 public class Player {
 
 
     private Terminator termRef;
 
+    //chosen username
+
     private String username;
+
+    //character the user has chosen to play with
 
     private String character;
 
+    //the score of the player
+
     private int points;
 
+    //the square to which the player belongs
+
     private Square position;
+
     //needed in some weapon effect
+
     private Square oldPosition;
+
+    //list of weapons available to the player
 
     private ArrayList<Weapon> weaponsList;
 
+    //list of powerups available to the player
+
     private ArrayList<PowerUp> powerupList;
+
+    //reference to the player's board
 
     private PlayerBoard personalBoard;
 

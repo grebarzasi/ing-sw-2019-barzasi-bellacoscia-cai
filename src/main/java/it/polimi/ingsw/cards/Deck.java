@@ -2,9 +2,18 @@ package it.polimi.ingsw.cards;
 
 import java.util.*;
 
+/**
+ * A deck of cards
+ * @author Yuting Cai
+ */
+
 public class Deck {
 
+    // cards that are still in the game and can be drawn
+
     private ArrayList<Card> usable;
+
+    // cards which are discarded from the game, can be reshuffled into the deck if usable is empty
 
     private ArrayList<Card> discarded;
 

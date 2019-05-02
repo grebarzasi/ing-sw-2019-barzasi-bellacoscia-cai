@@ -6,6 +6,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Loads the Ammolot deck into a deck
+ * used in the map constructor
+ *
+ * @author Yuting Cai
+ */
+
 public class AmmoDeckLoader {
 
     private static final int size = 36;

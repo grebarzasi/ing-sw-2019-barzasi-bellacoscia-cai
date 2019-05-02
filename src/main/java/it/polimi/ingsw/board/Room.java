@@ -5,6 +5,12 @@ import it.polimi.ingsw.Player;
 
 import java.util.*;
 
+/**
+ * A collection of squares, does not contain information of the squares to avoid redundancy since
+ * squares have a room field.
+ * @author Yuting Cai
+ */
+
 public class Room {
 
 

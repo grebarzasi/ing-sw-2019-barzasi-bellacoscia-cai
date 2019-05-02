@@ -3,6 +3,7 @@ package it.polimi.ingsw.board;
 
 /**
  * represents a row;column cell of the matrix
+ * @author Yuting Cai
  */
 
 

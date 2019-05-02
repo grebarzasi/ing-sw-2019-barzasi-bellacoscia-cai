@@ -8,6 +8,7 @@ import java.util.Collection;
 
 /**
  *represents a square in the game as is
+ * @author Yuting Cai
  */
 
 

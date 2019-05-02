@@ -1,5 +1,10 @@
 package it.polimi.ingsw.cards;
 
+/**
+ * Parses an Ammo lot
+ * @author Yuting Cai
+ */
+
 public class AmmoParser {
 
     private boolean powerup;

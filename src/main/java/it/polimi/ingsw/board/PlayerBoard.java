@@ -5,6 +5,11 @@ import it.polimi.ingsw.Token;
 import it.polimi.ingsw.cards.Ammo;
 import java.util.*;
 
+/**
+ * Playerboard, contains information about ammo, received damage and marks, and points drop upon death
+ * @author Yuting Cai
+ */
+
 public class PlayerBoard {
 
     private final Player owner;

@@ -5,17 +5,29 @@ import java.util.ArrayList;
 
 import static it.polimi.ingsw.board.MapLoader.loadMap;
 
+
+/**
+ * The Map of the game
+ */
+
+
 public class Map {
 
     private Square[][] squareMatrix;
+
+    //The list of rooms in a game
     private ArrayList<Room> roomList;
 
+    //Standard sizes of a map
     private static final int width = 4;
     private static final int height = 3;
 
 
-
-    //initiates the map
+    /**
+     * Initiates the map according to the size selection
+     * @param selection The map size selection
+     * @author Yuting Cai
+     */
 
     public Map(String selection) {
 
