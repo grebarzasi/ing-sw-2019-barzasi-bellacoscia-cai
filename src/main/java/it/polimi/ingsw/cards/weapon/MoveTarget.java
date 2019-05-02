@@ -1,8 +1,7 @@
 package it.polimi.ingsw.cards.weapon;
 
-import it.polimi.ingsw.Player;
+import it.polimi.ingsw.Figure;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 /**
@@ -27,7 +26,7 @@ public class MoveTarget implements SubEffect {
         return maxSteps;
     }
 
-    public Set<Player> applyEffect(Weapon w, Set<Player> p){
+    public Set<Figure> applyEffect(Weapon w, Set<Figure> p){
             return p;
         //implement
     }

@@ -1,6 +1,6 @@
 package it.polimi.ingsw.cards.weapon;
 
-import it.polimi.ingsw.Player;
+import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.cards.weapon.aiming.AimingFilter;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class TargetAcquisition implements SubEffect {
         return aimRoutine;
     }
 
-    public Set<Player> applyEffect(Weapon w, Set<Player> p){
+    public Set<Figure> applyEffect(Weapon w, Set<Figure> p){
         for(AimingFilter a: aimRoutine)
             p = a.filter(w,p);
        return p;

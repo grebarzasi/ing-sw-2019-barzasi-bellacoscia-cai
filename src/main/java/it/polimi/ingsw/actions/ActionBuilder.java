@@ -1,6 +1,6 @@
 package it.polimi.ingsw.actions;
 
-import it.polimi.ingsw.Player;
+import it.polimi.ingsw.Figure;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -11,7 +11,7 @@ import java.util.Set;
  * @author Gregorio Barzasi
  */
 public class ActionBuilder {
-    public Set<Action> buildActionFor(Player p,boolean isFrenzy, boolean isEndTurn){
+    public Set<Action> buildActionFor(Figure p, boolean isFrenzy, boolean isEndTurn){
 
         //create the actionSet
         Set<Action> actionSet = new HashSet<>();
@@ -39,7 +39,7 @@ public class ActionBuilder {
     }
 
 
-    private Set<Action> createNormalActions(Player p,Set<Action> actionSet){
+    private Set<Action> createNormalActions(Figure p, Set<Action> actionSet){
 
         //initialize arrayList for actions
         ArrayList<SubAction> shootArrayList = new ArrayList<>();

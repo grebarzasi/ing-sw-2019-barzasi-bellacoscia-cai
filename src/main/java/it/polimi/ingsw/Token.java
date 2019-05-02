@@ -1,20 +1,18 @@
 package it.polimi.ingsw;
 
-import java.util.*;
-
 public class Token {
 
-    private Player owner;
+    private Figure owner;
 
-    public Token(Player owner) {
+    public Token(Figure owner) {
         this.owner = owner;
     }
 
-    public Player getOwner() {
+    public Figure getOwner() {
         return owner;
     }
 
-    public void setOwner(Player owner) {
+    public void setOwner(Figure owner) {
         this.owner = owner;
     }
 

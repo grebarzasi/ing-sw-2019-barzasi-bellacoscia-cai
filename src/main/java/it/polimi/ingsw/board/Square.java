@@ -1,7 +1,6 @@
 package it.polimi.ingsw.board;
 
-import it.polimi.ingsw.GameControllerServer;
-import it.polimi.ingsw.Player;
+import it.polimi.ingsw.Figure;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -67,13 +66,13 @@ public class Square {
      * @return the list of players on the queried Square
      */
 
-    private Collection<Player> playersInASquare(Square where, Collection<Player> playerList){
+    private Collection<Figure> playersInASquare(Square where, Collection<Figure> figureList){
 
-        Collection<Player> playersHere = new ArrayList<>();
+        Collection<Figure> playersHere = new ArrayList<>();
 
-        for (Player player : playerList) {
-            if (player.getPosition() == where) {
-                playersHere.add(player);
+        for (Figure figure : figureList) {
+            if (figure.getPosition() == where) {
+                playersHere.add(figure);
             }
         }
 
@@ -85,7 +84,7 @@ public class Square {
      * @author Gregorio Barzasi
      */
 
-    public Collection<Player> playersInSquare(Collection<Player> allP){
+    public Collection<Figure> playersInSquare(Collection<Figure> allP){
         return playersInASquare(this,allP);
     }
 
@@ -152,7 +151,7 @@ public class Square {
     }
 
     //IMPLEMENT HERE
-    public void pickItem(Player p){}
+    public void pickItem(Figure p){}
 
 }
 

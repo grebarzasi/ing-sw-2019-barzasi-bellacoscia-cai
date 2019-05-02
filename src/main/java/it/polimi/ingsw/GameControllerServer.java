@@ -13,9 +13,9 @@ import java.util.Set;
 
 public class GameControllerServer implements Controller {
 
-    private ArrayList<Player> playerList;
+    private ArrayList<Figure> figureList;
 
-    private Player currentPlayer;
+    private Figure currentFigure;
 
     private Time timeTurn;
 
@@ -25,9 +25,9 @@ public class GameControllerServer implements Controller {
 
 
 
-    public GameControllerServer(ArrayList<Player> playerList, Player currentPlayer, Time timeTurn, Board currentBoard) {
-        this.playerList = playerList;
-        this.currentPlayer = currentPlayer;
+    public GameControllerServer(ArrayList<Figure> figureList, Figure currentFigure, Time timeTurn, Board currentBoard) {
+        this.figureList = figureList;
+        this.currentFigure = currentFigure;
         this.timeTurn = timeTurn;
         this.currentBoard = currentBoard;
     }
@@ -36,16 +36,16 @@ public class GameControllerServer implements Controller {
     public void setActions() {
     }
 
-    public void getStatus(Player p) {
+    public void getStatus(Figure p) {
     }
 
-    public void kill(Player p) {
+    public void kill(Figure p) {
     }
 
     public void finalFrenzy() {
     }
 
-    public void finalScore(Player p) {
+    public void finalScore(Figure p) {
     }
 
     public void update() {
@@ -66,7 +66,7 @@ public class GameControllerServer implements Controller {
         return null;
     }
     public Ammo askAmmo(){return null;}
-    public Set<Player> askTarget(int num){
+    public Set<Figure> askTarget(int num){
         return null;
     }
     public Weapon askWeapon(){
@@ -77,20 +77,20 @@ public class GameControllerServer implements Controller {
 
 
 
-    public ArrayList<Player> getPlayerList() {
-        return playerList;
+    public ArrayList<Figure> getFigureList() {
+        return figureList;
     }
 
-    public void setPlayerList(ArrayList<Player> playerList) {
-        this.playerList = playerList;
+    public void setFigureList(ArrayList<Figure> figureList) {
+        this.figureList = figureList;
     }
 
-    public Player getCurrentPlayer() {
-        return currentPlayer;
+    public Figure getCurrentFigure() {
+        return currentFigure;
     }
 
-    public void setCurrentPlayer(Player currentPlayer) {
-        this.currentPlayer = currentPlayer;
+    public void setCurrentFigure(Figure currentFigure) {
+        this.currentFigure = currentFigure;
     }
 
     public Time getTimeTurn() {
@@ -111,7 +111,7 @@ public class GameControllerServer implements Controller {
 
 
 
-    public ArrayList<Player> getPlayers() {
-        return this.playerList;
+    public ArrayList<Figure> getPlayers() {
+        return this.figureList;
     }
 }

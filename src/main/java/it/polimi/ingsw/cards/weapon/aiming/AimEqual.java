@@ -1,6 +1,6 @@
 package it.polimi.ingsw.cards.weapon.aiming;
 
-import it.polimi.ingsw.Player;
+import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.cards.weapon.TargetAcquisition;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
@@ -19,8 +19,8 @@ public class AimEqual extends AimComparator implements AimingFilter {
     }
 
     //does the intersection between the set of available target and the one from source
-    public Set<Player> filter(Weapon w, Set<Player> p) {
-        Player target = (Player)p;
+    public Set<Figure> filter(Weapon w, Set<Figure> p) {
+        Figure target = (Figure)p;
         p.retainAll(getPlayersFromSource(w,target));
         return p;
     }

@@ -1,6 +1,6 @@
 package it.polimi.ingsw.board;
 
-import it.polimi.ingsw.Player;
+import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.Token;
 import it.polimi.ingsw.cards.Ammo;
 import java.util.*;
@@ -12,7 +12,7 @@ import java.util.*;
 
 public class PlayerBoard {
 
-    private final Player owner;
+    private final Figure owner;
 
     private ArrayList<Token> damage;
 
@@ -110,7 +110,7 @@ public class PlayerBoard {
     }
 
     /**
-     * Adds a Skull to the Player, reducing points dropped upon death
+     * Adds a Skull to the Figure, reducing points dropped upon death
      *
      * NEEDS TO BE REVISITED, USE AT YOUR OWN AND OTHERS' RISK
      */
@@ -179,7 +179,7 @@ public class PlayerBoard {
      * NEEDS TO BE REVISITED, USE AT YOUR OWN AND OTHERS' RISK
      */
 
-    public PlayerBoard(Player owner) {
+    public PlayerBoard(Figure owner) {
 
         this.owner = owner;
         this.damage = new ArrayList<>();
@@ -196,7 +196,7 @@ public class PlayerBoard {
 
     }
 
-    public PlayerBoard(Player owner, ArrayList<Token> damage, int[] pointVec, ArrayList<Token> marks, Ammo ammoInventory) {
+    public PlayerBoard(Figure owner, ArrayList<Token> damage, int[] pointVec, ArrayList<Token> marks, Ammo ammoInventory) {
 
         this.owner = owner;
         this.damage = damage;
@@ -237,7 +237,7 @@ public class PlayerBoard {
         this.ammoInventory = ammoInventory;
     }
 
-    public Player getOwner() {
+    public Figure getOwner() {
         return owner;
     }
 }

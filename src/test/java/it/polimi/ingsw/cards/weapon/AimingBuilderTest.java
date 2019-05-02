@@ -89,7 +89,7 @@ public class AimingBuilderTest {
 
 
     /**BUILD ASK PLAYER
-     * Method that build the Ask Player filter.
+     * Method that build the Ask Figure filter.
      *
      */
 

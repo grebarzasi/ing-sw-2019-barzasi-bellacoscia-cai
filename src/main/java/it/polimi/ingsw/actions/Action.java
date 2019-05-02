@@ -1,18 +1,18 @@
 package it.polimi.ingsw.actions;
 
-import it.polimi.ingsw.Player;
+import it.polimi.ingsw.Figure;
 
 import java.util.ArrayList;
 
 /**
  * Initialized by the {@link ActionBuilder} with the sequence of {@link SubAction} needed
- * and used by {@link Player} during a turn
+ * and used by {@link Figure} during a turn
  * @author Gregorio Barzasi
  */
 
 
 public class Action {
-    private Player owner;
+    private Figure owner;
     private String description;
     private ArrayList<SubAction> subActionArrayList;
 
@@ -21,7 +21,7 @@ public class Action {
         this.subActionArrayList=list;
     }
 
-    public void setOwner(Player owner) {
+    public void setOwner(Figure owner) {
         this.owner = owner;
     }
 

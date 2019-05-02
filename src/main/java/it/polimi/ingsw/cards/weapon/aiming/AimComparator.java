@@ -1,6 +1,6 @@
 package it.polimi.ingsw.cards.weapon.aiming;
 
-import it.polimi.ingsw.Player;
+import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.util.ArrayList;
@@ -24,8 +24,8 @@ public class AimComparator {
     }
 
 
-    public Set<Player> getPlayersFromSource(Weapon w,Player target) {
-        Set<Player> pSet = new HashSet<>();
+    public Set<Figure> getPlayersFromSource(Weapon w, Figure target) {
+        Set<Figure> pSet = new HashSet<>();
         for (String s : sourceList) {
             switch (s) {
                 case "base":
@@ -47,18 +47,18 @@ public class AimComparator {
                     pSet.add(w.getLastHit());
                     break;
                 case "room":
-                    pSet.addAll(target.getPosition().getRoom().playersInRoom(target.allPlayers()));
+                    pSet.addAll(target.getPosition().getRoom().playersInRoom(target.allFigures()));
                     break;
                 case "square":
-                    pSet.addAll(target.getPosition().playersInSquare(target.allPlayers()));
+                    pSet.addAll(target.getPosition().playersInSquare(target.allFigures()));
                     break;
                 case "oldSquare":
                    // Implement here
                     break;
                 case "myRoom":
-                    pSet.addAll(w.getOwner().getPosition().getRoom().playersInRoom(target.allPlayers()));                    break;
+                    pSet.addAll(w.getOwner().getPosition().getRoom().playersInRoom(target.allFigures()));                    break;
                 case "mySquare":
-                    pSet.addAll(w.getOwner().getPosition().playersInSquare(target.allPlayers()));
+                    pSet.addAll(w.getOwner().getPosition().playersInSquare(target.allFigures()));
                     break;
                 case "me":
                     pSet.add(w.getOwner());

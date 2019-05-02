@@ -1,6 +1,6 @@
 package it.polimi.ingsw.cards.weapon;
 
-import it.polimi.ingsw.Player;
+import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.cards.Card;
 
@@ -18,7 +18,7 @@ public class Weapon extends Card {
 
     private String name;
     private Ammo chamber;
-    private Player owner=null;
+    private Figure owner=null;
     private boolean loaded=false;
 
     private Effect basicEffect;
@@ -36,7 +36,7 @@ public class Weapon extends Card {
     /**
      * used in some effect in order to act as a chain.
      */
-    private Player lastHit;
+    private Figure lastHit;
 
 
     public Weapon(String name,Ammo chamber) {
@@ -128,15 +128,15 @@ public class Weapon extends Card {
         this.extraMove = extraMove;
     }
 
-    public Player getLastHit() {
+    public Figure getLastHit() {
         return lastHit;
     }
 
-    public void setLastHit(Player lastHit) {
+    public void setLastHit(Figure lastHit) {
         this.lastHit = lastHit;
     }
 
-    public Player getOwner() {
+    public Figure getOwner() {
         return owner;
     }
 

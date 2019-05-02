@@ -1,6 +1,6 @@
 package it.polimi.ingsw.board;
 
-import it.polimi.ingsw.Player;
+import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.Token;
 
 import java.util.*;
@@ -81,42 +81,42 @@ public class KillshotTrack {
      */
     public void getPoints() {
         if(killsTrack != null) {
-            ArrayList<Player> playerList = killerListCreator();
+            ArrayList<Figure> figureList = killerListCreator();
             ArrayList<Integer> occ = new ArrayList<>();
 
-            for (Player p : playerList) {
+            for (Figure p : figureList) {
                 occ.add(countOcc(p));
             }
 
-            switch (playerList.size()) {
+            switch (figureList.size()) {
                 case 5: {
-                    playerList.get(getIndexMax(occ)).addPoints(8);
-                    playerList.get(getIndexMax(occ)).addPoints(6);
-                    playerList.get(getIndexMax(occ)).addPoints(4);
-                    playerList.get(getIndexMax(occ)).addPoints(2);
-                    playerList.get(getIndexMax(occ)).addPoints(2);
+                    figureList.get(getIndexMax(occ)).addPoints(8);
+                    figureList.get(getIndexMax(occ)).addPoints(6);
+                    figureList.get(getIndexMax(occ)).addPoints(4);
+                    figureList.get(getIndexMax(occ)).addPoints(2);
+                    figureList.get(getIndexMax(occ)).addPoints(2);
                     break;
                 }
                 case 4:{
-                    playerList.get(getIndexMax(occ)).addPoints(8);
-                    playerList.get(getIndexMax(occ)).addPoints(6);
-                    playerList.get(getIndexMax(occ)).addPoints(4);
-                    playerList.get(getIndexMax(occ)).addPoints(2);
+                    figureList.get(getIndexMax(occ)).addPoints(8);
+                    figureList.get(getIndexMax(occ)).addPoints(6);
+                    figureList.get(getIndexMax(occ)).addPoints(4);
+                    figureList.get(getIndexMax(occ)).addPoints(2);
                     break;
                 }
                 case 3:{
-                    playerList.get(getIndexMax(occ)).addPoints(8);
-                    playerList.get(getIndexMax(occ)).addPoints(6);
-                    playerList.get(getIndexMax(occ)).addPoints(4);
+                    figureList.get(getIndexMax(occ)).addPoints(8);
+                    figureList.get(getIndexMax(occ)).addPoints(6);
+                    figureList.get(getIndexMax(occ)).addPoints(4);
                     break;
                 }
                 case 2:{
-                    playerList.get(getIndexMax(occ)).addPoints(8);
-                    playerList.get(getIndexMax(occ)).addPoints(6);
+                    figureList.get(getIndexMax(occ)).addPoints(8);
+                    figureList.get(getIndexMax(occ)).addPoints(6);
                     break;
                 }
                 case 1:{
-                    playerList.get(getIndexMax(occ)).addPoints(8);
+                    figureList.get(getIndexMax(occ)).addPoints(8);
                     break;
                 }
             }
@@ -130,17 +130,17 @@ public class KillshotTrack {
      *
      * @return the array list
      */
-    public ArrayList<Player> killerListCreator() {
-        ArrayList<Player> playerList = new ArrayList<>();
+    public ArrayList<Figure> killerListCreator() {
+        ArrayList<Figure> figureList = new ArrayList<>();
 
         for (ArrayList<Token> i : killsTrack) {
             for (Token t : i) {
-                if (!playerList.contains(t.getOwner())) {
-                    playerList.add(t.getOwner());
+                if (!figureList.contains(t.getOwner())) {
+                    figureList.add(t.getOwner());
                 }
             }
         }
-        return playerList;
+        return figureList;
     }
 
 
@@ -150,7 +150,7 @@ public class KillshotTrack {
      * @param p the p
      * @return the integer
      */
-    public Integer countOcc (Player p){
+    public Integer countOcc (Figure p){
 
             Token token = new Token(p);
             Integer occ = 0;

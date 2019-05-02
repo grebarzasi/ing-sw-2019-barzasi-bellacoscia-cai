@@ -1,12 +1,9 @@
 package it.polimi.ingsw.cards.power_up;
 
-import it.polimi.ingsw.Player;
+import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.Token;
-import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.PlayerBoard;
-import it.polimi.ingsw.board.Square;
 import it.polimi.ingsw.cards.Ammo;
-import it.polimi.ingsw.cards.power_up.PowerUp;
 
 /**
  * The type Targeting scope.
@@ -28,8 +25,8 @@ public class TargetingScope extends PowerUp {
 
     @Override
     public void effect() {
-        Player owner = super.getOwner();
-        Player target = (Player)super.getOwner().getControllerServer().askTarget(1);
+        Figure owner = super.getOwner();
+        Figure target = (Figure)super.getOwner().getControllerServer().askTarget(1);
         Ammo a = super.getOwner().getControllerServer().askAmmo();
         Token t = new Token(owner);
         PlayerBoard ownerB = new PlayerBoard(owner);

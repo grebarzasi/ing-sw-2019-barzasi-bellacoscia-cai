@@ -1,6 +1,6 @@
 package it.polimi.ingsw.cards.weapon.aiming;
 
-import it.polimi.ingsw.Player;
+import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.cards.weapon.TargetAcquisition;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
@@ -19,7 +19,7 @@ public class AimDirection implements AimingFilter {
     public AimDirection(boolean wallBang){
         this.wallBang=wallBang;
     }
-    public Set<Player> filter(Weapon w, Set<Player> p) {
+    public Set<Figure> filter(Weapon w, Set<Figure> p) {
         return p;
 
     }

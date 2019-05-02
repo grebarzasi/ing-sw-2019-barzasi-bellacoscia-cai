@@ -1,6 +1,7 @@
 package it.polimi.ingsw.cards.weapon;
 
-import it.polimi.ingsw.Player;
+import it.polimi.ingsw.Figure;
+
 import java.util.Set;
 
 /**
@@ -26,15 +27,15 @@ public class ShootTarget implements SubEffect {
     }
 
 
-    public Set<Player> applyEffect(Weapon w, Set<Player> p){
+    public Set<Figure> applyEffect(Weapon w, Set<Figure> p){
         if(damageNum != 0) {
-            for (Player target : p) {
+            for (Figure target : p) {
                 w.getOwner().inflictDamage(damageNum, target);
                 w.setLastHit(target);
             }
         }
         if(markNum != 0) {
-            for (Player target : p) {
+            for (Figure target : p) {
                 w.getOwner().inflictMark(damageNum, target);
                 w.setLastHit(target);
             }

@@ -1,7 +1,6 @@
 package it.polimi.ingsw.board;
 
-import it.polimi.ingsw.GameControllerServer;
-import it.polimi.ingsw.Player;
+import it.polimi.ingsw.Figure;
 
 import java.util.*;
 
@@ -43,13 +42,13 @@ public class Room {
      * @return a collection of all player in this room
      * @author Gregorio Barzasi
      */
-    public Collection<Player> playersInRoom(Collection<Player> playerList){
+    public Collection<Figure> playersInRoom(Collection<Figure> figureList){
 
-        Collection<Player> playersHere = new HashSet<Player>();
+        Collection<Figure> playersHere = new HashSet<Figure>();
 
-        for (Player player : playerList) {
-            if (player.getPosition().getRoom().equals(this)) {
-                playersHere.add(player);
+        for (Figure figure : figureList) {
+            if (figure.getPosition().getRoom().equals(this)) {
+                playersHere.add(figure);
             }
         }
 

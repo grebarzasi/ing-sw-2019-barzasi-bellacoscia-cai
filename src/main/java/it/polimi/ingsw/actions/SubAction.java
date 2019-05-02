@@ -1,7 +1,7 @@
 package it.polimi.ingsw.actions;
 
 
-import it.polimi.ingsw.Player;
+import it.polimi.ingsw.Figure;
 
 
 /**used by {@link Action}
@@ -9,5 +9,5 @@ import it.polimi.ingsw.Player;
  */
 
 public interface SubAction {
-    void doAction(Player actor);
+    void doAction(Figure actor);
 }

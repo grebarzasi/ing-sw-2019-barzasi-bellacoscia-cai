@@ -1,6 +1,7 @@
 package it.polimi.ingsw.actions;
 
-import it.polimi.ingsw.Player;
+import it.polimi.ingsw.Figure;
+
 /**
  * @author Gregorio Barzasi
  */
@@ -10,7 +11,7 @@ public class Pick implements SubAction {
     }
 
 
-    public void doAction(Player p){
+    public void doAction(Figure p){
         p.getPosition().pickItem(p);
     }
 

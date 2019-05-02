@@ -1,6 +1,6 @@
 package it.polimi.ingsw.cards.weapon.aiming;
 
-import it.polimi.ingsw.Player;
+import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.cards.weapon.TargetAcquisition;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
@@ -35,8 +35,8 @@ public class AimRange implements AimingFilter {
             this.maxDistance = maxDistance;
     }
 
-    public Set<Player> filter(Weapon w, Set<Player> p) {
-        for(Player i : p){
+    public Set<Figure> filter(Weapon w, Set<Figure> p) {
+        for(Figure i : p){
            int dist = w.getOwner().distanceTo(i.getPosition());
             if (!((minDistance<=dist)&&(maxDistance>dist)))
                 p.remove(i);

@@ -1,7 +1,6 @@
 package it.polimi.ingsw.actions;
 
-import it.polimi.ingsw.GameControllerServer;
-import it.polimi.ingsw.Player;
+import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.board.Square;
 
 /**
@@ -18,7 +17,7 @@ public class Move implements SubAction {
     }
 
 
-    public void doAction(Player target){
+    public void doAction(Figure target){
         Square s;
         do {
             s = target.getControllerServer().askPosition();

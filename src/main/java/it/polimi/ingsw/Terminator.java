@@ -4,7 +4,7 @@ import it.polimi.ingsw.board.Square;
 
 public class Terminator {
 
-    private Player owner;
+    private Figure owner;
     private boolean move;
 
     public Terminator(){
@@ -15,7 +15,7 @@ public class Terminator {
 
     }
 
-    public void doDamage(Player p){
+    public void doDamage(Figure p){
 
     }
     public void doMove(Square s){
