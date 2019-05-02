@@ -33,7 +33,7 @@ public class DeckPowerUpBuilder extends Card{
 
         ObjectMapper mapper = new ObjectMapper();
 
-        String path = "data_files/deck_data/";
+        String path = "src/main/resources/data_files/deck_data/";
 
         File jsonFile = new File(path + "power_up_data.json");
 

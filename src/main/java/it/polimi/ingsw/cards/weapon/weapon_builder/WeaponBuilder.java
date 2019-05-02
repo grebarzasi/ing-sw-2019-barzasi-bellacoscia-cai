@@ -21,7 +21,7 @@ public class WeaponBuilder {
 
         ObjectMapper mapper = new ObjectMapper();
         // path of weapons data
-        final String path = "data_files/weapons_data/";
+        final String path = "src/main/resources/data_files/weapons_data/";
         File jsonFile = new File(String.format("%s%s.json", path, name));
         try {
 

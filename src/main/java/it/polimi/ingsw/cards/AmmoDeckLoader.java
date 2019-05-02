@@ -20,7 +20,7 @@ public class AmmoDeckLoader {
 
         ObjectMapper mapper = new ObjectMapper();
 
-        final String PATH = ("data_files/deck_data/ammo.json");
+        final String PATH = ("src/main/resources/data_files/deck_data/ammo.json");
 
         File deckFile = new File(PATH);
 
