@@ -182,9 +182,9 @@ public class PlayerBoard {
     public PlayerBoard(Player owner) {
 
         this.owner = owner;
-        this.damage = new ArrayList<Token>();
+        this.damage = new ArrayList<>();
         this.pointVec = new int[6];
-        this.mark = new ArrayList<Token>();
+        this.mark = new ArrayList<>();
         this.ammoInventory = new Ammo(0,0,0);
 
         this.pointVec[0]=8;

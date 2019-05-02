@@ -12,7 +12,7 @@ public class NonSpawnSquare extends Square{
 
     private AmmoLot drop;
 
-
+    @Override
     public boolean isSpawn(){
         return false;
     }

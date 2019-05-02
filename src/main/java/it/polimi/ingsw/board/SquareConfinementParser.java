@@ -13,7 +13,7 @@ public class SquareConfinementParser {
 
     private Boolean north;
     private Boolean east;
-    private Boolean South;
+    private Boolean south;
     private Boolean west;
 
 
@@ -50,11 +50,11 @@ public class SquareConfinementParser {
     }
 
     public Boolean getSouth() {
-        return South;
+        return south;
     }
 
     public void setSouth(Boolean south) {
-        South = south;
+        south = south;
     }
 
     public Boolean getWest() {
