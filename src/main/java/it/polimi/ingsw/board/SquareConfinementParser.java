@@ -54,7 +54,7 @@ public class SquareConfinementParser {
     }
 
     public void setSouth(Boolean south) {
-        south = south;
+        this.south = south;
     }
 
     public Boolean getWest() {
