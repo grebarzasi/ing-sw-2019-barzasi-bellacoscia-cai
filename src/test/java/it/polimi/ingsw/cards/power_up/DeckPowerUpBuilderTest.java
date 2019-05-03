@@ -16,6 +16,7 @@ class DeckPowerUpBuilderTest {
     void powerUpBuilderTest() {
         usablePUDeck = usablePU.PowerUpBuilder();
         assertNotNull(usablePUDeck);
+        assertFalse(usablePUDeck.getUsable().isEmpty());
     }
 
 

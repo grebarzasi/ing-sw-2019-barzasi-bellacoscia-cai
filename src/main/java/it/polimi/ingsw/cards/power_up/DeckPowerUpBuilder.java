@@ -12,11 +12,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/**
- * The type Power up builder.
- *
- * @author Carlo Bellacoscia
- */
 public class DeckPowerUpBuilder extends Card{
 
     @Override
@@ -24,11 +19,6 @@ public class DeckPowerUpBuilder extends Card{
 
     }
 
-    /**
-     * Power up builder.
-     *
-     * @return the deck
-     */
     public Deck PowerUpBuilder() {
 
         ObjectMapper mapper = new ObjectMapper();
@@ -77,12 +67,6 @@ public class DeckPowerUpBuilder extends Card{
     return null;
     }
 
-    /**
-     * Pu occ array list.
-     *
-     * @param node the node
-     * @return the array list
-     */
     public ArrayList<Ammo> puOcc(JsonNode node){
         ArrayList<Ammo> occ = new ArrayList<>();
 

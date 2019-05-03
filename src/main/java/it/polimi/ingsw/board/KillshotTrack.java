@@ -15,70 +15,35 @@ public class KillshotTrack {
     private int skullMax;
     private ArrayList<ArrayList <Token>> killsTrack = new ArrayList<>();
 
-    /**
-     * Instantiates a new Killshot track.
-     *
-     * @param skullMax the skull max
-     */
     public KillshotTrack(int skullMax) {
         this.skullMax = skullMax;
     }
 
-    /**
-     * Gets skull max.
-     *
-     * @return the skull max
-     */
     public int getSkullMax() {
         return skullMax;
     }
 
-    /**
-     * Sets skull max.
-     *
-     * @param skullMax the skull max
-     */
     public void setSkullMax(int skullMax) {
         this.skullMax = skullMax;
     }
 
-    /**
-     * Gets kills track.
-     *
-     * @return the kills track
-     */
     public ArrayList<ArrayList<Token>> getKillsTrack() {
         return killsTrack;
     }
 
-    /**
-     * Sets kills track.
-     *
-     * @param killsTrack the kills track
-     */
     public void setKillsTrack(ArrayList<ArrayList<Token>> killsTrack) {
         this.killsTrack = killsTrack;
     }
 
-    /**
-     * Remove skull.
-     */
     public void removeSkull() {
         this.skullMax --;
     }
 
-    /**
-     * Add kill.
-     *
-     * @param token the token
-     */
     public void addKill(ArrayList <Token> token) {
         killsTrack.add(token);
+        removeSkull();
     }
 
-    /**
-     * Gets points.
-     */
     public void getPoints() {
         if(killsTrack != null) {
             ArrayList<Figure> figureList = killerListCreator();
@@ -88,6 +53,24 @@ public class KillshotTrack {
                 occ.add(countOcc(p));
             }
 
+            switch (figureList.size()) {
+                case 5: {
+                    figureList.get(getIndexMin(occ)).addPoints(2);
+                }
+                case 4:{
+                    figureList.get(getIndexMin(occ)).addPoints(2);
+                }
+                case 3:{
+                    figureList.get(getIndexMin(occ)).addPoints(4);
+                }
+                case 2:{
+                    figureList.get(getIndexMin(occ)).addPoints(6);
+                }
+                case 1:{
+                    figureList.get(getIndexMin(occ)).addPoints(8);
+                }
+            }
+/*
             switch (figureList.size()) {
                 case 5: {
                     figureList.get(getIndexMax(occ)).addPoints(8);
@@ -120,16 +103,13 @@ public class KillshotTrack {
                     break;
                 }
             }
+*/
+
         }
 
     }
 
 
-    /**
-     * Killer list creator array list.
-     *
-     * @return the array list
-     */
     public ArrayList<Figure> killerListCreator() {
         ArrayList<Figure> figureList = new ArrayList<>();
 
@@ -144,20 +124,16 @@ public class KillshotTrack {
     }
 
 
-    /**
-     * Count occ integer.
-     *
-     * @param p the p
-     * @return the integer
-     */
     public Integer countOcc (Figure p){
 
             Token token = new Token(p);
             Integer occ = 0;
 
             for (ArrayList<Token> i : killsTrack) {
-                if (i.equals(token)) {
-                    occ++;
+                for (Token j:i) {
+                    if (equals(j, token)) {
+                        occ++;
+                    }
                 }
 
             }
@@ -165,24 +141,25 @@ public class KillshotTrack {
         }
 
 
-    /**
-     * Get index max int.
-     *
-     * @param occ the occ
-     * @return the int
-     */
-    public int getIndexMax(ArrayList<Integer> occ){
-        int maxIndex = 0;
-        Integer max = 0;
+    public int getIndexMin(ArrayList<Integer> occ){
+        int minIndex = 0;
+        Integer min = 20;
 
         for (Integer i: occ) {
-            if(occ.get(i) != null && occ.get(i) > max){
-                max = occ.get(i);
-                maxIndex = occ.indexOf(occ.get(i));
-                occ.remove(occ.get(i));
+            if(i != -1 && i < min){
+                min = i;
+                minIndex = occ.indexOf(i);
             }
         }
-        return maxIndex;
+        occ.set(minIndex, -1);
+        return minIndex;
+    }
+
+    public boolean equals(Token i, Token t){
+        if(t.getOwner() == i.getOwner()){
+            return true;
+        }
+        return false;
     }
 
 
