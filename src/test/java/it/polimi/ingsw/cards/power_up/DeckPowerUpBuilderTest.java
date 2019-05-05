@@ -1,5 +1,6 @@
 package it.polimi.ingsw.cards.power_up;
 
+import it.polimi.ingsw.cards.Card;
 import it.polimi.ingsw.cards.Deck;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,10 @@ class DeckPowerUpBuilderTest {
         usablePUDeck = usablePU.PowerUpBuilder();
         assertNotNull(usablePUDeck);
         assertFalse(usablePUDeck.getUsable().isEmpty());
+
+        for(Card c : usablePUDeck.getUsable()){
+            PowerUp p = (PowerUp) c;
+            assertNotNull(p.getName());
+        }
     }
-
-
 }

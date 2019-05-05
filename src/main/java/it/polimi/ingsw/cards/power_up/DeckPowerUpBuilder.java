@@ -32,16 +32,16 @@ public class DeckPowerUpBuilder extends Card{
         try{
 
             JsonNode rootNode = mapper.readTree(jsonFile);
-            Iterator<JsonNode> powerUpIterator = rootNode.elements();
-            while(powerUpIterator.hasNext()) {
-                String puKey = powerUpIterator.next().asText();
+            Iterator<String> powerUpIterator = rootNode.fieldNames();
 
-                String puName = rootNode.path("name").textValue();
+            while(powerUpIterator.hasNext()) {
+                String puKey = powerUpIterator.next();
+                String puName = rootNode.path(puKey).path("name").asText();
                 ArrayList<Ammo> occList = puOcc(rootNode.path(puKey).path("occ"));
                 for(Ammo a : occList) {
-                    switch (puKey) {
+                   switch (puKey) {
                         case "teleporter":
-                            usablePU.add(new Teleporter(a, puName));
+                            usablePU.add( new Teleporter(a, puName));
                             break;
                         case "newton":
                             usablePU.add(new Newton(a, puName));
@@ -67,16 +67,16 @@ public class DeckPowerUpBuilder extends Card{
     return null;
     }
 
-    public ArrayList<Ammo> puOcc(JsonNode node){
+    private ArrayList<Ammo> puOcc(JsonNode node){
         ArrayList<Ammo> occ = new ArrayList<>();
 
-        for(int i = 0; i <= node.path("blue").asInt(); i++){
+        for(int i = 0; i < node.path("blue").asInt(); i++){
             occ.add(new Ammo(0,1,0));
         }
-        for(int i = 0; i <= node.path("red").asInt(); i++){
+        for(int i = 0; i < node.path("red").asInt(); i++){
             occ.add(new Ammo(1,0,0));
         }
-        for(int i = 0; i <= node.path("yellow").asInt(); i++){
+        for(int i = 0; i < node.path("yellow").asInt(); i++){
             occ.add(new Ammo(0,0,1));
         }
         return occ;

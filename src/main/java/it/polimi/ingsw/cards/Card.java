@@ -8,6 +8,9 @@ public abstract class Card {
 
     private Figure owner;
 
+    public Card() {
+    }
+
     public Figure getOwner() {
         return owner;
     }
@@ -18,8 +21,7 @@ public abstract class Card {
 
     public abstract void fetch();
 
-    public Card() {
-    }
+
 
 
 }

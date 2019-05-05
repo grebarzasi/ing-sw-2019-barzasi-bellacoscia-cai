@@ -1,6 +1,10 @@
 package it.polimi.ingsw.cards;
 
+import it.polimi.ingsw.Player;
 import org.junit.jupiter.api.Test;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import static it.polimi.ingsw.cards.AmmoDeckLoader.loadDeck;
 import static org.junit.jupiter.api.Assertions.*;

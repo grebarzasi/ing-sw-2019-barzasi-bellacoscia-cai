@@ -15,72 +15,32 @@ public abstract class PowerUp extends Card {
 
     private String name;
 
-    /**
-     * The Deck.
-     */
-    DeckPowerUpBuilder deck = new DeckPowerUpBuilder();
 
-    /**
-     * The Deck pu.
-     */
-    Deck deckPU = deck.PowerUpBuilder();
-
-
-    /**
-     * Effect.
-     */
     public abstract void effect();
 
 
-    /**
-     * Instantiates a new Power up.
-     *
-     * @param ammoOnDiscard the ammo on discard
-     * @param name          the name
-     */
     public PowerUp(Ammo ammoOnDiscard, String name) {
         this.ammoOnDiscard = ammoOnDiscard;
         this.name = name;
     }
 
-    /**
-     * All setter and getter.
-     *
-     * @return the ammo on discard
-     */
     public Ammo getAmmoOnDiscard() {
         return ammoOnDiscard;
     }
 
-    /**
-     * Sets ammo on discard.
-     *
-     * @param ammoOnDiscard the ammo on discard
-     */
+
     public void setAmmoOnDiscard(Ammo ammoOnDiscard) {
         this.ammoOnDiscard = ammoOnDiscard;
     }
 
-    /**
-     * Gets name.
-     *
-     * @return the name
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * Sets name.
-     *
-     * @param name the name
-     */
     public void setName(String name) {
         this.name = name;
     }
 
 
-    public void fetch(){
-        deckPU.getUsable();
-    }
+    public void fetch(){};
 }

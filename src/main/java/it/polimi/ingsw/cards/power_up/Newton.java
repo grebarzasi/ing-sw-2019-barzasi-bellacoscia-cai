@@ -22,6 +22,7 @@ public class Newton extends PowerUp {
     }
 
     @Override
+    /*Edit this, Figure cast wont work*/
     public void effect() {
        Figure target = (Figure)super.getOwner().getControllerServer().askTarget(1);
        new Move(2).doAction(target);
