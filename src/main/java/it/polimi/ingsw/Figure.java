@@ -172,7 +172,7 @@ public class Figure {
      * @author Gregorio Barzasi
      */
     public Set<Figure> allFigures(){
-        return new HashSet<>(controllerServer.getFigureList());
+        return new HashSet<>(controllerServer.getPlayerList());
     }
 
     /**
@@ -207,7 +207,7 @@ public class Figure {
 
         int distance = 0;
         int size;
-        int i=0;
+        int i;
         LinkedList<Square> next = new LinkedList<>();
         HashSet<Square> visited = new HashSet<>();
         next.add(this.getPosition());

@@ -22,9 +22,13 @@ import java.util.Set;
  */
 public class GameControllerServer implements Controller {
 
-    private ArrayList<Figure> figureList;
+    private final static int maxPlayers = 5;
+    private final static int width = 4;
+    private final static int height = 3;
 
-    private Figure currentFigure;
+    private ArrayList<Player> playerList;
+
+    private Player currentPlayer;
 
     private Time timeTurn;
 
@@ -45,27 +49,28 @@ public class GameControllerServer implements Controller {
     public GameControllerServer() {
     }
 
-    public GameControllerServer(ArrayList<Figure> figureList, Figure currentFigure, Time timeTurn, Board currentBoard) {
-        this.figureList = figureList;
-        this.currentFigure = currentFigure;
+    public GameControllerServer(ArrayList<Player> playerList, Player currentPlayer, Time timeTurn, Board currentBoard) {
+        this.playerList = playerList;
+        this.currentPlayer = currentPlayer;
         this.timeTurn = timeTurn;
         this.currentBoard = currentBoard;
     }
 
-    public ArrayList<Figure> getFigureList() {
-        return figureList;
+
+    public ArrayList<Player> getPlayerList() {
+        return playerList;
     }
 
-    public void setFigureList(ArrayList<Figure> figureList) {
-        this.figureList = figureList;
+    public void setPlayerList(ArrayList<Player> playerList) {
+        this.playerList = playerList;
     }
 
-    public Figure getCurrentFigure() {
-        return currentFigure;
+    public Figure getCurrentPlayer() {
+        return currentPlayer;
     }
 
-    public void setCurrentFigure(Figure currentFigure) {
-        this.currentFigure = currentFigure;
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
     }
 
     public Time getTimeTurn() {
@@ -84,8 +89,8 @@ public class GameControllerServer implements Controller {
         this.currentBoard = currentBoard;
     }
 
-    public ArrayList<Figure> getPlayers() {
-        return this.figureList;
+    public ArrayList<Player> getPlayers() {
+        return this.playerList;
     }
 
 
@@ -155,7 +160,7 @@ public class GameControllerServer implements Controller {
 
     /**
      *ask player
-     * @autor Gregorio Barzasi
+     * @author Gregorio Barzasi
      */
     public Square askPosition(){
         return null;
@@ -175,8 +180,36 @@ public class GameControllerServer implements Controller {
     public void finalFrenzy() {}
     public void finalScore(Figure p) {}
     public void update() {}
-    public void newTurn() {}
-    public void endTurn() {}
+
+    public void newTurn() {
+        int i;
+
+
+        for(i = 0; i<this.playerList.size() ; i++){
+            if(currentPlayer == this.playerList.get(i)){
+                if(i == this.playerList.size()-1) {
+                    currentPlayer = this.playerList.get(i + 1);
+                }else{
+                    currentPlayer = this.playerList.get(0);
+                }
+            }
+        }
+
+    }
+
+    public void endTurn() {
+
+        for(Figure figure : this.playerList){
+
+            if(figure.getPersonalBoard().getDamage().size() >= 11){
+                figure.setPosition(null);
+            }
+
+        }
+
+        this.getCurrentBoard().refillSquares();
+
+    }
 
 
     public static void main(String[] args){

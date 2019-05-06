@@ -20,10 +20,23 @@ public class Terminator extends Figure{
 
     }
 
-    public void doDamage(Player p){
+    public void shoot(Player p){
+
+        if(canSee(p)){
+            p.getPersonalBoard().addDamage(new Token(this));
+        }
 
     }
+
+
     public void doMove(Square s){
+
+        if(s.isAdjacent(this.getPosition())){
+            this.setPosition(s);
+        }
+        else{
+            System.out.println("Terminator can only be moved by one square");
+        }
 
     }
 

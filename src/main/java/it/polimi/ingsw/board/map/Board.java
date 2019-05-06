@@ -107,8 +107,44 @@ public class Board extends Subject {
             }
         }
 
+    }
 
+    public void refillSquares() {
 
+        for (int row = 0; row < height; row++) {
+            for (int column = 0; column < width; column++) {
+                //for each cell of the square matrix if it is a spawn square
+                if (this.getMap().getSquareMatrix()[row][column].isSpawn()) {
+
+                    //if its armory is not full
+                    if (!((SpawnSquare) this.getMap().getSquareMatrix()[row][column]).getArmory().isFull()) {
+
+                        //while it is not full
+                        while (!((SpawnSquare) this.getMap().getSquareMatrix()[row][column]).getArmory().isFull()) {
+
+                            //if the weapon deck is not empty
+                            if (!this.getWeaponDeck().getUsable().isEmpty()) {
+
+                                //fetch from deck and add to the armory
+                                ((SpawnSquare) this.getMap().getSquareMatrix()[row][column]).getArmory().getWeaponList().add((Weapon) this.weaponDeck.fetch());
+                            }
+                        }
+                    }
+
+                }
+
+                if (!this.getMap().getSquareMatrix()[row][column].isSpawn()) {
+                    if (((NonSpawnSquare) this.getMap().getSquareMatrix()[row][column]).getDrop() == null) {
+                        if(!this.ammoDeck.getUsable().isEmpty()) {
+                            ((NonSpawnSquare) this.getMap().getSquareMatrix()[row][column]).setDrop((AmmoLot) this.ammoDeck.fetch());
+                        }else{
+                            this.ammoDeck.reset();
+                            ((NonSpawnSquare) this.getMap().getSquareMatrix()[row][column]).setDrop((AmmoLot) this.ammoDeck.fetch());
+                        }
+                    }
+                }
+            }
+        }
     }
 
 

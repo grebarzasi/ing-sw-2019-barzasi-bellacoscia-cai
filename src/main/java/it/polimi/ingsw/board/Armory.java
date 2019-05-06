@@ -40,8 +40,4 @@ Armory {
 
     public Armory() {
     }
-
-    public void refillWeapon() {
-    }
-
 }

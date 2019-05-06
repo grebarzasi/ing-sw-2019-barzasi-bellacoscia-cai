@@ -12,7 +12,10 @@ import java.util.Scanner;
  */
 public class GameControllerClient {
 
+    private final int maxPlayers = 5;
+
     private Socket client = null;
+
 
     int door = 1984;
 
@@ -30,6 +33,13 @@ public class GameControllerClient {
         try {
 
             System.out.println("Tentativo connessione...");
+
+
+            /*
+            **************************************************************
+            //BLOCKER ISSUE MATE
+            **************************************************************
+            */
             Socket client = new Socket(InetAddress.getLocalHost(),door);
             System.out.println("Connessione stabilita\n");
 
@@ -65,6 +75,7 @@ public class GameControllerClient {
         }
         return client;
     }
+
 
     public static void main( String[] args ) {
 

@@ -23,6 +23,8 @@ public class NonSpawnSquare extends Square{
         this.drop = drop;
     }
 
+
+
     public NonSpawnSquare(Cell position, Room room) {
         super(position, room);
     }
