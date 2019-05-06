@@ -1,8 +1,6 @@
 package it.polimi.ingsw;
 
 
-import it.polimi.ingsw.board.Cell;
-
 /**
  * Hello world! test
  *

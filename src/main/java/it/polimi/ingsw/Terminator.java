@@ -1,9 +1,8 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.actions.Action;
 import it.polimi.ingsw.actions.Move;
 import it.polimi.ingsw.actions.Shoot;
-import it.polimi.ingsw.board.Square;
+import it.polimi.ingsw.board.map.Square;
 
 public class Terminator extends Figure{
 

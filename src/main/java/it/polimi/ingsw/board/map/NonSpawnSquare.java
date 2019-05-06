@@ -1,5 +1,6 @@
-package it.polimi.ingsw.board;
+package it.polimi.ingsw.board.map;
 
+import it.polimi.ingsw.board.Room;
 import it.polimi.ingsw.cards.AmmoLot;
 
 /**

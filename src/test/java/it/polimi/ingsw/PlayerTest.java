@@ -1,11 +1,11 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.board.Room;
-import it.polimi.ingsw.board.Square;
+import it.polimi.ingsw.board.map.Square;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static it.polimi.ingsw.board.MapLoader.loadMap;
+import static it.polimi.ingsw.board.map.MapLoader.loadMap;
 
 
 

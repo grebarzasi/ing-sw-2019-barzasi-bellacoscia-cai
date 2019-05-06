@@ -1,8 +1,7 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.board.NonSpawnSquare;
-import it.polimi.ingsw.board.PlayerBoard;
-import it.polimi.ingsw.board.Square;
+import it.polimi.ingsw.board.map.NonSpawnSquare;
+import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Weapon;

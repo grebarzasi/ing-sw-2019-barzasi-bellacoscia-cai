@@ -1,5 +1,8 @@
 package it.polimi.ingsw.board;
 
+import it.polimi.ingsw.board.map.Board;
+import it.polimi.ingsw.board.map.NonSpawnSquare;
+import it.polimi.ingsw.board.map.SpawnSquare;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,7 +19,7 @@ class BoardTest {
     @Test
     public void constructorTest(){
 
-        Board mock = new Board("large");
+        Board fieldOfFire = new Board("large");
 
         int row;
         int column;
@@ -25,11 +28,11 @@ class BoardTest {
             for(column = 0; column < width ; column ++){
 
 
-                if(mock.getMap().getSquareMatrix()[row][column].isSpawn()){
+                if(fieldOfFire.getMap().getSquareMatrix()[row][column].isSpawn()){
 
                     //if a square is a respawn square it should have its armory fully filled at the start of a game
 
-                    assertTrue(((SpawnSquare)mock.getMap().getSquareMatrix()[row][column]).getArmory().isFull());
+                    assertTrue(((SpawnSquare)fieldOfFire.getMap().getSquareMatrix()[row][column]).getArmory().isFull());
 
                 }else{
 
@@ -37,25 +40,25 @@ class BoardTest {
 
 
 
-                    if(((NonSpawnSquare) mock.getMap().getSquareMatrix()[row][column]).getDrop().hasPowerup()) {
+                    if(((NonSpawnSquare) fieldOfFire.getMap().getSquareMatrix()[row][column]).getDrop().hasPowerup()) {
 
                         //if it is a drop with power up it has 2 ammunition
 
-                        assertEquals(2, ((NonSpawnSquare) mock.getMap().getSquareMatrix()[row][column]).getDrop().getContent().getRed() +
-                                ((NonSpawnSquare) mock.getMap().getSquareMatrix()[row][column]).getDrop().getContent().getBlue() +
-                                ((NonSpawnSquare) mock.getMap().getSquareMatrix()[row][column]).getDrop().getContent().getYellow());
+                        assertEquals(2, ((NonSpawnSquare) fieldOfFire.getMap().getSquareMatrix()[row][column]).getDrop().getContent().getRed() +
+                                ((NonSpawnSquare) fieldOfFire.getMap().getSquareMatrix()[row][column]).getDrop().getContent().getBlue() +
+                                ((NonSpawnSquare) fieldOfFire.getMap().getSquareMatrix()[row][column]).getDrop().getContent().getYellow());
                     }else{
 
                         //if not it should have 3 ammunition
 
-                        assertEquals(3, ((NonSpawnSquare) mock.getMap().getSquareMatrix()[row][column]).getDrop().getContent().getRed() +
-                                ((NonSpawnSquare) mock.getMap().getSquareMatrix()[row][column]).getDrop().getContent().getBlue() +
-                                ((NonSpawnSquare) mock.getMap().getSquareMatrix()[row][column]).getDrop().getContent().getYellow());
+                        assertEquals(3, ((NonSpawnSquare) fieldOfFire.getMap().getSquareMatrix()[row][column]).getDrop().getContent().getRed() +
+                                ((NonSpawnSquare) fieldOfFire.getMap().getSquareMatrix()[row][column]).getDrop().getContent().getBlue() +
+                                ((NonSpawnSquare) fieldOfFire.getMap().getSquareMatrix()[row][column]).getDrop().getContent().getYellow());
 
                     }
 
-                    //assertFalse(mock.getPowerupDeck().getUsable().isEmpty());
-                    assertTrue(mock.getPowerupDeck().getDiscarded().isEmpty());
+                    assertFalse(fieldOfFire.getPowerupDeck().getUsable().isEmpty());
+                    assertTrue(fieldOfFire.getPowerupDeck().getDiscarded().isEmpty());
 
                 }
 

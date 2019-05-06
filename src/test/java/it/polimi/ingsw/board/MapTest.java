@@ -1,8 +1,8 @@
 package it.polimi.ingsw.board;
 
+import it.polimi.ingsw.board.map.Map;
 import org.junit.Test;
 
-import static it.polimi.ingsw.board.MapLoader.loadMap;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,4 +1,4 @@
-package it.polimi.ingsw.board;
+package it.polimi.ingsw.board.map;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;

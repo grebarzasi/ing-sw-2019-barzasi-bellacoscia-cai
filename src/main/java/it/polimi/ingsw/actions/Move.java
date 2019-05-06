@@ -1,7 +1,7 @@
 package it.polimi.ingsw.actions;
 
 import it.polimi.ingsw.Figure;
-import it.polimi.ingsw.board.Square;
+import it.polimi.ingsw.board.map.Square;
 
 /**
  * @author Gregorio Barzasi

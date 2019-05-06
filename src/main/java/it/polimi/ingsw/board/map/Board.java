@@ -1,12 +1,13 @@
-package it.polimi.ingsw.board;
+package it.polimi.ingsw.board.map;
 
 import it.polimi.ingsw.Subject;
+import it.polimi.ingsw.board.Armory;
+import it.polimi.ingsw.board.KillshotTrack;
 import it.polimi.ingsw.cards.AmmoLot;
 import it.polimi.ingsw.cards.Deck;
 import it.polimi.ingsw.cards.WeaponDeck;
 import it.polimi.ingsw.cards.power_up.DeckPowerUpBuilder;
 import it.polimi.ingsw.cards.weapon.Weapon;
-import it.polimi.ingsw.cards.weapon.weapon_builder.WeaponBuilder;
 import it.polimi.ingsw.cards.weapon.weapon_builder.WeaponDeckBuilder;
 
 

@@ -2,9 +2,9 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.actions.Action;
 import it.polimi.ingsw.board.*;
-import it.polimi.ingsw.cards.Ammo;
+import it.polimi.ingsw.board.map.Board;
+import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
-import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.util.*;
 

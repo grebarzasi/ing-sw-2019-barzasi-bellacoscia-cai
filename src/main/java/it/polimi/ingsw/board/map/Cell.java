@@ -1,19 +1,21 @@
-package it.polimi.ingsw.board;
+package it.polimi.ingsw.board.map;
 
 
 /**
- * parses map files
+ * represents a row;column cell of the matrix
  * @author Yuting Cai
  */
 
-public class SquareParser {
+
+public class Cell {
 
     private int row;
     private int column;
 
-    private Room room;
-    private Boolean isRespawn;
-
+    public Cell(int row, int tmp) {
+        this.row = row;
+        this.column = tmp;
+    }
 
 
 
@@ -31,18 +33,6 @@ public class SquareParser {
 
     public void setColumn(int column) {
         this.column = column;
-    }
-
-    public Room getRoom() {
-        return room;
-    }
-
-    public void setRoom(Room room) {
-        this.room = room;
-    }
-
-    public Boolean getIsRespawn() {
-        return isRespawn;
     }
 
 }

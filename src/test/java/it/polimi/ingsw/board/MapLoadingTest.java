@@ -1,9 +1,12 @@
 package it.polimi.ingsw.board;
 
 
+import it.polimi.ingsw.board.map.NonSpawnSquare;
+import it.polimi.ingsw.board.map.SpawnSquare;
+import it.polimi.ingsw.board.map.Square;
 import org.junit.Test;
 
-import static it.polimi.ingsw.board.MapLoader.loadMap;
+import static it.polimi.ingsw.board.map.MapLoader.loadMap;
 import static org.junit.Assert.*;
 
 public class MapLoadingTest {
