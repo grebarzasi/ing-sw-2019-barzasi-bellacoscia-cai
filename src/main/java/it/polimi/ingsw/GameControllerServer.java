@@ -105,6 +105,13 @@ public class GameControllerServer implements Controller {
         return this.playerList;
     }
 
+    public Terminator getBot() {
+        return bot;
+    }
+
+    public void setBot(Terminator bot) {
+        this.bot = bot;
+    }
 
     /**
      * Socket connection.
