@@ -17,11 +17,19 @@ public class GameControllerClient {
     private Socket client = null;
 
 
-    int door = 1984;
+    int port;
 
     private BufferedReader input;
     private PrintWriter output;
 
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
+    }
 
     /**
      * Connect socket.
@@ -40,7 +48,7 @@ public class GameControllerClient {
             //BLOCKER ISSUE MATE
             **************************************************************
             */
-            Socket client = new Socket(InetAddress.getLocalHost(),door);
+            Socket client = new Socket(InetAddress.getLocalHost(),port);
             System.out.println("Connessione stabilita\n");
 
             /**
@@ -79,7 +87,11 @@ public class GameControllerClient {
 
     public static void main( String[] args ) {
 
+        Scanner sc = new Scanner(System.in);
         GameControllerClient c = new GameControllerClient();
+
+        System.out.println("Inserisci la porta");
+        c.setPort(sc.nextInt());
         c.connect();
     }
 }
