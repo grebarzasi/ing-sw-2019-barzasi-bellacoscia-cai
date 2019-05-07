@@ -12,7 +12,7 @@ public class Teleporter extends PowerUp {
 
     @Override
     public void effect() {
-        Figure target = (Figure)super.getOwner().getControllerServer().askTarget(1);
+        Figure target = super.getOwner().getControllerServer().askOneTarget();
         Square dest = super.getOwner().getControllerServer().askPosition();
         target.setPosition(dest);
     }

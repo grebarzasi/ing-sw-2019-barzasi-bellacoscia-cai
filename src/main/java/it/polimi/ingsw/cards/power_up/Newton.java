@@ -4,6 +4,8 @@ import it.polimi.ingsw.actions.Move;
 import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.cards.Ammo;
 
+import java.util.Set;
+
 /**
  * The type Newton.
  *
@@ -24,7 +26,7 @@ public class Newton extends PowerUp {
     @Override
     /*Edit this, Figure cast wont work*/
     public void effect() {
-       Figure target = (Figure)super.getOwner().getControllerServer().askTarget(1);
+       Figure target = super.getOwner().getControllerServer().askOneTarget();
        new Move(2).doAction(target);
     }
 

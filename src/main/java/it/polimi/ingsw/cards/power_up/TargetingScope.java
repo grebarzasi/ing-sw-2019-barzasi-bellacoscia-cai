@@ -26,7 +26,7 @@ public class TargetingScope extends PowerUp {
     @Override
     public void effect() {
         Figure owner = super.getOwner();
-        Figure target = (Figure)super.getOwner().getControllerServer().askTarget(1);
+        Figure target = super.getOwner().getControllerServer().askOneTarget();
         Ammo a = super.getOwner().getControllerServer().askAmmo();
         Token t = new Token(owner);
         PlayerBoard ownerB = new PlayerBoard(owner);

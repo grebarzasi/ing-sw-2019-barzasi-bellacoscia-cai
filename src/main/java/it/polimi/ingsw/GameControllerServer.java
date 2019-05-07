@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.lang.annotation.Target;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.Time;
@@ -181,9 +182,38 @@ public class GameControllerServer implements Controller {
      * @author Gregorio Barzasi
      */
     public Square askPosition(){
+
+        Scanner sc = new Scanner(System.in);
+        int row = sc.nextInt();
+        int column = sc.nextInt();
+
+        Square s = currentBoard.getMap().getSquareMatrix()[row][column];
+
+        return s;
+    }
+    public Ammo askAmmo(){
+        Figure p = getCurrentPlayer();
+        Scanner sc = new Scanner(System.in);
+        int red = sc.nextInt();
+        int blue = sc.nextInt();
+        int yellow = sc.nextInt();
+
+        Ammo a = new Ammo(red, blue, yellow);
+        p.getPersonalBoard().removeAmmo(a);
+
+        return a;
+    }
+    public Figure askOneTarget(){
+
+        Scanner sc = new Scanner(System.in);
+        String name = sc.next();
+        for (Player p :playerList) {
+            if(p.getUsername().equals(name)){
+                return p;
+            }
+        }
         return null;
     }
-    public Ammo askAmmo(){return null;}
     public Set<Figure> askTarget(int num){
         return null;
     }
