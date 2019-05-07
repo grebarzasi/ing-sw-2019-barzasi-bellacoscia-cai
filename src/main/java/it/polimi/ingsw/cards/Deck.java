@@ -62,6 +62,8 @@ public class Deck {
         return temp;
     }
 
+
+
     public void reset(){
         this.usable=this.discarded;
         this.discarded= new ArrayList<>();

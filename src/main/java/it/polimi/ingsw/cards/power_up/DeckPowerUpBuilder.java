@@ -12,12 +12,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class DeckPowerUpBuilder extends Card{
+public class DeckPowerUpBuilder{
 
-    @Override
-    public void fetch() {
-
-    }
 
     public Deck PowerUpBuilder() {
 

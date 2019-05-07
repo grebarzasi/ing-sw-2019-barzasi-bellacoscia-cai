@@ -1,7 +1,6 @@
 package it.polimi.ingsw.board.map;
 
 import it.polimi.ingsw.board.Armory;
-import it.polimi.ingsw.board.Room;
 
 /**
  * A Square that includes a respawn spot, also contains an armory where

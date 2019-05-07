@@ -3,6 +3,7 @@ package it.polimi.ingsw;
 import it.polimi.ingsw.actions.Action;
 import it.polimi.ingsw.board.*;
 import it.polimi.ingsw.board.Board;
+import it.polimi.ingsw.board.map.Room;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 
@@ -258,11 +259,12 @@ public class Figure {
 
         //give point to the player who inflicted first blood
         this.getPersonalBoard().getDamage().get(0).getOwner().addPoints(1);
+        System.out.println("added first blood damage");
 
-        //maps each player with
+        //maps each player with their contribution to the list
         for (Token t : this.getPersonalBoard().getDamage()){
 
-            if(!contributors.containsValue(t.getOwner())) {
+            if(!contributors.containsKey(t.getOwner())) {
                 contributors.put(t.getOwner(),1);
             }else{
                 tmp = contributors.get(t.getOwner());
@@ -270,16 +272,39 @@ public class Figure {
             }
         }
 
-        murderers = new ArrayList<>(contributors.keySet());
-
-        for(Token t: this.getPersonalBoard().getDamage()){
-
-            murderers.add(1,t.getOwner());
-
-            for(i=0;i<murderers.size();i++){
-                murderers.get(i).addPoints(t.getOwner().getPersonalBoard().getPointVec()[i]);
-            }
+        for(Figure f: contributors.keySet()){
+            murderers.add(f);
         }
+
+        System.out.println("number of murderers: " + murderers.size());
+
+        ArrayList ordered = new ArrayList<Figure>();
+
+        ordered.add(murderers.get(0));
+
+        while(!murderers.isEmpty()){
+
+            for(i=0;i<ordered.size();i++){
+                if(contributors.get(ordered.get(i)) < contributors.get(murderers.get(0))){
+                    continue;
+                }
+                if(contributors.get(ordered.get(i)) == contributors.get(murderers.get(0))){
+                    ordered.add(i,murderers.get(0));
+                    murderers.remove(0);
+                }else{
+                    ordered.add(murderers.get(0));
+                    murderers.remove(0);
+                }
+            }
+            ordered.add(murderers.get(0));
+            murderers.remove(0);
+        }
+
+
+        //if(contributors.get(murderers.get(k)) >= contributors.get(ordered.get(i))){
+
+        System.out.println("Ordered List Size: " + ordered.size());
+
 
         this.getPersonalBoard().resetDamage();
         this.setPosition(null);

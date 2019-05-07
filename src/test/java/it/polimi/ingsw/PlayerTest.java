@@ -1,6 +1,6 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.board.Room;
+import it.polimi.ingsw.board.map.Room;
 import it.polimi.ingsw.board.map.Square;
 import org.junit.jupiter.api.Test;
 
@@ -170,10 +170,10 @@ public class PlayerTest {
         int distance3 = dummy.distanceTo(squareMatrix[1][1]);
         int distance4 = dummy.distanceTo(squareMatrix[1][2]);
 
-        assertEquals(distance,-1);
-        assertEquals(distance2,1);
-        assertEquals(distance3,2);
-        assertEquals(distance4,3);
+        assertEquals(-1,distance);
+        assertEquals(1,distance2);
+        assertEquals(2,distance3);
+        assertEquals(3,distance4);
 
         dummy.setPosition(squareMatrix[1][2]);
 
@@ -182,10 +182,10 @@ public class PlayerTest {
         distance3 = dummy.distanceTo(squareMatrix[1][1]);
         distance4 = dummy.distanceTo(squareMatrix[2][2]);
 
-        assertEquals(distance,-1);
-        assertEquals(distance2,0);
-        assertEquals(distance3,1);
-        assertEquals(distance4,3);
+        assertEquals(-1,distance);
+        assertEquals(0,distance2);
+        assertEquals(1,distance3);
+        assertEquals(3,distance4);
 
     }
 
@@ -213,10 +213,10 @@ public class PlayerTest {
         int distance3 = dummy.distanceTo(squareMatrix[1][1]);
         int distance4 = dummy.distanceTo(squareMatrix[1][2]);
 
-        assertEquals(distance,5);
-        assertEquals(distance2,3);
-        assertEquals(distance3,2);
-        assertEquals(distance4,3);
+        assertEquals(5,distance);
+        assertEquals(3,distance2);
+        assertEquals(2,distance3);
+        assertEquals(3,distance4);
 
         dummy.setPosition(squareMatrix[1][1]);
 
@@ -225,10 +225,50 @@ public class PlayerTest {
         distance3 = dummy.distanceTo(squareMatrix[1][1]);
         distance4 = dummy.distanceTo(squareMatrix[1][3]);
 
-        assertEquals(distance,3);
-        assertEquals(distance2,3);
-        assertEquals(distance3,0);
-        assertEquals(distance4,4);
+        assertEquals(3,distance);
+        assertEquals(3,distance2);
+        assertEquals(0,distance3);
+        assertEquals(4,distance4);
+
+
+    }
+
+    @Test
+    public void deathTest(){
+
+        Player bertie = new Player ("Albert","char2");
+        Player bill = new Player("William","char1");
+        Player vic = new Player("Victoria","char3");
+        Player jeff = new Player("Jeff","char4");
+        Player stu = new Player("Stuart", "char5");
+
+        Token a = new Token(bertie);
+        Token b = new Token(bill);
+        Token v = new Token(vic);
+        Token j = new Token(jeff);
+        Token s = new Token(stu);
+
+        bertie.getPersonalBoard().addDamage(b);
+        bertie.getPersonalBoard().addDamage(b);
+        bertie.getPersonalBoard().addDamage(v);
+        bertie.getPersonalBoard().addDamage(v);
+        bertie.getPersonalBoard().addDamage(v);
+
+        bertie.getPersonalBoard().addDamage(v);
+        bertie.getPersonalBoard().addDamage(j);
+        bertie.getPersonalBoard().addDamage(j);
+        bertie.getPersonalBoard().addDamage(j);
+        bertie.getPersonalBoard().addDamage(j);
+
+        bertie.getPersonalBoard().addDamage(s);
+        bertie.getPersonalBoard().addDamage(s);
+
+        bertie.die();
+
+        assertEquals(8,vic.getPoints());
+        assertEquals(6,jeff.getPoints());
+        assertEquals(5,bill.getPoints());
+        assertEquals(2,stu.getPoints());
 
 
     }
