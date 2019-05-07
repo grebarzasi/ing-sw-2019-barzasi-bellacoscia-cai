@@ -102,7 +102,7 @@ public class Figure {
 
         } else
             return this.getPosition().getWest() != null && getPosition().getWest().getRoom().equals(p.getPosition().getRoom());
-
+        //intellij simplification return false if last condition is not verified
     }
 
     /**
@@ -126,7 +126,7 @@ public class Figure {
             return true;
 
         } else return getPosition().getSouth() != null && getPosition().getNorth().getRoom() == s.getRoom();
-
+        //intellij simplification return false if last condition is not verified
     }
 
     /**
@@ -150,7 +150,7 @@ public class Figure {
             return true;
 
         } else return getPosition().getSouth() != null && getPosition().getSouth().getRoom().equals(r);
-
+        //intellij simplification return false if last condition is not verified
 
     }
 
@@ -293,7 +293,7 @@ public class Figure {
                     murderers.remove(0);
                 }else{
                     ordered.add(murderers.get(0));
-                    murderers.remove(0);
+
                 }
             }
             ordered.add(murderers.get(0));
