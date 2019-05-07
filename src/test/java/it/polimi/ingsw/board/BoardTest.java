@@ -1,6 +1,5 @@
 package it.polimi.ingsw.board;
 
-import it.polimi.ingsw.board.map.Board;
 import it.polimi.ingsw.board.map.NonSpawnSquare;
 import it.polimi.ingsw.board.map.SpawnSquare;
 import org.junit.jupiter.api.Test;

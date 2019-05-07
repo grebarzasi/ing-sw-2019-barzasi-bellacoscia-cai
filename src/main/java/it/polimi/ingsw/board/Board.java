@@ -1,8 +1,11 @@
-package it.polimi.ingsw.board.map;
+package it.polimi.ingsw.board;
 
 import it.polimi.ingsw.Subject;
 import it.polimi.ingsw.board.Armory;
 import it.polimi.ingsw.board.KillshotTrack;
+import it.polimi.ingsw.board.map.Map;
+import it.polimi.ingsw.board.map.NonSpawnSquare;
+import it.polimi.ingsw.board.map.SpawnSquare;
 import it.polimi.ingsw.cards.AmmoLot;
 import it.polimi.ingsw.cards.Deck;
 import it.polimi.ingsw.cards.WeaponDeck;

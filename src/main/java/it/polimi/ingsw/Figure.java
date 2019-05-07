@@ -2,7 +2,7 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.actions.Action;
 import it.polimi.ingsw.board.*;
-import it.polimi.ingsw.board.map.Board;
+import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 
@@ -270,11 +270,11 @@ public class Figure {
             }
         }
 
+        murderers = new ArrayList<>(contributors.keySet());
+
         for(Token t: this.getPersonalBoard().getDamage()){
 
-
-            //don't know if it's ordered
-            murderers = new ArrayList<>(contributors.keySet());
+            murderers.add(1,t.getOwner());
 
             for(i=0;i<murderers.size();i++){
                 murderers.get(i).addPoints(t.getOwner().getPersonalBoard().getPointVec()[i]);
@@ -282,6 +282,7 @@ public class Figure {
         }
 
         this.getPersonalBoard().resetDamage();
+        this.setPosition(null);
 
     }
 
