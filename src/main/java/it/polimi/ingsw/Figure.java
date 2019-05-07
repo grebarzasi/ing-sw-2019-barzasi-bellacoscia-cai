@@ -249,12 +249,48 @@ public class Figure {
 
     }
 
+    public void die(){
+
+        HashMap<Figure,Integer> contributors = new HashMap<>();
+        ArrayList<Figure> murderers = new ArrayList<>();
+        int tmp;
+        int i;
+
+        //give point to the player who inflicted first blood
+        this.getPersonalBoard().getDamage().get(0).getOwner().addPoints(1);
+
+        //maps each player with
+        for (Token t : this.getPersonalBoard().getDamage()){
+
+            if(!contributors.containsValue(t.getOwner())) {
+                contributors.put(t.getOwner(),1);
+            }else{
+                tmp = contributors.get(t.getOwner());
+                contributors.replace(t.getOwner(),tmp+1);
+            }
+        }
+
+        for(Token t: this.getPersonalBoard().getDamage()){
+
+
+            //don't know if it's ordered
+            murderers = new ArrayList<>(contributors.keySet());
+
+            for(i=0;i<murderers.size();i++){
+                murderers.get(i).addPoints(t.getOwner().getPersonalBoard().getPointVec()[i]);
+            }
+        }
+
+        this.getPersonalBoard().resetDamage();
+
+    }
+
     public int getPoints() {
         return points;
     }
 
-    public void addPoints(int i){
-        this.points += i;
+    public void addPoints(int addedPoints){
+        this.points += addedPoints;
     }
 
     public void usePU(PowerUp pu) {

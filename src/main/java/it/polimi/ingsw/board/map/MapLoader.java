@@ -42,7 +42,9 @@ public class MapLoader {
         int column;
         int i = 0;
 
+        //initiates the list of parsers of squares
         SquareParser[] parserList = new SquareParser[12];
+        //initiates the list of parsers of the confinements of each square
         SquareConfinementParser[] confinementList = new SquareConfinementParser[12];
 
 
