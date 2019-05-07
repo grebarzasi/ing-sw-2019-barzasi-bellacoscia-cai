@@ -14,12 +14,16 @@ public class PlayerBoard {
 
     private final Figure owner;
 
+    //received damage tokens
     private ArrayList<Token> damage;
 
+    //array of points released at death
     private int[] pointVec;
 
+    //received mark tokens
     private ArrayList<Token> mark;
 
+    //available ammunition
     private Ammo ammoInventory;
 
     private static final int maxammo = 3;

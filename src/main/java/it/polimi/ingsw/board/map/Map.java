@@ -33,6 +33,7 @@ public class Map {
 
     public Map(String selection) {
 
+        //loads the map into a matrix
         this.squareMatrix = new Square[height][width];
         loadMap(selection, this.squareMatrix);
         this.roomList = new ArrayList<>();
@@ -41,9 +42,13 @@ public class Map {
         int row;
         int column;
 
+        //initiates the room list
+
+        //for every square
         for( row = 0 ; row < height ; row++ ){
             for(column = 0 ; column < width ; column ++ ){
 
+                //if its room its not in the list add it to the list
                 if(!this.roomList.contains(this.squareMatrix[row][column].getRoom())){
                     this.getRoomList().add(this.squareMatrix[row][column].getRoom());
                 }

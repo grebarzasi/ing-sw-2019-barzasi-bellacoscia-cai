@@ -2,7 +2,7 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.actions.Action;
 import it.polimi.ingsw.board.*;
-import it.polimi.ingsw.board.map.Board;
+import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 
@@ -249,12 +249,49 @@ public class Figure {
 
     }
 
+    public void die(){
+
+        HashMap<Figure,Integer> contributors = new HashMap<>();
+        ArrayList<Figure> murderers = new ArrayList<>();
+        int tmp;
+        int i;
+
+        //give point to the player who inflicted first blood
+        this.getPersonalBoard().getDamage().get(0).getOwner().addPoints(1);
+
+        //maps each player with
+        for (Token t : this.getPersonalBoard().getDamage()){
+
+            if(!contributors.containsValue(t.getOwner())) {
+                contributors.put(t.getOwner(),1);
+            }else{
+                tmp = contributors.get(t.getOwner());
+                contributors.replace(t.getOwner(),tmp+1);
+            }
+        }
+
+        murderers = new ArrayList<>(contributors.keySet());
+
+        for(Token t: this.getPersonalBoard().getDamage()){
+
+            murderers.add(1,t.getOwner());
+
+            for(i=0;i<murderers.size();i++){
+                murderers.get(i).addPoints(t.getOwner().getPersonalBoard().getPointVec()[i]);
+            }
+        }
+
+        this.getPersonalBoard().resetDamage();
+        this.setPosition(null);
+
+    }
+
     public int getPoints() {
         return points;
     }
 
-    public void addPoints(int i){
-        this.points += i;
+    public void addPoints(int addedPoints){
+        this.points += addedPoints;
     }
 
     public void usePU(PowerUp pu) {

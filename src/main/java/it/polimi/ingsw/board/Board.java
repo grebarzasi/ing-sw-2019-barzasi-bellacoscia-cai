@@ -1,8 +1,11 @@
-package it.polimi.ingsw.board.map;
+package it.polimi.ingsw.board;
 
 import it.polimi.ingsw.Subject;
 import it.polimi.ingsw.board.Armory;
 import it.polimi.ingsw.board.KillshotTrack;
+import it.polimi.ingsw.board.map.Map;
+import it.polimi.ingsw.board.map.NonSpawnSquare;
+import it.polimi.ingsw.board.map.SpawnSquare;
 import it.polimi.ingsw.cards.AmmoLot;
 import it.polimi.ingsw.cards.Deck;
 import it.polimi.ingsw.cards.WeaponDeck;
@@ -46,25 +49,30 @@ public class Board extends Subject {
 
     public Board(String selection){
 
-
+        //loads the map
         this.map = new Map(selection);
 
+        //loads the ammo deck and shuffles it
         this.ammoDeck = new Deck();
 
         loadDeck(this.ammoDeck);
         this.ammoDeck.shuffle();
 
+        //loads the weapon deck and shuffles it
         this.weaponDeck = WeaponDeckBuilder.buildDeck();
         this.weaponDeck.shuffle();
 
+        //loads the powerup deck and shuffles it
         DeckPowerUpBuilder tmpDeck = new DeckPowerUpBuilder();
         this.powerupDeck = tmpDeck.PowerUpBuilder();
-
+        this.powerupDeck.shuffle();
 
 
         int row;
         int column;
 
+
+        //loads the ammolots into the squares without a respawn spot
         for(row = 0 ; row < height; row ++){
             for(column = 0; column < width ; column++){
 
@@ -80,8 +88,7 @@ public class Board extends Subject {
             }
         }
 
-        this.weaponDeck = WeaponDeckBuilder.buildDeck();
-        this.weaponDeck.shuffle();
+        //loads the weapons into the armories
 
         for(row = 0 ; row < height; row ++){
             for(column = 0; column < width ; column++){
@@ -109,6 +116,11 @@ public class Board extends Subject {
 
     }
 
+    /**
+     * refills all the squares with ammo or weapons according to their type
+     * @author Yuting Cai
+     */
+
     public void refillSquares() {
 
         for (int row = 0; row < height; row++) {
@@ -116,32 +128,21 @@ public class Board extends Subject {
                 //for each cell of the square matrix if it is a spawn square
                 if (this.getMap().getSquareMatrix()[row][column].isSpawn()) {
 
-                    //if its armory is not full
-                    if (!((SpawnSquare) this.getMap().getSquareMatrix()[row][column]).getArmory().isFull()) {
+                    //while it is not full
+                    while (!((SpawnSquare) this.getMap().getSquareMatrix()[row][column]).getArmory().isFull()) {
 
-                        //while it is not full
-                        while (!((SpawnSquare) this.getMap().getSquareMatrix()[row][column]).getArmory().isFull()) {
-
-                            //if the weapon deck is not empty
-                            if (!this.getWeaponDeck().getUsable().isEmpty()) {
-
-                                //fetch from deck and add to the armory
-                                ((SpawnSquare) this.getMap().getSquareMatrix()[row][column]).getArmory().getWeaponList().add((Weapon) this.weaponDeck.fetch());
-                            }
+                        //if the weapon deck is not empty
+                        if (!this.getWeaponDeck().getUsable().isEmpty()) {
+                            //fetch from deck and add to the armory
+                            ((SpawnSquare) this.getMap().getSquareMatrix()[row][column]).getArmory().getWeaponList().add((Weapon) this.weaponDeck.fetch());
                         }
                     }
-
                 }
 
-                if (!this.getMap().getSquareMatrix()[row][column].isSpawn()) {
-                    if (((NonSpawnSquare) this.getMap().getSquareMatrix()[row][column]).getDrop() == null) {
-                        if(!this.ammoDeck.getUsable().isEmpty()) {
-                            ((NonSpawnSquare) this.getMap().getSquareMatrix()[row][column]).setDrop((AmmoLot) this.ammoDeck.fetch());
-                        }else{
-                            this.ammoDeck.reset();
-                            ((NonSpawnSquare) this.getMap().getSquareMatrix()[row][column]).setDrop((AmmoLot) this.ammoDeck.fetch());
-                        }
-                    }
+                //if the square is not a respawn spot and if its drop has been collected
+                if (!this.getMap().getSquareMatrix()[row][column].isSpawn() && this.getMap().getSquareMatrix()[row][column] == null) {
+                    //refill the drop
+                    ((NonSpawnSquare) this.getMap().getSquareMatrix()[row][column]).setDrop((AmmoLot)this.ammoDeck.fetch());
                 }
             }
         }

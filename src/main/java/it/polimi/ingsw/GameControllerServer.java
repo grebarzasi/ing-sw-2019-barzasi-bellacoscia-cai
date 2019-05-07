@@ -1,6 +1,6 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.board.map.Board;
+import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.cards.weapon.Effect;
@@ -30,6 +30,8 @@ public class GameControllerServer implements Controller {
     private ArrayList<Player> playerList;
 
     private Player currentPlayer;
+
+    private Terminator bot;
 
     private Time timeTurn;
 
