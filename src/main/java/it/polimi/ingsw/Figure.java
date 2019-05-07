@@ -161,10 +161,11 @@ public class Figure {
      */
 
     public Set<Figure> allCanSee(){
-        Set<Figure> visible = new HashSet<>(allFigures());
-        for(Figure p : visible){
-            if(!this.canSee(p))
-                visible.remove(p);
+        Set<Figure> visible = new HashSet<>();
+
+        for(Figure p : this.allFigures()){
+            if(this.canSee(p))
+                visible.add(p);
         }
         return visible;
     }
@@ -173,7 +174,10 @@ public class Figure {
      * @author Gregorio Barzasi
      */
     public Set<Figure> allFigures(){
-        return new HashSet<>(controllerServer.getPlayerList());
+        Set<Figure> f = new HashSet<>(controllerServer.getPlayerList());
+        if(controllerServer.getBot()!=null)
+         f.add(controllerServer.getBot());
+        return f;
     }
 
     /**

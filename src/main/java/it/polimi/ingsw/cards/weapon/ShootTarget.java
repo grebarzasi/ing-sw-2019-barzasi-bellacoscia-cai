@@ -40,7 +40,6 @@ public class ShootTarget implements SubEffect {
                 w.setLastHit(target);
             }
         }
-
         return p;
     }
 

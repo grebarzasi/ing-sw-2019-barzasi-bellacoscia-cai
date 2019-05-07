@@ -12,10 +12,6 @@ public class AmmoLot extends Card {
     public void useCare() {
     }
 
-    public void fetch(){
-
-    }
-
     public AmmoLot(boolean powerup, Ammo content) {
         this.powerup = powerup;
         this.content = content;

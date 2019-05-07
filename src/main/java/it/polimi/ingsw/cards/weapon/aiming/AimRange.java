@@ -4,6 +4,7 @@ import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.cards.weapon.TargetAcquisition;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -36,11 +37,12 @@ public class AimRange implements AimingFilter {
     }
 
     public Set<Figure> filter(Weapon w, Set<Figure> p) {
+        Set<Figure> temp = new HashSet<>(p);
         for(Figure i : p){
            int dist = w.getOwner().distanceTo(i.getPosition());
             if (!((minDistance<=dist)&&(maxDistance>dist)))
-                p.remove(i);
+                temp.remove(i);
         }
-        return p;
+        return temp;
     }
 }

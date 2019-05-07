@@ -18,7 +18,6 @@ public class Weapon extends Card {
 
     private String name;
     private Ammo chamber;
-    private Figure owner=null;
     private boolean loaded=false;
 
     private Effect basicEffect;
@@ -37,6 +36,8 @@ public class Weapon extends Card {
      * used in some effect in order to act as a chain.
      */
     private Figure lastHit;
+
+    public Weapon(){};
 
 
     public Weapon(String name,Ammo chamber) {
@@ -59,12 +60,8 @@ public class Weapon extends Card {
     }
 
 
-    public void fetch() {
-        //SET OWNER ON FETCH!
-    }
-
     public void use(){
-        owner.getControllerServer().askUseEffect(getUsableEff());
+        this.getOwner().getControllerServer().askUseEffect(getUsableEff());
     }
 
     //setters&getters
@@ -137,7 +134,7 @@ public class Weapon extends Card {
     }
 
     public Figure getOwner() {
-        return owner;
+        return super.getOwner();
     }
 
 

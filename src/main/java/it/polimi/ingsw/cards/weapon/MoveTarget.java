@@ -1,6 +1,9 @@
 package it.polimi.ingsw.cards.weapon;
 
 import it.polimi.ingsw.Figure;
+import it.polimi.ingsw.actions.Action;
+import it.polimi.ingsw.actions.Move;
+import it.polimi.ingsw.board.map.Square;
 
 import java.util.Set;
 
@@ -27,7 +30,22 @@ public class MoveTarget implements SubEffect {
     }
 
     public Set<Figure> applyEffect(Weapon w, Set<Figure> p){
-            return p;
+        Square s = null;
+        switch(finalPos){
+            case "last":
+                s = w.getLastHit().getPosition();
+                break;
+            case "me":
+                s = w.getOwner().getPosition();
+                break;
+        }
+        if(s==null)
+            s = w.getOwner().getControllerServer().askDestination();
+
+        for (Figure target : p) {
+            target.setPosition(s);
+        }
+        return p;
         //implement
     }
 
