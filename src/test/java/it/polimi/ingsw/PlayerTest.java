@@ -236,11 +236,11 @@ public class PlayerTest {
     @Test
     public void deathTest(){
 
-        Player bertie = new Player ("Albert","char2");
-        Player bill = new Player("William","char1");
-        Player vic = new Player("Victoria","char3");
-        Player jeff = new Player("Jeff","char4");
-        Player stu = new Player("Stuart", "char5");
+        Player bertie = new Player ("Albert","bertie");
+        Player bill = new Player("William","bill");
+        Player vic = new Player("Victoria","vic");
+        Player jeff = new Player("Jeff","jeff");
+        Player stu = new Player("Stuart", "stu");
 
         Token a = new Token(bertie);
         Token b = new Token(bill);
@@ -263,15 +263,16 @@ public class PlayerTest {
         bertie.getPersonalBoard().addDamage(s);
         bertie.getPersonalBoard().addDamage(s);
 
-       /* bertie.die();
+        bertie.die();
 
         assertEquals(8,vic.getPoints());
         assertEquals(6,jeff.getPoints());
         assertEquals(5,bill.getPoints());
         assertEquals(2,stu.getPoints());
-*/
 
     }
+
+
 
 }
 
