@@ -15,14 +15,19 @@ import java.util.Set;
 public class Effect {
     private Ammo cost;
     private ArrayList<SubEffect> effectList;
+
+
+
     private Set<Figure> targetHitSet;
     private boolean used;
     private Weapon myWeapon;
 
-    public Effect(Ammo cost,ArrayList<SubEffect> EffectList){
+    public Effect(){};
+
+    public Effect(Ammo cost,ArrayList<SubEffect> effectList){
         this.cost=cost;
-        this.effectList=EffectList;
-        this.targetHitSet= new HashSet<Figure>();
+        this.effectList=effectList;
+        this.targetHitSet= new HashSet<>();
         this.used= false;
     }
 
@@ -36,6 +41,10 @@ public class Effect {
 
     public ArrayList<SubEffect> getEffectList() {
         return effectList;
+    }
+
+    public void setTargetHitSet(Set<Figure> targetHitSet) {
+        this.targetHitSet = targetHitSet;
     }
 
     public Set<Figure> getTargetHitSet() {

@@ -15,6 +15,7 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 class AimRangeTest {
     private static Map m = new Map("large");
     private static ArrayList<Player> playerArrayList = new ArrayList<>();
@@ -39,6 +40,10 @@ class AimRangeTest {
         //player 4 not visible same line
         playerArrayList.add(new Player("p 4", "prova",squareMatrix[0][3]));
 
+        //player not visible other room
+        playerArrayList.add(new Player("p 5", "prova",squareMatrix[2][3]));
+
+
         for(Player p: playerArrayList){
             p.setControllerServer(controller);
         }
@@ -59,6 +64,7 @@ class AimRangeTest {
         assertFalse(figureSet.contains(playerArrayList.get(2)));
         assertFalse(figureSet.contains(playerArrayList.get(3)));
         assertFalse(figureSet.contains(playerArrayList.get(4)));
+        assertFalse(figureSet.contains(playerArrayList.get(5)));
     }
 
 
@@ -75,11 +81,13 @@ class AimRangeTest {
         assertTrue(figureSet.contains(playerArrayList.get(2)));
         assertTrue(figureSet.contains(playerArrayList.get(3)));
         assertFalse(figureSet.contains(playerArrayList.get(4)));
+        assertFalse(figureSet.contains(playerArrayList.get(5)));
+
     }
 
     @Test
     void rangeMedium() {
-        AimRange aimingFilter= new AimRange(1,3);
+        AimRange aimingFilter= new AimRange(1,4);
 
         Set<Figure> figureSet;
 
@@ -89,6 +97,7 @@ class AimRangeTest {
         assertFalse(figureSet.contains(playerArrayList.get(1)));
         assertTrue(figureSet.contains(playerArrayList.get(2)));
         assertTrue(figureSet.contains(playerArrayList.get(3)));
-        assertFalse(figureSet.contains(playerArrayList.get(4)));
+        assertTrue(figureSet.contains(playerArrayList.get(4)));
+        assertFalse(figureSet.contains(playerArrayList.get(5)));
     }
 }

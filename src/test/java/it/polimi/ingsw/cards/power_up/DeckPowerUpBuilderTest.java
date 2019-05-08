@@ -24,4 +24,5 @@ class DeckPowerUpBuilderTest {
             assertNotNull(p.getName());
         }
     }
+
 }

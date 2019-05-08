@@ -53,10 +53,11 @@ public class AimComparator {
                     pSet.addAll(target.getPosition().playersInSquare(target.allFigures()));
                     break;
                 case "oldSquare":
-                   // Implement here
+                    pSet.addAll(target.getOldPosition().playersInSquare(target.allFigures()));
                     break;
                 case "myRoom":
-                    pSet.addAll(w.getOwner().getPosition().getRoom().playersInRoom(target.allFigures()));                    break;
+                    pSet.addAll(w.getOwner().getPosition().getRoom().playersInRoom(target.allFigures()));
+                    break;
                 case "mySquare":
                     pSet.addAll(w.getOwner().getPosition().playersInSquare(target.allFigures()));
                     break;

@@ -33,6 +33,7 @@ public class Figure {
 
     //needed in some weapon effect
 
+
     private Square oldPosition;
 
     //The Playes's Playerboard
@@ -378,7 +379,15 @@ public class Figure {
     }
 
 
+    /*just a bunch of setters and getters*/
 
+    public Square getOldPosition() {
+        return oldPosition;
+    }
+
+    public void setOldPosition(Square oldPosition) {
+        this.oldPosition = oldPosition;
+    }
 
     public String getCharacter() {
         return character;
