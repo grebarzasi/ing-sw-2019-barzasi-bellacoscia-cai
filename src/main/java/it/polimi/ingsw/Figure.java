@@ -276,15 +276,20 @@ public class Figure {
             }
         }
 
+        //loads all players who have contributed to the kill into an Arraylist
         for(Figure f: contributors.keySet()){
             murderers.add(f);
         }
 
         System.out.println("number of murderers: " + murderers.size());
 
+        //initialising a new arraylist of ordered contributors
         ArrayList<Figure> ordered = new ArrayList<>();
         boolean added = false;
         //inserts in order into a new list
+
+
+        //sorted insertion into ordered
         while(!murderers.isEmpty()){
 
             System.out.print("unchcked murderers: " + murderers.size());
@@ -305,6 +310,7 @@ public class Figure {
                     murderers.remove(0);
                     System.out.print("added in the end\n");
                     added = true;
+                    break;
                 }
 
             }
@@ -324,6 +330,7 @@ public class Figure {
 
         int k;
 
+        //in case of same damage dealt by multiple players the one who hit firs get sorted in front
         for(i=0;i<ordered.size();i++) {
             for (k = i; k < ordered.size(); k++) {
                 if (contributors.get(ordered.get(k)).equals(contributors.get(ordered.get(i))) && damagePriority(ordered.get(k)) < damagePriority(ordered.get(i))) {

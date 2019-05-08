@@ -291,14 +291,14 @@ public class PlayerTest {
         Token e = new Token(ed);
 
         albert.getPersonalBoard().addDamage(b);
-        albert.getPersonalBoard().addDamage(b);
+        albert.getPersonalBoard().addDamage(c);
         albert.getPersonalBoard().addDamage(c);
         albert.getPersonalBoard().addDamage(c);
         albert.getPersonalBoard().addDamage(c);
 
         albert.getPersonalBoard().addDamage(c);
         albert.getPersonalBoard().addDamage(e);
-        albert.getPersonalBoard().addDamage(e);
+        albert.getPersonalBoard().addDamage(c);
         albert.getPersonalBoard().addDamage(e);
         albert.getPersonalBoard().addDamage(e);
 
@@ -312,8 +312,96 @@ public class PlayerTest {
 
         assertEquals(8,charlie.getPoints());
         assertEquals(6,ed.getPoints());
-        assertEquals(5,bill.getPoints());
-        assertEquals(2,don.getPoints());
+        assertEquals(4,don.getPoints());
+        assertEquals(3,bill.getPoints());
+
+    }
+
+    @Test
+    public void deathTest3(){
+
+        System.out.println("Starting Test 3\n");
+
+        Player albert = new Player ("Albert","albert");
+        Player bill = new Player("Bill","bill");
+        Player charlie = new Player("Charlie","charlie");
+        Player don = new Player("Don","don");
+        Player ed = new Player("Ed", "ed");
+
+        Token a = new Token(albert);
+        Token b = new Token(bill);
+        Token c = new Token(charlie);
+        Token d = new Token(don);
+        Token e = new Token(ed);
+
+        albert.getPersonalBoard().addDamage(c);
+        albert.getPersonalBoard().addDamage(c);
+        albert.getPersonalBoard().addDamage(c);
+        albert.getPersonalBoard().addDamage(c);
+
+        albert.getPersonalBoard().addDamage(c);
+        albert.getPersonalBoard().addDamage(c);
+        albert.getPersonalBoard().addDamage(d);
+        albert.getPersonalBoard().addDamage(e);
+
+        albert.getPersonalBoard().addDamage(c);
+        albert.getPersonalBoard().addDamage(c);
+        albert.getPersonalBoard().addDamage(c);
+        albert.getPersonalBoard().addDamage(c);
+
+        albert.die();
+
+        assertEquals(0,albert.getPersonalBoard().getDamage().size());
+        assertEquals(0,albert.getPoints());
+
+        assertEquals(9,charlie.getPoints());
+        assertEquals(6,don.getPoints());
+        assertEquals(4,ed.getPoints());
+        assertEquals(0,bill.getPoints());
+
+    }
+
+    @Test
+    public void deathTest4(){
+
+        System.out.println("Starting Test 3\n");
+
+        Player albert = new Player ("Albert","albert");
+        Player bill = new Player("Bill","bill");
+        Player charlie = new Player("Charlie","charlie");
+        Player don = new Player("Don","don");
+        Player ed = new Player("Ed", "ed");
+
+        Token a = new Token(albert);
+        Token b = new Token(bill);
+        Token c = new Token(charlie);
+        Token d = new Token(don);
+        Token e = new Token(ed);
+
+        albert.getPersonalBoard().addDamage(b);
+        albert.getPersonalBoard().addDamage(c);
+        albert.getPersonalBoard().addDamage(d);
+        albert.getPersonalBoard().addDamage(b);
+
+        albert.getPersonalBoard().addDamage(c);
+        albert.getPersonalBoard().addDamage(d);
+        albert.getPersonalBoard().addDamage(b);
+        albert.getPersonalBoard().addDamage(c);
+
+        albert.getPersonalBoard().addDamage(d);
+        albert.getPersonalBoard().addDamage(e);
+        albert.getPersonalBoard().addDamage(e);
+        albert.getPersonalBoard().addDamage(e);
+
+        albert.die();
+
+        assertEquals(0,albert.getPersonalBoard().getDamage().size());
+        assertEquals(0,albert.getPoints());
+
+        assertEquals(9,bill.getPoints());
+        assertEquals(6,charlie.getPoints());
+        assertEquals(4,don.getPoints());
+        assertEquals(2,ed.getPoints());
 
     }
 
