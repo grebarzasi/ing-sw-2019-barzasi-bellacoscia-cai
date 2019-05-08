@@ -283,27 +283,32 @@ public class Figure {
         System.out.println("number of murderers: " + murderers.size());
 
         ArrayList<Figure> ordered = new ArrayList<>();
-
-        ordered.add(murderers.get(0));
-        murderers.remove(0);
-        System.out.println(ordered.size());
-
+        boolean added = false;
+        //inserts in order into a new list
         while(!murderers.isEmpty()){
 
             System.out.print("unchcked murderers: " + murderers.size());
 
+            added = false;
+
             for(i=0;i<ordered.size();i++) {
 
-                if (!murderers.isEmpty() && contributors.get(ordered.get(i)) < contributors.get(murderers.get(0))) {
-                    continue;
-                }
-                if (murderers.isEmpty() && contributors.get(ordered.get(i)) == contributors.get(murderers.get(0))) {
+                if (contributors.get(ordered.get(i)) == contributors.get(murderers.get(0))) {
                     ordered.add(i, murderers.get(0));
                     murderers.remove(0);
                     System.out.print("added in the middle\n");
+                    added = true;
+                    break;
                 }
+                if (!added && contributors.get(ordered.get(i)) > contributors.get(murderers.get(0))) {
+                    ordered.add(i, murderers.get(0));
+                    murderers.remove(0);
+                    System.out.print("added in the end\n");
+                    added = true;
+                }
+
             }
-            if (!murderers.isEmpty()) {
+            if(!added) {
                 ordered.add(murderers.get(0));
                 murderers.remove(0);
                 System.out.print("added in the end\n");
@@ -311,11 +316,17 @@ public class Figure {
 
         }
 
+        System.out.print(ordered.get(0).getCharacter()+ "\n");
+
+        Collections.reverse(ordered);
+
+        System.out.print(ordered.get(0).getCharacter()+ "\n");
+
         int k;
 
         for(i=0;i<ordered.size();i++) {
-            for (k = 0; k < ordered.size(); k++) {
-                if (contributors.get(ordered.get(k)) == contributors.get(ordered.get(i)) && damagePriority(ordered.get(k)) > damagePriority(ordered.get(i))) {
+            for (k = i; k < ordered.size(); k++) {
+                if (contributors.get(ordered.get(k)).equals(contributors.get(ordered.get(i))) && damagePriority(ordered.get(k)) < damagePriority(ordered.get(i))) {
 
                     Figure temp = ordered.get(i);
                     ordered.set(i,ordered.get(k));
@@ -325,13 +336,18 @@ public class Figure {
             }
         }
 
+
+
+        ordered.set(1,ordered.get(1));
+
         System.out.print("out of while");
 
         System.out.println("Ordered List Size: " + ordered.size());
 
-        System.out.print("pointvec 0: " + this.getPersonalBoard().getPointVec()[0] + "\n");
+        System.out.print(ordered.get(0).getCharacter()+ "\n");
 
-        for(i=0;i<ordered.size();i++) {
+        for( i=0 ; i<ordered.size() ; i++) {
+
             System.out.print("Added points to "+ i +": " + this.getPersonalBoard().getPointVec()[i] + "\n");
 
             ordered.get(i).addPoints(this.getPersonalBoard().getPointVec()[i]);
@@ -340,11 +356,11 @@ public class Figure {
 
         }
 
+        ordered.set(1,ordered.get(1));
 
 
 
         this.getPersonalBoard().resetDamage();
-        this.setPosition(null);
 
     }
 
@@ -352,7 +368,7 @@ public class Figure {
 
         int i;
         for(i=0;i<this.getPersonalBoard().getDamage().size();i++){
-            if(this.getPersonalBoard().getDamage().get(i).getOwner() == f1){
+            if(this.getPersonalBoard().getDamage().get(i).getOwner().equals(f1)){
                 return i;
             }
         }

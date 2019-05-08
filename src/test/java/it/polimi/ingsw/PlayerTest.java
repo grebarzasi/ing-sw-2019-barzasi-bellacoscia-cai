@@ -233,6 +233,7 @@ public class PlayerTest {
 
     }
 
+
     @Test
     public void deathTest(){
 
@@ -254,8 +255,8 @@ public class PlayerTest {
         bertie.getPersonalBoard().addDamage(v);
         bertie.getPersonalBoard().addDamage(v);
 
-        bertie.getPersonalBoard().addDamage(v);
         bertie.getPersonalBoard().addDamage(j);
+        bertie.getPersonalBoard().addDamage(v);
         bertie.getPersonalBoard().addDamage(j);
         bertie.getPersonalBoard().addDamage(j);
         bertie.getPersonalBoard().addDamage(j);
@@ -271,6 +272,52 @@ public class PlayerTest {
         assertEquals(2,stu.getPoints());
 
     }
+
+    @Test
+    public void deathTest2(){
+
+        System.out.println("Starting Test 2\n");
+
+        Player albert = new Player ("Albert","albert");
+        Player bill = new Player("Bill","bill");
+        Player charlie = new Player("Charlie","charlie");
+        Player don = new Player("Don","don");
+        Player ed = new Player("Ed", "ed");
+
+        Token a = new Token(albert);
+        Token b = new Token(bill);
+        Token c = new Token(charlie);
+        Token d = new Token(don);
+        Token e = new Token(ed);
+
+        albert.getPersonalBoard().addDamage(b);
+        albert.getPersonalBoard().addDamage(b);
+        albert.getPersonalBoard().addDamage(c);
+        albert.getPersonalBoard().addDamage(c);
+        albert.getPersonalBoard().addDamage(c);
+
+        albert.getPersonalBoard().addDamage(c);
+        albert.getPersonalBoard().addDamage(e);
+        albert.getPersonalBoard().addDamage(e);
+        albert.getPersonalBoard().addDamage(e);
+        albert.getPersonalBoard().addDamage(e);
+
+        albert.getPersonalBoard().addDamage(d);
+        albert.getPersonalBoard().addDamage(d);
+
+        albert.die();
+
+        assertEquals(0,albert.getPersonalBoard().getDamage().size());
+        assertEquals(0,albert.getPoints());
+
+        assertEquals(8,charlie.getPoints());
+        assertEquals(6,ed.getPoints());
+        assertEquals(5,bill.getPoints());
+        assertEquals(2,don.getPoints());
+
+    }
+
+
 
 
 
