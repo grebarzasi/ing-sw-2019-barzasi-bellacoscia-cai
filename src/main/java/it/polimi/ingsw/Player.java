@@ -31,7 +31,11 @@ public class Player extends Figure {
 
     public void pickAmmo(){
 
-        if(this.getPosition().isSpawn() || !this.getPosition().isSpawn() && ((NonSpawnSquare)this.getPosition()).getDrop() != null){
+        if(((NonSpawnSquare)this.getPosition()).getDrop().hasPowerup()){
+            this.powerupList.add((PowerUp)this.getControllerServer().getCurrentBoard().getPowerupDeck().fetch());
+        }
+
+        if(this.getPosition().isSpawn() || (!this.getPosition().isSpawn() && ((NonSpawnSquare)this.getPosition()).getDrop() != null)){
             System.out.println("No ammo to pick \n");
         }
         if(!this.getPosition().isSpawn()){
@@ -39,6 +43,8 @@ public class Player extends Figure {
             this.getPersonalBoard().addAmmo(tmp);
             ((NonSpawnSquare)this.getPosition()).setDrop(null);
         }
+
+
 
     }
 

@@ -2,6 +2,7 @@ package it.polimi.ingsw.board;
 
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.Token;
+import it.polimi.ingsw.cards.Ammo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -317,6 +318,16 @@ class PlayerBoardTest {
 
     @Test
     void addAmmo() {
+
+        Ammo a = new Ammo(2,0,0);
+        Player pip = new Player("pip","watchman");
+
+        pip.getPersonalBoard().addAmmo(a);
+
+        assertEquals(2,pip.getPersonalBoard().getAmmoInventory().getRed());
+        assertEquals(0,pip.getPersonalBoard().getAmmoInventory().getBlue());
+        assertEquals(0,pip.getPersonalBoard().getAmmoInventory().getYellow());
+
     }
 
     @Test
