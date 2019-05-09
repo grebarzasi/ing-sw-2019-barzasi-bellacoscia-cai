@@ -15,17 +15,16 @@ import static it.polimi.ingsw.board.map.MapLoader.loadMap;
 public class PlayerTest {
 
 
-
     @Test
-    public void constructorTest(){
+    public void constructorTest() {
 
-        Player max = new Player("Max","Luna");
+        Player max = new Player("Max", "Luna");
 
         assertEquals("Luna", max.getPersonalBoard().getOwner().getCharacter());
-        assertEquals("Max", ((Player)max.getPersonalBoard().getOwner()).getUsername());
+        assertEquals("Max", ((Player) max.getPersonalBoard().getOwner()).getUsername());
 
-        assertEquals(0,max.getPersonalBoard().getDamage().size());
-        assertEquals(0,max.getPoints());
+        assertEquals(0, max.getPersonalBoard().getDamage().size());
+        assertEquals(0, max.getPoints());
 
     }
 
@@ -33,11 +32,10 @@ public class PlayerTest {
     public void ammoPickingTest() {
 
 
-
         int i;
 
         //test is ran for 100 times since there is random factor;
-        for(i=0;i<100;i++) {
+        for (i = 0; i < 100; i++) {
 
 
             GameControllerServer empire = new GameControllerServer(null, null, null, new Board("small"));
@@ -65,17 +63,7 @@ public class PlayerTest {
             assertEquals(0, luke.getPersonalBoard().getAmmoInventory().getBlue());
             assertEquals(0, luke.getPersonalBoard().getAmmoInventory().getYellow());
 
-            System.out.println(((NonSpawnSquare) aldera).getDrop().hasPowerup() + "\n");
-            System.out.println(((NonSpawnSquare) aldera).getDrop().getContent().getRed());
-            System.out.println(((NonSpawnSquare) aldera).getDrop().getContent().getBlue());
-            System.out.println(((NonSpawnSquare) aldera).getDrop().getContent().getYellow());
-
-
             luke.pickAmmo();
-
-            System.out.println(luke.getPersonalBoard().getAmmoInventory().getRed());
-            System.out.println(luke.getPersonalBoard().getAmmoInventory().getBlue());
-            System.out.println(luke.getPersonalBoard().getAmmoInventory().getYellow());
 
             if (tmp.hasPowerup()) {
                 assertEquals(1, luke.getPowerupList().size());
@@ -84,15 +72,6 @@ public class PlayerTest {
                 assertTrue(luke.getPowerupList().isEmpty());
                 assertEquals(3, luke.getPersonalBoard().getAmmoInventory().getRed() + luke.getPersonalBoard().getAmmoInventory().getBlue() + luke.getPersonalBoard().getAmmoInventory().getYellow());
             }
-
         }
-
-
-
     }
-
-
-
-
 }
-
