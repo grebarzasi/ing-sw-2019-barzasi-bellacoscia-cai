@@ -105,22 +105,6 @@ class AimVisibleTest {
 
     }
 
-  /*  @Test
-    public void aimRange(){
-        AimRange aimingFilt= new AimRange(0,1);
-        Set<Figure> figureSet;
-
-        figureSet = aimingFilt.filter(w,w.getOwner().allFigures());
-
-        assertTrue(figureSet.contains(playerArrayList.get(4)));
-        assertFalse(figureSet.contains(playerArrayList.get(3)));
-        assertFalse(figureSet.contains(playerArrayList.get(2)));
-        assertFalse(figureSet.contains(playerArrayList.get(0)));
-        assertFalse(figureSet.contains(playerArrayList.get(1)));
-
-    }*/
-
-
 
 
 }
