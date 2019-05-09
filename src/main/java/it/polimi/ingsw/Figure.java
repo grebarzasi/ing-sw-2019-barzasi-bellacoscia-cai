@@ -10,7 +10,7 @@ import it.polimi.ingsw.cards.power_up.PowerUp;
 import java.util.*;
 
 /**
- * A player in the game
+ * A figure of any kind in the game
  *
  * @author Yuting Cai
  * Excluding methods unless otherwise stated
@@ -184,15 +184,18 @@ public class Figure {
      * Make damage and set marks
      * @author Gregorio Barzasi
      */
+
+    //if you start from 0 you use < mate.  :)
+
     public void inflictDamage(int num, Figure target){
         Token t = new Token(this);
-        for(int i=0; i<=num; i++) {
+        for(int i=0; i<num; i++) {
             target.getPersonalBoard().addDamage(t);
         }
     }
     public void inflictMark(int num, Figure target){
         Token t = new Token(this);
-        for(int i=0; i<=num; i++) {
+        for(int i=0; i<num; i++) {
             target.getPersonalBoard().addMark(t);
         }
     }
@@ -253,6 +256,14 @@ public class Figure {
         return -1;
 
     }
+
+    /**
+     * RIP
+     * Manages player death, should be invoked and the end of the turn in which the player is killed
+     * distributes points to the players who contributed to this player's death
+     * redimentions this players's point vector
+     * resets this player's damage array
+     */
 
     public void die(){
 
@@ -366,8 +377,19 @@ public class Figure {
         ordered.set(1,ordered.get(1));
 
 
-
         this.getPersonalBoard().resetDamage();
+
+        for(i=0 ; i < this.personalBoard.getPointVec().length - 1 ; i++){
+
+            this.personalBoard.getPointVec()[i]=this.personalBoard.getPointVec()[i+1];
+
+        }
+
+
+
+
+
+
 
     }
 

@@ -4,11 +4,18 @@ import it.polimi.ingsw.actions.Move;
 import it.polimi.ingsw.actions.Shoot;
 import it.polimi.ingsw.board.map.Square;
 
+/**
+ * Terminator bot
+ */
+
 public class Terminator extends Figure{
 
+    //reference to the player controlling the terminator
     private Player owner;
 
+    //the movement it can perform in the rurn
     private Move move;
+    //the shot it can perform is a target is visible
     private Shoot shot;
 
     public Terminator(String character, Player owner) {
@@ -20,10 +27,18 @@ public class Terminator extends Figure{
 
     }
 
+    /**
+     * The only kind of damage infliction the terminator can perform,
+     * shoots a player if visible, also adds a mark if adrenaline status is active
+     */
+
     public void shoot(Player p){
 
         if(canSee(p)){
-            p.getPersonalBoard().addDamage(new Token(this));
+            this.inflictDamage(1,p);
+            if(this.getPersonalBoard().getDamage().size() >= 6){
+                this.inflictMark(1,p);
+            }
         }
 
     }

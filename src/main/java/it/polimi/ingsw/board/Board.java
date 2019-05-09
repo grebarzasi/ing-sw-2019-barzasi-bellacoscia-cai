@@ -23,6 +23,7 @@ import static it.polimi.ingsw.cards.AmmoDeckLoader.loadDeck;
  * has map, the killshot track and the decks.
  * @author Yuting Cai
  */
+
 public class Board extends Subject {
 
 

@@ -294,14 +294,14 @@ public class PlayerTest {
         albert.getPersonalBoard().addDamage(c);
         albert.getPersonalBoard().addDamage(c);
         albert.getPersonalBoard().addDamage(c);
-        albert.getPersonalBoard().addDamage(c);
 
         albert.getPersonalBoard().addDamage(c);
-        albert.getPersonalBoard().addDamage(e);
         albert.getPersonalBoard().addDamage(c);
         albert.getPersonalBoard().addDamage(e);
-        albert.getPersonalBoard().addDamage(e);
+        albert.getPersonalBoard().addDamage(c);
 
+        albert.getPersonalBoard().addDamage(e);
+        albert.getPersonalBoard().addDamage(e);
         albert.getPersonalBoard().addDamage(d);
         albert.getPersonalBoard().addDamage(d);
 

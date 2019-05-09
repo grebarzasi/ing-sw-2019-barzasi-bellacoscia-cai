@@ -6,6 +6,9 @@ import java.util.*;
 
 public class
 
+/**
+ * An armory containing max 3 weapons the player can choose from
+ */
 
 Armory {
 

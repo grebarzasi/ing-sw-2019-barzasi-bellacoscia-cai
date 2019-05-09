@@ -47,14 +47,12 @@ public class PlayerBoard {
         }else if(this.damage.size() < maxhealth){
 
             this.damage.add(t);
-            //kill(this.owner);
         }
 
         else if (this.damage.size() == maxhealth) {
 
             this.damage.add(t);
             t.getOwner().getPersonalBoard().addMark(new Token(this.owner));
-            //returns an overkill mark token
         }
 
 
