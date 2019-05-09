@@ -29,6 +29,12 @@ public class Player extends Figure {
 
     private ArrayList<PowerUp> powerupList;
 
+    /**
+     * Picks up AmmoLot on the square
+     *
+     * MISSING MAXIMUM POWERUP MANAGEMENT
+     */
+
     public void pickAmmo(){
 
 
@@ -44,13 +50,7 @@ public class Player extends Figure {
                 this.getPersonalBoard().addAmmo(tmp);
                 ((NonSpawnSquare)this.getPosition()).setDrop(null);
             }
-
         }
-
-
-
-
-
     }
 
     public void pickWeapon(Weapon selection){

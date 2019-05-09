@@ -28,6 +28,15 @@ public class PlayerTest {
 
     }
 
+    /**
+     * Asserts that Ammo and powerup picking
+     * is done correctly
+     *
+     *
+     * STILL MISSING CASE FOR MAXIMUM POWERUP AS FOR SERVER IS NOT
+     * READY FOR ASKING CLIENT TO DISCARD CHOSEN CARD
+     */
+
     @Test
     public void ammoPickingTest() {
 
@@ -72,6 +81,41 @@ public class PlayerTest {
                 assertTrue(luke.getPowerupList().isEmpty());
                 assertEquals(3, luke.getPersonalBoard().getAmmoInventory().getRed() + luke.getPersonalBoard().getAmmoInventory().getBlue() + luke.getPersonalBoard().getAmmoInventory().getYellow());
             }
+
         }
+    }
+
+
+    /**
+     * Asserts that even after picking up everything
+     * on Alderaan luke is still bound to having
+     * a maximum of 3 ammo per color
+     */
+
+    @Test
+    public void consecutivePicking(){
+
+        GameControllerServer empire = new GameControllerServer(null, null, null, new Board("large"));
+        Board alderaan = empire.getCurrentBoard();
+        Player luke = new Player("Luke", "Jedi");
+        luke.setControllerServer(empire);
+
+        final int height = 3;
+        final int width = 4;
+        int row;
+        int column;
+
+        for(row = 0 ; row < height ; row++){
+            for(column = 0; column < width; column ++){
+                luke.setPosition(alderaan.getMap().getSquareMatrix()[row][column]);
+                luke.pickAmmo();
+            }
+        }
+
+        assertEquals(3, luke.getPersonalBoard().getAmmoInventory().getRed());
+        assertEquals(3, luke.getPersonalBoard().getAmmoInventory().getBlue());
+        assertEquals(3, luke.getPersonalBoard().getAmmoInventory().getYellow());
+
+
     }
 }
