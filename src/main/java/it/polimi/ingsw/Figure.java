@@ -8,7 +8,6 @@ import it.polimi.ingsw.cards.power_up.PowerUp;
 
 import java.util.*;
 
-import static jdk.vm.ci.sparc.SPARC.f1;
 
 /**
  * A figure of any kind in the game
