@@ -35,8 +35,17 @@ public class Player extends Figure {
      * MISSING MAXIMUM POWERUP MANAGEMENT
      */
 
-    public void pickAmmo(){
 
+    public void pick(){
+
+        if(!this.getPosition().isSpawn()){
+            this.pickAmmo();
+        }else if(this.getPosition().isSpawn()){
+            //pickWeapon();
+        }
+
+    }
+    public void pickAmmo(){
 
         if(this.getPosition().isSpawn() || (!this.getPosition().isSpawn() && ((NonSpawnSquare)this.getPosition()).getDrop() == null)){
             System.out.println("No ammo to pick \n");

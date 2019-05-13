@@ -13,11 +13,7 @@ public class NonSpawnSquare extends Square{
     private AmmoLot drop;
 
 
-    //checks if the square is a respawn type or not
-    @Override
-    public boolean isSpawn(){
-        return false;
-    }
+
 
     public NonSpawnSquare(Cell position, Room room, AmmoLot drop) {
         super(position, room);
@@ -32,6 +28,11 @@ public class NonSpawnSquare extends Square{
 
     public AmmoLot getDrop() {
         return drop;
+    }
+
+    @Override
+    public boolean isSpawn(){
+        return false;
     }
 
     public void setDrop(AmmoLot drop) {

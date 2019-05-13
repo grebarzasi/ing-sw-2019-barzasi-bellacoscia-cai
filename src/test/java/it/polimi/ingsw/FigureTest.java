@@ -1,12 +1,10 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.board.Board;
-import it.polimi.ingsw.board.map.NonSpawnSquare;
 import it.polimi.ingsw.board.map.Room;
 import it.polimi.ingsw.board.map.Square;
 import org.junit.jupiter.api.Test;
 
-import static it.polimi.ingsw.board.map.MapLoader.loadMap;
+import static it.polimi.ingsw.board.map.MapLoader.loadTerrain;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FigureTest {
@@ -22,7 +20,7 @@ class FigureTest {
 
         Square[][] squareMatrix = new Square[3][4];
 
-        loadMap(selection, squareMatrix);
+        loadTerrain(selection, squareMatrix);
 
         Player ned = new Player("Edward","Huskar",squareMatrix[1][1]);
         Player rob = new Player("Robert","Pudge",squareMatrix[2][2]);
@@ -42,7 +40,7 @@ class FigureTest {
 
         Square[][] squareMatrix = new Square[3][4];
 
-        loadMap(selection, squareMatrix);
+        loadTerrain(selection, squareMatrix);
 
         Player ned = new Player("Edward","Tinker",squareMatrix[1][1]);
         Player rob = new Player("Robert","Wukong",squareMatrix[0][1]);
@@ -63,7 +61,7 @@ class FigureTest {
 
         Square[][] squareMatrix = new Square[3][4];
 
-        loadMap(selection, squareMatrix);
+        loadTerrain(selection, squareMatrix);
 
         Player ned = new Player("Edward","Timbersaw",squareMatrix[1][0]);
         Square s = squareMatrix[0][0];
@@ -83,7 +81,7 @@ class FigureTest {
 
         Square[][] squareMatrix = new Square[3][4];
 
-        loadMap(selection, squareMatrix);
+        loadTerrain(selection, squareMatrix);
 
         Player ned = new Player("Edward","Drow Ranger",squareMatrix[1][0]);
         Square s = squareMatrix[2][1];
@@ -103,7 +101,7 @@ class FigureTest {
 
         Square[][] squareMatrix = new Square[3][4];
 
-        loadMap(selection, squareMatrix);
+        loadTerrain(selection, squareMatrix);
 
         Player ned = new Player("Edward","Tony",squareMatrix[1][0]);
         Room r = squareMatrix[0][0].getRoom();
@@ -124,7 +122,7 @@ class FigureTest {
 
         Square[][] squareMatrix = new Square[3][4];
 
-        loadMap(selection, squareMatrix);
+        loadTerrain(selection, squareMatrix);
 
         Player ned = new Player("Edward","Io",squareMatrix[1][0]);
         Room r = squareMatrix[2][1].getRoom();
@@ -148,7 +146,7 @@ class FigureTest {
 
         Square[][] squareMatrix = new Square[3][4];
 
-        loadMap(selection, squareMatrix);
+        loadTerrain(selection, squareMatrix);
 
         Player dummy = new Player("Ronnie", "Charizard", squareMatrix[0][0]);
 
@@ -191,7 +189,7 @@ class FigureTest {
 
         Square[][] squareMatrix = new Square[3][4];
 
-        loadMap(selection, squareMatrix);
+        loadTerrain(selection, squareMatrix);
 
         Player dummy = new Player("Reggie", "Blastoise", squareMatrix[0][0]);
 

@@ -1,4 +1,4 @@
-package it.polimi.ingsw.board;
+package it.polimi.ingsw;
 
 import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.Token;

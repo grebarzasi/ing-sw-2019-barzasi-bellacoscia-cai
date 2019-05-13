@@ -2,14 +2,11 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.map.NonSpawnSquare;
-import it.polimi.ingsw.board.map.Room;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.AmmoLot;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static it.polimi.ingsw.board.map.MapLoader.loadMap;
-
 
 
 public class PlayerTest {

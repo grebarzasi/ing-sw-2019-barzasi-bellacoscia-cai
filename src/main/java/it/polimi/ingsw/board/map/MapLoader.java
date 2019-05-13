@@ -28,7 +28,7 @@ public class MapLoader {
      */
 
 
-    public static void loadMap(String selection, Square[][] squareMatrix) {
+    public static void loadTerrain(String selection, Square[][] squareMatrix) {
 
         ObjectMapper mapper = new ObjectMapper();
 

@@ -3,7 +3,7 @@ package it.polimi.ingsw.board.map;
 
 import java.util.ArrayList;
 
-import static it.polimi.ingsw.board.map.MapLoader.loadMap;
+import static it.polimi.ingsw.board.map.MapLoader.loadTerrain;
 
 
 /**
@@ -33,7 +33,7 @@ public class Map {
 
         //loads the map into a matrix
         this.squareMatrix = new Square[height][width];
-        loadMap(selection, this.squareMatrix);
+        loadTerrain(selection, this.squareMatrix);
         this.roomList = new ArrayList<>();
 
 

@@ -30,6 +30,7 @@ public class Room {
         return color;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -37,6 +38,7 @@ public class Room {
         Room room = (Room) o;
         return Objects.equals(color, room.color);
     }
+
 
     /**
      * @return a collection of all player in this room

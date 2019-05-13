@@ -6,7 +6,7 @@ import it.polimi.ingsw.board.map.SpawnSquare;
 import it.polimi.ingsw.board.map.Square;
 import org.junit.Test;
 
-import static it.polimi.ingsw.board.map.MapLoader.loadMap;
+import static it.polimi.ingsw.board.map.MapLoader.loadTerrain;
 import static org.junit.Assert.*;
 
 public class MapLoadingTest {
@@ -26,7 +26,7 @@ public class MapLoadingTest {
 
         Square[][] squareMatrix = new Square[height][width];
 
-        loadMap(selection, squareMatrix);
+        loadTerrain(selection, squareMatrix);
 
 
         assertEquals(squareMatrix[0][0].getRoom().getColor(),"red");
@@ -55,7 +55,7 @@ public class MapLoadingTest {
 
         Square[][] squareMatrix = new Square[height][width];
 
-        loadMap(selection, squareMatrix);
+        loadTerrain(selection, squareMatrix);
 
         int row;
         int column;
@@ -91,7 +91,7 @@ public class MapLoadingTest {
 
         Square[][] squareMatrix = new Square[height][width];
 
-        loadMap(selection, squareMatrix);
+        loadTerrain(selection, squareMatrix);
 
         int row;
         int column;
@@ -127,7 +127,7 @@ public class MapLoadingTest {
 
         Square[][] squareMatrix = new Square[height][width];
 
-        loadMap(selection, squareMatrix);
+        loadTerrain(selection, squareMatrix);
 
         int row;
         int column;
@@ -163,7 +163,7 @@ public class MapLoadingTest {
 
         Square[][] squareMatrix = new Square[height][width];
 
-        loadMap(selection, squareMatrix);
+        loadTerrain(selection, squareMatrix);
 
         int row;
         int column;
@@ -205,7 +205,7 @@ public class MapLoadingTest {
 
         Square[][] squareMatrix = new Square[height][width];
 
-        loadMap(selection, squareMatrix);
+        loadTerrain(selection, squareMatrix);
 
         int row;
         int column;
@@ -240,7 +240,7 @@ public class MapLoadingTest {
 
         Square[][] squareMatrix = new Square[height][width];
 
-        loadMap(selection, squareMatrix);
+        loadTerrain(selection, squareMatrix);
 
         int row;
         int column;
@@ -275,7 +275,7 @@ public class MapLoadingTest {
 
         Square[][] squareMatrix = new Square[height][width];
 
-        loadMap(selection, squareMatrix);
+        loadTerrain(selection, squareMatrix);
 
         int row;
         int column;
@@ -310,7 +310,7 @@ public class MapLoadingTest {
 
         Square[][] squareMatrix = new Square[height][width];
 
-        loadMap(selection, squareMatrix);
+        loadTerrain(selection, squareMatrix);
 
         int row;
         int column;

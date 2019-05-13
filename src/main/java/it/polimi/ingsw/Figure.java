@@ -1,7 +1,6 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.actions.Action;
-import it.polimi.ingsw.board.*;
 import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.map.Room;
 import it.polimi.ingsw.board.map.Square;
@@ -9,11 +8,13 @@ import it.polimi.ingsw.cards.power_up.PowerUp;
 
 import java.util.*;
 
+import static jdk.vm.ci.sparc.SPARC.f1;
+
 /**
  * A figure of any kind in the game
  *
  * @author Yuting Cai
- * Excluding methods unless otherwise stated
+ * Unless method is otherwise stated
  */
 
 public class Figure {
@@ -32,7 +33,6 @@ public class Figure {
     private Square position;
 
     //needed in some weapon effect
-
 
     private Square oldPosition;
 
@@ -210,6 +210,7 @@ public class Figure {
      *
      * calculated using Breadth-first search
      *
+     * @author Yuting Cai
      */
 
     public int distanceTo(Square s) {
@@ -262,7 +263,7 @@ public class Figure {
      * RIP
      * Manages player death, should be invoked and the end of the turn in which the player is killed
      * distributes points to the players who contributed to this player's death
-     * redimentions this players's point vector
+     * re-dimensions this players's point vector
      * resets this player's damage array
      */
 
@@ -316,16 +317,15 @@ public class Figure {
                     System.out.print("added in the middle\n");
                     added = true;
                     break;
-                }
-                if (!added && contributors.get(ordered.get(i)) > contributors.get(murderers.get(0))) {
+                }if (!added && contributors.get(ordered.get(i)) > contributors.get(murderers.get(0))) {
                     ordered.add(i, murderers.get(0));
                     murderers.remove(0);
                     System.out.print("added in the end\n");
                     added = true;
                     break;
                 }
-
             }
+
             if(!added) {
                 ordered.add(murderers.get(0));
                 murderers.remove(0);
@@ -386,15 +386,15 @@ public class Figure {
 
         }
 
-
-
-
-
-
-
     }
 
-    public int damagePriority(Figure f1){
+    /**
+     * private method used in die() for determining scoring
+     * priority inc ase 2 player deal the same damage
+     * @param f1 Figure to check if this has priority over
+     * @return true if this has priority, false otherwise
+     */
+    private int damagePriority(Figure f1){
 
         int i;
         for(i=0;i<this.getPersonalBoard().getDamage().size();i++){

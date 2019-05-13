@@ -13,7 +13,7 @@ public class Terminator extends Figure{
     //reference to the player controlling the terminator
     private Player owner;
 
-    //the movement it can perform in the rurn
+    //the movement it can perform in the turn
     private Move move;
     //the shot it can perform is a target is visible
     private Shoot shot;

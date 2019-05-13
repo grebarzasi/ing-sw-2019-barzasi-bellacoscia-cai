@@ -70,6 +70,7 @@ class AimRangeTest {
 
     @Test
     void rangeNear() {
+
         AimRange aimingFilter= new AimRange(0,3);
 
         Set<Figure> figureSet;

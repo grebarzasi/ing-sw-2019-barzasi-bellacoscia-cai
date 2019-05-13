@@ -43,6 +43,7 @@ public class GameControllerServer implements Controller {
     /**
      * Parameters for the connection.
      */
+
     private ServerSocket server = null;
     private Socket client = null;
 

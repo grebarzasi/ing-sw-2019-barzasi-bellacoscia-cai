@@ -2,7 +2,7 @@ package it.polimi.ingsw.cards.power_up;
 
 import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.Token;
-import it.polimi.ingsw.board.PlayerBoard;
+import it.polimi.ingsw.PlayerBoard;
 import it.polimi.ingsw.cards.Ammo;
 
 /**
