@@ -18,10 +18,10 @@ public class Move implements SubAction {
 
 
     public void doAction(Figure target){
-        Square s;
+        /*Square s;
         do {
-            s = target.getControllerServer().askPosition();
+            s = target.getControllerServer().askDestination();
         }while(target.distanceTo(s)>maxSteps);
-        target.setPosition(s);
+        target.setPosition(s);*/
     }
 }

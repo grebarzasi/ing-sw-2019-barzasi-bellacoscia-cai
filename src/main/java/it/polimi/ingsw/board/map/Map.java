@@ -1,8 +1,6 @@
 package it.polimi.ingsw.board.map;
 
 
-import it.polimi.ingsw.board.Room;
-
 import java.util.ArrayList;
 
 import static it.polimi.ingsw.board.map.MapLoader.loadMap;

@@ -1,7 +1,10 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.board.Room;
+import it.polimi.ingsw.board.Board;
+import it.polimi.ingsw.board.map.NonSpawnSquare;
+import it.polimi.ingsw.board.map.Room;
 import it.polimi.ingsw.board.map.Square;
+import it.polimi.ingsw.cards.AmmoLot;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,226 +15,107 @@ import static it.polimi.ingsw.board.map.MapLoader.loadMap;
 public class PlayerTest {
 
 
-
     @Test
-    public void constructorTest(){
+    public void constructorTest() {
 
-        Player max = new Player("Max","Luna");
+        Player max = new Player("Max", "Luna");
 
         assertEquals("Luna", max.getPersonalBoard().getOwner().getCharacter());
-        assertEquals("Max", ((Player)max.getPersonalBoard().getOwner()).getUsername());
+        assertEquals("Max", ((Player) max.getPersonalBoard().getOwner()).getUsername());
 
-    }
-
-
-    /**
-     *Tests that Ned playing as Huskar can see Rob playing as Pudge
-     */
-
-    @Test
-    public void testCanSee() {
-
-        String selection = "small";
-
-        Square[][] squareMatrix = new Square[3][4];
-
-        loadMap(selection, squareMatrix);
-
-        Player ned = new Player("Edward","Huskar",squareMatrix[1][1]);
-        Player rob = new Player("Robert","Pudge",squareMatrix[2][2]);
-
-        assertTrue(ned.canSee(rob));
+        assertEquals(0, max.getPersonalBoard().getDamage().size());
+        assertEquals(0, max.getPoints());
 
     }
 
     /**
-     * Tests that Ned playing as Tinker cannot see Rob playing as Wukong
+     * Asserts that Ammo and powerup picking
+     * is done correctly
+     *
+     *
+     * STILL MISSING CASE FOR MAXIMUM POWERUP AS FOR SERVER IS NOT
+     * READY FOR ASKING CLIENT TO DISCARD CHOSEN CARD
      */
 
     @Test
-    public void testCannotSee() {
-
-        String selection = "small";
-
-        Square[][] squareMatrix = new Square[3][4];
-
-        loadMap(selection, squareMatrix);
-
-        Player ned = new Player("Edward","Tinker",squareMatrix[1][1]);
-        Player rob = new Player("Robert","Wukong",squareMatrix[0][1]);
-
-        assertFalse(ned.canSee(rob));
+    public void ammoPickingTest() {
 
 
-    }
+        int i;
 
-    /**
-     * Tests that Ned playing as Timbersaw can see the {@link Square} s
-     */
-
-    @Test
-    public void testCanSeeSquare(){
-
-        String selection = "small";
-
-        Square[][] squareMatrix = new Square[3][4];
-
-        loadMap(selection, squareMatrix);
-
-        Player ned = new Player("Edward","Timbersaw",squareMatrix[1][0]);
-        Square s = squareMatrix[0][0];
-
-        assertTrue(ned.canSeeSquare(s));
-
-    }
-
-    /**
-     * Tests that Ned playing as Drow Ranger cannot see the {@link Square} s
-     */
-
-    @Test
-    public void testCannotSeeSquare(){
-
-        String selection = "small";
-
-        Square[][] squareMatrix = new Square[3][4];
-
-        loadMap(selection, squareMatrix);
-
-        Player ned = new Player("Edward","Drow Ranger",squareMatrix[1][0]);
-        Square s = squareMatrix[2][1];
-
-        assertFalse(ned.canSeeSquare(s));
-
-    }
-
-    /**
-     * Tests that Ned playing as Tony can see the {@link Room} r
-     */
-
-    @Test
-    public void testCanSeeRoom(){
-
-        String selection = "small";
-
-        Square[][] squareMatrix = new Square[3][4];
-
-        loadMap(selection, squareMatrix);
-
-        Player ned = new Player("Edward","Tony",squareMatrix[1][0]);
-        Room r = squareMatrix[0][0].getRoom();
-
-        assertTrue(ned.canSeeRoom(r));
-
-    }
-
-    /**
-     * Tests that Ned playing as Io cannot see the {@link Room} r
-     */
+        //test is ran for 100 times since there is random factor;
+        for (i = 0; i < 100; i++) {
 
 
-    @Test
-    public void testCannotSeeRoom(){
+            GameControllerServer empire = new GameControllerServer(null, null, null, new Board("small"));
+            Board alderaan = empire.getCurrentBoard();
+            Player luke = new Player("Luke", "Jedi");
+            luke.setControllerServer(empire);
+            Square aldera = alderaan.getMap().getSquareMatrix()[0][0];
 
-        String selection = "small";
+            assertNotNull(((NonSpawnSquare) alderaan.getMap().getSquareMatrix()[0][0]).getDrop());
 
-        Square[][] squareMatrix = new Square[3][4];
+            if (((NonSpawnSquare) alderaan.getMap().getSquareMatrix()[0][0]).getDrop().hasPowerup()) {
+                assertEquals(2, ((NonSpawnSquare) alderaan.getMap().getSquareMatrix()[0][0]).getDrop().getContent().getRed() +
+                        ((NonSpawnSquare) alderaan.getMap().getSquareMatrix()[0][0]).getDrop().getContent().getBlue() +
+                        ((NonSpawnSquare) alderaan.getMap().getSquareMatrix()[0][0]).getDrop().getContent().getYellow());
+            } else {
+                assertEquals(3, ((NonSpawnSquare) alderaan.getMap().getSquareMatrix()[0][0]).getDrop().getContent().getRed() +
+                        ((NonSpawnSquare) alderaan.getMap().getSquareMatrix()[0][0]).getDrop().getContent().getBlue() +
+                        ((NonSpawnSquare) alderaan.getMap().getSquareMatrix()[0][0]).getDrop().getContent().getYellow());
+            }
 
-        loadMap(selection, squareMatrix);
+            luke.setPosition(aldera);
+            AmmoLot tmp = ((NonSpawnSquare) aldera).getDrop();
 
-        Player ned = new Player("Edward","Io",squareMatrix[1][0]);
-        Room r = squareMatrix[2][1].getRoom();
+            assertEquals(0, luke.getPersonalBoard().getAmmoInventory().getRed());
+            assertEquals(0, luke.getPersonalBoard().getAmmoInventory().getBlue());
+            assertEquals(0, luke.getPersonalBoard().getAmmoInventory().getYellow());
 
-        assertFalse(ned.canSeeRoom(r));
+            luke.pickAmmo();
 
+            if (tmp.hasPowerup()) {
+                assertEquals(1, luke.getPowerupList().size());
+                assertEquals(2, luke.getPersonalBoard().getAmmoInventory().getRed() + luke.getPersonalBoard().getAmmoInventory().getBlue() + luke.getPersonalBoard().getAmmoInventory().getYellow());
+            } else {
+                assertTrue(luke.getPowerupList().isEmpty());
+                assertEquals(3, luke.getPersonalBoard().getAmmoInventory().getRed() + luke.getPersonalBoard().getAmmoInventory().getBlue() + luke.getPersonalBoard().getAmmoInventory().getYellow());
+            }
+
+        }
     }
 
 
     /**
-     * Tests the distance of a Ronnie playing as Charizard to some squares
-     * done for the small Map
-     * verifies that an empty square cannot be reached (returns -1 value)
+     * Asserts that even after picking up everything
+     * on Alderaan luke is still bound to having
+     * a maximum of 3 ammo per color
      */
 
     @Test
-    public void testDistanceSmallMap() {
+    public void consecutivePicking(){
 
+        GameControllerServer empire = new GameControllerServer(null, null, null, new Board("large"));
+        Board alderaan = empire.getCurrentBoard();
+        Player luke = new Player("Luke", "Jedi");
+        luke.setControllerServer(empire);
 
-        String selection = "small";
+        final int height = 3;
+        final int width = 4;
+        int row;
+        int column;
 
-        Square[][] squareMatrix = new Square[3][4];
+        for(row = 0 ; row < height ; row++){
+            for(column = 0; column < width; column ++){
+                luke.setPosition(alderaan.getMap().getSquareMatrix()[row][column]);
+                luke.pickAmmo();
+            }
+        }
 
-        loadMap(selection, squareMatrix);
-
-        Player dummy = new Player("Ronnie", "Charizard", squareMatrix[0][0]);
-
-        int distance = dummy.distanceTo(squareMatrix[0][3]);
-        int distance2 = dummy.distanceTo(squareMatrix[0][1]);
-        int distance3 = dummy.distanceTo(squareMatrix[1][1]);
-        int distance4 = dummy.distanceTo(squareMatrix[1][2]);
-
-        assertEquals(distance,-1);
-        assertEquals(distance2,1);
-        assertEquals(distance3,2);
-        assertEquals(distance4,3);
-
-        dummy.setPosition(squareMatrix[1][2]);
-
-        distance = dummy.distanceTo(squareMatrix[2][0]);
-        distance2 = dummy.distanceTo(squareMatrix[1][2]);
-        distance3 = dummy.distanceTo(squareMatrix[1][1]);
-        distance4 = dummy.distanceTo(squareMatrix[2][2]);
-
-        assertEquals(distance,-1);
-        assertEquals(distance2,0);
-        assertEquals(distance3,1);
-        assertEquals(distance4,3);
-
-    }
-
-    /**
-     * * Tests the distance of a Reggie playing as Blastoise to some squares
-     * done for the large Map
-     * only needs to work for up to distance = 4 but also tested for 5 because why not ¯\_(ツ)_/¯
-     */
-
-
-    @Test
-    public void testDistanceLargeMap() {
-
-
-        String selection = "large";
-
-        Square[][] squareMatrix = new Square[3][4];
-
-        loadMap(selection, squareMatrix);
-
-        Player dummy = new Player("Reggie", "Blastoise", squareMatrix[0][0]);
-
-        int distance = dummy.distanceTo(squareMatrix[2][3]);
-        int distance2 = dummy.distanceTo(squareMatrix[0][3]);
-        int distance3 = dummy.distanceTo(squareMatrix[1][1]);
-        int distance4 = dummy.distanceTo(squareMatrix[1][2]);
-
-        assertEquals(distance,5);
-        assertEquals(distance2,3);
-        assertEquals(distance3,2);
-        assertEquals(distance4,3);
-
-        dummy.setPosition(squareMatrix[1][1]);
-
-        distance = dummy.distanceTo(squareMatrix[1][0]);
-        distance2 = dummy.distanceTo(squareMatrix[1][2]);
-        distance3 = dummy.distanceTo(squareMatrix[1][1]);
-        distance4 = dummy.distanceTo(squareMatrix[1][3]);
-
-        assertEquals(distance,3);
-        assertEquals(distance2,3);
-        assertEquals(distance3,0);
-        assertEquals(distance4,4);
+        assertEquals(3, luke.getPersonalBoard().getAmmoInventory().getRed());
+        assertEquals(3, luke.getPersonalBoard().getAmmoInventory().getBlue());
+        assertEquals(3, luke.getPersonalBoard().getAmmoInventory().getYellow());
 
 
     }
-
 }
-

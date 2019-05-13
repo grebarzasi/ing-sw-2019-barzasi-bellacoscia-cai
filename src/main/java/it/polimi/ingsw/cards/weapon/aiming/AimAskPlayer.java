@@ -43,7 +43,7 @@ public class AimAskPlayer implements AimingFilter {
 
 
     public Set<Figure> filter(Weapon w, Set<Figure> p) {
-        return p;
+        return w.getOwner().getControllerServer().askTarget(numMax);
 
     }
 }

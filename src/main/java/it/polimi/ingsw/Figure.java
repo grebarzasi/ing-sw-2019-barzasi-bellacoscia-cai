@@ -3,13 +3,14 @@ package it.polimi.ingsw;
 import it.polimi.ingsw.actions.Action;
 import it.polimi.ingsw.board.*;
 import it.polimi.ingsw.board.Board;
+import it.polimi.ingsw.board.map.Room;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 
 import java.util.*;
 
 /**
- * A player in the game
+ * A figure of any kind in the game
  *
  * @author Yuting Cai
  * Excluding methods unless otherwise stated
@@ -31,6 +32,7 @@ public class Figure {
     private Square position;
 
     //needed in some weapon effect
+
 
     private Square oldPosition;
 
@@ -101,7 +103,7 @@ public class Figure {
 
         } else
             return this.getPosition().getWest() != null && getPosition().getWest().getRoom().equals(p.getPosition().getRoom());
-
+        //intellij simplification return false if last condition is not verified
     }
 
     /**
@@ -125,7 +127,7 @@ public class Figure {
             return true;
 
         } else return getPosition().getSouth() != null && getPosition().getNorth().getRoom() == s.getRoom();
-
+        //intellij simplification return false if last condition is not verified
     }
 
     /**
@@ -149,7 +151,7 @@ public class Figure {
             return true;
 
         } else return getPosition().getSouth() != null && getPosition().getSouth().getRoom().equals(r);
-
+        //intellij simplification return false if last condition is not verified
 
     }
 
@@ -160,10 +162,11 @@ public class Figure {
      */
 
     public Set<Figure> allCanSee(){
-        Set<Figure> visible = new HashSet<>(allFigures());
-        for(Figure p : visible){
-            if(!this.canSee(p))
-                visible.remove(p);
+        Set<Figure> visible = new HashSet<>();
+
+        for(Figure p : this.allFigures()){
+            if(this.canSee(p))
+                visible.add(p);
         }
         return visible;
     }
@@ -172,22 +175,28 @@ public class Figure {
      * @author Gregorio Barzasi
      */
     public Set<Figure> allFigures(){
-        return new HashSet<>(controllerServer.getPlayerList());
+        Set<Figure> f = new HashSet<>(controllerServer.getPlayerList());
+        if(controllerServer.getBot()!=null)
+         f.add(controllerServer.getBot());
+        return f;
     }
 
     /**
      * Make damage and set marks
      * @author Gregorio Barzasi
      */
+
+    //if you start from 0 you use < mate.  :)
+
     public void inflictDamage(int num, Figure target){
         Token t = new Token(this);
-        for(int i=0; i<=num; i++) {
+        for(int i=0; i<num; i++) {
             target.getPersonalBoard().addDamage(t);
         }
     }
     public void inflictMark(int num, Figure target){
         Token t = new Token(this);
-        for(int i=0; i<=num; i++) {
+        for(int i=0; i<num; i++) {
             target.getPersonalBoard().addMark(t);
         }
     }
@@ -249,6 +258,14 @@ public class Figure {
 
     }
 
+    /**
+     * RIP
+     * Manages player death, should be invoked and the end of the turn in which the player is killed
+     * distributes points to the players who contributed to this player's death
+     * redimentions this players's point vector
+     * resets this player's damage array
+     */
+
     public void die(){
 
         HashMap<Figure,Integer> contributors = new HashMap<>();
@@ -258,11 +275,12 @@ public class Figure {
 
         //give point to the player who inflicted first blood
         this.getPersonalBoard().getDamage().get(0).getOwner().addPoints(1);
+        System.out.println("added first blood damage");
 
-        //maps each player with
+        //maps each player with their contribution to the list
         for (Token t : this.getPersonalBoard().getDamage()){
 
-            if(!contributors.containsValue(t.getOwner())) {
+            if(!contributors.containsKey(t.getOwner())) {
                 contributors.put(t.getOwner(),1);
             }else{
                 tmp = contributors.get(t.getOwner());
@@ -270,21 +288,124 @@ public class Figure {
             }
         }
 
-        murderers = new ArrayList<>(contributors.keySet());
+        //loads all players who have contributed to the kill into an Arraylist
+        for(Figure f: contributors.keySet()){
+            murderers.add(f);
+        }
 
-        for(Token t: this.getPersonalBoard().getDamage()){
+        System.out.println("number of murderers: " + murderers.size());
 
-            murderers.add(1,t.getOwner());
+        //initialising a new arraylist of ordered contributors
+        ArrayList<Figure> ordered = new ArrayList<>();
+        boolean added = false;
+        //inserts in order into a new list
 
-            for(i=0;i<murderers.size();i++){
-                murderers.get(i).addPoints(t.getOwner().getPersonalBoard().getPointVec()[i]);
+
+        //sorted insertion into ordered
+        while(!murderers.isEmpty()){
+
+            System.out.print("unchcked murderers: " + murderers.size());
+
+            added = false;
+
+            for(i=0;i<ordered.size();i++) {
+
+                if (contributors.get(ordered.get(i)) == contributors.get(murderers.get(0))) {
+                    ordered.add(i, murderers.get(0));
+                    murderers.remove(0);
+                    System.out.print("added in the middle\n");
+                    added = true;
+                    break;
+                }
+                if (!added && contributors.get(ordered.get(i)) > contributors.get(murderers.get(0))) {
+                    ordered.add(i, murderers.get(0));
+                    murderers.remove(0);
+                    System.out.print("added in the end\n");
+                    added = true;
+                    break;
+                }
+
+            }
+            if(!added) {
+                ordered.add(murderers.get(0));
+                murderers.remove(0);
+                System.out.print("added in the end\n");
+            }
+
+        }
+
+        System.out.print(ordered.get(0).getCharacter()+ "\n");
+
+        Collections.reverse(ordered);
+
+        System.out.print(ordered.get(0).getCharacter()+ "\n");
+
+        int k;
+
+        //in case of same damage dealt by multiple players the one who hit firs get sorted in front
+        for(i=0;i<ordered.size();i++) {
+            for (k = i; k < ordered.size(); k++) {
+                if (contributors.get(ordered.get(k)).equals(contributors.get(ordered.get(i))) && damagePriority(ordered.get(k)) < damagePriority(ordered.get(i))) {
+
+                    Figure temp = ordered.get(i);
+                    ordered.set(i,ordered.get(k));
+                    ordered.set(k,temp);
+
+                }
             }
         }
 
+
+
+        ordered.set(1,ordered.get(1));
+
+        System.out.print("out of while");
+
+        System.out.println("Ordered List Size: " + ordered.size());
+
+        System.out.print(ordered.get(0).getCharacter()+ "\n");
+
+        for( i=0 ; i<ordered.size() ; i++) {
+
+            System.out.print("Added points to "+ i +": " + this.getPersonalBoard().getPointVec()[i] + "\n");
+
+            ordered.get(i).addPoints(this.getPersonalBoard().getPointVec()[i]);
+
+            System.out.print(ordered.get(i).getCharacter() + "Has "+ ordered.get(i).getPoints() + " points \n");
+
+        }
+
+        ordered.set(1,ordered.get(1));
+
+
         this.getPersonalBoard().resetDamage();
-        this.setPosition(null);
+
+        for(i=0 ; i < this.personalBoard.getPointVec().length - 1 ; i++){
+
+            this.personalBoard.getPointVec()[i]=this.personalBoard.getPointVec()[i+1];
+
+        }
+
+
+
+
+
+
 
     }
+
+    public int damagePriority(Figure f1){
+
+        int i;
+        for(i=0;i<this.getPersonalBoard().getDamage().size();i++){
+            if(this.getPersonalBoard().getDamage().get(i).getOwner().equals(f1)){
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
 
     public int getPoints() {
         return points;
@@ -303,6 +424,15 @@ public class Figure {
     }
 
 
+    /*just a bunch of setters and getters*/
+
+    public Square getOldPosition() {
+        return oldPosition;
+    }
+
+    public void setOldPosition(Square oldPosition) {
+        this.oldPosition = oldPosition;
+    }
 
     public String getCharacter() {
         return character;

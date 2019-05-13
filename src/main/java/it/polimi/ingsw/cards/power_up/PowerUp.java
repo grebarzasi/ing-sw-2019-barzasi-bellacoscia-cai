@@ -2,7 +2,6 @@ package it.polimi.ingsw.cards.power_up;
 
 import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.cards.Card;
-import it.polimi.ingsw.cards.Deck;
 
 /**
  * The type Power up.
@@ -42,5 +41,5 @@ public abstract class PowerUp extends Card {
     }
 
 
-    public void fetch(){};
+    ;
 }

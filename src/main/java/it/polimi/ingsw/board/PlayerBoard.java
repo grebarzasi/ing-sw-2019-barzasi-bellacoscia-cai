@@ -47,14 +47,12 @@ public class PlayerBoard {
         }else if(this.damage.size() < maxhealth){
 
             this.damage.add(t);
-            //kill(this.owner);
         }
 
         else if (this.damage.size() == maxhealth) {
 
             this.damage.add(t);
             t.getOwner().getPersonalBoard().addMark(new Token(this.owner));
-            //returns an overkill mark token
         }
 
 
@@ -141,8 +139,8 @@ public class PlayerBoard {
     public void addAmmo(Ammo a) {
 
         a.setRed(a.getRed() + this.owner.getPersonalBoard().getAmmoInventory().getRed());
-        a.setRed(a.getBlue() + this.owner.getPersonalBoard().getAmmoInventory().getBlue());
-        a.setRed(a.getYellow() + this.owner.getPersonalBoard().getAmmoInventory().getYellow());
+        a.setBlue(a.getBlue() + this.owner.getPersonalBoard().getAmmoInventory().getBlue());
+        a.setYellow(a.getYellow() + this.owner.getPersonalBoard().getAmmoInventory().getYellow());
 
         this.owner.getPersonalBoard().setAmmoInventory(a);
 

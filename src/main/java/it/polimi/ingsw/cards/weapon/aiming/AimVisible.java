@@ -16,7 +16,7 @@ import java.util.Set;
 public class AimVisible implements AimingFilter {
 
     private boolean visible;
-    private String origin;
+    private String origin="";
 
     public AimVisible(boolean visible,String origin){
        this.origin=origin;
@@ -24,7 +24,6 @@ public class AimVisible implements AimingFilter {
     }
 
     public AimVisible(boolean visible){
-        this.origin=null;
         this.visible=visible;
     }
     public boolean isVisible() {

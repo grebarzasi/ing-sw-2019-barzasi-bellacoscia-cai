@@ -16,14 +16,14 @@ class WeaponDeckBuilderTest {
     @Test
     void buildDeck() {
         WeaponDeck wDeck = WeaponDeckBuilder.buildDeck();
-        assertEquals(20,wDeck.getUsable().size());
-        for(Card c : wDeck.getUsable()) {
-            Weapon weaponCheck = (Weapon)c;
+        assertEquals(20, wDeck.getUsable().size());
+        for (Card c : wDeck.getUsable()) {
+            Weapon weaponCheck = (Weapon) c;
             assertNull(c.getOwner());
         }
-        Weapon w ;
-        while(!wDeck.getUsable().isEmpty()){
-           w =  (Weapon) wDeck.fetch();
+        Weapon w;
+        while (!wDeck.getUsable().isEmpty()) {
+            w = (Weapon) wDeck.fetch();
         }
         assertNull(wDeck.fetch());
     }

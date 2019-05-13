@@ -1,8 +1,6 @@
 package it.polimi.ingsw.board.map;
 
 
-import it.polimi.ingsw.board.Room;
-
 /**
  * parses map files
  * @author Yuting Cai

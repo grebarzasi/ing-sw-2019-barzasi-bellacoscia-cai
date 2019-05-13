@@ -8,6 +8,11 @@ import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.util.ArrayList;
 
+/**
+ * A non bot human controlled player in the game.
+ * can perform normal actions
+ */
+
 
 public class Player extends Figure {
 
@@ -24,15 +29,31 @@ public class Player extends Figure {
 
     private ArrayList<PowerUp> powerupList;
 
+    /**
+     * Picks up AmmoLot on the square
+     *
+     * MISSING MAXIMUM POWERUP MANAGEMENT
+     */
+
     public void pickAmmo(){
 
-        if(this.getPosition().isSpawn()){
-            System.out.println("no ammo to pick");
+
+        if(this.getPosition().isSpawn() || (!this.getPosition().isSpawn() && ((NonSpawnSquare)this.getPosition()).getDrop() == null)){
+            System.out.println("No ammo to pick \n");
+        }else{
+
+            if(this.getPosition().isSpawn() || ((NonSpawnSquare)this.getPosition()).getDrop().hasPowerup()){
+                this.powerupList.add((PowerUp)this.getControllerServer().getCurrentBoard().getPowerupDeck().fetch());
+            }
+            if(!this.getPosition().isSpawn()){
+                Ammo tmp = ((NonSpawnSquare)this.getPosition()).getDrop().getContent();
+                this.getPersonalBoard().addAmmo(tmp);
+                ((NonSpawnSquare)this.getPosition()).setDrop(null);
+            }
         }
-        if(!this.getPosition().isSpawn()){
-            Ammo tmp = ((NonSpawnSquare)this.getPosition()).getDrop().getContent();
-            this.getPersonalBoard().addAmmo(tmp);
-        }
+    }
+
+    public void pickWeapon(Weapon selection){
 
     }
 

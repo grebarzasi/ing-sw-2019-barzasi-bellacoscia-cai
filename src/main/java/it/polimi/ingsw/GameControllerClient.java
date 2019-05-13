@@ -48,6 +48,7 @@ public class GameControllerClient {
             //BLOCKER ISSUE MATE
             **************************************************************
             */
+
             Socket client = new Socket(InetAddress.getLocalHost(),port);
             System.out.println("Connessione stabilita\n");
 

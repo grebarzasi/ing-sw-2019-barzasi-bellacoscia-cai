@@ -55,7 +55,7 @@ public class AimingBuilderTest {
         JsonNode newNode = mapper.readTree(newString);
         AimVisible target = AimingBuilder.buildIsVisible(newNode);
         assertTrue(target.isVisible());
-        assertNull(target.getOrigin());
+        assertTrue(target.getOrigin().isEmpty());
     }
 
     @Test

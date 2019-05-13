@@ -23,6 +23,7 @@ import static it.polimi.ingsw.cards.AmmoDeckLoader.loadDeck;
  * has map, the killshot track and the decks.
  * @author Yuting Cai
  */
+
 public class Board extends Subject {
 
 
@@ -78,11 +79,7 @@ public class Board extends Subject {
 
                 if(!this.map.getSquareMatrix()[row][column].isSpawn()){
 
-                    ((NonSpawnSquare)this.map.getSquareMatrix()[row][column]).setDrop((AmmoLot)this.ammoDeck.getUsable().get(0));
-
-                    this.ammoDeck.getDiscarded().add(this.ammoDeck.getUsable().get(0));
-                    this.ammoDeck.getUsable().remove(0);
-
+                    ((NonSpawnSquare)this.map.getSquareMatrix()[row][column]).setDrop((AmmoLot)this.ammoDeck.fetch());
 
                 }
             }

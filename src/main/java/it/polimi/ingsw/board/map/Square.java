@@ -1,7 +1,6 @@
 package it.polimi.ingsw.board.map;
 
 import it.polimi.ingsw.Figure;
-import it.polimi.ingsw.board.Room;
 
 import java.util.ArrayList;
 import java.util.Collection;

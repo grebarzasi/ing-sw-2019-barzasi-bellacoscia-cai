@@ -26,8 +26,12 @@ public class TargetAcquisition implements SubEffect {
     }
 
     public Set<Figure> applyEffect(Weapon w, Set<Figure> p){
-        for(AimingFilter a: aimRoutine)
-            p = a.filter(w,p);
+        for(AimingFilter a: aimRoutine) {
+            p = a.filter(w, p);
+            //if is empty you have no target available
+            if (p.isEmpty())
+                return p;
+        }
        return p;
     }
 

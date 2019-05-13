@@ -1,6 +1,8 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.board.Board;
+import it.polimi.ingsw.board.map.Cell;
+import it.polimi.ingsw.board.map.Room;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.cards.weapon.Effect;
@@ -36,7 +38,7 @@ public class GameControllerServer implements Controller {
 
     private Time timeTurn;
 
-    public Board currentBoard;
+    private Board currentBoard; //was public who did dis?
 
     /**
      * Parameters for the connection.
@@ -105,6 +107,13 @@ public class GameControllerServer implements Controller {
         return this.playerList;
     }
 
+    public Terminator getBot() {
+        return bot;
+    }
+
+    public void setBot(Terminator bot) {
+        this.bot = bot;
+    }
 
     /**
      * Socket connection.
@@ -232,10 +241,9 @@ public class GameControllerServer implements Controller {
     public void newTurn() {
         int i;
 
-
         for(i = 0; i<this.playerList.size() ; i++){
             if(currentPlayer == this.playerList.get(i)){
-                if(i == this.playerList.size()-1) {
+                if(i != this.playerList.size()-1) {
                     currentPlayer = this.playerList.get(i + 1);
                 }else{
                     currentPlayer = this.playerList.get(0);
@@ -245,17 +253,47 @@ public class GameControllerServer implements Controller {
 
     }
 
+    /**
+     * ends a turn
+     * adds tokens to the killshot track
+     * iterates the current player
+     */
+
     public void endTurn() {
+
+        int k;
+        int i;
+        int flag =0;
 
         for(Figure figure : this.playerList){
 
             if(figure.getPersonalBoard().getDamage().size() >= 11){
-                figure.setPosition(null);
+
+                for (i = 0; i < this.currentBoard.getTrack().getKillsTrack().size(); i++) {
+                    if (this.currentBoard.getTrack().getKillsTrack().get(i) == null) {
+                        flag = i;
+                    }
+                }
+
+                this.currentBoard.getTrack().getKillsTrack().get(i).add(figure.getPersonalBoard().getDamage().get(10));
+                if(figure.getPersonalBoard().getDamage().size() == 12){
+                    this.currentBoard.getTrack().getKillsTrack().get(i).add(figure.getPersonalBoard().getDamage().get(11));
+                }
+                figure.die();
             }
 
         }
 
         this.getCurrentBoard().refillSquares();
+
+
+        for(i=0;i< this.playerList.size();i++){
+            if(this.playerList.get(i) == currentPlayer){
+                flag = i;
+            }
+        }
+
+        this.currentPlayer = this.playerList.get(flag+1);
 
     }
 

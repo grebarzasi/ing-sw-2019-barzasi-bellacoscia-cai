@@ -19,9 +19,4 @@ public abstract class Card {
         this.owner = owner;
     }
 
-    public abstract void fetch();
-
-
-
-
 }
