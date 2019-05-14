@@ -316,7 +316,8 @@ public class Figure {
                     System.out.print("added in the middle\n");
                     added = true;
                     break;
-                }if (!added && contributors.get(ordered.get(i)) > contributors.get(murderers.get(0))) {
+                }
+                if (!added && contributors.get(ordered.get(i)) > contributors.get(murderers.get(0))) {
                     ordered.add(i, murderers.get(0));
                     murderers.remove(0);
                     System.out.print("added in the end\n");
