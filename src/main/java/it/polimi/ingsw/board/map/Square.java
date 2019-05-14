@@ -65,7 +65,7 @@ public class Square {
      * @return the list of players on the queried Square
      */
 
-    private Collection<Figure> playersInSquare(Collection<Figure> figureList){
+    public Collection<Figure> playersInSquare(Collection<Figure> figureList){
 
         Collection<Figure> playersHere = new ArrayList<>();
 
