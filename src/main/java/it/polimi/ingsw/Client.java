@@ -10,7 +10,7 @@ import java.util.Scanner;
  *
  * @author Carlo Bellacoscia
  */
-public class GameControllerClient {
+public class Client {
 
     private final int maxPlayers = 5;
 
@@ -97,7 +97,7 @@ public class GameControllerClient {
     public static void main( String[] args ) {
 
         Scanner sc = new Scanner(System.in);
-        GameControllerClient c = new GameControllerClient();
+        Client c = new Client();
 
         System.out.println("Inserisci il local host");
         c.setHost(sc.nextLine());
