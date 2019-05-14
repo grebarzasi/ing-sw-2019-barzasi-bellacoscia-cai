@@ -20,7 +20,7 @@ public class Weapon extends Card {
     private Ammo chamber;
     private boolean loaded=false;
 
-    private Preferences pref;
+    private Preferences pref = new Preferences();
 
     private Effect basicEffect;
     private Effect addOneEffect;
