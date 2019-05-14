@@ -21,9 +21,13 @@ public class Lobby {
     }
 
     public void addPlayer(Player p){
-        this.joinedPlayers.add(p);
-        this.readyStatus.add(false);
-        System.out.println(p.getUsername() + " has joined the battle as " + p.getCharacter());
+        if(this.joinedPlayers.size()<5) {
+            this.joinedPlayers.add(p);
+            this.readyStatus.add(false);
+            System.out.println(p.getUsername() + " has joined the battle as " + p.getCharacter());
+        }else{
+            System.out.println(p.getUsername() + "has been rejected");
+        }
     }
 
     public void disconnectPlayer(Player p){
@@ -41,3 +45,11 @@ public class Lobby {
     }
 
 }
+
+
+
+
+
+
+
+

@@ -62,16 +62,15 @@ public class Square {
 
     /**
      * scans the list of players and checks whether they are on the square or not
-     * @param  where the Square you want to know the players on
      * @return the list of players on the queried Square
      */
 
-    private Collection<Figure> playersInASquare(Square where, Collection<Figure> figureList){
+    private Collection<Figure> playersInSquare(Collection<Figure> figureList){
 
         Collection<Figure> playersHere = new ArrayList<>();
 
         for (Figure figure : figureList) {
-            if (figure.getPosition() == where) {
+            if (figure.getPosition() == this) {
                 playersHere.add(figure);
             }
         }
@@ -79,14 +78,7 @@ public class Square {
         return playersHere;
     }
 
-    /**
-     * Upgraded version of "playersInSquare"
-     * @author Gregorio Barzasi
-     */
 
-    public Collection<Figure> playersInSquare(Collection<Figure> allP){
-        return playersInASquare(this,allP);
-    }
 
     public boolean isSpawn(){
         return true;

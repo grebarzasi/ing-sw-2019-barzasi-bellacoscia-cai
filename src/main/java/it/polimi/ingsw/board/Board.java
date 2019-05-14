@@ -103,12 +103,9 @@ public class Board extends Subject {
 
                     this.map.getSquareMatrix()[row][column] = tmp;
 
-
-
                 }
             }
         }
-
     }
 
     /**
