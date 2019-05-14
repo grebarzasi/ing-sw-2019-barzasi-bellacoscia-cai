@@ -18,10 +18,18 @@ public class GameControllerClient {
 
 
     int port;
+    String host;
 
     private BufferedReader input;
     private PrintWriter output;
 
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
+    }
 
     public int getPort() {
         return port;
@@ -49,7 +57,7 @@ public class GameControllerClient {
             **************************************************************
             */
 
-            Socket client = new Socket(InetAddress.getLocalHost(),port);
+            Socket client = new Socket(host,port);
             System.out.println("Connessione stabilita\n");
 
             /**
@@ -90,6 +98,9 @@ public class GameControllerClient {
 
         Scanner sc = new Scanner(System.in);
         GameControllerClient c = new GameControllerClient();
+
+        System.out.println("Inserisci il local host");
+        c.setHost(sc.nextLine());
 
         System.out.println("Inserisci la porta");
         c.setPort(sc.nextInt());
