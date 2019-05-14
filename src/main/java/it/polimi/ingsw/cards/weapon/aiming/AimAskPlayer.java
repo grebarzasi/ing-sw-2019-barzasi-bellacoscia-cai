@@ -17,8 +17,6 @@ public class AimAskPlayer implements AimingFilter {
 
     private Integer numMax;
     private boolean fromDiffSquare;
-    private boolean selectRoom;
-    private boolean selectSquare;
     private String msg;
 
     public Integer getNumMax() {
@@ -33,17 +31,14 @@ public class AimAskPlayer implements AimingFilter {
         return fromDiffSquare;
     }
 
-    public AimAskPlayer(String msg,Integer numMax, boolean fromDiffSquare, boolean selectSquare, boolean selectRoom) {
+    public AimAskPlayer(String msg,Integer numMax, boolean fromDiffSquare) {
         this.numMax = numMax;
         this.fromDiffSquare = fromDiffSquare;
-        this.selectSquare=selectSquare;
-        this.selectRoom=selectRoom;
         this.msg=msg;
     }
 
 
     public Set<Figure> filter(Weapon w, Set<Figure> p) {
-        return w.getOwner().getControllerServer().askTarget(numMax);
-
+        return  w.getPreferences().getTargetSet(p,msg,numMax,fromDiffSquare);
     }
 }

@@ -16,7 +16,7 @@
               "max": 2
             },
             "askPlayer": {
-              "masg": "Seleziona fino a 3 Player su quadrati differenti.",
+              "msg": "Seleziona fino a 3 Player su quadrati differenti.",
               "num": 3,
               "diffSquare": true
             }

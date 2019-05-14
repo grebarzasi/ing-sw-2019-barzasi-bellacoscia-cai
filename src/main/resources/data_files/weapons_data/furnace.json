@@ -41,7 +41,8 @@
               "max": 2
             },
             "askPlayer": {
-              "msg": "Seleziona 1 Player il cui quadrato verrà colpito"
+              "msg": "Seleziona 1 Player il cui quadrato verrà colpito",
+              "num": 1
             },
             "substitute": ["square"]
           },

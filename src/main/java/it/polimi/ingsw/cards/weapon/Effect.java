@@ -15,9 +15,6 @@ import java.util.Set;
 public class Effect {
     private Ammo cost;
     private ArrayList<SubEffect> effectList;
-
-
-
     private Set<Figure> targetHitSet;
     private boolean used;
     private Weapon myWeapon;

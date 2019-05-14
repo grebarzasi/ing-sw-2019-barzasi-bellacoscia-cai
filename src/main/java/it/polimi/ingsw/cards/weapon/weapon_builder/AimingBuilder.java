@@ -135,7 +135,7 @@ public class AimingBuilder {
             boolean selectSquare = node.path("selectSquare").asBoolean();
             boolean selectRoom = node.path("selectRoom").asBoolean();
             String msg= node.path("msg").asText();
-            return new AimAskPlayer(msg,numMax, fromDiffSquare, selectSquare, selectRoom);
+            return new AimAskPlayer(msg,numMax, fromDiffSquare);
     }
 
     /**

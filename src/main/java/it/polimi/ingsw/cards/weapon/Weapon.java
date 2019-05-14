@@ -20,6 +20,8 @@ public class Weapon extends Card {
     private Ammo chamber;
     private boolean loaded=false;
 
+    private Preferences pref;
+
     private Effect basicEffect;
     private Effect addOneEffect;
     private Effect addTwoEffect;
@@ -71,6 +73,10 @@ public class Weapon extends Card {
 
     public String getName() {
         return name;
+    }
+
+    public Preferences getPreferences() {
+        return pref;
     }
 
     public Ammo getChamber() {
