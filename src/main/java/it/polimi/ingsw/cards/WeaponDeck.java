@@ -17,6 +17,5 @@ public class WeaponDeck extends Deck {
         Card temp = super.getUsable().get(0);
         super.getUsable().remove(0);
         return temp;
-
     }
 }

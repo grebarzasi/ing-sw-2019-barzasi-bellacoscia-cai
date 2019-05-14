@@ -1,8 +1,6 @@
 package it.polimi.ingsw.board;
 
 import it.polimi.ingsw.Subject;
-import it.polimi.ingsw.board.Armory;
-import it.polimi.ingsw.board.KillshotTrack;
 import it.polimi.ingsw.board.map.Map;
 import it.polimi.ingsw.board.map.NonSpawnSquare;
 import it.polimi.ingsw.board.map.SpawnSquare;
@@ -120,6 +118,26 @@ public class Board extends Subject {
 
     public void refillSquares() {
 
+        this.fillAmmoLots();
+        this.fillArmories();
+    }
+
+    public void fillAmmoLots(){
+
+        for (int row = 0; row < height; row++) {
+            for (int column = 0; column < width; column++) {
+
+                //if the square is not a respawn spot and if its drop has been collected
+                if (!this.getMap().getSquareMatrix()[row][column].isSpawn() && this.getMap().getSquareMatrix()[row][column] == null) {
+                    //refill the drop
+                    ((NonSpawnSquare) this.getMap().getSquareMatrix()[row][column]).setDrop((AmmoLot)this.ammoDeck.fetch());
+                }
+            }
+        }
+    }
+
+    public void fillArmories() {
+
         for (int row = 0; row < height; row++) {
             for (int column = 0; column < width; column++) {
                 //for each cell of the square matrix if it is a spawn square
@@ -135,18 +153,8 @@ public class Board extends Subject {
                         }
                     }
                 }
-
-                //if the square is not a respawn spot and if its drop has been collected
-                if (!this.getMap().getSquareMatrix()[row][column].isSpawn() && this.getMap().getSquareMatrix()[row][column] == null) {
-                    //refill the drop
-                    ((NonSpawnSquare) this.getMap().getSquareMatrix()[row][column]).setDrop((AmmoLot)this.ammoDeck.fetch());
-                }
             }
         }
-    }
-
-
-    public void reachable() {
     }
 
     public Map getMap() {

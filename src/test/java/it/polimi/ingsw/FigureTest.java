@@ -263,6 +263,8 @@ class FigureTest {
 
         System.out.println("Starting Test 2\n");
 
+        GameControllerServer server = new GameControllerServer();
+
         Player albert = new Player ("Albert","albert");
         Player bill = new Player("Bill","bill");
         Player charlie = new Player("Charlie","charlie");

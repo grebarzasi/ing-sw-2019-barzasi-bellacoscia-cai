@@ -197,9 +197,7 @@ public class GameControllerServer implements Controller {
         int row = sc.nextInt();
         int column = sc.nextInt();
 
-        Square s = currentBoard.getMap().getSquareMatrix()[row][column];
-
-        return s;
+        return currentBoard.getMap().getSquareMatrix()[row][column];
     }
     public Ammo askAmmo(){
         Figure p = getCurrentPlayer();
@@ -252,6 +250,17 @@ public class GameControllerServer implements Controller {
             }
         }
 
+
+        for(Figure p: playerList) {
+            if(p.getPersonalBoard().getDamage().size() >= 11){
+                p.getPersonalBoard().resetDamage();
+            }
+        }
+
+        if(this.bot.getPersonalBoard().getDamage().size() >= 11){
+            this.bot.getPersonalBoard().resetDamage();
+        }
+
     }
 
     /**
@@ -288,6 +297,7 @@ public class GameControllerServer implements Controller {
         this.getCurrentBoard().refillSquares();
 
 
+        //iterates the current player
         for(i=0;i< this.playerList.size();i++){
             if(this.playerList.get(i) == currentPlayer){
                 flag = i;

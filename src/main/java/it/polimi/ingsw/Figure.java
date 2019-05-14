@@ -376,14 +376,8 @@ public class Figure {
 
         ordered.set(1,ordered.get(1));
 
-
         this.getPersonalBoard().resetDamage();
-
-        for(i=0 ; i < this.personalBoard.getPointVec().length - 1 ; i++){
-
-            this.personalBoard.getPointVec()[i]=this.personalBoard.getPointVec()[i+1];
-
-        }
+        this.getPersonalBoard().addSkull();
 
     }
 
@@ -417,11 +411,6 @@ public class Figure {
     public void usePU(PowerUp pu) {
 
     }
-
-    public void endTurn() {
-
-    }
-
 
     /*just a bunch of setters and getters*/
 

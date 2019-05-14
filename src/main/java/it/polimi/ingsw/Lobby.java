@@ -1,7 +1,5 @@
 package it.polimi.ingsw;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import java.util.ArrayList;
 
 public class Lobby {
