@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 
+
+
 public class PlayerTest {
 
 
@@ -41,7 +43,7 @@ public class PlayerTest {
         int i;
 
         //test is ran for 100 times since there is random factor;
-        for (i = 0; i < 100; i++) {
+        for (i = 0; i < 10; i++) {
 
 
             GameControllerServer empire = new GameControllerServer(null, null, null, new Board("small"));

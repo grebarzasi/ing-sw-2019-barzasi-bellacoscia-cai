@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DeckPowerUpBuilderTest {
+class PowerupDeckBuilderTest {
 
-    DeckPowerUpBuilder usablePU = new DeckPowerUpBuilder();
+    PowerupDeckBuilder usablePU = new PowerupDeckBuilder();
 
     Deck usablePUDeck = new Deck(null);
 

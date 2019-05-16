@@ -10,7 +10,6 @@ import static it.polimi.ingsw.board.map.MapLoader.loadTerrain;
  * The Map of the game
  */
 
-
 public class Map {
 
     private Square[][] squareMatrix;
@@ -52,8 +51,6 @@ public class Map {
                 }
             }
         }
-
-
     }
 
 

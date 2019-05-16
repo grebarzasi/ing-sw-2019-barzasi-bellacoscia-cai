@@ -7,7 +7,7 @@ import it.polimi.ingsw.board.map.SpawnSquare;
 import it.polimi.ingsw.cards.AmmoLot;
 import it.polimi.ingsw.cards.Deck;
 import it.polimi.ingsw.cards.WeaponDeck;
-import it.polimi.ingsw.cards.power_up.DeckPowerUpBuilder;
+import it.polimi.ingsw.cards.power_up.PowerupDeckBuilder;
 import it.polimi.ingsw.cards.weapon.Weapon;
 import it.polimi.ingsw.cards.weapon.weapon_builder.WeaponDeckBuilder;
 
@@ -62,7 +62,7 @@ public class Board extends Subject {
         this.weaponDeck.shuffle();
 
         //loads the powerup deck and shuffles it
-        DeckPowerUpBuilder tmpDeck = new DeckPowerUpBuilder();
+        PowerupDeckBuilder tmpDeck = new PowerupDeckBuilder();
         this.powerupDeck = tmpDeck.PowerUpBuilder();
         this.powerupDeck.shuffle();
 

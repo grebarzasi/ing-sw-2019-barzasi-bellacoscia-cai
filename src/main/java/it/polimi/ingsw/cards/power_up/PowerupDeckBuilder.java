@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class DeckPowerUpBuilder{
+public class PowerupDeckBuilder {
 
 
     public Deck PowerUpBuilder() {

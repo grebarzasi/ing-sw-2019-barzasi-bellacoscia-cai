@@ -388,6 +388,7 @@ public class Figure {
      * @param f1 Figure to check if this has priority over
      * @return true if this has priority, false otherwise
      */
+
     private int damagePriority(Figure f1){
 
         int i;

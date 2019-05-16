@@ -40,7 +40,6 @@ public class GameControllerServer implements Controller {
 
     private Board currentBoard; //was public who did dis?
 
-
     public GameControllerServer() {
     }
 
@@ -50,8 +49,6 @@ public class GameControllerServer implements Controller {
         this.timeTurn = timeTurn;
         this.currentBoard = currentBoard;
     }
-
-
 
     public ArrayList<Player> getPlayerList() {
         return playerList;
@@ -218,5 +215,7 @@ public class GameControllerServer implements Controller {
         this.currentPlayer = this.playerList.get(flag+1);
 
     }
+
+
 
 }

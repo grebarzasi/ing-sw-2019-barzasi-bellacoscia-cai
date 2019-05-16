@@ -107,9 +107,7 @@ public class MapLoader {
                 i++;
             }
         }
-
     }
-
 }
     
     
