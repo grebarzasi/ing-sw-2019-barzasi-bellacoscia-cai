@@ -107,4 +107,12 @@ public class Player extends Figure {
     public void setPowerupList(ArrayList<PowerUp> powerupList) {
         this.powerupList = powerupList;
     }
+
+    public String getCharacter(){
+        return super.getCharacter();
+    }
+
+    public void setCharacter(String character){
+        super.setCharacter(character);
+    }
 }

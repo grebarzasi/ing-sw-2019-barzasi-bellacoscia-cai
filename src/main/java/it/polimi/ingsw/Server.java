@@ -6,16 +6,24 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Socket connection.
+ *
+ * @author Carlo Bellacoscia
+ */
 public class Server {
 
     private ServerSocket server = null;
     private Socket client = null;
 
-    int port;
-    private BufferedReader input;
-    private PrintWriter output;
+    Lobby lobby = new Lobby();
+
+    private int port;
+    private BufferedReader in;
+    private PrintWriter out;
     String username;
     String character;
 
@@ -27,32 +35,39 @@ public class Server {
         this.port = port;
     }
 
-    /**
-     * Socket connection.
-     */
+
     public Socket connection(){
 
         port = getPort();
 
         try {
+                System.out.println("Server started");
+                server = new ServerSocket(port);
+                while(server.isBound()) {
+                    System.out.println("Server is listening on port " + port);
+                    client = server.accept();
 
-            System.out.println("Inizializzo Server");
-            server = new ServerSocket(port);
+                    System.out.println("Connection established\n");
 
-            System.out.println("Server in ascolto sulla porta " + port);
-            client = server.accept();
+                    try {
 
-            System.out.println("Connessione stabilita\n");
+                        logInfo();
+                        Player p = new Player(username, character);
 
-            try {
+                        ClientHandler handler = new ClientHandler(p);
+                        handler.start();
 
-                logInfo();
-                Player p = new Player(username, character);
+                        lobby.addPlayer(p);
+                        System.out.println("Welcome, " + username + "!\n");
+                        System.out.println("Players in game:");
+                        for (Player t: lobby.getJoinedPlayers()) {
+                            System.out.println(t.getUsername() + " (" + t.getCharacter() + ")");
+                        }
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
             server.close();
 
         } catch (IOException e) {
@@ -67,31 +82,29 @@ public class Server {
          * open buffered reader for reading data from client
          */
         try {
-            input = new BufferedReader(new InputStreamReader(client.getInputStream()));
+            in = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
             /**
              * read username and character
              */
-            username = input.readLine();
+            username = in.readLine();
             System.out.println("username: " + username);
 
-            character = input.readLine();
+            character = in.readLine();
             System.out.println("character: " + character + "\n");
 
             /**
              * open printwriter for writing data to client
              */
-            output = new PrintWriter(client.getOutputStream(), true);
+            out = new PrintWriter(client.getOutputStream(), true);
 
 
-            System.out.println("Benvenuto, " + username + "!\n");
-
-            output.flush();
-            output.close();
+            out.flush();
+            out.close();
 
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("\nConnessione non riuscita");
+            System.out.println("\nConnection not work");
         }
     }
 
@@ -99,10 +112,19 @@ public class Server {
 
         Scanner sc = new Scanner(System.in);
         Server s = new Server();
+        int port;
 
-        System.out.println("Inserisci la porta");
-        s.setPort(sc.nextInt());
+        System.out.println("Insert port:");
+        do {
+            port = sc.nextInt();
+            s.setPort(port);
+            if(port <= 1023 || port > 49151){
+                System.out.println("Not available port, insert another port:");
+            }
+        }while(port <= 1023 || port > 49151);
+
         s.connection();
+
     }
 
 }
