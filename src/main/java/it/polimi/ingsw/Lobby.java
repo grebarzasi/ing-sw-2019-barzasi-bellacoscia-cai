@@ -41,7 +41,7 @@ public class Lobby {
 
     public boolean usernamecheck(Player p){
         for(Player toCheck: this.joinedPlayers){
-            if(toCheck.getUsername() == p.getUsername()){
+            if(toCheck.getUsername().equals(p.getUsername())){
                 return false;
             }
         }
@@ -50,7 +50,7 @@ public class Lobby {
 
     public boolean charactercheck(Player p){
         for(Player toCheck: this.joinedPlayers){
-            if(toCheck.getCharacter() == p.getCharacter()){
+            if(toCheck.getCharacter().equals(p.getCharacter())){
                 return false;
             }
         }
