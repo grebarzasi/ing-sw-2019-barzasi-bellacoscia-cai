@@ -29,13 +29,32 @@ public class Lobby {
     }
 
     public void addPlayer(Player p){
-        if(this.joinedPlayers.size()<5) {
+
+        if (this.joinedPlayers.size() < 5 && usernamecheck(p) && charactercheck(p)) {
             this.joinedPlayers.add(p);
-            this.readyStatus.put(p,false);
+            this.readyStatus.put(p, false);
             System.out.println(p.getUsername() + " has joined the battle as " + p.getCharacter());
-        }else{
+        } else {
             System.out.println(p.getUsername() + " has been rejected");
         }
+    }
+
+    public boolean usernamecheck(Player p){
+        for(Player toCheck: this.joinedPlayers){
+            if(toCheck.getUsername() == p.getUsername()){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean charactercheck(Player p){
+        for(Player toCheck: this.joinedPlayers){
+            if(toCheck.getCharacter() == p.getCharacter()){
+                return false;
+            }
+        }
+        return true;
     }
 
     public void disconnectPlayer(Player p){

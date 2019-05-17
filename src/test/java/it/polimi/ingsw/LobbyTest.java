@@ -21,6 +21,7 @@ class LobbyTest {
         assertEquals(1, test.getJoinedPlayers().size());
 
         test.addPlayer(natta);
+        test.addPlayer(natta);
 
         test.readyPlayer(natta);
 
