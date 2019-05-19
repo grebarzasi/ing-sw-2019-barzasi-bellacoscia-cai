@@ -4,7 +4,6 @@ import it.polimi.ingsw.actions.Move;
 import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.cards.Ammo;
 
-import java.util.Set;
 
 /**
  * The type Newton.

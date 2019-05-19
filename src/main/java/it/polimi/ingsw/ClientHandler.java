@@ -45,11 +45,4 @@ public class ClientHandler extends Thread {
         super.run();
 
     }
-/*
-
-    public boolean accept(Player p){
-        return !playerConnected.contains(p.getUsername());
-    }
-
- */
 }

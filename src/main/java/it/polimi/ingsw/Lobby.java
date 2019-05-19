@@ -11,6 +11,8 @@ import java.util.HashMap;
 
 public class Lobby {
 
+    private final int maxPlayer = 5;
+
     //List of players who have joined the lobby
     private ArrayList<Player> joinedPlayers;
     //Maps each player to their status, ready or not
@@ -30,7 +32,7 @@ public class Lobby {
 
     public void addPlayer(Player p){
 
-        if (this.joinedPlayers.size() < 5 && usernamecheck(p) && charactercheck(p)) {
+        if (this.joinedPlayers.size() < maxPlayer && usernamecheck(p) && charactercheck(p)) {
             this.joinedPlayers.add(p);
             this.readyStatus.put(p, false);
             System.out.println(p.getUsername() + " has joined the battle as " + p.getCharacter());

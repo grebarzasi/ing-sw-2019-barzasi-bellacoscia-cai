@@ -10,25 +10,13 @@ import java.util.Scanner;
  *
  * @author Carlo Bellacoscia
  */
-public class Client extends Thread {
+public class Client{
 
 
-    private Socket client = null;
+    private Socket socketClient = null;
 
 
     int port;
-    //String host;
-
-    private BufferedReader input;
-    private PrintWriter output;
-
-    //public String getHost() {
-    //    return host;
-    //}
-
-    //public void setHost(String host) {
-    //    this.host = host;
-    //}
 
     public int getPort() {
         return port;
@@ -50,7 +38,7 @@ public class Client extends Thread {
             System.out.println("Try to connect...");
 
 
-            client = new Socket("127.0.0.1",port);
+            socketClient = new Socket("127.0.0.1",port);
             System.out.println("Connection established\n");
 
             /**
@@ -73,8 +61,7 @@ public class Client extends Thread {
 
 
                 System.out.println("Welcome "+ username + "!\n");
-            input = new BufferedReader(new InputStreamReader(client.getInputStream()));
-            output = new PrintWriter(client.getOutputStream(), true);
+            PrintWriter output = new PrintWriter(socketClient.getOutputStream(), true);
 
             /**
              * send username and character to server
@@ -89,7 +76,7 @@ public class Client extends Thread {
             System.err.println("Impossible to establish the connection\n");
 
         }
-        return client;
+        return socketClient;
     }
 
 
@@ -98,9 +85,6 @@ public class Client extends Thread {
         Scanner sc = new Scanner(System.in);
         Client c = new Client();
         int port;
-
-        //System.out.println("Insert local host:");
-        //c.setHost(sc.nextLine());
 
         System.out.println("Insert port:");
         do {

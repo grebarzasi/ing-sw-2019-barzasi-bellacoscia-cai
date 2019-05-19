@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -16,14 +15,11 @@ import java.util.Scanner;
  */
 public class Server {
 
-    private ServerSocket server = null;
     private Socket client = null;
 
-    Lobby lobby = new Lobby();
+    private Lobby lobby = new Lobby();
 
     private int port;
-    private BufferedReader in;
-    private PrintWriter out;
     String username;
     String character;
 
@@ -41,15 +37,15 @@ public class Server {
         port = getPort();
 
         try {
-                System.out.println("Server started");
-                server = new ServerSocket(port);
-                while(server.isBound()) {
-                    System.out.println("Server is listening on port " + port);
-                    client = server.accept();
+            System.out.println("Server started");
+            try (ServerSocket socketServer = new ServerSocket(port)) {
+                while (socketServer.isBound()) {
+                        System.out.println("Server is listening on port " + port);
+                        client = socketServer.accept();
 
-                    System.out.println("Connection established\n");
+                        System.out.println("Connection established\n");
 
-                    try {
+
 
                         logInfo();
                         Player p = new Player(username, character);
@@ -58,17 +54,14 @@ public class Server {
                         handler.start();
 
                         lobby.addPlayer(p);
+
                         System.out.println("Welcome, " + username + "!\n");
                         System.out.println("Players in game:");
-                        for (Player t: lobby.getJoinedPlayers()) {
+                        for (Player t : lobby.getJoinedPlayers()) {
                             System.out.println(t.getUsername() + " (" + t.getCharacter() + ")");
                         }
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
                     }
-                }
-            server.close();
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -82,7 +75,7 @@ public class Server {
          * open buffered reader for reading data from client
          */
         try {
-            in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+            BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
             /**
              * read username and character
@@ -96,7 +89,7 @@ public class Server {
             /**
              * open printwriter for writing data to client
              */
-            out = new PrintWriter(client.getOutputStream(), true);
+            PrintWriter out = new PrintWriter(client.getOutputStream(), true);
 
 
             out.flush();
