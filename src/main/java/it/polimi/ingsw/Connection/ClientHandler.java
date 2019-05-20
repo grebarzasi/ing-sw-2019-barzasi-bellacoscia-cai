@@ -1,5 +1,8 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.Connection;
 
+import it.polimi.ingsw.Player;
+
+import java.net.ServerSocket;
 import java.util.ArrayList;
 
 /**
@@ -12,11 +15,14 @@ public class ClientHandler extends Thread {
     private ArrayList<String> playerConnected = new ArrayList<>();
     private String username;
     private String character;
+    ServerSocket serverSocket;
 
-    public ClientHandler(Player p) {
+    public ClientHandler(Player p, ServerSocket s) {
         this.username = p.getUsername();
         this.character = p.getCharacter();
         this.playerConnected.add(username);
+
+        this.serverSocket = s;
 
     }
 
