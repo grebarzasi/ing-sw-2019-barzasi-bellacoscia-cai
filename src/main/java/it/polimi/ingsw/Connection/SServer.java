@@ -9,20 +9,19 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Scanner;
 
 /**
  * Socket connection.
  *
  * @author Carlo Bellacoscia
  */
-public class socketServer extends Connection{
+public class SServer extends Connection{
 
     private Socket client = null;
 
     private Lobby lobby = new Lobby();
 
-    public socketServer() {
+    public SServer() {
         super();
     }
 
@@ -43,7 +42,7 @@ public class socketServer extends Connection{
 
         try {
             try (ServerSocket serverSocket = new ServerSocket(port)) {
-                while (serverSocket.isBound()) {
+                while (true) {
 
                     System.out.println("Server started");
 
@@ -58,7 +57,7 @@ public class socketServer extends Connection{
                     logInfo();
                     Player p = new Player(username, character);
 
-                    ClientHandler handler = new ClientHandler(p,serverSocket);
+                    ClientThread handler = new ClientThread(p,serverSocket);
                     handler.start();
 
                     lobby.addPlayer(p);
@@ -111,7 +110,7 @@ public class socketServer extends Connection{
 
     public static void main(String[] args){
 
-        socketServer s = new socketServer();
+        SServer s = new SServer();
         s.acquirePort();
 
         s.connection();

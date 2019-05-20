@@ -10,14 +10,14 @@ import java.util.ArrayList;
  *
  * @author Carlo Bellacoscia
  */
-public class ClientHandler extends Thread {
+public class ClientThread extends Thread {
 
     private ArrayList<String> playerConnected = new ArrayList<>();
     private String username;
     private String character;
     ServerSocket serverSocket;
 
-    public ClientHandler(Player p, ServerSocket s) {
+    public ClientThread(Player p, ServerSocket s) {
         this.username = p.getUsername();
         this.character = p.getCharacter();
         this.playerConnected.add(username);

@@ -2,14 +2,13 @@ package it.polimi.ingsw.Connection;
 
 import java.io.*;
 import java.net.*;
-import java.util.Scanner;
 
 /**
  * The type Client.
  *
  * @author Carlo Bellacoscia
  */
-public class clientSocket extends Connection{
+public class SClient extends Connection{
 
 
     private Socket socketClient = null;
@@ -24,7 +23,7 @@ public class clientSocket extends Connection{
      *
      * @return the socket
      */
-    public Socket connect(clientSocket c){
+    public Socket connect(SClient c){
 
         try {
 
@@ -64,7 +63,7 @@ public class clientSocket extends Connection{
 
     public static void main( String[] args ) {
 
-        clientSocket c = new clientSocket();
+        SClient c = new SClient();
         c.acquirePort();
         c.connect(c);
     }
