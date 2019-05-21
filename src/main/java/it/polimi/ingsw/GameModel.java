@@ -42,8 +42,10 @@ public class GameModel {
 
     private Board currentBoard;
 
-    public GameModel() {
+    public GameModel(){
+
     }
+
 
     public GameModel(ArrayList<Player> playerList, Player currentPlayer, Time timeTurn, Board currentBoard) {
         this.playerList = playerList;
@@ -55,6 +57,65 @@ public class GameModel {
     public GameModel(Lobby lobbyToStartFrom){
         this.playerList = lobbyToStartFrom.getJoinedPlayers();
         this.currentBoard = new Board(lobbyToStartFrom.getMap());
+    }
+
+    public Set<Figure> askTarget(int num){
+        return null;
+    }
+    public Weapon askWeapon(){
+        return null;
+    }
+    public void askUseEffect(Set<Effect> eff){}
+
+    public void setActions() {}
+    public void getStatus(Figure p) {}
+    public void kill(Figure p) {}
+    public void finalFrenzy() {}
+    public void finalScore(Figure p) {}
+    public void update() {}
+
+
+    /**
+     * ends a turn
+     * adds tokens to the killshot track
+     * iterates the current player to the next
+     * on the player list
+     */
+
+    public void endTurn() {
+
+        int k;
+        int i;
+        int flag =0;
+
+        for(Figure figure : this.playerList){
+
+            if(figure.getPersonalBoard().getDamage().size() >= 11){
+
+                for (i = 0; i < this.currentBoard.getTrack().getKillsTrack().size(); i++) {
+                    if (this.currentBoard.getTrack().getKillsTrack().get(i) == null) {
+                        flag = i;
+                    }
+                }
+
+                this.currentBoard.getTrack().getKillsTrack().get(i).add(figure.getPersonalBoard().getDamage().get(10));
+                if(figure.getPersonalBoard().getDamage().size() == 12){
+                    this.currentBoard.getTrack().getKillsTrack().get(i).add(figure.getPersonalBoard().getDamage().get(11));
+                }
+                figure.die();
+            }
+
+        }
+
+        this.getCurrentBoard().refillSquares();
+
+
+        //iterates the current player
+        if(playerList.indexOf(currentPlayer) != this.playerList.size()-1) {
+            this.currentPlayer = this.playerList.get(this.playerList.indexOf(currentPlayer) + 1);
+        }else{
+            this.currentPlayer = this.playerList.get(1);
+        }
     }
 
     public ArrayList<Player> getPlayerList() {
@@ -99,97 +160,6 @@ public class GameModel {
 
     public void setBot(Terminator bot) {
         this.bot = bot;
-    }
-
-
-    public Set<Figure> askTarget(int num){
-        return null;
-    }
-    public Weapon askWeapon(){
-        return null;
-    }
-    public void askUseEffect(Set<Effect> eff){}
-
-    public void setActions() {}
-    public void getStatus(Figure p) {}
-    public void kill(Figure p) {}
-    public void finalFrenzy() {}
-    public void finalScore(Figure p) {}
-    public void update() {}
-
-    public void startGame(){
-
-    }
-
-    public void newTurn() {
-        int i;
-
-        for(i = 0; i<this.playerList.size() ; i++){
-            if(currentPlayer == this.playerList.get(i)){
-                if(i != this.playerList.size()-1) {
-                    currentPlayer = this.playerList.get(i + 1);
-                }else{
-                    currentPlayer = this.playerList.get(0);
-                }
-            }
-        }
-
-
-        for(Figure p: playerList) {
-            if(p.getPersonalBoard().getDamage().size() >= 11){
-                p.getPersonalBoard().resetDamage();
-            }
-        }
-
-        if(this.bot.getPersonalBoard().getDamage().size() >= 11){
-            this.bot.getPersonalBoard().resetDamage();
-        }
-
-    }
-
-    /**
-     * ends a turn
-     * adds tokens to the killshot track
-     * iterates the current player
-     */
-
-    public void endTurn() {
-
-        int k;
-        int i;
-        int flag =0;
-
-        for(Figure figure : this.playerList){
-
-            if(figure.getPersonalBoard().getDamage().size() >= 11){
-
-                for (i = 0; i < this.currentBoard.getTrack().getKillsTrack().size(); i++) {
-                    if (this.currentBoard.getTrack().getKillsTrack().get(i) == null) {
-                        flag = i;
-                    }
-                }
-
-                this.currentBoard.getTrack().getKillsTrack().get(i).add(figure.getPersonalBoard().getDamage().get(10));
-                if(figure.getPersonalBoard().getDamage().size() == 12){
-                    this.currentBoard.getTrack().getKillsTrack().get(i).add(figure.getPersonalBoard().getDamage().get(11));
-                }
-                figure.die();
-            }
-
-        }
-
-        this.getCurrentBoard().refillSquares();
-
-
-        //iterates the current player
-        for(i=0;i< this.playerList.size();i++){
-            if(this.playerList.get(i) == currentPlayer){
-                flag = i;
-            }
-        }
-
-        this.currentPlayer = this.playerList.get(flag+1);
-
     }
 
 
