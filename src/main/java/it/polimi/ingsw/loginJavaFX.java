@@ -1,16 +1,10 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.Connection.Connection;
-import it.polimi.ingsw.Connection.SClient;
-import it.polimi.ingsw.Connection.SServer;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -56,7 +50,8 @@ public class loginJavaFX extends Application {
         Label lblColor = new Label("Colore:");
         final TextField txtColor = new TextField();
         Button btnLogin = new Button("Login");
-        final Label lblMessage = new Label();HBox hbBtn = new HBox(10);
+        final Label lblMessage = new Label();
+        HBox hbBtn = new HBox(10);
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         hbBtn.getChildren().add(btnLogin);
         grid.add(hbBtn, 1, 4);
@@ -74,13 +69,15 @@ public class loginJavaFX extends Application {
             actiontarget.setFill(Color.GREEN);
             actiontarget.setText("Accesso...");
 
-
+          //  LoginBuffer user = new LoginBuffer(txtUsername.getText(),txtColor.getText());
+          //  user.send();
+/*
             SClient client = new SClient();
             client.setPort(1234);
             client.setUsername(txtUsername.getText());
             client.setCharacter(txtColor.getText());
             client.connect(client);
-
+*/
 
         });
         primaryStage.show();

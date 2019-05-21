@@ -11,6 +11,12 @@ import java.util.HashMap;
 
 public class Lobby {
 
+    private boolean gameStarted=false;
+
+    public boolean isGameStarted() {
+        return gameStarted;
+    }
+
     private final int maxPlayer = 5;
 
     //List of players who have joined the lobby

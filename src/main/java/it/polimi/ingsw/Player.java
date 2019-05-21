@@ -39,6 +39,8 @@ public class Player extends Figure {
         this.pref = pref;
     }
 
+    public Player(){};
+
     /**
      * Picks up AmmoLot on the square
      *
