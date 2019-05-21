@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model_buffer.CLI;
+package it.polimi.ingsw.CLI;
 
 import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.connection.socket.SClient;
