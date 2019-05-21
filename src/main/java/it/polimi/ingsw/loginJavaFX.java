@@ -1,6 +1,5 @@
 package it.polimi.ingsw;
 
-import com.sun.corba.se.spi.activation.Server;
 import it.polimi.ingsw.Connection.Connection;
 import it.polimi.ingsw.Connection.SClient;
 import it.polimi.ingsw.Connection.SServer;
