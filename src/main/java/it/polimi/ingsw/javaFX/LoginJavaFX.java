@@ -1,17 +1,10 @@
 package it.polimi.ingsw.javaFX;
 
-import it.polimi.ingsw.Connection.Connection;
-import it.polimi.ingsw.Connection.RmiClient;
-import it.polimi.ingsw.Connection.SClient;
-import it.polimi.ingsw.Connection.SServer;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -22,7 +15,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 
 public class LoginJavaFX extends Application {
 
@@ -43,11 +35,6 @@ public class LoginJavaFX extends Application {
 
     public void setColor(String color) {
         this.color = color;
-    }
-
-
-    public static void main(String[] args){
-        launch(args);
     }
 
     @Override
@@ -110,7 +97,6 @@ public class LoginJavaFX extends Application {
 
             username = txtUsername.getText();
             color = txtColor.getText();
-
         });
         primaryStage.show();
 
