@@ -25,7 +25,9 @@ public class TargetingScope extends PowerUp {
 
 
     public void effect(Figure target) {
-        //TODO missing implementation 
+
+        //TODO missing implementation
+
     }
 
 }

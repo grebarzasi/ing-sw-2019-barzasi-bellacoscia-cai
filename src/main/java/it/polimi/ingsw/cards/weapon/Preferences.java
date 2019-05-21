@@ -12,6 +12,7 @@ import java.util.Set;
 import static java.util.Collections.EMPTY_SET;
 
 public class Preferences {
+
     private Set<Figure> target;
     private Square position;
     private String direction;
