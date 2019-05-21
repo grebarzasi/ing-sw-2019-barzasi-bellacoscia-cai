@@ -1,8 +1,8 @@
 package it.polimi.ingsw.model_buffer;
 
-import it.polimi.ingsw.Connection.ConnectionTech;
-import it.polimi.ingsw.Connection.SClient;
-import it.polimi.ingsw.Connection.rmi.RmiClient;
+import it.polimi.ingsw.connection.ConnectionTech;
+import it.polimi.ingsw.connection.socket.SClient;
+import it.polimi.ingsw.connection.rmi.RmiClient;
 import java.rmi.RemoteException;
 
 public class LoginBuffer {

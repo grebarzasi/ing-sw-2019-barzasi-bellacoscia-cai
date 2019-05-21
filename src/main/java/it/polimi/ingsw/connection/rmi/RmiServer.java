@@ -1,6 +1,6 @@
-package it.polimi.ingsw.Connection.rmi;
+package it.polimi.ingsw.connection.rmi;
 
-import it.polimi.ingsw.Connection.ConnectionTech;
+import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.Lobby;
 
 import java.rmi.RemoteException;

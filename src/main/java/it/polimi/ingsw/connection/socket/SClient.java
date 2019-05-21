@@ -1,5 +1,7 @@
-package it.polimi.ingsw.Connection;
+package it.polimi.ingsw.connection.socket;
 
+
+import it.polimi.ingsw.connection.ConnectionTech;
 
 import java.io.*;
 import java.net.Socket;
@@ -22,9 +24,9 @@ public class SClient extends ConnectionTech {
             server = new Socket(super.getIp(), super.getPort());
             this.in = new BufferedReader(new InputStreamReader(server.getInputStream()));
             this.out = new PrintWriter(new OutputStreamWriter(server.getOutputStream()));
-            System.out.println("Connection established\n");
+            System.out.println("connection established\n");
         } catch (Exception e) {
-            System.err.println("Connection error\n");
+            System.err.println("connection error\n");
         }
     }
 

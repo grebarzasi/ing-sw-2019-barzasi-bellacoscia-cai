@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LobbyTest {
-
+/*
     @Test
     void allPurposeTest() {
 
@@ -64,5 +64,5 @@ class LobbyTest {
         assertTrue(test.canStart());
 
 
-    }
+    }*/
 }

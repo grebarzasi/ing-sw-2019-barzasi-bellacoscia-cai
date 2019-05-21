@@ -1,8 +1,8 @@
 package it.polimi.ingsw.model_buffer.CLI;
 
-import it.polimi.ingsw.Connection.ConnectionTech;
-import it.polimi.ingsw.Connection.SClient;
-import it.polimi.ingsw.Connection.rmi.RmiClient;
+import it.polimi.ingsw.connection.ConnectionTech;
+import it.polimi.ingsw.connection.socket.SClient;
+import it.polimi.ingsw.connection.rmi.RmiClient;
 import it.polimi.ingsw.model_buffer.LoginBuffer;
 
 import java.io.BufferedReader;
@@ -25,7 +25,7 @@ public class CliView {
 
 
     public void chooseConnection() throws IOException {
-        System.out.println("1-RMI\n2-Socket\nSelect connection type:\n");
+        System.out.println("1-RMI\n2-socket\nSelect connection type:\n");
         int temp = Integer.parseInt(sc.readLine());
         if(temp==1){
             c= new RmiClient();
@@ -34,7 +34,7 @@ public class CliView {
         }else if(temp==2){
             c= new SClient();
             c.setRmi(false);
-            System.out.println("Socket\n");
+            System.out.println("socket\n");
 
         }
         //c.setPort(this.acquirePort());
