@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Controller implements Remote {
 
     private GameModel model = new GameModel();
-    private VirtualView view = new VirtualView();
+    //private VirtualView view = new VirtualView();
 
     /**
      * ask player

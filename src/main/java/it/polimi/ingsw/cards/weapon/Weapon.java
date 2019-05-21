@@ -1,6 +1,7 @@
 package it.polimi.ingsw.cards.weapon;
 
 import it.polimi.ingsw.Figure;
+import it.polimi.ingsw.Player;
 import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.cards.Card;
 
@@ -139,7 +140,7 @@ public class Weapon extends Card {
         this.lastHit = lastHit;
     }
 
-    public Figure getOwner() {
+    public Player getOwner() {
         return super.getOwner();
     }
 

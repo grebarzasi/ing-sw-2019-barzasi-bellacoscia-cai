@@ -23,8 +23,6 @@ public class Newton extends PowerUp {
         super(ammoOnDiscard, name);
     }
 
-    @Override
-    /*Edit this, Figure cast wont work*/
     public void effect() {
        Figure target = super.getOwner().getPref().getOneTarget();
        new Move(2).doAction(target);
