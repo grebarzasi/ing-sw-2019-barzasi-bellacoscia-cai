@@ -18,6 +18,8 @@ public class Lobby {
     //Maps each player to their status, ready or not
     private HashMap<Player,Boolean> readyStatus = new HashMap<>();
 
+    private String map;
+
     public Lobby() {
         this.joinedPlayers = new ArrayList<>();
         this.readyStatus = new HashMap<>();
@@ -109,6 +111,14 @@ public class Lobby {
 
     public void setReadyStatus(HashMap<Player, Boolean> readyStatus) {
         this.readyStatus = readyStatus;
+    }
+
+    public String getMap() {
+        return map;
+    }
+
+    public void setMap(String map) {
+        this.map = map;
     }
 }
 

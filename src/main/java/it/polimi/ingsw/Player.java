@@ -53,7 +53,7 @@ public class Player extends Figure {
         }else{
 
             if(this.getPosition().isSpawn() || ((NonSpawnSquare)this.getPosition()).getDrop().hasPowerup()){
-                this.powerupList.add((PowerUp)this.getControllerServer().getCurrentBoard().getPowerupDeck().fetch());
+                this.powerupList.add((PowerUp)this.getModel().getCurrentBoard().getPowerupDeck().fetch());
             }
             if(!this.getPosition().isSpawn()){
                 Ammo tmp = ((NonSpawnSquare)this.getPosition()).getDrop().getContent();

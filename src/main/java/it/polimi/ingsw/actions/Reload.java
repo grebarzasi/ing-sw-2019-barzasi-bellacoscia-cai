@@ -11,7 +11,7 @@ public class Reload implements SubAction {
     }
 
     public void doAction(Figure p){
-        //p.getControllerServer().askWeapon();
+        //p.getModel().askWeapon();
 
     }
 }

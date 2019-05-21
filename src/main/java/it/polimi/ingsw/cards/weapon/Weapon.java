@@ -63,7 +63,7 @@ public class Weapon extends Card {
 
 
     public void use(){
-        this.getOwner().getControllerServer().askUseEffect(getUsableEff());
+        this.getOwner().getModel().askUseEffect(getUsableEff());
     }
 
     //setters&getters

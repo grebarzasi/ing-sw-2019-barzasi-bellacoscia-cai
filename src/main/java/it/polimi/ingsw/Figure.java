@@ -41,7 +41,7 @@ public class Figure {
 
     private Board gameBoard;
 
-    private GameControllerServer controllerServer;
+    private GameModel model;
 
     private int maxActions;
 
@@ -174,9 +174,9 @@ public class Figure {
      * @author Gregorio Barzasi
      */
     public Set<Figure> allFigures(){
-        Set<Figure> f = new HashSet<>(controllerServer.getPlayerList());
-        if(controllerServer.getBot()!=null)
-         f.add(controllerServer.getBot());
+        Set<Figure> f = new HashSet<>(model.getPlayerList());
+        if(model.getBot()!=null)
+         f.add(model.getBot());
         return f;
     }
 
@@ -456,12 +456,12 @@ public class Figure {
         this.gameBoard = gameBoard;
     }
 
-    public GameControllerServer getControllerServer() {
-        return controllerServer;
+    public GameModel getModel() {
+        return model;
     }
 
-    public void setControllerServer(GameControllerServer controllerServer) {
-        this.controllerServer = controllerServer;
+    public void setModel(GameModel model) {
+        this.model = model;
     }
 
     public int getMaxActions() {

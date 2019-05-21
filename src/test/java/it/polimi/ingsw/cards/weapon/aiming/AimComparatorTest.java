@@ -1,7 +1,7 @@
 package it.polimi.ingsw.cards.weapon.aiming;
 
 import it.polimi.ingsw.Figure;
-import it.polimi.ingsw.GameControllerServer;
+import it.polimi.ingsw.GameModel;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.board.map.Map;
 import it.polimi.ingsw.board.map.Square;
@@ -11,7 +11,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AimComparatorTest {
     private static Map m = new Map("large");
     private static ArrayList<Player> playerArrayList = new ArrayList<>();
-    private static GameControllerServer controller = new GameControllerServer();
+    private static GameModel controller = new GameModel();
     private static Weapon w = new Weapon();
     private static Square[][] squareMatrix = m.getSquareMatrix();
 
@@ -45,7 +44,7 @@ class AimComparatorTest {
         playerArrayList.add(new Player("p 4", "prova",squareMatrix[0][3]));
 
         for(Player p: playerArrayList){
-            p.setControllerServer(controller);
+            p.setModel(controller);
         }
         controller.setPlayerList(playerArrayList);
         controller.setCurrentPlayer(playerArrayList.get(0));

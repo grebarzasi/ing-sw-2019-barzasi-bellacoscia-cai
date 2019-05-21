@@ -1,12 +1,10 @@
 package it.polimi.ingsw;
 
-import java.util.*;
-
 public class Subject {
 
 
 
-    public GameControllerServer observer;
+    public GameModel observer;
 
     public Subject() {
     }

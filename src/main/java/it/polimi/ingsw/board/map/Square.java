@@ -145,6 +145,8 @@ public class Square {
     //IMPLEMENT HERE
     public void pickItem(Figure p){}
 
+
+
 }
 
 

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.cards.power_up;
 
 import it.polimi.ingsw.Figure;
+import it.polimi.ingsw.Player;
 import it.polimi.ingsw.Token;
 import it.polimi.ingsw.PlayerBoard;
 import it.polimi.ingsw.cards.Ammo;
@@ -23,13 +24,9 @@ public class TagbackGrenade extends PowerUp {
         super(ammoOnDiscard, name);
     }
 
-    @Override
-    public void effect() {
-        Figure owner = super.getOwner();
-        Figure target = super.getOwner().getControllerServer().askOneTarget();
-        PlayerBoard board = new PlayerBoard(target);
-        Token t = new Token(owner);
 
-        board.addMark(t);
+    public void activate() {
+       Figure target = this.getOwner().getPersonalBoard().getDamage().get(this.getOwner().getPersonalBoard().getDamage().size()-1).getOwner();
+       target.getPersonalBoard().addMark(new Token(this.getOwner()));
     }
 }

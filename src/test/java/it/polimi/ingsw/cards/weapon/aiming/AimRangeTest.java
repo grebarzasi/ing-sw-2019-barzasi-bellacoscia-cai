@@ -1,9 +1,8 @@
 package it.polimi.ingsw.cards.weapon.aiming;
 
 import it.polimi.ingsw.Figure;
-import it.polimi.ingsw.GameControllerServer;
+import it.polimi.ingsw.GameModel;
 import it.polimi.ingsw.Player;
-import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.map.Map;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.weapon.Weapon;
@@ -19,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AimRangeTest {
     private static Map m = new Map("large");
     private static ArrayList<Player> playerArrayList = new ArrayList<>();
-    private static GameControllerServer controller = new GameControllerServer();
+    private static GameModel controller = new GameModel();
     private static Weapon w = new Weapon();
     private static Square[][] squareMatrix = m.getSquareMatrix();
 
@@ -45,7 +44,7 @@ class AimRangeTest {
 
 
         for(Player p: playerArrayList){
-            p.setControllerServer(controller);
+            p.setModel(controller);
         }
         controller.setPlayerList(playerArrayList);
         controller.setCurrentPlayer(playerArrayList.get(0));

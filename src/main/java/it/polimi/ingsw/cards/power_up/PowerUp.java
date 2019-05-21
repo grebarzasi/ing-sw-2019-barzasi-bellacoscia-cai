@@ -1,5 +1,6 @@
 package it.polimi.ingsw.cards.power_up;
 
+import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.cards.Card;
 
@@ -14,13 +15,13 @@ public abstract class PowerUp extends Card {
 
     private String name;
 
-
-    public abstract void effect();
-
-
     public PowerUp(Ammo ammoOnDiscard, String name) {
         this.ammoOnDiscard = ammoOnDiscard;
         this.name = name;
+    }
+
+    public void discard(){
+        this.getOwner().getPersonalBoard().addAmmo(this.ammoOnDiscard);
     }
 
     public Ammo getAmmoOnDiscard() {

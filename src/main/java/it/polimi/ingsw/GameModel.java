@@ -22,9 +22,11 @@ import java.util.Scanner;
 import java.util.Set;
 
 /**
- * The type Game controller server.
+ * All the game's data are stored
+ * in game model
  */
-public class GameControllerServer implements Controller {
+
+public class GameModel {
 
     private final static int maxPlayers = 5;
     private final static int width = 4;
@@ -38,16 +40,21 @@ public class GameControllerServer implements Controller {
 
     private Time timeTurn;
 
-    private Board currentBoard; //was public who did dis?
+    private Board currentBoard;
 
-    public GameControllerServer() {
+    public GameModel() {
     }
 
-    public GameControllerServer(ArrayList<Player> playerList, Player currentPlayer, Time timeTurn, Board currentBoard) {
+    public GameModel(ArrayList<Player> playerList, Player currentPlayer, Time timeTurn, Board currentBoard) {
         this.playerList = playerList;
         this.currentPlayer = currentPlayer;
         this.timeTurn = timeTurn;
         this.currentBoard = currentBoard;
+    }
+
+    public GameModel(Lobby lobbyToStartFrom){
+        this.playerList = lobbyToStartFrom.getJoinedPlayers();
+        this.currentBoard = new Board(lobbyToStartFrom.getMap());
     }
 
     public ArrayList<Player> getPlayerList() {
@@ -95,41 +102,6 @@ public class GameControllerServer implements Controller {
     }
 
 
-    /**
-     *ask player
-     * @author Gregorio Barzasi
-     */
-    public Square askPosition(){
-
-        Scanner sc = new Scanner(System.in);
-        int row = sc.nextInt();
-        int column = sc.nextInt();
-
-        return currentBoard.getMap().getSquareMatrix()[row][column];
-    }
-    public Ammo askAmmo(){
-        Figure p = getCurrentPlayer();
-        Scanner sc = new Scanner(System.in);
-        int red = sc.nextInt();
-        int blue = sc.nextInt();
-        int yellow = sc.nextInt();
-
-        Ammo a = new Ammo(red, blue, yellow);
-        p.getPersonalBoard().removeAmmo(a);
-
-        return a;
-    }
-    public Figure askOneTarget(){
-
-        Scanner sc = new Scanner(System.in);
-        String name = sc.next();
-        for (Player p :playerList) {
-            if(p.getUsername().equals(name)){
-                return p;
-            }
-        }
-        return null;
-    }
     public Set<Figure> askTarget(int num){
         return null;
     }
@@ -144,6 +116,10 @@ public class GameControllerServer implements Controller {
     public void finalFrenzy() {}
     public void finalScore(Figure p) {}
     public void update() {}
+
+    public void startGame(){
+
+    }
 
     public void newTurn() {
         int i;

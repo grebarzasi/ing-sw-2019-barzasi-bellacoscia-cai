@@ -40,7 +40,7 @@ public class MoveTarget implements SubEffect {
                 break;
         }
         if(s==null)
-            //s = w.getOwner().getControllerServer().askDestination();
+            //s = w.getOwner().getModel().askDestination();
 
         for (Figure target : p) {
             target.setPosition(s);

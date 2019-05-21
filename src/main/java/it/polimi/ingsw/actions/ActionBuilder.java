@@ -1,13 +1,14 @@
 package it.polimi.ingsw.actions;
 
 import it.polimi.ingsw.Figure;
+import it.polimi.ingsw.GameModel;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
- * this class is used by {@link it.polimi.ingsw.GameControllerServer} to initialize {@link Action} according to game status
+ * this class is used by {@link GameModel} to initialize {@link Action} according to game status
  * @author Gregorio Barzasi
  */
 public class ActionBuilder {

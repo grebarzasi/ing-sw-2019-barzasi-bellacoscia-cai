@@ -10,10 +10,8 @@ public class Teleporter extends PowerUp {
         super(ammoOnDiscard, name);
     }
 
-    @Override
-    public void effect() {
-        Figure target = super.getOwner().getControllerServer().askOneTarget();
-        Square dest = super.getOwner().getControllerServer().askPosition();
-        target.setPosition(dest);
+
+    public void effect(Square teleportTo) {
+       this.getOwner().setPosition(teleportTo);
     }
 }

@@ -13,7 +13,7 @@ public class Shoot implements SubAction {
     }
 
     public void doAction(Figure p){
-        p.getControllerServer().askWeapon().use();
+        p.getModel().askWeapon().use();
     }
 
 }
