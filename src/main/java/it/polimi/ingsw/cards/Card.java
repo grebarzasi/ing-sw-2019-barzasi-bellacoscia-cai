@@ -2,20 +2,21 @@
 package it.polimi.ingsw.cards;
 
 import it.polimi.ingsw.Figure;
+import it.polimi.ingsw.Player;
 
 
 public abstract class Card {
 
-    private Figure owner;
+    private Player owner;
 
     public Card() {
     }
 
-    public Figure getOwner() {
+    public Player getOwner() {
         return owner;
     }
 
-    public void setOwner(Figure owner) {
+    public void setOwner(Player owner) {
         this.owner = owner;
     }
 

@@ -3,6 +3,7 @@ package it.polimi.ingsw.cards.weapon;
 import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.board.map.Square;
+import it.polimi.ingsw.cards.Ammo;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -14,6 +15,24 @@ public class Preferences {
     private Set<Figure> target;
     private Square position;
     private String direction;
+    private Figure oneTarget;
+    private Ammo ammo;
+
+    public Ammo getAmmo() {
+        return ammo;
+    }
+
+    public void setAmmo(Ammo ammo) {
+        this.ammo = ammo;
+    }
+
+    public Figure getOneTarget() {
+        return oneTarget;
+    }
+
+    public void setOneTarget(Figure oneTarget) {
+        this.oneTarget = oneTarget;
+    }
 
     public  Set<Figure> getTarget() {
         return target;

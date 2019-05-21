@@ -4,6 +4,7 @@ import it.polimi.ingsw.board.map.NonSpawnSquare;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.cards.power_up.PowerUp;
+import it.polimi.ingsw.cards.weapon.Preferences;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 
 public class Player extends Figure {
 
+    private Preferences pref;
 
     //chosen username
 
@@ -29,11 +31,20 @@ public class Player extends Figure {
 
     private ArrayList<PowerUp> powerupList;
 
+    public Preferences getPref() {
+        return pref;
+    }
+
+    public void setPref(Preferences pref) {
+        this.pref = pref;
+    }
+
     /**
      * Picks up AmmoLot on the square
      *
      * MISSING MAXIMUM POWERUP MANAGEMENT
      */
+
 
 
     public void pick(){
