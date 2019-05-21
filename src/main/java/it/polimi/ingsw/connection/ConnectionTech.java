@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Connection;
+package it.polimi.ingsw.connection;
 
 public abstract class ConnectionTech {
 

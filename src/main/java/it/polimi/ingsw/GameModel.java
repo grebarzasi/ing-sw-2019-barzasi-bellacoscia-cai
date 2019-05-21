@@ -55,8 +55,8 @@ public class GameModel {
     }
 
     public GameModel(Lobby lobbyToStartFrom){
-        this.playerList = lobbyToStartFrom.getJoinedPlayers();
-        this.currentBoard = new Board(lobbyToStartFrom.getMap());
+       // this.playerList = lobbyToStartFrom.getJoinedPlayers();
+      //  this.currentBoard = new Board(lobbyToStartFrom.getMap());
     }
 
     public Set<Figure> askTarget(int num){

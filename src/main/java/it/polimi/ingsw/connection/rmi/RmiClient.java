@@ -1,9 +1,9 @@
-package it.polimi.ingsw.Connection.rmi;
+package it.polimi.ingsw.connection.rmi;
 
 /**
  * @author Gregorio Barzasi
  */
-import it.polimi.ingsw.Connection.ConnectionTech;
+import it.polimi.ingsw.connection.ConnectionTech;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -26,9 +26,9 @@ public class RmiClient extends ConnectionTech implements RmiCInterf {
             server = (RmiSInterf) registry.lookup("Server");
             RmiCInterf client = (RmiCInterf) UnicastRemoteObject.exportObject(this, 0);
             server.sendClient(client);
-            System.out.println("RMI Connection established\n");
+            System.out.println("RMI connection established\n");
         } catch (Exception e) {
-            System.err.println("RMI Connection error\n");
+            System.err.println("RMI connection error\n");
             e.printStackTrace();
         }
 

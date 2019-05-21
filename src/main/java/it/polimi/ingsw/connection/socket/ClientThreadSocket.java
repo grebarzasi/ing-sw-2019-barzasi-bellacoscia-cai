@@ -1,9 +1,9 @@
-package it.polimi.ingsw.Connection;
+package it.polimi.ingsw.connection.socket;
 
+import it.polimi.ingsw.Lobby;
 import it.polimi.ingsw.Player;
 
 import java.io.*;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
@@ -12,17 +12,16 @@ import java.util.ArrayList;
  *
  * @author Carlo Bellacoscia
  */
-public class ClientThread extends Thread {
+public class ClientThreadSocket extends Thread {
 
-    private ArrayList<String> playerConnected = new ArrayList<>();
-    private String username;
-    private String character;
+    private Lobby lobby;
+    private Player owner;
     private Socket client;
     private BufferedReader in;
     private PrintWriter out;
 
-    public ClientThread(Socket s) throws IOException{
-        this.playerConnected.add(username);
+    public ClientThreadSocket(Socket s, Lobby lobby) throws IOException{
+        this.lobby=lobby;
         this.client = s;
         this.in = new BufferedReader(new InputStreamReader(client.getInputStream()));
         this.out = new PrintWriter(new OutputStreamWriter(client.getOutputStream()));
@@ -30,10 +29,10 @@ public class ClientThread extends Thread {
 
     public void waitLogin()throws IOException {
         while(in.readLine()!="login");
-        username=in.readLine();
-        character=in.readLine();
-        System.out.println(username + " logged as:"+ character);
-        out.println(username + "logged as:"+ character);
+        String username=in.readLine();
+        String character=in.readLine();
+        owner = new Player(username,character);
+        lobby.addPlayer(this);
     }
 
     public void run()  {
@@ -43,5 +42,9 @@ public class ClientThread extends Thread {
             e.printStackTrace();
         }
 
+    }
+
+    public Player getOwner() {
+        return owner;
     }
 }

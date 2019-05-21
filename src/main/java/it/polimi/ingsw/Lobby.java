@@ -1,6 +1,8 @@
 package it.polimi.ingsw;
 
 
+import it.polimi.ingsw.connection.socket.ClientThreadSocket;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -20,57 +22,54 @@ public class Lobby {
     private final int maxPlayer = 5;
 
     //List of players who have joined the lobby
-    private ArrayList<Player> joinedPlayers;
+    private ArrayList<ClientThreadSocket> joinedPlayers;
     //Maps each player to their status, ready or not
-    private HashMap<Player,Boolean> readyStatus = new HashMap<>();
+    private HashMap<ClientThreadSocket,Boolean> readyStatus = new HashMap<>();
 
-    private String map;
 
     public Lobby() {
         this.joinedPlayers = new ArrayList<>();
         this.readyStatus = new HashMap<>();
     }
 
-    public Lobby(Player p){
+    public Lobby(ClientThreadSocket p){
         this.joinedPlayers = new ArrayList<>();
         this.joinedPlayers.add(p);
         this.readyStatus.put(p,false);
 
     }
 
-    public void addPlayer(Player p){
-
-        if (this.joinedPlayers.size() < maxPlayer && usernamecheck(p) && charactercheck(p)) {
+    public boolean addPlayer(ClientThreadSocket p){
+        if (this.joinedPlayers.size() < maxPlayer && usernameCheck(p) && characterCheck(p)) {
             this.joinedPlayers.add(p);
             this.readyStatus.put(p, false);
-            System.out.println(p.getUsername() + " has joined the battle as " + p.getCharacter());
-        } else {
-            System.out.println(p.getUsername() + " has been rejected");
+            return true;
         }
+        return false;
     }
 
-    public boolean usernamecheck(Player p){
-        for(Player toCheck: this.joinedPlayers){
-            if(toCheck.getUsername().equals(p.getUsername())){
+    public boolean usernameCheck(ClientThreadSocket p){
+        for(ClientThreadSocket toCheck: this.joinedPlayers){
+            if(toCheck.getOwner().getUsername().equals(p.getOwner().getUsername())){
                 return false;
             }
         }
         return true;
     }
 
-    public boolean charactercheck(Player p){
-        for(Player toCheck: this.joinedPlayers){
-            if(toCheck.getCharacter().equals(p.getCharacter())){
+    public boolean characterCheck(ClientThreadSocket p){
+        for(ClientThreadSocket toCheck: this.joinedPlayers){
+            if(toCheck.getOwner().getCharacter().equals(p.getOwner().getCharacter())){
                 return false;
             }
         }
         return true;
     }
 
-    public void disconnectPlayer(Player p){
+    public void disconnectPlayer(ClientThreadSocket p){
         this.joinedPlayers.remove(p);
         this.readyStatus.remove(p);
-        System.out.print(p.getUsername() + " has cowardly left the battle before it began\n");
+        System.out.print(p.getOwner().getUsername() + " has cowardly left the battle before it began\n");
     }
 
     /**
@@ -79,7 +78,7 @@ public class Lobby {
      */
     public boolean allReady(){
 
-        for (Player p : joinedPlayers){
+        for (ClientThreadSocket p : joinedPlayers){
             if(!readyStatus.get(p)){
                 return false;
             }
@@ -94,37 +93,29 @@ public class Lobby {
         return false;
     }
 
-    public void readyPlayer(Player p){
+    public void readyPlayer(ClientThreadSocket p){
         this.readyStatus.replace(p,true);
 
     }
 
-    public void unreadyPlayer(Player p){
+    public void unreadyPlayer(ClientThreadSocket p){
         this.readyStatus.replace(p,false);
     }
 
-    public ArrayList<Player> getJoinedPlayers() {
+    public ArrayList<ClientThreadSocket> getJoinedPlayers() {
         return joinedPlayers;
     }
 
-    public void setJoinedPlayers(ArrayList<Player> joinedPlayers) {
+    public void setJoinedPlayers(ArrayList<ClientThreadSocket> joinedPlayers) {
         this.joinedPlayers = joinedPlayers;
     }
 
-    public HashMap<Player, Boolean> getReadyStatus() {
+    public HashMap<ClientThreadSocket, Boolean> getReadyStatus() {
         return readyStatus;
     }
 
-    public void setReadyStatus(HashMap<Player, Boolean> readyStatus) {
+    public void setReadyStatus(HashMap<ClientThreadSocket, Boolean> readyStatus) {
         this.readyStatus = readyStatus;
-    }
-
-    public String getMap() {
-        return map;
-    }
-
-    public void setMap(String map) {
-        this.map = map;
     }
 }
 

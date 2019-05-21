@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.javaFX;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -16,12 +16,26 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class loginJavaFX extends Application {
+public class LoginJavaFX extends Application {
 
-    public static void main(String[] args){
-        launch(args);
+    String username;
+    String color;
+
+    public String getUsername() {
+        return username;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -43,8 +57,9 @@ public class loginJavaFX extends Application {
 
         Text scenetitle = new Text("Benvenuto");
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-        grid.add(scenetitle, 0, 0, 2, 1);
+        grid.add(scenetitle, 0, 1, 2, 1);
 
+        Button btnBack = new Button("Indietro");
         Label lblUsername = new Label("Username:");
         final TextField txtUsername = new TextField();
         Label lblColor = new Label("Colore:");
@@ -54,31 +69,34 @@ public class loginJavaFX extends Application {
         HBox hbBtn = new HBox(10);
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         hbBtn.getChildren().add(btnLogin);
+
+        grid.add(btnBack,0,0);
         grid.add(hbBtn, 1, 4);
-        grid.add(lblUsername,1,1);
-        grid.add(txtUsername,1,2);
-        grid.add(lblColor,1,3);
-        grid.add(txtColor,1,4);
-        grid.add(btnLogin,1,5);
+        grid.add(lblUsername,0,2);
+        grid.add(txtUsername,0,3);
+        grid.add(lblColor,0,4);
+        grid.add(txtColor,0,5);
+        grid.add(btnLogin,0,6);
 
         final Text actiontarget = new Text();
-        grid.add(actiontarget, 1, 6);
+        grid.add(actiontarget, 1, 7);
+
+        btnBack.setOnAction(e->{
+            StartJavaFX start = new StartJavaFX();
+            try {
+                start.start(primaryStage);
+            }catch (Exception a){
+                a.printStackTrace();
+            }
+        });
 
         btnLogin.setOnAction(e -> {
 
             actiontarget.setFill(Color.GREEN);
             actiontarget.setText("Accesso...");
 
-          //  LoginBuffer user = new LoginBuffer(txtUsername.getText(),txtColor.getText());
-          //  user.send();
-/*
-            SClient client = new SClient();
-            client.setPort(1234);
-            client.setUsername(txtUsername.getText());
-            client.setCharacter(txtColor.getText());
-            client.connect(client);
-*/
-
+            username = txtUsername.getText();
+            color = txtColor.getText();
         });
         primaryStage.show();
 

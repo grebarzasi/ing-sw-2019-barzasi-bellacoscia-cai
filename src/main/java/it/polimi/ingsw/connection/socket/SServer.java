@@ -1,14 +1,13 @@
-package it.polimi.ingsw.Connection;
+package it.polimi.ingsw.connection.socket;
 
-import it.polimi.ingsw.Connection.rmi.RmiServer;
 import it.polimi.ingsw.Lobby;
-import it.polimi.ingsw.Player;
+import it.polimi.ingsw.connection.ConnectionTech;
 
 import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
- * Socket connection.
+ * socket connection.
  *
  * @author Carlo Bellacoscia
  */
@@ -25,12 +24,12 @@ public class SServer extends ConnectionTech {
 
             while(!lobby.isGameStarted()){
                 client = server.accept();
-                new ClientThread(client).start();
-                System.out.println("Connection established with\n" + client);
+                new ClientThreadSocket(client,lobby).start();
+                System.out.println("connection established with\n" + client);
             }
 
         } catch (Exception e) {
-            System.err.println("Socket Connection error\n");
+            System.err.println("socket connection error\n");
             e.printStackTrace();
         }
 
