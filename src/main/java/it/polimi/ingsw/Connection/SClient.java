@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Connection;
 
+import it.polimi.ingsw.javaFX.LoginJavaFX;
+
 import java.io.*;
 import java.net.*;
 
@@ -13,6 +15,8 @@ public class SClient extends Connection{
 
     private Socket socketClient = null;
 
+    private LoginJavaFX login = new LoginJavaFX();
+
 
     public void setPort(int port) {
         this.port = port;
@@ -23,7 +27,7 @@ public class SClient extends Connection{
      *
      * @return the socket
      */
-    public Socket connect(SClient c){
+    public void connect(){
 
         try {
 
@@ -33,23 +37,7 @@ public class SClient extends Connection{
             socketClient = new Socket("127.0.0.1",port);
             System.out.println("Connection established\n");
 
-            /**
-             *prompt for username and character
-             */
 
-            c.acquireUsername();
-            c.acquireCharacter();
-
-
-            System.out.println("Welcome "+ username + "!\n");
-            PrintWriter output = new PrintWriter(socketClient.getOutputStream(), true);
-
-            /**
-             * send username and character to server
-             */
-            output.println(username);
-            output.println(character);
-            output.flush();
 
         } catch (Exception e) {
 
@@ -57,14 +45,45 @@ public class SClient extends Connection{
             System.err.println("Impossible to establish the connection\n");
 
         }
-        return socketClient;
     }
 
+    public void login(){
+        /**
+         *prompt for username and character
+         */
+        if(login.getUsername() == null){
+            this.acquireUsername();
+        }else {
+            username = login.getUsername();
+        }
+
+        if(login.getColor() == null){
+            this.acquireCharacter();
+        }else{
+            character = login.getColor();
+        }
+
+
+        System.out.println("Welcome "+ username + "!\n");
+        PrintWriter output = null;
+        try {
+            output = new PrintWriter(socketClient.getOutputStream(), true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        /**
+         * send username and character to server
+         */
+        output.println(username);
+        output.println(character);
+        output.flush();
+    }
 
     public static void main( String[] args ) {
 
         SClient c = new SClient();
         c.acquirePort();
-        c.connect(c);
+        c.connect();
     }
 }

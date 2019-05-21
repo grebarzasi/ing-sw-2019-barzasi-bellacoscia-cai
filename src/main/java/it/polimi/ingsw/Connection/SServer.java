@@ -44,6 +44,8 @@ public class SServer extends Connection{
             try (ServerSocket serverSocket = new ServerSocket(port)) {
                 while (true) {
 
+                    this.acquirePort();
+
                     System.out.println("Server started");
 
 
@@ -111,7 +113,6 @@ public class SServer extends Connection{
     public static void main(String[] args){
 
         SServer s = new SServer();
-        s.acquirePort();
 
         s.connection();
 

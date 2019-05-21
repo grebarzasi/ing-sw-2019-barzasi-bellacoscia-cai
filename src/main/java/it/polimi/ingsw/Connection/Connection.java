@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Connection;
 
+import it.polimi.ingsw.javaFX.LoginJavaFX;
+
 import java.util.Scanner;
 
 public class Connection {
@@ -7,6 +9,8 @@ public class Connection {
     protected int port;
     protected String username;
     protected String character;
+
+    private LoginJavaFX login = new LoginJavaFX();
 
     public int getPort() {
         return port;
@@ -33,7 +37,6 @@ public class Connection {
     }
 
     public void acquirePort() {
-        if(port == 0) {
             Scanner sc = new Scanner(System.in);
 
             System.out.println("Insert port:");
@@ -43,20 +46,17 @@ public class Connection {
                     System.out.println("Not available port, insert another port:");
                 }
             } while (port <= 1023 || port > 49151);
-        }
     }
 
     public void acquireUsername(){
-        if(username == null) {
             Scanner sc = new Scanner(System.in);
             System.out.println("Insert username");
             username = sc.nextLine();
-        }
+
 
     }
 
     public void acquireCharacter(){
-        if(character == null) {
             Scanner sc = new Scanner(System.in);
 
             do {
@@ -66,6 +66,6 @@ public class Connection {
                     System.out.println("Not available color, insert another color:");
                 }
             } while (!character.equals("blue") && !character.equals("red") && !character.equals("yellow") && !character.equals("green") && !character.equals("gray"));
-        }
+
     }
 }
