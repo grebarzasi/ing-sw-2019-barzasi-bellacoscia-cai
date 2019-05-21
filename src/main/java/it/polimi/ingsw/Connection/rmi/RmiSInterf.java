@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Connection;
+package it.polimi.ingsw.Connection.rmi;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -6,7 +6,7 @@ import java.rmi.RemoteException;
 /**
  * @author Gregorio Barzasi
  */
-public interface RmiInterface extends Remote {
-    String hello() throws RemoteException;
+public interface RmiSInterf extends Remote {
     String login(String username, String color) throws RemoteException;
+    RmiCInterf sendClient(RmiCInterf p)throws RemoteException;
 }

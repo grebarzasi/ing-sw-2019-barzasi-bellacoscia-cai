@@ -2,7 +2,9 @@ package it.polimi.ingsw.Connection;
 
 import it.polimi.ingsw.Player;
 
+import java.io.*;
 import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 
 /**
@@ -15,40 +17,31 @@ public class ClientThread extends Thread {
     private ArrayList<String> playerConnected = new ArrayList<>();
     private String username;
     private String character;
-    ServerSocket serverSocket;
+    private Socket client;
+    private BufferedReader in;
+    private PrintWriter out;
 
-    public ClientThread(Player p, ServerSocket s) {
-        this.username = p.getUsername();
-        this.character = p.getCharacter();
+    public ClientThread(Socket s) throws IOException{
         this.playerConnected.add(username);
-
-        this.serverSocket = s;
-
+        this.client = s;
+        this.in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+        this.out = new PrintWriter(new OutputStreamWriter(client.getOutputStream()));
     }
 
-    public String getUsername() {
-        return username;
+    public void waitLogin()throws IOException {
+        while(in.readLine()!="login");
+        username=in.readLine();
+        character=in.readLine();
+        System.out.println(username + " logged as:"+ character);
+        out.println(username + "logged as:"+ character);
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getCharacter() {
-        return character;
-    }
-
-    public void setCharacter(String character) {
-        this.character = character;
-    }
-
-    public ArrayList<String> getPlayerConnected() {
-        return playerConnected;
-    }
-
-    @Override
-    public void run() {
-        super.run();
+    public void run()  {
+        try {
+            waitLogin();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 }
