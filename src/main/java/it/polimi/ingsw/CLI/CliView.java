@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.rmi.RemoteException;
 
 public class CliView {
+
     private ConnectionTech c;
     private BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
 

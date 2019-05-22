@@ -97,6 +97,10 @@ public class Player extends Figure {
         this.powerupList = new ArrayList<>();
     }
 
+    public void addWeapon(Weapon weaponToAdd){
+        this.weaponsList.add(weaponToAdd);
+    }
+
     public String getUsername() {
         return username;
     }
