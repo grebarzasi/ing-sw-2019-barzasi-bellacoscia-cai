@@ -12,18 +12,27 @@ import java.util.ArrayList;
 public interface ControllerState {
 
     void shoot(ArrayList<Player> target);
+
     void chooseWeapon(Weapon choice);
+
     void move(Square position);
+
     void pick(Square position);
 
     void choose(int choice);
+
     void discardPU(PowerUp toDiscard);
+
     void discardWeapon(Weapon toDiscard);
 
     void usePU(PowerUp toUse);
+
     void teleport(Square teleportHere);
+
     void tagback();
+
     void Scope(PowerUp choice);
+
     void Newton(PowerUp choice);
 
     void useNewton(Figure Target, Square moveTo);

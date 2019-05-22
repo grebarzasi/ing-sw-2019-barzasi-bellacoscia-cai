@@ -17,13 +17,13 @@ public class Controller {
     private ControllerState asBotMoving;
     private ControllerState asBotShooting;
     private ControllerState moving;
-    private  ControllerState picking;
+    private ControllerState picking;
     private ControllerState shooting;
     private ControllerState choosingMove;
     private ControllerState choosingPowerUpToUse;
     private ControllerState discardingPowerUp;
     private ControllerState discargindWeapon;
-    private  ControllerState choosingWeapon;
+    private ControllerState choosingWeapon;
 
     private GameModel model;
     private Lobby lobby;
