@@ -62,7 +62,7 @@ public class StartJavaFX extends Application {
         /**
          * set background
          */
-        Image back = new Image(new FileInputStream("src/main/resources/images/black.png"),3000,3000,true,true);
+        Image back = new Image(new FileInputStream("src/main/resources/images/background.jpg"),2000,1500,true,true);
         BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         grid.setBackground(new Background(backgroundImage));
 
@@ -71,7 +71,7 @@ public class StartJavaFX extends Application {
          */
         Image title;
         ImageView titleV;
-        title = new Image(new FileInputStream("src/main/resources/images/title.png"),500,200,true,true);
+        title = new Image(new FileInputStream("src/main/resources/images/title.png"),1000,500,true,true);
         titleV = new ImageView(title);
         VBox ver = new VBox();
         ver.setAlignment(Pos.TOP_CENTER);
@@ -80,13 +80,13 @@ public class StartJavaFX extends Application {
         /**
          * set bottom characters
          */
-        ImageView yellowV = new ImageView(new Image(new FileInputStream("src/main/resources/images/D-struct-0R.png"), 200 ,200,true,true));
-        ImageView redV = new ImageView(new Image(new FileInputStream("src/main/resources/images/violet.png"), 200 ,200,true,true));;
-        ImageView blueV = new ImageView(new Image(new FileInputStream("src/main/resources/images/banshee.png"), 200 ,200,true,true));;
-        ImageView greenV = new ImageView(new Image(new FileInputStream("src/main/resources/images/sprog.png"), 200 ,200,true,true));;
-        ImageView grayV = new ImageView(new Image(new FileInputStream("src/main/resources/images/dozer.png"), 200 ,200,true,true));;
+        ImageView yellowV = new ImageView(new Image(new FileInputStream("src/main/resources/images/D-struct-0R.png"), 250 ,250,true,true));
+        ImageView redV = new ImageView(new Image(new FileInputStream("src/main/resources/images/violet.png"), 250 ,250,true,true));;
+        ImageView blueV = new ImageView(new Image(new FileInputStream("src/main/resources/images/banshee.png"), 250 ,250,true,true));;
+        ImageView greenV = new ImageView(new Image(new FileInputStream("src/main/resources/images/sprog.png"), 250 ,250,true,true));;
+        ImageView grayV = new ImageView(new Image(new FileInputStream("src/main/resources/images/dozer.png"), 250 ,250,true,true));;
 
-        HBox charList = new HBox(50);
+        HBox charList = new HBox(40);
         charList.setAlignment(Pos.BOTTOM_CENTER);
         charList.getChildren().add(yellowV);
         charList.getChildren().add(redV);
@@ -98,9 +98,15 @@ public class StartJavaFX extends Application {
         /**
          * set buttons
          */
-        Button btnRules = new Button("Rules");
+        Button btnRules = new Button();
         Button btnLogin = new Button("Login");
         Button btnSettings = new Button("Settings");
+        Image imgLogin = new Image(new FileInputStream("src/main/resources/images/login.png"),50,50,true,true);
+        btnLogin.setGraphic(new ImageView(imgLogin));
+        Image imgSettings = new Image(new FileInputStream("src/main/resources/images/settings.png"),50,50,true,true);
+        btnSettings.setGraphic(new ImageView(imgSettings));
+        Image imgRules = new Image(new FileInputStream("src/main/resources/images/rules.jpg"),100,100,true,true);
+        btnRules.setGraphic(new ImageView(imgRules));
 
         HBox buttonList = new HBox(20);
         buttonList.setAlignment(Pos.CENTER);
@@ -111,7 +117,7 @@ public class StartJavaFX extends Application {
         /**
          * merge layout
          */
-        VBox layout = new VBox(200);
+        VBox layout = new VBox(150);
         layout.getChildren().add(ver);
         layout.getChildren().add(buttonList);
         layout.getChildren().add(charList);
