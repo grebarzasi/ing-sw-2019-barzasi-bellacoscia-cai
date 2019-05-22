@@ -71,7 +71,7 @@ public class StartJavaFX extends Application {
          */
         Image title;
         ImageView titleV;
-        title = new Image(new FileInputStream("src/main/resources/images/title.png"),1000,500,true,true);
+        title = new Image(new FileInputStream("src/main/resources/images/title.png"),1200,700,true,true);
         titleV = new ImageView(title);
         VBox ver = new VBox();
         ver.setAlignment(Pos.TOP_CENTER);
