@@ -20,7 +20,7 @@ public class CliView {
         CliView cliView = new CliView();
         System.out.println("Benvenuto in adrenalina! seleziona la connessione da utilizzare:\n");
         cliView.chooseConnection();
-        cliView.login().send();
+        cliView.login();
     }
 
 
@@ -41,11 +41,20 @@ public class CliView {
         //c.setPort(this.acquirePort());
         c.initConnection();
     }
-    public LoginBuffer login()throws IOException{
+    public void login()throws IOException{
         System.out.println("It's time to login!");
-        String username = acquireUsername();
-        String character = acquireCharacter();
-        return new LoginBuffer(username,character,c);
+        LoginBuffer l;
+        while(true){
+            String username = acquireUsername();
+            String character = acquireCharacter();
+            l = new LoginBuffer(username, character, c);
+            System.out.println("waiting...");
+            if(l.send()){
+                System.out.println("Login success!");
+                break;
+            }
+            System.out.println("Login failed! name or character already in use");
+        }
     }
 
 

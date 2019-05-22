@@ -1,5 +1,9 @@
 package it.polimi.ingsw.javaFX;
 
+import it.polimi.ingsw.connection.ConnectionTech;
+import it.polimi.ingsw.connection.rmi.RmiClient;
+import it.polimi.ingsw.connection.socket.SClient;
+import it.polimi.ingsw.model_buffer.LoginBuffer;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +24,7 @@ import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.rmi.RemoteException;
 
 /**
  *
@@ -32,7 +37,8 @@ public class StartJavaFX extends Application {
     private String color;
     private int port;
     private String ip;
-    private String connection;
+    private String connection = "Socket";
+    private ConnectionTech c;
 
 
     public static void main(String[] args){
@@ -71,7 +77,7 @@ public class StartJavaFX extends Application {
          */
         Image title;
         ImageView titleV;
-        title = new Image(new FileInputStream("src/main/resources/images/title.png"),1000,500,true,true);
+        title = new Image(new FileInputStream("src/main/resources/images/title.png"),1200,700,true,true);
         titleV = new ImageView(title);
         VBox ver = new VBox();
         ver.setAlignment(Pos.TOP_CENTER);
@@ -154,7 +160,18 @@ public class StartJavaFX extends Application {
     }
 
     public class loginWindow extends Stage{
+
         public loginWindow(){
+
+            if(connection.equals("RMI")){
+                c= new RmiClient();
+                c.setRmi(true);
+            }else if(connection.equals("Socket")){
+                c= new SClient();
+                c.setRmi(false);
+            }
+            c.initConnection();
+
 
             Scene scene = new Scene(new BorderPane(),700,400);
             this.setTitle("Login");
@@ -244,6 +261,13 @@ public class StartJavaFX extends Application {
                 actiontarget.setText("Accesso...");
 
                 username = txtUsername.getText();
+
+                LoginBuffer login = new LoginBuffer(username,color,c);
+                try {
+                    login.send();
+                } catch (RemoteException ex) {
+                    ex.printStackTrace();
+                }
 
             });
 

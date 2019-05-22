@@ -23,7 +23,7 @@ public class SClient extends ConnectionTech {
             System.out.println("Try to connect...");
             server = new Socket(super.getIp(), super.getPort());
             this.in = new BufferedReader(new InputStreamReader(server.getInputStream()));
-            this.out = new PrintWriter(new OutputStreamWriter(server.getOutputStream()));
+            this.out = new PrintWriter(server.getOutputStream(),true);
             System.out.println("connection established\n");
         } catch (Exception e) {
             System.err.println("connection error\n");

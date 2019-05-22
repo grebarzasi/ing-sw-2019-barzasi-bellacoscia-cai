@@ -24,20 +24,34 @@ public class ClientThreadSocket extends Thread {
         this.lobby=lobby;
         this.client = s;
         this.in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-        this.out = new PrintWriter(new OutputStreamWriter(client.getOutputStream()));
+        this.out = new PrintWriter(client.getOutputStream(),true);
+        this.owner = new Player();
     }
 
-    public void waitLogin()throws IOException {
-        while(in.readLine()!="login");
-        String username=in.readLine();
-        String character=in.readLine();
-        owner = new Player(username,character);
-        lobby.addPlayer(this);
+    public boolean waitLogin()throws IOException {
+        System.out.println("Waiting login");
+        String temp;
+        do{
+           temp = in.readLine();
+        }
+        while(temp!="login");
+        owner.setUsername(in.readLine());
+        owner.setCharacter(in.readLine());
+        out.println("reply");
+        System.out.println("reply");
+        if(lobby.addPlayer(this)){
+            out.println("accepted");
+            return true;
+        }else{
+            out.println(owner.getUsername()+ " refused");
+            return false;
+        }
     }
 
     public void run()  {
         try {
-            waitLogin();
+            System.out.println("Thread started");
+            while(waitLogin());
         } catch (IOException e) {
             e.printStackTrace();
         }

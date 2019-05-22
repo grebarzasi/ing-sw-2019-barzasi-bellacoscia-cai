@@ -18,9 +18,9 @@ public class RmiServer extends ConnectionTech implements RmiSInterf {
     private Lobby lobby;
     public RmiCInterf client;
 
-    public String login(String username, String color) throws RemoteException {
+    public boolean login(String username, String color) throws RemoteException {
         System.out.println("logged " + username +" "+ color);
-        return username + color;
+        return true;
     }
 
     public RmiCInterf sendClient(RmiCInterf temp)throws RemoteException{
