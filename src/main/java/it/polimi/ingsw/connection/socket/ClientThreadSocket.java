@@ -8,9 +8,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 /**
- * Client thread
- *
- * @author Carlo Bellacoscia
+ * A thread for each client that handle the communication using Socket tech
+ * @author Gregorio Barzasi
  */
 public class ClientThreadSocket extends Thread {
 
@@ -24,10 +23,12 @@ public class ClientThreadSocket extends Thread {
         this.lobby=lobby;
         this.client = s;
         this.in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-        this.out = new PrintWriter(client.getOutputStream(),true);
+        this.out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(client.getOutputStream())));
         this.owner = new Player();
     }
-
+    /**
+     * Login procedure
+     */
     public boolean waitLogin()throws IOException {
         System.out.println("Waiting login");
         String temp;
@@ -48,17 +49,29 @@ public class ClientThreadSocket extends Thread {
         }
     }
 
-    public void run()  {
+    public void run() {
+        System.out.println("Thread started");
         try {
-            System.out.println("Thread started");
-            while(waitLogin());
+            echo();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public Player getOwner() {
         return owner;
+    }
+
+    public BufferedReader getIn() {
+        return in;
+    }
+
+    public PrintWriter getOut() {
+        return out;
+    }
+
+    public void echo() throws IOException {
+        String line = in.readLine();
+            System.out.println(line);
     }
 }

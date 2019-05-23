@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.rmi.RemoteException;
 
@@ -265,7 +266,7 @@ public class StartJavaFX extends Application {
                 LoginBuffer login = new LoginBuffer(username,color,c);
                 try {
                     login.send();
-                } catch (RemoteException ex) {
+                } catch (IOException ex) {
                     ex.printStackTrace();
                 }
 

@@ -35,12 +35,13 @@ public class CliView {
         }else if(temp==2){
             c= new SClient();
             c.setRmi(false);
-            System.out.println("socket\n");
+            System.out.println("Socket\n");
 
         }
         //c.setPort(this.acquirePort());
         c.initConnection();
     }
+
     public void login()throws IOException{
         System.out.println("It's time to login!");
         LoginBuffer l;

@@ -7,9 +7,9 @@ import java.io.*;
 import java.net.Socket;
 
 /**
- * The type Client.
+ * Client side Socket connection
  *
- * @author Carlo Bellacoscia
+ * @author Gregorio Barzasi
  */
 public class SClient extends ConnectionTech {
 
@@ -17,16 +17,20 @@ public class SClient extends ConnectionTech {
     private BufferedReader in;
     private PrintWriter out;
 
+    /**
+     * Initialize connection and input and output streams
+     */
     public void initConnection() {
         try {
-
             System.out.println("Try to connect...");
-            server = new Socket(super.getIp(), super.getPort());
-            this.in = new BufferedReader(new InputStreamReader(server.getInputStream()));
-            this.out = new PrintWriter(server.getOutputStream(),true);
+
+            this.server = new Socket(super.getIp(), super.getPort());
             System.out.println("connection established\n");
+            this.in = new BufferedReader(new InputStreamReader(server.getInputStream()));
+            this.out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(server.getOutputStream())));
         } catch (Exception e) {
             System.err.println("connection error\n");
+            e.printStackTrace();
         }
     }
 
@@ -39,5 +43,12 @@ public class SClient extends ConnectionTech {
     }
     public BufferedReader getInput() {
         return in;
+    }
+
+
+    public static void main(String[] args){
+        SClient c = new SClient();
+        c.initConnection();
+        c.getOutput().println("test");
     }
 }
