@@ -3,32 +3,43 @@ package it.polimi.ingsw.CLI;
 import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.connection.socket.SClient;
 import it.polimi.ingsw.connection.rmi.RmiClient;
-import it.polimi.ingsw.model_buffer.LoginBuffer;
+import it.polimi.ingsw.virtual_model.VirtualLobby;
+import it.polimi.ingsw.virtual_model.VirtualLogin;
+import it.polimi.ingsw.virtual_model.VirtualPlayer;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.rmi.RemoteException;
 
 public class CliView {
 
     private ConnectionTech c;
     private BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
+    private VirtualPlayer p;
+    private CliLobby lobby;
 
 
     public static void main(String args[]) {
         CliView cliView = new CliView();
-        System.out.println("------------------------------\n" +
-                            "*** Welcome to ADRENALINA! ***"+
-                            "\n------------------------------");
-        try {
-            cliView.chooseConnection();
-            cliView.login();
-        }catch(Exception e){
-            System.err.println("Conection error");
-        }
-
+        cliView.start();
     }
+
+
+    public void start(){
+        System.out.println("------------------------------\n" +
+                "*** Welcome to ADRENALINA! ***"+
+                "\n------------------------------");
+        try {
+            chooseConnection();
+            login();
+            lobby = new CliLobby(c,sc,p);
+            lobby.start();
+        }catch(Exception e){
+            System.err.println("Connection error");
+        }
+    }
+
+
 
 
 
@@ -51,14 +62,15 @@ public class CliView {
 
     public void login()throws IOException{
         System.out.println("\nIt's time to login!");
-        LoginBuffer l;
+        VirtualLogin l;
         while(true){
             String username = acquireUsername();
             String character = acquireCharacter();
-            l = new LoginBuffer(username, character, c);
+            l = new VirtualLogin(username, character, c);
             System.out.println("waiting...");
             if(l.send()){
                 System.out.println("Login success!");
+                p = new VirtualPlayer(username,character);
                 break;
             }
             System.out.println("\nLogin failed! name or character already in use, try again!");

@@ -34,6 +34,7 @@ public class LobbyJavaFX extends Application {
     private boolean terminator = false;
     private boolean frenzy = false;
     int map;
+    int skull;
     private ArrayList<Player> joinedPlayers = new ArrayList<>();
 
     public void start(Stage primaryStage) throws Exception {
@@ -65,6 +66,17 @@ public class LobbyJavaFX extends Application {
         Image back = new Image(new FileInputStream("src/main/resources/images/background.jpg"),2000,1200,true,true);
         BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         lobbyGrid.setBackground(new Background(backgroundImage));
+
+        /**
+         * skulls choise
+        */
+        javafx.scene.control.Label lblSkulls = new javafx.scene.control.Label("Numero di teschi:");
+        lblSkulls.setFont(font);
+        ObservableList<String> skuItems = FXCollections.observableArrayList("5","6","7","8");
+        ComboBox skuBox = new ComboBox(skuItems);
+        HBox skuH = new HBox(20);
+        skuH.getChildren().add(lblSkulls);
+        skuH.getChildren().add(skuBox);
 
         /**
          * terminator choise
@@ -170,13 +182,14 @@ public class LobbyJavaFX extends Application {
 
         lobbyGrid.add(btnBack,0,0);
         lobbyGrid.add(title, 1,1);
-        lobbyGrid.add(terH,1,2);
-        lobbyGrid.add(freH,1,3);
-        lobbyGrid.add(lblMap,1,4);
-        lobbyGrid.add(mapBox,1,5);
-        lobbyGrid.add(lblPlayer,1,6);
-        lobbyGrid.add(playerBox,1,7);
-        lobbyGrid.add(btnStart,1,8);
+        lobbyGrid.add(skuH,1,2);
+        lobbyGrid.add(terH,1,3);
+        lobbyGrid.add(freH,1,4);
+        lobbyGrid.add(lblMap,1,5);
+        lobbyGrid.add(mapBox,1,6);
+        lobbyGrid.add(lblPlayer,1,7);
+        lobbyGrid.add(playerBox,1,8);
+        lobbyGrid.add(btnStart,1,9);
 
         ImageView load = null;
         try {
@@ -196,6 +209,10 @@ public class LobbyJavaFX extends Application {
         /**
          * buttons action
          */
+
+        skuBox.setOnAction(e->{
+            skull = Integer.parseInt(skuBox.getValue().toString());
+        });
 
         btnBack.setOnAction(e->{
             StartJavaFX start = new StartJavaFX();

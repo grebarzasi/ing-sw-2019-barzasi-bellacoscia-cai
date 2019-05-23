@@ -19,6 +19,12 @@ public class ClientThreadSocket extends Thread {
     private BufferedReader in;
     private PrintWriter out;
 
+    //preferences
+    private String mapPref;
+    private int killPref;
+    private boolean terminatorPref;
+    private boolean finalFrenzyPref;
+
     public ClientThreadSocket(Socket s, Lobby lobby) throws IOException{
         this.lobby=lobby;
         this.client = s;
@@ -32,24 +38,41 @@ public class ClientThreadSocket extends Thread {
      * if lobby refuse the login reply "refused" and keep waiting for login until a valid login is achieved.
      */
     public boolean waitLogin()throws IOException {
-        System.out.println("Waiting login");
-        owner.setUsername(in.readLine());
-        owner.setCharacter(in.readLine());
-        if(lobby.addPlayer(this)){
-            out.println("accepted");
-            System.out.println("repling to "+ owner.getUsername() +": accepted!");
-            return true;
-        }else{
-            out.println("refused");
-            System.out.println("repling to "+ owner.getUsername() +": refused!");
-            return false;
-        }
+        do {
+            System.out.println("Waiting login");
+            owner.setUsername(in.readLine());
+            owner.setCharacter(in.readLine());
+            if (lobby.addPlayer(this)) {
+                out.println("accepted");
+                System.out.println("repling to " + owner.getUsername() + ": accepted!");
+                break;
+            } else {
+                out.println("refused");
+                System.out.println("repling to " + owner.getUsername() + ": refused!");
+            }
+        }while(true);
+        return true;
+    }
+
+    public void waitPref()throws IOException {
+        System.out.println("Waiting pref for "+ owner.getUsername());
+        mapPref=in.readLine();
+        killPref=Integer.parseInt(in.readLine());
+        terminatorPref=Boolean.parseBoolean(in.readLine());
+        finalFrenzyPref=Boolean.parseBoolean(in.readLine());
+        out.println("accepted");
+        System.out.println(owner.getUsername() + " pref registered");
+    }
+
+    public void updateLobby(){
     }
 
     public void run() {
         System.out.println("Thread started");
         try {
-            while(!waitLogin());
+            waitLogin();
+            waitPref();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
