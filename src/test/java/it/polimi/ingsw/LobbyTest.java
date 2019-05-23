@@ -5,9 +5,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LobbyTest {
-/*
+
     @Test
     void allPurposeTest() {
+        /*
 
         Player maxwell = new Player("Maxwell","Physicist");
         Player natta = new Player("Natta","Chemist");
@@ -63,6 +64,8 @@ class LobbyTest {
         assertTrue(test.allReady());
         assertTrue(test.canStart());
 
+*/
+    }
 
-    }*/
+
 }

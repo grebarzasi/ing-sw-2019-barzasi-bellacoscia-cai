@@ -13,11 +13,12 @@ import java.util.HashMap;
 
 public class Lobby {
 
-    private boolean gameStarted=false;
+    private boolean hasStarted =false;
 
-    public boolean isGameStarted() {
-        return gameStarted;
+    public boolean hasStarted() {
+        return hasStarted;
     }
+
 
     private final int maxPlayer = 5;
 

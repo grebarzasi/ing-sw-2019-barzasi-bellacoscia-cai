@@ -3,7 +3,6 @@ package it.polimi.ingsw.connection.socket;
 import it.polimi.ingsw.Lobby;
 import it.polimi.ingsw.connection.ConnectionTech;
 
-import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.rmi.RemoteException;
@@ -34,7 +33,7 @@ public class SServer extends ConnectionTech {
 
             //loops until game start waiting for other players
 
-            while(!lobby.isGameStarted()){
+            while(!lobby.hasStarted()){
                 client = server.accept();
                 System.out.println("connection established with\n" + client);
                 temp = new ClientThreadSocket(client,lobby);
