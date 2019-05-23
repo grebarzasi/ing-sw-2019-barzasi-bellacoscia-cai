@@ -43,6 +43,8 @@ public class SServer extends ConnectionTech {
 
             }
 
+
+
         } catch (Exception e) {
             System.err.println("socket connection error\n");
             e.printStackTrace();

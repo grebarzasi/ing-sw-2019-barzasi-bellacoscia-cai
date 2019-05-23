@@ -24,7 +24,6 @@ import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.rmi.RemoteException;
 
 /**
@@ -69,7 +68,7 @@ public class StartJavaFX extends Application {
         /**
          * set background
          */
-        Image back = new Image(new FileInputStream("src/main/resources/images/background.jpg"),2000,1500,true,true);
+        Image back = new Image(new FileInputStream("src/main/resources/images/background.jpg"),2000,1200,true,true);
         BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         grid.setBackground(new Background(backgroundImage));
 
@@ -121,12 +120,21 @@ public class StartJavaFX extends Application {
         buttonList.getChildren().add(btnLogin);
         buttonList.getChildren().add(btnSettings);
 
+        Button btnLobby = new Button("Lobby");
+
+
+        VBox v = new VBox(50);
+        v.setAlignment(Pos.CENTER);
+        v.getChildren().add(buttonList);
+        v.getChildren().add(btnLobby);
+
+
         /**
          * merge layout
          */
-        VBox layout = new VBox(150);
+        VBox layout = new VBox(100);
         layout.getChildren().add(ver);
-        layout.getChildren().add(buttonList);
+        layout.getChildren().add(v);
         layout.getChildren().add(charList);
 
         grid.add(layout,1,1);
@@ -151,6 +159,18 @@ public class StartJavaFX extends Application {
             }catch (Exception a){
                 a.printStackTrace();
             }
+
+        });
+
+        btnLobby.setOnAction(e->{
+
+            LobbyJavaFX lobby = new LobbyJavaFX();
+            try {
+                lobby.start(primaryStage);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
 
         });
 
@@ -194,6 +214,14 @@ public class StartJavaFX extends Application {
 
             Scene loginScene = new Scene(loginGrid, 700, 400);
             this.setScene(loginScene);
+
+            try {
+                Image back = new Image(new FileInputStream("src/main/resources/images/background.jpg"), 2000, 1200, true, true);
+                BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+                loginGrid.setBackground(new Background(backgroundImage));
+            }catch (IOException e){
+                e.printStackTrace();
+            }
 
             Text scenetitle = new Text("Benvenuto");
             scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
@@ -295,14 +323,22 @@ public class StartJavaFX extends Application {
             Scene theScene = new Scene(new BorderPane(),400,300);
             this.setScene(theScene);
 
-            GridPane grid = new GridPane();
-            grid.setAlignment(Pos.CENTER);
-            grid.setHgap(10);
-            grid.setVgap(10);
-            grid.setPadding(new Insets(10, 10, 10, 10));
+            GridPane settingsGrid = new GridPane();
+            settingsGrid.setAlignment(Pos.CENTER);
+            settingsGrid.setHgap(10);
+            settingsGrid.setVgap(10);
+            settingsGrid.setPadding(new Insets(10, 10, 10, 10));
 
-            Scene scene = new Scene(grid, 400, 300);
+            Scene scene = new Scene(settingsGrid, 400, 300);
             this.setScene(scene);
+
+            try {
+                Image back = new Image(new FileInputStream("src/main/resources/images/background.jpg"), 2000, 1200, true, true);
+                BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+                settingsGrid.setBackground(new Background(backgroundImage));
+            }catch (IOException e){
+                e.printStackTrace();
+            }
 
             Label lblPort = new Label("Porta:");
             final TextField txtPort= new TextField();
@@ -317,15 +353,15 @@ public class StartJavaFX extends Application {
 
 
 
-            grid.add(lblPort,1,1);
-            grid.add(txtPort,1,2);
-            grid.add(btnPort,2,2);
-            grid.add(lblIP,1,3);
-            grid.add(txtIP,1,4);
-            grid.add(btnIP,2,4);
-            grid.add(lblConnection,1,5);
+            settingsGrid.add(lblPort,1,1);
+            settingsGrid.add(txtPort,1,2);
+            settingsGrid.add(btnPort,2,2);
+            settingsGrid.add(lblIP,1,3);
+            settingsGrid.add(txtIP,1,4);
+            settingsGrid.add(btnIP,2,4);
+            settingsGrid.add(lblConnection,1,5);
 
-            grid.add(connBox,2,5);
+            settingsGrid.add(connBox,2,5);
 
             btnPort.setOnAction(e->{
 
@@ -342,5 +378,9 @@ public class StartJavaFX extends Application {
                 connection = connBox.getValue().toString();
             });
         }
+    }
+
+    public class lobbyWindow extends Stage{
+
     }
 }
