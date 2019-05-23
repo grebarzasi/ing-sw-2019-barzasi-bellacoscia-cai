@@ -270,6 +270,14 @@ public class StartJavaFX extends Application {
                     ex.printStackTrace();
                 }
 
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+
+                this.close();
+
             });
 
         }

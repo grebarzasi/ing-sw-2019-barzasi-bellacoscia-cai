@@ -39,7 +39,7 @@ public class Lobby {
 
     }
 
-    public boolean addPlayer(ClientThreadSocket p){
+    public boolean addPlayer(ClientThreadSocket p) {
         if (this.joinedPlayers.size() < maxPlayer && usernameCheck(p) && characterCheck(p)) {
             this.joinedPlayers.add(p);
             this.readyStatus.put(p, false);
