@@ -23,14 +23,14 @@ public class SClient extends ConnectionTech {
      */
     public void initConnection() throws RemoteException{
         try {
-            System.out.println("Try to connect...");
+            System.out.println("Connecting");
 
             this.server = new Socket(super.getIp(), super.getPort());
-            System.out.println("connection established\n");
+            System.out.println("Connection established\n");
             this.in = new BufferedReader(new InputStreamReader(server.getInputStream()));
             this.out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(server.getOutputStream())),true);
         } catch (Exception e) {
-            System.err.println("connection error\n");
+            System.err.println("Connection error\n");
             e.printStackTrace();
             throw new RemoteException();
         }
@@ -47,14 +47,4 @@ public class SClient extends ConnectionTech {
         return in;
     }
 
-
-    public static void main(String[] args){
-        SClient c = new SClient();
-        try {
-            c.initConnection();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-        c.getOutput().println("test");
-    }
 }

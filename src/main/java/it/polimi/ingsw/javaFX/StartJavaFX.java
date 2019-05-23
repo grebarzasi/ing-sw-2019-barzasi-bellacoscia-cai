@@ -3,7 +3,7 @@ package it.polimi.ingsw.javaFX;
 import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.connection.rmi.RmiClient;
 import it.polimi.ingsw.connection.socket.SClient;
-import it.polimi.ingsw.model_buffer.LoginBuffer;
+import it.polimi.ingsw.virtual_model.VirtualLogin;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -297,7 +297,7 @@ public class StartJavaFX extends Application {
 
                 username = txtUsername.getText();
 
-                LoginBuffer login = new LoginBuffer(username,color,c);
+                VirtualLogin login = new VirtualLogin(username,color,c);
                 try {
                     login.send();
                 } catch (IOException ex) {

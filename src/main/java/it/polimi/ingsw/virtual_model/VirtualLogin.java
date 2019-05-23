@@ -1,18 +1,19 @@
-package it.polimi.ingsw.model_buffer;
+package it.polimi.ingsw.virtual_model;
 
 import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.connection.socket.SClient;
 import it.polimi.ingsw.connection.rmi.RmiClient;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
 
-public class LoginBuffer {
+public class VirtualLogin {
     private ConnectionTech connController;
     private String username;
     private String character;
 
-    public LoginBuffer(String username, String character,ConnectionTech connController) {
+
+
+    public VirtualLogin(String username, String character, ConnectionTech connController) {
         this.username = username;
         this.character = character;
         this.connController=connController;
@@ -39,4 +40,6 @@ public class LoginBuffer {
         }
         return flag;
     }
+
+
 }
