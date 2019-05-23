@@ -23,28 +23,25 @@ public class ClientThreadSocket extends Thread {
         this.lobby=lobby;
         this.client = s;
         this.in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-        this.out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(client.getOutputStream())));
+        this.out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(client.getOutputStream())),true);
         this.owner = new Player();
     }
+
     /**
-     * Login procedure
+     * Login procedure: read user and character, if lobby accepts them reply to client "accepted" .
+     * if lobby refuse the login reply "refused" and keep waiting for login until a valid login is achieved.
      */
     public boolean waitLogin()throws IOException {
         System.out.println("Waiting login");
-        String temp;
-        do{
-           temp = in.readLine();
-        }
-        while(temp!="login");
         owner.setUsername(in.readLine());
         owner.setCharacter(in.readLine());
-        out.println("reply");
-        System.out.println("reply");
         if(lobby.addPlayer(this)){
             out.println("accepted");
+            System.out.println("repling to "+ owner.getUsername() +": accepted!");
             return true;
         }else{
-            out.println(owner.getUsername()+ " refused");
+            out.println("refused");
+            System.out.println("repling to "+ owner.getUsername() +": refused!");
             return false;
         }
     }
@@ -52,7 +49,7 @@ public class ClientThreadSocket extends Thread {
     public void run() {
         System.out.println("Thread started");
         try {
-            echo();
+            while(!waitLogin());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -68,10 +65,5 @@ public class ClientThreadSocket extends Thread {
 
     public PrintWriter getOut() {
         return out;
-    }
-
-    public void echo() throws IOException {
-        String line = in.readLine();
-            System.out.println(line);
     }
 }

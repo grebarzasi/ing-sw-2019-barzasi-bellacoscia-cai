@@ -5,6 +5,7 @@ import it.polimi.ingsw.connection.ConnectionTech;
 
 import java.io.*;
 import java.net.Socket;
+import java.rmi.RemoteException;
 
 /**
  * Client side Socket connection
@@ -20,17 +21,18 @@ public class SClient extends ConnectionTech {
     /**
      * Initialize connection and input and output streams
      */
-    public void initConnection() {
+    public void initConnection() throws RemoteException{
         try {
             System.out.println("Try to connect...");
 
             this.server = new Socket(super.getIp(), super.getPort());
             System.out.println("connection established\n");
             this.in = new BufferedReader(new InputStreamReader(server.getInputStream()));
-            this.out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(server.getOutputStream())));
+            this.out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(server.getOutputStream())),true);
         } catch (Exception e) {
             System.err.println("connection error\n");
             e.printStackTrace();
+            throw new RemoteException();
         }
     }
 
@@ -48,7 +50,11 @@ public class SClient extends ConnectionTech {
 
     public static void main(String[] args){
         SClient c = new SClient();
-        c.initConnection();
+        try {
+            c.initConnection();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
         c.getOutput().println("test");
     }
 }

@@ -6,6 +6,7 @@ import it.polimi.ingsw.connection.ConnectionTech;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 /**
@@ -25,7 +26,7 @@ public class SServer extends ConnectionTech {
     /**
      * Initialize connection and wait for client to connect
      */
-    public void initConnection() {
+    public void initConnection() throws RemoteException {
         try {
             server = new ServerSocket(super.getPort());
 
@@ -37,20 +38,24 @@ public class SServer extends ConnectionTech {
                 client = server.accept();
                 System.out.println("connection established with\n" + client);
                 temp = new ClientThreadSocket(client,lobby);
+                players.add(temp);
                 temp.start();
-               // players.add(temp);
-                // temp.start();
 
             }
 
         } catch (Exception e) {
             System.err.println("socket connection error\n");
             e.printStackTrace();
+            throw new RemoteException();
         }
 
     }
     public static void main(String[] args){
         SServer s = new SServer();
-        s.initConnection();
+        try {
+            s.initConnection();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 }

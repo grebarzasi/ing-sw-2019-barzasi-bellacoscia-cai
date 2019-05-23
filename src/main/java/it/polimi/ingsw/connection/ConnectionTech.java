@@ -1,5 +1,7 @@
 package it.polimi.ingsw.connection;
 
+import java.rmi.RemoteException;
+
 public abstract class ConnectionTech {
 
     //default 127.0.0.1:1234
@@ -7,7 +9,7 @@ public abstract class ConnectionTech {
     public String ip="127.0.0.1";
 
     //default is rmi
-    private boolean rmi=true;
+    private boolean rmi=false;
 
     public void setRmi(boolean rmi) {
         this.rmi = rmi;
@@ -29,5 +31,5 @@ public abstract class ConnectionTech {
         this.port = port;
     }
 
-    public abstract void  initConnection();
+    public abstract void  initConnection()throws RemoteException;
 }

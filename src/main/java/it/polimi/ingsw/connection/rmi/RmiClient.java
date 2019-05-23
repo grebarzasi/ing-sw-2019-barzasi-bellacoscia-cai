@@ -5,6 +5,7 @@ package it.polimi.ingsw.connection.rmi;
  */
 import it.polimi.ingsw.connection.ConnectionTech;
 
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
@@ -20,7 +21,7 @@ public class RmiClient extends ConnectionTech implements RmiCInterf {
         return true;
     }
 
-    public void initConnection() {
+    public void initConnection() throws RemoteException{
         try {
             Registry registry = LocateRegistry.getRegistry(super.getIp(),super.getPort());
             server = (RmiSInterf) registry.lookup("Server");
@@ -30,6 +31,7 @@ public class RmiClient extends ConnectionTech implements RmiCInterf {
         } catch (Exception e) {
             System.err.println("RMI connection error\n");
             e.printStackTrace();
+            throw new RemoteException();
         }
 
     }

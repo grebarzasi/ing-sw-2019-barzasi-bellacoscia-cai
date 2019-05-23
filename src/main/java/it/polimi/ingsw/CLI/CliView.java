@@ -16,26 +16,33 @@ public class CliView {
     private BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
 
 
-    public static void main(String args[])throws RemoteException,IOException {
+    public static void main(String args[]) {
         CliView cliView = new CliView();
-        System.out.println("Benvenuto in adrenalina! seleziona la connessione da utilizzare:\n");
-        cliView.chooseConnection();
-        cliView.login();
+        System.out.println("------------------------------\n" +
+                            "*** Welcome to ADRENALINA! ***"+
+                            "\n------------------------------");
+        try {
+            cliView.chooseConnection();
+            cliView.login();
+        }catch(Exception e){
+            System.err.println("Conection error");
+        }
+
     }
 
 
 
     public void chooseConnection() throws IOException {
-        System.out.println("1-RMI\n2-socket\nSelect connection type:\n");
-        int temp = Integer.parseInt(sc.readLine());
-        if(temp==1){
+        System.out.println("\nSelect connection type: (RMI/SOCKET)");
+        String temp = sc.readLine();
+        if(temp.equals("R")||temp.equals("RMI")||temp.equals("1")||temp.equals("r")){
             c= new RmiClient();
             c.setRmi(true);
-            System.out.println("Rmi\n");
-        }else if(temp==2){
+            System.out.println("\nRMI Selected");
+        }else if(temp.equals("S")||temp.equals("Socket")||temp.equals("2")||temp.equals("s")){
             c= new SClient();
             c.setRmi(false);
-            System.out.println("Socket\n");
+            System.out.println("\nSocket Selected");
 
         }
         //c.setPort(this.acquirePort());
@@ -43,7 +50,7 @@ public class CliView {
     }
 
     public void login()throws IOException{
-        System.out.println("It's time to login!");
+        System.out.println("\nIt's time to login!");
         LoginBuffer l;
         while(true){
             String username = acquireUsername();
@@ -54,7 +61,7 @@ public class CliView {
                 System.out.println("Login success!");
                 break;
             }
-            System.out.println("Login failed! name or character already in use");
+            System.out.println("\nLogin failed! name or character already in use, try again!");
         }
     }
 
@@ -79,7 +86,7 @@ public class CliView {
     }
 
     private String acquireUsername()throws IOException{
-            System.out.println("Insert username");
+            System.out.println("\n__Insert Username:");
             return sc.readLine();
         }
 
@@ -87,7 +94,7 @@ public class CliView {
     private String acquireCharacter()throws IOException{
             String character;
             do {
-                System.out.println("Insert color");
+                System.out.println("\n__Insert color");
                 character = sc.readLine();
                 if (!character.equals("blue") && !character.equals("red") && !character.equals("yellow") && !character.equals("green") && !character.equals("gray")) {
                     System.out.println("Not available color, insert another color:");

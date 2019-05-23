@@ -29,7 +29,7 @@ public class RmiServer extends ConnectionTech implements RmiSInterf {
         return temp;
     }
 
-    public void initConnection() {
+    public void initConnection() throws RemoteException{
         try {
             super.getPort();
             RmiSInterf stub = (RmiSInterf) UnicastRemoteObject.exportObject(this, 0);
@@ -42,11 +42,16 @@ public class RmiServer extends ConnectionTech implements RmiSInterf {
         } catch (Exception e) {
             System.err.println("RMI Server exception");
             e.printStackTrace();
+            throw new RemoteException();
         }
     }
 
     public static void main(String args[]){
-        new RmiServer().initConnection();
+        try {
+            new RmiServer().initConnection();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
 
     }
 }

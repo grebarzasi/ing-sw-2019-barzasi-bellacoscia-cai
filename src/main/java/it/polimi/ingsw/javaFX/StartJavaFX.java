@@ -171,7 +171,13 @@ public class StartJavaFX extends Application {
                 c= new SClient();
                 c.setRmi(false);
             }
-            c.initConnection();
+
+            //check this exception
+            try {
+                c.initConnection();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
 
 
             Scene scene = new Scene(new BorderPane(),700,400);
