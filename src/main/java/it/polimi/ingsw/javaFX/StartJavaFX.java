@@ -175,6 +175,7 @@ public class StartJavaFX extends Application {
         });
 
 
+
         primaryStage.setMaximized(true);
         primaryStage.show();
 

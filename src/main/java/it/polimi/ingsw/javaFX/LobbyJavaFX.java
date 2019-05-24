@@ -22,6 +22,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -106,16 +107,16 @@ public class LobbyJavaFX extends Application {
         Label lblMap = new Label("Scegli una mappa:");
         lblMap.setFont(font);
         Button map1 = new Button();
-        javafx.scene.image.Image img1 = new Image(new FileInputStream("src/main/resources/images/1.jpg"),150,150,true,true);
+        javafx.scene.image.Image img1 = new Image(new FileInputStream("src/main/resources/images/1.png"),150,150,true,true);
         map1.setGraphic(new ImageView(img1));
         Button map2 = new Button();
-        javafx.scene.image.Image img2 = new Image(new FileInputStream("src/main/resources/images/2.jpg"),150,150,true,true);
+        javafx.scene.image.Image img2 = new Image(new FileInputStream("src/main/resources/images/2.png"),150,150,true,true);
         map2.setGraphic(new ImageView(img2));
         Button map3 = new Button();
-        javafx.scene.image.Image img3 = new Image(new FileInputStream("src/main/resources/images/3.jpg"),150,150,true,true);
+        javafx.scene.image.Image img3 = new Image(new FileInputStream("src/main/resources/images/3.png"),150,150,true,true);
         map3.setGraphic(new ImageView(img3));
         Button map4 = new Button();
-        javafx.scene.image.Image img4 = new Image(new FileInputStream("src/main/resources/images/4.jpg"),150,150,true,true);
+        javafx.scene.image.Image img4 = new Image(new FileInputStream("src/main/resources/images/4.png"),150,150,true,true);
         map4.setGraphic(new ImageView(img4));
         HBox mapBox = new HBox(50);
         mapBox.setAlignment(Pos.CENTER);
@@ -170,7 +171,7 @@ public class LobbyJavaFX extends Application {
 
 
 
-        Button btnStart = new Button("GIOCA");
+        Button btnStart = new Button("PRONTO");
         btnStart.setAlignment(Pos.CENTER);
         btnStart.setFont(font);
 
@@ -245,7 +246,7 @@ public class LobbyJavaFX extends Application {
         map4.setOnAction(e-> map = 4);
 
         btnStart.setOnAction(e->{
-
+            btnStart.setVisible(false);
             rotateTransition.play();
 
         });
