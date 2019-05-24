@@ -1,7 +1,6 @@
 package it.polimi.ingsw.virtual_model;
 
 import it.polimi.ingsw.connection.ConnectionTech;
-import it.polimi.ingsw.connection.rmi.RmiClient;
 import it.polimi.ingsw.connection.socket.SClient;
 
 import java.io.IOException;
@@ -24,7 +23,7 @@ public class VirtualLobby {
 
     public boolean sendPref() throws IOException {
         if (conn.isRmi()) {
-             return false;
+            return false;
         } else {
             SClient c = ((SClient) conn);
             System.out.println("sending preferences");
@@ -42,6 +41,8 @@ public class VirtualLobby {
             }
         }
     }
+
+
 
     public boolean update(){
         return true;

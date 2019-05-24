@@ -18,12 +18,14 @@ public class ClientThreadSocket extends Thread {
     private Socket client;
     private BufferedReader in;
     private PrintWriter out;
+    private boolean ready=false;
 
     //preferences
     private String mapPref;
     private int killPref;
     private boolean terminatorPref;
     private boolean finalFrenzyPref;
+    private boolean waiting=false;
 
     public ClientThreadSocket(Socket s, Lobby lobby) throws IOException{
         this.lobby=lobby;
@@ -62,9 +64,11 @@ public class ClientThreadSocket extends Thread {
         finalFrenzyPref=Boolean.parseBoolean(in.readLine());
         out.println("accepted");
         System.out.println(owner.getUsername() + " pref registered");
+        waiting=true;
     }
 
     public void updateLobby(){
+        out.println(lobby.toString());
     }
 
     public void run() {
@@ -72,6 +76,7 @@ public class ClientThreadSocket extends Thread {
         try {
             waitLogin();
             waitPref();
+            updateLobby();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -88,5 +93,26 @@ public class ClientThreadSocket extends Thread {
 
     public PrintWriter getOut() {
         return out;
+    }
+
+    public boolean isReady() {
+        return ready;
+    }
+
+    public void setReady(boolean ready) {
+        this.ready = ready;
+    }
+
+    public boolean isWaiting() {
+        return waiting;
+    }
+
+    public void setWaiting(boolean waiting) {
+        this.waiting = waiting;
+    }
+
+    @Override
+    public String toString() {
+        return owner.getUsername() + ";" + owner.getCharacter() + ";" + ready;
     }
 }
