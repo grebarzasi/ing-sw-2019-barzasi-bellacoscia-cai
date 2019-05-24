@@ -10,8 +10,6 @@ import it.polimi.ingsw.board.map.Square;
 
 public class Terminator extends Figure{
 
-    //reference to the player controlling the terminator
-    private Player owner;
 
     //the movement it can perform in the turn
     private Move move;
@@ -20,7 +18,6 @@ public class Terminator extends Figure{
 
     public Terminator(String character, Player owner) {
         super(character);
-        this.owner = owner;
     }
 
     public void pass(){
@@ -53,15 +50,6 @@ public class Terminator extends Figure{
             System.out.println("Terminator can only be moved by one square");
         }
 
-    }
-
-
-    public Player getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Player owner) {
-        this.owner = owner;
     }
 
     public Move getMove() {

@@ -33,8 +33,6 @@ public class PlayerBoard {
     /**
      * Adds a damage token to the player's board
      * @param t the token to apply
-     *
-     * NEEDS TO BE REVISITED, USE AT YOUR OWN AND OTHERS' RISK
      */
 
     public void damage(Token t) {
@@ -62,8 +60,6 @@ public class PlayerBoard {
      * Adds a damage token to the player's board,
      * also if a player has a marks of the same owner applies the marks
      * @param t the token to apply
-     *
-     * NEEDS TO BE REVISITED, USE AT YOUR OWN AND OTHERS' RISK
      */
 
     public void addDamage(Token t){
@@ -90,8 +86,6 @@ public class PlayerBoard {
     /**
      * Adds a mark token to the player's board
      * @param t the token to apply
-     *
-     * NEEDS TO BE REVISITED, USE AT YOUR OWN AND OTHERS' RISK
      */
 
     public void addMark(Token t){
@@ -103,8 +97,6 @@ public class PlayerBoard {
     /**
      * Removes a mark token to the player's board
      * @param t the token to apply
-     *
-     * NEEDS TO BE REVISITED, USE AT YOUR OWN AND OTHERS' RISK
      */
 
     public void removeMark(Token t) {
@@ -113,8 +105,6 @@ public class PlayerBoard {
 
     /**
      * Adds a Skull to the Figure, reducing points dropped upon death
-     *
-     * NEEDS TO BE REVISITED, USE AT YOUR OWN AND OTHERS' RISK
      */
 
     public void addSkull() {
@@ -132,8 +122,6 @@ public class PlayerBoard {
     /**
      * Adds an amount of ammo to the player's ammunition inventory
      * @param a the number of ammunition to add
-     *
-     * NEEDS TO BE REVISITED, USE AT YOUR OWN AND OTHERS' RISK
      */
 
     public void addAmmo(Ammo a) {
@@ -160,8 +148,6 @@ public class PlayerBoard {
     /**
      * Removes an amount of ammo from the player's ammunition inventory
      * @param a the number of ammunition to remove
-     *
-     * NEEDS TO BE REVISITED, USE AT YOUR OWN AND OTHERS' RISK
      */
 
     public void removeAmmo(Ammo a) {
@@ -177,8 +163,6 @@ public class PlayerBoard {
     /**
      * Initiates the board with default values
      * @param owner the board's player
-     *
-     * NEEDS TO BE REVISITED, USE AT YOUR OWN AND OTHERS' RISK
      */
 
     public PlayerBoard(Figure owner) {

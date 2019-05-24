@@ -7,6 +7,7 @@ import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.cards.weapon.Effect;
 import it.polimi.ingsw.cards.weapon.Weapon;
+import it.polimi.ingsw.connection.socket.ClientThreadSocket;
 
 
 import java.io.BufferedReader;
@@ -28,17 +29,11 @@ import java.util.Set;
 
 public class GameModel {
 
-    private final static int maxPlayers = 5;
-    private final static int width = 4;
-    private final static int height = 3;
-
     private ArrayList<Player> playerList;
 
     private Player currentPlayer;
 
     private Terminator bot;
-
-    private Time timeTurn;
 
     private Board currentBoard;
 
@@ -47,16 +42,22 @@ public class GameModel {
     }
 
 
-    public GameModel(ArrayList<Player> playerList, Player currentPlayer, Time timeTurn, Board currentBoard) {
+    public GameModel(ArrayList<Player> playerList, Player currentPlayer, Board currentBoard) {
         this.playerList = playerList;
         this.currentPlayer = currentPlayer;
-        this.timeTurn = timeTurn;
         this.currentBoard = currentBoard;
     }
 
+    /**
+     * Starts a model from a lobby
+     * Loads the players from a lobby to the model
+     * @param lobbyToStartFrom The lobby you want to start the game from
+     */
     public GameModel(Lobby lobbyToStartFrom){
-       // this.playerList = lobbyToStartFrom.getJoinedPlayers();
-      //  this.currentBoard = new Board(lobbyToStartFrom.getMap());
+       for (ClientThreadSocket client : lobbyToStartFrom.getJoinedPlayers()){
+           this.playerList.add(client.getOwner());
+       }
+        //TODO if this game wants a bot adds a bot;
     }
 
     public Set<Figure> askTarget(int num){
@@ -132,14 +133,6 @@ public class GameModel {
 
     public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
-    }
-
-    public Time getTimeTurn() {
-        return timeTurn;
-    }
-
-    public void setTimeTurn(Time timeTurn) {
-        this.timeTurn = timeTurn;
     }
 
     public Board getCurrentBoard() {

@@ -43,21 +43,8 @@ public class Player extends Figure {
 
     /**
      * Picks up AmmoLot on the square
-     *
-     * MISSING MAXIMUM POWERUP MANAGEMENT
+     * Maximum powerup case managed in controller;
      */
-
-
-
-    public void pick(){
-
-        if(!this.getPosition().isSpawn()){
-            this.pickAmmo();
-        }else if(this.getPosition().isSpawn()){
-            //pickWeapon();
-        }
-
-    }
 
     public void pickAmmo(){
 
@@ -74,10 +61,6 @@ public class Player extends Figure {
                 ((NonSpawnSquare)this.getPosition()).setDrop(null);
             }
         }
-    }
-
-    public void pickWeapon(Weapon selection){
-
     }
 
     public Player(String username, String character) {
