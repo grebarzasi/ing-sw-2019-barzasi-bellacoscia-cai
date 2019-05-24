@@ -24,29 +24,29 @@ public class Lobby {
 
     //List of players who have joined the lobby
     private ArrayList<ClientThreadSocket> joinedPlayers;
-    //Maps each player to their status, ready or not
-    private HashMap<ClientThreadSocket,Boolean> readyStatus = new HashMap<>();
 
 
     public Lobby() {
         this.joinedPlayers = new ArrayList<>();
-        this.readyStatus = new HashMap<>();
-    }
-
-    public Lobby(ClientThreadSocket p){
-        this.joinedPlayers = new ArrayList<>();
-        this.joinedPlayers.add(p);
-        this.readyStatus.put(p,false);
-
     }
 
     public boolean addPlayer(ClientThreadSocket p) {
         if (this.joinedPlayers.size() < maxPlayer && usernameCheck(p) && characterCheck(p)) {
             this.joinedPlayers.add(p);
-            this.readyStatus.put(p, false);
+            updateClient();
             return true;
         }
         return false;
+    }
+
+    /**
+     * Updates all client when other player is added
+     */
+    public void updateClient(){
+        for(ClientThreadSocket c : joinedPlayers){
+            if(c.isWaiting())
+                c.updateLobby();
+        }
     }
 
     public boolean usernameCheck(ClientThreadSocket p){
@@ -69,7 +69,6 @@ public class Lobby {
 
     public void disconnectPlayer(ClientThreadSocket p){
         this.joinedPlayers.remove(p);
-        this.readyStatus.remove(p);
         System.out.print(p.getOwner().getUsername() + " has cowardly left the battle before it began\n");
     }
 
@@ -78,9 +77,8 @@ public class Lobby {
      * @return True if all players are ready, false otherwise
      */
     public boolean allReady(){
-
         for (ClientThreadSocket p : joinedPlayers){
-            if(!readyStatus.get(p)){
+            if(!p.isReady()){
                 return false;
             }
         }
@@ -94,14 +92,6 @@ public class Lobby {
         return false;
     }
 
-    public void readyPlayer(ClientThreadSocket p){
-        this.readyStatus.replace(p,true);
-
-    }
-
-    public void unreadyPlayer(ClientThreadSocket p){
-        this.readyStatus.replace(p,false);
-    }
 
     public ArrayList<ClientThreadSocket> getJoinedPlayers() {
         return joinedPlayers;
@@ -111,12 +101,13 @@ public class Lobby {
         this.joinedPlayers = joinedPlayers;
     }
 
-    public HashMap<ClientThreadSocket, Boolean> getReadyStatus() {
-        return readyStatus;
-    }
-
-    public void setReadyStatus(HashMap<ClientThreadSocket, Boolean> readyStatus) {
-        this.readyStatus = readyStatus;
+    @Override
+    public String toString() {
+        String s="";
+        for(ClientThreadSocket c: joinedPlayers){
+            s= s + c.toString()+";";
+        }
+        return s;
     }
 }
 

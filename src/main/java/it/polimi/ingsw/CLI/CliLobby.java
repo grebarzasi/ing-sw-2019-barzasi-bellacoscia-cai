@@ -30,6 +30,10 @@ public class CliLobby {
         lobby.sendPref();
     }
 
+    public String askMap(){
+        return null;
+    }
+
     public boolean ynAsk(String question, String yes, String no)throws IOException{
         String temp;
         do {
@@ -62,7 +66,7 @@ public class CliLobby {
         //FINAL FRENZY
         lobby.setFinalFrenzyPref(ynAsk("\nFinal Frenzy? (Y/N)","\nFinal frenzy set!","\nNo final frenzy, ok!"));
 
-        //MAXKILL
+        //MAX KILL
         int num=0;
         do {
             System.out.println("\nSkull on Kill Track? (3-8)");
@@ -79,8 +83,15 @@ public class CliLobby {
         }while(num<3 || num>8);
         lobby.setKillPref(num);
         System.out.println("\nPerfect! you selected " + num +" skulls on kill track!");
+
+        //MAP
+        lobby.setMapPref(askMap());
         System.out.println("------------------------------\n");
 
+    }
+
+    public void waitingRoom(){
+        
     }
 
 }
