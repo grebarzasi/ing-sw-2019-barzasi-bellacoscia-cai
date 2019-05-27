@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -206,12 +207,23 @@ public class GameJavaFX extends Application {
         vOther.getChildren().add(v4);
         vOther.getChildren().add(imgDeck);
 
+        Button btnMove = new Button("Muovi");
+        Button btnPick = new Button("Raccogli");
+        Button btnShoot = new Button("Spara");
+        HBox hBtn = new HBox(30);
+        hBtn.setAlignment(Pos.CENTER);
+        hBtn.getChildren().add(btnMove);
+        hBtn.getChildren().add(btnPick);
+        hBtn.getChildren().add(btnShoot);
+
+
         /**
          * merge layout.
          */
         VBox v = new VBox(50);
         v.getChildren().add(imgTitle);
         v.getChildren().add(gridBoard);
+        v.getChildren().add(hBtn);
 
         HBox layout = new HBox(20);
         layout.getChildren().add(vPers);
