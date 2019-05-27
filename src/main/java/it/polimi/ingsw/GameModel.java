@@ -46,6 +46,10 @@ public class GameModel {
         this.playerList = playerList;
         this.currentPlayer = currentPlayer;
         this.currentBoard = currentBoard;
+
+        for (Player p : this.playerList) {
+            p.setModel(this);
+        }
     }
 
     /**
@@ -57,6 +61,9 @@ public class GameModel {
        for (ClientThreadSocket client : lobbyToStartFrom.getJoinedPlayers()){
            this.playerList.add(client.getOwner());
        }
+        for (Player p : this.playerList) {
+            p.setModel(this);
+        }
         //TODO if this game wants a bot adds a bot;
     }
 

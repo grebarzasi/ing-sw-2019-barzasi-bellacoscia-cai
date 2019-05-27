@@ -16,23 +16,41 @@ public class AsBot implements ControllerState{
         this.controller = controller;
     }
 
+
     @Override
-    public void shoot(ArrayList<Player> target) {
+    public void shoot() {
+
+        ArrayList<Figure> targets = new ArrayList<>();
+        for (Player p : this.controller.getModel().getPlayerList()) {
+            if (this.controller.getModel().getBot().canSee(p)) ;
+            targets.add(p);
+        }
+
+        Player toShoot = this.controller.getView().showMultipleTargets(targets);
+
+        int index = this.controller.getModel().getPlayerList().indexOf(toShoot);
+        this.controller.getModel().getBot().inflictDamage(1, this.controller.getModel().getPlayerList().get(index));
+
+        this.controller.getModel().endTurn();
+        this.controller.setCurrentState(this.controller.choosingMove);
 
     }
 
     @Override
-    public void chooseWeapon(Weapon choice) {
+    public void chooseWeapon() {
 
     }
 
     @Override
-    public void move(Square position) {
+    public void move() {
+
+        ArrayList<Square> canGo = new ArrayList<>();
+        this.controller.getModel().getBot().setPosition(this.controller.getView().showPossibleMoves(this.controller.getModel().getBot().canGo()));
 
     }
 
     @Override
-    public void pick(Square position) {
+    public void pick() {
 
     }
 
@@ -84,5 +102,13 @@ public class AsBot implements ControllerState{
     @Override
     public void useNewton(Figure Target, Square moveTo) {
 
+    }
+
+    public Controller getController() {
+        return controller;
+    }
+
+    public void setController(Controller controller) {
+        this.controller = controller;
     }
 }

@@ -5,6 +5,7 @@ import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.map.Room;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
+import it.polimi.ingsw.controller.Controller;
 
 import java.util.*;
 
@@ -17,6 +18,10 @@ import java.util.*;
  */
 
 public class Figure {
+
+    private static final int width = 4;
+    private static final int height = 3;
+    private static final int range = 3;
 
 
     //chosen character
@@ -46,6 +51,26 @@ public class Figure {
     private int maxActions;
 
     private ArrayList<Action> actions;
+
+    public ArrayList<Square> canGo() {
+
+        int row;
+        int column;
+
+        ArrayList<Square> destinations = new ArrayList<>();
+
+        for (row = 0; row < height; row++) {
+            for (column = 0; column < width; column++) {
+                if (this.distanceTo(this.model.getCurrentBoard().getMap().getSquareMatrix()[row][column]) <= 3) {
+
+                    destinations.add(this.model.getCurrentBoard().getMap().getSquareMatrix()[row][column]);
+
+                }
+            }
+        }
+
+        return destinations;
+    }
 
 
     public Figure(String character){

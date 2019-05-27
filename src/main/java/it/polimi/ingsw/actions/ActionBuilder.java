@@ -12,6 +12,7 @@ import java.util.Set;
  * @author Gregorio Barzasi
  */
 public class ActionBuilder {
+
     public Set<Action> buildActionFor(Figure p, boolean isFrenzy, boolean isEndTurn){
 
         //create the actionSet
@@ -21,7 +22,6 @@ public class ActionBuilder {
         /*FRENZY ACTION*/
         if(isFrenzy){
             return null;
-
         }
 
         /*NORMAL ACTION*/

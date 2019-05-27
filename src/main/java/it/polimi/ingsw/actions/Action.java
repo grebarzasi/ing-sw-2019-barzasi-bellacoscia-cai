@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 
 public class Action {
+
     private Figure owner;
     private String description;
     private ArrayList<SubAction> subActionArrayList;

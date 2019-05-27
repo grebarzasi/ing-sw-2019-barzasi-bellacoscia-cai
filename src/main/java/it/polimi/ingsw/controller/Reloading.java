@@ -1,7 +1,6 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Figure;
-import it.polimi.ingsw.Player;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Weapon;
@@ -17,22 +16,22 @@ public class Reloading implements ControllerState {
     }
 
     @Override
-    public void shoot(ArrayList<Player> target) {
+    public void shoot() {
 
     }
 
     @Override
-    public void chooseWeapon(Weapon choice) {
+    public void chooseWeapon() {
 
     }
 
     @Override
-    public void move(Square position) {
+    public void move() {
 
     }
 
     @Override
-    public void pick(Square position) {
+    public void pick() {
 
     }
 

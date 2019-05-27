@@ -1,9 +1,6 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.Figure;
-import it.polimi.ingsw.GameModel;
-import it.polimi.ingsw.Lobby;
-import it.polimi.ingsw.Player;
+import it.polimi.ingsw.*;
 import it.polimi.ingsw.actions.Shoot;
 import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.map.SpawnSquare;
@@ -36,7 +33,9 @@ public class Controller implements Remote {
 
     private GameModel model;
     private Lobby lobby;
-    //private VirtualView view = new VirtualView();
+    private View view;
+    //private View view = new View();
+
 
     public Controller(Lobby lobby) {
 
@@ -65,27 +64,6 @@ public class Controller implements Remote {
      *
      */
 
-
-
-
-    public void startGame(String arg){
-
-        this.model = new GameModel(this.lobby);
-        this.model.setCurrentBoard(new Board(arg));
-        this.model.setCurrentPlayer(this.model.getPlayerList().get(0));
-
-    }
-
-    public void move(String args[]){
-
-        Square moveto = (this.model.getCurrentBoard().getMap().getSquareMatrix()[Integer.parseInt(args[0])][Integer.parseInt(args[1])]);
-        this.model.getCurrentPlayer().setPosition(moveto);
-
-    }
-
-    public void pickWeapon(String arg){
-        ((Player)this.model.getCurrentPlayer()).addWeapon(((SpawnSquare)(this.model.getCurrentPlayer().getPosition())).getArmory().getWeaponList().get(Integer.parseInt(arg)));
-    }
 
     public Square askPosition(){
 
@@ -121,5 +99,135 @@ public class Controller implements Remote {
     }
 
 
+    public ControllerState getAsBot() {
+        return asBot;
+    }
 
+    public void setAsBot(ControllerState asBot) {
+        this.asBot = asBot;
+    }
+
+    public ControllerState getChoosingMove() {
+        return choosingMove;
+    }
+
+    public void setChoosingMove(ControllerState choosingMove) {
+        this.choosingMove = choosingMove;
+    }
+
+    public ControllerState getChoosingPowerUpToUse() {
+        return choosingPowerUpToUse;
+    }
+
+    public void setChoosingPowerUpToUse(ControllerState choosingPowerUpToUse) {
+        this.choosingPowerUpToUse = choosingPowerUpToUse;
+    }
+
+    public ControllerState getChoosingWeapon() {
+        return choosingWeapon;
+    }
+
+    public void setChoosingWeapon(ControllerState choosingWeapon) {
+        this.choosingWeapon = choosingWeapon;
+    }
+
+    public ControllerState getDiscardingPowerUp() {
+        return discardingPowerUp;
+    }
+
+    public void setDiscardingPowerUp(ControllerState discardingPowerUp) {
+        this.discardingPowerUp = discardingPowerUp;
+    }
+
+    public ControllerState getDiscardingWeapon() {
+        return discardingWeapon;
+    }
+
+    public void setDiscardingWeapon(ControllerState discardingWeapon) {
+        this.discardingWeapon = discardingWeapon;
+    }
+
+    public ControllerState getMoving() {
+        return moving;
+    }
+
+    public void setMoving(ControllerState moving) {
+        this.moving = moving;
+    }
+
+    public ControllerState getPicking() {
+        return picking;
+    }
+
+    public void setPicking(ControllerState picking) {
+        this.picking = picking;
+    }
+
+    public ControllerState getPickingWeapon() {
+        return pickingWeapon;
+    }
+
+    public void setPickingWeapon(ControllerState pickingWeapon) {
+        this.pickingWeapon = pickingWeapon;
+    }
+
+    public ControllerState getReloading() {
+        return reloading;
+    }
+
+    public void setReloading(ControllerState reloading) {
+        this.reloading = reloading;
+    }
+
+    public ControllerState getShooting() {
+        return shooting;
+    }
+
+    public void setShooting(ControllerState shooting) {
+        this.shooting = shooting;
+    }
+
+    public ControllerState getTeleporting() {
+        return teleporting;
+    }
+
+    public void setTeleporting(ControllerState teleporting) {
+        this.teleporting = teleporting;
+    }
+
+    public ControllerState getUsingNewton() {
+        return usingNewton;
+    }
+
+    public void setUsingNewton(ControllerState usingNewton) {
+        this.usingNewton = usingNewton;
+    }
+
+    public ControllerState getCurrentState() {
+        return currentState;
+    }
+
+    public void setCurrentState(ControllerState currentState) {
+        this.currentState = currentState;
+    }
+
+    public GameModel getModel() {
+        return model;
+    }
+
+    public void setModel(GameModel model) {
+        this.model = model;
+    }
+
+    public Lobby getLobby() {
+        return lobby;
+    }
+
+    public void setLobby(Lobby lobby) {
+        this.lobby = lobby;
+    }
+
+    public View getView() {
+        return view;
+    }
 }
