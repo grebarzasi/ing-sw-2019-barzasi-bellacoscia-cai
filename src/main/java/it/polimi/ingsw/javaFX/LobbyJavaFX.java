@@ -22,7 +22,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -138,6 +137,7 @@ public class LobbyJavaFX extends Application {
         Label lblPlayer = new Label("Player connessi:");
         lblPlayer.setFont(font);
         HBox playerBox = new HBox();
+        HBox usernameBox = new HBox(100);
         for (Player p: joinedPlayers) {
             switch (p.getCharacter()) {
                 case "yellow": {
@@ -166,6 +166,9 @@ public class LobbyJavaFX extends Application {
                     break;
                 }
             }
+            Label lblUsername = new Label(p.getUsername());
+            lblUsername.setFont(font);
+            usernameBox.getChildren().add(lblUsername);
 
         }
 
@@ -190,7 +193,8 @@ public class LobbyJavaFX extends Application {
         lobbyGrid.add(mapBox,1,6);
         lobbyGrid.add(lblPlayer,1,7);
         lobbyGrid.add(playerBox,1,8);
-        lobbyGrid.add(btnStart,1,9);
+        lobbyGrid.add(usernameBox,1,9);
+        lobbyGrid.add(btnStart,1,10);
 
         ImageView load = null;
         try {
@@ -204,7 +208,7 @@ public class LobbyJavaFX extends Application {
         rotateTransition.setCycleCount(Timeline.INDEFINITE);
         rotateTransition.setInterpolator(Interpolator.LINEAR);
         ImageView finalLoad = load;
-        lobbyGrid.add(finalLoad,2,9);
+        lobbyGrid.add(finalLoad,2,10);
 
 
         /**

@@ -26,6 +26,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.rmi.RemoteException;
 
+
 /**
  *
  * @author Carlo Bellacoscia
@@ -35,8 +36,8 @@ public class StartJavaFX extends Application {
 
     private String username;
     private String color;
-    private int port;
-    private String ip;
+    int port;
+    String ip;
     private String connection = "Socket";
     private ConnectionTech c;
 
@@ -48,7 +49,8 @@ public class StartJavaFX extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Stage origin = primaryStage;
+        double width = primaryStage.getMaxWidth();
+        double height = primaryStage.getMaxHeight();
 
         primaryStage.setTitle("Adrenalina");
 
@@ -62,15 +64,13 @@ public class StartJavaFX extends Application {
         grid.setVgap(30);
         grid.setPadding(new Insets(25, 25, 0, 25));
 
-        Scene scene = new Scene(grid,1045,720);
+        Scene scene = new Scene(grid,width,height);
         primaryStage.setScene(scene);
 
         /**
          * set background
          */
-        Image back = new Image(new FileInputStream("src/main/resources/images/background.jpg"),2000,1200,true,true);
-        BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-        grid.setBackground(new Background(backgroundImage));
+        setBackground(grid);
 
         /**
          * set title
@@ -216,13 +216,7 @@ public class StartJavaFX extends Application {
             Scene loginScene = new Scene(loginGrid, 700, 400);
             this.setScene(loginScene);
 
-            try {
-                Image back = new Image(new FileInputStream("src/main/resources/images/background.jpg"), 2000, 1200, true, true);
-                BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-                loginGrid.setBackground(new Background(backgroundImage));
-            }catch (IOException e){
-                e.printStackTrace();
-            }
+            setBackground(loginGrid);
 
             Text scenetitle = new Text("Benvenuto");
             scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
@@ -305,14 +299,6 @@ public class StartJavaFX extends Application {
                     ex.printStackTrace();
                 }
 
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
-
-                this.close();
-
             });
 
         }
@@ -333,13 +319,7 @@ public class StartJavaFX extends Application {
             Scene scene = new Scene(settingsGrid, 400, 300);
             this.setScene(scene);
 
-            try {
-                Image back = new Image(new FileInputStream("src/main/resources/images/background.jpg"), 2000, 1200, true, true);
-                BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-                settingsGrid.setBackground(new Background(backgroundImage));
-            }catch (IOException e){
-                e.printStackTrace();
-            }
+            setBackground(settingsGrid);
 
             Label lblPort = new Label("Porta:");
             final TextField txtPort= new TextField();
@@ -381,7 +361,13 @@ public class StartJavaFX extends Application {
         }
     }
 
-    public class lobbyWindow extends Stage{
-
+    public  void setBackground(GridPane grid){
+        try {
+            Image back = new Image(new FileInputStream("src/main/resources/images/background.jpg"), 2000, 1200, true, true);
+            BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+            grid.setBackground(new Background(backgroundImage));
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 }
