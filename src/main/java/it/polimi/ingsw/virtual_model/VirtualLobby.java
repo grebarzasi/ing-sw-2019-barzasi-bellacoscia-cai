@@ -14,6 +14,7 @@ import java.util.HashMap;
 public class VirtualLobby {
     private ConnectionTech conn;
     private HashMap<String,VirtualPlayer> players = new HashMap<>();
+    private ArrayList<String> newPlayersList =new ArrayList<>();
     private VirtualPlayer owner;
     private int mapPref;
     private int killPref;
@@ -51,23 +52,6 @@ public class VirtualLobby {
             }
         }
     }
-
-    /**
-     * send your game preferences to server
-     */
-    public void sendReady() throws IOException {
-        if (conn.isRmi()) {
-            return;
-        } else {
-            SClient c = ((SClient) conn);
-            if(owner.isReady())
-                c.getOutput().println("ready");
-            else
-                c.getOutput().println("not ready");
-        }
-    }
-
-
     /**
      * wait lobby update from server
      */
@@ -91,15 +75,13 @@ public class VirtualLobby {
     private void updatePlayers(String s){
         String [] allPl = s.split(";");
         for(String p : allPl){
-            System.out.println(p);
             String [] plStat = p.split(",");
             if(!players.containsKey(plStat[0])){
-                players.put(plStat[0],new VirtualPlayer(plStat[0],plStat[1],plStat[2].equals("1")));
-            }else{
-                players.get(plStat[0]).setUsername(plStat[0]);
-                players.get(plStat[0]).setCharacter(plStat[1]);
-                players.get(plStat[0]).setReady(plStat[2].equals("1"));
+                players.put(plStat[0],new VirtualPlayer(plStat[0],plStat[1]));
+                newPlayersList.add(p);
             }
+            if(newPlayersList.contains(p))
+                newPlayersList.remove(p);
         }
     }
 
@@ -145,5 +127,9 @@ public class VirtualLobby {
 
     public void setOwner(VirtualPlayer owner) {
         this.owner = owner;
+    }
+
+    public ArrayList<String> getNewPlayersList() {
+        return newPlayersList;
     }
 }

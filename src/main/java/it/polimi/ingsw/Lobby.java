@@ -44,7 +44,7 @@ public class Lobby {
      */
     public synchronized void updateClients(){
         for(ClientThreadSocket c : joinedPlayers){
-            if(c.isWaiting())
+            if(c.isReady())
                 c.updateLobby();
         }
     }

@@ -1,11 +1,15 @@
 package it.polimi.ingsw.CLI;
 
 import it.polimi.ingsw.connection.ConnectionTech;
+import it.polimi.ingsw.virtual_model.LobbyUpTh;
 import it.polimi.ingsw.virtual_model.VirtualLobby;
 import it.polimi.ingsw.virtual_model.VirtualPlayer;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Gregorio Barzasi
@@ -105,14 +109,15 @@ public class CliLobby extends Thread{
                 "\n\n----------------------------------------\n" +
                         "*** Waiting room..." +
                         "\n----------------------------------------");
-        System.out.println("\nARE YOU READY!? (Y/N)");
-        while (!lobby.isGameStarted()) {
-                lobby.getOwner().setReady(ynAsk("", "HELL YEAH, Waiting for other players ( press N to unready )", "Ok, press Y when you're ready"));
-                lobby.waitUpdate();
-            }
+        new LobbyUpTh(lobby).start();
+        Set<String> old=new HashSet<>();
 
-
-        }
+        //QUI
+        /*
+        while (!lobby.isGameStarted())
+            old.addAll(lobby.getNewPlayersList());
+    */
+    }
 
 
 

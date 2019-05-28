@@ -25,7 +25,6 @@ public class ClientThreadSocket extends Thread {
     private int killPref;
     private boolean terminatorPref;
     private boolean finalFrenzyPref;
-    private boolean waiting=false;
 
     public ClientThreadSocket(Socket s, Lobby lobby) throws IOException{
         this.lobby=lobby;
@@ -69,7 +68,8 @@ public class ClientThreadSocket extends Thread {
         finalFrenzyPref=Boolean.parseBoolean(in.readLine());
         out.println("accepted");
         System.out.println(owner.getUsername() + " pref registered");
-        waiting=true;
+        ready=true;
+        updateLobby();
     }
 
     /**
@@ -84,19 +84,8 @@ public class ClientThreadSocket extends Thread {
      */
 
 
-    public void waitReady()throws IOException {
-        System.out.println("Waiting ready for " + owner.getUsername());
-        while (!lobby.hasStarted()) {
-            String readyStatus = in.readLine();
-            if(readyStatus.equals("ready")) {
-                ready = true;
-                System.out.println(owner.getUsername() + "is ready!");
-            }else if(readyStatus.equals("not ready")){
-                ready = false;
-                System.out.println(owner.getUsername() + "is NOT ready!");
-            }
-            lobby.updateClients();
-        }
+    public void waitStart()throws IOException {
+        while (!lobby.hasStarted()) ;
     }
 
     public void run() {
@@ -104,11 +93,8 @@ public class ClientThreadSocket extends Thread {
         try {
             waitLogin();
             waitPref();
-            /*
-            while(true)
-                lobby.updateClients();
+            waitStart();
 
-             */
 
 
 
@@ -136,15 +122,6 @@ public class ClientThreadSocket extends Thread {
     public void setReady(boolean ready) {
         this.ready = ready;
     }
-
-    public boolean isWaiting() {
-        return waiting;
-    }
-
-    public void setWaiting(boolean waiting) {
-        this.waiting = waiting;
-    }
-
     @Override
     public String toString() {
         return owner.getUsername() + "," + owner.getCharacter() + "," + ready;

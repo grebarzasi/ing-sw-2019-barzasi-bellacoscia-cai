@@ -58,7 +58,9 @@ public class CliView {
             System.out.println("\nSocket Selected");
 
         }
-        //c.setPort(this.acquirePort());
+
+        c.setPort(acquirePort());
+        c.setIp(acquireIp());
         c.initConnection();
     }
 
@@ -76,7 +78,7 @@ public class CliView {
             System.out.println("waiting...");
             if(l.send()){
                 System.out.println("Login success!");
-                p = new VirtualPlayer(username,character,false);
+                p = new VirtualPlayer(username,character);
                 break;
             }
             System.out.println("\nLogin failed! name or character already in use, try again!");

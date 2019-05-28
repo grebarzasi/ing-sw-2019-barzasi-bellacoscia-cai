@@ -301,7 +301,7 @@ public class StartJavaFX extends Application {
 
                 VirtualLogin login = new VirtualLogin(username,color,c);
                 try {
-                    p = new VirtualPlayer(username,color,false);
+                    p = new VirtualPlayer(username,color);
                     if(login.send()){
                         this.close();
                     }else{

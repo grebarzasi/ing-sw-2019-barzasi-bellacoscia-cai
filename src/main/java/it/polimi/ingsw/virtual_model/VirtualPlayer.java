@@ -7,12 +7,10 @@ package it.polimi.ingsw.virtual_model;
 public class VirtualPlayer {
     private String username;
     private String character;
-    private boolean ready=false;
 
-    public VirtualPlayer(String username,String character, boolean ready){
+    public VirtualPlayer(String username,String character){
         this.character=character;
         this.username=username;
-        this.ready=ready;
     }
 
 
@@ -30,14 +28,6 @@ public class VirtualPlayer {
 
     public void setCharacter(String charachter) {
         this.character = charachter;
-    }
-
-    public boolean isReady() {
-        return ready;
-    }
-
-    public void setReady(boolean ready) {
-        this.ready = ready;
     }
 
 
