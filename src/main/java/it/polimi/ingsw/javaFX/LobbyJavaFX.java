@@ -1,6 +1,9 @@
 package it.polimi.ingsw.javaFX;
 
 import it.polimi.ingsw.Player;
+import it.polimi.ingsw.connection.ConnectionTech;
+import it.polimi.ingsw.virtual_model.VirtualLobby;
+import it.polimi.ingsw.virtual_model.VirtualPlayer;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
@@ -24,6 +27,7 @@ import javafx.util.Duration;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -33,9 +37,19 @@ public class LobbyJavaFX extends Application {
 
     private boolean terminator = false;
     private boolean frenzy = false;
-    int map;
-    int skull;
+    private int map;
+    private int skull;
+    private ConnectionTech conn;
+    private VirtualPlayer owner;
+
+    private VirtualLobby lobby;
     private ArrayList<Player> joinedPlayers = new ArrayList<>();
+
+    public LobbyJavaFX(ConnectionTech conn, VirtualPlayer owner) {
+        this.conn = conn;
+        this.owner = owner;
+        this.lobby = new VirtualLobby(conn, owner);
+    }
 
     public void start(Stage primaryStage) throws Exception {
 
@@ -250,8 +264,20 @@ public class LobbyJavaFX extends Application {
         map4.setOnAction(e-> map = 4);
 
         btnStart.setOnAction(e->{
-            btnStart.setVisible(false);
-            rotateTransition.play();
+
+            lobby.setKillPref(skull);
+            lobby.setTerminatorPref(terminator);
+            lobby.setFinalFrenzyPref(frenzy);
+            lobby.setMapPref(map);
+
+            try {
+                lobby.sendPref();
+                btnStart.setVisible(false);
+                rotateTransition.play();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+
 
         });
 

@@ -32,8 +32,8 @@ public class CliLobby extends Thread{
         waitingRoom();
     }
 
-    public String askMap(){
-        return null;
+    public int askMap(){
+        return 0;
     }
 
     /**

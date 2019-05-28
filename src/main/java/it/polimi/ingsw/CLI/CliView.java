@@ -103,6 +103,10 @@ public class CliView {
         return port;
     }
 
+    public String acquireIp()throws IOException{
+        System.out.println("\nInsert IP:");
+        return sc.readLine();
+    }
 
     /**
      * parse username

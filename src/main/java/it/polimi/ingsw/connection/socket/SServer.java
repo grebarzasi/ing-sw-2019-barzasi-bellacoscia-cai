@@ -1,8 +1,10 @@
 package it.polimi.ingsw.connection.socket;
 
+import it.polimi.ingsw.CLI.CliView;
 import it.polimi.ingsw.Lobby;
 import it.polimi.ingsw.connection.ConnectionTech;
 
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.rmi.RemoteException;
@@ -47,6 +49,14 @@ public class SServer extends ConnectionTech {
     }
     public static void main(String[] args){
         SServer s = new SServer();
+        CliView cli = new CliView();
+
+        try {
+            s.setPort(cli.acquirePort());
+            s.setIp(cli.acquireIp());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         try {
             s.initConnection();
         } catch (RemoteException e) {

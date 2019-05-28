@@ -15,7 +15,7 @@ public class VirtualLobby {
     private ConnectionTech conn;
     private HashMap<String,VirtualPlayer> players = new HashMap<>();
     private VirtualPlayer owner;
-    private String mapPref;
+    private int mapPref;
     private int killPref;
     private boolean terminatorPref;
     private boolean finalFrenzyPref;
@@ -104,11 +104,11 @@ public class VirtualLobby {
     }
 
 
-    public String getMapPref() {
+    public int getMapPref() {
         return mapPref;
     }
 
-    public void setMapPref(String mapPref) {
+    public void setMapPref(int mapPref) {
         this.mapPref = mapPref;
     }
 

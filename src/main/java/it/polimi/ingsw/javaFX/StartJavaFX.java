@@ -4,6 +4,7 @@ import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.connection.rmi.RmiClient;
 import it.polimi.ingsw.connection.socket.SClient;
 import it.polimi.ingsw.virtual_model.VirtualLogin;
+import it.polimi.ingsw.virtual_model.VirtualPlayer;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,10 +37,11 @@ public class StartJavaFX extends Application {
 
     private String username;
     private String color;
-    int port;
-    String ip;
+    private int port = 0;
+    private String ip = "";
     private String connection = "Socket";
     private ConnectionTech c;
+    private VirtualPlayer p;
 
 
     public static void main(String[] args){
@@ -164,7 +166,7 @@ public class StartJavaFX extends Application {
 
         btnLobby.setOnAction(e->{
 
-            LobbyJavaFX lobby = new LobbyJavaFX();
+            LobbyJavaFX lobby = new LobbyJavaFX(c,p);
             try {
                 lobby.start(primaryStage);
             } catch (Exception ex) {
@@ -186,15 +188,20 @@ public class StartJavaFX extends Application {
         public loginWindow(){
 
             if(connection.equals("RMI")){
-                c= new RmiClient();
+                c = new RmiClient();
                 c.setRmi(true);
             }else if(connection.equals("Socket")){
-                c= new SClient();
+                c = new SClient();
                 c.setRmi(false);
             }
 
-            //check this exception
             try {
+                if(!ip.isEmpty()){
+                    c.setIp(ip);
+                }
+                if(port != 0){
+                    c.setPort(port);
+                }
                 c.initConnection();
             } catch (RemoteException e) {
                 e.printStackTrace();
@@ -294,7 +301,14 @@ public class StartJavaFX extends Application {
 
                 VirtualLogin login = new VirtualLogin(username,color,c);
                 try {
-                    login.send();
+                    p = new VirtualPlayer(username,color,false);
+                    if(login.send()){
+                        this.close();
+                    }else{
+                        actiontarget.setFill(Color.RED);
+                        actiontarget.setText("Username o personaggio non disponibile!");
+
+                    }
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }

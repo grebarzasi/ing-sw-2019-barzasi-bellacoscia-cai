@@ -104,8 +104,13 @@ public class ClientThreadSocket extends Thread {
         try {
             waitLogin();
             waitPref();
+            /*
             while(true)
                 lobby.updateClients();
+
+             */
+
+
 
         } catch (IOException e) {
             e.printStackTrace();
