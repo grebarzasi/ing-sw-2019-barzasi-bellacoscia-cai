@@ -6,6 +6,8 @@ import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.AmmoLot;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -46,7 +48,7 @@ public class PlayerTest {
         for (i = 0; i < 10; i++) {
 
 
-            GameModel empire = new GameModel(null, null, new Board("small"));
+            GameModel empire = new GameModel(new ArrayList<>(), null, new Board("small"));
             Board alderaan = empire.getCurrentBoard();
             Player luke = new Player("Luke", "Jedi");
             luke.setModel(empire);
@@ -94,7 +96,7 @@ public class PlayerTest {
     @Test
     public void consecutivePicking(){
 
-        GameModel empire = new GameModel(null, null, new Board("large"));
+        GameModel empire = new GameModel(new ArrayList<>(), null, new Board("large"));
         Board alderaan = empire.getCurrentBoard();
         Player luke = new Player("Luke", "Jedi");
         luke.setModel(empire);

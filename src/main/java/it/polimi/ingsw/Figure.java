@@ -48,8 +48,6 @@ public class Figure {
 
     private GameModel model;
 
-    private int maxActions;
-
     private ArrayList<Action> actions;
 
     public ArrayList<Square> canGo() {
@@ -487,14 +485,6 @@ public class Figure {
 
     public void setModel(GameModel model) {
         this.model = model;
-    }
-
-    public int getMaxActions() {
-        return maxActions;
-    }
-
-    public void setMaxActions(int maxActions) {
-        this.maxActions = maxActions;
     }
 
     public ArrayList<Action> getActions() {

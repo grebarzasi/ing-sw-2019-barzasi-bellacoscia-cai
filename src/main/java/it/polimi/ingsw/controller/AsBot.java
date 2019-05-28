@@ -16,6 +16,12 @@ public class AsBot implements ControllerState{
         this.controller = controller;
     }
 
+    /**
+     * Passes a list of valid targets to the view, (the view displays the
+     * choices and makes the player choose one)
+     * <p>
+     * Then proceeds to shoot the target in the face (adding one bot damage or mark)
+     */
 
     @Override
     public void shoot() {
@@ -40,6 +46,13 @@ public class AsBot implements ControllerState{
     public void chooseWeapon() {
 
     }
+
+    /**
+     * Passes the view a list of valid targets (The view displays them
+     * and makes the player choose one)
+     *
+     * Then moves the bot to the chosen position
+     */
 
     @Override
     public void move() {

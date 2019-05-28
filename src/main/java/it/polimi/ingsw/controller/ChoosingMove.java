@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Figure;
+import it.polimi.ingsw.actions.Action;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Weapon;
@@ -37,6 +38,8 @@ public class ChoosingMove implements ControllerState{
 
     @Override
     public void choose() {
+
+        ArrayList<Action> availableActions = new ArrayList<>();
 
     }
 

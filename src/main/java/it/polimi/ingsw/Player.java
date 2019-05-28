@@ -31,6 +31,8 @@ public class Player extends Figure {
 
     private ArrayList<PowerUp> powerupList;
 
+    private int maxActions;
+
     public Preferences getPref() {
         return pref;
     }
@@ -114,5 +116,13 @@ public class Player extends Figure {
 
     public void setCharacter(String character){
         super.setCharacter(character);
+    }
+
+    public int getMaxActions() {
+        return maxActions;
+    }
+
+    public void setMaxActions(int maxActions) {
+        this.maxActions = maxActions;
     }
 }
