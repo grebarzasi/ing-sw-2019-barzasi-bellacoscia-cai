@@ -12,8 +12,15 @@ public class AsBot implements ControllerState{
 
     private Controller controller;
 
+    private boolean hasMoved;
+    private boolean hasShot;
+
+
     public AsBot(Controller controller) {
         this.controller = controller;
+
+        this.hasMoved = false;
+        this.hasShot = false;
     }
 
     /**
@@ -26,19 +33,25 @@ public class AsBot implements ControllerState{
     @Override
     public void shoot() {
 
-        ArrayList<Figure> targets = new ArrayList<>();
-        for (Player p : this.controller.getModel().getPlayerList()) {
-            if (this.controller.getModel().getBot().canSee(p)) ;
-            targets.add(p);
+        if (hasShot == false) {
+
+            ArrayList<Figure> targets = new ArrayList<>();
+            for (Player p : this.controller.getModel().getPlayerList()) {
+                if (this.controller.getModel().getBot().canSee(p)) ;
+                targets.add(p);
+            }
+
+            Player toShoot = this.controller.getView().showMultipleTargets(targets);
+
+            int index = this.controller.getModel().getPlayerList().indexOf(toShoot);
+            this.controller.getModel().getBot().inflictDamage(1, this.controller.getModel().getPlayerList().get(index));
+
+            this.controller.getModel().endTurn();
+            this.controller.setCurrentState(this.controller.choosingMove);
+
+        } else {
+            this.controller.getView().displayMessage("Bot has no actions left this turn");
         }
-
-        Player toShoot = this.controller.getView().showMultipleTargets(targets);
-
-        int index = this.controller.getModel().getPlayerList().indexOf(toShoot);
-        this.controller.getModel().getBot().inflictDamage(1, this.controller.getModel().getPlayerList().get(index));
-
-        this.controller.getModel().endTurn();
-        this.controller.setCurrentState(this.controller.choosingMove);
 
     }
 
@@ -57,9 +70,14 @@ public class AsBot implements ControllerState{
     @Override
     public void move() {
 
-        ArrayList<Square> canGo = new ArrayList<>();
-        this.controller.getModel().getBot().setPosition(this.controller.getView().showPossibleMoves(this.controller.getModel().getBot().canGo()));
-
+        if (hasMoved == false && hasShot == false) {
+            ArrayList<Square> canGo = new ArrayList<>();
+            this.controller.getModel().getBot().setPosition(this.controller.getView().showPossibleMoves(this.controller.getModel().getBot().canGo()));
+        } else if (hasMoved == true && hasShot == false) {
+            this.controller.getView().displayMessage("Bot has already moved this turn");
+        } else if (hasShot == true) {
+            System.out.print("Bot has no actions left this turn");
+        }
     }
 
     @Override

@@ -230,4 +230,16 @@ public class Controller implements Remote {
     public View getView() {
         return view;
     }
+
+    public int getMovesLeft() {
+        return this.getModel().getMovesLeft();
+    }
+
+    public void setMovesLeft(int moves) {
+        this.model.setMovesLeft(moves);
+    }
+
+    public Player getCurrentPlayer() {
+        return this.model.getCurrentPlayer();
+    }
 }

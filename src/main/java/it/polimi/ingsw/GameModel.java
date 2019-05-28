@@ -33,9 +33,13 @@ public class GameModel {
 
     private Player currentPlayer;
 
+    private int movesLeft;
+
     private Terminator bot;
 
     private Board currentBoard;
+
+    private boolean isFrenzy;
 
     public GameModel(){
 
@@ -50,6 +54,8 @@ public class GameModel {
         for (Player p : this.playerList) {
             p.setModel(this);
         }
+
+        this.isFrenzy = false;
     }
 
     /**
@@ -65,6 +71,8 @@ public class GameModel {
             p.setModel(this);
         }
         //TODO if this game wants a bot adds a bot;
+
+        this.isFrenzy = false;
     }
 
     public Set<Figure> askTarget(int num){
@@ -74,14 +82,6 @@ public class GameModel {
         return null;
     }
     public void askUseEffect(Set<Effect> eff){}
-
-    public void setActions() {}
-    public void getStatus(Figure p) {}
-    public void kill(Figure p) {}
-    public void finalFrenzy() {}
-    public void finalScore(Figure p) {}
-    public void update() {}
-
 
     /**
      * ends a turn
@@ -134,7 +134,7 @@ public class GameModel {
         this.playerList = playerList;
     }
 
-    public Figure getCurrentPlayer() {
+    public Player getCurrentPlayer() {
         return currentPlayer;
     }
 
@@ -162,6 +162,19 @@ public class GameModel {
         this.bot = bot;
     }
 
+    public int getMovesLeft() {
+        return movesLeft;
+    }
 
+    public void setMovesLeft(int movesLeft) {
+        this.movesLeft = movesLeft;
+    }
 
+    public boolean isFrenzy() {
+        return isFrenzy;
+    }
+
+    public void setFrenzy(boolean frenzy) {
+        isFrenzy = frenzy;
+    }
 }

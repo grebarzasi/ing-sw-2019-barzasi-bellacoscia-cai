@@ -13,7 +13,7 @@ import java.util.Set;
  */
 public class ActionBuilder {
 
-    public Set<Action> buildActionFor(Figure p, boolean isFrenzy, boolean isEndTurn){
+    public static Set<Action> build(Figure p, boolean isFrenzy, int movesLeft) {
 
         //create the actionSet
         Set<Action> actionSet = new HashSet<>();
@@ -27,10 +27,10 @@ public class ActionBuilder {
         /*NORMAL ACTION*/
 
         //reload is the only action allowed on end turn
-        if(isEndTurn){
+        if (movesLeft == 0) {
             ArrayList<SubAction> reloadArrayList = new ArrayList<>();
             reloadArrayList.add(new Reload());
-            Action reload = new Action("Scegli le armi da ricaricare",reloadArrayList);
+            Action reload = new Action("Reload", reloadArrayList);
             actionSet.add(reload);
             return actionSet;
         }
@@ -40,13 +40,13 @@ public class ActionBuilder {
     }
 
 
-    private Set<Action> createNormalActions(Figure p, Set<Action> actionSet){
+    private static Set<Action> createNormalActions(Figure p, Set<Action> actionSet) {
 
         //initialize arrayList for actions
         ArrayList<SubAction> shootArrayList = new ArrayList<>();
-        String shootDescription="Scegli un arma e spara";
+        String shootDescription = "Shoot";
         ArrayList<SubAction> pickArrayList = new ArrayList<>();
-        String pickDescription="Raccogli";
+        String pickDescription = "Pick";
         ArrayList<SubAction> moveArrayList = new ArrayList<>();
 
         //check damage num
@@ -55,11 +55,11 @@ public class ActionBuilder {
         //if "adrenalinic" add special moves
         if(damageNum>5){
             shootArrayList.add(new Move(1));
-            shootDescription="Muovi 1 posizione poi scegli un arma e spara ";
+            shootDescription = "Move and Shoot";
         }
         if (damageNum>2 ){
             pickArrayList.add(new Move(2));
-            pickDescription="Muovi 2 posizioni poi raccogli";
+            pickDescription = "Pick";
         }
 
         //now add normal actions
@@ -68,7 +68,7 @@ public class ActionBuilder {
         moveArrayList.add(new Move(3));
 
         //adds all to actionSet ad return
-        actionSet.add(new Action("Muovi 3 posizioni",moveArrayList));
+        actionSet.add(new Action("Move", moveArrayList));
         actionSet.add(new Action(pickDescription,pickArrayList));
         actionSet.add(new Action(shootDescription,shootArrayList));
 

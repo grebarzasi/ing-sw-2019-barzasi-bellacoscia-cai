@@ -45,7 +45,7 @@ public class PlayerTest {
         int i;
 
         //test is ran for 100 times since there is random factor;
-        for (i = 0; i < 10; i++) {
+        for (i = 0; i < 3; i++) {
 
 
             GameModel empire = new GameModel(new ArrayList<>(), null, new Board("small"));
