@@ -6,7 +6,7 @@ public abstract class ConnectionTech {
 
     //default 127.0.0.1:1234
     private int port=1234;
-    public String ip="127.0.0.1";
+    public String ip = "192.168.43.211";
 
     //default is rmi
     private boolean rmi=false;

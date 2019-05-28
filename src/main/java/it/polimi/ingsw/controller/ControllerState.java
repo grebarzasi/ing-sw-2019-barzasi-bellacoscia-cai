@@ -17,15 +17,15 @@ public interface ControllerState {
 
     void pick();
 
-    void choose(int choice);
+    void choose();
 
-    void chooseMove(String choice);
+    void chooseMove();
 
-    void discardPU(PowerUp toDiscard);
+    void discardPU();
 
-    void discardWeapon(Weapon toDiscard);
+    void discardWeapon();
 
-    void usePU(PowerUp toUse);
+    void usePU();
 
     void teleport(Square teleportHere);
 

@@ -55,27 +55,27 @@ public class AsBot implements ControllerState{
     }
 
     @Override
-    public void choose(int choice) {
+    public void choose() {
 
     }
 
     @Override
-    public void chooseMove(String choice) {
+    public void chooseMove() {
 
     }
 
     @Override
-    public void discardPU(PowerUp toDiscard) {
+    public void discardPU() {
 
     }
 
     @Override
-    public void discardWeapon(Weapon toDiscard) {
+    public void discardWeapon() {
 
     }
 
     @Override
-    public void usePU(PowerUp toUse) {
+    public void usePU() {
 
     }
 
