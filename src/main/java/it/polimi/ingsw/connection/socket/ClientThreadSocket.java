@@ -56,6 +56,11 @@ public class ClientThreadSocket extends Thread {
         return true;
     }
 
+    /**
+     * Wait for game settings from client.
+     */
+
+
     public void waitPref()throws IOException {
         System.out.println("Waiting pref for "+ owner.getUsername());
         mapPref=in.readLine();
@@ -67,8 +72,31 @@ public class ClientThreadSocket extends Thread {
         waiting=true;
     }
 
+    /**
+     * sends updates to client
+     */
     public void updateLobby(){
         out.println(lobby.toString());
+    }
+
+    /**
+     * Wait for ready status
+     */
+
+
+    public void waitReady()throws IOException {
+        System.out.println("Waiting ready for " + owner.getUsername());
+        while (!lobby.hasStarted()) {
+            String readyStatus = in.readLine();
+            if(readyStatus.equals("ready")) {
+                ready = true;
+                System.out.println(owner.getUsername() + "is ready!");
+            }else if(readyStatus.equals("not ready")){
+                ready = false;
+                System.out.println(owner.getUsername() + "is NOT ready!");
+            }
+            lobby.updateClients();
+        }
     }
 
     public void run() {
@@ -76,7 +104,8 @@ public class ClientThreadSocket extends Thread {
         try {
             waitLogin();
             waitPref();
-            updateLobby();
+            while(true)
+                lobby.updateClients();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -113,6 +142,6 @@ public class ClientThreadSocket extends Thread {
 
     @Override
     public String toString() {
-        return owner.getUsername() + ";" + owner.getCharacter() + ";" + ready;
+        return owner.getUsername() + "," + owner.getCharacter() + "," + ready;
     }
 }

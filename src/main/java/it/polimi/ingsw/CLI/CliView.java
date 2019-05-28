@@ -33,14 +33,16 @@ public class CliView {
             chooseConnection();
             login();
             lobby = new CliLobby(c,sc,p);
-            lobby.start();
+            lobby.startLobby();
         }catch(Exception e){
             System.err.println("Connection error");
         }
     }
 
 
-
+    /**
+     * choose connection type
+     */
 
 
     public void chooseConnection() throws IOException {
@@ -60,6 +62,10 @@ public class CliView {
         c.initConnection();
     }
 
+    /**
+     * parse login info
+     */
+
     public void login()throws IOException{
         System.out.println("\nIt's time to login!");
         VirtualLogin l;
@@ -70,7 +76,7 @@ public class CliView {
             System.out.println("waiting...");
             if(l.send()){
                 System.out.println("Login success!");
-                p = new VirtualPlayer(username,character);
+                p = new VirtualPlayer(username,character,false);
                 break;
             }
             System.out.println("\nLogin failed! name or character already in use, try again!");
@@ -97,12 +103,19 @@ public class CliView {
         return port;
     }
 
+
+    /**
+     * parse username
+     */
     private String acquireUsername()throws IOException{
             System.out.println("\n__Insert Username:");
             return sc.readLine();
         }
 
 
+    /**
+     * parse character
+     */
     private String acquireCharacter()throws IOException{
             String character;
             do {

@@ -30,10 +30,10 @@ public class Lobby {
         this.joinedPlayers = new ArrayList<>();
     }
 
-    public boolean addPlayer(ClientThreadSocket p) {
+    public synchronized boolean addPlayer(ClientThreadSocket p) {
         if (this.joinedPlayers.size() < maxPlayer && usernameCheck(p) && characterCheck(p)) {
             this.joinedPlayers.add(p);
-            updateClient();
+            updateClients();
             return true;
         }
         return false;
@@ -42,7 +42,7 @@ public class Lobby {
     /**
      * Updates all client when other player is added
      */
-    public void updateClient(){
+    public synchronized void updateClients(){
         for(ClientThreadSocket c : joinedPlayers){
             if(c.isWaiting())
                 c.updateLobby();
