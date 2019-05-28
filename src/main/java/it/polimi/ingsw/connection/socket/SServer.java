@@ -3,7 +3,6 @@ package it.polimi.ingsw.connection.socket;
 import it.polimi.ingsw.Lobby;
 import it.polimi.ingsw.connection.ConnectionTech;
 
-import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.rmi.RemoteException;
