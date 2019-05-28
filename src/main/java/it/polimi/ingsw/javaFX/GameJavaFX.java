@@ -18,8 +18,8 @@ import java.io.IOException;
 
 public class GameJavaFX extends Application {
 
-    int map = 1;
-    Player player = new Player("carlo", "red");
+    private int map = 1;
+    private Player player = new Player("carlo", "red");
 
     @Override
     public void start(Stage primaryStage) throws Exception {
