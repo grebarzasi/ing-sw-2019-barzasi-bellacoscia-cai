@@ -23,7 +23,8 @@ public interface View {
 
     public Player showMultipleTargets(ArrayList<Figure> args);
 
-    public void displayMessage(String string);
+    public boolean showBoolean();
 
+    public void displayMessage(String string);
 
 }

@@ -44,10 +44,10 @@ public class ChoosingMove implements ControllerState{
 
         Set<Action> availableActions = new HashSet<>();
 
-        if (this.controller.getModel().getMovesLeft() != 0) {
-            availableActions = ActionBuilder.build(this.controller.getModel().getCurrentPlayer(), this.controller.getModel().isFrenzy(),
-                    this.controller.getMovesLeft());
-        }
+
+        availableActions = ActionBuilder.build(this.controller.getModel().getCurrentPlayer(), this.controller.getModel().isFrenzy(),
+                this.controller.getMovesLeft());
+
 
         Set<String> options = new HashSet<>();
 
@@ -63,6 +63,11 @@ public class ChoosingMove implements ControllerState{
 
         switch (choice) {
             case "UsePU":
+            case "PowerUp":
+            case "usepowerup":
+            case "usePU":
+            case "pu":
+            case "PU":
                 this.controller.setCurrentState(this.controller.choosingPowerUpToUse);
             case "Move":
                 this.controller.setCurrentState(this.controller.moving);
@@ -70,6 +75,8 @@ public class ChoosingMove implements ControllerState{
                 this.controller.setCurrentState(this.controller.shooting);
             case "Reload":
                 this.controller.setCurrentState(this.controller.reloading);
+            case "Pick":
+                this.controller.setCurrentState(this.controller.picking);
         }
 
     }

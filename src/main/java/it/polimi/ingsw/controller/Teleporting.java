@@ -9,6 +9,10 @@ import java.util.ArrayList;
 
 public class Teleporting implements ControllerState {
 
+    private static final int height = 3;
+    private static final int width = 4;
+
+
     private Controller controller;
 
     public Teleporting(Controller controller) {
@@ -42,6 +46,24 @@ public class Teleporting implements ControllerState {
 
     @Override
     public void chooseMove() {
+
+        ArrayList<Square> options = new ArrayList<>();
+
+        int row;
+        int column;
+
+        for (row = 0; row < height; row++) {
+            for (column = 0; column < height; column++) {
+                options.add(this.controller.getModel().getCurrentBoard().getMap().getSquareMatrix()[row][column]);
+            }
+        }
+
+        options.remove(this.controller.getCurrentPlayer().getPosition());
+        Square choice = this.controller.getView().showPossibleMoves(options);
+
+        this.controller.getCurrentPlayer().setPosition(choice);
+        this.controller.setCurrentState(this.controller.choosingMove);
+
 
     }
 
