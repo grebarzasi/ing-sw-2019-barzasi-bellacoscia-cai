@@ -26,14 +26,14 @@ public class SServer extends ConnectionTech {
         try {
             ServerSocket server = new ServerSocket(super.getPort());
 
-            System.out.println("Server started");
+            System.out.println("Server started  " + super.getIp() + " : "+super.getPort());
 
             //loops until game start waiting for other players
 
             ClientThreadSocket temp;
             while(!lobby.hasStarted()){
                 Socket client = server.accept();
-                System.out.println("connection established with\n" + client);
+                System.out.println("\n\nconnection established with\n" + client);
                 temp = new ClientThreadSocket(client,lobby);
                 temp.start();
             }
@@ -47,13 +47,20 @@ public class SServer extends ConnectionTech {
         }
 
     }
+
+
+
     public static void main(String[] args){
         SServer s = new SServer();
         CliView cli = new CliView();
 
         try {
-            s.setPort(cli.acquirePort());
-            s.setIp(cli.acquireIp());
+            int port=cli.acquirePort();
+            String ip =cli.acquireIp();
+            if(port!=0)
+                s.setPort(port);
+            if(!ip.isEmpty())
+                s.setIp(ip);
         } catch (IOException e) {
             e.printStackTrace();
         }

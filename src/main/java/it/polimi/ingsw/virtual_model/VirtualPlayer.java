@@ -7,10 +7,12 @@ package it.polimi.ingsw.virtual_model;
 public class VirtualPlayer {
     private String username;
     private String character;
+    private boolean printed;
 
     public VirtualPlayer(String username,String character){
         this.character=character;
         this.username=username;
+        this.printed=false;
     }
 
 
@@ -30,5 +32,11 @@ public class VirtualPlayer {
         this.character = charachter;
     }
 
+    public boolean isPrinted() {
+        return printed;
+    }
 
+    public void setPrinted(boolean printed) {
+        this.printed = printed;
+    }
 }

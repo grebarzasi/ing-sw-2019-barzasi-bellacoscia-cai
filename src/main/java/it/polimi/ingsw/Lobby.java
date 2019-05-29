@@ -5,6 +5,8 @@ import it.polimi.ingsw.connection.socket.ClientThreadSocket;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
@@ -13,11 +15,8 @@ import java.util.HashMap;
 
 public class Lobby {
 
-    private boolean hasStarted =false;
-
-    public boolean hasStarted() {
-        return hasStarted;
-    }
+    private boolean hasStarted;
+    private Timer timer;
 
 
     private final int maxPlayer = 5;
@@ -28,12 +27,13 @@ public class Lobby {
 
     public Lobby() {
         this.joinedPlayers = new ArrayList<>();
+        this.timer= new Timer();
+        this.hasStarted=false;
     }
 
     public synchronized boolean addPlayer(ClientThreadSocket p) {
         if (this.joinedPlayers.size() < maxPlayer && usernameCheck(p) && characterCheck(p)) {
             this.joinedPlayers.add(p);
-            updateClients();
             return true;
         }
         return false;
@@ -42,12 +42,25 @@ public class Lobby {
     /**
      * Updates all client when other player is added
      */
-    public synchronized void updateClients(){
-        for(ClientThreadSocket c : joinedPlayers){
-            if(c.isReady())
+    public synchronized void updateClients() {
+
+        int i = 0;
+        for (ClientThreadSocket c : joinedPlayers) {
+            if (c.isReady()) {
+                i++;
                 c.updateLobby();
+            }
+        }
+        if (i > 2) {
+            System.out.println("countdown started");
+            timer.schedule(new TimerGameStart(this), 20 * 1000);
         }
     }
+
+    /**
+     * Updates all client when game starts
+     */
+
 
     public boolean usernameCheck(ClientThreadSocket p){
         for(ClientThreadSocket toCheck: this.joinedPlayers){
@@ -101,8 +114,16 @@ public class Lobby {
         this.joinedPlayers = joinedPlayers;
     }
 
+    public synchronized boolean hasStarted() {
+        return hasStarted;
+    }
+
+    public synchronized void setHasStarted(boolean hasStarted) {
+        this.hasStarted = hasStarted;
+    }
+
     @Override
-    public String toString() {
+    public synchronized String toString() {
         String s="";
         for(ClientThreadSocket c: joinedPlayers){
             s= s + c.toString()+";";
