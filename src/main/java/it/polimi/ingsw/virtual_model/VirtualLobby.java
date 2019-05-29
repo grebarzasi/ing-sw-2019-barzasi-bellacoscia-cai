@@ -13,8 +13,8 @@ import java.util.HashMap;
  */
 public class VirtualLobby {
     private ConnectionTech conn;
-    private HashMap<String,VirtualPlayer> players = new HashMap<>();
-    private ArrayList<String> newPlayersList =new ArrayList<>();
+    private HashMap<String,VirtualPlayer> players;
+    private ArrayList<VirtualPlayer> newPlayersList;
     private VirtualPlayer owner;
     private int mapPref;
     private int killPref;
@@ -27,6 +27,9 @@ public class VirtualLobby {
     public VirtualLobby(ConnectionTech c, VirtualPlayer owner){
         this.conn=c;
         this.owner=owner;
+        this.gameStarted=false;
+        this.newPlayersList =new ArrayList<>();
+        this.players = new HashMap<>();
     }
 
     /**
@@ -57,13 +60,18 @@ public class VirtualLobby {
      */
 
 
-    public boolean waitUpdate()throws IOException {
+    public synchronized boolean waitUpdate()throws IOException {
         if (conn.isRmi()) {
             return false;
         } else {
             String all;
             SClient c = ((SClient) conn);
             all = c.getInput().readLine();
+            if(all.equals("*start*")) {
+                System.out.println("Started");
+                gameStarted = true;
+                return true;
+            }
             updatePlayers(all);
             return true;
         }
@@ -72,16 +80,15 @@ public class VirtualLobby {
     /**
      * Updates in game players info.
      */
-    private void updatePlayers(String s){
+    private synchronized void updatePlayers(String s){
         String [] allPl = s.split(";");
         for(String p : allPl){
             String [] plStat = p.split(",");
             if(!players.containsKey(plStat[0])){
-                players.put(plStat[0],new VirtualPlayer(plStat[0],plStat[1]));
-                newPlayersList.add(p);
+                VirtualPlayer pla = new VirtualPlayer(plStat[0],plStat[1]);
+                players.put(plStat[0],pla);
+                newPlayersList.add(pla);
             }
-            if(newPlayersList.contains(p))
-                newPlayersList.remove(p);
         }
     }
 
@@ -113,7 +120,8 @@ public class VirtualLobby {
     public boolean isFinalFrenzyPref() {
         return finalFrenzyPref;
     }
-    public boolean isGameStarted() {
+
+    public synchronized boolean isGameStarted() {
         return gameStarted;
     }
 
@@ -129,7 +137,18 @@ public class VirtualLobby {
         this.owner = owner;
     }
 
-    public ArrayList<String> getNewPlayersList() {
+    public synchronized ArrayList<VirtualPlayer> getNewPlayersList() {
         return newPlayersList;
+    }
+    public synchronized void setNewPlayersList(ArrayList<VirtualPlayer> list) {
+        this.newPlayersList = list;
+    }
+
+    public HashMap<String, VirtualPlayer> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(HashMap<String, VirtualPlayer> players) {
+        this.players = players;
     }
 }

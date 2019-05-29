@@ -18,6 +18,9 @@ public class CliView {
     private VirtualPlayer p;
     private CliLobby lobby;
 
+    private String ip;
+    private int port;
+
 
     public static void main(String args[]) {
         CliView cliView = new CliView();
@@ -36,6 +39,7 @@ public class CliView {
             lobby.startLobby();
         }catch(Exception e){
             System.err.println("Connection error");
+            e.printStackTrace();
         }
     }
 
@@ -58,9 +62,12 @@ public class CliView {
             System.out.println("\nSocket Selected");
 
         }
-
-        c.setPort(acquirePort());
-        c.setIp(acquireIp());
+        port=acquirePort();
+        ip=acquireIp();
+        if(port!=0)
+            c.setPort(port);
+        if(!ip.isEmpty())
+            c.setIp(ip);
         c.initConnection();
     }
 
@@ -96,8 +103,11 @@ public class CliView {
     public int acquirePort()throws IOException {
         int port;
         System.out.println("Insert port:");
+        String s = sc.readLine();
+        if(s.isEmpty())
+            return 0;
         do {
-            port = Integer.parseInt(sc.readLine());
+            port = Integer.parseInt(s);
             if (port <= 1023 || port > 49151) {
                 System.out.println("Not available port, insert another port:");
             }

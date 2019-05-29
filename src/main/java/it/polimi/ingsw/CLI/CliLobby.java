@@ -1,15 +1,11 @@
 package it.polimi.ingsw.CLI;
 
 import it.polimi.ingsw.connection.ConnectionTech;
-import it.polimi.ingsw.virtual_model.LobbyUpTh;
 import it.polimi.ingsw.virtual_model.VirtualLobby;
 import it.polimi.ingsw.virtual_model.VirtualPlayer;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @author Gregorio Barzasi
@@ -31,13 +27,31 @@ public class CliLobby extends Thread{
             gameSetup();
             clearScreen();
         }while(ynAsk("\nYou want to edit something? (Y/N)","\nOk,check again:","\nSending preferences"));
+
         lobby.sendPref();
         clearScreen();
         waitingRoom();
     }
 
-    public int askMap(){
-        return 0;
+    public int askMap()throws IOException{
+        String temp;
+        int num=0;
+        do {System.out.println("\n1-...\n2-...\n3-...\n4-...");
+            System.out.println("Select your map:");
+            temp = sc.readLine();
+            try{
+                num = Integer.parseInt(temp);
+            }
+            catch (NumberFormatException e)
+            {num=0;
+            }
+            if(num<1 || num>4){
+                System.err.println("\nNot available,  again:");
+            }
+        }while(num<1 || num>4);
+        lobby.setKillPref(num);
+        System.out.println("\nPerfect! you selected map" + num +" !");
+        return num;
     }
 
     /**
@@ -103,20 +117,24 @@ public class CliLobby extends Thread{
 
     }
 
-    public void waitingRoom()throws IOException {
+    public synchronized void waitingRoom()throws IOException {
         clearScreen();
         System.out.println(
                 "\n\n----------------------------------------\n" +
                         "*** Waiting room..." +
                         "\n----------------------------------------");
-        new LobbyUpTh(lobby).start();
-        Set<String> old=new HashSet<>();
 
-        //QUI
-        /*
-        while (!lobby.isGameStarted())
-            old.addAll(lobby.getNewPlayersList());
-    */
+        while (!lobby.isGameStarted()){
+            lobby.waitUpdate();
+            for(VirtualPlayer p : lobby.getNewPlayersList() ){
+                if (!p.isPrinted()) {
+                    System.out.println(p.getUsername() + " using " + p.getCharacter() + ": is READY!");
+                    p.setPrinted(true);
+                }
+            }
+
+        }
+
     }
 
 

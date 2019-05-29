@@ -67,9 +67,9 @@ public class ClientThreadSocket extends Thread {
         terminatorPref=Boolean.parseBoolean(in.readLine());
         finalFrenzyPref=Boolean.parseBoolean(in.readLine());
         out.println("accepted");
-        System.out.println(owner.getUsername() + " pref registered");
+        System.out.println(owner.getUsername() + " pref registered\n");
         ready=true;
-        updateLobby();
+        lobby.updateClients();
     }
 
     /**
@@ -85,7 +85,11 @@ public class ClientThreadSocket extends Thread {
 
 
     public void waitStart()throws IOException {
-        while (!lobby.hasStarted()) ;
+        System.out.println("Waiting for game start");
+        while (!lobby.hasStarted());
+        out.println("*started*");
+        System.out.println("sending start signal");
+
     }
 
     public void run() {
@@ -123,7 +127,7 @@ public class ClientThreadSocket extends Thread {
         this.ready = ready;
     }
     @Override
-    public String toString() {
-        return owner.getUsername() + "," + owner.getCharacter() + "," + ready;
+    public synchronized String toString() {
+        return owner.getUsername() + "," + owner.getCharacter();
     }
 }
