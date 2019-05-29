@@ -7,9 +7,11 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
@@ -60,26 +62,84 @@ public class GameJavaFX extends Application {
          * set the board.
          */
         GridPane gridBoard = new GridPane();
-        ImageView imgBoard = null;
+        gridBoard.setAlignment(Pos.CENTER);
+        gridBoard.setHgap(0);
+        gridBoard.setVgap(0);
+        gridBoard.setPadding(new Insets(0, 0, 0, 0));
+
+        Image imgBoard = null;
         switch (map){
             case 1:{
-                imgBoard = new ImageView(new Image(new FileInputStream("src/main/resources/images/1.png"),720,480,true,true));
+                imgBoard = /*new ImageView(*/new Image(new FileInputStream("src/main/resources/images/1.png"),720,480,true,true);
                 break;
             }
             case 2:{
-                imgBoard = new ImageView(new Image(new FileInputStream("src/main/resources/images/2.png"),720,480,true,true));
+                imgBoard = /*new ImageView(*/new Image(new FileInputStream("src/main/resources/images/2.png"),720,480,true,true);
                 break;
             }
             case 3:{
-                imgBoard = new ImageView(new Image(new FileInputStream("src/main/resources/images/3.png"),720,480,true,true));
+                imgBoard = /*new ImageView(*/new Image(new FileInputStream("src/main/resources/images/3.png"),720,480,true,true);
                 break;
             }
             case 4:{
-                imgBoard = new ImageView(new Image(new FileInputStream("src/main/resources/images/4.png"),720,480,true,true));
+                imgBoard = /*new ImageView(*/new Image(new FileInputStream("src/main/resources/images/4.png"),720,480,true,true);
                 break;
             }
         }
-        gridBoard.add(imgBoard,1,1);
+        BackgroundImage backgroundMap = new BackgroundImage(imgBoard, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        Background back = new Background(backgroundMap);
+        gridBoard.setBackground(back);
+
+        Button btn00 = new Button();
+        Button btn01 = new Button();
+        Button btn02 = new Button();
+        Button btn10 = new Button();
+        Button btn11 = new Button();
+        Button btn12 = new Button();
+        Button btn20 = new Button();
+        Button btn21 = new Button();
+        Button btn22 = new Button();
+        Button btn30= new Button();
+        Button btn31 = new Button();
+        Button btn32= new Button();
+        gridBoard.add(btn00,0,0);
+        gridBoard.add(btn01,0,1);
+        gridBoard.add(btn02,0,2);
+        gridBoard.add(btn10,1,0);
+        gridBoard.add(btn11,1,1);
+        gridBoard.add(btn12,1,2);
+        gridBoard.add(btn20,2,0);
+        gridBoard.add(btn21,2,1);
+        gridBoard.add(btn22,2,2);
+        gridBoard.add(btn30,3,0);
+        gridBoard.add(btn31,3,1);
+        gridBoard.add(btn32,3,2);
+        btn00.setPrefSize(170,170);
+        btn01.setPrefSize(170,170);
+        btn02.setPrefSize(170,170);
+        btn10.setPrefSize(170,170);
+        btn11.setPrefSize(170,170);
+        btn12.setPrefSize(170,170);
+        btn20.setPrefSize(170,170);
+        btn21.setPrefSize(170,170);
+        btn22.setPrefSize(170,170);
+        btn30.setPrefSize(170,170);
+        btn31.setPrefSize(170,170);
+        btn32.setPrefSize(170,170);
+        transparent(btn00);
+        transparent(btn01);
+        transparent(btn02);
+        transparent(btn10);
+        transparent(btn11);
+        transparent(btn12);
+        transparent(btn20);
+        transparent(btn21);
+        transparent(btn22);
+        transparent(btn30);
+        transparent(btn31);
+        transparent(btn32);
+
+
 
         /**
          * set personal space.
@@ -89,6 +149,7 @@ public class GameJavaFX extends Application {
         ImageView imgOther2 = null;
         ImageView imgOther3 = null;
         ImageView imgOther4 = null;
+
 
         double widthPB = 350;
         double heightPB = 150;
@@ -216,13 +277,23 @@ public class GameJavaFX extends Application {
         hBtn.getChildren().add(btnPick);
         hBtn.getChildren().add(btnShoot);
 
+        TextField msg = new TextField();
+        Image msgBack = new Image(new FileInputStream("src/main/resources/images/img854.png"),300,100,true,true);
+        BackgroundImage backgroundMsg = new BackgroundImage(msgBack, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        Background backMsg = new Background(backgroundMsg);
+        msg.setBackground(backMsg);
+        msg.setAlignment(Pos.CENTER);
+        Font msgFont = new Font(20);
+        msg.setText("Benvenuto Giocatore!");
+        msg.setFont(msgFont);
 
         /**
          * merge layout.
          */
-        VBox v = new VBox(50);
+        VBox v = new VBox(25);
         v.getChildren().add(imgTitle);
         v.getChildren().add(gridBoard);
+        v.getChildren().add(msg);
         v.getChildren().add(hBtn);
 
         HBox layout = new HBox(20);
@@ -233,6 +304,15 @@ public class GameJavaFX extends Application {
         grid.add(layout,1,1);
 
         primaryStage.show();
+
+        btn00.setOnAction(e->{
+            System.out.println("ok");
+        });
+    }
+
+    public void transparent(Button btn){
+        btn.setBorder(null);
+        btn.setOpacity(0);
     }
 
     public void addImgWe(HBox h){
