@@ -35,8 +35,23 @@ public class ChoosingWeapon implements ControllerState {
 
     }
 
+    /**
+     * Makes the player choose a weapon through the view and afterwards
+     * sets the current state of controller to shooting
+     */
+
     @Override
     public void choose() {
+
+        //load the current player's weapons into "options"
+        ArrayList<Weapon> options = this.controller.getCurrentPlayer().getWeaponsList();
+
+        //Displays the options to the view and the view returns the chosen weapon
+        Weapon choice = this.controller.getView().showWeapon(options);
+
+        //Sets the shooting state's weapon to the chosen one and changes the current state to shooting
+        ((Shooting) this.controller.getShooting()).setShootingWith(choice);
+        this.controller.setCurrentState(this.controller.shooting);
 
     }
 

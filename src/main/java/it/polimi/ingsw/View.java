@@ -21,7 +21,9 @@ public interface View {
 
     public Player showTarget(Figure arg);
 
-    public Player showMultipleTargets(ArrayList<Figure> args);
+    public ArrayList<Figure> showMultipleTargets(ArrayList<Figure> args);
+
+    public Figure singleTargetingShowTarget(ArrayList<Figure> args);
 
     public boolean showBoolean();
 

@@ -41,7 +41,7 @@ public class AsBot implements ControllerState{
                 targets.add(p);
             }
 
-            Player toShoot = this.controller.getView().showMultipleTargets(targets);
+            Figure toShoot = this.controller.getView().singleTargetingShowTarget(targets);
 
             int index = this.controller.getModel().getPlayerList().indexOf(toShoot);
             this.controller.getModel().getBot().inflictDamage(1, this.controller.getModel().getPlayerList().get(index));

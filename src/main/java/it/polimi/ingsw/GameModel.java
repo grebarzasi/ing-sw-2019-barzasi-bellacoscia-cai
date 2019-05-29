@@ -35,6 +35,8 @@ public class GameModel {
 
     private int movesLeft;
 
+    private boolean hasBotAction;
+
     private Terminator bot;
 
     private Board currentBoard;
@@ -176,5 +178,13 @@ public class GameModel {
 
     public void setFrenzy(boolean frenzy) {
         isFrenzy = frenzy;
+    }
+
+    public boolean isHasBotAction() {
+        return hasBotAction;
+    }
+
+    public void setHasBotAction(boolean hasBotAction) {
+        this.hasBotAction = hasBotAction;
     }
 }
