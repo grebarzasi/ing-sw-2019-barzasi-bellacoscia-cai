@@ -82,6 +82,15 @@ public class Player extends Figure {
         this.powerupList = new ArrayList<>();
     }
 
+    public void addPowerUp(PowerUp toAdd) {
+        this.getPowerupList().add(toAdd);
+    }
+
+    public void removePowerUp(PowerUp toRemove) {
+        int index = this.getPowerupList().indexOf(toRemove);
+        this.getPowerupList().remove(index);
+    }
+
     public void addWeapon(Weapon weaponToAdd){
         this.weaponsList.add(weaponToAdd);
     }

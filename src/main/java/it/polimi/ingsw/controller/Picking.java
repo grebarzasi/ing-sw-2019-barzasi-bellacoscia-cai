@@ -38,6 +38,24 @@ public class Picking implements ControllerState{
     @Override
     public void choose() {
 
+        PowerUp chosen = this.controller.getView().showPowerUp(this.controller.getCurrentPlayer().getPowerupList());
+
+        if (this.controller.getCurrentPlayer().getPowerupList().size() < 3) {
+
+            this.controller.getCurrentPlayer().addPowerUp(chosen);
+
+        } else {
+
+            ArrayList<PowerUp> options;
+            options = this.controller.getCurrentPlayer().getPowerupList();
+            options.add(chosen);
+            PowerUp discarded = this.controller.getView().showPowerUp(options);
+            options.remove(discarded);
+            this.controller.getCurrentPlayer().getPowerupList().clear();
+            this.controller.getCurrentPlayer().getPowerupList().addAll(options);
+
+        }
+
     }
 
     @Override

@@ -38,6 +38,16 @@ public class ChoosingPowerUpToUse implements ControllerState {
     @Override
     public void choose() {
 
+        PowerUp chosen = this.controller.getView().showPowerUp(this.controller.getCurrentPlayer().getPowerupList());
+
+        switch (chosen.getName()) {
+            case "Newton":
+                this.controller.setCurrentState(this.controller.usingNewton);
+            case "Teleporter":
+                this.controller.getCurrentPlayer().removePowerUp(chosen);
+                this.controller.setCurrentState(this.controller.teleporting);
+
+        }
     }
 
     @Override

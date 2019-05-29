@@ -55,7 +55,7 @@ public class ActionBuilder {
         //if "adrenalinic" add special moves
         if(damageNum>5){
             shootArrayList.add(new Move(1));
-            shootDescription = "Move and Shoot";
+            shootDescription = "Shoot";
         }
         if (damageNum>2 ){
             pickArrayList.add(new Move(2));
