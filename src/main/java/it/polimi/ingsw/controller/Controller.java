@@ -98,6 +98,9 @@ public class Controller implements Remote {
         return null;
     }
 
+    public Board getBoard() {
+        return this.getModel().getCurrentBoard();
+    }
 
     public ControllerState getAsBot() {
         return asBot;

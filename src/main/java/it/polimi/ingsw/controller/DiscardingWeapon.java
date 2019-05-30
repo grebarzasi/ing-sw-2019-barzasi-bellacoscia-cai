@@ -51,11 +51,6 @@ public class DiscardingWeapon implements ControllerState {
     }
 
     @Override
-    public void discardWeapon() {
-
-    }
-
-    @Override
     public void usePU() {
 
     }

@@ -97,11 +97,6 @@ public class ChoosingMove implements ControllerState{
     }
 
     @Override
-    public void discardWeapon() {
-
-    }
-
-    @Override
     public void usePU() {
 
     }

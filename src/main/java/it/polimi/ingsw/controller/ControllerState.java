@@ -23,8 +23,6 @@ public interface ControllerState {
 
     void discardPU();
 
-    void discardWeapon();
-
     void usePU();
 
     void teleport(Square teleportHere);
@@ -36,6 +34,7 @@ public interface ControllerState {
     void Newton(PowerUp choice);
 
     void useNewton(Figure Target, Square moveTo);
+
 
 }
 

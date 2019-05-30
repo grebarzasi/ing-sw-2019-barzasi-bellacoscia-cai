@@ -38,6 +38,7 @@ public class DiscardingPowerUp implements ControllerState {
     @Override
     public void choose() {
 
+
     }
 
     @Override
@@ -47,11 +48,6 @@ public class DiscardingPowerUp implements ControllerState {
 
     @Override
     public void discardPU() {
-
-    }
-
-    @Override
-    public void discardWeapon() {
 
     }
 

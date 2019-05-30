@@ -101,11 +101,6 @@ public class AsBot implements ControllerState{
     }
 
     @Override
-    public void discardWeapon() {
-
-    }
-
-    @Override
     public void usePU() {
 
     }

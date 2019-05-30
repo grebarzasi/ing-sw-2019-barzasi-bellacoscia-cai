@@ -11,6 +11,10 @@ public class Picking implements ControllerState{
 
     private Controller controller;
 
+    private static final int width = 4;
+    private static final int height = 3;
+    private static final int max = 3;
+
     public Picking(Controller controller) {
         this.controller = controller;
     }
@@ -32,6 +36,32 @@ public class Picking implements ControllerState{
 
     @Override
     public void pick() {
+
+        ArrayList<Square> options = new ArrayList<>();
+
+        int row;
+        int column;
+
+        for (row = 0; row < height; row++) {
+            for (column = 0; column < width; column++) {
+                //TODO condition is currently bullshit, needs to be fixed in action builder;
+                if (this.controller.getCurrentPlayer().distanceTo(this.controller.getBoard().getMap().getSquareMatrix()[row][column]) < 3) {
+                    options.add(this.controller.getBoard().getMap().getSquareMatrix()[row][column]);
+                }
+            }
+        }
+
+        Square choice = this.controller.getView().showPossibleMoves(options);
+
+        if (choice.isSpawn()) {
+            this.controller.setCurrentState(this.controller.pickingWeapon);
+        } else {
+            this.controller.getCurrentPlayer().pickAmmo();
+            if (this.controller.getCurrentPlayer().getPowerupList().size() == max) {
+                this.controller.getCurrentState().choose();
+            }
+        }
+
 
     }
 
@@ -65,11 +95,6 @@ public class Picking implements ControllerState{
 
     @Override
     public void discardPU() {
-
-    }
-
-    @Override
-    public void discardWeapon() {
 
     }
 

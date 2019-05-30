@@ -71,11 +71,6 @@ public class Shooting implements ControllerState {
     }
 
     @Override
-    public void discardWeapon() {
-
-    }
-
-    @Override
     public void usePU() {
 
     }

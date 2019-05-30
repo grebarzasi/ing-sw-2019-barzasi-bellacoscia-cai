@@ -1,10 +1,12 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Figure;
+import it.polimi.ingsw.board.map.SpawnSquare;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class PickingWeapon implements ControllerState {
@@ -38,6 +40,17 @@ public class PickingWeapon implements ControllerState {
     @Override
     public void choose() {
 
+        ArrayList<Weapon> options = new ArrayList<>();
+
+        options = ((SpawnSquare) this.controller.getCurrentPlayer().getPosition()).getArmory().getWeaponList();
+        Weapon choice = this.controller.getView().showWeapon(options);
+
+        if (this.controller.getCurrentPlayer().getWeaponsList().size() < 3) {
+            this.controller.getCurrentPlayer().getWeaponsList().add(choice);
+        } else {
+            this.discardWeapon(choice);
+        }
+
     }
 
     @Override
@@ -50,8 +63,12 @@ public class PickingWeapon implements ControllerState {
 
     }
 
-    @Override
-    public void discardWeapon() {
+    private void discardWeapon(Weapon arg) {
+
+        ArrayList<Weapon> options = this.controller.getCurrentPlayer().getWeaponsList();
+        options.add(arg);
+
+        Weapon choice = this.controller.getView().showWeapon(options);
 
     }
 
