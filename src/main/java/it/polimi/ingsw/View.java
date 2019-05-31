@@ -30,4 +30,6 @@ public interface View {
 
     public void displayMessage(String string);
 
+    public void displayLeaderboard();
+
 }

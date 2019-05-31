@@ -62,6 +62,9 @@ public class ChoosingMove implements ControllerState{
         if (this.controller.getModel().getBot() != null) {
             options.add("UseBot");
         }
+
+        options.add("end");
+
         String choice = this.controller.getView().showMoves(options);
 
         switch (choice) {
@@ -82,6 +85,8 @@ public class ChoosingMove implements ControllerState{
                 this.controller.setCurrentState(this.controller.picking);
             case "UseBot":
                 this.controller.setCurrentState(this.controller.asBot);
+            case "end":
+                this.controller.endGame();
         }
 
     }

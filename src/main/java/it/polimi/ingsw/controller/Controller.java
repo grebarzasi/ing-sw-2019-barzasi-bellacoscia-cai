@@ -70,6 +70,12 @@ public class Controller implements Remote {
      *
      */
 
+    public void endGame(){
+
+        this.view.displayLeaderboard();
+
+    }
+
 
     public Square askPosition(){
 
