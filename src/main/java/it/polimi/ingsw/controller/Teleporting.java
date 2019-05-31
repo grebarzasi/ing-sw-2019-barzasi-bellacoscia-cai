@@ -53,7 +53,7 @@ public class Teleporting implements ControllerState {
         int column;
 
         for (row = 0; row < height; row++) {
-            for (column = 0; column < height; column++) {
+            for (column = 0; column < width; column++) {
                 options.add(this.controller.getModel().getCurrentBoard().getMap().getSquareMatrix()[row][column]);
             }
         }

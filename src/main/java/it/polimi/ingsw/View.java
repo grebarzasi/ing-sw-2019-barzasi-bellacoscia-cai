@@ -4,6 +4,7 @@ import it.polimi.ingsw.actions.Action;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Weapon;
+import it.polimi.ingsw.controller.Controller;
 
 import java.util.ArrayList;
 import java.util.HashSet;

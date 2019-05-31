@@ -41,5 +41,5 @@ public abstract class PowerUp extends Card {
     }
 
 
-    ;
+
 }

@@ -6,6 +6,7 @@ import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.map.SpawnSquare;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.Ammo;
+import it.polimi.ingsw.cards.power_up.PowerUp;
 
 import java.rmi.Remote;
 import java.util.ArrayList;
@@ -13,6 +14,9 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Controller implements Remote {
+
+    private static final int height = 3;
+    private static final int width = 4;
 
     ControllerState asBot;
     ControllerState choosingMove;
@@ -27,6 +31,7 @@ public class Controller implements Remote {
     ControllerState shooting;
     ControllerState teleporting;
     ControllerState usingNewton;
+    ControllerState spawning;
 
     ControllerState currentState;
 
@@ -38,6 +43,7 @@ public class Controller implements Remote {
 
 
     public Controller(Lobby lobby) {
+
 
         this.model = new GameModel(lobby);
 
@@ -54,7 +60,7 @@ public class Controller implements Remote {
         this.shooting = new Shooting(this);
         this.teleporting = new Teleporting(this);
         this.usingNewton = new UsingNewton(this);
-
+        this.shooting = new Spawning(this);
 
     }
 
