@@ -41,7 +41,6 @@ public class LobbyJavaFX extends Application {
     private int skull;
     private ConnectionTech conn;
     private VirtualPlayer owner;
-    private boolean update = false;
 
     private VirtualLobby lobby;
     private ArrayList<VirtualPlayer> joinedPlayers = new ArrayList<>();
@@ -62,7 +61,6 @@ public class LobbyJavaFX extends Application {
 
         this.primaryStage = primaryStage;
 
-        do {
 
             primaryStage.setTitle("Lobby");
 
@@ -155,6 +153,8 @@ public class LobbyJavaFX extends Application {
 
             joinedPlayers = lobby.getNewPlayersList();
 
+/*
+
             Label lblPlayer = new Label("Player connessi:");
             lblPlayer.setFont(font);
             HBox playerBox = new HBox();
@@ -193,6 +193,7 @@ public class LobbyJavaFX extends Application {
                 usernameBox.getChildren().add(txtUsername);
             }
 
+*/
 
             Button btnStart = new Button("PRONTO");
             btnStart.setAlignment(Pos.CENTER);
@@ -211,9 +212,13 @@ public class LobbyJavaFX extends Application {
             lobbyGrid.add(freH, 1, 4);
             lobbyGrid.add(lblMap, 1, 5);
             lobbyGrid.add(mapBox, 1, 6);
+            /*
+
             lobbyGrid.add(lblPlayer, 1, 7);
             lobbyGrid.add(playerBox, 1, 8);
             lobbyGrid.add(usernameBox, 1, 9);
+
+             */
             lobbyGrid.add(btnStart, 1, 10);
 
             ImageView load = null;
@@ -276,7 +281,6 @@ public class LobbyJavaFX extends Application {
                 lobby.setFinalFrenzyPref(frenzy);
                 lobby.setMapPref(map);
 
-                update = true;
 
                 try {
                     lobby.sendPref();
@@ -286,20 +290,27 @@ public class LobbyJavaFX extends Application {
                     ex.printStackTrace();
                 }
 
+                while(!lobby.isGameStarted()){
+                    try {
+                        lobby.waitUpdate();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+
+                try {
+                    GameJavaFX game = new GameJavaFX();
+                    game.setLobby(lobby);
+                    game.start(primaryStage);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
 
             });
 
             primaryStage.setMaximized(true);
             primaryStage.show();
-
-            if(lobby.isGameStarted()){
-                GameJavaFX game = new GameJavaFX();
-                game.setLobby(lobby);
-                game.start(primaryStage);
-            }
-
-        }while(!lobby.isGameStarted() && update);
-
 
     }
 }
