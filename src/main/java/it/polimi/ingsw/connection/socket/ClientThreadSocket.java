@@ -19,6 +19,7 @@ public class ClientThreadSocket extends Thread {
     private BufferedReader in;
     private PrintWriter out;
     private boolean ready=false;
+    private boolean expired=false;
 
     //preferences
     private String mapPref;
@@ -46,6 +47,27 @@ public class ClientThreadSocket extends Thread {
             if (lobby.addPlayer(this)) {
                 out.println("accepted");
                 System.out.println("repling to " + owner.getUsername() + ": accepted!");
+                break;
+            } else {
+                out.println("refused");
+                System.out.println("repling to " + owner.getUsername() + ": refused!");
+            }
+        }while(true);
+        return true;
+    }
+
+    /**
+     * Login procedure: read user and character, if lobby accepts them reply to client "accepted" .
+     * if lobby refuse the login reply "refused" and keep waiting for login until a valid login is achieved.
+     */
+    public boolean waitLoginGS()throws IOException {
+        do {
+            System.out.println("Waiting login GS");
+            owner.setUsername(in.readLine());
+            owner.setCharacter(in.readLine());
+            if (lobby.restorePlayer(this)) {
+                out.println("accepted");
+                System.out.println("repling to " + owner.getUsername() + ": restored!");
                 break;
             } else {
                 out.println("refused");
@@ -86,26 +108,40 @@ public class ClientThreadSocket extends Thread {
 
     public void waitStart()throws IOException {
         System.out.println("Waiting for game start");
+
+        while (!lobby.hasTimerStarted());
+        out.println("*timer_started*");
         while (!lobby.hasStarted());
         out.println("*started*");
         System.out.println("sending start signal");
 
     }
 
-    public void run() {
-        System.out.println("Thread started");
-        try {
-            waitLogin();
-            waitPref();
-            waitStart();
-
-
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void game() {
+        System.out.println("*GAME*");
     }
+
+    public void run() {
+        try {
+            System.out.println("Thread started");
+            if(!lobby.hasStarted()) {
+
+                    waitLogin();
+                    waitPref();
+                    waitStart();
+                    game();
+
+
+
+            }else{
+                waitLoginGS();
+            }
+        } catch (IOException e) {
+        e.printStackTrace();
+    }
+    }
+
+
 
     public Player getOwner() {
         return owner;
@@ -126,6 +162,15 @@ public class ClientThreadSocket extends Thread {
     public void setReady(boolean ready) {
         this.ready = ready;
     }
+
+    public boolean isExpired() {
+        return expired;
+    }
+
+    public void setExpired(boolean expired) {
+        this.expired = expired;
+    }
+
     @Override
     public synchronized String toString() {
         return owner.getUsername() + "," + owner.getCharacter();

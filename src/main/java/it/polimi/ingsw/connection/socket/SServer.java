@@ -31,7 +31,7 @@ public class SServer extends ConnectionTech {
             //loops until game start waiting for other players
 
             ClientThreadSocket temp;
-            while(!lobby.hasStarted()){
+            while(true){
                 Socket client = server.accept();
                 System.out.println("\n\nconnection established with\n" + client);
                 temp = new ClientThreadSocket(client,lobby);
@@ -46,6 +46,10 @@ public class SServer extends ConnectionTech {
             throw new RemoteException();
         }
 
+    }
+
+    public void game() {
+        System.out.println("*SERVER IN GAME*");
     }
 
 
@@ -69,5 +73,7 @@ public class SServer extends ConnectionTech {
         } catch (RemoteException e) {
             e.printStackTrace();
         }
+
+        s.game();
     }
 }

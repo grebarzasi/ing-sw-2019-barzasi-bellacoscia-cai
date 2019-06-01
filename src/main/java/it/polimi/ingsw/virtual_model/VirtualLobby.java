@@ -22,6 +22,7 @@ public class VirtualLobby {
     private boolean finalFrenzyPref;
 
     private boolean gameStarted;
+    private boolean gameTimerStarted;
 
 
     public VirtualLobby(ConnectionTech c, VirtualPlayer owner){
@@ -67,9 +68,12 @@ public class VirtualLobby {
             String all;
             SClient c = ((SClient) conn);
             all = c.getInput().readLine();
-            if(all.equals("*start*")) {
-                System.out.println("Started");
+            if(all.equals("*started*")) {
                 gameStarted = true;
+                return true;
+            }
+            if(all.equals("*timer_started*")) {
+                gameTimerStarted = true;
                 return true;
             }
             updatePlayers(all);
@@ -92,6 +96,9 @@ public class VirtualLobby {
         }
     }
 
+    public boolean hasGameTimerStarted() {
+        return gameTimerStarted;
+    }
 
     public int getMapPref() {
         return mapPref;

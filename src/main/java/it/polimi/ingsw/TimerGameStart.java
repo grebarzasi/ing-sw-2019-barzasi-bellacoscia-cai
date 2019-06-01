@@ -13,7 +13,7 @@ public class TimerGameStart extends TimerTask {
     @Override
     public void run() {
         lobby.setHasStarted(true);
-        lobby.updateClients();
+        //lobby.updateClients();
         System.out.println("Game Started");
     }
 }
