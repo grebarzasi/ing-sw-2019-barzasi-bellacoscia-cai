@@ -1,6 +1,8 @@
 package it.polimi.ingsw.javaFX;
 
 import it.polimi.ingsw.Player;
+import it.polimi.ingsw.virtual_model.VirtualLobby;
+import it.polimi.ingsw.virtual_model.VirtualPlayer;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -8,20 +10,63 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+
+/*
+
+CONTORNO ROSSO!!
+
+        DropShadow borderGlow = new DropShadow();
+        borderGlow.setColor(Color.RED);
+        borderGlow.setHeight(50);
+        borderGlow.setWidth(50);
+        borderGlow.setOffsetX(0f);
+        borderGlow.setOffsetY(0f);
+        imgOther1.setEffect(borderGlow);
+
+CONTORNO ROSSO!!
+
+
+
+NASCONDERE CELLE!!
+
+        btn00.setOpacity(0.5);
+        btn01.setOpacity(0.5);
+        btn02.setOpacity(0.5);
+
+NASCONDERE CELLE!!
+
+*/
 
 public class GameJavaFX extends Application {
 
-    private int map = 1;
-    private Player player = new Player("carlo", "red");
+    private int map = 3;
+    private Font font = new Font(20);
+    private int skullMax = 8;
+
+    private VirtualLobby lobby;
+
+    private boolean turn = false;
+    private boolean move = false;
+    private boolean pick = false;
+    private boolean shoot = false;
+
+    public void setLobby(VirtualLobby lobby) {
+        this.lobby = lobby;
+    }
+
+    private VirtualPlayer player = new VirtualPlayer("carlo", "yellow");
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -70,19 +115,19 @@ public class GameJavaFX extends Application {
         Image imgBoard = null;
         switch (map){
             case 1:{
-                imgBoard = /*new ImageView(*/new Image(new FileInputStream("src/main/resources/images/1.png"),720,480,true,true);
+                imgBoard = new Image(new FileInputStream("src/main/resources/images/1.png"),720,480,true,true);
                 break;
             }
             case 2:{
-                imgBoard = /*new ImageView(*/new Image(new FileInputStream("src/main/resources/images/2.png"),720,480,true,true);
+                imgBoard = new Image(new FileInputStream("src/main/resources/images/2.png"),720,480,true,true);
                 break;
             }
             case 3:{
-                imgBoard = /*new ImageView(*/new Image(new FileInputStream("src/main/resources/images/3.png"),720,480,true,true);
+                imgBoard = new Image(new FileInputStream("src/main/resources/images/3.png"),720,480,true,true);
                 break;
             }
             case 4:{
-                imgBoard = /*new ImageView(*/new Image(new FileInputStream("src/main/resources/images/4.png"),720,480,true,true);
+                imgBoard = new Image(new FileInputStream("src/main/resources/images/4.png"),720,480,true,true);
                 break;
             }
         }
@@ -140,133 +185,137 @@ public class GameJavaFX extends Application {
         transparent(btn32);
 
 
-
         /**
          * set personal space.
          */
-        ImageView imgPBoard = null;
-        ImageView imgOther1 = null;
-        ImageView imgOther2 = null;
-        ImageView imgOther3 = null;
-        ImageView imgOther4 = null;
+        Image imgPBoard = null;
 
 
         double widthPB = 350;
-        double heightPB = 150;
+        double heightPB = 100;
         double dimPW = 150;
         double dimPPU = 100;
 
-        double widthOB = 200;
-        double heightOB = 100;
 
-        ImageView imgPWe1 = new ImageView(new Image(new FileInputStream("src/main/resources/images/weapon.png"),dimPW,dimPW,true,true));
-        ImageView imgPWe2 = new ImageView(new Image(new FileInputStream("src/main/resources/images/weapon.png"),dimPW,dimPW,true,true));
-        ImageView imgPWe3 = new ImageView(new Image(new FileInputStream("src/main/resources/images/weapon.png"),dimPW,dimPW,true,true));
+        Image imgPWe = new Image(new FileInputStream("src/main/resources/images/weapon.png"),dimPW,dimPW,true,true);
+        Image imgPPU = new Image(new FileInputStream("src/main/resources/images/powerup.png"),dimPPU,dimPPU,true,true);
 
-        ImageView imgPPU1 = new ImageView(new Image(new FileInputStream("src/main/resources/images/powerup.png"),dimPPU,dimPPU,true,true));
-        ImageView imgPPU2 = new ImageView(new Image(new FileInputStream("src/main/resources/images/powerup.png"),dimPPU,dimPPU,true,true));
-        ImageView imgPPU3 = new ImageView(new Image(new FileInputStream("src/main/resources/images/powerup.png"),dimPPU,dimPPU,true,true));
+        Button btnPWe1 = new Button();
+        Button btnPWe2 = new Button();
+        Button btnPWe3 = new Button();
+
+        Button btnPPu1 = new Button();
+        Button btnPPu2 = new Button();
+        Button btnPPu3 = new Button();
+
+        BackgroundImage backgroundPWe = new BackgroundImage(imgPWe, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        Background backPWe = new Background(backgroundPWe);
+        BackgroundImage backgroundPPu = new BackgroundImage(imgPPU, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        Background backPPu = new Background(backgroundPPu);
+
+        btnPWe1.setBackground(backPWe);
+        btnPWe2.setBackground(backPWe);
+        btnPWe3.setBackground(backPWe);
+        btnPWe1.setPrefSize(100,150);
+        btnPWe2.setPrefSize(100,150);
+        btnPWe3.setPrefSize(100,150);
+
+        btnPPu1.setBackground(backPPu);
+        btnPPu2.setBackground(backPPu);
+        btnPPu3.setBackground(backPPu);
+        btnPPu1.setPrefSize(85,100);
+        btnPPu2.setPrefSize(85,100);
+        btnPPu3.setPrefSize(85,100);
 
         switch (player.getCharacter()){
             case "yellow":{
-                imgPBoard = new ImageView(new Image(new FileInputStream("src/main/resources/images/yellow_board.png"),widthPB,heightPB,true,true));
-                imgOther1 = new ImageView(new Image(new FileInputStream("src/main/resources/images/red_board.png"),widthOB,heightOB,true,true));
-                imgOther2 = new ImageView(new Image(new FileInputStream("src/main/resources/images/blue_board.png"),widthOB,heightOB,true,true));
-                imgOther3 = new ImageView(new Image(new FileInputStream("src/main/resources/images/green_board.png"),widthOB,heightOB,true,true));
-                imgOther4 = new ImageView(new Image(new FileInputStream("src/main/resources/images/gray_board.png"),widthOB,heightOB,true,true));
-
+                imgPBoard = new Image(new FileInputStream("src/main/resources/images/yellow_board.png"),widthPB-20,heightPB-20,true,true);
                 break;
             }
             case "red":{
-                imgPBoard = new ImageView(new Image(new FileInputStream("src/main/resources/images/red_board.png"),widthPB,heightPB,true,true));
-                imgOther1 = new ImageView(new Image(new FileInputStream("src/main/resources/images/yellow_board.png"),widthOB,heightOB,true,true));
-                imgOther2 = new ImageView(new Image(new FileInputStream("src/main/resources/images/blue_board.png"),widthOB,heightOB,true,true));
-                imgOther3 = new ImageView(new Image(new FileInputStream("src/main/resources/images/green_board.png"),widthOB,heightOB,true,true));
-                imgOther4 = new ImageView(new Image(new FileInputStream("src/main/resources/images/gray_board.png"),widthOB,heightOB,true,true));
-
+                imgPBoard = new Image(new FileInputStream("src/main/resources/images/red_board.png"),widthPB-20,heightPB-20,true,true);
                 break;
             }
             case "blue":{
-                imgPBoard = new ImageView(new Image(new FileInputStream("src/main/resources/images/blue_board.png"),widthPB,heightPB,true,true));
-                imgOther1 = new ImageView(new Image(new FileInputStream("src/main/resources/images/yellow_board.png"),widthOB,heightOB,true,true));
-                imgOther2 = new ImageView(new Image(new FileInputStream("src/main/resources/images/red_board.png"),widthOB,heightOB,true,true));
-                imgOther3 = new ImageView(new Image(new FileInputStream("src/main/resources/images/green_board.png"),widthOB,heightOB,true,true));
-                imgOther4 = new ImageView(new Image(new FileInputStream("src/main/resources/images/gray_board.png"),widthOB,heightOB,true,true));
+                imgPBoard = new Image(new FileInputStream("src/main/resources/images/blue_board.png"),widthPB-20,heightPB-20,true,true);
                 break;
             }
             case "green":{
-                imgPBoard = new ImageView(new Image(new FileInputStream("src/main/resources/images/green_board.png"),widthPB,heightPB,true,true));
-                imgOther1 = new ImageView(new Image(new FileInputStream("src/main/resources/images/yellow_board.png"),widthOB,heightOB,true,true));
-                imgOther2 = new ImageView(new Image(new FileInputStream("src/main/resources/images/red_board.png"),widthOB,heightOB,true,true));
-                imgOther3 = new ImageView(new Image(new FileInputStream("src/main/resources/images/blue_board.png"),widthOB,heightOB,true,true));
-                imgOther4 = new ImageView(new Image(new FileInputStream("src/main/resources/images/gray_board.png"),widthOB,heightOB,true,true));
+                imgPBoard = new Image(new FileInputStream("src/main/resources/images/green_board.png"),widthPB-20,heightPB-20,true,true);
                 break;
             }
             case "gray":{
-                imgPBoard = new ImageView(new Image(new FileInputStream("src/main/resources/images/gray_board.png"),widthPB,heightPB,true,true));
-                imgOther1 = new ImageView(new Image(new FileInputStream("src/main/resources/images/yellow_board.png"),widthOB,heightOB,true,true));
-                imgOther2 = new ImageView(new Image(new FileInputStream("src/main/resources/images/red_board.png"),widthOB,heightOB,true,true));
-                imgOther3 = new ImageView(new Image(new FileInputStream("src/main/resources/images/blue_board.png"),widthOB,heightOB,true,true));
-                imgOther4 = new ImageView(new Image(new FileInputStream("src/main/resources/images/green_board.png"),widthOB,heightOB,true,true));
+                imgPBoard = new Image(new FileInputStream("src/main/resources/images/gray_board.png"),widthPB-20,heightPB-20,true,true);
                 break;
             }
         }
 
-        double dimSkull = 40;
-        ImageView imgSkull = new ImageView(new Image(new FileInputStream("src/main/resources/images/skull.png"),dimSkull,dimSkull,true,true));
-
+        BackgroundImage backgroundPB = new BackgroundImage(imgPBoard, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        Background backPB = new Background(backgroundPB);
+        Button btnPB = new Button();
+        btnPB.setPrefSize(widthPB,heightPB);
+        btnPB.setBackground(backPB);
 
         HBox hPWe = new HBox(20);
-        hPWe.getChildren().add(imgPWe1);
-        hPWe.getChildren().add(imgPWe2);
-        hPWe.getChildren().add(imgPWe3);
+        hPWe.getChildren().add(btnPWe1);
+        hPWe.getChildren().add(btnPWe2);
+        hPWe.getChildren().add(btnPWe3);
 
         HBox hPPU = new HBox(45);
-        hPPU.getChildren().add(imgPPU1);
-        hPPU.getChildren().add(imgPPU2);
-        hPPU.getChildren().add(imgPPU3);
+        hPPU.getChildren().add(btnPPu1);
+        hPPU.getChildren().add(btnPPu2);
+        hPPU.getChildren().add(btnPPu3);
 
         VBox vAmmo = addImgAmmo(30,10);
+
+
+
+        /**
+         * set Killshot track.
+         */
+        Image imgTrack = new Image(new FileInputStream("src/main/resources/images/killshotrack.png"),300,100,true,true);
+        BackgroundImage backgroundSkull = new BackgroundImage(imgTrack, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        Background backSkull = new Background(backgroundSkull);
+        Button btnTrack = new Button();
+        btnTrack.setPrefSize(300,100);
+        btnTrack.setBackground(backSkull);
+
+
+        /**
+         * merge personal space
+         */
         VBox vPers = new VBox(30);
-        vPers.getChildren().add(imgSkull);
-        vPers.getChildren().add(imgPBoard);
+        vPers.getChildren().add(btnTrack);
+        vPers.getChildren().add(btnPB);
         vPers.getChildren().add(hPWe);
         vPers.getChildren().add(hPPU);
         vPers.getChildren().add(vAmmo);
 
+        /**
+         * set other players board
+         */
+        Image imgDeck = new Image(new FileInputStream("src/main/resources/images/powerup.png"),dimPW,dimPW,true,true);
+        BackgroundImage backgroundDeck = new BackgroundImage(imgDeck, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        Background backDeck = new Background(backgroundDeck);
+        Button btnDeck = new Button();
+        btnDeck.setBackground(backDeck);
+        btnDeck.setPrefSize(dimPW,dimPW);
+        VBox vOther = setOtherBoard(player);
+        vOther.getChildren().add(btnDeck);
 
-        HBox hWe1 = new HBox(10);
-        hWe1.getChildren().add(imgOther1);
-        addImgWe(hWe1);
 
-        HBox hWe2 = new HBox(10);
-        hWe2.getChildren().add(imgOther2);
-        addImgWe(hWe2);
-
-        HBox hWe3 = new HBox(10);
-        hWe3.getChildren().add(imgOther3);
-        addImgWe(hWe3);
-
-        HBox hWe4 = new HBox(10);
-        hWe4.getChildren().add(imgOther4);
-        addImgWe(hWe4);
-
-        ImageView imgDeck = new ImageView(new Image(new FileInputStream("src/main/resources/images/powerup.png"),dimPW,dimPW,true,true));
-
-        VBox vOther = new VBox(20);
-        vOther.getChildren().add(hWe1);
-        VBox v1 = addImgAmmo(15, 5);
-        vOther.getChildren().add(v1);
-        vOther.getChildren().add(hWe2);
-        VBox v2 = addImgAmmo(15,5);
-        vOther.getChildren().add(v2);
-        vOther.getChildren().add(hWe3);
-        VBox v3 = addImgAmmo(15,5);
-        vOther.getChildren().add(v3);
-        vOther.getChildren().add(hWe4);
-        VBox v4 = addImgAmmo(15,5);
-        vOther.getChildren().add(v4);
-        vOther.getChildren().add(imgDeck);
+        /**
+         * set game buttons
+         */
+        TextField msg = new TextField();
+        Image msgBack = new Image(new FileInputStream("src/main/resources/images/img854.png"),300,100,true,true);
+        BackgroundImage backgroundMsg = new BackgroundImage(msgBack, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        Background backMsg = new Background(backgroundMsg);
+        msg.setBackground(backMsg);
+        msg.setAlignment(Pos.CENTER);
+        msg.setText("Benvenuto Giocatore!");
+        msg.setFont(font);
+        msg.setEditable(false);
 
         Button btnMove = new Button("Muovi");
         Button btnPick = new Button("Raccogli");
@@ -277,15 +326,6 @@ public class GameJavaFX extends Application {
         hBtn.getChildren().add(btnPick);
         hBtn.getChildren().add(btnShoot);
 
-        TextField msg = new TextField();
-        Image msgBack = new Image(new FileInputStream("src/main/resources/images/img854.png"),300,100,true,true);
-        BackgroundImage backgroundMsg = new BackgroundImage(msgBack, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-        Background backMsg = new Background(backgroundMsg);
-        msg.setBackground(backMsg);
-        msg.setAlignment(Pos.CENTER);
-        Font msgFont = new Font(20);
-        msg.setText("Benvenuto Giocatore!");
-        msg.setFont(msgFont);
 
         /**
          * merge layout.
@@ -310,6 +350,7 @@ public class GameJavaFX extends Application {
         });
     }
 
+
     public void transparent(Button btn){
         btn.setBorder(null);
         btn.setOpacity(0);
@@ -319,21 +360,30 @@ public class GameJavaFX extends Application {
 
         double dimOPU = 50;
 
-        ImageView imgWe1 = null;
-        ImageView imgWe2 = null;
-        ImageView imgWe3 = null;
+        Image imgWe = null;
 
         try {
-             imgWe1 = new ImageView(new Image(new FileInputStream("src/main/resources/images/weapon.png"),dimOPU,dimOPU,true,true));
-             imgWe2 = new ImageView(new Image(new FileInputStream("src/main/resources/images/weapon.png"),dimOPU,dimOPU,true,true));
-             imgWe3 = new ImageView(new Image(new FileInputStream("src/main/resources/images/weapon.png"),dimOPU,dimOPU,true,true));
+             imgWe = new Image(new FileInputStream("src/main/resources/images/weapon.png"),dimOPU,dimOPU,true,true);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        h.getChildren().add(imgWe1);
-        h.getChildren().add(imgWe2);
-        h.getChildren().add(imgWe3);
+        BackgroundImage backgroundOWe = new BackgroundImage(imgWe, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        Background backWe = new Background(backgroundOWe);
+
+        Button btn1 = new Button();
+        Button btn2 = new Button();
+        Button btn3 = new Button();
+        btn1.setBackground(backWe);
+        btn2.setBackground(backWe);
+        btn3.setBackground(backWe);
+        btn1.setPrefSize(50,50);
+        btn2.setPrefSize(50,50);
+        btn3.setPrefSize(50,50);
+
+        h.getChildren().add(btn1);
+        h.getChildren().add(btn2);
+        h.getChildren().add(btn3);
     }
 
     public VBox addImgAmmo(double dim, int spacing){
@@ -358,5 +408,138 @@ public class GameJavaFX extends Application {
         v.getChildren().add(imgAY);
 
         return v;
+    }
+
+    public Image setBoard(String color, double width, double height){
+
+        double widthOB = width;
+        double heightOB = height;
+
+        Image img = null;
+
+        try {
+            switch (color) {
+                case "yellow": {
+                    img = new Image(new FileInputStream("src/main/resources/images/yellow_board.png"), widthOB, heightOB, true, true);
+                    break;
+                }
+                case "red": {
+                    img = new Image(new FileInputStream("src/main/resources/images/red_board.png"), widthOB, heightOB, true, true);
+                    break;
+                }
+                case "blue": {
+                    img = new Image(new FileInputStream("src/main/resources/images/blue_board.png"), widthOB, heightOB, true, true);
+                    break;
+                }
+                case "green": {
+                    img = new Image(new FileInputStream("src/main/resources/images/green_board.png"), widthOB, heightOB, true, true);
+                    break;
+                }
+                case "gray": {
+                    img = new Image(new FileInputStream("src/main/resources/images/gray_board.png"), widthOB, heightOB, true, true);
+                    break;
+                }
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        return img;
+    }
+
+    public VBox setOtherBoard(VirtualPlayer player){
+
+        Image imgOther1;
+        Image imgOther2;
+        Image imgOther3;
+        Image imgOther4;
+        Image imgOther5;
+
+        double widthOB = 200;
+        double heightOB = 100;
+        double resize = 50;
+
+        VBox v = new VBox(15);
+
+        HBox h1 = new HBox(5);
+        HBox h2 = new HBox(5);
+        HBox h3 = new HBox(5);
+        HBox h4 = new HBox(5);
+        HBox h5 = new HBox(5);
+
+        Button btnOther1 = new Button();
+        Button btnOther2 = new Button();
+        Button btnOther3 = new Button();
+        Button btnOther4 = new Button();
+        Button btnOther5 = new Button();
+
+
+        ArrayList<VirtualPlayer> players = new ArrayList<>();
+        players.add(new VirtualPlayer("gre","blue"));
+        players.add(new VirtualPlayer("theo","red"));
+
+        for (VirtualPlayer p : players ) {
+            if(!p.equals(player)){
+                switch (p.getCharacter()) {
+                    case "yellow": {
+                        imgOther1 = setBoard(p.getCharacter(), widthOB, heightOB);
+                        setButtonBack(btnOther1,imgOther1);
+                        btnOther1.setPrefSize(widthOB,heightOB-resize);
+                        h1.getChildren().add(btnOther1);
+                        addImgWe(h1);
+                        v.getChildren().add(h1);
+                        v.getChildren().add(addImgAmmo(15,5));
+                        break;
+                    }
+                    case "red": {
+                        imgOther2 = setBoard(p.getCharacter(), widthOB, heightOB);
+                        setButtonBack(btnOther2,imgOther2);
+                        btnOther2.setPrefSize(widthOB,heightOB-resize);
+                        h2.getChildren().add(btnOther2);
+                        addImgWe(h2);
+                        v.getChildren().add(h2);
+                        v.getChildren().add(addImgAmmo(15,5));
+                        break;
+                    }
+                    case "blue": {
+                        imgOther3 = setBoard(p.getCharacter(), widthOB, heightOB);
+                        setButtonBack(btnOther3,imgOther3);
+                        btnOther3.setPrefSize(widthOB,heightOB-resize);
+                        h3.getChildren().add(btnOther3);
+                        addImgWe(h3);
+                        v.getChildren().add(h3);
+                        v.getChildren().add(addImgAmmo(15,5));
+                        break;
+                    }
+                    case "green": {
+                        imgOther4 = setBoard(p.getCharacter(), widthOB, heightOB);
+                        setButtonBack(btnOther4,imgOther4);
+                        btnOther4.setPrefSize(widthOB,heightOB-resize);
+                        h4.getChildren().add(btnOther4);
+                        addImgWe(h4);
+                        v.getChildren().add(h4);
+                        v.getChildren().add(addImgAmmo(15,5));
+                        break;
+                    }
+                    case "gray": {
+                        imgOther5 = setBoard(p.getCharacter(), widthOB, heightOB);
+                        setButtonBack(btnOther5,imgOther5);
+                        btnOther5.setPrefSize(widthOB,heightOB-resize);
+                        h5.getChildren().add(btnOther5);
+                        addImgWe(h5);
+                        v.getChildren().add(h5);
+                        v.getChildren().add(addImgAmmo(15,5));
+                        break;
+                    }
+                }
+            }
+        }
+        return v;
+    }
+
+    public void setButtonBack(Button btn,Image img ){
+        BackgroundImage background = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        Background back = new Background(background);
+        btn.setBackground(back);
     }
 }
