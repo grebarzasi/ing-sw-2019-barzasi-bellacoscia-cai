@@ -9,6 +9,7 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -42,10 +43,11 @@ public class LobbyJavaFX extends Application {
     private ConnectionTech conn;
     private VirtualPlayer owner;
 
+    private Font font = new Font("TimesRoman", 20);
+    private Font titleFont = new Font("TimesRoman", 36);
+
     private VirtualLobby lobby;
     private ArrayList<VirtualPlayer> joinedPlayers = new ArrayList<>();
-
-    private Stage primaryStage;
 
     public LobbyJavaFX(ConnectionTech conn, VirtualPlayer owner) {
         this.conn = conn;
@@ -59,7 +61,7 @@ public class LobbyJavaFX extends Application {
 
     public void start(Stage primaryStage) throws Exception {
 
-        this.primaryStage = primaryStage;
+            joinedPlayers = lobby.getNewPlayersList();
 
 
             primaryStage.setTitle("Lobby");
@@ -76,9 +78,6 @@ public class LobbyJavaFX extends Application {
 
             Scene scene = new Scene(lobbyGrid, 900, 900);
             primaryStage.setScene(scene);
-
-            Font font = new Font("TimesRoman", 20);
-            Font titleFont = new Font("TimesRoman", 36);
 
             Text title = new Text("Lobby");
             title.setFont(titleFont);
@@ -147,53 +146,6 @@ public class LobbyJavaFX extends Application {
             mapBox.getChildren().add(map3);
             mapBox.getChildren().add(map4);
 
-            /**
-             * player connected
-             */
-
-            joinedPlayers = lobby.getNewPlayersList();
-
-/*
-
-            Label lblPlayer = new Label("Player connessi:");
-            lblPlayer.setFont(font);
-            HBox playerBox = new HBox();
-            HBox usernameBox = new HBox();
-            for (VirtualPlayer p : joinedPlayers) {
-                switch (p.getCharacter()) {
-                    case "yellow": {
-                        ImageView yellowV = new ImageView(new Image(new FileInputStream("src/main/resources/images/D-struct-0R.png"), 150, 150, true, true));
-                        playerBox.getChildren().add(yellowV);
-                        break;
-                    }
-                    case "red": {
-                        ImageView redV = new ImageView(new Image(new FileInputStream("src/main/resources/images/violet.png"), 150, 150, true, true));
-                        playerBox.getChildren().add(redV);
-                        break;
-                    }
-                    case "blue": {
-                        ImageView blueV = new ImageView(new Image(new FileInputStream("src/main/resources/images/banshee.png"), 150, 150, true, true));
-                        playerBox.getChildren().add(blueV);
-                        break;
-                    }
-                    case "green": {
-                        ImageView greenV = new ImageView(new Image(new FileInputStream("src/main/resources/images/sprog.png"), 150, 150, true, true));
-                        playerBox.getChildren().add(greenV);
-                        break;
-                    }
-                    case "gray": {
-                        ImageView grayV = new ImageView(new Image(new FileInputStream("src/main/resources/images/dozer.png"), 150, 150, true, true));
-                        playerBox.getChildren().add(grayV);
-                        break;
-                    }
-                }
-                TextField txtUsername = new TextField(p.getUsername());
-                txtUsername.setPrefSize(150, 30);
-                txtUsername.setFont(font);
-                usernameBox.getChildren().add(txtUsername);
-            }
-
-*/
 
             Button btnStart = new Button("PRONTO");
             btnStart.setAlignment(Pos.CENTER);
@@ -212,13 +164,6 @@ public class LobbyJavaFX extends Application {
             lobbyGrid.add(freH, 1, 4);
             lobbyGrid.add(lblMap, 1, 5);
             lobbyGrid.add(mapBox, 1, 6);
-            /*
-
-            lobbyGrid.add(lblPlayer, 1, 7);
-            lobbyGrid.add(playerBox, 1, 8);
-            lobbyGrid.add(usernameBox, 1, 9);
-
-             */
             lobbyGrid.add(btnStart, 1, 10);
 
             ImageView load = null;
@@ -290,22 +235,55 @@ public class LobbyJavaFX extends Application {
                     ex.printStackTrace();
                 }
 
-                while(!lobby.isGameStarted()){
+
+                WaitingRoomJavaFX wait = new WaitingRoomJavaFX(lobby);
+                try {
+                    wait.start(primaryStage);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                /*
+
+                Task<Void> task = new Task<Void>() {
+                    @Override
+                    protected Void call() {
+
+                        while(!lobby.isGameStarted()){
+                            try {
+                                lobby.waitUpdate();
+                                setJoinedPlayers(lobbyGrid);
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                            }
+                        }
+
+                        return null;
+                    }
+                };
+
+                Thread th = new Thread(task);
+                th.setDaemon(true);
+                th.start();
+
+                while (!lobby.isGameStarted()){
                     try {
                         lobby.waitUpdate();
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
                 }
-
-                try {
+                if(lobby.isGameStarted()) {
                     GameJavaFX game = new GameJavaFX();
                     game.setLobby(lobby);
-                    game.start(primaryStage);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                    try {
+
+                        game.start(primaryStage);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
                 }
 
+                */
 
             });
 
@@ -313,4 +291,55 @@ public class LobbyJavaFX extends Application {
             primaryStage.show();
 
     }
+
+/*
+    public void setJoinedPlayers(GridPane grid){
+        Label lblPlayer = new Label("Player connessi:");
+        lblPlayer.setFont(font);
+        HBox playerBox = new HBox();
+        HBox usernameBox = new HBox();
+        for (VirtualPlayer p : joinedPlayers) {
+            try {
+                switch (p.getCharacter()) {
+                    case "yellow": {
+                        ImageView yellowV = new ImageView(new Image(new FileInputStream("src/main/resources/images/D-struct-0R.png"), 150, 150, true, true));
+                        playerBox.getChildren().add(yellowV);
+                        break;
+                    }
+                    case "red": {
+                        ImageView redV = new ImageView(new Image(new FileInputStream("src/main/resources/images/violet.png"), 150, 150, true, true));
+                        playerBox.getChildren().add(redV);
+                        break;
+                    }
+                    case "blue": {
+                        ImageView blueV = new ImageView(new Image(new FileInputStream("src/main/resources/images/banshee.png"), 150, 150, true, true));
+                        playerBox.getChildren().add(blueV);
+                        break;
+                    }
+                    case "green": {
+                        ImageView greenV = new ImageView(new Image(new FileInputStream("src/main/resources/images/sprog.png"), 150, 150, true, true));
+                        playerBox.getChildren().add(greenV);
+                        break;
+                    }
+                    case "gray": {
+                        ImageView grayV = new ImageView(new Image(new FileInputStream("src/main/resources/images/dozer.png"), 150, 150, true, true));
+                        playerBox.getChildren().add(grayV);
+                        break;
+                    }
+                }
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+
+            TextField txtUsername = new TextField(p.getUsername());
+            txtUsername.setPrefSize(150, 30);
+            txtUsername.setFont(font);
+            usernameBox.getChildren().add(txtUsername);
+
+            grid.add(lblPlayer, 1, 7);
+            grid.add(playerBox, 1, 8);
+            grid.add(usernameBox, 1, 9);
+        }
+    }
+*/
 }
