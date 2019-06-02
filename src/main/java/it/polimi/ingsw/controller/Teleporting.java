@@ -42,11 +42,6 @@ public class Teleporting implements ControllerState {
     @Override
     public void choose() {
 
-    }
-
-    @Override
-    public void chooseMove() {
-
         ArrayList<Square> options = new ArrayList<>();
 
         int row;
@@ -64,6 +59,11 @@ public class Teleporting implements ControllerState {
         this.controller.getCurrentPlayer().setPosition(choice);
         this.controller.setCurrentState(this.controller.choosingMove);
 
+
+    }
+
+    @Override
+    public void chooseMove() {
 
     }
 

@@ -48,6 +48,38 @@ public class Weapon extends Card {
         this.chamber=chamber;
     }
 
+    /**
+     * reloads the weapon, removes the cost from owner's ammo inventory
+     *
+     * @return true if the cost can be covered, false otherwise
+     */
+    public boolean reload() {
+
+        if (covers(this.getOwner().getPersonalBoard().getAmmoInventory(), this.getBasicEffect().getCost())) {
+            this.getOwner().getPersonalBoard().removeAmmo(this.getBasicEffect().getCost());
+            this.setLoaded(true);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Checks if an ammo covers the reload cost of another ammo object
+     *
+     * @param a available ammunition
+     * @param b ammunition cost
+     * @return true if it the cost can be covered, false otherwise
+     */
+    public boolean covers(Ammo a, Ammo b) {
+
+        if (a.getBlue() - b.getBlue() < 0 || a.getRed() - b.getRed() < 0 || a.getYellow() - b.getYellow() < 0) {
+            return false;
+        }
+
+        return true;
+    }
+
     public void basic(){}
 
     public void alternative(){}

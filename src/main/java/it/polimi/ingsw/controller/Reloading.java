@@ -38,6 +38,17 @@ public class Reloading implements ControllerState {
     @Override
     public void choose() {
 
+        ArrayList<Weapon> options = this.controller.getCurrentPlayer().getWeaponsList();
+        Weapon choice = this.controller.getView().showWeapon(options);
+
+        Boolean check = choice.reload();
+
+        if (check == false) {
+            this.controller.getView().displayMessage("You don't have enough ammo to load that weapon, try another one");
+        }
+
+        this.controller.setCurrentState(this.controller.choosingMove);
+
     }
 
     @Override

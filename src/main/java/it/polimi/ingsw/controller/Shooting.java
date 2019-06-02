@@ -37,7 +37,6 @@ public class Shooting implements ControllerState {
         should load the valid targets into  targetable
          */
 
-
     }
 
     @Override
