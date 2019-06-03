@@ -6,6 +6,7 @@ import it.polimi.ingsw.View;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Weapon;
+import it.polimi.ingsw.controller.Controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import java.util.Set;
 
 public class Cli implements View {
 
+    private Controller controller;
     private BufferedReader sc;
 
     @Override
@@ -23,7 +25,7 @@ public class Cli implements View {
 
             System.out.println(args.indexOf(p)+" :");
             System.out.println(p.getName());
-            System.out.println(" " +powerUptoColor(p));
+            System.out.println(" " + powerUptoColor(p));
 
         }
 
@@ -64,11 +66,6 @@ public class Cli implements View {
     }
 
     @Override
-    public Player showTarget(Figure arg) {
-        return null;
-    }
-
-    @Override
     public ArrayList<Figure> showMultipleTargets(ArrayList<Figure> args) {
         return null;
     }
@@ -79,7 +76,7 @@ public class Cli implements View {
     }
 
     @Override
-    public boolean showBoolean() {
+    public boolean showBoolean(String message) {
         return false;
     }
 

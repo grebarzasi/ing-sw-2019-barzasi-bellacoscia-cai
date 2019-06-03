@@ -23,11 +23,12 @@ public class Shooting implements ControllerState {
      * Shoots the targets according to weapon effects
      */
 
+
     @Override
-    public void shoot() {
+    public void choose() {
 
 
-        //per andare al model this.controller.getModel()
+        //per andare al model: this.controller.getModel()
         //l'arma con cui si sta sparando e' this.shootingWith
 
 
@@ -36,6 +37,14 @@ public class Shooting implements ControllerState {
         /*
         should load the valid targets into  targetable
          */
+
+
+    }
+
+
+    @Override
+    public void shoot() {
+
 
     }
 
@@ -48,11 +57,6 @@ public class Shooting implements ControllerState {
 
     @Override
     public void pick() {
-
-    }
-
-    @Override
-    public void choose() {
 
     }
 
