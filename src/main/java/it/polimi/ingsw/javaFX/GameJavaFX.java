@@ -22,6 +22,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /*
 
@@ -46,6 +47,21 @@ NASCONDERE CELLE!!
         btn02.setOpacity(0.5);
 
 NASCONDERE CELLE!!
+
+
+
+RISALIRE ALLA CELLA!!
+
+        Double d = 3.2;
+        Double u;
+        int c;
+        u = (d - d.intValue())*10;
+        c = d.intValue();
+
+        System.out.println("row: " + u.intValue() + " column: " + c);
+
+RISALIRE ALLA CELLA!!
+
 
 */
 
@@ -135,6 +151,68 @@ public class GameJavaFX extends Application {
         Background back = new Background(backgroundMap);
         gridBoard.setBackground(back);
 
+        double widthBoard = 170;
+        double heightBoard = 170;
+
+        ColumnConstraints c1 = new ColumnConstraints(widthBoard);
+        ColumnConstraints c2 = new ColumnConstraints(widthBoard);
+        ColumnConstraints c3 = new ColumnConstraints(widthBoard);
+        ColumnConstraints c4 = new ColumnConstraints(widthBoard);
+
+        RowConstraints r1=new RowConstraints(heightBoard);
+        RowConstraints r2=new RowConstraints(heightBoard);
+        RowConstraints r3=new RowConstraints(heightBoard);
+
+        gridBoard.getColumnConstraints().addAll(c1,c2,c3,c4);
+        gridBoard.getRowConstraints().addAll(r1,r2,r3);
+
+        gridBoard.setGridLinesVisible(true);
+        for(int column = 0; column <= 3; column++ ){
+            for(int row = 0; row <= 2; row++) {
+                ColumnConstraints c5 = new ColumnConstraints(widthBoard/3);
+                ColumnConstraints c6 = new ColumnConstraints(widthBoard/3);
+                ColumnConstraints c7 = new ColumnConstraints(widthBoard/3);
+
+                RowConstraints r4=new RowConstraints(heightBoard/2);
+                RowConstraints r5=new RowConstraints(heightBoard/2);
+
+                GridPane gridCell = new GridPane();
+
+                gridCell.getColumnConstraints().addAll(c5,c6,c7);
+                gridCell.getRowConstraints().addAll(r4,r5);
+
+                gridCell.setGridLinesVisible(true);
+
+                gridCell.add(new Button(),0,0);
+                gridCell.add(new Button(),0,1);
+                gridCell.add(new Button(),1,0);
+                gridCell.add(new Button(),1,1);
+                gridCell.add(new Button(),2,0);
+                gridCell.add(new Button(),2,1);
+
+                gridBoard.add(gridCell,column,row);
+            }
+        }
+
+
+
+        /*
+        for(int column = 0; column <= 3; column++ ){
+            for(int row = 0; row <= 2; row++){
+                GridPane gridCell = new GridPane();
+                for(int cCell = 0; cCell < 3; cCell++){
+                    for (int rCell = 0; rCell < 3; rCell++){
+                        Button btn = new Button();
+                        btn.setPrefSize(55,55);
+                        btn.setBorder(new Border(new BorderStroke(Color.GREEN, BorderStrokeStyle.SOLID, new CornerRadii(10), new BorderWidths(3))));
+                        btn.setOpacity(0);
+                        gridCell.add(btn,cCell,rCell);
+                    }
+                }
+                gridBoard.add(gridCell,column,row);
+            }
+        }
+
         Button btn00 = new Button();
         Button btn01 = new Button();
         Button btn02 = new Button();
@@ -183,7 +261,7 @@ public class GameJavaFX extends Application {
         transparent(btn30);
         transparent(btn31);
         transparent(btn32);
-
+        */
 
         /**
          * set personal space.
@@ -294,13 +372,99 @@ public class GameJavaFX extends Application {
         /**
          * set other players board
          */
+
+        Image imgOther1;
+        Image imgOther2;
+        Image imgOther3;
+        Image imgOther4;
+        Image imgOther5;
+
+        double widthOB = 200;
+        double heightOB = 100;
+        double resize = 50;
+
+        VBox vOther = new VBox(15);
+
+        HBox h1 = new HBox(5);
+        HBox h2 = new HBox(5);
+        HBox h3 = new HBox(5);
+        HBox h4 = new HBox(5);
+        HBox h5 = new HBox(5);
+
+        Button btnOther1 = new Button();
+        Button btnOther2 = new Button();
+        Button btnOther3 = new Button();
+        Button btnOther4 = new Button();
+        Button btnOther5 = new Button();
+
+
+        ArrayList<VirtualPlayer> players = new ArrayList<>();
+        players.add(new VirtualPlayer("gre","blue"));
+        players.add(new VirtualPlayer("theo","red"));
+
+        for (VirtualPlayer p : players ) {
+            if(!p.equals(player)){
+                switch (p.getCharacter()) {
+                    case "yellow": {
+                        imgOther1 = setBoard(p.getCharacter(), widthOB, heightOB);
+                        setButtonBack(btnOther1,imgOther1);
+                        btnOther1.setPrefSize(widthOB,heightOB-resize);
+                        h1.getChildren().add(btnOther1);
+                        addImgWe(h1);
+                        vOther.getChildren().add(h1);
+                        vOther.getChildren().add(addImgAmmo(15,5));
+                        break;
+                    }
+                    case "red": {
+                        imgOther2 = setBoard(p.getCharacter(), widthOB, heightOB);
+                        setButtonBack(btnOther2,imgOther2);
+                        btnOther2.setPrefSize(widthOB,heightOB-resize);
+                        h2.getChildren().add(btnOther2);
+                        addImgWe(h2);
+                        vOther.getChildren().add(h2);
+                        vOther.getChildren().add(addImgAmmo(15,5));
+                        break;
+                    }
+                    case "blue": {
+                        imgOther3 = setBoard(p.getCharacter(), widthOB, heightOB);
+                        setButtonBack(btnOther3,imgOther3);
+                        btnOther3.setPrefSize(widthOB,heightOB-resize);
+                        h3.getChildren().add(btnOther3);
+                        addImgWe(h3);
+                        vOther.getChildren().add(h3);
+                        vOther.getChildren().add(addImgAmmo(15,5));
+                        break;
+                    }
+                    case "green": {
+                        imgOther4 = setBoard(p.getCharacter(), widthOB, heightOB);
+                        setButtonBack(btnOther4,imgOther4);
+                        btnOther4.setPrefSize(widthOB,heightOB-resize);
+                        h4.getChildren().add(btnOther4);
+                        addImgWe(h4);
+                        vOther.getChildren().add(h4);
+                        vOther.getChildren().add(addImgAmmo(15,5));
+                        break;
+                    }
+                    case "gray": {
+                        imgOther5 = setBoard(p.getCharacter(), widthOB, heightOB);
+                        setButtonBack(btnOther5,imgOther5);
+                        btnOther5.setPrefSize(widthOB,heightOB-resize);
+                        h5.getChildren().add(btnOther5);
+                        addImgWe(h5);
+                        vOther.getChildren().add(h5);
+                        vOther.getChildren().add(addImgAmmo(15,5));
+                        break;
+                    }
+                }
+            }
+        }
+
         Image imgDeck = new Image(new FileInputStream("src/main/resources/images/powerup.png"),dimPW,dimPW,true,true);
         BackgroundImage backgroundDeck = new BackgroundImage(imgDeck, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background backDeck = new Background(backgroundDeck);
         Button btnDeck = new Button();
         btnDeck.setBackground(backDeck);
         btnDeck.setPrefSize(dimPW,dimPW);
-        VBox vOther = setOtherBoard(player);
         vOther.getChildren().add(btnDeck);
 
 
@@ -345,9 +509,71 @@ public class GameJavaFX extends Application {
 
         primaryStage.show();
 
-        btn00.setOnAction(e->{
-            System.out.println("ok");
+        /*
+        HashMap<String,Button> board = new HashMap<>();
+        board.put("0.0",btn00);
+        board.put("0.1",btn01);
+        board.put("0.2",btn02);
+        board.put("1.0",btn10);
+        board.put("1.1",btn11);
+        board.put("1.2",btn12);
+        board.put("2.0",btn20);
+        board.put("2.1",btn21);
+        board.put("2.2",btn22);
+        board.put("3.0",btn30);
+        board.put("3.1",btn31);
+        board.put("3.2",btn32);
+
+         */
+
+
+        //actionButtonCell(board);
+
+        /*
+
+        btn00.setOnAction(e->{ actionButtonCell(); });
+        btn01.setOnAction(e->{ actionButtonCell(); });
+        btn02.setOnAction(e->{ actionButtonCell(); });
+        btn10.setOnAction(e->{ actionButtonCell(); });
+        btn11.setOnAction(e->{ actionButtonCell(); });
+        btn12.setOnAction(e->{ actionButtonCell(); });
+        btn20.setOnAction(e->{ actionButtonCell(); });
+        btn21.setOnAction(e->{ actionButtonCell(); });
+        btn22.setOnAction(e->{ actionButtonCell(); });
+        btn30.setOnAction(e->{ actionButtonCell(); });
+        btn31.setOnAction(e->{ actionButtonCell(); });
+        btn32.setOnAction(e->{ actionButtonCell(); });
+
+         */
+
+
+        btnPB.setOnAction(e->{});
+        btnPWe1.setOnAction(e->{});
+        btnPWe2.setOnAction(e->{});
+        btnPWe3.setOnAction(e->{});
+        btnPPu1.setOnAction(e->{});
+        btnPPu2.setOnAction(e->{});
+        btnPPu3.setOnAction(e->{});
+
+        btnOther1.setOnAction(e->{});
+        btnOther2.setOnAction(e->{});
+        btnOther3.setOnAction(e->{});
+        btnOther4.setOnAction(e->{});
+        btnOther5.setOnAction(e->{});
+
+        btnDeck.setOnAction(e->{});
+        btnTrack.setOnAction(e->{});
+
+        btnMove.setOnAction(e->{
+            move = true;
         });
+        btnPick.setOnAction(e->{
+            pick = true;
+        });
+        btnShoot.setOnAction(e->{
+            shoot = true;
+        });
+
     }
 
 
@@ -384,7 +610,15 @@ public class GameJavaFX extends Application {
         h.getChildren().add(btn1);
         h.getChildren().add(btn2);
         h.getChildren().add(btn3);
+
+        btn1.setOnAction(e->{});
+        btn2.setOnAction(e->{});
+        btn3.setOnAction(e->{});
+
+
     }
+
+
 
     public VBox addImgAmmo(double dim, int spacing){
 
@@ -447,99 +681,89 @@ public class GameJavaFX extends Application {
         return img;
     }
 
-    public VBox setOtherBoard(VirtualPlayer player){
-
-        Image imgOther1;
-        Image imgOther2;
-        Image imgOther3;
-        Image imgOther4;
-        Image imgOther5;
-
-        double widthOB = 200;
-        double heightOB = 100;
-        double resize = 50;
-
-        VBox v = new VBox(15);
-
-        HBox h1 = new HBox(5);
-        HBox h2 = new HBox(5);
-        HBox h3 = new HBox(5);
-        HBox h4 = new HBox(5);
-        HBox h5 = new HBox(5);
-
-        Button btnOther1 = new Button();
-        Button btnOther2 = new Button();
-        Button btnOther3 = new Button();
-        Button btnOther4 = new Button();
-        Button btnOther5 = new Button();
-
-
-        ArrayList<VirtualPlayer> players = new ArrayList<>();
-        players.add(new VirtualPlayer("gre","blue"));
-        players.add(new VirtualPlayer("theo","red"));
-
-        for (VirtualPlayer p : players ) {
-            if(!p.equals(player)){
-                switch (p.getCharacter()) {
-                    case "yellow": {
-                        imgOther1 = setBoard(p.getCharacter(), widthOB, heightOB);
-                        setButtonBack(btnOther1,imgOther1);
-                        btnOther1.setPrefSize(widthOB,heightOB-resize);
-                        h1.getChildren().add(btnOther1);
-                        addImgWe(h1);
-                        v.getChildren().add(h1);
-                        v.getChildren().add(addImgAmmo(15,5));
-                        break;
-                    }
-                    case "red": {
-                        imgOther2 = setBoard(p.getCharacter(), widthOB, heightOB);
-                        setButtonBack(btnOther2,imgOther2);
-                        btnOther2.setPrefSize(widthOB,heightOB-resize);
-                        h2.getChildren().add(btnOther2);
-                        addImgWe(h2);
-                        v.getChildren().add(h2);
-                        v.getChildren().add(addImgAmmo(15,5));
-                        break;
-                    }
-                    case "blue": {
-                        imgOther3 = setBoard(p.getCharacter(), widthOB, heightOB);
-                        setButtonBack(btnOther3,imgOther3);
-                        btnOther3.setPrefSize(widthOB,heightOB-resize);
-                        h3.getChildren().add(btnOther3);
-                        addImgWe(h3);
-                        v.getChildren().add(h3);
-                        v.getChildren().add(addImgAmmo(15,5));
-                        break;
-                    }
-                    case "green": {
-                        imgOther4 = setBoard(p.getCharacter(), widthOB, heightOB);
-                        setButtonBack(btnOther4,imgOther4);
-                        btnOther4.setPrefSize(widthOB,heightOB-resize);
-                        h4.getChildren().add(btnOther4);
-                        addImgWe(h4);
-                        v.getChildren().add(h4);
-                        v.getChildren().add(addImgAmmo(15,5));
-                        break;
-                    }
-                    case "gray": {
-                        imgOther5 = setBoard(p.getCharacter(), widthOB, heightOB);
-                        setButtonBack(btnOther5,imgOther5);
-                        btnOther5.setPrefSize(widthOB,heightOB-resize);
-                        h5.getChildren().add(btnOther5);
-                        addImgWe(h5);
-                        v.getChildren().add(h5);
-                        v.getChildren().add(addImgAmmo(15,5));
-                        break;
-                    }
-                }
-            }
-        }
-        return v;
-    }
 
     public void setButtonBack(Button btn,Image img ){
         BackgroundImage background = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background back = new Background(background);
         btn.setBackground(back);
+    }
+
+    public void setPlayerOnCell(Button btn, String color){
+
+        String image = color + ".png";
+
+        try {
+            Image img = new Image(new FileInputStream("src/main/resources/images/" + image), 70, 70, true, true);
+            setButtonBack(btn,img);
+            btn.setOpacity(1);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void actionButtonCell(HashMap<String,Button> board){
+
+        String init = "0 . 0";
+        String[] val = init.split(" . ");
+
+        ///*
+        int column = Integer.parseInt(val[0]);
+        int row = Integer.parseInt(val[1]);
+
+        String key;
+
+        for(; column <= 3; column++){
+            for(; row <= 2; row++){
+                key = column + "." + row;
+
+                board.get(key).setOnAction(e->{
+                    System.out.println("ok btn");
+                });
+            }
+        }
+
+         //*/
+
+
+    }
+
+
+    public void actionButtonCell(){
+        System.out.println("ok");
+    }
+
+        public int getRow(Double d){
+        Double u;
+        u = (d - d.intValue())*10;
+
+        return u.intValue();
+    }
+    public int getColumn(Double d){
+        return d.intValue();
+    }
+
+    public class SkullWindow extends Stage{
+
+    }
+
+    public class BoardWindow extends Stage{
+
+    }
+
+    public class WeaponWindow extends Stage{
+
+    }
+
+    public class PowerUpWindow extends Stage{
+
+    }
+
+    public class CellWindow extends Stage{
+
+    }
+
+    public class ChoiseWindow extends Stage{
+
     }
 }
