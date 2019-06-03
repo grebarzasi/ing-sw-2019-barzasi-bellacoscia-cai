@@ -43,4 +43,10 @@ Armory {
 
     public Armory() {
     }
+    public String toString(){
+        String s="";
+        for(Weapon w: weaponList)
+            s=s+w.getName()+";";
+        return s;
+    }
 }

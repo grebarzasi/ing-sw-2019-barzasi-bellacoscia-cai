@@ -6,7 +6,14 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.Token;
+import it.polimi.ingsw.board.Armory;
+import it.polimi.ingsw.board.Board;
+import it.polimi.ingsw.board.map.Map;
+import it.polimi.ingsw.board.map.NonSpawnSquare;
+import it.polimi.ingsw.board.map.SpawnSquare;
+import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.Ammo;
+import it.polimi.ingsw.cards.AmmoLot;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
@@ -16,13 +23,19 @@ public class GameStateJsonBuilder {
     private Controller controller;
     private ObjectMapper mapper = new ObjectMapper();
 
+    public GameStateJsonBuilder(Controller conn){
+        this.controller=conn;
+    }
+
+    public GameStateJsonBuilder(){
+    }
+
+
     public JsonNode create(){
         ObjectNode rootNode = mapper.createObjectNode();
         rootNode.set("players",allPlayersNode());
         rootNode.set("main_board",mainBoardNode());
-
-
-        return null;
+        return rootNode;
     }
 
     public ObjectNode allPlayersNode(){
@@ -34,7 +47,7 @@ public class GameStateJsonBuilder {
         }
 
 
-        return null;
+        return playersNode;
     }
 
     public ObjectNode playerNode(Player p){
@@ -101,10 +114,43 @@ public class GameStateJsonBuilder {
             return boardNode;
 
         }
+
         public ObjectNode mainBoardNode(){
          ObjectNode mainBoardNode = mapper.createObjectNode();
-         mainBoardNode.put("skull",true);
-        return mainBoardNode;
+         Board board=controller.getModel().getBoard();
+         Map map = board.getMap();
+         //skull
+         mainBoardNode.put("skull",board.getTrack().getSkullMax());
+
+         //map
+         mainBoardNode.put("map",map.getName());
+
+         //cells
+         ObjectNode cellsNode = mapper.createObjectNode();
+         cellsNode.set("cells_pu",createCellNode(map,false));
+         cellsNode.set("cells_armory",createCellNode(map,true));
+         mainBoardNode.set("cells",cellsNode);
+
+         return mainBoardNode;
         }
+
+        public ObjectNode createCellNode(Map map, boolean isArmory){
+        ObjectNode node = mapper.createObjectNode();
+        Square[][] sq = map.getSquareMatrix();
+        for(int r=0;r<3;r++)
+            for(int c=0;c<4;c++){
+                Square s = sq[r][c];
+                String coord = r+":"+c;
+                if (s.isSpawn() && isArmory){
+                     Armory armory=((SpawnSquare)s).getArmory();
+                     node.put(coord,armory.toString());
+                }
+                if (!s.isSpawn() && !isArmory){
+                    AmmoLot ammoLot =((NonSpawnSquare)s).getDrop();
+                    node.put(coord,ammoLot.toString());
+                }
+            }
+                return node;
+    }
 
     }

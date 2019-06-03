@@ -13,7 +13,7 @@ import static it.polimi.ingsw.board.map.MapLoader.loadTerrain;
 public class Map {
 
     private Square[][] squareMatrix;
-
+    private String name;
     //The list of rooms in a game
     private ArrayList<Room> roomList;
 
@@ -34,7 +34,7 @@ public class Map {
         this.squareMatrix = new Square[height][width];
         loadTerrain(selection, this.squareMatrix);
         this.roomList = new ArrayList<>();
-
+        this.name=selection;
 
         int row;
         int column;
@@ -68,5 +68,13 @@ public class Map {
 
     public void setRoomList(ArrayList<Room> roomList) {
         this.roomList = roomList;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

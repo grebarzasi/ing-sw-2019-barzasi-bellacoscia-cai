@@ -12,7 +12,7 @@ import java.util.*;
 
 public class PlayerBoard {
 
-    private final Figure owner;
+    private Figure owner;
 
     //received damage tokens
     private ArrayList<Token> damage;
@@ -29,6 +29,7 @@ public class PlayerBoard {
     private static final int maxammo = 3;
     private static final int maxhealth = 11;
 
+    public PlayerBoard(){}
 
     /**
      * Adds a damage token to the player's board

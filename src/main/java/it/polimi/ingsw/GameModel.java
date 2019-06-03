@@ -17,7 +17,7 @@ import java.util.Set;
 
 public class GameModel {
 
-    private ArrayList<Player> playerList;
+    private ArrayList<Player> playerList=new ArrayList<>();
 
     private Player currentPlayer;
 

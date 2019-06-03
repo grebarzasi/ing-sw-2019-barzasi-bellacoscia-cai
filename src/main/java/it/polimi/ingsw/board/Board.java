@@ -48,6 +48,7 @@ public class Board extends Subject {
 
     public Board(String selection){
 
+        this.track=new KillshotTrack(8);
         //loads the map
         this.map = new Map(selection);
 

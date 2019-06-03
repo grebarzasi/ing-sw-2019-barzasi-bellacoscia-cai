@@ -35,6 +35,11 @@ public class ClientThreadSocket extends Thread {
         this.owner = new Player();
     }
 
+    public ClientThreadSocket(Lobby lobby) throws IOException{
+        this.lobby=lobby;
+        this.owner = new Player();
+    }
+
     /**
      * Login procedure: read user and character, if lobby accepts them reply to client "accepted" .
      * if lobby refuse the login reply "refused" and keep waiting for login until a valid login is achieved.
