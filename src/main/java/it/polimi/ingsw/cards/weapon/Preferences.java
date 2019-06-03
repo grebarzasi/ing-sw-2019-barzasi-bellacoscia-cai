@@ -13,12 +13,16 @@ import static java.util.Collections.EMPTY_SET;
 
 public class Preferences {
 
+    private Weapon w;
     private Set<Figure> target;
     private Square position;
-    private String direction;
+    private String direction="";
     private Figure oneTarget;
     private Ammo ammo;
 
+    public Preferences(Weapon w){
+        this.w=w;
+    }
     public Ammo getAmmo() {
         return ammo;
     }
@@ -41,6 +45,9 @@ public class Preferences {
 
     public  Set<Figure> getTargetSet(Set<Figure> set,String msg, int max, boolean diffSquare) {
         target.retainAll(set);
+        if(target.isEmpty()){
+            return EMPTY_SET;//w.getOwner().getModel().getController().getView().askPlayer();
+        }
         if(!target.isEmpty() && target.size()<=max) {
             if(diffSquare && !areFromDiffSquare(target) )
                 return EMPTY_SET;
@@ -80,6 +87,8 @@ public class Preferences {
     }
 
     public String getDirection() {
+        if(direction.isEmpty())
+            direction="";//w.getOwner().getModel().getController().getView().askPlayer();
         return direction;
     }
 
