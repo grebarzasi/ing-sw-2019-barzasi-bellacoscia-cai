@@ -19,20 +19,9 @@ public class Picking implements ControllerState{
         this.controller = controller;
     }
 
-    @Override
-    public void shoot() {
-
-    }
-
-
 
     @Override
-    public void move() {
-
-    }
-
-    @Override
-    public void pick() {
+    public void command() {
 
         ArrayList<Square> options = new ArrayList<>();
 
@@ -55,15 +44,14 @@ public class Picking implements ControllerState{
         } else {
             this.controller.getCurrentPlayer().pickAmmo();
             if (this.controller.getCurrentPlayer().getPowerupList().size() == max) {
-                this.controller.getCurrentState().choose();
+                this.choosePU();
             }
         }
 
 
     }
 
-    @Override
-    public void choose() {
+    private void choosePU() {
 
         PowerUp chosen = this.controller.getView().showPowerUp(this.controller.getCurrentPlayer().getPowerupList());
 

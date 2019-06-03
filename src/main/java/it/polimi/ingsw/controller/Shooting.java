@@ -28,7 +28,7 @@ public class Shooting implements ControllerState {
 
 
     @Override
-    public void choose() {
+    public void command() {
 
         Set<Effect> effects;
         effects = shootingWith.getUsableEff();
@@ -39,27 +39,7 @@ public class Shooting implements ControllerState {
 
         ArrayList<Figure> targetable = new ArrayList<>();
 
-
-
     }
-
-
-    @Override
-    public void shoot() {
-
-    }
-
-    @Override
-    public void move() {
-
-
-    }
-
-    @Override
-    public void pick() {
-
-    }
-
 
     public Controller getController() {
         return controller;

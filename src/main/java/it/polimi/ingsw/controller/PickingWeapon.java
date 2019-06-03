@@ -18,23 +18,7 @@ public class PickingWeapon implements ControllerState {
     }
 
     @Override
-    public void shoot() {
-
-    }
-
-
-    @Override
-    public void move() {
-
-    }
-
-    @Override
-    public void pick() {
-
-    }
-
-    @Override
-    public void choose() {
+    public void command() {
 
         ArrayList<Weapon> options = new ArrayList<>();
 

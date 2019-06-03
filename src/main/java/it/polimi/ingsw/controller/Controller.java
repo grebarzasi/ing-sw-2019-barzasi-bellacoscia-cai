@@ -57,8 +57,6 @@ public class Controller implements Remote {
         this.choosingMove = new ChoosingMove(this);
         this.choosingPowerUpToUse = new ChoosingPowerUpToUse(this);
         this.choosingWeapon = new ChoosingWeapon(this);
-        this.discardingPowerUp = new DiscardingPowerUp(this);
-        this.discardingWeapon = new DiscardingWeapon(this);
         this.moving = new Moving(this);
         this.picking = new Picking(this);
         this.pickingWeapon = new PickingWeapon(this);

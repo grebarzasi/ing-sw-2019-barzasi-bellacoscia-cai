@@ -45,7 +45,7 @@ public class CliView {
 
 
     /**
-     * choose connection type
+     * command connection type
      */
 
 

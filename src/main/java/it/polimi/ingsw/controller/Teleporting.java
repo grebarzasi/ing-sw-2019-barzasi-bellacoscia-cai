@@ -20,22 +20,7 @@ public class Teleporting implements ControllerState {
     }
 
     @Override
-    public void shoot() {
-
-    }
-
-    @Override
-    public void move() {
-
-    }
-
-    @Override
-    public void pick() {
-
-    }
-
-    @Override
-    public void choose() {
+    public void command() {
 
         ArrayList<Square> options = new ArrayList<>();
 

@@ -9,14 +9,7 @@ import java.util.ArrayList;
 
 public interface ControllerState {
 
-    void shoot();
-
-    void move();
-
-    void pick();
-
-    void choose();
-
+    void command();
 
 }
 

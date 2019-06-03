@@ -21,22 +21,7 @@ public class Spawning implements ControllerState {
     }
 
     @Override
-    public void shoot() {
-
-    }
-
-    @Override
-    public void move() {
-
-    }
-
-    @Override
-    public void pick() {
-
-    }
-
-    @Override
-    public void choose() {
+    public void command() {
 
         if (!controller.getBoard().getTrack().getKillsTrack().isEmpty()) {
 

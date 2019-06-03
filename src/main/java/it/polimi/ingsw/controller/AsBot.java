@@ -23,14 +23,19 @@ public class AsBot implements ControllerState{
         this.hasShot = false;
     }
 
+
+    @Override
+    public void command() {
+
+    }
+
     /**
      * Passes a list of valid targets to the view, (the view displays the
-     * choices and makes the player choose one)
+     * choices and makes the player command one)
      * 
      * Then proceeds to shoot the target in the face (adding one bot damage or mark)
      */
 
-    @Override
     public void shoot() {
 
         if (hasShot == false) {
@@ -59,12 +64,11 @@ public class AsBot implements ControllerState{
 
     /**
      * Passes the view a list of valid targets (The view displays them
-     * and makes the player choose one)
+     * and makes the player command one)
      *
      * Then moves the bot to the chosen position
      */
 
-    @Override
     public void move() {
 
         if (hasMoved == false && hasShot == false) {
@@ -75,16 +79,6 @@ public class AsBot implements ControllerState{
         } else if (hasShot == true) {
             System.out.print("Bot has no actions left this turn");
         }
-    }
-
-    @Override
-    public void pick() {
-
-    }
-
-    @Override
-    public void choose() {
-
     }
 
 

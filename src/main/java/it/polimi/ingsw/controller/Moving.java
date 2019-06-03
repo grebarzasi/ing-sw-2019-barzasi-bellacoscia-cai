@@ -16,24 +16,8 @@ public class Moving implements ControllerState{
     }
 
     @Override
-    public void shoot() {
+    public void command() {
 
     }
-
-    @Override
-    public void move() {
-
-    }
-
-    @Override
-    public void pick() {
-
-    }
-
-    @Override
-    public void choose() {
-
-    }
-
 
 }

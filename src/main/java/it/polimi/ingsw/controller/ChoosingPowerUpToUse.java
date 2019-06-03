@@ -16,22 +16,7 @@ public class ChoosingPowerUpToUse implements ControllerState {
     }
 
     @Override
-    public void shoot() {
-
-    }
-
-    @Override
-    public void move() {
-
-    }
-
-    @Override
-    public void pick() {
-
-    }
-
-    @Override
-    public void choose() {
+    public void command() {
 
         PowerUp chosen = this.controller.getView().showPowerUp(this.controller.getCurrentPlayer().getPowerupList());
 

@@ -14,7 +14,7 @@ import java.util.Set;
 public interface View {
 
     /**
-     * Shows the PowerUps and makes the user choose one, then returns it
+     * Shows the PowerUps and makes the user command one, then returns it
      *
      * @param args the Powerups to show
      * @return the chosen one
@@ -23,7 +23,7 @@ public interface View {
     public PowerUp showPowerUp(ArrayList<PowerUp> args);
 
     /**
-     * Shows the Weapons and makes the user choose one, the returns is
+     * Shows the Weapons and makes the user command one, the returns is
      * @param args the Weapons to show
      * @return the chosen one
      */
@@ -31,7 +31,7 @@ public interface View {
     public Weapon showWeapon(ArrayList<Weapon> args);
 
     /**
-     * Show the possible moves that a player can perform then makes the user choose one,
+     * Show the possible moves that a player can perform then makes the user command one,
      * then returns it
      * @param args the moves to show
      * @return the chosen one
