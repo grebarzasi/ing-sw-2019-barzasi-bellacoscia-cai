@@ -1,6 +1,7 @@
 {
   "players":{
     "red":{
+      "username": "ciccio",
       "points": 23,
       "pos": "1:0",
       "weapons": {
@@ -26,12 +27,12 @@
     "map": "large",
     "killshot_track": ["RR"],
     "cells": {
-      "0:0":{
-        "care_pakage": ["P","Y","R"]
+      "cells_pu": {
+        "0:0":"PYR"
       },
-      "0:1": {
-        "armory": ["bomba"]
+      "cells_armory": {
+        "0:1":"bomba;;;"
       }
     }
-    }
   }
+}

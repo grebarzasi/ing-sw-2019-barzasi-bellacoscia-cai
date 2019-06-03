@@ -16,6 +16,8 @@ public class Token {
         this.owner = owner;
     }
 
-
+    public String toString(){
+        return owner.getCharacter();
+    }
 
 }
