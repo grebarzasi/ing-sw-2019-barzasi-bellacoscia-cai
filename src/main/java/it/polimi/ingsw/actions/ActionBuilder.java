@@ -2,6 +2,7 @@ package it.polimi.ingsw.actions;
 
 import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.GameModel;
+import it.polimi.ingsw.Player;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -11,16 +12,18 @@ import java.util.Set;
  * this class is used by {@link GameModel} to initialize {@link Action} according to game status
  * @author Gregorio Barzasi
  */
+
+
 public class ActionBuilder {
 
-    public static Set<Action> build(Figure p, boolean isFrenzy) {
+    public static Set<Action> build(Player p, boolean isFrenzy) {
+
+        HashSet<Action> actions = new HashSet<>();
 
         if (!isFrenzy) {
 
             int damage = p.getPersonalBoard().getDamage().size();
             int adrenalineStage;
-
-            HashSet<Action> actions = new HashSet<>();
 
             adrenalineStage = 0;
 
@@ -51,13 +54,20 @@ public class ActionBuilder {
 
             }
 
-            return actions;
 
         } else {
 
-            return new HashSet<>();
+            if (!p.isStartingPlayer()) {
+                actions.add(new Action("Move", 4));
+                actions.add(new Action("Pick", 2));
+                actions.add(new Action("Move, reload and Shoot", 1));
+            } else {
+                actions.add(new Action("Pick", 3));
+                actions.add(new Action("Move, reload and Shoot", 2));
+
+            }
         }
 
+        return actions;
     }
-
 }
