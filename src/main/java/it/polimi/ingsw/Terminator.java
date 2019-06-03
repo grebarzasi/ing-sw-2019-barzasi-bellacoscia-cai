@@ -1,7 +1,5 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.actions.Move;
-import it.polimi.ingsw.actions.Shoot;
 import it.polimi.ingsw.board.map.Square;
 
 import java.util.ArrayList;
@@ -17,11 +15,6 @@ public class Terminator extends Figure{
     private static final int height = 3;
     private static final int range = 3;
 
-
-    //the movement it can perform in the turn
-    private Move move;
-    //the shot it can perform is a target is visible
-    private Shoot shot;
 
     public Terminator(String character, Player owner) {
         super(character);
@@ -70,9 +63,9 @@ public class Terminator extends Figure{
 
         for (row = 0; row < height; row++) {
             for (column = 0; column < width; column++) {
-                if (this.getPosition().isAdjacent((this.getModel().getCurrentBoard().getMap().getSquareMatrix()[row][column]))) {
+                if (this.getPosition().isAdjacent((this.getModel().getBoard().getMap().getSquareMatrix()[row][column]))) {
 
-                    destinations.add(this.getModel().getCurrentBoard().getMap().getSquareMatrix()[row][column]);
+                    destinations.add(this.getModel().getBoard().getMap().getSquareMatrix()[row][column]);
 
                 }
             }
@@ -82,19 +75,4 @@ public class Terminator extends Figure{
 
     }
 
-    public Move getMove() {
-        return move;
-    }
-
-    public void setMove(Move move) {
-        this.move = move;
-    }
-
-    public Shoot getShoot() {
-        return shot;
-    }
-
-    public void setShoot(Shoot shoot) {
-        this.shot = shoot;
-    }
 }

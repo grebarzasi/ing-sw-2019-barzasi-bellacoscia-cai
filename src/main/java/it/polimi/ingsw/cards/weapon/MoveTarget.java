@@ -2,7 +2,6 @@ package it.polimi.ingsw.cards.weapon;
 
 import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.actions.Action;
-import it.polimi.ingsw.actions.Move;
 import it.polimi.ingsw.board.map.Square;
 
 import java.util.Set;

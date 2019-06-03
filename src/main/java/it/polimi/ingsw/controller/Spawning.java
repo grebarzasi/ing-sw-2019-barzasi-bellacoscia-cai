@@ -1,10 +1,7 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.board.map.Square;
-import it.polimi.ingsw.cards.Ammo;
-import it.polimi.ingsw.cards.Card;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 
 import java.util.ArrayList;
@@ -48,7 +45,7 @@ public class Spawning implements ControllerState {
                 int i;
 
                 for (i = 0; i < 2; i++) {
-                    options.add((PowerUp) this.controller.getModel().getCurrentBoard().getPowerupDeck().fetch());
+                    options.add((PowerUp) this.controller.getModel().getBoard().getPowerupDeck().fetch());
                 }
 
                 PowerUp choice = this.controller.getView().showPowerUp(options);

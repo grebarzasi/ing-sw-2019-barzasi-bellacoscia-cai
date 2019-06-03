@@ -14,6 +14,7 @@ import java.util.Set;
 public class ChoosingMove implements ControllerState{
 
     private Controller controller;
+    private int movesLeft;
 
     public ChoosingMove(Controller controller) {
         this.controller = controller;
@@ -25,8 +26,7 @@ public class ChoosingMove implements ControllerState{
         Set<Action> availableActions = new HashSet<>();
 
 
-        availableActions = ActionBuilder.build(this.controller.getModel().getCurrentPlayer(), this.controller.getModel().isFrenzy(),
-                this.controller.getMovesLeft());
+        availableActions = new HashSet<>();
 
 
         Set<String> options = new HashSet<>();
@@ -43,7 +43,9 @@ public class ChoosingMove implements ControllerState{
             options.add("UseBot");
         }
 
+
         options.add("end");
+        options.add("reload");
 
         String choice = this.controller.getView().showMoves(options);
 

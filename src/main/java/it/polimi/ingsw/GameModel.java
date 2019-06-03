@@ -1,26 +1,13 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.board.Board;
-import it.polimi.ingsw.board.map.Cell;
-import it.polimi.ingsw.board.map.Room;
-import it.polimi.ingsw.board.map.Square;
-import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.cards.weapon.Effect;
 import it.polimi.ingsw.cards.weapon.Weapon;
 import it.polimi.ingsw.connection.socket.ClientThreadSocket;
 import it.polimi.ingsw.controller.Controller;
 
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.lang.annotation.Target;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.Set;
 
 /**
@@ -40,7 +27,7 @@ public class GameModel {
 
     private Terminator bot;
 
-    private Board currentBoard;
+    private Board board;
 
     private boolean isFrenzy;
 
@@ -50,11 +37,11 @@ public class GameModel {
 
     }
 
+    public GameModel(ArrayList<Player> playerList, Player currentPlayer, Board board) {
 
-    public GameModel(ArrayList<Player> playerList, Player currentPlayer, Board currentBoard) {
         this.playerList = playerList;
         this.currentPlayer = currentPlayer;
-        this.currentBoard = currentBoard;
+        this.board = board;
 
         for (Player p : this.playerList) {
             p.setModel(this);
@@ -68,8 +55,11 @@ public class GameModel {
      * Loads the players from a lobby to the model
      * @param lobbyToStartFrom The lobby you want to start the game from
      */
+
     public GameModel(Lobby lobbyToStartFrom, Controller controller) {
-       for (ClientThreadSocket client : lobbyToStartFrom.getJoinedPlayers()){
+
+
+        for (ClientThreadSocket client : lobbyToStartFrom.getJoinedPlayers()){
            this.playerList.add(client.getOwner());
        }
         for (Player p : this.playerList) {
@@ -77,59 +67,20 @@ public class GameModel {
         }
         //TODO if this game wants a bot adds a bot;
 
+        this.currentPlayer = this.playerList.get(0);
         this.isFrenzy = false;
+
     }
 
     public Set<Figure> askTarget(int num){
         return null;
     }
+
     public Weapon askWeapon(){
         return null;
     }
+
     public void askUseEffect(Set<Effect> eff){}
-
-    /**
-     * ends a turn
-     * adds tokens to the killshot track
-     * iterates the current player to the next
-     * on the player list
-     */
-
-    public void endTurn() {
-
-        int k;
-        int i;
-        int flag =0;
-
-        for(Figure figure : this.playerList){
-
-            if(figure.getPersonalBoard().getDamage().size() >= 11){
-
-                for (i = 0; i < this.currentBoard.getTrack().getKillsTrack().size(); i++) {
-                    if (this.currentBoard.getTrack().getKillsTrack().get(i) == null) {
-                        flag = i;
-                    }
-                }
-
-                this.currentBoard.getTrack().getKillsTrack().get(i).add(figure.getPersonalBoard().getDamage().get(10));
-                if(figure.getPersonalBoard().getDamage().size() == 12){
-                    this.currentBoard.getTrack().getKillsTrack().get(i).add(figure.getPersonalBoard().getDamage().get(11));
-                }
-                figure.die();
-            }
-
-        }
-
-        this.getCurrentBoard().refillSquares();
-
-
-        //iterates the current player
-        if(playerList.indexOf(currentPlayer) != this.playerList.size()-1) {
-            this.currentPlayer = this.playerList.get(this.playerList.indexOf(currentPlayer) + 1);
-        }else{
-            this.currentPlayer = this.playerList.get(1);
-        }
-    }
 
     public ArrayList<Player> getPlayerList() {
         return playerList;
@@ -147,12 +98,12 @@ public class GameModel {
         this.currentPlayer = currentPlayer;
     }
 
-    public Board getCurrentBoard() {
-        return currentBoard;
+    public Board getBoard() {
+        return board;
     }
 
-    public void setCurrentBoard(Board currentBoard) {
-        this.currentBoard = currentBoard;
+    public void setBoard(Board board) {
+        this.board = board;
     }
 
     public ArrayList<Player> getPlayers() {

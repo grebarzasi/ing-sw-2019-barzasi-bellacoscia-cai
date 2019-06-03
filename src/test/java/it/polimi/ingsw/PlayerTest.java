@@ -49,7 +49,7 @@ public class PlayerTest {
 
 
             GameModel empire = new GameModel(new ArrayList<>(), null, new Board("small"));
-            Board alderaan = empire.getCurrentBoard();
+            Board alderaan = empire.getBoard();
             Player luke = new Player("Luke", "Jedi");
             luke.setModel(empire);
             Square aldera = alderaan.getMap().getSquareMatrix()[0][0];
@@ -97,7 +97,7 @@ public class PlayerTest {
     public void consecutivePicking(){
 
         GameModel empire = new GameModel(new ArrayList<>(), null, new Board("large"));
-        Board alderaan = empire.getCurrentBoard();
+        Board alderaan = empire.getBoard();
         Player luke = new Player("Luke", "Jedi");
         luke.setModel(empire);
 

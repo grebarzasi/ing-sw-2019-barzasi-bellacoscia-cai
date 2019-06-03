@@ -5,7 +5,6 @@ import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.map.Room;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
-import it.polimi.ingsw.controller.Controller;
 
 import java.util.*;
 
@@ -59,9 +58,9 @@ public class Figure {
 
         for (row = 0; row < height; row++) {
             for (column = 0; column < width; column++) {
-                if (this.distanceTo(this.model.getCurrentBoard().getMap().getSquareMatrix()[row][column]) <= 3) {
+                if (this.distanceTo(this.model.getBoard().getMap().getSquareMatrix()[row][column]) <= 3) {
 
-                    destinations.add(this.model.getCurrentBoard().getMap().getSquareMatrix()[row][column]);
+                    destinations.add(this.model.getBoard().getMap().getSquareMatrix()[row][column]);
 
                 }
             }

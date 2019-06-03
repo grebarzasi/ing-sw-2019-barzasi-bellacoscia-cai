@@ -1,19 +1,13 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.*;
-import it.polimi.ingsw.actions.Shoot;
 import it.polimi.ingsw.board.Board;
-import it.polimi.ingsw.board.map.SpawnSquare;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.Ammo;
-import it.polimi.ingsw.cards.power_up.PowerUp;
 
-import java.rmi.Remote;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
-public class Controller implements Remote {
+public class Controller {
 
     private static final int height = 3;
     private static final int width = 4;
@@ -69,6 +63,49 @@ public class Controller implements Remote {
     }
 
     /**
+     * ends a turn
+     * adds tokens to the killshot track
+     * iterates the current player to the next
+     * on the player list
+     */
+
+    public void endTurn() {
+
+        int k;
+        int i;
+        int flag = 0;
+
+        for (Figure figure : this.model.getPlayerList()) {
+
+            if (figure.getPersonalBoard().getDamage().size() >= 11) {
+
+                for (i = 0; i < this.model.getBoard().getTrack().getKillsTrack().size(); i++) {
+                    if (this.model.getBoard().getTrack().getKillsTrack().get(i) == null) {
+                        flag = i;
+                    }
+                }
+
+                this.model.getBoard().getTrack().getKillsTrack().get(i).add(figure.getPersonalBoard().getDamage().get(10));
+                if (figure.getPersonalBoard().getDamage().size() == 12) {
+                    this.model.getBoard().getTrack().getKillsTrack().get(i).add(figure.getPersonalBoard().getDamage().get(11));
+                }
+                figure.die();
+            }
+
+        }
+
+        this.model.getBoard().refillSquares();
+
+
+        //iterates the current player
+        if (this.model.getPlayerList().indexOf(this.model.getCurrentPlayer()) != this.model.getPlayerList().size() - 1) {
+            this.model.setCurrentPlayer(this.model.getPlayerList().get(this.model.getPlayerList().indexOf(model.getCurrentPlayer()) + 1));
+        } else {
+            this.model.setCurrentPlayer(this.model.getPlayerList().get(0));
+        }
+    }
+
+    /**
      * ask player
      * @author Gregorio Barzasi
      *
@@ -87,7 +124,7 @@ public class Controller implements Remote {
         int row = sc.nextInt();
         int column = sc.nextInt();
 
-        return this.model.getCurrentBoard().getMap().getSquareMatrix()[row][column];
+        return this.model.getBoard().getMap().getSquareMatrix()[row][column];
     }
     public Ammo askAmmo(){
 
@@ -115,7 +152,7 @@ public class Controller implements Remote {
     }
 
     public Board getBoard() {
-        return this.getModel().getCurrentBoard();
+        return this.getModel().getBoard();
     }
 
     public ControllerState getAsBot() {

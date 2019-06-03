@@ -55,7 +55,7 @@ public class Player extends Figure {
         }else{
 
             if(this.getPosition().isSpawn() || ((NonSpawnSquare)this.getPosition()).getDrop().hasPowerup()){
-                this.powerupList.add((PowerUp)this.getModel().getCurrentBoard().getPowerupDeck().fetch());
+                this.powerupList.add((PowerUp) this.getModel().getBoard().getPowerupDeck().fetch());
             }
             if(!this.getPosition().isSpawn()){
                 Ammo tmp = ((NonSpawnSquare)this.getPosition()).getDrop().getContent();
@@ -80,6 +80,14 @@ public class Player extends Figure {
         this.username = username;
         this.weaponsList = new ArrayList<>();
         this.powerupList = new ArrayList<>();
+    }
+
+    public Boolean isStartingPlayer() {
+        if (this.getModel().getPlayerList().indexOf(this) == 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void addPowerUp(PowerUp toAdd) {

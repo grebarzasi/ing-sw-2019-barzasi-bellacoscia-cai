@@ -1,9 +1,6 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.board.map.Square;
-import it.polimi.ingsw.cards.power_up.PowerUp;
-import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.util.ArrayList;
 
@@ -29,7 +26,7 @@ public class Teleporting implements ControllerState {
 
         for (row = 0; row < height; row++) {
             for (column = 0; column < width; column++) {
-                options.add(this.controller.getModel().getCurrentBoard().getMap().getSquareMatrix()[row][column]);
+                options.add(this.controller.getModel().getBoard().getMap().getSquareMatrix()[row][column]);
             }
         }
 
