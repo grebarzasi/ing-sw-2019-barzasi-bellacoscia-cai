@@ -1,0 +1,37 @@
+{
+  "players":{
+    "red":{
+      "points": 23,
+      "pos": "1:0",
+      "weapons": {
+        "plasma_cannon": true
+      },
+      "powerups": {
+        "newtone": "red"
+      },
+      "board": {
+        "damage": ["blue","blue"],
+        "marks": ["blue","blue"],
+        "skulls": 0,
+        "ammo": {
+          "red": 0,
+          "blue": 0,
+          "yellow": 0
+        }
+      }
+    }
+  },
+  "main_board": {
+    "skull": 3,
+    "map": "large",
+    "killshot_track": ["RR"],
+    "cells": {
+      "0:0":{
+        "care_pakage": ["P","Y","R"]
+      },
+      "0:1": {
+        "armory": ["bomba"]
+      }
+    }
+    }
+  }

@@ -99,6 +99,9 @@ public class VirtualLobby {
     public boolean hasGameTimerStarted() {
         return gameTimerStarted;
     }
+    public void setGameTimerStarted(boolean time) {
+        this.gameTimerStarted=time;
+    }
 
     public int getMapPref() {
         return mapPref;

@@ -40,5 +40,6 @@ public class AimAskPlayer implements AimingFilter {
 
     public Set<Figure> filter(Weapon w, Set<Figure> p) {
         return  w.getPreferences().getTargetSet(p,msg,numMax,fromDiffSquare);
+
     }
 }
