@@ -11,29 +11,11 @@ public interface ControllerState {
 
     void shoot();
 
-    void chooseWeapon();
-
     void move();
 
     void pick();
 
     void choose();
-
-    void chooseMove();
-
-    void discardPU();
-
-    void usePU();
-
-    void teleport(Square teleportHere);
-
-    void tagback();
-
-    void Scope(PowerUp choice);
-
-    void Newton(PowerUp choice);
-
-    void useNewton(Figure Target, Square moveTo);
 
 
 }

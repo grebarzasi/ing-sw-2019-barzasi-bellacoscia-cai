@@ -26,7 +26,7 @@ public class AsBot implements ControllerState{
     /**
      * Passes a list of valid targets to the view, (the view displays the
      * choices and makes the player choose one)
-     * <p>
+     * 
      * Then proceeds to shoot the target in the face (adding one bot damage or mark)
      */
 
@@ -55,10 +55,7 @@ public class AsBot implements ControllerState{
 
     }
 
-    @Override
-    public void chooseWeapon() {
 
-    }
 
     /**
      * Passes the view a list of valid targets (The view displays them
@@ -90,51 +87,5 @@ public class AsBot implements ControllerState{
 
     }
 
-    @Override
-    public void chooseMove() {
 
-    }
-
-    @Override
-    public void discardPU() {
-
-    }
-
-    @Override
-    public void usePU() {
-
-    }
-
-    @Override
-    public void teleport(Square teleportHere) {
-
-    }
-
-    @Override
-    public void tagback() {
-
-    }
-
-    @Override
-    public void Scope(PowerUp choice) {
-
-    }
-
-    @Override
-    public void Newton(PowerUp choice) {
-
-    }
-
-    @Override
-    public void useNewton(Figure Target, Square moveTo) {
-
-    }
-
-    public Controller getController() {
-        return controller;
-    }
-
-    public void setController(Controller controller) {
-        this.controller = controller;
-    }
 }

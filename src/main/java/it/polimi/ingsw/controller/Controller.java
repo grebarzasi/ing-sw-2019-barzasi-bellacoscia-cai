@@ -18,6 +18,9 @@ public class Controller implements Remote {
     private static final int height = 3;
     private static final int width = 4;
 
+
+    //State pattern states
+
     ControllerState asBot;
     ControllerState choosingMove;
     ControllerState choosingPowerUpToUse;
@@ -33,18 +36,21 @@ public class Controller implements Remote {
     ControllerState usingNewton;
     ControllerState spawning;
 
+
+    //current state patten state
+
     ControllerState currentState;
 
 
     private GameModel model;
     private Lobby lobby;
     private View view;
-    //private View view = new View();
 
+    //Starts the game from a lobby
 
     public Controller(Lobby lobby) {
 
-
+        this.lobby = lobby;
         this.model = new GameModel(lobby);
 
         this.asBot = new AsBot(this);

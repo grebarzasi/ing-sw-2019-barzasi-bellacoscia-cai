@@ -22,10 +22,6 @@ public class PickingWeapon implements ControllerState {
 
     }
 
-    @Override
-    public void chooseWeapon() {
-
-    }
 
     @Override
     public void move() {
@@ -55,15 +51,6 @@ public class PickingWeapon implements ControllerState {
 
     }
 
-    @Override
-    public void chooseMove() {
-
-    }
-
-    @Override
-    public void discardPU() {
-
-    }
 
     private void discardWeapon(Weapon arg) {
 
@@ -77,35 +64,6 @@ public class PickingWeapon implements ControllerState {
 
         ((SpawnSquare) this.controller.getCurrentPlayer().getPosition()).getArmory().getWeaponList().add(choice);
         this.controller.setCurrentState(this.controller.choosingMove);
-    }
-
-    @Override
-    public void usePU() {
-
-    }
-
-    @Override
-    public void teleport(Square teleportHere) {
-
-    }
-
-    @Override
-    public void tagback() {
-
-    }
-
-    @Override
-    public void Scope(PowerUp choice) {
-
-    }
-
-    @Override
-    public void Newton(PowerUp choice) {
-
-    }
-
-    @Override
-    public void useNewton(Figure Target, Square moveTo) {
 
     }
 }

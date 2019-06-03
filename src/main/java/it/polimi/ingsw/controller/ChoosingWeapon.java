@@ -21,11 +21,6 @@ public class ChoosingWeapon implements ControllerState {
     }
 
     @Override
-    public void chooseWeapon() {
-
-    }
-
-    @Override
     public void move() {
 
     }
@@ -52,46 +47,6 @@ public class ChoosingWeapon implements ControllerState {
         //Sets the shooting state's weapon to the chosen one and changes the current state to shooting
         ((Shooting) this.controller.getShooting()).setShootingWith(choice);
         this.controller.setCurrentState(this.controller.shooting);
-
-    }
-
-    @Override
-    public void chooseMove() {
-
-    }
-
-    @Override
-    public void discardPU() {
-
-    }
-
-    @Override
-    public void usePU() {
-
-    }
-
-    @Override
-    public void teleport(Square teleportHere) {
-
-    }
-
-    @Override
-    public void tagback() {
-
-    }
-
-    @Override
-    public void Scope(PowerUp choice) {
-
-    }
-
-    @Override
-    public void Newton(PowerUp choice) {
-
-    }
-
-    @Override
-    public void useNewton(Figure Target, Square moveTo) {
 
     }
 

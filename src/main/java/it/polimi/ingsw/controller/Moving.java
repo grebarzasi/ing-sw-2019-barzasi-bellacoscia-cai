@@ -20,10 +20,7 @@ public class Moving implements ControllerState{
 
     }
 
-    @Override
-    public void chooseWeapon() {
 
-    }
 
     @Override
     public void move() {
@@ -40,43 +37,5 @@ public class Moving implements ControllerState{
 
     }
 
-    @Override
-    public void chooseMove() {
 
-    }
-
-    @Override
-    public void discardPU() {
-
-    }
-
-    @Override
-    public void usePU() {
-
-    }
-
-    @Override
-    public void teleport(Square teleportHere) {
-
-    }
-
-    @Override
-    public void tagback() {
-
-    }
-
-    @Override
-    public void Scope(PowerUp choice) {
-
-    }
-
-    @Override
-    public void Newton(PowerUp choice) {
-
-    }
-
-    @Override
-    public void useNewton(Figure Target, Square moveTo) {
-
-    }
 }
