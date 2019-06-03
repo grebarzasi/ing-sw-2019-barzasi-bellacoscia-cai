@@ -5,6 +5,7 @@ import it.polimi.ingsw.Player;
 import it.polimi.ingsw.View;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
+import it.polimi.ingsw.cards.weapon.Effect;
 import it.polimi.ingsw.cards.weapon.Weapon;
 import it.polimi.ingsw.controller.Controller;
 
@@ -83,6 +84,11 @@ public class Cli implements View {
     @Override
     public void displayMessage(String string) {
 
+    }
+
+    @Override
+    public Effect showEffects(Set<Effect> args) {
+        return null;
     }
 
     @Override

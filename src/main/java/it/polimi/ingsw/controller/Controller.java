@@ -51,7 +51,7 @@ public class Controller implements Remote {
     public Controller(Lobby lobby) {
 
         this.lobby = lobby;
-        this.model = new GameModel(lobby);
+        this.model = new GameModel(lobby, this);
 
         this.asBot = new AsBot(this);
         this.choosingMove = new ChoosingMove(this);

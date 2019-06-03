@@ -3,9 +3,12 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
+import it.polimi.ingsw.cards.weapon.Effect;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Shooting implements ControllerState {
 
@@ -27,16 +30,15 @@ public class Shooting implements ControllerState {
     @Override
     public void choose() {
 
+        Set<Effect> effects;
+        effects = shootingWith.getUsableEff();
 
-        //per andare al model: this.controller.getModel()
-        //l'arma con cui si sta sparando e' this.shootingWith
+        Effect choice = this.controller.getView().showEffects(effects);
 
+        choice.executeEffect();
 
         ArrayList<Figure> targetable = new ArrayList<>();
 
-        /*
-        should load the valid targets into  targetable
-         */
 
 
     }
@@ -45,13 +47,11 @@ public class Shooting implements ControllerState {
     @Override
     public void shoot() {
 
-
     }
-
-
 
     @Override
     public void move() {
+
 
     }
 

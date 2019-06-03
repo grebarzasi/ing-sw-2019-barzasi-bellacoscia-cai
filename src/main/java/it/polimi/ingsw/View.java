@@ -3,6 +3,7 @@ package it.polimi.ingsw;
 import it.polimi.ingsw.actions.Action;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
+import it.polimi.ingsw.cards.weapon.Effect;
 import it.polimi.ingsw.cards.weapon.Weapon;
 import it.polimi.ingsw.controller.Controller;
 
@@ -85,5 +86,7 @@ public interface View {
      */
 
     public void displayLeaderboard();
+
+    public Effect showEffects(Set<Effect> args);
 
 }

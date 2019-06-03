@@ -20,8 +20,6 @@ public class Moving implements ControllerState{
 
     }
 
-
-
     @Override
     public void move() {
 

@@ -8,6 +8,7 @@ import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.cards.weapon.Effect;
 import it.polimi.ingsw.cards.weapon.Weapon;
 import it.polimi.ingsw.connection.socket.ClientThreadSocket;
+import it.polimi.ingsw.controller.Controller;
 
 
 import java.io.BufferedReader;
@@ -43,6 +44,8 @@ public class GameModel {
 
     private boolean isFrenzy;
 
+    private Controller controller;
+
     public GameModel(){
 
     }
@@ -65,7 +68,7 @@ public class GameModel {
      * Loads the players from a lobby to the model
      * @param lobbyToStartFrom The lobby you want to start the game from
      */
-    public GameModel(Lobby lobbyToStartFrom){
+    public GameModel(Lobby lobbyToStartFrom, Controller controller) {
        for (ClientThreadSocket client : lobbyToStartFrom.getJoinedPlayers()){
            this.playerList.add(client.getOwner());
        }
