@@ -4,7 +4,8 @@ package it.polimi.ingsw.board;
 import it.polimi.ingsw.board.map.NonSpawnSquare;
 import it.polimi.ingsw.board.map.SpawnSquare;
 import it.polimi.ingsw.board.map.Square;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
 
 import static it.polimi.ingsw.board.map.MapLoader.loadTerrain;
 import static org.junit.Assert.*;

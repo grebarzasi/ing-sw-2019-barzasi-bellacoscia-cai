@@ -159,22 +159,20 @@ public class PlayerBoard {
 
     public void addAmmo(Ammo a) {
 
-        a.setRed(a.getRed() + this.owner.getPersonalBoard().getAmmoInventory().getRed());
-        a.setBlue(a.getBlue() + this.owner.getPersonalBoard().getAmmoInventory().getBlue());
-        a.setYellow(a.getYellow() + this.owner.getPersonalBoard().getAmmoInventory().getYellow());
+        owner.getPersonalBoard().getAmmoInventory().setRed(a.getRed() + owner.getPersonalBoard().getAmmoInventory().getRed());
+        owner.getPersonalBoard().getAmmoInventory().setBlue(a.getBlue() + owner.getPersonalBoard().getAmmoInventory().getBlue());
+        owner.getPersonalBoard().getAmmoInventory().setYellow(a.getYellow() + owner.getPersonalBoard().getAmmoInventory().getYellow());
 
-        this.owner.getPersonalBoard().setAmmoInventory(a);
-
-        if(this.owner.getPersonalBoard().getAmmoInventory().getRed() > maxammo){
-            this.owner.getPersonalBoard().getAmmoInventory().setRed(maxammo);
+        if(owner.getPersonalBoard().getAmmoInventory().getRed() > maxammo){
+            owner.getPersonalBoard().getAmmoInventory().setRed(maxammo);
         }
 
-        if(this.owner.getPersonalBoard().getAmmoInventory().getBlue() > maxammo){
-            this.owner.getPersonalBoard().getAmmoInventory().setBlue(maxammo);
+        if(owner.getPersonalBoard().getAmmoInventory().getBlue() > maxammo){
+            owner.getPersonalBoard().getAmmoInventory().setBlue(maxammo);
         }
 
-        if(this.owner.getPersonalBoard().getAmmoInventory().getYellow() > maxammo){
-            this.owner.getPersonalBoard().getAmmoInventory().setYellow(maxammo);
+        if(owner.getPersonalBoard().getAmmoInventory().getYellow() > maxammo){
+            owner.getPersonalBoard().getAmmoInventory().setYellow(maxammo);
         }
     }
 
@@ -183,14 +181,21 @@ public class PlayerBoard {
      * @param a the number of ammunition to remove
      */
 
-    public void removeAmmo(Ammo a) {
+    public boolean removeAmmo(Ammo a) {
+        int red = owner.getPersonalBoard().getAmmoInventory().getRed();
+        int blue = owner.getPersonalBoard().getAmmoInventory().getBlue();
+        int yellow = owner.getPersonalBoard().getAmmoInventory().getYellow();
 
-        Ammo tmp = this.owner.getPersonalBoard().getAmmoInventory();
-
-        tmp.setRed(this.owner.getPersonalBoard().getAmmoInventory().getRed() - a.getRed());
-        tmp.setRed(this.owner.getPersonalBoard().getAmmoInventory().getBlue() - a.getBlue());
-        tmp.setRed(this.owner.getPersonalBoard().getAmmoInventory().getYellow() - a.getYellow());
-
+        if(red-a.getRed()<0)
+            return false;
+        if(blue-a.getBlue()<0)
+            return false;
+        if(yellow-a.getYellow()<0)
+            return false;
+        owner.getPersonalBoard().getAmmoInventory().setRed(red-a.getRed());
+        owner.getPersonalBoard().getAmmoInventory().setBlue(blue-a.getBlue());
+        owner.getPersonalBoard().getAmmoInventory().setYellow(yellow-a.getYellow());
+        return true;
     }
 
     public ArrayList<Token> getDamage() {

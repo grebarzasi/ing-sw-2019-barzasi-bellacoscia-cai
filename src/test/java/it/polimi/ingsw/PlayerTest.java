@@ -69,15 +69,15 @@ public class PlayerTest {
             luke.setPosition(aldera);
             AmmoLot tmp = ((NonSpawnSquare) aldera).getDrop();
 
-            assertEquals(0, luke.getPersonalBoard().getAmmoInventory().getRed());
-            assertEquals(0, luke.getPersonalBoard().getAmmoInventory().getBlue());
-            assertEquals(0, luke.getPersonalBoard().getAmmoInventory().getYellow());
+            assertEquals(3, luke.getPersonalBoard().getAmmoInventory().getRed());
+            assertEquals(3, luke.getPersonalBoard().getAmmoInventory().getBlue());
+            assertEquals(3, luke.getPersonalBoard().getAmmoInventory().getYellow());
 
             luke.pickAmmo();
 
             if (tmp.hasPowerup()) {
                 assertEquals(1, luke.getPowerupList().size());
-                assertEquals(2, luke.getPersonalBoard().getAmmoInventory().getRed() + luke.getPersonalBoard().getAmmoInventory().getBlue() + luke.getPersonalBoard().getAmmoInventory().getYellow());
+                assertEquals(9, luke.getPersonalBoard().getAmmoInventory().getRed() + luke.getPersonalBoard().getAmmoInventory().getBlue() + luke.getPersonalBoard().getAmmoInventory().getYellow());
             } else {
                 assertTrue(luke.getPowerupList().isEmpty());
                 assertEquals(3, luke.getPersonalBoard().getAmmoInventory().getRed() + luke.getPersonalBoard().getAmmoInventory().getBlue() + luke.getPersonalBoard().getAmmoInventory().getYellow());
