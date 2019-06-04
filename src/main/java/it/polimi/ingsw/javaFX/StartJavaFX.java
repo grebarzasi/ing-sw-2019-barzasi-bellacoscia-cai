@@ -35,6 +35,27 @@ import java.rmi.RemoteException;
 
 public class StartJavaFX extends Application {
 
+    /**
+     * All Path.
+     */
+    private static final String PATH_BACK = "src/main/resources/images/background/background.jpg";
+
+    private static final String PATH_YELLOW = "src/main/resources/images/character/yellow.png";
+    private static final String PATH_RED = "src/main/resources/images/character/red.png";
+    private static final String PATH_BLUE = "src/main/resources/images/character/blue.png";
+    private static final String PATH_GREEN = "src/main/resources/images/character/green.png";
+    private static final String PATH_GRAY = "src/main/resources/images/character/gray.png";
+    private static final String PATH_YELLOW_CHARACTER = "src/main/resources/images/character/D-struct-0R.png";
+    private static final String PATH_RED_CHARACTER = "src/main/resources/images/character/violet.png";
+    private static final String PATH_BLUE_CHARACTER = "src/main/resources/images/character/banshee.png";
+    private static final String PATH_GREEN_CHARACTER = "src/main/resources/images/character/sprog.png";
+    private static final String PATH_GRAY_CHARACTER = "src/main/resources/images/character/dozer.png";
+
+    private static final String PATH_TITLE = "src/main/resources/images/title.png";
+    private static final String PATH_RULES = "src/main/resources/images/rules.jpg";
+    private static final String PATH_LOGIN = "src/main/resources/images/login.png";
+    private static final String PATH_SETTINGS = "src/main/resources/images/settings.png";
+
     private String username;
     private String color;
     private int port = 0;
@@ -79,7 +100,7 @@ public class StartJavaFX extends Application {
          */
         Image title;
         ImageView titleV;
-        title = new Image(new FileInputStream("src/main/resources/images/title.png"),1200,700,true,true);
+        title = new Image(new FileInputStream(PATH_TITLE),1200,700,true,true);
         titleV = new ImageView(title);
         VBox ver = new VBox();
         ver.setAlignment(Pos.TOP_CENTER);
@@ -88,11 +109,11 @@ public class StartJavaFX extends Application {
         /**
          * set bottom characters
          */
-        ImageView yellowV = new ImageView(new Image(new FileInputStream("src/main/resources/images/D-struct-0R.png"), 250 ,250,true,true));
-        ImageView redV = new ImageView(new Image(new FileInputStream("src/main/resources/images/violet.png"), 250 ,250,true,true));;
-        ImageView blueV = new ImageView(new Image(new FileInputStream("src/main/resources/images/banshee.png"), 250 ,250,true,true));;
-        ImageView greenV = new ImageView(new Image(new FileInputStream("src/main/resources/images/sprog.png"), 250 ,250,true,true));;
-        ImageView grayV = new ImageView(new Image(new FileInputStream("src/main/resources/images/dozer.png"), 250 ,250,true,true));;
+        ImageView yellowV = new ImageView(new Image(new FileInputStream(PATH_YELLOW_CHARACTER), 250 ,250,true,true));
+        ImageView redV = new ImageView(new Image(new FileInputStream(PATH_RED_CHARACTER), 250 ,250,true,true));;
+        ImageView blueV = new ImageView(new Image(new FileInputStream(PATH_BLUE_CHARACTER), 250 ,250,true,true));;
+        ImageView greenV = new ImageView(new Image(new FileInputStream(PATH_GREEN_CHARACTER), 250 ,250,true,true));;
+        ImageView grayV = new ImageView(new Image(new FileInputStream(PATH_GRAY_CHARACTER), 250 ,250,true,true));;
 
         HBox charList = new HBox(40);
         charList.setAlignment(Pos.BOTTOM_CENTER);
@@ -109,11 +130,11 @@ public class StartJavaFX extends Application {
         Button btnRules = new Button();
         Button btnLogin = new Button("Login");
         Button btnSettings = new Button("Settings");
-        Image imgLogin = new Image(new FileInputStream("src/main/resources/images/login.png"),50,50,true,true);
+        Image imgLogin = new Image(new FileInputStream(PATH_LOGIN),50,50,true,true);
         btnLogin.setGraphic(new ImageView(imgLogin));
-        Image imgSettings = new Image(new FileInputStream("src/main/resources/images/settings.png"),50,50,true,true);
+        Image imgSettings = new Image(new FileInputStream(PATH_SETTINGS),50,50,true,true);
         btnSettings.setGraphic(new ImageView(imgSettings));
-        Image imgRules = new Image(new FileInputStream("src/main/resources/images/rules.jpg"),100,100,true,true);
+        Image imgRules = new Image(new FileInputStream(PATH_RULES),100,100,true,true);
         btnRules.setGraphic(new ImageView(imgRules));
 
         HBox buttonList = new HBox(20);
@@ -244,19 +265,19 @@ public class StartJavaFX extends Application {
             Image imgGr;
             Button buttonGr = new Button();
             try {
-                imgY = new Image(new FileInputStream("src/main/resources/images/yellow.png"),100,100,true,true);
+                imgY = new Image(new FileInputStream(PATH_YELLOW),100,100,true,true);
                 buttonY.setGraphic(new ImageView(imgY));
 
-                imgR = new Image(new FileInputStream("src/main/resources/images/red.png"),100,100,true,true);
+                imgR = new Image(new FileInputStream(PATH_RED),100,100,true,true);
                 buttonR.setGraphic(new ImageView(imgR));
 
-                imgB = new Image(new FileInputStream("src/main/resources/images/blue.png"),100,100,true,true);
+                imgB = new Image(new FileInputStream(PATH_BLUE),100,100,true,true);
                 buttonB.setGraphic(new ImageView(imgB));
 
-                imgG = new Image(new FileInputStream("src/main/resources/images/green.png"),100,100,true,true);
+                imgG = new Image(new FileInputStream(PATH_GREEN),100,100,true,true);
                 buttonG.setGraphic(new ImageView(imgG));
 
-                imgGr = new Image(new FileInputStream("src/main/resources/images/gray.png"),100,100,true,true);
+                imgGr = new Image(new FileInputStream(PATH_GRAY),100,100,true,true);
                 buttonGr.setGraphic(new ImageView(imgGr));
 
             } catch (FileNotFoundException e) {
@@ -377,7 +398,7 @@ public class StartJavaFX extends Application {
 
     public  void setBackground(GridPane grid){
         try {
-            Image back = new Image(new FileInputStream("src/main/resources/images/background.jpg"), 2000, 1200, true, true);
+            Image back = new Image(new FileInputStream(PATH_BACK), 2000, 1200, true, true);
             BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
             grid.setBackground(new Background(backgroundImage));
         }catch (IOException e){

@@ -72,6 +72,50 @@ RISALIRE ALLA CELLA!!
  */
 public class GameJavaFX extends Application {
 
+    /**
+     * All Path.
+     */
+    private static final String PATH_BACK_GAME = "src/main/resources/images/background/game_background.jpg";
+    private static final String PATH_BACK = "src/main/resources/images/background/background.jpg";
+    private static final String PATH_BACK_WEAPON = "src/main/resources/images/background/weapon.png";
+    private static final String PATH_BACK_POWERUP = "src/main/resources/images/background/powerup.png";
+    private static final String PATH_BACK_MSG = "src/main/resources/images/background/img854.png";
+    private static final String PATH_BACK_POINTS = "src/main/resources/images/background/img5006.jpg";
+
+    private static final String PATH_SMALL_MAP = "src/main/resources/images/map/2.png";
+    private static final String PATH_MEDIUM1_MAP = "src/main/resources/images/map/1.png";
+    private static final String PATH_MEDIUM2_MAP = "src/main/resources/images/map/4.png";
+    private static final String PATH_LARGE_MAP = "src/main/resources/images/map/3.png";
+
+    private static final String PATH_YELLOW_BOARD = "src/main/resources/images/board/yellow_board.png";
+    private static final String PATH_RED_BOARD = "src/main/resources/images/board/red_board.png";
+    private static final String PATH_BLUE_BOARD = "src/main/resources/images/board/blue_board.png";
+    private static final String PATH_GREEN_BOARD = "src/main/resources/images/board/green_board.png";
+    private static final String PATH_GRAY_BOARD = "src/main/resources/images/board/gray_board.png";
+
+    private static final String PATH_GENERAL_COLOR = "src/main/resources/images/character";
+    private static final String PATH_YELLOW = "src/main/resources/images/character/yellow.png";
+    private static final String PATH_RED = "src/main/resources/images/character/red.png";
+    private static final String PATH_BLUE = "src/main/resources/images/character/blue.png";
+    private static final String PATH_GREEN = "src/main/resources/images/character/green.png";
+    private static final String PATH_GRAY = "src/main/resources/images/character/gray.png";
+    private static final String PATH_YELLOW_CHARACTER = "src/main/resources/images/character/D-struct-0R.png";
+    private static final String PATH_RED_CHARACTER = "src/main/resources/images/character/violet.png";
+    private static final String PATH_BLUE_CHARACTER = "src/main/resources/images/character/banshee.png";
+    private static final String PATH_GREEN_CHARACTER = "src/main/resources/images/character/sprog.png";
+    private static final String PATH_GRAY_CHARACTER = "src/main/resources/images/character/dozer.png";
+
+    private static final String PATH_RED_AMMO = "src/main/resources/images/ammo/red_ammo.png";
+    private static final String PATH_BLUE_AMMO = "src/main/resources/images/ammo/blue_ammo.png";
+    private static final String PATH_YELLOW_AMMO = "src/main/resources/images/ammo/yellow_ammo.png";
+
+    private static final String PATH_TITLE = "src/main/resources/images/title.png";
+    private static final String PATH_TRACK = "src/main/resources/images/killshotrack.png";
+    private static final String PATH_LOADING = "src/main/resources/images/loading.png";
+    private static final String PATH_RULES = "src/main/resources/images/rules.jpg";
+    private static final String PATH_LOGIN = "src/main/resources/images/login.png";
+    private static final String PATH_SETTINGS = "src/main/resources/images/settings.png";
+
     private int map = 3;
     private javafx.scene.text.Font font = new Font(20);
     private int skullMax = 8;
@@ -89,13 +133,13 @@ public class GameJavaFX extends Application {
 
     public void setLobby(VirtualLobby lobby) {
         this.lobby = lobby;
-        ///*
+        /*
 
         player = lobby.getOwner();
         players = lobby.getNewPlayersList();
         points = player.getPoints();
 
-         //*/
+         */
 
     }
 
@@ -103,7 +147,7 @@ public class GameJavaFX extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        /*
+        ///*
 
         points = 0;
         player = new VirtualPlayer("carlo", "yellow");
@@ -112,7 +156,7 @@ public class GameJavaFX extends Application {
         players.add(new VirtualPlayer("gre","blue"));
         players.add(new VirtualPlayer("theo","red"));
 
-         */
+        // */
 
         primaryStage.setTitle("ADRENALINA");
 
@@ -138,7 +182,7 @@ public class GameJavaFX extends Application {
          * set Background.
          */
         try {
-            Image back = new Image(new FileInputStream("src/main/resources/images/game_background.jpg"), 2190, 1920, true, true);
+            Image back = new Image(new FileInputStream(PATH_BACK_GAME), 2190, 1920, true, true);
             BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
             grid.setBackground(new Background(backgroundImage));
         }catch (IOException e){
@@ -168,14 +212,14 @@ public class GameJavaFX extends Application {
         /**
          * set title.
          */
-        ImageView imgTitle = new ImageView(new Image(new FileInputStream("src/main/resources/images/title.png"),widthCenter,heightLateral,true,true));
+        ImageView imgTitle = new ImageView(new Image(new FileInputStream(PATH_TITLE),widthCenter,heightLateral,true,true));
         grid.add(imgTitle,1,0);
 
         /**
          * set points.
          */
         TextField pointsField = new TextField();
-        Image pointsBack = new Image(new FileInputStream("src/main/resources/images/img5006.jpg"),300,100,true,true);
+        Image pointsBack = new Image(new FileInputStream(PATH_BACK_POINTS),100,100,true,true);
         BackgroundImage backgroundPoints = new BackgroundImage(pointsBack, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background backPoints = new Background(backgroundPoints);
 
@@ -203,7 +247,7 @@ public class GameJavaFX extends Application {
         GridPane gridSkull = new GridPane();
         gridSkull.setPadding(new Insets(100, 0, 80, 0));
 
-        Image imgTrack = new Image(new FileInputStream("src/main/resources/images/killshotrack.png"),widthLateral,heightLateral,true,true);
+        Image imgTrack = new Image(new FileInputStream(PATH_TRACK),widthLateral,heightLateral,true,true);
         BackgroundImage backgroundSkull = new BackgroundImage(imgTrack, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background backSkull = new Background(backgroundSkull);
 
@@ -239,19 +283,19 @@ public class GameJavaFX extends Application {
         Image imgBoard = null;
         switch (map){
             case 1:{
-                imgBoard = new Image(new FileInputStream("src/main/resources/images/1.png"),widthCenter,heightCenter,true,true);
+                imgBoard = new Image(new FileInputStream(PATH_MEDIUM1_MAP),widthCenter,heightCenter,true,true);
                 break;
             }
             case 2:{
-                imgBoard = new Image(new FileInputStream("src/main/resources/images/2.png"),widthCenter,heightCenter,true,true);
+                imgBoard = new Image(new FileInputStream(PATH_SMALL_MAP),widthCenter,heightCenter,true,true);
                 break;
             }
             case 3:{
-                imgBoard = new Image(new FileInputStream("src/main/resources/images/3.png"),widthCenter,heightCenter,true,true);
+                imgBoard = new Image(new FileInputStream(PATH_LARGE_MAP),widthCenter,heightCenter,true,true);
                 break;
             }
             case 4:{
-                imgBoard = new Image(new FileInputStream("src/main/resources/images/4.png"),widthCenter,heightCenter,true,true);
+                imgBoard = new Image(new FileInputStream(PATH_MEDIUM2_MAP),widthCenter,heightCenter,true,true);
                 break;
             }
         }
@@ -355,23 +399,23 @@ public class GameJavaFX extends Application {
 
         switch (player.getCharacter()){
             case "yellow":{
-                imgPBoard = new Image(new FileInputStream("src/main/resources/images/yellow_board.png"),widthPers,heightPBoard,true,true);
+                imgPBoard = new Image(new FileInputStream(PATH_YELLOW_BOARD),widthPers,heightPBoard,true,true);
                 break;
             }
             case "red":{
-                imgPBoard = new Image(new FileInputStream("src/main/resources/images/red_board.png"),widthPers,heightPBoard,true,true);
+                imgPBoard = new Image(new FileInputStream(PATH_RED_BOARD),widthPers,heightPBoard,true,true);
                 break;
             }
             case "blue":{
-                imgPBoard = new Image(new FileInputStream("src/main/resources/images/blue_board.png"),widthPers,heightPBoard,true,true);
+                imgPBoard = new Image(new FileInputStream(PATH_BLUE_BOARD),widthPers,heightPBoard,true,true);
                 break;
             }
             case "green":{
-                imgPBoard = new Image(new FileInputStream("src/main/resources/images/green_board.png"),widthPers,heightPBoard,true,true);
+                imgPBoard = new Image(new FileInputStream(PATH_GREEN_BOARD),widthPers,heightPBoard,true,true);
                 break;
             }
             case "gray":{
-                imgPBoard = new Image(new FileInputStream("src/main/resources/images/gray_board.png"),widthPers,heightPBoard,true,true);
+                imgPBoard = new Image(new FileInputStream(PATH_GRAY_BOARD),widthPers,heightPBoard,true,true);
                 break;
             }
         }
@@ -404,8 +448,8 @@ public class GameJavaFX extends Application {
         Image imgPPU = null;
 
         try {
-            imgWe = new Image(new FileInputStream("src/main/resources/images/weapon.png"),widthCard,heightCard,true,true);
-            imgPPU = new Image(new FileInputStream("src/main/resources/images/powerup.png"),widthCard-20,heightCard-20,true,true);
+            imgWe = new Image(new FileInputStream(PATH_BACK_WEAPON),widthCard,heightCard,true,true);
+            imgPPU = new Image(new FileInputStream(PATH_BACK_POWERUP),widthCard-20,heightCard-20,true,true);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -628,16 +672,18 @@ public class GameJavaFX extends Application {
         setCellBoard(gridOtherBoard4,widthOther,heightOtherBoard);
         setCellBoard(gridOtherBoard5,widthOther,heightOtherBoard);
 
-
+/*
         Image imgOBoard = new Image(new FileInputStream("src/main/resources/images/yellow_board.png"),widthOther,heightOtherBoard,true,true);
         BackgroundImage backgroundOB = new BackgroundImage(imgOBoard, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background backOB = new Background(backgroundOB);
 
 
+ */
+
         /**
          * set deck
          */
-        Image imgDeck = new Image(new FileInputStream("src/main/resources/images/powerup.png"),widthCard,widthCard,true,true);
+        Image imgDeck = new Image(new FileInputStream(PATH_BACK_POWERUP),widthCard,widthCard,true,true);
         BackgroundImage backgroundDeck = new BackgroundImage(imgDeck, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background backDeck = new Background(backgroundDeck);
         Button btnDeck = new Button();
@@ -649,7 +695,7 @@ public class GameJavaFX extends Application {
          * set buttons
          */
         TextField msg = new TextField();
-        Image msgBack = new Image(new FileInputStream("src/main/resources/images/img854.png"),300,100,true,true);
+        Image msgBack = new Image(new FileInputStream(PATH_BACK_MSG),300,100,true,true);
         BackgroundImage backgroundMsg = new BackgroundImage(msgBack, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background backMsg = new Background(backgroundMsg);
         msg.setBackground(backMsg);
@@ -800,23 +846,23 @@ public class GameJavaFX extends Application {
         try {
             switch (color) {
                 case "yellow": {
-                    img = new Image(new FileInputStream("src/main/resources/images/yellow_board.png"), widthOB, heightOB, true, true);
+                    img = new Image(new FileInputStream(PATH_YELLOW_BOARD), widthOB, heightOB, true, true);
                     break;
                 }
                 case "red": {
-                    img = new Image(new FileInputStream("src/main/resources/images/red_board.png"), widthOB, heightOB, true, true);
+                    img = new Image(new FileInputStream(PATH_RED_BOARD), widthOB, heightOB, true, true);
                     break;
                 }
                 case "blue": {
-                    img = new Image(new FileInputStream("src/main/resources/images/blue_board.png"), widthOB, heightOB, true, true);
+                    img = new Image(new FileInputStream(PATH_BLUE_BOARD), widthOB, heightOB, true, true);
                     break;
                 }
                 case "green": {
-                    img = new Image(new FileInputStream("src/main/resources/images/green_board.png"), widthOB, heightOB, true, true);
+                    img = new Image(new FileInputStream(PATH_GREEN_BOARD), widthOB, heightOB, true, true);
                     break;
                 }
                 case "gray": {
-                    img = new Image(new FileInputStream("src/main/resources/images/gray_board.png"), widthOB, heightOB, true, true);
+                    img = new Image(new FileInputStream(PATH_GRAY_BOARD), widthOB, heightOB, true, true);
                     break;
                 }
             }
@@ -877,7 +923,7 @@ public class GameJavaFX extends Application {
             ImageView imgAR = null;
 
             try {
-                imgAR = new ImageView(new Image(new FileInputStream("src/main/resources/images/red_ammo.png"),w,h,true,true));
+                imgAR = new ImageView(new Image(new FileInputStream(PATH_RED_AMMO),w,h,true,true));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -888,7 +934,7 @@ public class GameJavaFX extends Application {
             ImageView imgAB = null;
 
             try {
-                imgAB = new ImageView(new Image(new FileInputStream("src/main/resources/images/blue_ammo.png"),w,h,true,true));
+                imgAB = new ImageView(new Image(new FileInputStream(PATH_BLUE_AMMO),w,h,true,true));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -899,7 +945,7 @@ public class GameJavaFX extends Application {
             ImageView imgAY = null;
 
             try {
-                imgAY = new ImageView(new Image(new FileInputStream("src/main/resources/images/yellow_ammo.png"),w,h,true,true));
+                imgAY = new ImageView(new Image(new FileInputStream(PATH_YELLOW_AMMO),w,h,true,true));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -939,7 +985,7 @@ public class GameJavaFX extends Application {
             ImageView imgAR = null;
 
             try {
-                imgAR = new ImageView(new Image(new FileInputStream("src/main/resources/images/red_ammo.png"),w,h,true,true));
+                imgAR = new ImageView(new Image(new FileInputStream(PATH_RED_AMMO),w,h,true,true));
                             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -950,7 +996,7 @@ public class GameJavaFX extends Application {
             ImageView imgAB = null;
 
             try {
-                imgAB = new ImageView(new Image(new FileInputStream("src/main/resources/images/blue_ammo.png"),w,h,true,true));
+                imgAB = new ImageView(new Image(new FileInputStream(PATH_BLUE_AMMO),w,h,true,true));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -961,7 +1007,7 @@ public class GameJavaFX extends Application {
             ImageView imgAY = null;
 
             try {
-                imgAY = new ImageView(new Image(new FileInputStream("src/main/resources/images/yellow_ammo.png"),w,h,true,true));
+                imgAY = new ImageView(new Image(new FileInputStream(PATH_YELLOW_AMMO),w,h,true,true));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -976,7 +1022,7 @@ public class GameJavaFX extends Application {
 
         Image imgDeck = null;
         try {
-            imgDeck = new Image(new FileInputStream("src/main/resources/images/powerup.png"),w,h,true,true);
+            imgDeck = new Image(new FileInputStream(PATH_BACK_WEAPON),w,h,true,true);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -1008,7 +1054,7 @@ public class GameJavaFX extends Application {
         String image = color + ".png";
 
         try {
-            Image img = new Image(new FileInputStream("src/main/resources/images/" + image), 70, 70, true, true);
+            Image img = new Image(new FileInputStream(PATH_GENERAL_COLOR + image), 70, 70, true, true);
             setButtonBack(btn,img);
             btn.setOpacity(1);
         } catch (FileNotFoundException e) {
@@ -1021,5 +1067,6 @@ public class GameJavaFX extends Application {
         Background back = new Background(background);
         btn.setBackground(back);
     }
+
 
 }
