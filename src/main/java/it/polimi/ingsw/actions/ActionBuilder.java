@@ -9,16 +9,42 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * this class is used by {@link GameModel} to initialize {@link Action} according to game status
- * @author Gregorio Barzasi
+ * Genetrates actions a player can perform
  */
-
 
 public class ActionBuilder {
 
-    public static Set<Action> build(Player p, boolean isFrenzy) {
+    /**
+     * Generates available actions based on information taken from the game
+     *
+     * @param p the player
+     * @param isFrenzy frenzy status of the game
+     * @return the ArrayList of actions a player can perform
+     */
 
-        HashSet<Action> actions = new HashSet<>();
+    private static final int stage1 = 2;
+    private static final int stage2 = 5;
+
+    public static final int stage0PickRange = 1;
+    public static final int stage0ShootRange = 0;
+    public static final int stage0MoveRange = 3;
+
+    public static final int stage1PickRange = 2;
+    public static final int stage1ShootRange = 0;
+
+    public static final int stage2PickRange = 2;
+    public static final int stage2ShootRange = 1;
+
+    public static final int frenzyMoveRange = 4;
+    public static final int frenzyPickRange = 2;
+    public static final int frenzyMoveReloadShootRange = 1;
+
+    public static final int firstPlayerFrenzyPickRange = 3;
+    public static final int firstPlayerFrenzyMoveReloadShootRange = 2;
+
+    public static ArrayList<Action> build(Player p, boolean isFrenzy) {
+
+        ArrayList<Action> actions = new ArrayList<>();
 
         if (!isFrenzy) {
 
@@ -27,30 +53,30 @@ public class ActionBuilder {
 
             adrenalineStage = 0;
 
-            if (damage > 2) {
+            if (damage > stage1) {
                 adrenalineStage = 1;
             }
 
-            if (damage > 5) {
+            if (damage > stage2) {
                 adrenalineStage = 2;
             }
 
-            actions.add(new Action("Move", 3));
+            actions.add(new Action("Move", stage0MoveRange));
 
             if (adrenalineStage == 0) {
 
-                actions.add(new Action("Pick", 1));
-                actions.add(new Action("Shoot", 0));
+                actions.add(new Action("Pick", stage0PickRange));
+                actions.add(new Action("Shoot", stage0ShootRange));
 
             } else if (adrenalineStage == 1) {
 
-                actions.add(new Action("Pick", 2));
-                actions.add(new Action("Shoot", 0));
+                actions.add(new Action("Pick", stage1PickRange));
+                actions.add(new Action("Shoot", stage1ShootRange));
 
             } else if (adrenalineStage == 2) {
 
-                actions.add(new Action("Pick", 2));
-                actions.add(new Action("Shoot", 1));
+                actions.add(new Action("Pick", stage2PickRange));
+                actions.add(new Action("Shoot", stage2ShootRange));
 
             }
 
@@ -58,12 +84,12 @@ public class ActionBuilder {
         } else {
 
             if (!p.isStartingPlayer()) {
-                actions.add(new Action("Move", 4));
-                actions.add(new Action("Pick", 2));
-                actions.add(new Action("Move, reload and Shoot", 1));
+                actions.add(new Action("Move", frenzyMoveRange));
+                actions.add(new Action("Pick", frenzyPickRange));
+                actions.add(new Action("Move, reload and Shoot", frenzyMoveReloadShootRange));
             } else {
-                actions.add(new Action("Pick", 3));
-                actions.add(new Action("Move, reload and Shoot", 2));
+                actions.add(new Action("Pick", firstPlayerFrenzyPickRange));
+                actions.add(new Action("Move, reload and Shoot", firstPlayerFrenzyMoveReloadShootRange));
 
             }
         }

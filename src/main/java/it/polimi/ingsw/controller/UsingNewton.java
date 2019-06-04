@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class UsingNewton implements ControllerState {
 
     private Controller controller;
+    private PowerUp using;
 
     private static final int width = 4;
     private static final int height = 3;
@@ -51,5 +52,11 @@ public class UsingNewton implements ControllerState {
         this.controller.setCurrentState(this.controller.choosingMove);
     }
 
+    public PowerUp getUsing() {
+        return using;
+    }
 
+    public void setUsing(PowerUp using) {
+        this.using = using;
+    }
 }

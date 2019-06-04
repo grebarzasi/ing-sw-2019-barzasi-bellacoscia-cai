@@ -59,7 +59,17 @@ public class Controller {
         this.teleporting = new Teleporting(this);
         this.usingNewton = new UsingNewton(this);
         this.shooting = new Spawning(this);
+        this.spawning = new Spawning(this);
 
+    }
+
+    /**
+     * Goes back to choosing the move
+     */
+
+    public void goBack(){
+        this.setCurrentState(this.choosingMove);
+        this.choosingMove.command();
     }
 
     /**
@@ -104,6 +114,7 @@ public class Controller {
             this.model.setCurrentPlayer(this.model.getPlayerList().get(0));
         }
     }
+
 
     /**
      * ask player

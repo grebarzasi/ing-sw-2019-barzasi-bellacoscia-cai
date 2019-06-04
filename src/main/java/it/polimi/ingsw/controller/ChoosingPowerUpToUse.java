@@ -20,15 +20,20 @@ public class ChoosingPowerUpToUse implements ControllerState {
 
         PowerUp chosen = this.controller.getView().showPowerUp(this.controller.getCurrentPlayer().getPowerupList());
 
-        switch (chosen.getName()) {
-            case "Newton":
-                this.controller.setCurrentState(this.controller.usingNewton);
-            case "Teleporter":
-                this.controller.getCurrentPlayer().removePowerUp(chosen);
-                this.controller.setCurrentState(this.controller.teleporting);
+        if(chosen == null){
+            this.controller.goBack();
+        }else {
+
+            switch (chosen.getName()) {
+                case "Newton":
+                    this.controller.setCurrentState(this.controller.usingNewton);
+                    ((UsingNewton)this.controller.usingNewton).setUsing(chosen);
+                case "Teleporter":
+                    this.controller.setCurrentState(this.controller.teleporting);
+                    ((Teleporting)this.controller.teleporting).setUsing(chosen);
+            }
 
         }
     }
-
 
 }
