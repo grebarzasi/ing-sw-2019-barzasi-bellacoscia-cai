@@ -32,9 +32,28 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
-        * @author Carlo Bellacoscia
-        */
+ * @author Carlo Bellacoscia
+ */
 public class LobbyJavaFX extends Application {
+
+    /**
+     * All Path.
+     */
+    private static final String PATH_BACK = "src/main/resources/images/background/background.jpg";
+
+    private static final String PATH_SMALL_MAP = "src/main/resources/images/map/2.png";
+    private static final String PATH_MEDIUM1_MAP = "src/main/resources/images/map/1.png";
+    private static final String PATH_MEDIUM2_MAP = "src/main/resources/images/map/4.png";
+    private static final String PATH_LARGE_MAP = "src/main/resources/images/map/3.png";
+
+    private static final String PATH_YELLOW_CHARACTER = "src/main/resources/images/character/D-struct-0R.png";
+    private static final String PATH_RED_CHARACTER = "src/main/resources/images/character/violet.png";
+    private static final String PATH_BLUE_CHARACTER = "src/main/resources/images/character/banshee.png";
+    private static final String PATH_GREEN_CHARACTER = "src/main/resources/images/character/sprog.png";
+    private static final String PATH_GRAY_CHARACTER = "src/main/resources/images/character/dozer.png";
+
+    private static final String PATH_LOADING = "src/main/resources/images/loading.png";
+
 
     private boolean terminator = false;
     private boolean frenzy = false;
@@ -89,7 +108,7 @@ public class LobbyJavaFX extends Application {
             /**
              * set background
              */
-        Image back = new Image(new FileInputStream("src/main/resources/images/background.jpg"), 2000, 1200, true, true);
+        Image back = new Image(new FileInputStream(PATH_BACK), 2000, 1200, true, true);
         BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         lobbyGrid.setBackground(new Background(backgroundImage));
 
@@ -132,16 +151,16 @@ public class LobbyJavaFX extends Application {
         Label lblMap = new Label("Scegli una mappa:");
         lblMap.setFont(font);
         Button map1 = new Button();
-        javafx.scene.image.Image img1 = new Image(new FileInputStream("src/main/resources/images/1.png"), 150, 150, true, true);
+        javafx.scene.image.Image img1 = new Image(new FileInputStream(PATH_MEDIUM1_MAP), 150, 150, true, true);
         map1.setGraphic(new ImageView(img1));
         Button map2 = new Button();
-        javafx.scene.image.Image img2 = new Image(new FileInputStream("src/main/resources/images/2.png"), 150, 150, true, true);
+        javafx.scene.image.Image img2 = new Image(new FileInputStream(PATH_SMALL_MAP), 150, 150, true, true);
         map2.setGraphic(new ImageView(img2));
         Button map3 = new Button();
-        javafx.scene.image.Image img3 = new Image(new FileInputStream("src/main/resources/images/3.png"), 150, 150, true, true);
+        javafx.scene.image.Image img3 = new Image(new FileInputStream(PATH_LARGE_MAP), 150, 150, true, true);
         map3.setGraphic(new ImageView(img3));
         Button map4 = new Button();
-        javafx.scene.image.Image img4 = new Image(new FileInputStream("src/main/resources/images/4.png"), 150, 150, true, true);
+        javafx.scene.image.Image img4 = new Image(new FileInputStream(PATH_MEDIUM2_MAP), 150, 150, true, true);
         map4.setGraphic(new ImageView(img4));
         HBox mapBox = new HBox(50);
         mapBox.setAlignment(Pos.CENTER);
@@ -221,7 +240,7 @@ public class LobbyJavaFX extends Application {
 
         ImageView load = null;
         try {
-            load = new ImageView(new Image(new FileInputStream("src/main/resources/images/loading.png"), 70, 70, true, true));
+            load = new ImageView(new Image(new FileInputStream(PATH_LOADING), 70, 70, true, true));
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         }
@@ -345,27 +364,27 @@ public class LobbyJavaFX extends Application {
             try {
                 switch (p.getCharacter()) {
                     case "yellow": {
-                        ImageView yellowV = new ImageView(new Image(new FileInputStream("src/main/resources/images/D-struct-0R.png"), 150, 150, true, true));
+                        ImageView yellowV = new ImageView(new Image(new FileInputStream(PATH_YELLOW_CHARACTER), 150, 150, true, true));
                         v.getChildren().add(yellowV);
                         break;
                     }
                     case "red": {
-                        ImageView redV = new ImageView(new Image(new FileInputStream("src/main/resources/images/violet.png"), 150, 150, true, true));
+                        ImageView redV = new ImageView(new Image(new FileInputStream(PATH_RED_CHARACTER), 150, 150, true, true));
                         v.getChildren().add(redV);
                         break;
                     }
                     case "blue": {
-                        ImageView blueV = new ImageView(new Image(new FileInputStream("src/main/resources/images/banshee.png"), 150, 150, true, true));
+                        ImageView blueV = new ImageView(new Image(new FileInputStream(PATH_BLUE_CHARACTER), 150, 150, true, true));
                         v.getChildren().add(blueV);
                         break;
                     }
                     case "green": {
-                        ImageView greenV = new ImageView(new Image(new FileInputStream("src/main/resources/images/sprog.png"), 150, 150, true, true));
+                        ImageView greenV = new ImageView(new Image(new FileInputStream(PATH_GREEN_CHARACTER), 150, 150, true, true));
                         v.getChildren().add(greenV);
                         break;
                     }
                     case "gray": {
-                        ImageView grayV = new ImageView(new Image(new FileInputStream("src/main/resources/images/dozer.png"), 150, 150, true, true));
+                        ImageView grayV = new ImageView(new Image(new FileInputStream(PATH_GRAY_CHARACTER), 150, 150, true, true));
                         v.getChildren().add(grayV);
                         break;
                     }
