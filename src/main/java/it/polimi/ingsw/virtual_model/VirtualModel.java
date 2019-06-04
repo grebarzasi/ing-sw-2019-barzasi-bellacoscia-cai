@@ -26,14 +26,12 @@ public class VirtualModel {
         this.board=new VirtualBoard();
     }
 
-    public void updateModel(){
+    public void updateModel(String s){
         ObjectMapper mapper = new ObjectMapper();
         // path of weapons data
-        final String path = "src/main/resources/";
-        File jsonFile = new File(String.format("%s%s.json", path, "test"));
         try {
             //open json file and start parsing
-            JsonNode rootNode = mapper.readTree(jsonFile);
+            JsonNode rootNode = mapper.readTree(s);
             parsePlayers(rootNode.path("players"));
             board.parseBoard(rootNode.path("main_board"));
 
@@ -114,6 +112,6 @@ public class VirtualModel {
     }
 
     public static void main(String args[]){
-        new VirtualModel().updateModel();
+
     }
 }

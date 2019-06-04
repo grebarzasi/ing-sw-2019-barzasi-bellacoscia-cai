@@ -12,6 +12,7 @@ import it.polimi.ingsw.cards.WeaponDeck;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Weapon;
 import it.polimi.ingsw.connection.socket.ClientThreadSocket;
+import it.polimi.ingsw.virtual_model.VirtualModel;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -99,5 +100,9 @@ class GameStateJsonBuilderTest {
         board.getTrack().getKillsTrack();
         JsonNode node = new GameStateJsonBuilder(contr).create();
         System.out.println(node);
+
+        new VirtualModel().updateModel(node.toString());
+
+
     }
 }
