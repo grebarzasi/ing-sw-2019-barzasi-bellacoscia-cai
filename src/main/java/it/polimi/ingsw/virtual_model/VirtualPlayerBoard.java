@@ -6,9 +6,9 @@ public class VirtualPlayerBoard {
     private ArrayList<String> damage;
     private ArrayList<String> marks;
     private int skulls;
-    private int ammoRed;
-    private int ammoBlue;
-    private int ammoYellow;
+    private int ammoRed = 3;
+    private int ammoBlue = 3;
+    private int ammoYellow = 3;
 
     public ArrayList<String> getDamage() {
         return damage;

@@ -294,11 +294,7 @@ public class LobbyJavaFX extends Application {
             }
             System.out.println("game started");
 
-            try {
-                game.setLobby(lobby);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+            game.setLobby(lobby);
             Platform.runLater(()->gameStart());
 
         });
