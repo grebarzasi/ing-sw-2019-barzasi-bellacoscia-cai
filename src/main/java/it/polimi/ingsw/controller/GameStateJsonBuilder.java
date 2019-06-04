@@ -65,15 +65,10 @@ public class GameStateJsonBuilder {
 
         //add pu
         ObjectNode puNode = mapper.createObjectNode();
+        Integer i=0;
         for(PowerUp pu :p.getPowerupList()) {
-            String ammo;
-            if(pu.getAmmoOnDiscard().getRed()==1)
-                ammo="red";
-            else if(pu.getAmmoOnDiscard().getBlue()==1)
-                ammo="blue";
-            else
-                ammo="yellow";
-            puNode.put(pu.getName(),ammo);
+            puNode.put(i.toString(),pu.getName()+":"+pu.getAmmoOnDiscard().toString());
+            i++;
         }
 
         playerNode.set("powerups",puNode);

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.polimi.ingsw.connection.ConnectionTech;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,26 +39,58 @@ public class VirtualModel {
         }
     }
 
+    public HashMap<String, VirtualPlayer> getAllPlayers() {
+        return allPlayers;
+    }
+
+    public void setAllPlayers(HashMap<String, VirtualPlayer> allPlayers) {
+        this.allPlayers = allPlayers;
+    }
+
+    public VirtualBoard getBoard() {
+        return board;
+    }
+
+    public void setBoard(VirtualBoard board) {
+        this.board = board;
+    }
+
+    public ConnectionTech getConn() {
+        return conn;
+    }
+
+    public void setConn(ConnectionTech conn) {
+        this.conn = conn;
+    }
+
+    /*JSON PARSER ZONE*/
+
     public void parsePlayers(JsonNode node){
                Iterator<String> characterIterator = node.fieldNames();
                while (characterIterator.hasNext()){
                    String character = characterIterator.next();
                    //if is a new player, add
                    if(!allPlayers.containsKey(character))
-                        allPlayers.put(character,new VirtualPlayer(node.path("username").asText(),character));
+                        allPlayers.put(character,new VirtualPlayer(node.path(character).path("username").asText(),character));
                    VirtualPlayer player = allPlayers.get(character);
 
                    //parse player points
-                   player.setPoints(node.path("points").asInt());
+                   player.setPoints(node.path(character).path("points").asInt());
+
+                   //parse player position
+
+                   String[] posArray = node.path(character).get("pos").asText().split(":");
+                   player.setRow(Integer.parseInt(posArray[0]));
+                   player.setColumn(Integer.parseInt(posArray[1]));
 
                    //parse weapons info ( name, loaded)
-                    player.setWeapons(parseWeapon(node.path("weapons")));
+                    player.setWeapons(parseWeapon(node.path(character).path("weapons")));
 
                    //parse powerUp info
-                   player.setPowerUps(parsePowerUp(node.path("powerups")));
+                   player.setPowerUps(parsePowerUp(node.path(character).path("powerups")));
 
                    //parse player board
-                   parsePlayerBoard(node.path("board"),player.getpBoard());
+                   parsePlayerBoard(node.path(character).path("board"),player.getpBoard());
 
                }
     }
@@ -76,12 +107,12 @@ public class VirtualModel {
         return weaponsOwned;
     }
 
-    public HashMap<String,String> parsePowerUp(JsonNode node){
+    public  ArrayList<String> parsePowerUp(JsonNode node){
         Iterator<String> puIterator = node.fieldNames();
-        HashMap<String,String> puOwned = new HashMap<>();
+        ArrayList<String> puOwned =new ArrayList<>();
         while (puIterator.hasNext()){
-            String puName = puIterator.next();
-            puOwned.put(puName,node.path(puName).asText());
+            String puID = puIterator.next();
+            puOwned.add(node.path(puID).asText());
         }
         return puOwned;
     }

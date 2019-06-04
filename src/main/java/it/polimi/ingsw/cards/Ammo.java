@@ -38,4 +38,12 @@ public class Ammo{
     public void setYellow(int yellow) {
         this.yellow = yellow;
     }
+
+    public String toString(){
+        if(yellow==1)
+            return "yellow";
+        if(blue==1)
+            return "blue";
+        return "red";
+    }
 }

@@ -10,11 +10,12 @@ import java.util.HashMap;
 public class VirtualPlayer {
     private String username;
     private String character;
+    private int row;
+    private int column;
     private boolean printed;
     private int points;
-    private String pos;
     private HashMap<String,Boolean> weapons;
-    private HashMap<String,String> powerUps;
+    private  ArrayList<String> powerUps;
     private VirtualPlayerBoard pBoard;
 
 
@@ -59,12 +60,20 @@ public class VirtualPlayer {
         this.points = points;
     }
 
-    public String getPos() {
-        return pos;
+    public int getRow() {
+        return row;
     }
 
-    public void setPos(String pos) {
-        this.pos = pos;
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public void setColumn(int column) {
+        this.column = column;
     }
 
     public HashMap<String,Boolean> getWeapons() {
@@ -75,11 +84,11 @@ public class VirtualPlayer {
         this.weapons = weapons;
     }
 
-    public HashMap<String,String>  getPowerUps() {
+    public  ArrayList<String>  getPowerUps() {
         return powerUps;
     }
 
-    public void setPowerUps(HashMap<String,String>  powerUps) {
+    public void setPowerUps( ArrayList<String>  powerUps) {
         this.powerUps = powerUps;
     }
 

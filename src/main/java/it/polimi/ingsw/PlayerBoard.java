@@ -14,22 +14,54 @@ public class PlayerBoard {
 
     private Figure owner;
 
-    //received damage tokens
+        //received damage tokens
+
     private ArrayList<Token> damage;
-
     //array of points released at death
+
     private int[] pointVec;
-
     //received mark tokens
+
     private ArrayList<Token> mark;
-
     //available ammunition
-    private Ammo ammoInventory;
 
+    private Ammo ammoInventory;
     private static final int maxammo = 3;
+
     private static final int maxhealth = 11;
 
     public PlayerBoard(){}
+    /**
+     * Initiates the board with default values
+     * @param owner the board's player
+     */
+
+    public PlayerBoard(Figure owner) {
+
+        this.owner = owner;
+        this.damage = new ArrayList<>();
+        this.pointVec = new int[6];
+        this.mark = new ArrayList<>();
+        this.ammoInventory = new Ammo(3,3,3);
+
+        this.pointVec[0]=8;
+        this.pointVec[1]=6;
+        this.pointVec[2]=4;
+        this.pointVec[3]=2;
+        this.pointVec[4]=1;
+        this.pointVec[5]=1;
+
+    }
+
+    public PlayerBoard(Figure owner, ArrayList<Token> damage, int[] pointVec, ArrayList<Token> marks, Ammo ammoInventory) {
+
+        this.owner = owner;
+        this.damage = damage;
+        this.pointVec = pointVec;
+        this.mark = marks;
+        this.ammoInventory = ammoInventory;
+    }
+
 
     /**
      * Adds a damage token to the player's board
@@ -159,37 +191,6 @@ public class PlayerBoard {
         tmp.setRed(this.owner.getPersonalBoard().getAmmoInventory().getBlue() - a.getBlue());
         tmp.setRed(this.owner.getPersonalBoard().getAmmoInventory().getYellow() - a.getYellow());
 
-    }
-
-    /**
-     * Initiates the board with default values
-     * @param owner the board's player
-     */
-
-    public PlayerBoard(Figure owner) {
-
-        this.owner = owner;
-        this.damage = new ArrayList<>();
-        this.pointVec = new int[6];
-        this.mark = new ArrayList<>();
-        this.ammoInventory = new Ammo(0,0,0);
-
-        this.pointVec[0]=8;
-        this.pointVec[1]=6;
-        this.pointVec[2]=4;
-        this.pointVec[3]=2;
-        this.pointVec[4]=1;
-        this.pointVec[5]=1;
-
-    }
-
-    public PlayerBoard(Figure owner, ArrayList<Token> damage, int[] pointVec, ArrayList<Token> marks, Ammo ammoInventory) {
-
-        this.owner = owner;
-        this.damage = damage;
-        this.pointVec = pointVec;
-        this.mark = marks;
-        this.ammoInventory = ammoInventory;
     }
 
     public ArrayList<Token> getDamage() {

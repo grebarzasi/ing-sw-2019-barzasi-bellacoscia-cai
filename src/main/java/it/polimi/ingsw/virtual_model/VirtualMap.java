@@ -33,4 +33,20 @@ public class VirtualMap {
                 cells.put(cell,new VirtualCell(node.path(cell).asText(),armory));
         }
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public HashMap<String, VirtualCell> getCells() {
+        return cells;
+    }
+
+    public void setCells(HashMap<String, VirtualCell> cells) {
+        this.cells = cells;
+    }
 }

@@ -24,4 +24,8 @@ public class VirtualCell {
     public void setArmory(boolean armory) {
         this.armory = armory;
     }
+
+    public String toString(){
+        return content;
+    }
 }
