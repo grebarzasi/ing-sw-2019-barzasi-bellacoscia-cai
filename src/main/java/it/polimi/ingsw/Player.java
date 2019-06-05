@@ -54,19 +54,18 @@ public class Player extends Figure {
 
     public void pickAmmo(){
 
-        if(this.getPosition().isSpawn() || (!this.getPosition().isSpawn() && ((NonSpawnSquare)this.getPosition()).getDrop() == null)){
-           this.getModel().getController().getView().displayMessage("No Ammo to Pick");
-        }else{
+        if( !this.getPosition().isSpawn() && !(!this.getPosition().isSpawn() && ((NonSpawnSquare)this.getPosition()).getDrop() == null)) {
 
-            if(this.getPosition().isSpawn() || ((NonSpawnSquare)this.getPosition()).getDrop().hasPowerup()){
+            if (this.getPosition().isSpawn() || ((NonSpawnSquare) this.getPosition()).getDrop().hasPowerup()) {
                 this.powerupList.add((PowerUp) this.getModel().getBoard().getPowerupDeck().fetch());
             }
-            if(!this.getPosition().isSpawn()){
-                Ammo tmp = ((NonSpawnSquare)this.getPosition()).getDrop().getContent();
+            if (!this.getPosition().isSpawn()) {
+                Ammo tmp = ((NonSpawnSquare) this.getPosition()).getDrop().getContent();
                 this.getPersonalBoard().addAmmo(tmp);
-                ((NonSpawnSquare)this.getPosition()).setDrop(null);
+                ((NonSpawnSquare) this.getPosition()).setDrop(null);
             }
         }
+
     }
 
     public Player(String username, String character) {
