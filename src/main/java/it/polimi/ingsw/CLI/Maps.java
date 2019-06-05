@@ -21,6 +21,7 @@ public class Maps {
     }
 
     public void plotString(String s){
+
         switch(s){
             //Text
             case"#R":
@@ -37,6 +38,9 @@ public class Maps {
                 break;
             case"#W":
                 System.out.print(WHITE);
+                break;
+            case"#P":
+                System.out.print(PURPLE);
                 break;
 
                 //Background
@@ -55,6 +59,9 @@ public class Maps {
             case"#w":
                 System.out.print(WHITE_B);
                 break;
+            case"#p":
+                System.out.print(PURPLE_B);
+                break;
 
                 //RESET
             case"#z":
@@ -70,6 +77,7 @@ public class Maps {
                 break;
                 //Players
             case "#@":
+                System.out.println("P");
                 break;
 
             default:
@@ -80,7 +88,7 @@ public class Maps {
 
     public static void main(String args[]){
         try {
-            new Maps().loadFile("map_test");
+            new Maps().loadFile("cli_small");
         } catch (IOException e) {
             e.printStackTrace();
         }

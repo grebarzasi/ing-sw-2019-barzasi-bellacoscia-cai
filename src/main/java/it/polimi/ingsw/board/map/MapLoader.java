@@ -20,6 +20,8 @@ public class MapLoader {
     private static final int width = 4;
     private static final int height = 3;
 
+    private static final String MAPS_PATH = ("src/main/resources/data_files/map_data/");
+
     /**
      * Loads the map information into a given matrix of squares
      *
@@ -32,10 +34,8 @@ public class MapLoader {
 
         ObjectMapper mapper = new ObjectMapper();
 
-        final String PATH = ("src/main/resources/data_files/map_data/");
-
-        File squareFile = new File(PATH + selection + ".json");
-        File confinementFile = new File (PATH + selection + "_confinements.json");
+        File squareFile = new File(MAPS_PATH + selection + ".json");
+        File confinementFile = new File (MAPS_PATH + selection + "_confinements.json");
 
 
         int row;

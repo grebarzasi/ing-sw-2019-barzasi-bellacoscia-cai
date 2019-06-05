@@ -50,7 +50,7 @@ public class ActionBuilder {
         ArrayList<Action> actions = new ArrayList<>();
 
 
-        if(p.getModel().getMovesLeft()!= 0) {
+        if(p.getModel().getMovesLeft() > 0) {
 
             if (!isFrenzy) {
 

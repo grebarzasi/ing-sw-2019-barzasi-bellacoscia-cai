@@ -4,6 +4,7 @@ package it.polimi.ingsw.CLI;
  * @author Gregorio Barzasi
  */
 public class CliMessages {
+    
     public static final String HEAD_MSG="------------------------------\n"+"*** Welcome to ADRENALINA! ***"+"\n------------------------------";
     public static final String SELECT_CONN = "Select connection type: (RMI/SOCKET)";
 

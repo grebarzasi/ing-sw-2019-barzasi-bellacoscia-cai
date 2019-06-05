@@ -20,7 +20,7 @@ public class PickingWeapon implements ControllerState {
     @Override
     public void command() {
 
-        ArrayList<Weapon> options = new ArrayList<>();
+        ArrayList<Weapon> options;
 
         options = ((SpawnSquare) this.controller.getCurrentPlayer().getPosition()).getArmory().getWeaponList();
         Weapon choice = this.controller.getView().showWeapon(options);

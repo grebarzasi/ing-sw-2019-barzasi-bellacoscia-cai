@@ -6,9 +6,13 @@ import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
+import javax.lang.model.type.ArrayType;
 import java.util.ArrayList;
 
 public class AsBot implements ControllerState{
+
+    private static final int height = 3;
+    private static final int width = 4;
 
     private Controller controller;
 
@@ -24,63 +28,54 @@ public class AsBot implements ControllerState{
     }
 
 
+    /**
+     * Makes the player choose a move and then a target to shoot
+     */
+
+
     @Override
     public void command() {
 
-    }
+        //adds adjacent squares to the bots possible destinations
+        ArrayList<Square> canGo = new ArrayList<>();
 
-    /**
-     * Passes a list of valid targets to the view, (the view displays the
-     * choices and makes the player command one)
-     * 
-     * Then proceeds to shoot the target in the face (adding one bot damage or mark)
-     */
+        int row;
+        int column;
 
-    public void shoot() {
+        for(row = 0; row < height; row++){
+            for(column = 0; column < width; column++){
 
-        if (hasShot == false) {
+                if(this.controller.getBoard().getMap().getSquareMatrix()[row][column].isAdjacent(this.controller.getModel().getBot().getPosition())){
+                    canGo.add(this.controller.getBoard().getMap().getSquareMatrix()[row][column]);
+                }
+            }
+        }
 
-            ArrayList<Figure> targets = new ArrayList<>();
-            for (Player p : this.controller.getModel().getPlayerList()) {
-                if (this.controller.getModel().getBot().canSee(p)) ;
+
+        //makes the player select a destination
+        Square botDestination = this.controller.getView().showPossibleMoves(canGo);
+        this.controller.getModel().getBot().setPosition(botDestination);
+
+
+        //adds visible players to the target list
+        ArrayList<Figure> targets = new ArrayList<>();
+
+        for(Player p : this.controller.getModel().getPlayerList()){
+            if(this.controller.getModel().getBot().canSee(p) && p!= this.controller.getModel().getCurrentPlayer()){
                 targets.add(p);
             }
-
-            Figure toShoot = this.controller.getView().singleTargetingShowTarget(targets);
-
-            int index = this.controller.getModel().getPlayerList().indexOf(toShoot);
-
-            this.controller.getModel().getBot().shoot(this.controller.getModel().getPlayerList().get(index));
-
-            this.controller.endTurn();
-            this.controller.setCurrentState(this.controller.choosingMove);
-
-        } else {
-            this.controller.getView().displayMessage("Bot has no actions left this turn");
         }
+
+
+        //shoots the target
+        Figure choice = this.controller.getView().singleTargetingShowTarget(targets);
+
+        this.controller.getModel().getBot().shoot((Player)choice);
 
     }
 
-
-
-    /**
-     * Passes the view a list of valid targets (The view displays them
-     * and makes the player command one)
-     *
-     * Then moves the bot to the chosen position
-     */
-
-    public void move() {
-
-        if (hasMoved == false && hasShot == false) {
-            ArrayList<Square> canGo = new ArrayList<>();
-            this.controller.getModel().getBot().setPosition(this.controller.getView().showPossibleMoves(this.controller.getModel().getBot().canGo()));
-        } else if (hasMoved == true && hasShot == false) {
-            this.controller.getView().displayMessage("Bot has already moved this turn");
-        } else if (hasShot == true) {
-            System.out.print("Bot has no actions left this turn");
-        }
+    public void goBack(){
+        this.controller.goBack();
     }
-
 
 }

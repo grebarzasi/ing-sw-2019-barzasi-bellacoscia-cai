@@ -21,6 +21,10 @@ public class ChoosingMove implements ControllerState{
         this.controller = controller;
     }
 
+    /**
+     * Sets the controller state to the corresponding action the player chooses
+     */
+
     @Override
     public void command() {
 
@@ -31,21 +35,34 @@ public class ChoosingMove implements ControllerState{
         Action choice = this.controller.getView().showMoves(options);
 
         switch (choice.getDescription()){
+
+                //sets the state to moving and sets the range accordingly
             case "Move":
                 this.controller.setCurrentState(this.controller.moving);
                 ((Moving)this.controller.moving).setRange(choice.getRange());
+
+                //sets the state to picking and sets the range accordingly
             case "Pick":
                 this.controller.setCurrentState(this.controller.picking);
                 ((Picking)this.controller.moving).setRange(choice.getRange());
+
+                //sets the range to shooting and sets the range accordingly
             case "Shoot":
                 this.controller.setCurrentState(this.controller.choosingWeapon);
                 ((Shooting)this.controller.shooting).setRange(choice.getRange());
+
+                //sets the range to choosing power up
             case "PowerUp":
                 this.controller.setCurrentState(this.controller.choosingPowerUpToUse);
+
+                //sets the state to reloading
             case "Reload":
                 this.controller.setCurrentState(this.controller.reloading);
+
+                //sets the state to special weir useless and complicated frenzy action
             case "Move, Reload and Shoot":
                 this.controller.setCurrentState(this.controller.frenzySpecialAction);
+
         }
 
     }

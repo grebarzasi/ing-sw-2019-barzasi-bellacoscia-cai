@@ -15,18 +15,16 @@ import java.io.IOException;
 public class AmmoDeckLoader {
 
     private static final int size = 36;
+    private static final String AMMO_PATH = ("src/main/resources/data_files/deck_data/ammo.json");
 
     public static void loadDeck(Deck deckToLoad){
 
         ObjectMapper mapper = new ObjectMapper();
 
-        final String PATH = ("src/main/resources/data_files/deck_data/ammo.json");
 
-        File deckFile = new File(PATH);
+        File deckFile = new File(AMMO_PATH);
 
         AmmoParser[] parserList = new AmmoParser[size];
-
-
 
         //loads files into parsers
 
@@ -39,13 +37,11 @@ public class AmmoDeckLoader {
         }
 
 
-
         for(int i=0;i<size;i++){
 
             deckToLoad.getUsable().add(new AmmoLot(parserList[i].hasPowerup(), new Ammo(parserList[i].getRed(),parserList[i].getBlue(),parserList[i].getYellow())));
 
         }
-
 
     }
 
