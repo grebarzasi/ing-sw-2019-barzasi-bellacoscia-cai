@@ -75,6 +75,9 @@ public class VirtualLobby {
             if(all.equals("*timer_started*")) {
                 gameTimerStarted = true;
                 return true;
+            }if(all.equals("*PING*")) {
+                c.getOutput().println("*PONG*");
+                return true;
             }
             updatePlayers(all);
             return true;

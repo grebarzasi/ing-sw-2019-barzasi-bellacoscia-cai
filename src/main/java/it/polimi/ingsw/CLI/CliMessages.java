@@ -18,10 +18,10 @@ public class CliMessages {
     public static final String SOCKET = "SOCKET Selected!";
     public static final String DEFAULT = "Default value selected:";
 
-    public static final String PORT_SELECT = "Insert port:";
-    public static final String IP_SELECT = "Insert port:";
+    public static final String PORT_SELECT = "Insert port: (leave empty for default value)";
+    public static final String IP_SELECT = "Insert ip: (leave empty for default value)";
     public static final String PORT_ERR = "Not available port, insert another port:";
-    public static final String CONNECTION_ERR = "Something went wrong, connection error";
+    public static final String CONNECTION_ERR = "Something went wrong, check server connection";
 
     public static final String USERNAME = "Insert username:";
     public static final String CHARACTER = "Insert your color";

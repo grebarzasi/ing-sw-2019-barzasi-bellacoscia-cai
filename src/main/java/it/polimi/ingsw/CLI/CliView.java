@@ -37,7 +37,6 @@ public class CliView {
             lobby.startLobby();
         }catch(Exception e){
             System.err.println(CONNECTION_ERR);
-            e.printStackTrace();
         }
     }
 
@@ -54,11 +53,11 @@ public class CliView {
         if(temp.equals("R")||temp.equals("RMI")||temp.equals("1")||temp.equals("r")){
             c= new RmiClient();
             c.setRmi(true);
-            System.out.println("\n"+RMI);
+            System.out.println(RMI);
         }else if(temp.equals("S")||temp.equals("Socket")||temp.equals("2")||temp.equals("s")||temp.isEmpty()){
             c= new SClient();
             c.setRmi(false);
-            System.out.println("\n"+SOCKET);
+            System.out.println(SOCKET);
 
         }
         port=acquirePort();
@@ -66,14 +65,15 @@ public class CliView {
         if(port!=0)
             c.setPort(port);
         else
-            System.out.println(DEFAULT+" "+ c.getPort());
+            System.out.println(DEFAULT+" "+ c.getPort()+"\n");
 
         if(!ip.isEmpty())
             c.setIp(ip);
         else
-            System.out.println(DEFAULT+" "+c.getIp());
-
+            System.out.println(DEFAULT+" "+c.getIp()+"\n");
+        System.out.println(LINE_SEP);
         c.initConnection();
+        System.out.println(LINE_SEP);
     }
 
     /**
@@ -107,7 +107,7 @@ public class CliView {
 
     public int acquirePort()throws IOException {
         int port;
-        System.out.println(PORT_SELECT);
+        System.out.println("\n"+PORT_SELECT);
 
         do {
             String s = sc.readLine();

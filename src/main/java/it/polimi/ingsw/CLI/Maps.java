@@ -7,7 +7,7 @@ import static it.polimi.ingsw.CLI.Color.*;
 
 public class Maps {
 
-    public void loadFile(String name)throws FileNotFoundException, IOException {
+    public void loadFile(String name)throws IOException {
         File f=new File("src/main/resources/cli_files/" + name +".txt");
         BufferedReader in = new BufferedReader(new FileReader(f));
         String line;

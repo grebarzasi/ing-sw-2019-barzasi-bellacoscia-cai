@@ -224,7 +224,7 @@ public class StartJavaFX extends Application {
                     c.setPort(port);
                 }
                 c.initConnection();
-            } catch (RemoteException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 

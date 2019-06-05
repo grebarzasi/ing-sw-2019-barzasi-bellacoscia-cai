@@ -1,6 +1,6 @@
 package it.polimi.ingsw.connection;
 
-import java.rmi.RemoteException;
+import java.io.IOException;
 
 public abstract class ConnectionTech {
 
@@ -35,5 +35,5 @@ public abstract class ConnectionTech {
         this.port = port;
     }
 
-    public abstract void  initConnection()throws RemoteException;
+    public abstract void  initConnection()throws IOException;
 }

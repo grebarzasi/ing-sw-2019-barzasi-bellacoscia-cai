@@ -114,9 +114,15 @@ public class ClientThreadSocket extends Thread {
     public void waitStart()throws IOException {
         System.out.println("Waiting for game start");
 
-        while (!lobby.hasTimerStarted());
+        while (!lobby.hasTimerStarted()){
+            out.println("*PING*");
+            in.readLine();
+        }
         out.println("*timer_started*");
-        while (!lobby.hasStarted());
+        while (!lobby.hasStarted()){
+            out.println("*PING*");
+            in.readLine();
+        }
         out.println("*started*");
         System.out.println("sending start signal");
 
