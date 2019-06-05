@@ -1,7 +1,6 @@
 package it.polimi.ingsw.virtual_model;
 
 import it.polimi.ingsw.connection.socket.SClient;
-import it.polimi.ingsw.connection.socket.SServer;
 
 import java.io.IOException;
 
@@ -24,7 +23,7 @@ public class GameComSocket extends Thread{
 
 
             switch (msg){
-                case "test":
+                case "ping":
 
             }
 

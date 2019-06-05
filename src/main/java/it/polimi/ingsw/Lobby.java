@@ -16,7 +16,7 @@ public class Lobby {
     private boolean hasStarted;
     private boolean hasTimerStarted;
     private Timer timer;
-    private DisconnectChecker disconnectChecker;
+    //private DisconnectChecker disconnectChecker;
     private final int DELAY=30;
 
 
@@ -31,14 +31,14 @@ public class Lobby {
         this.timer= new Timer();
         this.hasStarted=false;
         this.hasTimerStarted=false;
-        this.disconnectChecker = new DisconnectChecker(this);
+       // this.disconnectChecker = new DisconnectChecker(this);
     }
 
     public synchronized boolean addPlayer(ClientThreadSocket p) {
         if (joinedPlayers.size() < maxPlayer && usernameCheck(p) && characterCheck(p)) {
             joinedPlayers.add(p);
-            if(!disconnectChecker.isAlive())
-                disconnectChecker.start();
+           // if(!disconnectChecker.isAlive())
+           //     disconnectChecker.start();
             return true;
         }
 
@@ -55,6 +55,7 @@ public class Lobby {
                 if(toCheck.getOwner().getUsername().equals(p.getOwner().getUsername())){
                    if(toCheck.isExpired())
                        return false;
+                   //HERE
                     return true;
                 }
             }
