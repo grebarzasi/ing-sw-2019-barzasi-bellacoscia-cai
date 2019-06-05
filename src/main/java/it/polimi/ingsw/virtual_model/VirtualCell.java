@@ -1,7 +1,7 @@
 package it.polimi.ingsw.virtual_model;
 
 public class VirtualCell {
-    private String content;
+    private String content="";
     private boolean armory;
 
     public VirtualCell(String content, boolean armory) {

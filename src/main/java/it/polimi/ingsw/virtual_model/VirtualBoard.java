@@ -10,8 +10,9 @@ import java.util.Iterator;
 public class VirtualBoard {
     private ConnectionTech conn;
     private int skull;
-    private ArrayList<String> killshotTrack;
+    private ArrayList<String> killshotTrack=new ArrayList<>();
     private VirtualMap map = new VirtualMap();
+
 
 
     public ConnectionTech getConn() {

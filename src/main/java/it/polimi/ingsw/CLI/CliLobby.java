@@ -3,7 +3,7 @@ package it.polimi.ingsw.CLI;
 import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.virtual_model.VirtualLobby;
 import it.polimi.ingsw.virtual_model.VirtualPlayer;
-
+import static it.polimi.ingsw.CLI.CliMessages.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 
@@ -11,6 +11,7 @@ import java.io.IOException;
  * @author Gregorio Barzasi
  */
 public class CliLobby extends Thread{
+    private final int COUNTDOWN = 30;
     private VirtualLobby lobby;
     private ConnectionTech c;
     private BufferedReader sc;
@@ -26,7 +27,7 @@ public class CliLobby extends Thread{
         do {
             gameSetup();
             clearScreen();
-        }while(ynAsk("\nYou want to edit something? (Y/N)","\nOk,check again:","\nSending preferences"));
+        }while(ynAsk(PREFERENCE_Q,PREFERENCE_Y,PREFERENCE_N));
 
         lobby.sendPref();
         clearScreen();
@@ -36,8 +37,8 @@ public class CliLobby extends Thread{
     public int askMap()throws IOException{
         String temp;
         int num=0;
-        do {System.out.println("\n1-...\n2-...\n3-...\n4-...");
-            System.out.println("Select your map:");
+        do {System.out.println(MAP_OPT);
+            System.out.println(MAP_Q);
             temp = sc.readLine();
             try{
                 num = Integer.parseInt(temp);
@@ -46,11 +47,11 @@ public class CliLobby extends Thread{
             {num=0;
             }
             if(num<1 || num>4){
-                System.err.println("\nNot available,  again:");
+                System.err.println(MAP_N);
             }
         }while(num<1 || num>4);
         lobby.setKillPref(num);
-        System.out.println("\nPerfect! you selected map" + num +" !");
+        System.out.println(MAP_Y+num);
         return num;
     }
 
@@ -69,7 +70,7 @@ public class CliLobby extends Thread{
                 System.out.println(no);
                 return false;
             }else{
-                System.err.println("\nNot valid, again:");
+                System.err.println(GENERIC_N);
             }
         }while(true);
 
@@ -81,22 +82,19 @@ public class CliLobby extends Thread{
 
     public void gameSetup() throws IOException {
         lobby= new VirtualLobby(c,p);
-        System.out.println(
-                "\n\n----------------------------------------\n" +
-                "*** LOBBY! Setup your game preferences! ***"+
-                "\n----------------------------------------");
+        System.out.println(LOBBY_HEAD);
 
         String temp;
         //TERMINATOR
-        lobby.setTerminatorPref(ynAsk("\nTerminator bot? (Y/N)","\nTerminator hired, you're brave!","\nTerminator rejected"));
+        lobby.setTerminatorPref(ynAsk(TERMINATOR_Q,TERMINATOR_Y,TERMINATOR_N));
 
         //FINAL FRENZY
-        lobby.setFinalFrenzyPref(ynAsk("\nFinal Frenzy? (Y/N)","\nFinal frenzy set!","\nNo final frenzy, ok!"));
+        lobby.setFinalFrenzyPref(ynAsk(FRENZY_Q,FRENZY_Y,FRENZY_N));
 
         //MAX KILL
         int num=0;
         do {
-            System.out.println("\nSkull on Kill Track? (3-8)");
+            System.out.println(SKULL_Q);
             temp = sc.readLine();
             try{
             num = Integer.parseInt(temp);
@@ -105,28 +103,25 @@ public class CliLobby extends Thread{
             {num=0;
             }
             if(num<3 || num>8){
-                System.err.println("\nOut of range,  again:");
+                System.err.println(SKULL_N);
             }
         }while(num<3 || num>8);
         lobby.setKillPref(num);
-        System.out.println("\nPerfect! you selected " + num +" skulls on kill track!");
+        System.out.println(SKULL_Y+num);
 
         //MAP
         lobby.setMapPref(askMap());
-        System.out.println("------------------------------\n");
+        System.out.println(LINE_SEP);
 
     }
 
     public synchronized void waitingRoom()throws IOException {
         clearScreen();
-        System.out.println(
-                "\n\n----------------------------------------\n" +
-                        "*** Waiting room..." +
-                        "\n----------------------------------------");
+        System.out.println(WAITINGROOM_HEAD);
 
         while (!lobby.isGameStarted()){
             if(lobby.hasGameTimerStarted()) {
-                new CliCountDown(30).start();
+                new CliCountDown(COUNTDOWN).start();
                 lobby.setGameTimerStarted(false);
             }
             lobby.waitUpdate();
@@ -142,12 +137,5 @@ public class CliLobby extends Thread{
     }
 
 
-
-
-    public static void clearScreen() {
-        System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
 
 }
