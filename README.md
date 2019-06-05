@@ -9,14 +9,14 @@
 |:-----------------------|:------------------------------------:|
 | Basic rules | [![YELLOW](https://placehold.it/15/ffdd00/ffdd00)](#) |
 | Complete rules | [![YELLOW](https://placehold.it/15/ffdd00/ffdd00)](#) |
-| Socket | [![YELLOW](https://placehold.it/15/ffdd00/ffdd00)](#) |
+| Socket | [![GREEN](https://placehold.it/15/44bb44/44bb44)](#)(#) |
 | RMI | [![YELLOW](https://placehold.it/15/ffdd00/ffdd00)](#) |
 | GUI | [![YELLOW](https://placehold.it/15/ffdd00/ffdd00)](#) |
 | CLI | [![YELLOW](https://placehold.it/15/ffdd00/ffdd00)](#) |
 | Multiple games | [![RED](https://placehold.it/15/f03c15/f03c15)](#) |
 | Persistence | [![RED](https://placehold.it/15/f03c15/f03c15)](#) |
 | Domination or Towers modes | [![RED](https://placehold.it/15/f03c15/f03c15)](#) |
-| Terminator | [![YELLOW](https://placehold.it/15/ffdd00/ffdd00)](#) |
+| Terminator | [![GREEN](https://placehold.it/15/44bb44/44bb44)](#) |
 
 <!--
 [![RED](https://placehold.it/15/f03c15/f03c15)](#)
