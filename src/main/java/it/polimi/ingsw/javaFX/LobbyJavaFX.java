@@ -50,7 +50,7 @@ public class LobbyJavaFX extends Application {
     private static final String PATH_RED_CHARACTER = "src/main/resources/images/character/violet.png";
     private static final String PATH_BLUE_CHARACTER = "src/main/resources/images/character/banshee.png";
     private static final String PATH_GREEN_CHARACTER = "src/main/resources/images/character/sprog.png";
-    private static final String PATH_GRAY_CHARACTER = "src/main/resources/images/character/dozer.png";
+    private static final String PATH_GREY_CHARACTER = "src/main/resources/images/character/dozer.png";
 
     private static final String PATH_LOADING = "src/main/resources/images/loading.png";
 
@@ -383,8 +383,8 @@ public class LobbyJavaFX extends Application {
                         v.getChildren().add(greenV);
                         break;
                     }
-                    case "gray": {
-                        ImageView grayV = new ImageView(new Image(new FileInputStream(PATH_GRAY_CHARACTER), 150, 150, true, true));
+                    case "grey": {
+                        ImageView grayV = new ImageView(new Image(new FileInputStream(PATH_GREY_CHARACTER), 150, 150, true, true));
                         v.getChildren().add(grayV);
                         break;
                     }

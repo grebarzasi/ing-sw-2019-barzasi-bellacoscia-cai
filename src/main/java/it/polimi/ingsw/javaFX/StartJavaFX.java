@@ -44,12 +44,12 @@ public class StartJavaFX extends Application {
     private static final String PATH_RED = "src/main/resources/images/character/red.png";
     private static final String PATH_BLUE = "src/main/resources/images/character/blue.png";
     private static final String PATH_GREEN = "src/main/resources/images/character/green.png";
-    private static final String PATH_GRAY = "src/main/resources/images/character/gray.png";
+    private static final String PATH_GREY = "src/main/resources/images/character/grey.png";
     private static final String PATH_YELLOW_CHARACTER = "src/main/resources/images/character/D-struct-0R.png";
     private static final String PATH_RED_CHARACTER = "src/main/resources/images/character/violet.png";
     private static final String PATH_BLUE_CHARACTER = "src/main/resources/images/character/banshee.png";
     private static final String PATH_GREEN_CHARACTER = "src/main/resources/images/character/sprog.png";
-    private static final String PATH_GRAY_CHARACTER = "src/main/resources/images/character/dozer.png";
+    private static final String PATH_GREY_CHARACTER = "src/main/resources/images/character/dozer.png";
 
     private static final String PATH_TITLE = "src/main/resources/images/title.png";
     private static final String PATH_RULES = "src/main/resources/images/rules.jpg";
@@ -113,7 +113,7 @@ public class StartJavaFX extends Application {
         ImageView redV = new ImageView(new Image(new FileInputStream(PATH_RED_CHARACTER), 250 ,250,true,true));;
         ImageView blueV = new ImageView(new Image(new FileInputStream(PATH_BLUE_CHARACTER), 250 ,250,true,true));;
         ImageView greenV = new ImageView(new Image(new FileInputStream(PATH_GREEN_CHARACTER), 250 ,250,true,true));;
-        ImageView grayV = new ImageView(new Image(new FileInputStream(PATH_GRAY_CHARACTER), 250 ,250,true,true));;
+        ImageView grayV = new ImageView(new Image(new FileInputStream(PATH_GREY_CHARACTER), 250 ,250,true,true));;
 
         HBox charList = new HBox(40);
         charList.setAlignment(Pos.BOTTOM_CENTER);
@@ -277,7 +277,7 @@ public class StartJavaFX extends Application {
                 imgG = new Image(new FileInputStream(PATH_GREEN),100,100,true,true);
                 buttonG.setGraphic(new ImageView(imgG));
 
-                imgGr = new Image(new FileInputStream(PATH_GRAY),100,100,true,true);
+                imgGr = new Image(new FileInputStream(PATH_GREY),100,100,true,true);
                 buttonGr.setGraphic(new ImageView(imgGr));
 
             } catch (FileNotFoundException e) {
@@ -311,7 +311,7 @@ public class StartJavaFX extends Application {
             buttonR.setOnAction(e-> color = "red");
             buttonB.setOnAction(e-> color = "blue");
             buttonG.setOnAction(e-> color = "green");
-            buttonGr.setOnAction(e-> color = "gray");
+            buttonGr.setOnAction(e-> color = "grey");
 
             btnLogin.setOnAction(e -> {
 

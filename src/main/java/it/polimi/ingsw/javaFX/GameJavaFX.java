@@ -16,9 +16,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -91,26 +91,39 @@ public class GameJavaFX extends Application {
     private static final String PATH_RED_BOARD = "src/main/resources/images/board/red_board.png";
     private static final String PATH_BLUE_BOARD = "src/main/resources/images/board/blue_board.png";
     private static final String PATH_GREEN_BOARD = "src/main/resources/images/board/green_board.png";
-    private static final String PATH_GRAY_BOARD = "src/main/resources/images/board/gray_board.png";
+    private static final String PATH_GREY_BOARD = "src/main/resources/images/board/gray_board.png";
 
     private static final String PATH_GENERAL_COLOR = "src/main/resources/images/character";
     private static final String PATH_YELLOW = "src/main/resources/images/character/yellow.png";
     private static final String PATH_RED = "src/main/resources/images/character/red.png";
     private static final String PATH_BLUE = "src/main/resources/images/character/blue.png";
     private static final String PATH_GREEN = "src/main/resources/images/character/green.png";
-    private static final String PATH_GRAY = "src/main/resources/images/character/gray.png";
+    private static final String PATH_GREY = "src/main/resources/images/character/gray.png";
     private static final String PATH_YELLOW_CHARACTER = "src/main/resources/images/character/D-struct-0R.png";
     private static final String PATH_RED_CHARACTER = "src/main/resources/images/character/violet.png";
     private static final String PATH_BLUE_CHARACTER = "src/main/resources/images/character/banshee.png";
     private static final String PATH_GREEN_CHARACTER = "src/main/resources/images/character/sprog.png";
-    private static final String PATH_GRAY_CHARACTER = "src/main/resources/images/character/dozer.png";
+    private static final String PATH_GREY_CHARACTER = "src/main/resources/images/character/dozer.png";
 
     private static final String PATH_RED_AMMO = "src/main/resources/images/ammo/red_ammo.png";
     private static final String PATH_BLUE_AMMO = "src/main/resources/images/ammo/blue_ammo.png";
     private static final String PATH_YELLOW_AMMO = "src/main/resources/images/ammo/yellow_ammo.png";
 
+    private static final String PATH_YELLOW_DAMAGE = "src/main/resources/images/damage/yellow.png";
+    private static final String PATH_RED_DAMAGE = "src/main/resources/images/damage/red.png";
+    private static final String PATH_BLUE_DAMAGE = "src/main/resources/images/damage/blue.png";
+    private static final String PATH_GREEN_DAMAGE = "src/main/resources/images/damage/green.png";
+    private static final String PATH_GREY_DAMAGE = "src/main/resources/images/damage/grey.png";
+    private static final String PATH_YELLOW_DAMAGE_DOUBLE = "src/main/resources/images/damage/yellow_double.png";
+    private static final String PATH_RED_DAMAGE_DOUBLE = "src/main/resources/images/damage/red_double.png";
+    private static final String PATH_BLUE_DAMAGE_DOUBLE = "src/main/resources/images/damage/blue_double.png";
+    private static final String PATH_GREEN_DAMAGE_DOUBLE = "src/main/resources/images/damage/green_double.png";
+    private static final String PATH_GREY_DAMAGE_DOUBLE = "src/main/resources/images/damage/grey_double.png";
+
+
     private static final String PATH_TITLE = "src/main/resources/images/title.png";
     private static final String PATH_TRACK = "src/main/resources/images/killshotrack.png";
+    private static final String PATH_SKULL = "src/main/resources/images/skull.png";
     private static final String PATH_LOADING = "src/main/resources/images/loading.png";
     private static final String PATH_RULES = "src/main/resources/images/rules.jpg";
     private static final String PATH_LOGIN = "src/main/resources/images/login.png";
@@ -133,11 +146,13 @@ public class GameJavaFX extends Application {
 
     public void setLobby(VirtualLobby lobby) {
         this.lobby = lobby;
+
         /*
 
         player = lobby.getOwner();
         players = lobby.getNewPlayersList();
         points = player.getPoints();
+        skullMax = lobby.getKillPref();
 
          */
 
@@ -156,14 +171,35 @@ public class GameJavaFX extends Application {
         players.add(new VirtualPlayer("gre","blue"));
         players.add(new VirtualPlayer("theo","red"));
 
+        ArrayList<String> damage = new ArrayList<>();
+        damage.add("red");
+        damage.add("red");
+        damage.add("yellow");
+        damage.add("blue");
+        damage.add("green");
+        damage.add("grey");
+        damage.add("blue");
+        damage.add("blue");
+        damage.add("green");
+        damage.add("green");
+        damage.add("green");
+        damage.add("green");
+
+        ArrayList<String> marks = new ArrayList<>();
+        marks.add("red");
+        marks.add("red");
+        marks.add("yellow");
+
+        player.getpBoard().setMarks(marks);
+        player.getpBoard().setDamage(damage);
+
+
         // */
 
         primaryStage.setTitle("ADRENALINA");
 
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
-        double widthScreen = screenSize.getWidth();
-        double heightScreen = screenSize.getHeight();
+        double widthScreen = Screen.getPrimary().getBounds().getWidth();
+        double heightScreen = Screen.getPrimary().getBounds().getHeight();
 
         Group root = new Group();
         Scene theScene = new Scene(root);
@@ -177,6 +213,9 @@ public class GameJavaFX extends Application {
 
         Scene scene = new Scene(grid,widthScreen,heightScreen);
         primaryStage.setScene(scene);
+
+        scene.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> grid.setPrefWidth((double)newSceneWidth));
+        scene.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> grid.setPrefHeight((double)newSceneHeight));
 
         /**
          * set Background.
@@ -197,6 +236,9 @@ public class GameJavaFX extends Application {
         ColumnConstraints c1 = new ColumnConstraints(widthLateral);
         ColumnConstraints c2 = new ColumnConstraints(widthCenter);
         ColumnConstraints c3 = new ColumnConstraints(widthLateral);
+        c1.setPercentWidth(25);
+        c2.setPercentWidth(50);
+        c3.setPercentWidth(25);
 
 
         double heightLateral = heightScreen/6;
@@ -204,6 +246,9 @@ public class GameJavaFX extends Application {
         RowConstraints r1 = new RowConstraints(heightLateral);
         RowConstraints r2 = new RowConstraints(heightCenter);
         RowConstraints r3 = new RowConstraints(heightLateral);
+        r1.setPercentHeight(25);
+        r2.setPercentHeight(50);
+        r3.setPercentHeight(25);
 
 
         grid.getColumnConstraints().addAll(c1,c2,c3);
@@ -237,7 +282,7 @@ public class GameJavaFX extends Application {
         pointsBorder.setOffsetY(0f);
         pointsField.setEffect(pointsBorder);
 
-        pointsField.setStyle("-fx-text-fill: gray; -fx-font-size: 20px;");
+        pointsField.setStyle("-fx-text-fill: grey; -fx-font-size: 20px;");
 
         grid.add(pointsField,2,0);
 
@@ -269,6 +314,8 @@ public class GameJavaFX extends Application {
 
         gridSkull.getColumnConstraints().addAll(kc1,kc2,kc3,kc4,kc5,kc6,kc7,kc8,kc9);
         gridSkull.getRowConstraints().add(kr1);
+
+        fillSkulls(gridSkull,skullMax, widthSkull-5,imgTrack.getHeight()-25);
 
         grid.add(gridSkull,0,0);
 
@@ -414,8 +461,8 @@ public class GameJavaFX extends Application {
                 imgPBoard = new Image(new FileInputStream(PATH_GREEN_BOARD),widthPers,heightPBoard,true,true);
                 break;
             }
-            case "gray":{
-                imgPBoard = new Image(new FileInputStream(PATH_GRAY_BOARD),widthPers,heightPBoard,true,true);
+            case "grey":{
+                imgPBoard = new Image(new FileInputStream(PATH_GREY_BOARD),widthPers,heightPBoard,true,true);
                 break;
             }
         }
@@ -425,7 +472,8 @@ public class GameJavaFX extends Application {
 
         gridPBoard.setBackground(backPB);
 
-        setCellBoard(gridPBoard,widthPers,heightBoard-50);
+        setCellBoard(gridPBoard,widthPers,heightPBoard-50);
+        fillBoard(gridPBoard,player,widthPers,heightPBoard/4-6,heightPBoard/4,heightPBoard/3-6);
 
         gridPers.add(gridPBoard,0,0);
 
@@ -636,7 +684,7 @@ public class GameJavaFX extends Application {
                         weOther4 = setOtherWeapon(gridOtherWe,3,widthOtherWeapon,heightOtherWeapon);
                         break;
                     }
-                    case "gray": {
+                    case "grey": {
                         imgOther5 = setBoard(p.getCharacter(), widthOther, heightOtherBoard);
                         setGridBack(gridOtherBoard5,imgOther5);
                         fillOtherAmmo(gridOtherAmmo5,p.getpBoard(),heightOtherAmmo,heightOtherAmmo);
@@ -861,8 +909,8 @@ public class GameJavaFX extends Application {
                     img = new Image(new FileInputStream(PATH_GREEN_BOARD), widthOB, heightOB, true, true);
                     break;
                 }
-                case "gray": {
-                    img = new Image(new FileInputStream(PATH_GRAY_BOARD), widthOB, heightOB, true, true);
+                case "grey": {
+                    img = new Image(new FileInputStream(PATH_GREY_BOARD), widthOB, heightOB, true, true);
                     break;
                 }
             }
@@ -910,6 +958,7 @@ public class GameJavaFX extends Application {
 
         grid.getColumnConstraints().addAll(c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14);
         grid.getRowConstraints().addAll(r1,r2,r3);
+
 
     }
 
@@ -1068,5 +1117,156 @@ public class GameJavaFX extends Application {
         btn.setBackground(back);
     }
 
+    public void fillSkulls(GridPane grid, int skullMax, double w, double h) {
+
+        int i = skullMax - 1;
+
+        while(i >= 0){
+
+            ImageView skull = null;
+
+            try {
+                skull = new ImageView(new Image(new FileInputStream(PATH_SKULL), w, h, true, true));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            grid.add(skull,i,0);
+            i--;
+        }
+    }
+
+    public void fillSkulls(GridPane grid, int skullMax, double w, double h, String color, boolean two) {
+
+    }
+
+    public void fillBoard(GridPane grid, VirtualPlayer p, double width, double hmarks, double hdamage, double hskulls){
+
+        int i = 10;
+        int j = 2;
+        int k = 2;
+        int no = 3;
+
+        if(!p.getpBoard().getMarks().equals(null))
+        for (String color : p.getpBoard().getMarks()) {
+            switch (color){
+                case "yellow":{
+                    ImageView img = null;
+
+                    try {
+                        img = new ImageView(new Image(new FileInputStream(PATH_YELLOW_DAMAGE), width, hmarks, true, true));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    grid.add(img,i,0);
+                    break;
+                }
+                case "red":{
+                    ImageView img = null;
+
+                    try {
+                        img = new ImageView(new Image(new FileInputStream(PATH_RED_DAMAGE), width, hmarks, true, true));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    grid.add(img,i,0);
+                    break;
+                }case "blue":{
+                    ImageView img = null;
+
+                    try {
+                        img = new ImageView(new Image(new FileInputStream(PATH_BLUE_DAMAGE), width, hmarks, true, true));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    grid.add(img,i,0);
+                    break;
+                }case "green":{
+                    ImageView img = null;
+
+                    try {
+                        img = new ImageView(new Image(new FileInputStream(PATH_GREEN_DAMAGE), width, hmarks, true, true));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    grid.add(img,i,0);
+                    break;
+                }case "grey":{
+                    ImageView img = null;
+
+                    try {
+                        img = new ImageView(new Image(new FileInputStream(PATH_GREY_DAMAGE), width, hmarks, true, true));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    grid.add(img,i,0);
+                    break;
+                }
+            }
+            i++;
+        }
+
+        if(!p.getpBoard().getDamage().equals(null))
+        for (String color : p.getpBoard().getDamage()) {
+            switch(color){
+                case "yellow":{
+                    ImageView img = null;
+
+                    try {
+                        img = new ImageView(new Image(new FileInputStream(PATH_YELLOW_DAMAGE), width, hmarks, true, true));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    grid.add(img,j,1);
+                    break;
+                }
+                case "red":{
+                    ImageView img = null;
+
+                    try {
+                        img = new ImageView(new Image(new FileInputStream(PATH_RED_DAMAGE), width, hmarks, true, true));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    grid.add(img,j,1);
+                    break;
+                }
+                case "blue":{
+                    ImageView img = null;
+
+                    try {
+                        img = new ImageView(new Image(new FileInputStream(PATH_BLUE_DAMAGE), width, hmarks, true, true));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    grid.add(img,j,1);
+                    break;
+                }
+                case "green":{
+                    ImageView img = null;
+
+                    try {
+                        img = new ImageView(new Image(new FileInputStream(PATH_GREEN_DAMAGE), width, hmarks, true, true));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    grid.add(img,j,1);
+                    break;
+                }
+                case "grey":{
+                    ImageView img = null;
+
+                    try {
+                        img = new ImageView(new Image(new FileInputStream(PATH_GREY_DAMAGE), width, hmarks, true, true));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    grid.add(img,j,1);
+                    break;
+                }
+            }
+            j++;
+        }
+    }
 
 }
