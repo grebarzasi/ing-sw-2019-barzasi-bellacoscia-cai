@@ -2,6 +2,7 @@ package it.polimi.ingsw.board;
 
 import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.Player;
+import it.polimi.ingsw.Player;
 import it.polimi.ingsw.Token;
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +34,7 @@ class KillshotTrackTest {
 
     @Test
     void getPointsTest() {
-        Figure p1 =  new Figure();
+        Player p1 =  new Player();
         ArrayList <Token> t1 = new ArrayList<>();
         for (int i = 0; i < 2; i++){
             Token k = new Token(p1);
@@ -41,7 +42,7 @@ class KillshotTrackTest {
         }
         kills.addKill(t1);
 
-        Figure p2 =  new Figure();
+        Player p2 =  new Player();
         ArrayList <Token> t2 = new ArrayList<>();
         for (int i = 0; i < 1; i++){
             Token k = new Token(p2);
@@ -62,7 +63,7 @@ class KillshotTrackTest {
 
     @Test
     void killerListCreatorTest() {
-        Figure p =  new Figure();
+        Player p =  new Player();
         ArrayList <Token> t = new ArrayList<>();
         for (int i = 0; i < 2; i++){
             Token k = new Token(p);
@@ -79,7 +80,7 @@ class KillshotTrackTest {
 
     @Test
     void countOccTest() {
-        Figure p =  new Figure();
+        Player p =  new Player();
         ArrayList <Token> t = new ArrayList<>();
         for (int i = 0; i < 2; i++){
             Token k = new Token(p);
@@ -96,8 +97,8 @@ class KillshotTrackTest {
     @Test
     void getIndexMinTest() {
 
-        Figure p1 =  new Figure();
-        Figure p2 =  new Figure();
+        Player p1 =  new Player();
+        Player p2 =  new Player();
         Token k1 = new Token(p1);
         Token k2 = new Token(p2);
         ArrayList <Token> t1 = new ArrayList<>();

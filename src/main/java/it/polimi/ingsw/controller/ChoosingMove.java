@@ -28,5 +28,28 @@ public class ChoosingMove implements ControllerState{
 
         options = ActionBuilder.build(controller.getCurrentPlayer(), this.controller.getModel().isFrenzy());
 
+        Action choice = this.controller.getView().showMoves(options);
+
+        switch (choice.getDescription()){
+            case "Move":
+                this.controller.setCurrentState(this.controller.moving);
+                ((Moving)this.controller.moving).setRange(choice.getRange());
+            case "Pick":
+                this.controller.setCurrentState(this.controller.picking);
+                ((Picking)this.controller.moving).setRange(choice.getRange());
+            case "Shoot":
+                this.controller.setCurrentState(this.controller.choosingWeapon);
+                ((Shooting)this.controller.shooting).setRange(choice.getRange());
+            case "PowerUp":
+                this.controller.setCurrentState(this.controller.choosingPowerUpToUse);
+            case "Reload":
+                this.controller.setCurrentState(this.controller.reloading);
+            case "Move, Reload and Shoot":
+                this.controller.setCurrentState(this.controller.frenzySpecialAction);
+        }
+
     }
+
+
+
 }

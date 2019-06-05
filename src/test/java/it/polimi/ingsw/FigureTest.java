@@ -222,11 +222,18 @@ class FigureTest {
     @Test
     public void deathTest(){
 
+
+
         Player bertie = new Player ("Albert","bertie");
         Player bill = new Player("William","bill");
         Player vic = new Player("Victoria","vic");
         Player jeff = new Player("Jeff","jeff");
         Player stu = new Player("Stuart", "stu");
+
+        GameModel model = new GameModel();
+        bertie.setModel(model);
+        model.setFrenzy(false);
+
 
         Token a = new Token(bertie);
         Token b = new Token(bill);
@@ -261,15 +268,16 @@ class FigureTest {
     @Test
     public void deathTest2(){
 
-        System.out.println("Starting Test 2\n");
-
-        GameModel server = new GameModel();
 
         Player albert = new Player ("Albert","albert");
         Player bill = new Player("Bill","bill");
         Player charlie = new Player("Charlie","charlie");
         Player don = new Player("Don","don");
         Player ed = new Player("Ed", "ed");
+
+        GameModel model = new GameModel();
+        albert.setModel(model);
+        model.setFrenzy(false);
 
         Token a = new Token(albert);
         Token b = new Token(bill);
@@ -307,13 +315,16 @@ class FigureTest {
     @Test
     public void deathTest3(){
 
-        System.out.println("Starting Test 3\n");
 
         Player albert = new Player ("Albert","albert");
         Player bill = new Player("Bill","bill");
         Player charlie = new Player("Charlie","charlie");
         Player don = new Player("Don","don");
         Player ed = new Player("Ed", "ed");
+
+        GameModel model = new GameModel();
+        albert.setModel(model);
+        model.setFrenzy(false);
 
         Token a = new Token(albert);
         Token b = new Token(bill);
@@ -351,13 +362,16 @@ class FigureTest {
     @Test
     public void deathTest4(){
 
-        System.out.println("Starting Test 3\n");
 
         Player albert = new Player ("Albert","albert");
         Player bill = new Player("Bill","bill");
         Player charlie = new Player("Charlie","charlie");
         Player don = new Player("Don","don");
         Player ed = new Player("Ed", "ed");
+
+        GameModel model = new GameModel();
+        albert.setModel(model);
+        model.setFrenzy(false);
 
         Token a = new Token(albert);
         Token b = new Token(bill);
@@ -433,6 +447,10 @@ class FigureTest {
         Player charlie = new Player("Charlie","charlie");
         Player don = new Player("Don","don");
         Player ed = new Player("Ed", "ed");
+
+        GameModel model = new GameModel();
+        albert.setModel(model);
+        model.setFrenzy(false);
 
         Token a = new Token(albert);
         Token b = new Token(bill);

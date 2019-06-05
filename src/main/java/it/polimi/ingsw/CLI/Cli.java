@@ -3,6 +3,7 @@ package it.polimi.ingsw.CLI;
 import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.View;
+import it.polimi.ingsw.actions.Action;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Effect;
@@ -30,7 +31,7 @@ public class Cli implements View {
 
         }
 
-        //TODO take input and return it;
+        //TODO take input and return it
         return null;
 
     }
@@ -57,7 +58,7 @@ public class Cli implements View {
     }
 
     @Override
-    public String showMoves(Set<String> args) {
+    public Action showMoves(ArrayList<Action> args) {
         return null;
     }
 

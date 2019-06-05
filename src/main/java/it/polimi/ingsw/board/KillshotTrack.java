@@ -13,6 +13,7 @@ import java.util.*;
 public class KillshotTrack {
 
     private int skullMax;
+
     private ArrayList<ArrayList <Token>> killsTrack = new ArrayList<>();
 
     public KillshotTrack(int skullMax) {

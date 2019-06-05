@@ -3,6 +3,7 @@ package it.polimi.ingsw.actions;
 import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.GameModel;
 import it.polimi.ingsw.Player;
+import it.polimi.ingsw.cards.power_up.PowerUp;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -46,54 +47,75 @@ public class ActionBuilder {
 
         ArrayList<Action> actions = new ArrayList<>();
 
-        if (!isFrenzy) {
 
-            int damage = p.getPersonalBoard().getDamage().size();
-            int adrenalineStage;
+        if(p.getModel().getMovesLeft()!= 0) {
 
-            adrenalineStage = 0;
+            if (!isFrenzy) {
 
-            if (damage > stage1) {
-                adrenalineStage = 1;
-            }
+                int damage = p.getPersonalBoard().getDamage().size();
+                int adrenalineStage;
 
-            if (damage > stage2) {
-                adrenalineStage = 2;
-            }
+                adrenalineStage = 0;
 
-            actions.add(new Action("Move", stage0MoveRange));
+                if (damage > stage1) {
+                    adrenalineStage = 1;
+                }
 
-            if (adrenalineStage == 0) {
+                if (damage > stage2) {
+                    adrenalineStage = 2;
+                }
 
-                actions.add(new Action("Pick", stage0PickRange));
-                actions.add(new Action("Shoot", stage0ShootRange));
+                actions.add(new Action("Move", stage0MoveRange));
 
-            } else if (adrenalineStage == 1) {
+                if (adrenalineStage == 0) {
 
-                actions.add(new Action("Pick", stage1PickRange));
-                actions.add(new Action("Shoot", stage1ShootRange));
+                    actions.add(new Action("Pick", stage0PickRange));
+                    actions.add(new Action("Shoot", stage0ShootRange));
 
-            } else if (adrenalineStage == 2) {
+                } else if (adrenalineStage == 1) {
 
-                actions.add(new Action("Pick", stage2PickRange));
-                actions.add(new Action("Shoot", stage2ShootRange));
+                    actions.add(new Action("Pick", stage1PickRange));
+                    actions.add(new Action("Shoot", stage1ShootRange));
 
-            }
+                } else if (adrenalineStage == 2) {
+
+                    actions.add(new Action("Pick", stage2PickRange));
+                    actions.add(new Action("Shoot", stage2ShootRange));
+
+                }
 
 
-        } else {
-
-            if (!p.isStartingPlayer()) {
-                actions.add(new Action("Move", frenzyMoveRange));
-                actions.add(new Action("Pick", frenzyPickRange));
-                actions.add(new Action("Move, reload and Shoot", frenzyMoveReloadShootRange));
             } else {
-                actions.add(new Action("Pick", firstPlayerFrenzyPickRange));
-                actions.add(new Action("Move, reload and Shoot", firstPlayerFrenzyMoveReloadShootRange));
 
+                if (!p.getStartedFrenzy()) {
+                    actions.add(new Action("Move", frenzyMoveRange));
+                    actions.add(new Action("Pick", frenzyPickRange));
+                    actions.add(new Action("Move, reload and Shoot", frenzyMoveReloadShootRange));
+                } else {
+                    actions.add(new Action("Pick", firstPlayerFrenzyPickRange));
+                    actions.add(new Action("Move, reload and Shoot", firstPlayerFrenzyMoveReloadShootRange));
+
+                }
             }
+
+        }else{
+            actions.add(new Action("Reload",0));
+        }
+
+        for(PowerUp pu : p.getPowerupList()){
+
+            boolean flag = false;
+
+            if(pu.getName() == "Teleporter" || pu.getName() == "Newton"){
+                flag = true;
+            }
+            if(flag == true){
+                actions.add(new Action("PowerUp",0));
+            }
+
         }
 
         return actions;
     }
+
 }

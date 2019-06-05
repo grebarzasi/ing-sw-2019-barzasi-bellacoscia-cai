@@ -12,6 +12,7 @@ import java.util.Set;
 
 public class Shooting implements ControllerState {
 
+    private int range;
     private Controller controller;
     private Weapon shootingWith;
 
@@ -55,5 +56,13 @@ public class Shooting implements ControllerState {
 
     public void setShootingWith(Weapon shootingWith) {
         this.shootingWith = shootingWith;
+    }
+
+    public int getRange() {
+        return range;
+    }
+
+    public void setRange(int range) {
+        this.range = range;
     }
 }

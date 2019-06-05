@@ -5,12 +5,18 @@ import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.Ammo;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Controller {
 
+    private static final int[] frenzyPointsVec = {2,1,1,1};
+
     private static final int height = 3;
     private static final int width = 4;
+
+    private static final int deathDamage = 11;
+    private static final int overKillDamage = 12;
 
 
     //State pattern states
@@ -29,6 +35,7 @@ public class Controller {
     ControllerState teleporting;
     ControllerState usingNewton;
     ControllerState spawning;
+    ControllerState frenzySpecialAction;
 
 
     //current state patten state
@@ -36,6 +43,7 @@ public class Controller {
     ControllerState currentState;
 
 
+    private boolean hasFrenzy;
     private GameModel model;
     private Lobby lobby;
     private View view;
@@ -60,6 +68,7 @@ public class Controller {
         this.usingNewton = new UsingNewton(this);
         this.shooting = new Spawning(this);
         this.spawning = new Spawning(this);
+        this.frenzySpecialAction = new FrenzySpecialAction(this);
 
     }
 
@@ -85,21 +94,32 @@ public class Controller {
         int i;
         int flag = 0;
 
-        for (Figure figure : this.model.getPlayerList()) {
+        for (Figure f : this.model.getPlayerList()) {
 
-            if (figure.getPersonalBoard().getDamage().size() >= 11) {
+            if (f.getPersonalBoard().getDamage().size() >= deathDamage) {
 
-                for (i = 0; i < this.model.getBoard().getTrack().getKillsTrack().size(); i++) {
-                    if (this.model.getBoard().getTrack().getKillsTrack().get(i) == null) {
-                        flag = i;
+                ArrayList<Token> addToTrack = new ArrayList<>();
+                addToTrack.add(f.getPersonalBoard().getDamage().get(deathDamage - 1));
+                addToTrack.add(f.getPersonalBoard().getDamage().get(overKillDamage -1));
+                this.getBoard().getTrack().getKillsTrack().add(addToTrack);
+
+                if(this.getBoard().getTrack().getKillsTrack().size() == this.getBoard().getTrack().getSkullMax()){
+                    if(this.hasFrenzy){
+
+                        this.model.setFrenzy(true);
+                        this.getCurrentPlayer().setStartedFrenzy(true);
+                        this.model.getBoard().refillSquares();
+
+
+
+                    }else if(!this.hasFrenzy){
+
+                        this.view.displayLeaderboard();
+
                     }
+
                 }
 
-                this.model.getBoard().getTrack().getKillsTrack().get(i).add(figure.getPersonalBoard().getDamage().get(10));
-                if (figure.getPersonalBoard().getDamage().size() == 12) {
-                    this.model.getBoard().getTrack().getKillsTrack().get(i).add(figure.getPersonalBoard().getDamage().get(11));
-                }
-                figure.die();
             }
 
         }

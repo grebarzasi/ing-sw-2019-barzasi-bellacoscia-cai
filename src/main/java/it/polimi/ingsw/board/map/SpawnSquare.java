@@ -37,4 +37,8 @@ public class SpawnSquare extends Square {
     public void setArmory(Armory armory) {
         this.armory = armory;
     }
+
+    public boolean isSpawn(){
+        return true;
+    }
 }

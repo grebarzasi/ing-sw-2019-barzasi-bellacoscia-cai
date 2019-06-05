@@ -33,6 +33,8 @@ public class Player extends Figure {
 
     private int maxActions;
 
+    private boolean startedFrenzy;
+
     public Preferences getPref() {
         return pref;
     }
@@ -41,7 +43,9 @@ public class Player extends Figure {
         this.pref = pref;
     }
 
-    public Player(){};
+    public Player(){
+
+    }
 
     /**
      * Picks up AmmoLot on the square
@@ -51,7 +55,7 @@ public class Player extends Figure {
     public void pickAmmo(){
 
         if(this.getPosition().isSpawn() || (!this.getPosition().isSpawn() && ((NonSpawnSquare)this.getPosition()).getDrop() == null)){
-            System.out.println("No ammo to pick \n");
+           this.getModel().getController().getView().displayMessage("No Ammo to Pick");
         }else{
 
             if(this.getPosition().isSpawn() || ((NonSpawnSquare)this.getPosition()).getDrop().hasPowerup()){
@@ -80,14 +84,6 @@ public class Player extends Figure {
         this.username = username;
         this.weaponsList = new ArrayList<>();
         this.powerupList = new ArrayList<>();
-    }
-
-    public Boolean isStartingPlayer() {
-        if (this.getModel().getPlayerList().indexOf(this) == 0) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     public void addPowerUp(PowerUp toAdd) {
@@ -141,5 +137,13 @@ public class Player extends Figure {
 
     public void setMaxActions(int maxActions) {
         this.maxActions = maxActions;
+    }
+
+    public boolean getStartedFrenzy() {
+        return startedFrenzy;
+    }
+
+    public void setStartedFrenzy(boolean startedFrenzy) {
+        this.startedFrenzy = startedFrenzy;
     }
 }

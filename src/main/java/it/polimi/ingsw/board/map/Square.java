@@ -11,7 +11,7 @@ import java.util.Collection;
  */
 
 
-public class Square {
+public abstract class Square {
 
 
     //position of the square within the matrix
@@ -79,16 +79,6 @@ public class Square {
     }
 
 
-
-    public boolean isSpawn(){
-        return true;
-    }
-
-
-
-
-
-
     public boolean isAdjacent(Square s){
 
         return this.getNorth() == s || this.getEast() == s || this.getSouth() == s || this.getWest() == s;
@@ -142,8 +132,12 @@ public class Square {
         this.room = room;
     }
 
-    //IMPLEMENT HERE
-    public void pickItem(Figure p){}
+
+    public boolean isSpawn(){
+        return false;
+    }
+
+
 
 
 

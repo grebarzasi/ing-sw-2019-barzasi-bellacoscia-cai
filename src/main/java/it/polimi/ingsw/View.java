@@ -37,7 +37,7 @@ public interface View {
      * @return the chosen one
      */
 
-    public String showMoves(Set<String> args);
+    public Action showMoves(ArrayList<Action> args);
 
     /**
      * Shows the possible destinations a figure can reach and then returns the chosen value

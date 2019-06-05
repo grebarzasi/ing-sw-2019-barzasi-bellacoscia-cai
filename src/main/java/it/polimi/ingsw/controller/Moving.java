@@ -53,4 +53,11 @@ public class Moving implements ControllerState{
         }
     }
 
+    public int getRange() {
+        return range;
+    }
+
+    public void setRange(int range) {
+        this.range = range;
+    }
 }

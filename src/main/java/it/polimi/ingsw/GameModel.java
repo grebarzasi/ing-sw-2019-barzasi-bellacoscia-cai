@@ -141,4 +141,12 @@ public class GameModel {
     public void setHasBotAction(boolean hasBotAction) {
         this.hasBotAction = hasBotAction;
     }
+
+    public Controller getController() {
+        return controller;
+    }
+
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
 }

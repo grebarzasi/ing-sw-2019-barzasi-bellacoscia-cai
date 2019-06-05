@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class Picking implements ControllerState{
 
+    private int range;
     private Controller controller;
 
     private static final int width = 4;
@@ -73,4 +74,11 @@ public class Picking implements ControllerState{
 
     }
 
+    public int getRange() {
+        return range;
+    }
+
+    public void setRange(int range) {
+        this.range = range;
+    }
 }
