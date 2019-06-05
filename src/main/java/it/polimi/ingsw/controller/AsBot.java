@@ -49,7 +49,8 @@ public class AsBot implements ControllerState{
             Figure toShoot = this.controller.getView().singleTargetingShowTarget(targets);
 
             int index = this.controller.getModel().getPlayerList().indexOf(toShoot);
-            this.controller.getModel().getBot().inflictDamage(1, this.controller.getModel().getPlayerList().get(index));
+
+            this.controller.getModel().getBot().shoot(this.controller.getModel().getPlayerList().get(index));
 
             this.controller.endTurn();
             this.controller.setCurrentState(this.controller.choosingMove);

@@ -15,14 +15,6 @@ import java.util.Set;
 
 public class ActionBuilder {
 
-    /**
-     * Generates available actions based on information taken from the game
-     *
-     * @param p the player
-     * @param isFrenzy frenzy status of the game
-     * @return the ArrayList of actions a player can perform
-     */
-
     private static final int stage1 = 2;
     private static final int stage2 = 5;
 
@@ -42,6 +34,16 @@ public class ActionBuilder {
 
     public static final int firstPlayerFrenzyPickRange = 3;
     public static final int firstPlayerFrenzyMoveReloadShootRange = 2;
+
+
+
+    /**
+     * Generates available actions based on information taken from the game
+     *
+     * @param p the player
+     * @param isFrenzy frenzy status of the game
+     * @return the ArrayList of actions a player can perform
+     */
 
     public static ArrayList<Action> build(Player p, boolean isFrenzy) {
 

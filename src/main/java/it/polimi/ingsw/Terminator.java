@@ -13,14 +13,13 @@ public class Terminator extends Figure{
 
     private static final int width = 4;
     private static final int height = 3;
-    private static final int range = 3;
+
+    public static final int stage2 = 5;
 
 
-    public Terminator(String character, Player owner) {
+    public Terminator(String character) {
+
         super(character);
-    }
-
-    public void pass(){
 
     }
 
@@ -33,21 +32,9 @@ public class Terminator extends Figure{
 
         if(canSee(p)){
             this.inflictDamage(1,p);
-            if(this.getPersonalBoard().getDamage().size() >= 6){
+            if(this.getPersonalBoard().getDamage().size() > stage2){
                 this.inflictMark(1,p);
             }
-        }
-
-    }
-
-
-    public void doMove(Square s){
-
-        if(s.isAdjacent(this.getPosition())){
-            this.setPosition(s);
-        }
-        else{
-            System.out.println("Terminator can only be moved by one square");
         }
 
     }
