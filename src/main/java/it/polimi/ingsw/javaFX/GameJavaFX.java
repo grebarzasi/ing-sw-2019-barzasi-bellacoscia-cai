@@ -192,7 +192,7 @@ public class GameJavaFX extends Application {
 
         player.getpBoard().setMarks(marks);
         player.getpBoard().setDamage(damage);
-
+        player.getpBoard().setSkulls(7);
 
         // */
 
@@ -1266,6 +1266,24 @@ public class GameJavaFX extends Application {
                 }
             }
             j++;
+        }
+        while(k <= p.getpBoard().getSkulls() + 2){
+
+            if(k == no){
+                k++;
+                continue;
+            }
+
+            ImageView skull = null;
+
+            try {
+                skull = new ImageView(new Image(new FileInputStream(PATH_SKULL), width-25, hskulls-25, true, true));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            grid.add(skull,k,2);
+            k++;
         }
     }
 
