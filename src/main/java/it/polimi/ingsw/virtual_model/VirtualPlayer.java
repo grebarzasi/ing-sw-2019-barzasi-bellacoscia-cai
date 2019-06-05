@@ -25,6 +25,8 @@ public class VirtualPlayer {
         this.username=username;
         this.printed=false;
         this.pBoard=new VirtualPlayerBoard();
+        this.weapons = new HashMap<>();
+        this.powerUps= new ArrayList<>();
     }
 
 
@@ -40,8 +42,8 @@ public class VirtualPlayer {
         return character;
     }
 
-    public void setCharacter(String charachter) {
-        this.character = charachter;
+    public void setCharacter(String character) {
+        this.character = character;
     }
 
     public boolean isPrinted() {

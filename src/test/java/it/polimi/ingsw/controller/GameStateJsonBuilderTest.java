@@ -2,7 +2,6 @@ package it.polimi.ingsw.controller;
 
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import it.polimi.ingsw.Lobby;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.PlayerBoard;

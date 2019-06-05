@@ -3,8 +3,8 @@ package it.polimi.ingsw.virtual_model;
 import java.util.ArrayList;
 
 public class VirtualPlayerBoard {
-    private ArrayList<String> damage;
-    private ArrayList<String> marks;
+    private ArrayList<String> damage=new ArrayList<>();
+    private ArrayList<String> marks= new ArrayList<>();
     private int skulls;
     private int ammoRed = 3;
     private int ammoBlue = 3;

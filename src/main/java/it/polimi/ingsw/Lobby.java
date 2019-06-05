@@ -16,6 +16,7 @@ public class Lobby {
     private boolean hasStarted;
     private boolean hasTimerStarted;
     private Timer timer;
+    private DisconnectChecker disconnectChecker;
     private final int DELAY=30;
 
 
@@ -30,13 +31,17 @@ public class Lobby {
         this.timer= new Timer();
         this.hasStarted=false;
         this.hasTimerStarted=false;
+        this.disconnectChecker = new DisconnectChecker(this);
     }
 
     public synchronized boolean addPlayer(ClientThreadSocket p) {
         if (joinedPlayers.size() < maxPlayer && usernameCheck(p) && characterCheck(p)) {
             joinedPlayers.add(p);
+            if(!disconnectChecker.isAlive())
+                disconnectChecker.start();
             return true;
         }
+
         return false;
     }
 
@@ -78,9 +83,6 @@ public class Lobby {
         }
     }
 
-    /**
-     * Updates all client when game starts
-     */
 
 
     public boolean usernameCheck(ClientThreadSocket p){
@@ -102,13 +104,14 @@ public class Lobby {
     }
 
     public void disconnectPlayer(ClientThreadSocket p){
-        this.joinedPlayers.remove(p);
+        joinedPlayers.remove(p);
+        updateClients();
         System.out.print(p.getOwner().getUsername() + " has cowardly left the battle before it began\n");
     }
 
 
 
-    public ArrayList<ClientThreadSocket> getJoinedPlayers() {
+    public synchronized ArrayList<ClientThreadSocket> getJoinedPlayers() {
         return joinedPlayers;
     }
 

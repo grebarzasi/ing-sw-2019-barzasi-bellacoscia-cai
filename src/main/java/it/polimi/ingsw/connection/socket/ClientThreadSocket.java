@@ -142,7 +142,9 @@ public class ClientThreadSocket extends Thread {
                 waitLoginGS();
             }
         } catch (IOException e) {
-        e.printStackTrace();
+            System.err.println("Smoething went wrong, removing"+ client.getInetAddress());
+            lobby.disconnectPlayer(this);
+            this.interrupt();
     }
     }
 
@@ -174,6 +176,14 @@ public class ClientThreadSocket extends Thread {
 
     public void setExpired(boolean expired) {
         this.expired = expired;
+    }
+
+    public Socket getClient() {
+        return client;
+    }
+
+    public void setClient(Socket client) {
+        this.client = client;
     }
 
     @Override
