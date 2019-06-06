@@ -103,7 +103,7 @@ public class GameJavaFX extends Application {
     private static final String PATH_GREEN_BOARD = "src/main/resources/images/board/green_board.png";
     private static final String PATH_GREY_BOARD = "src/main/resources/images/board/gray_board.png";
 
-    private static final String PATH_GENERAL_COLOR = "src/main/resources/images/character";
+    private static final String PATH_GENERAL_COLOR = "src/main/resources/images/character/";
     private static final String PATH_YELLOW = "src/main/resources/images/character/yellow.png";
     private static final String PATH_RED = "src/main/resources/images/character/red.png";
     private static final String PATH_BLUE = "src/main/resources/images/character/blue.png";
@@ -177,11 +177,14 @@ public class GameJavaFX extends Application {
         ///*
 
         points = 0;
-        player = new VirtualPlayer("carlo", "yellow");
+        player = new VirtualPlayer("Mariangiangiangela", "yellow");
         players = new ArrayList<>();
         players.add(player);
-        players.add(new VirtualPlayer("gre","blue"));
-        players.add(new VirtualPlayer("theo","red"));
+        players.add(new VirtualPlayer("AlbertoAngela","blue"));
+        players.add(new VirtualPlayer("Mussolini","red"));
+        players.add(new VirtualPlayer("MioPadre","green"));
+        players.add(new VirtualPlayer("Bignè","grey"));
+        //System.out.println(players.get(4).getCharacter());
 
         ArrayList<String> damage = new ArrayList<>();
         damage.add("red");
@@ -732,13 +735,6 @@ public class GameJavaFX extends Application {
         setCellBoard(gridOtherBoard4,widthOther,heightOtherBoard);
         setCellBoard(gridOtherBoard5,widthOther,heightOtherBoard);
 
-/*
-        Image imgOBoard = new Image(new FileInputStream("src/main/resources/images/yellow_board.png"),widthOther,heightOtherBoard,true,true);
-        BackgroundImage backgroundOB = new BackgroundImage(imgOBoard, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-        Background backOB = new Background(backgroundOB);
-
-
- */
 
         /**
          * set deck
@@ -792,19 +788,30 @@ public class GameJavaFX extends Application {
         }
 
         btnPwe1.setOnAction(e->{
-            infoWindow iw = new infoWindow(false);
-            iw.show();
+            if(shoot){
+
+            }else {
+                infoWindow iw = new infoWindow(false);
+                iw.show();
+            }
         });
         btnPwe2.setOnAction(e->{
-            infoWindow iw = new infoWindow(false);
-            iw.show();
+            if(shoot){
+
+            }else {
+                infoWindow iw = new infoWindow(false);
+                iw.show();
+            }
         });
         btnPwe3.setOnAction(e->{
-            infoWindow iw = new infoWindow(false);
-            iw.show();
+            if(shoot){
+
+            }else {
+                infoWindow iw = new infoWindow(false);
+                iw.show();
+            }
         });
         btnPpu1.setOnAction(e->{
-            System.out.println("pu1");
             infoWindow iw = new infoWindow(true);
             iw.show();
         });
@@ -820,7 +827,8 @@ public class GameJavaFX extends Application {
         for (ArrayList<Button> btnArr : weOther){
             for (Button btn : btnArr) {
                 btn.setOnAction(e->{
-                    System.out.println("ok");
+                    infoWindow iw = new infoWindow(false);
+                    iw.show();
                 });
             }
 
@@ -839,7 +847,13 @@ public class GameJavaFX extends Application {
             System.out.println("ok");
         });
 
-        btnDeck.setOnAction(e->{});
+        btnDeck.setOnAction(e->{System.out.println("ok");});
+
+        setPlayerOnCell(btnCell.get(0),player.getCharacter());
+        setPlayerOnCell(btnCell.get(0),players.get(0).getCharacter());
+        setPlayerOnCell(btnCell.get(0),players.get(1).getCharacter());
+        setPlayerOnCell(btnCell.get(0),players.get(2).getCharacter());
+        setPlayerOnCell(btnCell.get(0),players.get(3).getCharacter());
 
 
         primaryStage.show();
@@ -1129,17 +1143,62 @@ public class GameJavaFX extends Application {
         return res;
     }
 
-    public void setPlayerOnCell(Button btn, String color){
+    public void setPlayerOnCell(ArrayList<Button> btn, String color){
+
+        final int R = 4;
+        final int B = 3;
+        final int Y = 0;
+        final int G = 2;
+        final int GR = 1;
+
+        DropShadow borderGlow = new DropShadow();
+        borderGlow.setColor(Color.WHITE);
+        borderGlow.setHeight(30);
+        borderGlow.setWidth(30);
+        borderGlow.setOffsetX(0f);
+        borderGlow.setOffsetY(0f);
 
         String image = color + ".png";
 
+        System.out.println(image);
+        Image img = null;
         try {
-            Image img = new Image(new FileInputStream(PATH_GENERAL_COLOR + image), 70, 70, true, true);
-            setButtonBack(btn,img);
-            btn.setOpacity(1);
+            img = new Image(new FileInputStream(PATH_GENERAL_COLOR + image), 50, 50, true, true);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
+        switch(color){
+            case("red"):{
+                setButtonBack(btn.get(R),img);
+                btn.get(R).setOpacity(1);
+                btn.get(R).setEffect(borderGlow);
+                break;
+            }
+            case("blue"):{
+                setButtonBack(btn.get(B),img);
+                btn.get(B).setOpacity(1);
+                btn.get(B).setEffect(borderGlow);
+                break;
+            }case("yellow"):{
+                setButtonBack(btn.get(Y),img);
+                btn.get(Y).setOpacity(1);
+                btn.get(Y).setEffect(borderGlow);
+                break;
+            }case("green"):{
+                setButtonBack(btn.get(G),img);
+                btn.get(G).setOpacity(1);
+                btn.get(G).setEffect(borderGlow);
+                break;
+            }case("grey"):{
+                setButtonBack(btn.get(GR),img);
+                btn.get(GR).setOpacity(1);
+                btn.get(GR).setEffect(borderGlow);
+                break;
+            }
+        }
+
+
     }
 
     public void setButtonBack(Button btn,Image img ){
