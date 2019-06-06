@@ -129,7 +129,7 @@ public class GameJavaFX extends Application {
     private static final String PATH_GREY_DAMAGE_DOUBLE = "src/main/resources/images/damage/grey_double.png";
 
     private static final String PATH_WEAPON = "src/main/resources/images/weapon/";
-
+    private static final String PATH_POWER_UP = "src/main/resources/images/power-up/";
 
     private static final String PATH_TITLE = "src/main/resources/images/title.png";
     private static final String PATH_TRACK = "src/main/resources/images/killshotrack.png";

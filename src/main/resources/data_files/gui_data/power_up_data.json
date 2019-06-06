@@ -1,0 +1,34 @@
+{
+  "teleporter": {
+    "color":{
+      "red" :"AD_powerups_IT_0212.png",
+      "yellow":"AD_powerups_IT_0213.png",
+      "blue": "AD_powerups_IT_0211.png"
+    },
+    "info" : "teletrasporto.png"
+  },
+  "tagback_granade": {
+    "color":{
+      "red" :"AD_powerups_IT_023.png",
+      "yellow":"AD_powerups_IT_024.png",
+      "blue": "AD_powerups_IT_022.png"
+    },
+    "info" : "granata_venom.png"
+  },
+  "newton": {
+    "color":{
+      "red" :"AD_powerups_IT_029.png",
+      "yellow":"AD_powerups_IT_0210.png",
+      "blue": "AD_powerups_IT_028.png"
+    },
+    "info" : "raggio_cinetico.png"
+  },
+  "targeting_scope": {
+    "color":{
+      "red" :"AD_powerups_IT_026.png",
+      "yellow":"AD_powerups_IT_027.png",
+      "blue": "AD_powerups_IT_025.png"
+    },
+    "info" : "teletrasporto.png"
+  }
+}
