@@ -849,11 +849,17 @@ public class GameJavaFX extends Application {
 
         btnDeck.setOnAction(e->{System.out.println("ok");});
 
+        // ** HARDCODED TEST **
         setPlayerOnCell(btnCell.get(0),player.getCharacter());
-        setPlayerOnCell(btnCell.get(0),players.get(0).getCharacter());
         setPlayerOnCell(btnCell.get(0),players.get(1).getCharacter());
         setPlayerOnCell(btnCell.get(0),players.get(2).getCharacter());
         setPlayerOnCell(btnCell.get(0),players.get(3).getCharacter());
+        setPlayerOnCell(btnCell.get(0),players.get(4).getCharacter());
+
+        hideCell(btnCell.get(1));
+        hideCell(btnCell.get(2));
+        hideCell(btnCell.get(4));
+        hideCell(btnCell.get(5));
 
 
         primaryStage.show();
@@ -1160,7 +1166,6 @@ public class GameJavaFX extends Application {
 
         String image = color + ".png";
 
-        System.out.println(image);
         Image img = null;
         try {
             img = new Image(new FileInputStream(PATH_GENERAL_COLOR + image), 50, 50, true, true);
@@ -1374,6 +1379,12 @@ public class GameJavaFX extends Application {
 
             grid.add(skull,k,2);
             k++;
+        }
+    }
+
+    public void hideCell(ArrayList<Button> btn){
+        for (Button b : btn) {
+            b.setOpacity(0.5);
         }
     }
 
