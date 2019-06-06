@@ -1,5 +1,10 @@
 package it.polimi.ingsw.javaFX;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import it.polimi.ingsw.cards.Ammo;
+import it.polimi.ingsw.cards.weapon.Weapon;
+import it.polimi.ingsw.cards.weapon.weapon_builder.EffectBuilder;
 import it.polimi.ingsw.virtual_model.VirtualLobby;
 import it.polimi.ingsw.virtual_model.VirtualPlayer;
 import it.polimi.ingsw.virtual_model.VirtualPlayerBoard;
@@ -16,13 +21,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /*
 
@@ -119,6 +127,8 @@ public class GameJavaFX extends Application {
     private static final String PATH_BLUE_DAMAGE_DOUBLE = "src/main/resources/images/damage/blue_double.png";
     private static final String PATH_GREEN_DAMAGE_DOUBLE = "src/main/resources/images/damage/green_double.png";
     private static final String PATH_GREY_DAMAGE_DOUBLE = "src/main/resources/images/damage/grey_double.png";
+
+    private static final String PATH_WEAPON = "src/main/resources/images/weapon/";
 
 
     private static final String PATH_TITLE = "src/main/resources/images/title.png";
@@ -779,9 +789,18 @@ public class GameJavaFX extends Application {
 
         }
 
-        btnPwe1.setOnAction(e->{System.out.println("ok");});
-        btnPwe2.setOnAction(e->{System.out.println("ok");});
-        btnPwe3.setOnAction(e->{System.out.println("ok");});
+        btnPwe1.setOnAction(e->{
+            weaponWindow ww = new weaponWindow();
+            ww.show();
+        });
+        btnPwe2.setOnAction(e->{
+            weaponWindow ww = new weaponWindow();
+            ww.show();
+        });
+        btnPwe3.setOnAction(e->{
+            weaponWindow ww = new weaponWindow();
+            ww.show();
+        });
         btnPpu1.setOnAction(e->{System.out.println("ok");});
         btnPpu2.setOnAction(e->{System.out.println("ok");});
         btnPpu3.setOnAction(e->{System.out.println("ok");});
@@ -1287,4 +1306,86 @@ public class GameJavaFX extends Application {
         }
     }
 
+    public class weaponWindow extends Stage {
+        public weaponWindow() {
+
+            String weapon = null;
+            String text = null;
+
+            double widthScreen = Screen.getPrimary().getBounds().getWidth() / 3;
+            double heightScreen = Screen.getPrimary().getBounds().getHeight() / 3;
+
+            Group root = new Group();
+            Scene theScene = new Scene(root);
+            this.setScene(theScene);
+
+            GridPane grid = new GridPane();
+            grid.setAlignment(Pos.CENTER);
+            grid.setHgap(0);
+            grid.setVgap(0);
+            grid.setPadding(new Insets(0, 0, 0, 0));
+
+            Scene scene = new Scene(grid, widthScreen+50, heightScreen+50);
+            this.setScene(scene);
+
+            scene.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> grid.setPrefWidth((double) newSceneWidth));
+            scene.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> grid.setPrefHeight((double) newSceneHeight));
+
+            ColumnConstraints c1 = new ColumnConstraints(widthScreen / 2);
+            ColumnConstraints c2 = new ColumnConstraints(widthScreen / 2);
+
+            RowConstraints r1 = new RowConstraints(heightScreen);
+
+            grid.getColumnConstraints().addAll(c1, c2);
+            grid.getRowConstraints().add(r1);
+
+            ObjectMapper mapper = new ObjectMapper();
+
+            final String PATH = "src/main/resources/data_files/gui_data/weapon.json";
+            File jsonFile = new File(PATH);
+            try {
+
+                JsonNode rootNode = null;
+                try {
+                    rootNode = mapper.readTree(jsonFile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                JsonNode chamberNode = rootNode.path("ZX-2");
+
+                weapon = chamberNode.path("path").asText();
+                text = chamberNode.path("info").asText();
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+            ImageView img = null;
+            try {
+                img = new ImageView(new Image(new FileInputStream( PATH_WEAPON + weapon), widthScreen/2-50, heightScreen-50, true, true));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            ImageView img2 = null;
+            try {
+                img2 = new ImageView(new Image(new FileInputStream( PATH_WEAPON + text), widthScreen/2+20,heightScreen+20, true, true));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                Image back = new Image(new FileInputStream(PATH_BACK_GAME), 2190, 1920, true, true);
+                BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+                grid.setBackground(new Background(backgroundImage));
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+
+            grid.add(img, 0, 0);
+            grid.add(img2,1,0);
+
+        }
+    }
 }
