@@ -95,7 +95,7 @@ public class PlayerTest {
      * a maximum of 3 ammo per color
      */
 
-    @Test
+   @Test
     public void consecutivePicking(){
 
         GameModel empire = new GameModel(new ArrayList<>(), null, new Board("large"));

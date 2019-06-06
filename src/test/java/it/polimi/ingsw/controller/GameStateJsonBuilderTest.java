@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller;
 
 
 import com.fasterxml.jackson.databind.JsonNode;
+import it.polimi.ingsw.CLI.Maps;
 import it.polimi.ingsw.Lobby;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.PlayerBoard;
@@ -15,6 +16,7 @@ import it.polimi.ingsw.cards.WeaponDeck;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Weapon;
 import it.polimi.ingsw.connection.socket.ClientThreadSocket;
+import it.polimi.ingsw.virtual_model.UpdateParser;
 import it.polimi.ingsw.virtual_model.VirtualCell;
 import it.polimi.ingsw.virtual_model.VirtualModel;
 import it.polimi.ingsw.virtual_model.VirtualPlayer;
@@ -138,21 +140,21 @@ class GameStateJsonBuilderTest {
 
         JsonNode node = new GameStateJsonBuilder(contr).create();
         System.out.println(node);
-
         VirtualModel vmodel = new VirtualModel();
-        vmodel.updateModel(node.toString());
-        HashMap<String, VirtualPlayer> allP = vmodel.getAllPlayers();
+        vmodel.setOwner(new VirtualPlayer("gre","red"));
+        UpdateParser parser=new UpdateParser(vmodel);
+        parser.updateModel(node.toString());
 
 
 
         // verify if its all ok
-        assertTrue(allP.containsKey(p1.getCharacter()));
-        assertTrue(allP.containsKey(p2.getCharacter()));
-        assertTrue(allP.containsKey(p3.getCharacter()));
+        assertNotNull(vmodel.findPlayer(p1.getCharacter()));
+        assertNotNull(vmodel.findPlayer(p2.getCharacter()));
+        assertNotNull(vmodel.findPlayer(p3.getCharacter()));
 
-        VirtualPlayer vP1 = allP.get(p1.getCharacter());
-        VirtualPlayer vP2 = allP.get(p2.getCharacter());
-        VirtualPlayer vP3 = allP.get(p3.getCharacter());
+        VirtualPlayer vP1 = vmodel.findPlayer(p1.getCharacter());
+        VirtualPlayer vP2 = vmodel.findPlayer(p2.getCharacter());
+        VirtualPlayer vP3 = vmodel.findPlayer(p3.getCharacter());
 
         assertEquals(p1.getUsername(),vP1.getUsername());
         assertEquals(p2.getUsername(),vP2.getUsername());
@@ -266,6 +268,7 @@ class GameStateJsonBuilderTest {
         HashMap<String, VirtualCell> cells = vmodel.getBoard().getMap().getCells();
         System.out.println(cells);
 
-
+        Maps cliMap =new Maps(vmodel);
+        cliMap.loadFile("cli_large_pos");
     }
 }

@@ -47,19 +47,4 @@ public class VirtualBoard {
         this.map = map;
     }
 
-    public void parseBoard(JsonNode node){
-        skull=node.path("skull").asInt();
-
-        //parse killshotTrack
-        ArrayList<String> kills = new ArrayList<>();
-        Iterator<JsonNode> killIter = node.path("killshot_track").elements();
-        while (killIter.hasNext())
-            kills.add(killIter.next().toString().replace("\"", ""));
-        killshotTrack=kills;
-
-        //parse cells
-        map.setName(node.path("map").asText());
-        map.parseMap(node.path("cells"));
-
-    }
 }
