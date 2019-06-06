@@ -88,7 +88,7 @@ public class Maps {
 
     public static void main(String args[]){
         try {
-            new Maps().loadFile("cli_small");
+            new Maps().loadFile("cli_large");
         } catch (IOException e) {
             e.printStackTrace();
         }

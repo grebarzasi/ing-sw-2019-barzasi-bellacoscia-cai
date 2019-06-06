@@ -72,6 +72,29 @@ public class Controller {
 
     }
 
+    public Controller(Lobby lobby, View view) {
+
+        this.lobby = lobby;
+        this.model = new GameModel(lobby, this);
+        this.view = view;
+
+        this.asBot = new AsBot(this);
+        this.choosingMove = new ChoosingMove(this);
+        this.choosingPowerUpToUse = new ChoosingPowerUpToUse(this);
+        this.choosingWeapon = new ChoosingWeapon(this);
+        this.moving = new Moving(this);
+        this.picking = new Picking(this);
+        this.pickingWeapon = new PickingWeapon(this);
+        this.reloading = new Reloading(this);
+        this.shooting = new Shooting(this);
+        this.teleporting = new Teleporting(this);
+        this.usingNewton = new UsingNewton(this);
+        this.shooting = new Spawning(this);
+        this.spawning = new Spawning(this);
+        this.frenzySpecialAction = new FrenzySpecialAction(this);
+
+    }
+
     /**
      * Goes back to choosing the move
      */
