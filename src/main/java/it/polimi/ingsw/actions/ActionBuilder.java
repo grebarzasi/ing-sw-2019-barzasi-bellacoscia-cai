@@ -36,6 +36,7 @@ public class ActionBuilder {
     public static final int firstPlayerFrenzyMoveReloadShootRange = 2;
 
 
+    //TODO Generate bot action
 
     /**
      * Generates available actions based on information taken from the game

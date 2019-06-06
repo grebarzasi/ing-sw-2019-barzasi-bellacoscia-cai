@@ -16,15 +16,10 @@ public class AsBot implements ControllerState{
 
     private Controller controller;
 
-    private boolean hasMoved;
-    private boolean hasShot;
-
 
     public AsBot(Controller controller) {
         this.controller = controller;
 
-        this.hasMoved = false;
-        this.hasShot = false;
     }
 
 

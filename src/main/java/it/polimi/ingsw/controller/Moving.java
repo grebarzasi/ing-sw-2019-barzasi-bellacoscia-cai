@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.board.map.Square;
 
 import java.util.ArrayList;
@@ -20,22 +21,9 @@ public class Moving implements ControllerState{
     @Override
     public void command() {
 
-        ArrayList<Square> options = new ArrayList<>();
+        ArrayList<Square> options;
 
-        int row;
-        int column;
-
-        for(row = 0; row < height; row++){
-            for(column = 0; column < width; column++){
-
-                if(this.controller.getCurrentPlayer().distanceTo(this.controller.getBoard().getMap().getSquareMatrix()[row][column])
-                        < this.range){
-
-                    options.add(this.controller.getBoard().getMap().getSquareMatrix()[row][column]);
-
-                }
-            }
-        }
+        options = this.controller.canGo(this.controller.getCurrentPlayer(),this.range);
 
         Square choice = this.controller.getView().showPossibleMoves(options);
 

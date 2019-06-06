@@ -205,6 +205,37 @@ public class Controller {
         return null;
     }
 
+    /**
+     * Determines the squares a player can reach within a given range
+     *
+     * @param p the Player inquiring on
+     * @param range the range
+     * @return the list of possible squares
+     */
+
+    public ArrayList<Square> canGo(Figure p, int range){
+
+        int row;
+        int column;
+
+        ArrayList<Square> options = new ArrayList<>();
+
+        for(row = 0; row < height; row++){
+            for(column = 0; column < width; column++){
+
+                if(p.distanceTo(this.getModel().getBoard().getMap().getSquareMatrix()[row][column])
+                        < range){
+
+                    options.add(this.getBoard().getMap().getSquareMatrix()[row][column]);
+
+                }
+            }
+        }
+
+        return options;
+
+    }
+
     public Board getBoard() {
         return this.getModel().getBoard();
     }
