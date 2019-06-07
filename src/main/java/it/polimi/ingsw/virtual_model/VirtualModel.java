@@ -14,6 +14,7 @@ public class VirtualModel {
     private VirtualBoard board;
     private ConnectionTech conn;
     private VirtualPlayer owner;
+    private VirtualPlayer turn;
 
     public VirtualModel(ConnectionTech conn,VirtualPlayer owner){
         this.conn=conn;
@@ -71,5 +72,13 @@ public class VirtualModel {
 
     public void setOwner(VirtualPlayer owner) {
         this.owner = owner;
+    }
+
+    public VirtualPlayer getTurn() {
+        return turn;
+    }
+
+    public void setTurn(VirtualPlayer turn) {
+        this.turn = turn;
     }
 }

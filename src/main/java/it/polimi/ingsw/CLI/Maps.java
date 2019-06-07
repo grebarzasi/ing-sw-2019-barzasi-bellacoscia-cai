@@ -198,7 +198,7 @@ public class Maps {
     public void printBoard1(int num){
         ArrayList<VirtualPlayer> temp = new ArrayList<>(model.getAllPlayers());
         temp.remove(model.getOwner());
-        if(num > (model.getAllPlayers().size()-1))
+        if(num >=temp.size())
             return;
         createBoard1(temp.get(num));
     }
@@ -208,7 +208,14 @@ public class Maps {
         System.out.print(RESET+BOARD_LEFT);
 
         //UsernameSpace
-        System.out.print(WHITE+"╲"+BLACK_UNDERLINED+ p.getUsername() + " ");
+        System.out.print(WHITE+"╲");
+        if (p.getCharacter().equals(model.getTurn().getCharacter()))
+            System.out.print(BLACK_BACKGROUND_BRIGHT);
+        else
+            System.out.print(WHITE_BACKGROUND_BRIGHT);
+        System.out.print(p.getUsername() + " ");
+
+
         for (i=p.getUsername().length(); i < USERNAME_SPACE; i++) {
             System.out.print(" ");
         }
@@ -240,7 +247,7 @@ public class Maps {
     public void printBoard2(int num){
         ArrayList<VirtualPlayer> temp = new ArrayList<>(model.getAllPlayers());
         temp.remove(model.getOwner());
-        if(num > (model.getAllPlayers().size()-1))
+        if(num >=temp.size())
             return;
         createBoard2(temp.get(num));
     }
@@ -286,7 +293,7 @@ public class Maps {
     public void printBoard3(int num){
         ArrayList<VirtualPlayer> temp = new ArrayList<>(model.getAllPlayers());
         temp.remove(model.getOwner());
-        if(num > (model.getAllPlayers().size()-1))
+        if(num >=temp.size())
             return;
         createBoard3(temp.get(num));
     }
@@ -295,7 +302,7 @@ public class Maps {
         int i = 0;
         System.out.print(RESET+"├");
         System.out.print(RESET);
-        for(; i<4 /*p.getpBoard().getSkulls()*/; i++){
+        for(; i<(8-p.getpBoard().getSkulls()); i++){
             System.out.print("["+SKULL_T+"]");
         }
         for(; i< DEATH_TRACK.length; i++){
@@ -327,11 +334,11 @@ public class Maps {
     public void printBoard4(int num){
         ArrayList<VirtualPlayer> temp = new ArrayList<>(model.getAllPlayers());
         temp.remove(model.getOwner());
-        if(num == (model.getAllPlayers().size()-1)){
+        if(num == temp.size()-1){
             System.out.print(RESET+BOARD_BOTTOM+RESET);
             return;
         }
-        if(num > (model.getAllPlayers().size()-1))
+        if(num >temp.size()-1)
             return;
         System.out.print(RESET+BOARD_SEP+RESET);
     }

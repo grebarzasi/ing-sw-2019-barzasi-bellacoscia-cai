@@ -28,6 +28,7 @@ public class UpdateParser {
             JsonNode rootNode = mapper.readTree(s);
             parsePlayers(rootNode.path("players"));
             parseBoard(rootNode.path("main_board"));
+            model.setTurn(model.findPlayer(rootNode.path("turn").asText()));
 
         } catch (IOException e) {
             e.printStackTrace();

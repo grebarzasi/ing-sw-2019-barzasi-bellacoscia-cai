@@ -11,6 +11,8 @@ import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.map.Cell;
 import it.polimi.ingsw.board.map.Map;
 import it.polimi.ingsw.board.map.Square;
+import it.polimi.ingsw.cards.Ammo;
+import it.polimi.ingsw.cards.AmmoLot;
 import it.polimi.ingsw.cards.Deck;
 import it.polimi.ingsw.cards.WeaponDeck;
 import it.polimi.ingsw.cards.power_up.PowerUp;
@@ -37,30 +39,40 @@ class GameStateJsonBuilderTest {
         ClientThreadSocket a =new ClientThreadSocket(lobby);
         ClientThreadSocket b =new ClientThreadSocket(lobby);
         ClientThreadSocket c =new ClientThreadSocket(lobby);
+        ClientThreadSocket d =new ClientThreadSocket(lobby);
 
         Player p1 = a.getOwner();
         Player p2 = b.getOwner();
         Player p3 = c.getOwner();
+        Player p4 = d.getOwner();
 
         p1.setCharacter("red");
-        p1.setUsername("Violetta");
+        p1.setUsername("Iron Man");
+
         p2.setCharacter("blue");
-        p2.setUsername("Bombe");
+        p2.setUsername("Thanos");
+
         p3.setCharacter("yellow");
-        p3.setUsername("Ratzewwww");
+        p3.setUsername("Thor");
+
+        p4.setCharacter("green");
+        p4.setUsername("Hulk");
+
         lobby.addPlayer(a);
         lobby.addPlayer(b);
         lobby.addPlayer(c);
+        lobby.addPlayer(d);
 
 
         Controller contr= new Controller(lobby);
         contr.getModel().setBoard(new Board("large"));
         Map map = contr.getModel().getBoard().getMap();
         Square[][] matrix = map.getSquareMatrix();
-        p1.setPosition(matrix[0][0]);
-        p2.setPosition(matrix[0][2]);
+        p1.setPosition(matrix[1][2]);
+        p2.setPosition(matrix[1][2]);
         p3.setPosition(matrix[0][3]);
-
+        p4.setPosition(matrix[2][3]);
+        contr.getModel().setCurrentPlayer(p1);
         //WEAPONS
         WeaponDeck weaponDeck = contr.getModel().getBoard().getWeaponDeck();
         Weapon w1 = (Weapon)weaponDeck.fetch();
@@ -73,6 +85,7 @@ class GameStateJsonBuilderTest {
         ArrayList<Weapon> weaponList1= new ArrayList<>();
         ArrayList<Weapon> weaponList2= new ArrayList<>();
         ArrayList<Weapon> weaponList3= new ArrayList<>();
+        ArrayList<Weapon> weaponList4= new ArrayList<>();
 
         weaponList1.add((Weapon) weaponDeck.fetch());
         weaponList1.add(w1);
@@ -85,9 +98,12 @@ class GameStateJsonBuilderTest {
         weaponList3.add((Weapon) weaponDeck.fetch());
         weaponList3.add((Weapon) weaponDeck.fetch());
 
+        //weaponList4.add((Weapon) weaponDeck.fetch());
+
         p1.setWeaponsList(weaponList1);
         p2.setWeaponsList(weaponList2);
         p3.setWeaponsList(weaponList3);
+        p4.setWeaponsList(weaponList4);
 
         //POWERUPS
         Deck puDeck = contr.getModel().getBoard().getPowerupDeck();
@@ -95,6 +111,7 @@ class GameStateJsonBuilderTest {
         ArrayList<PowerUp> puList1 = new ArrayList<>();
         ArrayList<PowerUp> puList2 = new ArrayList<>();
         ArrayList<PowerUp> puList3 = new ArrayList<>();
+        ArrayList<PowerUp> puList4 = new ArrayList<>();
 
         puList1.add((PowerUp) puDeck.fetch());
         puList1.add((PowerUp) puDeck.fetch());
@@ -103,6 +120,8 @@ class GameStateJsonBuilderTest {
         puList3.add((PowerUp) puDeck.fetch());
         puList3.add((PowerUp) puDeck.fetch());
         puList3.add((PowerUp) puDeck.fetch());
+
+      //  puList4.add((PowerUp) puDeck.fetch());
 
         assertEquals(2,puList1.size());
         assertEquals(2,puList2.size());
@@ -111,16 +130,19 @@ class GameStateJsonBuilderTest {
         p1.setPowerupList(puList1);
         p2.setPowerupList(puList2);
         p3.setPowerupList(puList3);
+        p4.setPowerupList(puList4);
 
         //BOARD
         p1.setPersonalBoard(new PlayerBoard(a.getOwner()));
         p2.setPersonalBoard(new PlayerBoard(b.getOwner()));
         p3.setPersonalBoard(new PlayerBoard(c.getOwner()));
+        p4.setPersonalBoard(new PlayerBoard(d.getOwner()));
 
         //damage & marks
         Token t1 = new Token(p1);
         Token t2 = new Token(p2);
         Token t3 = new Token(p3);
+        Token t4 = new Token(p4);
 
 
         p1.getPersonalBoard().addDamage(t2);
@@ -143,6 +165,17 @@ class GameStateJsonBuilderTest {
         p3.getPersonalBoard().addMark(t1);
         p3.getPersonalBoard().addMark(t2);
 
+        //ammo
+        p1.getPersonalBoard().setAmmoInventory(new Ammo(0,2,3));
+        p2.getPersonalBoard().setAmmoInventory(new Ammo(1,0,0));
+        p3.getPersonalBoard().setAmmoInventory(new Ammo(1,2,3));
+        p4.getPersonalBoard().setAmmoInventory(new Ammo(3,3,3));
+
+        //
+        int[]test={6,4,2,1,1};
+        p3.getPersonalBoard().setPointVec(test);
+        int[]test2={4,2,1,1};
+        p4.getPersonalBoard().setPointVec(test2);
 
 
         JsonNode node = new GameStateJsonBuilder(contr).create();
@@ -152,6 +185,12 @@ class GameStateJsonBuilderTest {
         UpdateParser parser=new UpdateParser(vmodel);
         parser.updateModel(node.toString());
 
+        VirtualPlayer vP1 = vmodel.findPlayer(p1.getCharacter());
+        VirtualPlayer vP2 = vmodel.findPlayer(p2.getCharacter());
+        VirtualPlayer vP3 = vmodel.findPlayer(p3.getCharacter());
+        VirtualPlayer vP4 = vmodel.findPlayer(p4.getCharacter());
+        //vmodel.setOwner(vP1);
+
 
 
         // verify if its all ok
@@ -159,13 +198,12 @@ class GameStateJsonBuilderTest {
         assertNotNull(vmodel.findPlayer(p2.getCharacter()));
         assertNotNull(vmodel.findPlayer(p3.getCharacter()));
 
-        VirtualPlayer vP1 = vmodel.findPlayer(p1.getCharacter());
-        VirtualPlayer vP2 = vmodel.findPlayer(p2.getCharacter());
-        VirtualPlayer vP3 = vmodel.findPlayer(p3.getCharacter());
+
 
         assertEquals(p1.getUsername(),vP1.getUsername());
         assertEquals(p2.getUsername(),vP2.getUsername());
         assertEquals(p3.getUsername(),vP3.getUsername());
+//        assertEquals(vmodel.getTurn(),vP2);
 
         assertEquals(p1.getCharacter(),vP1.getCharacter());
         assertEquals(p2.getCharacter(),vP2.getCharacter());
@@ -251,7 +289,7 @@ class GameStateJsonBuilderTest {
         //skulls
         assertEquals(6,vP1.getpBoard().getSkulls());
         assertEquals(6,vP2.getpBoard().getSkulls());
-        assertEquals(6,vP3.getpBoard().getSkulls());
+        assertEquals(5,vP3.getpBoard().getSkulls());
 
         //ammo
         assertEquals(p1.getPersonalBoard().getAmmoInventory().getRed(),vP1.getpBoard().getAmmoRed());

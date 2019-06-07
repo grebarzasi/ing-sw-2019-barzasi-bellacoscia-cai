@@ -35,6 +35,8 @@ public class GameStateJsonBuilder {
         ObjectNode rootNode = mapper.createObjectNode();
         rootNode.set("players",allPlayersNode());
         rootNode.set("main_board",mainBoardNode());
+        rootNode.put("turn",controller.getCurrentPlayer().getCharacter());
+        //rootNode.set("bot",mainBoardNode());
         return rootNode;
     }
 
