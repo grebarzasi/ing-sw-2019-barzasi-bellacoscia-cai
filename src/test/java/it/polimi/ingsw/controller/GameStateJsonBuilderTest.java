@@ -66,26 +66,24 @@ class GameStateJsonBuilderTest {
         Weapon w1 = (Weapon)weaponDeck.fetch();
         w1.setLoaded(true);
         Weapon w2 = (Weapon)weaponDeck.fetch();
+        w2.setLoaded(true);
         Weapon w3 = (Weapon)weaponDeck.fetch();
-        Weapon w4 = (Weapon)weaponDeck.fetch();
-        Weapon w5 = (Weapon)weaponDeck.fetch();
-        w5.setLoaded(true);
+        w3.setLoaded(true);
 
         ArrayList<Weapon> weaponList1= new ArrayList<>();
         ArrayList<Weapon> weaponList2= new ArrayList<>();
         ArrayList<Weapon> weaponList3= new ArrayList<>();
 
+        weaponList1.add((Weapon) weaponDeck.fetch());
         weaponList1.add(w1);
         weaponList1.add(w3);
-        weaponList1.add(w5);
 
-        weaponList2.add(w4);
         weaponList2.add(w2);
-        weaponList2.add(w3);
+        weaponList2.add((Weapon) weaponDeck.fetch());
+        weaponList2.add((Weapon) weaponDeck.fetch());
 
-        weaponList3.add(w4);
-        weaponList3.add(w5);
-        weaponList3.add(w3);
+        weaponList3.add((Weapon) weaponDeck.fetch());
+        weaponList3.add((Weapon) weaponDeck.fetch());
 
         p1.setWeaponsList(weaponList1);
         p2.setWeaponsList(weaponList2);
@@ -125,6 +123,15 @@ class GameStateJsonBuilderTest {
         Token t3 = new Token(p3);
 
 
+        p1.getPersonalBoard().addDamage(t2);
+        p1.getPersonalBoard().addDamage(t2);
+        p1.getPersonalBoard().addDamage(t3);
+        p1.getPersonalBoard().addDamage(t2);
+        p1.getPersonalBoard().addDamage(t2);
+        p1.getPersonalBoard().addDamage(t3);
+        p1.getPersonalBoard().addDamage(t2);
+        p1.getPersonalBoard().addDamage(t2);
+        p1.getPersonalBoard().addDamage(t3);
         p1.getPersonalBoard().addDamage(t2);
         p1.getPersonalBoard().addDamage(t2);
         p1.getPersonalBoard().addDamage(t3);
@@ -192,20 +199,17 @@ class GameStateJsonBuilderTest {
 
         assertTrue(vP3.getWeapons().containsKey(weaponList3.get(0).getName()));
         assertTrue(vP3.getWeapons().containsKey(weaponList3.get(1).getName()));
-        assertTrue(vP3.getWeapons().containsKey(weaponList3.get(2).getName()));
 
         //verify load State
-        assertTrue(vP1.getWeapons().get(weaponList1.get(0).getName()));
-        assertFalse(vP1.getWeapons().get(weaponList1.get(1).getName()));
+        assertTrue(vP1.getWeapons().get(weaponList1.get(1).getName()));
         assertTrue(vP1.getWeapons().get(weaponList1.get(2).getName()));
 
-        assertFalse(vP2.getWeapons().get(weaponList2.get(0).getName()));
+        assertTrue(vP2.getWeapons().get(weaponList2.get(0).getName()));
         assertFalse(vP2.getWeapons().get(weaponList2.get(1).getName()));
         assertFalse(vP2.getWeapons().get(weaponList2.get(2).getName()));
 
         assertFalse(vP3.getWeapons().get(weaponList3.get(0).getName()));
-        assertTrue(vP3.getWeapons().get(weaponList3.get(1).getName()));
-        assertFalse(vP3.getWeapons().get(weaponList3.get(2).getName()));
+        assertFalse(vP3.getWeapons().get(weaponList3.get(1).getName()));
 
         //power up
         assertTrue(vP1.getPowerUps().contains(puList1.get(0).getName()+":"+puList1.get(0).getAmmoOnDiscard().toString()));

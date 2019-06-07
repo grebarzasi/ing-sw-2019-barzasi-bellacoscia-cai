@@ -1,10 +1,11 @@
 package it.polimi.ingsw.CLI;
 
 
+import com.sun.org.apache.regexp.internal.RE;
 import it.polimi.ingsw.virtual_model.VirtualCell;
 import it.polimi.ingsw.virtual_model.VirtualModel;
 import it.polimi.ingsw.virtual_model.VirtualPlayer;
-
+import static it.polimi.ingsw.CLI.CLiBoardStuff.*;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -12,42 +13,13 @@ import static it.polimi.ingsw.CLI.Color.*;
 
 
 public class Maps {
-
-    public static final String RED_P = PURPLE_BACKGROUND_BRIGHT+"Ȣ"+RESET;
-    public static final String GREEN_P = GREEN_BACKGROUND_BRIGHT+"G"+RESET;
-    public static final String BLUE_P =CYAN_BACKGROUND_BRIGHT+"B"+RESET;
-    public static final String GRAY_P = WHITE_BACKGROUND_BRIGHT+"W"+RESET;
-    public static final String YELLOW_P = YELLOW_BACKGROUND_BRIGHT+"Ÿ"+RESET;
-
-    public static final String ARMORY = " ۩ ";
-    public static final String AMMO = "ѻ";
-
-    public static final String YELLOW_AMMO = YELLOW+AMMO+RESET;
-    public static final String BLUE_AMMO = BLUE+AMMO+RESET;
-    public static final String RED_AMMO = RED+AMMO+RESET;
-    public static final String PU_AMMO = BLACK+"Ѻ"+RESET;
-
-    public static final String RED_T = PURPLE_BOLD_BRIGHT+"o"+RESET;
-    public static final String GREEN_T = GREEN_BOLD_BRIGHT+"o"+RESET;
-    public static final String BLUE_T =CYAN_BOLD_BRIGHT+"o"+RESET;
-    public static final String GRAY_T = WHITE_BOLD_BRIGHT+"o"+RESET;
-    public static final String YELLOW_T = YELLOW_BOLD_BRIGHT+"o"+RESET;
-
     private String lastColor="";
     private String lastBackground="";
-
-    private static final int CELLS_NUM =12;
-    private static final int ROW_NUM =3;
-    private static final int COL_NUM =4;
-    private static final int PLAYERS_NUM =5;
-
-    private static final int USERNAME_SPACE =10;
-    private static final int MARKS_SPACE =9;
-    private static final int DAMAGE_SPACE =12;
     private int cellsPlnum=12;
     private int cellsCPnum=12;
     private int boardPrinted=0;
 
+    private ArrayList<String> weaponTemp;
     private VirtualModel model;
 
     public Maps(VirtualModel model){
@@ -151,6 +123,9 @@ public class Maps {
                 break;
             case"#$":
                 printBoard3(boardPrinted);
+                break;
+            case"#£":
+                printBoard4(boardPrinted);
                 boardPrinted++;
                 break;
             case "":
@@ -160,6 +135,9 @@ public class Maps {
         }
 
     }
+    /**
+     * @return row and column coordinates given the room number
+     */
 
     public int getRowNum(int room){
         return(int) Math.ceil((double)room/COL_NUM)-1;
@@ -169,6 +147,9 @@ public class Maps {
         return(room-((getRowNum(room))*4))-1;
     }
 
+    /**
+     * print player pawn in the right spot on map
+     */
     public void printPlayers(int num){
         int room=CELLS_NUM-num+1;
         int row =getRowNum(room);
@@ -176,7 +157,7 @@ public class Maps {
         int i= 0;
         for(VirtualPlayer p: model.getAllPlayers()){
             if(p.getRow()==row && p.getColumn()==col)
-                printPown(p.getCharacter());
+                printPawn(p.getCharacter());
             else
                 System.out.print(" ");
             i++;
@@ -190,6 +171,9 @@ public class Maps {
 
     }
 
+    /**
+     * print care package token in the right spot on map
+     */
     public void printCarePackage(int num){
         int room=CELLS_NUM-num+1;
         int row =getRowNum(room);
@@ -205,7 +189,12 @@ public class Maps {
         System.out.print(lastBackground);
     }
 
+    /*PLAYER BOARD ZONE*/
 
+    /**
+     * print player board info in the right spot on map
+     * Line #1 ( username and marks token )
+     */
     public void printBoard1(int num){
         ArrayList<VirtualPlayer> temp = new ArrayList<>(model.getAllPlayers());
         temp.remove(model.getOwner());
@@ -216,30 +205,38 @@ public class Maps {
 
     public void createBoard1(VirtualPlayer p) {
         int i = 0;
-        System.out.print(RESET);
+        System.out.print(RESET+BOARD_LEFT);
 
         //UsernameSpace
-        System.out.print(BLACK_UNDERLINED+ "| " + p.getUsername() + " ");
+        System.out.print(WHITE+"╲"+BLACK_UNDERLINED+ p.getUsername() + " ");
         for (i=p.getUsername().length(); i < USERNAME_SPACE; i++) {
             System.out.print(" ");
         }
         System.out.print(RESET);
 
-        printPown(p.getCharacter());
-
+        printPawn(p.getCharacter());
         //Print marks
-        System.out.print(BLACK_UNDERLINED+"  (");
-        i=0;
+        System.out.print(WHITE+"╱"+"╲"+WHITE_UNDERLINED+" ╭");
         for (String d : p.getpBoard().getMarks()) {
             printToken(d);
             i++;
-        }
-        for (; i < MARKS_SPACE; i++) {
-            System.out.print(" ");
-        }
-        System.out.print(BLACK_UNDERLINED+")  |"+RESET);
-    }
 
+        }
+        for (; i < MARKS_SPACE+USERNAME_SPACE; i++) {
+            System.out.print("─");
+        }
+        System.out.print(WHITE+"╫"+RESET);
+
+        //print weapons#1
+        weaponTemp = new ArrayList<>(p.getWeapons().keySet());
+        //Weapon
+        printWeapon(0,p);
+
+    }
+    /**
+     * print player board info in the right spot on map
+     * Line #2 ( Damage token )
+     */
     public void printBoard2(int num){
         ArrayList<VirtualPlayer> temp = new ArrayList<>(model.getAllPlayers());
         temp.remove(model.getOwner());
@@ -250,21 +247,42 @@ public class Maps {
 
     public void createBoard2(VirtualPlayer p) {
         int i = 0;
-        System.out.print(RESET);
-
+        System.out.print(RESET+"├");
         //UsernameSpace
-        System.out.print(BLACK+"< ");
+        System.out.print(WHITE+"╾");
         for (String d : p.getpBoard().getDamage()) {
             printToken(d);
             i++;
+            if(i==2||i==5||i==10){
+                System.out.print(WHITE_UNDERLINED+"╮╭"+RESET);
+            }
         }
         for (; i < DAMAGE_SPACE; i++) {
-            System.out.print(" ");
+            if(i==2||i==5||i==10){
+                System.out.print(WHITE_UNDERLINED+"╮╭"+RESET);
+            }
+            System.out.print("─");
         }
-        System.out.print(BLACK+"> "+RESET);
+        System.out.print(WHITE+"┴"+RESET);
 
+        //print ammo
+        System.out.print("(");
+        System.out.print(p.getpBoard().getAmmoBlue());
+        colorizeCP("B");
+        System.out.print(" "+p.getpBoard().getAmmoYellow());
+        colorizeCP("Y");
+        System.out.print(" "+p.getpBoard().getAmmoRed());
+        colorizeCP("R");
+        System.out.print(")╫");
+
+
+        //Weapon
+        printWeapon(1,p);
     }
-
+    /**
+     * print player board info in the right spot on map
+     * Line #3 ( Point track and skull token )
+     */
     public void printBoard3(int num){
         ArrayList<VirtualPlayer> temp = new ArrayList<>(model.getAllPlayers());
         temp.remove(model.getOwner());
@@ -274,11 +292,68 @@ public class Maps {
     }
 
     public void createBoard3(VirtualPlayer p) {
-        System.out.print(RED_UNDERLINED+""+p.getpBoard().getSkulls()+RESET);
+        int i = 0;
+        System.out.print(RESET+"├");
+        System.out.print(RESET);
+        for(; i<4 /*p.getpBoard().getSkulls()*/; i++){
+            System.out.print("["+SKULL_T+"]");
+        }
+        for(; i< DEATH_TRACK.length; i++){
+            System.out.print("["+CYAN+DEATH_TRACK[i]+RESET+"]");
+        }
+        System.out.print("┼"+RESET);
+
+        //powerup
+        System.out.print("─");
+        int r=0;
+        for(String s: p.getPowerUps()){
+            System.out.print("<");
+            colorizeCP("P");
+            System.out.print(">");
+            r++;
+        }
+        for(;r<3;r++)
+            System.out.print("   ");
+
+        System.out.print("╫");
+
+        //Weapon
+        printWeapon(2,p);
+    }
+    /**
+     * print player board info in the right spot on map
+     * Line #4 ( Board separator)
+     */
+    public void printBoard4(int num){
+        ArrayList<VirtualPlayer> temp = new ArrayList<>(model.getAllPlayers());
+        temp.remove(model.getOwner());
+        if(num == (model.getAllPlayers().size()-1)){
+            System.out.print(RESET+BOARD_BOTTOM+RESET);
+            return;
+        }
+        if(num > (model.getAllPlayers().size()-1))
+            return;
+        System.out.print(RESET+BOARD_SEP+RESET);
     }
 
 
-
+    public void printWeapon(int k,VirtualPlayer p){
+        int i=0;
+        String s="";
+        if(k<weaponTemp.size()) {
+            s=weaponTemp.get(k);
+            if (!p.getWeapons().get(weaponTemp.get(k)))
+                s=s.replaceAll(".",WEAPON_CENSORED);
+            i=+s.length();
+        }
+        for(;i<WEAPON_SPACE;i++)
+            System.out.print(" ");
+        System.out.print(s);
+        System.out.print(WHITE+"}┤"+RESET);
+    }
+    /**
+     * convert Care package info into token
+     */
     public void colorizeCP(String pu){
         char[] array =pu.toCharArray();
         for(char c:array){
@@ -301,58 +376,56 @@ public class Maps {
         }
     }
 
-
-    public void printPown(String character){
-        String pown;
+    /**
+     * convert Character info into pawn
+     */
+    public void printPawn(String character){
+        String pawn;
         switch (character){
             case "red":
-                pown=RED_P;
+                pawn=RED_P;
                 break;
             case "blue":
-                pown=BLUE_P;
+                pawn=BLUE_P;
                 break;
             case "yellow":
-                pown=YELLOW_P;
+                pawn=YELLOW_P;
                 break;
             case "green":
-                pown=GREEN_P;
+                pawn=GREEN_P;
                 break;
             case "gray":
-                pown=GRAY_P;
+                pawn=GRAY_P;
                 break;
             default:
-                pown="";
+                pawn="";
         }
-        System.out.print(pown);
+        System.out.print(pawn);
     }
-
+    /**
+     * convert Character info into token
+     */
     public void printToken(String character){
-        String pown;
+        String pawn;
         switch (character){
             case "red":
-                pown=RED_T;
+                pawn=RED_T;
                 break;
             case "blue":
-                pown=BLUE_T;
+                pawn=BLUE_T;
                 break;
             case "yellow":
-                pown=YELLOW_T;
+                pawn=YELLOW_T;
                 break;
             case "green":
-                pown=GREEN_T;
+                pawn=GREEN_T;
                 break;
             case "gray":
-                pown=GRAY_T;
+                pawn=GRAY_T;
                 break;
             default:
-                pown="";
+                pawn="";
         }
-        System.out.print(pown);
-    }
-
-    public static void main(String args[]){
-
-
-
+        System.out.print(pawn);
     }
 }
