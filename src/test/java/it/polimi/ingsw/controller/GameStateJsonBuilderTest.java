@@ -43,11 +43,11 @@ class GameStateJsonBuilderTest {
         Player p3 = c.getOwner();
 
         p1.setCharacter("red");
-        p1.setUsername("test1");
+        p1.setUsername("Violetta");
         p2.setCharacter("blue");
-        p2.setUsername("test2");
+        p2.setUsername("Bombe");
         p3.setCharacter("yellow");
-        p3.setUsername("test3");
+        p3.setUsername("Ratzewwww");
         lobby.addPlayer(a);
         lobby.addPlayer(b);
         lobby.addPlayer(c);

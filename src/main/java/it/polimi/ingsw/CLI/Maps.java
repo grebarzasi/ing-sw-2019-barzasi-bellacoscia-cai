@@ -40,10 +40,13 @@ public class Maps {
     private static final int ROW_NUM =3;
     private static final int COL_NUM =4;
     private static final int PLAYERS_NUM =5;
+
+    private static final int USERNAME_SPACE =10;
+    private static final int MARKS_SPACE =9;
+    private static final int DAMAGE_SPACE =12;
     private int cellsPlnum=12;
     private int cellsCPnum=12;
     private int boardPrinted=0;
-
 
     private VirtualModel model;
 
@@ -141,7 +144,13 @@ public class Maps {
                 cellsPlnum--;
                 break;
             case"#+":
-                printBoard(boardPrinted);
+                printBoard1(boardPrinted);
+                break;
+            case"#&":
+                printBoard2(boardPrinted);
+                break;
+            case"#$":
+                printBoard3(boardPrinted);
                 boardPrinted++;
                 break;
             case "":
@@ -197,37 +206,78 @@ public class Maps {
     }
 
 
-    public void printBoard(int num){
+    public void printBoard1(int num){
         ArrayList<VirtualPlayer> temp = new ArrayList<>(model.getAllPlayers());
         temp.remove(model.getOwner());
         if(num > (model.getAllPlayers().size()-1))
             return;
-        createBoard(temp.get(num));
+        createBoard1(temp.get(num));
     }
 
-
-
-    public void createBoard(VirtualPlayer p){
-        String s="";
-        int i=0;
+    public void createBoard1(VirtualPlayer p) {
+        int i = 0;
         System.out.print(RESET);
-        System.out.print(p.getUsername()+ " ");
+
+        //UsernameSpace
+        System.out.print(BLACK_UNDERLINED+ "| " + p.getUsername() + " ");
+        for (i=p.getUsername().length(); i < USERNAME_SPACE; i++) {
+            System.out.print(" ");
+        }
+        System.out.print(RESET);
+
         printPown(p.getCharacter());
-        System.out.print(" |DAMAGE: ");
-        for(String d: p.getpBoard().getDamage()){
+
+        //Print marks
+        System.out.print(BLACK_UNDERLINED+"  (");
+        i=0;
+        for (String d : p.getpBoard().getMarks()) {
             printToken(d);
             i++;
         }
-        for(;i<12;i++){
+        for (; i < MARKS_SPACE; i++) {
             System.out.print(" ");
         }
+        System.out.print(BLACK_UNDERLINED+")  |"+RESET);
+    }
 
-        System.out.print(" |MARKS: ");
-        for(String d: p.getpBoard().getMarks()){
+    public void printBoard2(int num){
+        ArrayList<VirtualPlayer> temp = new ArrayList<>(model.getAllPlayers());
+        temp.remove(model.getOwner());
+        if(num > (model.getAllPlayers().size()-1))
+            return;
+        createBoard2(temp.get(num));
+    }
+
+    public void createBoard2(VirtualPlayer p) {
+        int i = 0;
+        System.out.print(RESET);
+
+        //UsernameSpace
+        System.out.print(BLACK+"< ");
+        for (String d : p.getpBoard().getDamage()) {
             printToken(d);
+            i++;
         }
+        for (; i < DAMAGE_SPACE; i++) {
+            System.out.print(" ");
+        }
+        System.out.print(BLACK+"> "+RESET);
 
     }
+
+    public void printBoard3(int num){
+        ArrayList<VirtualPlayer> temp = new ArrayList<>(model.getAllPlayers());
+        temp.remove(model.getOwner());
+        if(num > (model.getAllPlayers().size()-1))
+            return;
+        createBoard3(temp.get(num));
+    }
+
+    public void createBoard3(VirtualPlayer p) {
+        System.out.print(RED_UNDERLINED+""+p.getpBoard().getSkulls()+RESET);
+    }
+
+
 
     public void colorizeCP(String pu){
         char[] array =pu.toCharArray();
