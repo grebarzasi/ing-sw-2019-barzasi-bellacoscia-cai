@@ -52,6 +52,7 @@ public class GUIFiles {
 
     public static final String PATH_WEAPON = "src/main/resources/images/weapon/";
     public static final String PATH_POWER_UP = "src/main/resources/images/power-up/";
+    public static final String PATH_AMMO = "src/main/resources/images/ammo/";
 
     public static final String PATH_TITLE = "src/main/resources/images/title.png";
     public static final String PATH_TRACK = "src/main/resources/images/killshotrack.png";
@@ -61,12 +62,16 @@ public class GUIFiles {
     public static final String PATH_LOGIN = "src/main/resources/images/login.png";
     public static final String PATH_SETTINGS = "src/main/resources/images/settings.png";
 
+
+
     public static final String PATH_PU = "src/main/resources/data_files/gui_data/power_up_data.json";
     public static final String PATH_WE = "src/main/resources/data_files/gui_data/weapon.json";
+
 
     /**
      * messages
      */
+    public static final String CLEAR = "";
     public static final String WELCOME = "BENVENUTO";
     public static final String CHOOSE_SQUARE = "Scegli un quadrato";
     public static final String CHOOSE_PLAYER = "Scegli un Giocatore";

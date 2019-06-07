@@ -55,6 +55,17 @@ CONTORNO ROSSO!!
 
 
 
+POSIZIONE: STRING -> INDICE DI BTNCELL
+
+        String pos;
+        int temp1 = Integer.parseInt(pos.split(":")[0]);
+        int temp2 = Integer.parseInt(pos.split(":")[1]);
+        int i = temp1*4 + temp2;
+
+POSIZIONE: STRING -> INDICE DI BTNCELL
+
+
+
 NASCONDERE CELLE!!
 
         btn00.setOpacity(0.5);
@@ -96,6 +107,8 @@ public class GameJavaFX extends Application {
     private VirtualLobby lobby;
     private VirtualGame game = new VirtualGame();
 
+    ArrayList<ArrayList<Button>> btnCell = new ArrayList<>();
+
     private String turn = "";
     private boolean move = false;
     private boolean pick = false;
@@ -104,6 +117,8 @@ public class GameJavaFX extends Application {
     private VirtualPlayer player;
     private ArrayList<VirtualPlayer> players;
     private int points;
+
+    TextField msg = new TextField();
 
     public void setLobby(VirtualLobby lobby) {
         this.lobby = lobby;
@@ -361,20 +376,19 @@ public class GameJavaFX extends Application {
         ArrayList<Button> btnCell11 = setGridCell(gridCell11,widthBoard,heightBoard);
         ArrayList<Button> btnCell12 = setGridCell(gridCell12,widthBoard,heightBoard);
         gridBoard.add(gridCell1,0,0);
-        gridBoard.add(gridCell2,0,1);
-        gridBoard.add(gridCell3,0,2);
-        gridBoard.add(gridCell4,1,0);
-        gridBoard.add(gridCell5,1,1);
-        gridBoard.add(gridCell6,1,2);
-        gridBoard.add(gridCell7,2,0);
-        gridBoard.add(gridCell8,2,1);
-        gridBoard.add(gridCell9,2,2);
-        gridBoard.add(gridCell10,3,0);
-        gridBoard.add(gridCell11,3,1);
+        gridBoard.add(gridCell2,1,0);
+        gridBoard.add(gridCell3,2,0);
+        gridBoard.add(gridCell4,3,0);
+        gridBoard.add(gridCell5,0,1);
+        gridBoard.add(gridCell6,1,1);
+        gridBoard.add(gridCell7,2,1);
+        gridBoard.add(gridCell8,3,1);
+        gridBoard.add(gridCell9,0,2);
+        gridBoard.add(gridCell10,1,2);
+        gridBoard.add(gridCell11,2,2);
         gridBoard.add(gridCell12,3,2);
 
 
-        ArrayList<ArrayList<Button>> btnCell = new ArrayList<>();
         btnCell.add(btnCell1);
         btnCell.add(btnCell2);
         btnCell.add(btnCell3);
@@ -700,7 +714,6 @@ public class GameJavaFX extends Application {
         /**
          * set buttons
          */
-        TextField msg = new TextField();
         Image msgBack = new Image(new FileInputStream(PATH_BACK_MSG),300,100,true,true);
         BackgroundImage backgroundMsg = new BackgroundImage(msgBack, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background backMsg = new Background(backgroundMsg);
@@ -712,11 +725,17 @@ public class GameJavaFX extends Application {
         Button btnMove = new Button("Muovi");
         Button btnPick = new Button("Raccogli");
         Button btnShoot = new Button("Spara");
+        Button btnRel = new Button("Ricarica");
+        Button btnCancel = new Button("Annulla");
+        btnCancel.setOpacity(0);
+        btnRel.setOpacity(0);
         HBox hBtn = new HBox(30);
         hBtn.setAlignment(Pos.CENTER);
+        hBtn.getChildren().add(btnRel);
         hBtn.getChildren().add(btnMove);
         hBtn.getChildren().add(btnPick);
         hBtn.getChildren().add(btnShoot);
+        hBtn.getChildren().add(btnCancel);
 
         VBox vmsg = new VBox(25);
         vmsg.setAlignment(Pos.CENTER);
@@ -737,21 +756,55 @@ public class GameJavaFX extends Application {
 
         msg.setText(WELCOME);
 
-        for (ArrayList<Button> btnArr: btnCell){
-            if(turn.equals(player.getCharacter())){
-                gridPBoard.setEffect(borderGlow);
-                if(move){
+        if(turn.equals(player.getCharacter()))
+            gridPBoard.setEffect(borderGlow);
+
+        btnCancel.setOnAction(e->{
+            update();
+            btnCancel.setOpacity(0);
+        });
+
+        btnMove.setOnAction(e->{
+            move = true;
+            msg.setText(CHOOSE_SQUARE);
+            btnCancel.setOpacity(1);
+            for (ArrayList<Button> btnArr: btnCell) {
+                if (turn.equals(player.getCharacter())) {
+                    chooseSquare(btnArr, btnCell.indexOf(btnArr));
+
+                    hideCell(btnCell.get(3),0.5);
+                    hideCell(btnCell.get(6),0.5);
+                    hideCell(btnCell.get(7),0.5);
+                    hideCell(btnCell.get(9),0.5);
+                    hideCell(btnCell.get(10),0.5);
+                    hideCell(btnCell.get(11),0.5);
+
+                }else
+                    msg.setText("Aspetta il tuo turno...");
+            }
+        });
+        btnPick.setOnAction(e->{
+            pick = true;
+            msg.setText(CHOOSE_SQUARE);
+            for (ArrayList<Button> btnArr: btnCell){
+                if(turn.equals(player.getCharacter())){
+                    gridPBoard.setEffect(borderGlow);
                     chooseSquare(btnArr, btnCell.indexOf(btnArr));
                 }else
-                    if(pick){
-                        chooseSquare(btnArr, btnCell.indexOf(btnArr));
-                    }else
-                        if(shoot){
-                            choosePlayer(btnCell.indexOf(btnArr));
-                        }
-            }else
-                msg.setText("Aspetta il tuo turno...");
-        }
+                    msg.setText("Aspetta il tuo turno...");
+            }
+        });
+        btnShoot.setOnAction(e->{
+            shoot = true;
+            msg.setText(CHOOSE_PLAYER);
+            for (ArrayList<Button> btnArr: btnCell){
+                if(turn.equals(player.getCharacter())){
+                    gridPBoard.setEffect(borderGlow);
+                    choosePlayer(btnArr, btnCell.indexOf(btnArr));
+                }else
+                    msg.setText("Aspetta il tuo turno...");
+            }
+        });
 
         btnPwe1.setOnAction(e->{
             if(shoot){
@@ -800,19 +853,6 @@ public class GameJavaFX extends Application {
 
         }
 
-        btnMove.setOnAction(e->{
-            move = true;
-            System.out.println("ok");
-        });
-        btnPick.setOnAction(e->{
-            pick = true;
-            System.out.println("ok");
-        });
-        btnShoot.setOnAction(e->{
-            shoot = true;
-            System.out.println("ok");
-        });
-
         btnDeck.setOnAction(e->{System.out.println("ok");});
 
         // ** HARDCODED TEST **
@@ -822,13 +862,8 @@ public class GameJavaFX extends Application {
         setPlayerOnCell(btnCell.get(0),players.get(3).getCharacter());
         setPlayerOnCell(btnCell.get(0),players.get(4).getCharacter());
 
-        hideCell(btnCell.get(1));
-        hideCell(btnCell.get(2));
-        hideCell(btnCell.get(4));
-        hideCell(btnCell.get(5));
 
         if(move){
-            msg.setText(CHOOSE_SQUARE);
         }else
         if(pick){
             msg.setText(CHOOSE_SQUARE);
@@ -1357,9 +1392,9 @@ public class GameJavaFX extends Application {
         }
     }
 
-    public void hideCell(ArrayList<Button> btn){
+    public void hideCell(ArrayList<Button> btn,double o){
         for (Button b : btn) {
-            b.setOpacity(0.5);
+            b.setOpacity(o);
         }
     }
 
@@ -1367,15 +1402,89 @@ public class GameJavaFX extends Application {
 
         for (Button b : btnArr) {
             b.setOnAction(e->{
-                int x = (int) Math.ceil((double)btn/4)-1;;
-                int y = btn - ((x*4))-1;
+                int x = (int) Math.ceil((double)(btn+1)/4)-1;
+                int y = (btn+1) - (x*4)-1;
                 game.setTargetSquare(x + ":" + y);
+                System.out.println(game.getTargetSquare());
 
+                update();
             });
         }
+
     }
 
-    public void choosePlayer(int btn){
+
+    public void choosePlayer(ArrayList<Button> btnArr, int btn){
+
+        for (Button b : btnArr) {
+            b.setOnAction(e->{
+                switch(btnArr.indexOf(b)){
+                    case(0):{
+                        if(b.getOpacity() != 0){
+                            game.setTargetPlayer("yellow");
+                            System.out.println(game.getTargetPlayer());
+                        }
+                        break;
+                    }
+                    case(1):{
+                        if(b.getOpacity() != 0) {
+                            game.setTargetPlayer("grey");
+                        }
+                        break;
+                    }
+                    case(2):{
+                        if(b.getOpacity() != 0){
+                            game.setTargetPlayer("green");
+                        }
+                        break;
+                    }
+                    case(3):{
+                        if(b.getOpacity() != 0){
+                            game.setTargetPlayer("blue");
+                        }
+                        break;
+                    }
+                    case(4):{
+                        if(b.getOpacity() != 0){
+                            game.setTargetPlayer("red");
+                        }
+                        break;
+                    }
+                    case(5):{
+                        msg.setText(ERR_PLAYER);
+                        break;
+                    }
+                }
+            });
+        }
+
+    }
+
+    public void update(){
+        for (ArrayList<Button> btnArr : btnCell) {
+            hideCell(btnArr,0);
+            for (Button b : btnArr) {
+                b.setOnAction(e->{});
+            }
+        }
+
+        String pos = game.getTargetSquare();
+        int temp1 = Integer.parseInt(pos.split(":")[0]);
+        int temp2 = Integer.parseInt(pos.split(":")[1]);
+        int i = temp1*4 + temp2;
+
+        /*
+        for (VirtualPlayer p : players) {
+            setPlayerOnCell(btnCell.get(p.getRow()*4 + p.getColumn()),players.get(1).getCharacter());
+        }
+         */
+        setPlayerOnCell(btnCell.get(i),player.getCharacter());
+        setPlayerOnCell(btnCell.get(0),players.get(1).getCharacter());
+        setPlayerOnCell(btnCell.get(0),players.get(2).getCharacter());
+        setPlayerOnCell(btnCell.get(0),players.get(3).getCharacter());
+        setPlayerOnCell(btnCell.get(0),players.get(4).getCharacter());
+
+
 
     }
 
