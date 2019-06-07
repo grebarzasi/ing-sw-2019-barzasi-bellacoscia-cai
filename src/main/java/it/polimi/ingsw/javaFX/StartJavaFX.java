@@ -27,6 +27,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.rmi.RemoteException;
 
+import static it.polimi.ingsw.javaFX.GUIFiles.*;
+
 
 /**
  *
@@ -35,26 +37,6 @@ import java.rmi.RemoteException;
 
 public class StartJavaFX extends Application {
 
-    /**
-     * All Path.
-     */
-    private static final String PATH_BACK = "src/main/resources/images/background/background.jpg";
-
-    private static final String PATH_YELLOW = "src/main/resources/images/character/yellow.png";
-    private static final String PATH_RED = "src/main/resources/images/character/red.png";
-    private static final String PATH_BLUE = "src/main/resources/images/character/blue.png";
-    private static final String PATH_GREEN = "src/main/resources/images/character/green.png";
-    private static final String PATH_GREY = "src/main/resources/images/character/grey.png";
-    private static final String PATH_YELLOW_CHARACTER = "src/main/resources/images/character/D-struct-0R.png";
-    private static final String PATH_RED_CHARACTER = "src/main/resources/images/character/violet.png";
-    private static final String PATH_BLUE_CHARACTER = "src/main/resources/images/character/banshee.png";
-    private static final String PATH_GREEN_CHARACTER = "src/main/resources/images/character/sprog.png";
-    private static final String PATH_GREY_CHARACTER = "src/main/resources/images/character/dozer.png";
-
-    private static final String PATH_TITLE = "src/main/resources/images/title.png";
-    private static final String PATH_RULES = "src/main/resources/images/rules.jpg";
-    private static final String PATH_LOGIN = "src/main/resources/images/login.png";
-    private static final String PATH_SETTINGS = "src/main/resources/images/settings.png";
 
     private String username;
     private String color;

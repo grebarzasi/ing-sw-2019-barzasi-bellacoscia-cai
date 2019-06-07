@@ -7,6 +7,7 @@ import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.power_up.Teleporter;
 import it.polimi.ingsw.cards.weapon.Weapon;
+import it.polimi.ingsw.virtual_model.VirtualGame;
 import it.polimi.ingsw.virtual_model.VirtualLobby;
 import it.polimi.ingsw.virtual_model.VirtualPlayer;
 import it.polimi.ingsw.virtual_model.VirtualPlayerBoard;
@@ -33,6 +34,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import static it.polimi.ingsw.javaFX.GUIFiles.*;
+
+
 
 /*
 
@@ -82,72 +87,16 @@ RISALIRE ALLA CELLA!!
  */
 public class GameJavaFX extends Application {
 
-    /**
-     * All Path.
-     */
-    private static final String PATH_BACK_GAME = "src/main/resources/images/background/game_background.jpg";
-    private static final String PATH_BACK = "src/main/resources/images/background/background.jpg";
-    private static final String PATH_BACK_WEAPON = "src/main/resources/images/background/weapon.png";
-    private static final String PATH_BACK_POWERUP = "src/main/resources/images/background/powerup.png";
-    private static final String PATH_BACK_MSG = "src/main/resources/images/background/img854.png";
-    private static final String PATH_BACK_POINTS = "src/main/resources/images/background/img5006.jpg";
 
-    private static final String PATH_SMALL_MAP = "src/main/resources/images/map/2.png";
-    private static final String PATH_MEDIUM1_MAP = "src/main/resources/images/map/1.png";
-    private static final String PATH_MEDIUM2_MAP = "src/main/resources/images/map/4.png";
-    private static final String PATH_LARGE_MAP = "src/main/resources/images/map/3.png";
-
-    private static final String PATH_YELLOW_BOARD = "src/main/resources/images/board/yellow_board.png";
-    private static final String PATH_RED_BOARD = "src/main/resources/images/board/red_board.png";
-    private static final String PATH_BLUE_BOARD = "src/main/resources/images/board/blue_board.png";
-    private static final String PATH_GREEN_BOARD = "src/main/resources/images/board/green_board.png";
-    private static final String PATH_GREY_BOARD = "src/main/resources/images/board/gray_board.png";
-
-    private static final String PATH_GENERAL_COLOR = "src/main/resources/images/character/";
-    private static final String PATH_YELLOW = "src/main/resources/images/character/yellow.png";
-    private static final String PATH_RED = "src/main/resources/images/character/red.png";
-    private static final String PATH_BLUE = "src/main/resources/images/character/blue.png";
-    private static final String PATH_GREEN = "src/main/resources/images/character/green.png";
-    private static final String PATH_GREY = "src/main/resources/images/character/gray.png";
-    private static final String PATH_YELLOW_CHARACTER = "src/main/resources/images/character/D-struct-0R.png";
-    private static final String PATH_RED_CHARACTER = "src/main/resources/images/character/violet.png";
-    private static final String PATH_BLUE_CHARACTER = "src/main/resources/images/character/banshee.png";
-    private static final String PATH_GREEN_CHARACTER = "src/main/resources/images/character/sprog.png";
-    private static final String PATH_GREY_CHARACTER = "src/main/resources/images/character/dozer.png";
-
-    private static final String PATH_RED_AMMO = "src/main/resources/images/ammo/red_ammo.png";
-    private static final String PATH_BLUE_AMMO = "src/main/resources/images/ammo/blue_ammo.png";
-    private static final String PATH_YELLOW_AMMO = "src/main/resources/images/ammo/yellow_ammo.png";
-
-    private static final String PATH_YELLOW_DAMAGE = "src/main/resources/images/damage/yellow.png";
-    private static final String PATH_RED_DAMAGE = "src/main/resources/images/damage/red.png";
-    private static final String PATH_BLUE_DAMAGE = "src/main/resources/images/damage/blue.png";
-    private static final String PATH_GREEN_DAMAGE = "src/main/resources/images/damage/green.png";
-    private static final String PATH_GREY_DAMAGE = "src/main/resources/images/damage/grey.png";
-    private static final String PATH_YELLOW_DAMAGE_DOUBLE = "src/main/resources/images/damage/yellow_double.png";
-    private static final String PATH_RED_DAMAGE_DOUBLE = "src/main/resources/images/damage/red_double.png";
-    private static final String PATH_BLUE_DAMAGE_DOUBLE = "src/main/resources/images/damage/blue_double.png";
-    private static final String PATH_GREEN_DAMAGE_DOUBLE = "src/main/resources/images/damage/green_double.png";
-    private static final String PATH_GREY_DAMAGE_DOUBLE = "src/main/resources/images/damage/grey_double.png";
-
-    private static final String PATH_WEAPON = "src/main/resources/images/weapon/";
-    private static final String PATH_POWER_UP = "src/main/resources/images/power-up/";
-
-    private static final String PATH_TITLE = "src/main/resources/images/title.png";
-    private static final String PATH_TRACK = "src/main/resources/images/killshotrack.png";
-    private static final String PATH_SKULL = "src/main/resources/images/skull.png";
-    private static final String PATH_LOADING = "src/main/resources/images/loading.png";
-    private static final String PATH_RULES = "src/main/resources/images/rules.jpg";
-    private static final String PATH_LOGIN = "src/main/resources/images/login.png";
-    private static final String PATH_SETTINGS = "src/main/resources/images/settings.png";
 
     private int map = 3;
     private javafx.scene.text.Font font = new Font(20);
     private int skullMax = 8;
 
     private VirtualLobby lobby;
+    private VirtualGame game = new VirtualGame();
 
-    private boolean turn = false;
+    private String turn = "";
     private boolean move = false;
     private boolean pick = false;
     private boolean shoot = false;
@@ -184,7 +133,8 @@ public class GameJavaFX extends Application {
         players.add(new VirtualPlayer("Mussolini","red"));
         players.add(new VirtualPlayer("MioPadre","green"));
         players.add(new VirtualPlayer("Bignè","grey"));
-        //System.out.println(players.get(4).getCharacter());
+
+        turn = player.getCharacter();
 
         ArrayList<String> damage = new ArrayList<>();
         damage.add("red");
@@ -756,7 +706,6 @@ public class GameJavaFX extends Application {
         Background backMsg = new Background(backgroundMsg);
         msg.setBackground(backMsg);
         msg.setAlignment(Pos.CENTER);
-        msg.setText("Benvenuto Giocatore!");
         msg.setFont(font);
         msg.setEditable(false);
 
@@ -779,12 +728,29 @@ public class GameJavaFX extends Application {
         /**
          * set buttons' action.
          */
+        DropShadow borderGlow = new DropShadow();
+        borderGlow.setColor(Color.RED);
+        borderGlow.setHeight(50);
+        borderGlow.setWidth(50);
+        borderGlow.setOffsetX(0f);
+        borderGlow.setOffsetY(0f);
+
+        msg.setText(WELCOME);
 
         for (ArrayList<Button> btnArr: btnCell){
-            for (Button btn : btnArr) {
-                btn.setOnAction(e->{System.out.println("ok");});
-            }
-
+            if(turn.equals(player.getCharacter())){
+                gridPBoard.setEffect(borderGlow);
+                if(move){
+                    chooseSquare(btnArr, btnCell.indexOf(btnArr));
+                }else
+                    if(pick){
+                        chooseSquare(btnArr, btnCell.indexOf(btnArr));
+                    }else
+                        if(shoot){
+                            choosePlayer(btnCell.indexOf(btnArr));
+                        }
+            }else
+                msg.setText("Aspetta il tuo turno...");
         }
 
         btnPwe1.setOnAction(e->{
@@ -861,6 +827,15 @@ public class GameJavaFX extends Application {
         hideCell(btnCell.get(4));
         hideCell(btnCell.get(5));
 
+        if(move){
+            msg.setText(CHOOSE_SQUARE);
+        }else
+        if(pick){
+            msg.setText(CHOOSE_SQUARE);
+        }else
+        if(shoot){
+            msg.setText(CHOOSE_PLAYER);
+        }
 
         primaryStage.show();
     }
@@ -1388,6 +1363,22 @@ public class GameJavaFX extends Application {
         }
     }
 
+    public void chooseSquare(ArrayList<Button> btnArr, int btn){
+
+        for (Button b : btnArr) {
+            b.setOnAction(e->{
+                int x = (int) Math.ceil((double)btn/4)-1;;
+                int y = btn - ((x*4))-1;
+                game.setTargetSquare(x + ":" + y);
+
+            });
+        }
+    }
+
+    public void choosePlayer(int btn){
+
+    }
+
     public class infoWindow extends Stage {
 
         private boolean pu;
@@ -1397,7 +1388,7 @@ public class GameJavaFX extends Application {
             this.pu = pu;
 
             //hardcoded test.
-            Ammo a = new Ammo(1, 0, 0);
+            Ammo a = new Ammo(0, 1, 0);
             Weapon w = new Weapon("ZX-2", a);
             Teleporter t = new Teleporter(a, "teleporter");
 
@@ -1445,7 +1436,6 @@ public class GameJavaFX extends Application {
             ObjectMapper mapper = new ObjectMapper();
 
             if (!pu) {
-                final String PATH_WE = "src/main/resources/data_files/gui_data/weapon.json";
                 File jsonFileWe = new File(PATH_WE);
                 try {
 
@@ -1485,7 +1475,6 @@ public class GameJavaFX extends Application {
             } else if(pu){
 
 
-                final String PATH_PU = "src/main/resources/data_files/gui_data/power_up_data.json";
                 File jsonFilePU = new File(PATH_PU);
 
                 try {

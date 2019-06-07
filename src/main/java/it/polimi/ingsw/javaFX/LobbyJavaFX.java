@@ -31,28 +31,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static it.polimi.ingsw.javaFX.GUIFiles.*;
+
+
 /**
  * @author Carlo Bellacoscia
  */
 public class LobbyJavaFX extends Application {
-
-    /**
-     * All Path.
-     */
-    private static final String PATH_BACK = "src/main/resources/images/background/background.jpg";
-
-    private static final String PATH_SMALL_MAP = "src/main/resources/images/map/2.png";
-    private static final String PATH_MEDIUM1_MAP = "src/main/resources/images/map/1.png";
-    private static final String PATH_MEDIUM2_MAP = "src/main/resources/images/map/4.png";
-    private static final String PATH_LARGE_MAP = "src/main/resources/images/map/3.png";
-
-    private static final String PATH_YELLOW_CHARACTER = "src/main/resources/images/character/D-struct-0R.png";
-    private static final String PATH_RED_CHARACTER = "src/main/resources/images/character/violet.png";
-    private static final String PATH_BLUE_CHARACTER = "src/main/resources/images/character/banshee.png";
-    private static final String PATH_GREEN_CHARACTER = "src/main/resources/images/character/sprog.png";
-    private static final String PATH_GREY_CHARACTER = "src/main/resources/images/character/dozer.png";
-
-    private static final String PATH_LOADING = "src/main/resources/images/loading.png";
 
 
     private boolean terminator = false;
