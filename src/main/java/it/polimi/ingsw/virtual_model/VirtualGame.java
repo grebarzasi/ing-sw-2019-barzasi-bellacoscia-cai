@@ -2,6 +2,8 @@ package it.polimi.ingsw.virtual_model;
 
 import it.polimi.ingsw.board.map.Square;
 
+import java.util.ArrayList;
+
 public class VirtualGame {
 
     private String targetSquare;
@@ -10,6 +12,31 @@ public class VirtualGame {
     private String weapon;
     private String powerup;
     private String effect;
+
+    private ArrayList<String> hideSquare = new ArrayList<>();
+    private ArrayList<String> ammoTiles = new ArrayList<>();
+
+    public VirtualGame() {
+        hideSquare.add("2:1");
+        hideSquare.add("2:2");
+        hideSquare.add("2:3");
+        hideSquare.add("1:2");
+        hideSquare.add("1:3");
+        hideSquare.add("0:3");
+
+        ammoTiles.add("YBB");
+        ammoTiles.add("PRB");
+        ammoTiles.add("YBB");
+        ammoTiles.add("PRB");
+        ammoTiles.add("YBB");
+        ammoTiles.add("PRB");
+        ammoTiles.add("YBB");
+        ammoTiles.add("PRB");
+        ammoTiles.add("YBB");
+        ammoTiles.add("PRB");
+        ammoTiles.add("YBB");
+        ammoTiles.add("PRB");
+    }
 
     public String getTargetSquare() {
         return targetSquare;
@@ -49,5 +76,21 @@ public class VirtualGame {
 
     public void setEffect(String effect) {
         this.effect = effect;
+    }
+
+    public ArrayList<String> getHideSquare() {
+        return hideSquare;
+    }
+
+    public void setHideSquare(ArrayList<String> hideSquare) {
+        this.hideSquare = hideSquare;
+    }
+
+    public ArrayList<String> getAmmoTiles() {
+        return ammoTiles;
+    }
+
+    public void setAmmoTiles(ArrayList<String> ammoTiles) {
+        this.ammoTiles = ammoTiles;
     }
 }

@@ -107,7 +107,6 @@ public class GameJavaFX extends Application {
     private VirtualLobby lobby;
     private VirtualGame game = new VirtualGame();
 
-    ArrayList<ArrayList<Button>> btnCell = new ArrayList<>();
 
     private String turn = "";
     private boolean move = false;
@@ -118,19 +117,81 @@ public class GameJavaFX extends Application {
     private ArrayList<VirtualPlayer> players;
     private int points;
 
+    ArrayList<ArrayList<Button>> btnCell = new ArrayList<>();
     TextField msg = new TextField();
+    TextField pointsField = new TextField();
+    GridPane gridSkull = new GridPane();
+
+    Button btnMove = new Button("Muovi");
+    Button btnPick = new Button("Raccogli");
+    Button btnShoot = new Button("Spara");
+    Button btnRel = new Button("Ricarica");
+    Button btnCancel = new Button("Annulla");
+    Button btnDeck = new Button();
+
+    GridPane gridPBoard = new GridPane();
+
+    Button btnPwe1 = new Button();
+    Button btnPwe2 = new Button();
+    Button btnPwe3 = new Button();
+    Button btnPpu1 = new Button();
+    Button btnPpu2 = new Button();
+    Button btnPpu3 = new Button();
+
+    GridPane gridPAmmo = new GridPane();
+
+    GridPane gridOtherBoard1 = new GridPane();
+    GridPane gridOtherBoard2 = new GridPane();
+    GridPane gridOtherBoard3 = new GridPane();
+    GridPane gridOtherBoard4 = new GridPane();
+    GridPane gridOtherBoard5 = new GridPane();
+
+    ArrayList<Button> weOther1 = new ArrayList<>();
+    ArrayList<Button> weOther2 = new ArrayList<>();
+    ArrayList<Button> weOther3 = new ArrayList<>();
+    ArrayList<Button> weOther4 = new ArrayList<>();
+    ArrayList<Button> weOther5 = new ArrayList<>();
+
+    GridPane gridOtherAmmo1 = new GridPane();
+    GridPane gridOtherAmmo2 = new GridPane();
+    GridPane gridOtherAmmo3 = new GridPane();
+    GridPane gridOtherAmmo4 = new GridPane();
+    GridPane gridOtherAmmo5 = new GridPane();
+
+    double widthScreen = Screen.getPrimary().getBounds().getWidth();
+    double widthLateral = widthScreen/4;
+    double widthCenter = widthScreen/2;
+    double widthSkull = widthLateral/9;
+    double widthBoard = (widthCenter-120)/4;
+    double widthPers = widthLateral;
+    double widthCard = widthPers/3;
+    double widthOCard = widthLateral/3;
+    double widthOther = widthOCard * 2;
+    double widthOtherWeapon = widthCard/3;
+    double heightScreen = Screen.getPrimary().getBounds().getHeight();
+    double heightLateral = heightScreen/6;
+    double heightCenter = heightScreen/2;
+    double heightBoard = heightCenter/3;
+    double heightPBoard = heightCenter/3;
+    double heightPCards = heightPBoard *2;
+    double heightCard = heightPCards/2;
+    double heightOther = heightCenter/5;
+    double heightOtherWeapon = heightCenter/5;
+    double heightOtherAmmo = heightOther/5;
+    double heightOtherBoard = heightOtherAmmo * 4;
 
     public void setLobby(VirtualLobby lobby) {
         this.lobby = lobby;
 
-        /*
+/*
 
+        map = lobby.getMapPref()
         player = lobby.getOwner();
         players = lobby.getNewPlayersList();
         points = player.getPoints();
         skullMax = lobby.getKillPref();
 
-         */
+*/
 
     }
 
@@ -178,9 +239,6 @@ public class GameJavaFX extends Application {
 
         primaryStage.setTitle("ADRENALINA");
 
-        double widthScreen = Screen.getPrimary().getBounds().getWidth();
-        double heightScreen = Screen.getPrimary().getBounds().getHeight();
-
         Group root = new Group();
         Scene theScene = new Scene(root);
         primaryStage.setScene(theScene);
@@ -211,8 +269,6 @@ public class GameJavaFX extends Application {
         /**
          * set space in grid.
          */
-        double widthLateral = widthScreen/4;
-        double widthCenter = widthScreen/2;
         ColumnConstraints c1 = new ColumnConstraints(widthLateral);
         ColumnConstraints c2 = new ColumnConstraints(widthCenter);
         ColumnConstraints c3 = new ColumnConstraints(widthLateral);
@@ -221,8 +277,6 @@ public class GameJavaFX extends Application {
         c3.setPercentWidth(25);
 
 
-        double heightLateral = heightScreen/6;
-        double heightCenter = heightScreen/2;
         RowConstraints r1 = new RowConstraints(heightLateral);
         RowConstraints r2 = new RowConstraints(heightCenter);
         RowConstraints r3 = new RowConstraints(heightLateral);
@@ -243,7 +297,6 @@ public class GameJavaFX extends Application {
         /**
          * set points.
          */
-        TextField pointsField = new TextField();
         Image pointsBack = new Image(new FileInputStream(PATH_BACK_POINTS),100,100,true,true);
         BackgroundImage backgroundPoints = new BackgroundImage(pointsBack, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background backPoints = new Background(backgroundPoints);
@@ -269,7 +322,6 @@ public class GameJavaFX extends Application {
         /**
          * set Killshot track.
          */
-        GridPane gridSkull = new GridPane();
         gridSkull.setPadding(new Insets(100, 0, 80, 0));
 
         Image imgTrack = new Image(new FileInputStream(PATH_TRACK),widthLateral,heightLateral,true,true);
@@ -278,8 +330,6 @@ public class GameJavaFX extends Application {
 
         gridSkull.setBackground(backSkull);
 
-
-        double widthSkull = imgTrack.getWidth()/9;
         ColumnConstraints kc1 = new ColumnConstraints(widthSkull);
         ColumnConstraints kc2 = new ColumnConstraints(widthSkull);
         ColumnConstraints kc3 = new ColumnConstraints(widthSkull);
@@ -332,8 +382,7 @@ public class GameJavaFX extends Application {
         gridBoard.setBackground(back);
 
 
-        double widthBoard = (widthCenter-120)/4;
-        double heightBoard = heightCenter/3;
+
         ColumnConstraints bc1 = new ColumnConstraints(widthBoard);
         ColumnConstraints bc2 = new ColumnConstraints(widthBoard);
         ColumnConstraints bc3 = new ColumnConstraints(widthBoard);
@@ -407,10 +456,6 @@ public class GameJavaFX extends Application {
          */
         GridPane gridPers = new GridPane();
 
-        double widthPers = widthLateral;
-        double heightPBoard = heightCenter/3;
-        double heightPCards = heightPBoard *2;
-
         ColumnConstraints pc1 = new ColumnConstraints(widthPers);
 
         RowConstraints pr1=new RowConstraints(heightBoard);
@@ -420,8 +465,6 @@ public class GameJavaFX extends Application {
         gridPers.getRowConstraints().addAll(pr1,pr2);
 
         Image imgPBoard = null;
-
-        GridPane gridPBoard = new GridPane();
 
         switch (player.getCharacter()){
             case "yellow":{
@@ -458,8 +501,7 @@ public class GameJavaFX extends Application {
 
         GridPane gridCards = new GridPane();
 
-        double widthCard = widthPers/3;
-        double heightCard = heightPCards/2;
+
         ColumnConstraints cc1 = new ColumnConstraints(widthCard);
         ColumnConstraints cc2 = new ColumnConstraints(widthCard);
         ColumnConstraints cc3 = new ColumnConstraints(widthCard);
@@ -485,12 +527,6 @@ public class GameJavaFX extends Application {
         Background backWe = new Background(backgroundOWe);
         BackgroundImage backgroundPPu = new BackgroundImage(imgPPU, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background backPPu = new Background(backgroundPPu);
-        Button btnPwe1 = new Button();
-        Button btnPwe2 = new Button();
-        Button btnPwe3 = new Button();
-        Button btnPpu1 = new Button();
-        Button btnPpu2 = new Button();
-        Button btnPpu3 = new Button();
 
         btnPwe1.setPrefSize(widthCard,heightCard);
         btnPwe2.setPrefSize(widthCard,heightCard);
@@ -520,7 +556,6 @@ public class GameJavaFX extends Application {
         /**
          * set personal ammo
          */
-        GridPane gridPAmmo = new GridPane();
         gridPAmmo.setAlignment(Pos.CENTER);
 
         double widthAmmo = 50;
@@ -547,9 +582,6 @@ public class GameJavaFX extends Application {
         GridPane gridOther = new GridPane();
         gridOther.setAlignment(Pos.CENTER);
 
-        double widthOCard = widthLateral/3;
-        double widthOther = widthOCard * 2;
-        double heightOther = heightCenter/5;
         ColumnConstraints oc1 = new ColumnConstraints(widthOther);
         ColumnConstraints oc2 = new ColumnConstraints(widthOCard);
 
@@ -577,9 +609,6 @@ public class GameJavaFX extends Application {
         gridOther.add(gridOtherSpace4,0,3);
         gridOther.add(gridOtherSpace5,0,4);
 
-        double widthOtherWeapon = widthCard/3;
-        double heightOtherWeapon = heightCenter/5;
-
         GridPane gridOtherWe = new GridPane();
 
         ColumnConstraints owc1 = new ColumnConstraints(widthOtherWeapon);
@@ -598,25 +627,11 @@ public class GameJavaFX extends Application {
 
         gridOther.add(gridOtherWe,1,0,1,5);
 
-        double heightOtherAmmo = heightOther/5;
-        double heightOtherBoard = heightOtherAmmo * 4;
-
-        GridPane gridOtherAmmo1 = new GridPane();
-        GridPane gridOtherAmmo2 = new GridPane();
-        GridPane gridOtherAmmo3 = new GridPane();
-        GridPane gridOtherAmmo4 = new GridPane();
-        GridPane gridOtherAmmo5 = new GridPane();
         setOtherAmmo(gridOtherAmmo1,widthOther,heightOtherAmmo);
         setOtherAmmo(gridOtherAmmo2,widthOther,heightOtherAmmo);
         setOtherAmmo(gridOtherAmmo3,widthOther,heightOtherAmmo);
         setOtherAmmo(gridOtherAmmo4,widthOther,heightOtherAmmo);
         setOtherAmmo(gridOtherAmmo5,widthOther,heightOtherAmmo);
-
-        GridPane gridOtherBoard1 = new GridPane();
-        GridPane gridOtherBoard2 = new GridPane();
-        GridPane gridOtherBoard3 = new GridPane();
-        GridPane gridOtherBoard4 = new GridPane();
-        GridPane gridOtherBoard5 = new GridPane();
 
 
         Image imgOther1;
@@ -625,11 +640,7 @@ public class GameJavaFX extends Application {
         Image imgOther4;
         Image imgOther5;
 
-        ArrayList<Button> weOther1 = new ArrayList<>();
-        ArrayList<Button> weOther2 = new ArrayList<>();
-        ArrayList<Button> weOther3 = new ArrayList<>();
-        ArrayList<Button> weOther4 = new ArrayList<>();
-        ArrayList<Button> weOther5 = new ArrayList<>();
+
 
 
         for (VirtualPlayer p : players ) {
@@ -706,7 +717,6 @@ public class GameJavaFX extends Application {
         Image imgDeck = new Image(new FileInputStream(PATH_BACK_POWERUP),widthCard,widthCard,true,true);
         BackgroundImage backgroundDeck = new BackgroundImage(imgDeck, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background backDeck = new Background(backgroundDeck);
-        Button btnDeck = new Button();
         btnDeck.setBackground(backDeck);
         btnDeck.setPrefSize(widthCard,widthCard);
         grid.add(btnDeck,2,2);
@@ -722,11 +732,6 @@ public class GameJavaFX extends Application {
         msg.setFont(font);
         msg.setEditable(false);
 
-        Button btnMove = new Button("Muovi");
-        Button btnPick = new Button("Raccogli");
-        Button btnShoot = new Button("Spara");
-        Button btnRel = new Button("Ricarica");
-        Button btnCancel = new Button("Annulla");
         btnCancel.setOpacity(0);
         btnRel.setOpacity(0);
         HBox hBtn = new HBox(30);
@@ -771,17 +776,14 @@ public class GameJavaFX extends Application {
             for (ArrayList<Button> btnArr: btnCell) {
                 if (turn.equals(player.getCharacter())) {
                     chooseSquare(btnArr, btnCell.indexOf(btnArr));
-
-                    hideCell(btnCell.get(3),0.5);
-                    hideCell(btnCell.get(6),0.5);
-                    hideCell(btnCell.get(7),0.5);
-                    hideCell(btnCell.get(9),0.5);
-                    hideCell(btnCell.get(10),0.5);
-                    hideCell(btnCell.get(11),0.5);
-
                 }else
                     msg.setText("Aspetta il tuo turno...");
             }
+
+            for (String s : game.getHideSquare()) {
+                hideCell(btnCell.get(getCoordinate(s)),0.5);
+            }
+
         });
         btnPick.setOnAction(e->{
             pick = true;
@@ -862,6 +864,7 @@ public class GameJavaFX extends Application {
         setPlayerOnCell(btnCell.get(0),players.get(3).getCharacter());
         setPlayerOnCell(btnCell.get(0),players.get(4).getCharacter());
 
+        fillAmmoTiles();
 
         if(move){
         }else
@@ -1392,6 +1395,59 @@ public class GameJavaFX extends Application {
         }
     }
 
+    public void fillAmmoTiles(){
+
+        double w = btnCell.get(0).get(0).getPrefWidth();
+        double h = btnCell.get(0).get(0).getPrefHeight();
+
+        DropShadow borderGlow = new DropShadow();
+        borderGlow.setHeight(20);
+        borderGlow.setWidth(20);
+        borderGlow.setOffsetX(0f);
+        borderGlow.setOffsetY(0f);
+
+        for(int i = 0; i < 12; i++ ){
+
+            if(i == 2 || i == 4 || i == 11) {
+                try{
+                    Image img = new Image(new FileInputStream(PATH_BACK_WEAPON),w,h,true,true);
+                    BackgroundImage background = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+                    Background back = new Background(background);
+                    btnCell.get(i).get(5).setBackground(back);
+                    btnCell.get(i).get(5).setOpacity(1);
+                    btnCell.get(i).get(5).setAlignment(Pos.CENTER_LEFT);
+                    borderGlow.setColor(Color.LIGHTGREEN);
+                    btnCell.get(i).get(5).setEffect(borderGlow);
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                continue;
+            }
+
+            try{
+                Image img = new Image(new FileInputStream(PATH_AMMO + game.getAmmoTiles().get(i) + ".png"),w,h,true,true);
+                BackgroundImage background = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+                Background back = new Background(background);
+                btnCell.get(i).get(5).setBackground(back);
+                btnCell.get(i).get(5).setOpacity(1);
+                borderGlow.setColor(Color.LIGHTCYAN);
+                btnCell.get(i).get(5).setEffect(borderGlow);
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public int getCoordinate(String s){
+
+        int temp1 = Integer.parseInt(s.split(":")[0]);
+        int temp2 = Integer.parseInt(s.split(":")[1]);
+
+        return temp1*4 + temp2;
+    }
+
     public void hideCell(ArrayList<Button> btn,double o){
         for (Button b : btn) {
             b.setOpacity(o);
@@ -1402,14 +1458,21 @@ public class GameJavaFX extends Application {
 
         for (Button b : btnArr) {
             b.setOnAction(e->{
-                int x = (int) Math.ceil((double)(btn+1)/4)-1;
-                int y = (btn+1) - (x*4)-1;
-                game.setTargetSquare(x + ":" + y);
-                System.out.println(game.getTargetSquare());
+                if(b.getOpacity() == 0) {
+                    int x = (int) Math.ceil((double) (btn + 1) / 4) - 1;
+                    int y = (btn + 1) - (x * 4) - 1;
+                    game.setTargetSquare(x + ":" + y);
+                    System.out.println(game.getTargetSquare());
 
-                update();
+                    btnCancel.setOpacity(0);
+
+                    update();
+                } else
+                    msg.setText(ERR_SQUARE);
             });
         }
+
+
 
     }
 
@@ -1422,7 +1485,6 @@ public class GameJavaFX extends Application {
                     case(0):{
                         if(b.getOpacity() != 0){
                             game.setTargetPlayer("yellow");
-                            System.out.println(game.getTargetPlayer());
                         }
                         break;
                     }
@@ -1455,18 +1517,24 @@ public class GameJavaFX extends Application {
                         break;
                     }
                 }
+                update();
             });
         }
 
     }
 
     public void update(){
+
+        msg.setText(CLEAR);
+
         for (ArrayList<Button> btnArr : btnCell) {
             hideCell(btnArr,0);
             for (Button b : btnArr) {
                 b.setOnAction(e->{});
             }
         }
+
+        fillAmmoTiles();
 
         String pos = game.getTargetSquare();
         int temp1 = Integer.parseInt(pos.split(":")[0]);
@@ -1484,7 +1552,44 @@ public class GameJavaFX extends Application {
         setPlayerOnCell(btnCell.get(0),players.get(3).getCharacter());
         setPlayerOnCell(btnCell.get(0),players.get(4).getCharacter());
 
+        for (VirtualPlayer p : players) {
+            if(players.indexOf(p) == 0) {
+                fillBoard(gridPBoard,p,widthBoard,heightPBoard/4-6, heightPBoard/4, heightPBoard/3-6);
+                fillAmmo(gridPAmmo,p.getpBoard(),widthLateral/7,heightLateral/7);
+                continue;
+            }
+            /*
+            switch (p.getCharacter()){
+                case("yellow"):{
+                    fillBoard(gridOtherBoard1,p,widthBoard,heightPBoard/4-6, heightPBoard/4, heightPBoard/3-6);
+                    fillAmmo(gridOtherAmmo1,p.getpBoard(),widthLateral/7,heightLateral/7);
+                    break;
+                }
+                case("red"):{
+                    fillBoard(gridOtherBoard2,p,widthBoard,heightPBoard/4-6, heightPBoard/4, heightPBoard/3-6);
+                    fillAmmo(gridOtherAmmo2,p.getpBoard(),widthLateral/7,heightLateral/7);
+                    break;
+                }
+                case("blue"):{
+                    fillBoard(gridOtherBoard3,p,widthBoard,heightPBoard/4-6, heightPBoard/4, heightPBoard/3-6);
+                    fillAmmo(gridOtherAmmo3,p.getpBoard(),widthLateral/7,heightLateral/7);
+                    break;
+                }
+                case("green"):{
+                    fillBoard(gridOtherBoard4,p,widthBoard,heightPBoard/4-6, heightPBoard/4, heightPBoard/3-6);
+                    fillAmmo(gridOtherAmmo4,p.getpBoard(),widthLateral/7,heightLateral/7);
+                    break;
+                }
+                case("grey"):{
+                    fillBoard(gridOtherBoard5,p,widthBoard,heightPBoard/4-6, heightPBoard/4, heightPBoard/3-6);
+                    fillAmmo(gridOtherAmmo5,p.getpBoard(),widthLateral/7,heightLateral/7);
+                    break;
+                }
+            }
 
+             */
+
+        }
 
     }
 
