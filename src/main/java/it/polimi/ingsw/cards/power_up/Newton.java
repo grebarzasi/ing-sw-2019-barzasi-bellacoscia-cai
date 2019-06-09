@@ -22,8 +22,4 @@ public class Newton extends PowerUp {
         super(ammoOnDiscard, name);
     }
 
-    public void effect() {
-       Figure target = super.getOwner().getPref().getOneTarget();
-    }
-
 }

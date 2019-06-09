@@ -11,7 +11,4 @@ public class Teleporter extends PowerUp {
     }
 
 
-    public void effect(Square teleportTo) {
-       this.getOwner().setPosition(teleportTo);
-    }
 }

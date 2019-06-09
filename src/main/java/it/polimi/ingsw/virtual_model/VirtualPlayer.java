@@ -8,6 +8,7 @@ import java.util.HashMap;
  * @author Gregorio Barzasi
  */
 public class VirtualPlayer {
+
     private String username;
     private String character;
     private int row;

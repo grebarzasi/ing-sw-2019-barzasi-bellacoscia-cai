@@ -24,10 +24,4 @@ public class TagbackGrenade extends PowerUp {
     }
 
 
-    public void activate() {
-
-       Figure target = this.getOwner().getPersonalBoard().getDamage().get(this.getOwner().getPersonalBoard().getDamage().size()-1).getOwner();
-       target.getPersonalBoard().addMark(new Token(this.getOwner()));
-
-    }
 }

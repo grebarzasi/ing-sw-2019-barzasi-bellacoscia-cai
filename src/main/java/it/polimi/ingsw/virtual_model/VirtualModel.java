@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 public class VirtualModel {
+
     private ArrayList<VirtualPlayer> allPlayers;
     private VirtualBoard board;
     private ConnectionTech conn;

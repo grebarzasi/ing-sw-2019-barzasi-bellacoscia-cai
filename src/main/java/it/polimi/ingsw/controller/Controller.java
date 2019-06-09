@@ -8,6 +8,12 @@ import it.polimi.ingsw.cards.Ammo;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Main controller class, implemented with satate pattern.
+ *
+ * @author Yuting Cai
+ */
+
 public class Controller {
 
     private static final int[] frenzyPointsVec = {2,1,1,1};

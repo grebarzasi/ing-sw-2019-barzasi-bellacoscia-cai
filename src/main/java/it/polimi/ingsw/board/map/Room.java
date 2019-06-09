@@ -15,13 +15,6 @@ public class Room {
 
     private String color;
 
-
-
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
     public Room(String color) {
         this.color = color;
     }
@@ -46,7 +39,7 @@ public class Room {
      */
     public Collection<Figure> playersInRoom(Collection<Figure> figureList){
 
-        Collection<Figure> playersHere = new HashSet<Figure>();
+        Collection<Figure> playersHere = new HashSet<>();
 
         for (Figure figure : figureList) {
             if (figure.getPosition().getRoom().equals(this)) {

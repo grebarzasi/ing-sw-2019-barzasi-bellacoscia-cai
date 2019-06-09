@@ -1,7 +1,7 @@
 package it.polimi.ingsw.CLI;
 
 
-import com.sun.org.apache.regexp.internal.RE;
+
 import it.polimi.ingsw.virtual_model.VirtualCell;
 import it.polimi.ingsw.virtual_model.VirtualModel;
 import it.polimi.ingsw.virtual_model.VirtualPlayer;
