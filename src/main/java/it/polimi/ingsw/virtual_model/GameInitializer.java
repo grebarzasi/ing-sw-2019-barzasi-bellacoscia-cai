@@ -1,10 +1,9 @@
-package it.polimi.ingsw.controller;
+package it.polimi.ingsw.virtual_model;
 
 
 import com.fasterxml.jackson.databind.JsonNode;
 import it.polimi.ingsw.CLI.CliBoard;
 import it.polimi.ingsw.CLI.CliGame;
-import it.polimi.ingsw.CLI.CliView;
 import it.polimi.ingsw.Lobby;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.PlayerBoard;
@@ -19,23 +18,27 @@ import it.polimi.ingsw.cards.WeaponDeck;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Weapon;
 import it.polimi.ingsw.connection.socket.ClientThreadSocket;
-import it.polimi.ingsw.virtual_model.UpdateParser;
-import it.polimi.ingsw.virtual_model.VirtualCell;
-import it.polimi.ingsw.virtual_model.VirtualModel;
-import it.polimi.ingsw.virtual_model.VirtualPlayer;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import it.polimi.ingsw.controller.Controller;
+import it.polimi.ingsw.controller.GameStateJsonBuilder;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 
-class GameStateJsonBuilderTest {
 
-    @Test
-    void create() throws IOException {
+
+class GameInitializer {
+
+    public static void main(String[] args){
+        try {
+            new GameInitializer().initAll();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    void initAll() throws IOException {
         Lobby lobby = new Lobby();
         ClientThreadSocket a =new ClientThreadSocket(lobby);
         ClientThreadSocket b =new ClientThreadSocket(lobby);
@@ -124,9 +127,6 @@ class GameStateJsonBuilderTest {
 
       //  puList4.add((PowerUp) puDeck.fetch());
 
-        assertEquals(2,puList1.size());
-        assertEquals(2,puList2.size());
-        assertEquals(3,puList3.size());
 
         p1.setPowerupList(puList1);
         p2.setPowerupList(puList2);
@@ -180,6 +180,7 @@ class GameStateJsonBuilderTest {
 
 
         JsonNode node = new GameStateJsonBuilder(contr).create();
+        System.out.println(node);
         VirtualModel vmodel = new VirtualModel();
         vmodel.setOwner(new VirtualPlayer("gre","red"));
         UpdateParser parser=new UpdateParser(vmodel);
@@ -191,121 +192,11 @@ class GameStateJsonBuilderTest {
         VirtualPlayer vP4 = vmodel.findPlayer(p4.getCharacter());
         vmodel.setOwner(vP2);
 
+        HashMap<String, VirtualCell> cells = vmodel.getBoard().getMap().getCells();
+        System.out.println(cells);
 
-
-        // verify if its all ok
-        assertNotNull(vmodel.findPlayer(p1.getCharacter()));
-        assertNotNull(vmodel.findPlayer(p2.getCharacter()));
-        assertNotNull(vmodel.findPlayer(p3.getCharacter()));
-
-
-
-        assertEquals(p1.getUsername(),vP1.getUsername());
-        assertEquals(p2.getUsername(),vP2.getUsername());
-        assertEquals(p3.getUsername(),vP3.getUsername());
-//        assertEquals(vmodel.getTurn(),vP2);
-
-        assertEquals(p1.getCharacter(),vP1.getCharacter());
-        assertEquals(p2.getCharacter(),vP2.getCharacter());
-        assertEquals(p3.getCharacter(),vP3.getCharacter());
-
-        assertEquals(0,vP1.getPoints());
-        assertEquals(0,vP2.getPoints());
-        assertEquals(0,vP3.getPoints());
-
-        Cell cell = p1.getPosition().getPosition();
-        assertEquals(cell.getRow(),vP1.getRow());
-        assertEquals(cell.getColumn(),vP1.getColumn());
-
-        cell = p2.getPosition().getPosition();
-        assertEquals(cell.getRow(),vP2.getRow());
-        assertEquals(cell.getColumn(),vP2.getColumn());
-
-        cell = p3.getPosition().getPosition();
-        assertEquals(cell.getRow(),vP3.getRow());
-        assertEquals(cell.getColumn(),vP3.getColumn());
-
-        //weapons
-
-        assertTrue(vP1.getWeapons().containsKey(weaponList1.get(0).getName()));
-        assertTrue(vP1.getWeapons().containsKey(weaponList1.get(1).getName()));
-        assertTrue(vP1.getWeapons().containsKey(weaponList1.get(2).getName()));
-
-        assertTrue(vP2.getWeapons().containsKey(weaponList2.get(0).getName()));
-        assertTrue(vP2.getWeapons().containsKey(weaponList2.get(1).getName()));
-        assertTrue(vP2.getWeapons().containsKey(weaponList2.get(2).getName()));
-
-        assertTrue(vP3.getWeapons().containsKey(weaponList3.get(0).getName()));
-        assertTrue(vP3.getWeapons().containsKey(weaponList3.get(1).getName()));
-
-        //verify load State
-        assertTrue(vP1.getWeapons().get(weaponList1.get(1).getName()));
-        assertTrue(vP1.getWeapons().get(weaponList1.get(2).getName()));
-
-        assertTrue(vP2.getWeapons().get(weaponList2.get(0).getName()));
-        assertFalse(vP2.getWeapons().get(weaponList2.get(1).getName()));
-        assertFalse(vP2.getWeapons().get(weaponList2.get(2).getName()));
-
-        assertFalse(vP3.getWeapons().get(weaponList3.get(0).getName()));
-        assertFalse(vP3.getWeapons().get(weaponList3.get(1).getName()));
-
-        //power up
-        assertTrue(vP1.getPowerUps().contains(puList1.get(0).getName()+":"+puList1.get(0).getAmmoOnDiscard().toString()));
-        assertTrue(vP1.getPowerUps().contains(puList1.get(1).getName()+":"+puList1.get(1).getAmmoOnDiscard().toString()));
-
-        assertTrue(vP2.getPowerUps().contains(puList2.get(0).getName()+":"+puList2.get(0).getAmmoOnDiscard().toString()));
-        assertTrue(vP2.getPowerUps().contains(puList2.get(1).getName()+":"+puList2.get(1).getAmmoOnDiscard().toString()));
-
-        assertTrue(vP3.getPowerUps().contains(puList3.get(0).getName()+":"+puList3.get(0).getAmmoOnDiscard().toString()));
-        assertTrue(vP3.getPowerUps().contains(puList3.get(1).getName()+":"+puList3.get(1).getAmmoOnDiscard().toString()));
-        assertTrue(vP3.getPowerUps().contains(puList3.get(2).getName()+":"+puList3.get(2).getAmmoOnDiscard().toString()));
-
-        //damage and marks
-        ArrayList<String> damage = new ArrayList<>();
-        ArrayList<String> marks = new ArrayList<>();
-
-        damage.add("blue");
-        damage.add("blue");
-        damage.add("yellow");
-        marks.add("blue");
-
-        assertTrue(vP1.getpBoard().getDamage().containsAll(damage));
-        assertTrue(vP1.getpBoard().getMarks().containsAll(marks));
-
-        damage.clear();
-        marks.clear();
-        damage.add("red");
-        marks.add("yellow");
-        assertTrue(vP2.getpBoard().getDamage().containsAll(damage));
-        assertTrue(vP2.getpBoard().getMarks().containsAll(marks));
-
-        damage.clear();
-        marks.clear();
-        marks.add("red");
-        marks.add("blue");
-        assertTrue(vP3.getpBoard().getDamage().isEmpty());
-        assertTrue(vP3.getpBoard().getMarks().containsAll(marks));
-
-        //skulls
-        assertEquals(6,vP1.getpBoard().getSkulls());
-        assertEquals(6,vP2.getpBoard().getSkulls());
-        assertEquals(5,vP3.getpBoard().getSkulls());
-
-        //ammo
-        assertEquals(p1.getPersonalBoard().getAmmoInventory().getRed(),vP1.getpBoard().getAmmoRed());
-        assertEquals(p1.getPersonalBoard().getAmmoInventory().getBlue(),vP1.getpBoard().getAmmoBlue());
-        assertEquals(p1.getPersonalBoard().getAmmoInventory().getYellow(),vP1.getpBoard().getAmmoYellow());
-
-        assertEquals(p2.getPersonalBoard().getAmmoInventory().getRed(),vP2.getpBoard().getAmmoRed());
-        assertEquals(p2.getPersonalBoard().getAmmoInventory().getBlue(),vP2.getpBoard().getAmmoBlue());
-        assertEquals(p2.getPersonalBoard().getAmmoInventory().getYellow(),vP2.getpBoard().getAmmoYellow());
-
-        assertEquals(p3.getPersonalBoard().getAmmoInventory().getRed(),vP3.getpBoard().getAmmoRed());
-        assertEquals(p3.getPersonalBoard().getAmmoInventory().getBlue(),vP3.getpBoard().getAmmoBlue());
-        assertEquals(p3.getPersonalBoard().getAmmoInventory().getYellow(),vP3.getpBoard().getAmmoYellow());
-
-        //Map
-        assertEquals(8,vmodel.getBoard().getSkull());
-        assertEquals("large",vmodel.getBoard().getMap().getName());
+        CliBoard cliBoard =new CliBoard(vmodel);
+        cliBoard.loadFile("cli_large_pos");
+        CliGame game =  new CliGame(cliBoard);
     }
 }

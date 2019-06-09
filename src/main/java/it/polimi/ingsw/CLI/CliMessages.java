@@ -60,6 +60,12 @@ public class CliMessages {
     public static final String COUNTDOWN_START = "Countdown started!";
     public static final String GAME_START = "Game started";
 
+    //Game msg
+    public static final String CHOOSE_PU_Q = "\nSeleziona un powerup da utilizzare:";
+    public static final String CHOOSE_PU_ERR = "\nNon disponibile";
+
+    public static final String CHOOSE_WP_Q = "\nSeleziona un powerup da utilizzare:";
+    public static final String CHOOSE_WP_ERR = "\nNon disponibile";
 
     public static void clearScreen() {
         System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");

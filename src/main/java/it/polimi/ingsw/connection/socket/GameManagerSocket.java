@@ -8,8 +8,11 @@ import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Effect;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Set;
+
+import static it.polimi.ingsw.connection.ConnMessage.*;
 
 public class GameManagerSocket implements View {
 
@@ -19,52 +22,93 @@ public class GameManagerSocket implements View {
         this.cl=cl;
     }
 
-    @Override
+    /**
+     * Convert args into Strings, sends it to client and wait for a reply.
+     * then convert the string into a PU pointer and returns it
+     * @param args the Powerups to show
+     * @return a pu element
+     * @throws IOException
+     */
     public PowerUp showPowerUp(ArrayList<PowerUp> args) {
+        String s="";
+        String rpl="";
+        String[] temp;
+        for(PowerUp p : args){
+            s=s+p.getName()+INNER_SEP+p.getAmmoOnDiscard().toString()+INFO_SEP;
+        }
+        cl.getOut().println(SHOW_PU);
+        cl.getOut().println(s);
+
+        try {
+            rpl=cl.getIn().readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if(rpl.equals(NOTHING))
+            return null;
+        temp=rpl.split(INNER_SEP);
+        for(PowerUp p : args){
+            if(p.getName().equals(temp[0])&&p.getAmmoOnDiscard().toString().equals(temp[1]))
+                return p;
+        }
         return null;
     }
 
-    @Override
     public Weapon showWeapon(ArrayList<Weapon> args) {
+        String s="";
+        String rpl="";
+        String[] temp;
+        for(Weapon p : args){
+            s=s+p.getName()+INNER_SEP+p.isLoaded()+INFO_SEP;
+        }
+        cl.getOut().println(SHOW_WEAPONS);
+        cl.getOut().println(s);
+
+        try {
+            rpl=cl.getIn().readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if(rpl.equals(NOTHING))
+            return null;
+        temp=rpl.split(INNER_SEP);
+        for(Weapon p : args){
+            if(p.getName().equals(temp[0]))
+                return p;
+        }
         return null;
     }
 
-    @Override
     public Action showMoves(ArrayList<Action> args) {
         return null;
     }
 
-    @Override
     public Square showPossibleMoves(ArrayList<Square> args) {
         return null;
     }
 
-    @Override
     public ArrayList<Figure> showMultipleTargets(ArrayList<Figure> args) {
         return null;
     }
 
-    @Override
     public Figure singleTargetingShowTarget(ArrayList<Figure> args) {
         return null;
     }
 
-    @Override
     public boolean showBoolean(String message) {
         return false;
     }
 
-    @Override
     public void displayMessage(String message) {
 
     }
 
-    @Override
     public void displayLeaderboard() {
 
     }
 
-    @Override
     public Effect showEffects(Set<Effect> args) {
         return null;
     }

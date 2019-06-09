@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import static it.polimi.ingsw.connection.ConnMessage.*;
+
 /**
  * @author Gregorio Barzasi
  */
@@ -31,33 +33,33 @@ public class GameComSocket extends Thread{
             msg= i.readLine();
 
             switch (msg){
-                case "*ping*":
-                    o.println("*pong*");
+                case PING:
+                    o.println(PONG);
                     break;
-                case "*SHOW_PowerUP*":
+                case SHOW_PU:
                     args=i.readLine();
                     o.println(v.showPowerUp(parseString(args)));
                     break;
-                case "*SHOW_Weapons*":
+                case SHOW_WEAPONS:
                     args=i.readLine();
                     o.println(v.showWeapon(parseString(args)));
                     break;
-                case "*SHOW_Action*":
+                case SHOW_ACTIONS:
                     args=i.readLine();
                     o.println(v.showAction(parseString(args)));
                     break;
-                case "*SHOW_Moves*":
+                case SHOW_MOVES:
                     args=i.readLine();
                     o.println(v.showPossibleMoves(parseString(args)));
                     break;
-                case "*SHOW_MultipleTarget*":
+                case SHOW_TARGETS:
                     args=i.readLine();
                     o.println(v.showTargets(parseString(args)));
                     break;
-                case "*CHOOSE_Direction":
+                case CHOOSE_DIRECTION:
                     o.println(v.chooseDirection());
                     break;
-                case "*UPDATE":
+                case UPDATE:
                     args=i.readLine();
                     v.updateModel(args);
                     break;
@@ -66,16 +68,18 @@ public class GameComSocket extends Thread{
             break;
 
         }
-        } catch (IOException e) {
-        e.printStackTrace();
+           } catch (IOException e) {
+               e.printStackTrace();
+        }
     }
-    }
+
+    //Parse args info
     public ArrayList<String> parseString(String args){
         ArrayList<String> sList = new ArrayList<>();
-        if(args.equals("*NOTHING*")) {
+        if(args.equals(NOTHING)) {
             return sList;
         }
-        String[] s=args.split(";");
+        String[] s=args.split(INFO_SEP);
         for(String x : s){
             sList.add(x);
         }
