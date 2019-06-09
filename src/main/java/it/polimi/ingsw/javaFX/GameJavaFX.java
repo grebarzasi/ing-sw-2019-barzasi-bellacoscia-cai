@@ -44,7 +44,7 @@ import static it.polimi.ingsw.javaFX.GUIFiles.*;
 CONTORNO ROSSO!!
 
         DropShadow borderGlow = new DropShadow();
-        borderGlow.setColor(Color.RED);
+        borderGlow.setColor(CliColor.RED);
         borderGlow.setHeight(50);
         borderGlow.setWidth(50);
         borderGlow.setOffsetX(0f);
