@@ -21,6 +21,8 @@ public class ClientThreadSocket extends Thread {
     private boolean ready=false;
     private boolean expired=false;
 
+    private GameManagerSocket manager;
+
     //preferences
     private String mapPref;
     private int killPref;
@@ -129,7 +131,7 @@ public class ClientThreadSocket extends Thread {
     }
 
     public void game() {
-        System.out.println("*GAME*");
+        manager=new GameManagerSocket(this);
     }
 
     public void run() {
@@ -190,6 +192,38 @@ public class ClientThreadSocket extends Thread {
 
     public void setClient(Socket client) {
         this.client = client;
+    }
+
+    public String getMapPref() {
+        return mapPref;
+    }
+
+    public void setMapPref(String mapPref) {
+        this.mapPref = mapPref;
+    }
+
+    public int getKillPref() {
+        return killPref;
+    }
+
+    public void setKillPref(int killPref) {
+        this.killPref = killPref;
+    }
+
+    public boolean isTerminatorPref() {
+        return terminatorPref;
+    }
+
+    public void setTerminatorPref(boolean terminatorPref) {
+        this.terminatorPref = terminatorPref;
+    }
+
+    public boolean isFinalFrenzyPref() {
+        return finalFrenzyPref;
+    }
+
+    public void setFinalFrenzyPref(boolean finalFrenzyPref) {
+        this.finalFrenzyPref = finalFrenzyPref;
     }
 
     @Override

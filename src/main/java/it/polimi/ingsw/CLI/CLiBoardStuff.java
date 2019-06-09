@@ -1,9 +1,7 @@
 package it.polimi.ingsw.CLI;
 
-import java.util.ArrayList;
-
-import static it.polimi.ingsw.CLI.Color.*;
-import static it.polimi.ingsw.CLI.Color.RESET;
+import static it.polimi.ingsw.CLI.CliColor.*;
+import static it.polimi.ingsw.CLI.CliColor.RESET;
 
 public class CLiBoardStuff {
 

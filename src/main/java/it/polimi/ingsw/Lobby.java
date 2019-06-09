@@ -4,6 +4,8 @@ package it.polimi.ingsw;
 import it.polimi.ingsw.connection.socket.ClientThreadSocket;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 import java.util.Timer;
 
 
@@ -16,7 +18,6 @@ public class Lobby {
     private boolean hasStarted;
     private boolean hasTimerStarted;
     private Timer timer;
-    //private DisconnectChecker disconnectChecker;
     private final int DELAY=30;
 
 
@@ -31,7 +32,6 @@ public class Lobby {
         this.timer= new Timer();
         this.hasStarted=false;
         this.hasTimerStarted=false;
-       // this.disconnectChecker = new DisconnectChecker(this);
     }
 
     public synchronized boolean addPlayer(ClientThreadSocket p) {
@@ -139,6 +139,41 @@ public class Lobby {
             s= s + c.toString()+";";
         }
         return s;
+    }
+
+    //make decision on the game setup;
+    public void prefDecision(){
+        ArrayList<Integer> killPrefList=new ArrayList<>();
+        ArrayList<String> mapPrefList=new ArrayList<>();
+        ArrayList<Boolean> terminatorList=new ArrayList<>();
+        ArrayList<Boolean> finalFrenzyList=new ArrayList<>();
+
+        for(ClientThreadSocket c: joinedPlayers){
+            killPrefList.add(c.getKillPref());
+            mapPrefList.add(c.getMapPref());
+            terminatorList.add(c.isTerminatorPref());
+            finalFrenzyList.add(c.isFinalFrenzyPref());
+        }
+    }
+
+    public String modeOf(ArrayList<String> list){
+        HashMap<String,Integer> occ = new HashMap<>();
+        for(String s : list){
+            if(occ.containsKey(s))
+                occ.replace(s,occ.get(s)+1);
+            else
+                occ.put(s,1);
+        }
+        String pref="";
+        int max=0;
+        Set<String> all = occ.keySet();
+        for(String s: all){
+            if(max<occ.get(s)){
+                pref = s;
+                max=occ.get(s);
+            }
+        }
+        return pref;
     }
 }
 

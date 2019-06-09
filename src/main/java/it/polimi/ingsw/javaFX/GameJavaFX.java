@@ -44,7 +44,7 @@ import static it.polimi.ingsw.javaFX.GUIFiles.*;
 CONTORNO ROSSO!!
 
         DropShadow borderGlow = new DropShadow();
-        borderGlow.setColor(Color.RED);
+        borderGlow.setColor(CliColor.RED);
         borderGlow.setHeight(50);
         borderGlow.setWidth(50);
         borderGlow.setOffsetX(0f);
@@ -116,6 +116,7 @@ public class GameJavaFX extends Application {
     private VirtualPlayer player;
     private ArrayList<VirtualPlayer> players;
     private int points;
+
 
     ArrayList<ArrayList<Button>> btnCell = new ArrayList<>();
     TextField msg = new TextField();
@@ -657,6 +658,7 @@ public class GameJavaFX extends Application {
                         imgOther2 = setBoard(p.getCharacter(), widthOther, heightOtherBoard);
                         setGridBack(gridOtherBoard2,imgOther2);
                         fillOtherAmmo(gridOtherAmmo2,p.getpBoard(),heightOtherAmmo,heightOtherAmmo);
+                        //fillBoard(gridOtherBoard2,p,widthOther,heightOtherBoard/4,heightOtherBoard/3,heightOtherBoard/4);
                         weOther2 = setOtherWeapon(gridOtherWe,1,widthOtherWeapon,heightOtherWeapon);
                         break;
                     }
@@ -770,42 +772,53 @@ public class GameJavaFX extends Application {
         });
 
         btnMove.setOnAction(e->{
-            move = true;
-            msg.setText(CHOOSE_SQUARE);
-            btnCancel.setOpacity(1);
-            for (ArrayList<Button> btnArr: btnCell) {
-                if (turn.equals(player.getCharacter())) {
-                    chooseSquare(btnArr, btnCell.indexOf(btnArr));
-                }else
-                    msg.setText("Aspetta il tuo turno...");
-            }
+            if (turn.equals(player.getCharacter()) && btnShoot.getOpacity() == 1) {
 
-            for (String s : game.getHideSquare()) {
-                hideCell(btnCell.get(getCoordinate(s)),0.5);
-            }
+                move = true;
+                msg.setText(CHOOSE_SQUARE);
+                btnCancel.setOpacity(1);
+                for (ArrayList<Button> btnArr : btnCell) {
+                    chooseSquare(btnArr, btnCell.indexOf(btnArr));
+                }
+
+
+                for (String s : game.getHideSquare()) {
+                    hideCell(btnCell.get(getCoordinate(s)), 0.5);
+                }
+            }else
+                msg.setText("Aspetta il tuo turno...");
 
         });
         btnPick.setOnAction(e->{
-            pick = true;
-            msg.setText(CHOOSE_SQUARE);
-            for (ArrayList<Button> btnArr: btnCell){
-                if(turn.equals(player.getCharacter())){
-                    gridPBoard.setEffect(borderGlow);
+            if(turn.equals(player.getCharacter()) && btnShoot.getOpacity() == 1) {
+
+                pick = true;
+                msg.setText(CHOOSE_SQUARE);
+                btnCancel.setOpacity(1);
+                for (ArrayList<Button> btnArr : btnCell) {
                     chooseSquare(btnArr, btnCell.indexOf(btnArr));
-                }else
-                    msg.setText("Aspetta il tuo turno...");
-            }
+                }
+
+                for (String s : game.getHideSquare()) {
+                    hideCell(btnCell.get(getCoordinate(s)), 0.5);
+                }
+
+                btnCell.get(getCoordinate(game.getTargetSquare())).get(5).setOpacity(0);
+
+            }else
+                msg.setText("Aspetta il tuo turno...");
         });
         btnShoot.setOnAction(e->{
-            shoot = true;
-            msg.setText(CHOOSE_PLAYER);
-            for (ArrayList<Button> btnArr: btnCell){
-                if(turn.equals(player.getCharacter())){
-                    gridPBoard.setEffect(borderGlow);
-                    choosePlayer(btnArr, btnCell.indexOf(btnArr));
-                }else
-                    msg.setText("Aspetta il tuo turno...");
+            if(turn.equals(player.getCharacter()) && btnShoot.getOpacity() == 1){
+
+                shoot = true;
+                msg.setText(CHOOSE_PLAYER);
+                btnCancel.setOpacity(1);
+                for (ArrayList<Button> btnArr: btnCell) {
+                choosePlayer(btnArr, btnCell.indexOf(btnArr));
             }
+            }else
+                msg.setText("Aspetta il tuo turno...");
         });
 
         btnPwe1.setOnAction(e->{
@@ -866,13 +879,13 @@ public class GameJavaFX extends Application {
 
         fillAmmoTiles();
 
-        if(move){
-        }else
-        if(pick){
-            msg.setText(CHOOSE_SQUARE);
-        }else
-        if(shoot){
-            msg.setText(CHOOSE_PLAYER);
+        for (ArrayList<Button> btnArr : btnCell) {
+            btnArr.get(5).setOnAction(e->{
+                if(btnCell.indexOf(btnArr) == 2 || btnCell.indexOf(btnArr) == 4 || btnCell.indexOf(btnArr) == 11){
+                    chooseWeapon cw = new chooseWeapon();
+                    cw.show();
+                }
+            });
         }
 
         primaryStage.show();
@@ -1393,6 +1406,7 @@ public class GameJavaFX extends Application {
             grid.add(skull,k,2);
             k++;
         }
+
     }
 
     public void fillAmmoTiles(){
@@ -1462,7 +1476,6 @@ public class GameJavaFX extends Application {
                     int x = (int) Math.ceil((double) (btn + 1) / 4) - 1;
                     int y = (btn + 1) - (x * 4) - 1;
                     game.setTargetSquare(x + ":" + y);
-                    System.out.println(game.getTargetSquare());
 
                     btnCancel.setOpacity(0);
 
@@ -1741,6 +1754,51 @@ public class GameJavaFX extends Application {
                 }
 
             }
+
+        }
+    }
+
+    public class chooseWeapon extends Stage {
+        public chooseWeapon(){
+
+            this.setTitle("SCEGLI UN'ARMA");
+
+            double widthScreen = Screen.getPrimary().getBounds().getWidth() / 3;
+            double heightScreen = Screen.getPrimary().getBounds().getHeight() / 3;
+
+            Group root = new Group();
+            Scene theScene = new Scene(root);
+            this.setScene(theScene);
+
+            GridPane grid = new GridPane();
+            grid.setAlignment(Pos.CENTER);
+            grid.setPadding(new Insets(0, 0, 0, 0));
+
+            try {
+                Image back = new Image(new FileInputStream(PATH_BACK_GAME), 2190, 1920, true, true);
+                BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+                grid.setBackground(new Background(backgroundImage));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            Scene scene = new Scene(grid, widthScreen + 50, heightScreen + 50);
+            this.setScene(scene);
+
+            scene.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> grid.setPrefWidth((double) newSceneWidth));
+            scene.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> grid.setPrefHeight((double) newSceneHeight));
+
+            ColumnConstraints c1 = new ColumnConstraints(widthScreen / 3);
+            ColumnConstraints c2 = new ColumnConstraints(widthScreen / 3);
+            ColumnConstraints c3 = new ColumnConstraints(widthScreen / 3);
+
+            RowConstraints r = new RowConstraints(heightScreen);
+
+            grid.getColumnConstraints().addAll(c1,c2,c3);
+            grid.getRowConstraints().add(r);
+
+
+
 
         }
     }

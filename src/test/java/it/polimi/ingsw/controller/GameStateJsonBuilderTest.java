@@ -2,7 +2,7 @@ package it.polimi.ingsw.controller;
 
 
 import com.fasterxml.jackson.databind.JsonNode;
-import it.polimi.ingsw.CLI.Maps;
+import it.polimi.ingsw.CLI.CliBoard;
 import it.polimi.ingsw.Lobby;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.PlayerBoard;
@@ -12,7 +12,6 @@ import it.polimi.ingsw.board.map.Cell;
 import it.polimi.ingsw.board.map.Map;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.Ammo;
-import it.polimi.ingsw.cards.AmmoLot;
 import it.polimi.ingsw.cards.Deck;
 import it.polimi.ingsw.cards.WeaponDeck;
 import it.polimi.ingsw.cards.power_up.PowerUp;
@@ -72,7 +71,7 @@ class GameStateJsonBuilderTest {
         p2.setPosition(matrix[1][2]);
         p3.setPosition(matrix[0][3]);
         p4.setPosition(matrix[2][3]);
-        contr.getModel().setCurrentPlayer(p1);
+        contr.getModel().setCurrentPlayer(p3);
         //WEAPONS
         WeaponDeck weaponDeck = contr.getModel().getBoard().getWeaponDeck();
         Weapon w1 = (Weapon)weaponDeck.fetch();
@@ -98,7 +97,7 @@ class GameStateJsonBuilderTest {
         weaponList3.add((Weapon) weaponDeck.fetch());
         weaponList3.add((Weapon) weaponDeck.fetch());
 
-        //weaponList4.add((Weapon) weaponDeck.fetch());
+        weaponList4.add((Weapon) weaponDeck.fetch());
 
         p1.setWeaponsList(weaponList1);
         p2.setWeaponsList(weaponList2);
@@ -189,7 +188,7 @@ class GameStateJsonBuilderTest {
         VirtualPlayer vP2 = vmodel.findPlayer(p2.getCharacter());
         VirtualPlayer vP3 = vmodel.findPlayer(p3.getCharacter());
         VirtualPlayer vP4 = vmodel.findPlayer(p4.getCharacter());
-        //vmodel.setOwner(vP1);
+        vmodel.setOwner(vP2);
 
 
 
@@ -310,7 +309,7 @@ class GameStateJsonBuilderTest {
         HashMap<String, VirtualCell> cells = vmodel.getBoard().getMap().getCells();
         System.out.println(cells);
 
-        Maps cliMap =new Maps(vmodel);
+        CliBoard cliMap =new CliBoard(vmodel);
         cliMap.loadFile("cli_large_pos");
     }
 }

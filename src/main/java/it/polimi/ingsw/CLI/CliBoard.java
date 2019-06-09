@@ -1,7 +1,6 @@
 package it.polimi.ingsw.CLI;
 
 
-
 import it.polimi.ingsw.virtual_model.VirtualCell;
 import it.polimi.ingsw.virtual_model.VirtualModel;
 import it.polimi.ingsw.virtual_model.VirtualPlayer;
@@ -9,10 +8,10 @@ import static it.polimi.ingsw.CLI.CLiBoardStuff.*;
 import java.io.*;
 import java.util.ArrayList;
 
-import static it.polimi.ingsw.CLI.Color.*;
+import static it.polimi.ingsw.CLI.CliColor.*;
 
 
-public class Maps {
+public class CliBoard {
     private String lastColor="";
     private String lastBackground="";
     private int cellsPlnum=12;
@@ -22,7 +21,7 @@ public class Maps {
     private ArrayList<String> weaponTemp;
     private VirtualModel model;
 
-    public Maps(VirtualModel model){
+    public CliBoard(VirtualModel model){
         this.model=model;
     }
 
@@ -127,6 +126,14 @@ public class Maps {
             case"#£":
                 printBoard4(boardPrinted);
                 boardPrinted++;
+                break;
+            case"#PLAYERB":
+                createBoard1(model.getOwner());
+                System.out.println();
+                createBoard2(model.getOwner());
+                System.out.println();
+                createBoard3(model.getOwner());
+                System.out.println();
                 break;
             case "":
                 break;
@@ -239,6 +246,8 @@ public class Maps {
         //Weapon
         printWeapon(0,p);
 
+        //OWNER PU
+        printPU(0,p);
     }
     /**
      * print player board info in the right spot on map
@@ -285,6 +294,9 @@ public class Maps {
 
         //Weapon
         printWeapon(1,p);
+
+        //Owner PU
+        printPU(1,p);
     }
     /**
      * print player board info in the right spot on map
@@ -326,6 +338,8 @@ public class Maps {
 
         //Weapon
         printWeapon(2,p);
+        //Owner PU
+        printPU(2,p);
     }
     /**
      * print player board info in the right spot on map
@@ -349,14 +363,29 @@ public class Maps {
         String s="";
         if(k<weaponTemp.size()) {
             s=weaponTemp.get(k);
-            if (!p.getWeapons().get(weaponTemp.get(k)))
+            if (model.getOwner().equals(p)&&!p.getWeapons().get(weaponTemp.get(k))) {
+                s = RED_B + s;
+                i=i-RED_B.length();
+            }else if (!p.getWeapons().get(weaponTemp.get(k)))
                 s=s.replaceAll(".",WEAPON_CENSORED);
-            i=+s.length();
+            i=i+s.length();
         }
         for(;i<WEAPON_SPACE;i++)
             System.out.print(" ");
         System.out.print(s);
         System.out.print(WHITE+"}┤"+RESET);
+    }
+
+    public void printPU(int k,VirtualPlayer p){
+        if(!model.getOwner().equals(p))
+            return;
+        String pu[];
+        if(model.getOwner().getPowerUps().size()>k){
+            pu= model.getOwner().getPowerUps().get(k).split(":");
+            System.out.print("├─< "+pu[0]+" [");
+            colorizeCP(pu[1].subSequence(0,1).toString().toUpperCase());
+            System.out.print("]>");
+        }
     }
     /**
      * convert Care package info into token
