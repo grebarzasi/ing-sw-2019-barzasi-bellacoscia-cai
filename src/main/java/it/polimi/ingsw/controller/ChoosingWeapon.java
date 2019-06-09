@@ -16,7 +16,7 @@ public class ChoosingWeapon implements ControllerState {
     }
 
     /**
-     * Makes the player command a weapon through the view and afterwards
+     * Makes the player choose a weapon through the view and afterwards
      * sets the current state of controller to shooting
      */
 
