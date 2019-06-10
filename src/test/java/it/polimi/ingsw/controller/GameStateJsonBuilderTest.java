@@ -25,6 +25,7 @@ import it.polimi.ingsw.virtual_model.VirtualModel;
 import it.polimi.ingsw.virtual_model.VirtualPlayer;
 import org.junit.jupiter.api.Test;
 
+import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
@@ -227,27 +228,18 @@ class GameStateJsonBuilderTest {
 
         //weapons
 
-        assertTrue(vP1.getWeapons().containsKey(weaponList1.get(0).getName()));
-        assertTrue(vP1.getWeapons().containsKey(weaponList1.get(1).getName()));
-        assertTrue(vP1.getWeapons().containsKey(weaponList1.get(2).getName()));
+        assertEquals(vP1.getWeapons().get(0),weaponList1.get(0).getName()+INNER_SEP+weaponList1.get(0).isLoaded());
+        assertEquals(vP1.getWeapons().get(1),weaponList1.get(1).getName()+INNER_SEP+weaponList1.get(1).isLoaded());
+        assertEquals(vP1.getWeapons().get(2),weaponList1.get(2).getName()+INNER_SEP+weaponList1.get(2).isLoaded());
 
-        assertTrue(vP2.getWeapons().containsKey(weaponList2.get(0).getName()));
-        assertTrue(vP2.getWeapons().containsKey(weaponList2.get(1).getName()));
-        assertTrue(vP2.getWeapons().containsKey(weaponList2.get(2).getName()));
+        assertEquals(vP2.getWeapons().get(0),weaponList2.get(0).getName()+INNER_SEP+weaponList2.get(0).isLoaded());
+        assertEquals(vP2.getWeapons().get(1),weaponList2.get(1).getName()+INNER_SEP+weaponList2.get(1).isLoaded());
+        assertEquals(vP2.getWeapons().get(2),weaponList2.get(2).getName()+INNER_SEP+weaponList2.get(2).isLoaded());
 
-        assertTrue(vP3.getWeapons().containsKey(weaponList3.get(0).getName()));
-        assertTrue(vP3.getWeapons().containsKey(weaponList3.get(1).getName()));
 
-        //verify load State
-        assertTrue(vP1.getWeapons().get(weaponList1.get(1).getName()));
-        assertTrue(vP1.getWeapons().get(weaponList1.get(2).getName()));
+        assertEquals(vP3.getWeapons().get(0),weaponList3.get(0).getName()+INNER_SEP+weaponList3.get(0).isLoaded());
+        assertEquals(vP3.getWeapons().get(1),weaponList3.get(1).getName()+INNER_SEP+weaponList3.get(1).isLoaded());
 
-        assertTrue(vP2.getWeapons().get(weaponList2.get(0).getName()));
-        assertFalse(vP2.getWeapons().get(weaponList2.get(1).getName()));
-        assertFalse(vP2.getWeapons().get(weaponList2.get(2).getName()));
-
-        assertFalse(vP3.getWeapons().get(weaponList3.get(0).getName()));
-        assertFalse(vP3.getWeapons().get(weaponList3.get(1).getName()));
 
         //power up
         assertTrue(vP1.getPowerUps().contains(puList1.get(0).getName()+":"+puList1.get(0).getAmmoOnDiscard().toString()));

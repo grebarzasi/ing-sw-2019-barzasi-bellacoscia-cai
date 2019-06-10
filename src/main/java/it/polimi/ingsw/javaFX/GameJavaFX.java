@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
 import static it.polimi.ingsw.javaFX.GUIFiles.*;
 
 /*
@@ -1381,15 +1382,15 @@ public class GameJavaFX extends Application {
     }
 
     public void fillWeapon(ArrayList<Button> btnArr, VirtualPlayer p, double width, double height){
-
+        String[] wpState;
         int i = 0;
 
-        for (String name : p.getWeapons().keySet()) {
-
-            if(p.getWeapons().get(name)){
+        for (String name : p.getWeapons()) {
+            wpState = name.split(INNER_SEP);
+            if(wpState[1].equals("true")){
                 Image img = null;
                 try {
-                    img = new Image(new FileInputStream(PATH_WEAPON + name.toLowerCase().replace(" ", "_").replace("-","_") + ".png"),width, height, true,true  );
+                    img = new Image(new FileInputStream(PATH_WEAPON + wpState[0].toLowerCase().replace(" ", "_").replace("-","_") + ".png"),width, height, true,true  );
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }

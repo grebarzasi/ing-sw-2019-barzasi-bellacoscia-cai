@@ -44,7 +44,7 @@ public class GameInitializer extends Application {
         launch(args);
     }
 
-    public void start(Stage primaryStage) throws IOException {
+    public void initAll() throws IOException {
         Lobby lobby = new Lobby();
         ClientThreadSocket a =new ClientThreadSocket(lobby);
         ClientThreadSocket b =new ClientThreadSocket(lobby);
@@ -207,13 +207,17 @@ public class GameInitializer extends Application {
         cliBoard.loadFile("cli_large_pos");
         CliGame game =  new CliGame(cliBoard);
 
-*/
-        GameJavaFX game = new GameJavaFX(vmodel);
-        try {
-            game.start(primaryStage);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//*/
+       }
+
+        public void start(Stage primaryStage) throws IOException {
+                initAll();
+                GameJavaFX game = new GameJavaFX(vmodel);
+                try {
+                    game.start(primaryStage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
 
     }
-}

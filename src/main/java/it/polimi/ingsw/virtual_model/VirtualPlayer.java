@@ -15,7 +15,8 @@ public class VirtualPlayer {
     private int column;
     private boolean printed;
     private int points;
-    private HashMap<String,Boolean> weapons;
+//    private HashMap<String,Boolean> weapons;
+    private ArrayList<String> weapons;
     private  ArrayList<String> powerUps;
     private VirtualPlayerBoard pBoard;
 
@@ -26,7 +27,7 @@ public class VirtualPlayer {
         this.username=username;
         this.printed=false;
         this.pBoard=new VirtualPlayerBoard();
-        this.weapons = new HashMap<>();
+        this.weapons = new ArrayList<>();
         this.powerUps= new ArrayList<>();
     }
 
@@ -79,11 +80,11 @@ public class VirtualPlayer {
         this.column = column;
     }
 
-    public HashMap<String,Boolean> getWeapons() {
+    public  ArrayList<String> getWeapons() {
         return weapons;
     }
 
-    public void setWeapons(HashMap<String,Boolean>  weapons) {
+    public void setWeapons( ArrayList<String> weapons) {
         this.weapons = weapons;
     }
 

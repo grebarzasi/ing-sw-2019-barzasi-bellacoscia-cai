@@ -1,6 +1,7 @@
 package it.polimi.ingsw.CLI;
 
 
+import it.polimi.ingsw.virtual_model.GameInitializer;
 import it.polimi.ingsw.virtual_model.VirtualCell;
 import it.polimi.ingsw.virtual_model.VirtualModel;
 import it.polimi.ingsw.virtual_model.VirtualPlayer;
@@ -12,6 +13,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import static it.polimi.ingsw.CLI.CliColor.*;
+import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
 
 
 public class CliBoard {
@@ -248,7 +250,7 @@ public class CliBoard {
         printPawn(p.getCharacter());
         //Print marks
         //System.out.print(WHITE+"╱"+"╲"+WHITE_UNDERLINED+" ╭");
-        System.out.print(WHITE_UNDERLINED+"   ["+BLACK_BOLD+(model.getAllPlayers().indexOf(p)+1)+""+WHITE_UNDERLINED+"] ╭");
+        System.out.print(WHITE_UNDERLINED+"   ["+BLACK_BOLD+(model.getAllPlayers().indexOf(p)+1)+""+WHITE_UNDERLINED+"] ╭"+WHITE);
 
         for (String d : p.getpBoard().getMarks()) {
             printToken(d);
@@ -261,7 +263,7 @@ public class CliBoard {
         System.out.print(WHITE+"╫"+RESET);
 
         //print weapons#1
-        weaponTemp = new ArrayList<>(p.getWeapons().keySet());
+        weaponTemp = p.getWeapons();
         //Weapon
         printWeapon(0,p);
 
@@ -380,18 +382,20 @@ public class CliBoard {
     public void printWeapon(int k,VirtualPlayer p){
         int i=0;
         String s="";
+        String[] temp={"",""};
         if(k<weaponTemp.size()) {
             s=weaponTemp.get(k);
-            if (model.getOwner().equals(p)&&!p.getWeapons().get(weaponTemp.get(k))) {
-                s = RED_B + s;
+            temp=s.split(INNER_SEP);
+            if (model.getOwner().equals(p)&&temp[1].equals("false")) {
+                temp[0] = RED_B + temp[0];
                 i=i-RED_B.length();
-            }else if (!p.getWeapons().get(weaponTemp.get(k)))
-                s=s.replaceAll(".",WEAPON_CENSORED);
-            i=i+s.length();
+            }else if (temp[1].equals("false"))
+                temp[0]=temp[0].replaceAll(".",WEAPON_CENSORED);
+            i=i+temp[0].length();
         }
         for(;i<WEAPON_SPACE;i++)
             System.out.print(" ");
-        System.out.print(s);
+        System.out.print(temp[0]);
         System.out.print(WHITE+"}┤"+RESET);
     }
 
@@ -482,5 +486,21 @@ public class CliBoard {
                 pawn="";
         }
         System.out.print(pawn);
+    }
+
+    public static void main(String[] args){
+        GameInitializer game = new GameInitializer();
+        try {
+            game.initAll();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        CliBoard cli= new  CliBoard(game.getVmodel());
+        try {
+            cli.loadMap("cli_large");
+            cli.draw();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

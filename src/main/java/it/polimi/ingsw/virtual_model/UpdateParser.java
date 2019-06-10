@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
+
 /**
  * @author Gregorio Barzasi
  */
@@ -65,14 +67,14 @@ public class UpdateParser {
         }
     }
 
-    public HashMap<String,Boolean> parseWeapon(JsonNode node){
+    public  ArrayList<String> parseWeapon(JsonNode node){
         Iterator<String> weaponsIterator = node.fieldNames();
-        HashMap<String,Boolean> weaponsOwned = new HashMap<>();
+        ArrayList<String> weaponsOwned = new  ArrayList<>();
         while (weaponsIterator.hasNext()){
             String weaponName = weaponsIterator.next();
 
             //add weapon
-            weaponsOwned.put(weaponName,node.path(weaponName).asBoolean());
+            weaponsOwned.add(weaponName+INNER_SEP+node.path(weaponName).asBoolean());
         }
         return weaponsOwned;
     }
