@@ -28,6 +28,7 @@ public class Controller {
 
     //State pattern states
 
+    ControllerState starting;
     ControllerState asBot;
     ControllerState choosingMove;
     ControllerState choosingPowerUpToUse;
@@ -74,7 +75,6 @@ public class Controller {
         this.hasFrenzy = lobby.hasFinalFrenzy();
         this.hasBot = lobby.hasTerminatorPref();
         this.getModel().getBoard().getTrack().setSkullMax(lobby.getKillPref());
-
 
         this.asBot = new AsBot(this);
         this.choosingMove = new ChoosingMove(this);

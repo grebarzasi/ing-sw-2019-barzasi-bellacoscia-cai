@@ -34,7 +34,17 @@ public class ChoosingMove implements ControllerState{
 
         Action choice = this.controller.getView().showMoves(options);
 
+        if(this.controller.getCurrentPlayer().isDead()){
+
+            this.controller.setCurrentState(this.controller.spawning);
+            this.controller.getCurrentState().command();
+
+        }
+
         switch (choice.getDescription()){
+
+            case "Start":
+                this.controller.setCurrentState(this.controller.starting);
 
                 //sets the state to moving and sets the range accordingly
             case "Move":

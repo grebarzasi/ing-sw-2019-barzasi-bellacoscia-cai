@@ -11,6 +11,7 @@ public class Spawning implements ControllerState {
     private static final int height = 3;
     private static final int width = 4;
 
+
     private Controller controller;
 
     public Spawning(Controller controller) {
@@ -25,14 +26,7 @@ public class Spawning implements ControllerState {
             ArrayList<PowerUp> options = this.controller.getCurrentPlayer().getPowerupList();
             options.add((PowerUp) this.controller.getBoard().getPowerupDeck().fetch());
 
-            PowerUp choice = this.controller.getView().showPowerUp(options);
-
-            options.remove(choice);
-
-            Square spawnPoint = powerUptoSpawn(choice);
-
-            this.controller.getCurrentPlayer().setPosition(spawnPoint);
-            this.controller.setCurrentState(this.controller.choosingMove);
+            spawnOnChoice(options);
 
         } else {
 
@@ -48,19 +42,23 @@ public class Spawning implements ControllerState {
                     options.add((PowerUp) this.controller.getModel().getBoard().getPowerupDeck().fetch());
                 }
 
-                PowerUp choice = this.controller.getView().showPowerUp(options);
-
-                options.remove(choice);
-
-                Square spawnPoint = powerUptoSpawn(choice);
-
-                this.controller.getCurrentPlayer().setPosition(spawnPoint);
-                this.controller.setCurrentState(this.controller.choosingMove);
-
+                spawnOnChoice(options);
 
             }
-
         }
+    }
+
+    private void spawnOnChoice(ArrayList<PowerUp> options){
+
+        PowerUp choice = this.controller.getView().showPowerUp(options);
+
+        options.remove(choice);
+
+        Square spawnPoint = powerUptoSpawn(choice);
+
+        this.controller.getCurrentPlayer().setPosition(spawnPoint);
+        this.controller.setCurrentState(this.controller.choosingMove);
+
     }
 
     private Square powerUptoSpawn(PowerUp toMatch){
