@@ -120,9 +120,11 @@ public class GameJavaFX extends Application {
     private Button btnPwe1;
     private Button btnPwe2;
     private Button btnPwe3;
+    private ArrayList<Button> we;
     private Button btnPpu1;
     private Button btnPpu2;
     private Button btnPpu3;
+    private ArrayList<Button> pu;
 
     private GridPane gridPAmmo;
 
@@ -196,6 +198,8 @@ public class GameJavaFX extends Application {
         this.btnPpu1 = new Button();
         this.btnPpu2 = new Button();
         this.btnPpu3 = new Button();
+        this.pu = new ArrayList<>();
+        this.we = new ArrayList<>();
         this.gridPAmmo = new GridPane();
         this.gridOtherBoard1 = new GridPane();
         this.gridOtherBoard2 = new GridPane();
@@ -536,9 +540,10 @@ public class GameJavaFX extends Application {
         btnPpu2.setPrefSize(widthCard,heightCard);
         btnPpu3.setPrefSize(widthCard,heightCard);
 
-        btnPwe1.setBackground(backWe);
-        btnPwe2.setBackground(backWe);
-        btnPwe3.setBackground(backWe);
+        we.add(btnPwe1);
+        we.add(btnPwe2);
+        we.add(btnPwe3);
+
         btnPpu1.setBackground(backPPu);
         btnPpu2.setBackground(backPPu);
         btnPpu3.setBackground(backPPu);
@@ -1137,24 +1142,15 @@ public class GameJavaFX extends Application {
 
         ArrayList<Button> res = new ArrayList<>();
 
-        Image imgDeck = null;
-        try {
-            imgDeck = new Image(new FileInputStream(PATH_BACK_WEAPON),w,h,true,true);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        BackgroundImage backgroundDeck = new BackgroundImage(imgDeck, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-        Background backDeck = new Background(backgroundDeck);
-
         Button btn1 = new Button();
         Button btn2 = new Button();
         Button btn3 = new Button();
         btn1.setPrefSize(w,h);
         btn2.setPrefSize(w,h);
         btn3.setPrefSize(w,h);
-        btn1.setBackground(backDeck);
-        btn2.setBackground(backDeck);
-        btn3.setBackground(backDeck);
+        btn1.setOpacity(0);
+        btn2.setOpacity(0);
+        btn3.setOpacity(0);
         grid.add(btn1,0,row);
         grid.add(btn2,1,row);
         grid.add(btn3,2,row);
@@ -1401,6 +1397,36 @@ public class GameJavaFX extends Application {
 
     }
 
+    public void fillWeapon(ArrayList<Button> btnArr, VirtualPlayer p, double width, double height){
+
+        int i = 0;
+
+        for (String name : p.getWeapons().keySet()) {
+
+            if(p.getWeapons().get(name)){
+                Image img = null;
+                try {
+                    img = new Image(new FileInputStream(PATH_WEAPON + name.toLowerCase().replace(" ", "_").replace("-","_") + ".png"),width, height, true,true  );
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                setButtonBack(btnArr.get(i),img);
+                btnArr.get(i).setOpacity(1);
+                i++;
+            } else{
+                Image img = null;
+                try {
+                    img = new Image(new FileInputStream(PATH_BACK_WEAPON),width, height, true,true  );
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                setButtonBack(btnArr.get(i),img);
+                btnArr.get(i).setOpacity(1);
+                i++;
+            }
+        }
+    }
+
     public void fillAmmoTiles(){
 
         double w = btnCell.get(0).get(0).getPrefWidth();
@@ -1557,6 +1583,8 @@ public class GameJavaFX extends Application {
         fillBoard(gridPBoard,model.getOwner(),widthBoard,heightPBoard/4-6, heightPBoard/4, heightPBoard/3-6);
         fillAmmo(gridPAmmo,model.getOwner().getpBoard(),widthLateral/7,heightLateral/7);
 
+        fillWeapon(we,model.getOwner(),widthCard,heightCard);
+
         for (VirtualPlayer p : model.getAllPlayers()) {
 
             if(p.equals(model.getOwner())){
@@ -1567,26 +1595,31 @@ public class GameJavaFX extends Application {
                 case("yellow"):{
                     fillBoard(gridOtherBoard1,p,widthBoard,heightPBoard/5-10, heightPBoard/4-10, heightPBoard/5-10);
                     fillOtherAmmo(gridOtherAmmo1,p.getpBoard(),widthLateral/7,heightLateral/7);
+                    fillWeapon(weOther1,p,widthOCard/3.7,heightOtherWeapon);
                     break;
                 }
                 case("red"):{
                     fillBoard(gridOtherBoard2,p,widthBoard,heightPBoard/5-10, heightPBoard/4-10, heightPBoard/5-10);
                     fillOtherAmmo(gridOtherAmmo2,p.getpBoard(),widthLateral/7,heightLateral/7);
+                    fillWeapon(weOther2,p,widthOCard/3.7,heightOtherWeapon);
                     break;
                 }
                 case("blue"):{
                     fillBoard(gridOtherBoard3,p,widthBoard,heightPBoard/5-10, heightPBoard/4-10, heightPBoard/5-10);
                     fillOtherAmmo(gridOtherAmmo3,p.getpBoard(),widthLateral/7,heightLateral/7);
+                    fillWeapon(weOther3,p,widthOCard/3.7,heightOtherWeapon);
                     break;
                 }
                 case("green"):{
                     fillBoard(gridOtherBoard4,p,widthBoard,heightPBoard/5-10, heightPBoard/4-10, heightPBoard/5-10);
                     fillOtherAmmo(gridOtherAmmo4,p.getpBoard(),widthLateral/7,heightLateral/7);
+                    fillWeapon(weOther4,p,widthOCard/3.7,heightOtherWeapon);
                     break;
                 }
                 case("grey"):{
                     fillBoard(gridOtherBoard5,p,widthBoard,heightPBoard/5-10, heightPBoard/4-10, heightPBoard/5-10);
                     fillOtherAmmo(gridOtherAmmo5,p.getpBoard(),widthLateral/7,heightLateral/7);
+                    fillWeapon(weOther5,p,widthOCard/3.7,heightOtherWeapon);
                     break;
                 }
             }

@@ -50,7 +50,8 @@ public class GUIFiles {
     public static final String PATH_GREEN_DAMAGE_DOUBLE = "src/main/resources/images/damage/green_double.png";
     public static final String PATH_GREY_DAMAGE_DOUBLE = "src/main/resources/images/damage/grey_double.png";
 
-    public static final String PATH_WEAPON = "src/main/resources/images/weapon/";
+    public static final String PATH_WEAPON = "src/main/resources/images/weapon/weapon/";
+    public static final String PATH_INFO = "src/main/resources/images/weapon/info/";
     public static final String PATH_POWER_UP = "src/main/resources/images/power-up/";
     public static final String PATH_AMMO = "src/main/resources/images/ammo/";
 
