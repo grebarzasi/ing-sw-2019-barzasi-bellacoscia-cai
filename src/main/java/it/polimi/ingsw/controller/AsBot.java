@@ -31,6 +31,13 @@ public class AsBot implements ControllerState{
     @Override
     public void command() {
 
+        if(this.controller.getModel().getBot().isDead() || this.controller.getModel().getTurn() != 0){
+
+            Square spawnPoint = this.controller.getView().showPossibleMoves(this.returnSpawns());
+            this.controller.getModel().getBot().setPosition(spawnPoint);
+
+        }
+
         //adds adjacent squares to the bots possible destinations
         ArrayList<Square> canGo = new ArrayList<>();
 
@@ -71,6 +78,23 @@ public class AsBot implements ControllerState{
 
     public void goBack(){
         this.controller.goBack();
+    }
+
+    public ArrayList<Square> returnSpawns(){
+
+        ArrayList<Square> spawns = new ArrayList<>();
+        int row;
+        int column;
+
+        for(row = 0; row < height; row++){
+            for(column = 0; column < width; column ++){
+                if(this.controller.getBoard().getMap().getSquareMatrix()[row][column].isSpawn())
+                    spawns.add(this.controller.getBoard().getMap().getSquareMatrix()[row][column]);
+            }
+        }
+
+        return spawns;
+
     }
 
 }

@@ -12,8 +12,6 @@ public class Picking implements ControllerState{
     private int range;
     private Controller controller;
 
-    private static final int width = 4;
-    private static final int height = 3;
     private static final int max = 3;
 
     public Picking(Controller controller) {
@@ -47,7 +45,7 @@ public class Picking implements ControllerState{
 
         PowerUp chosen = this.controller.getView().showPowerUp(this.controller.getCurrentPlayer().getPowerupList());
 
-        if (this.controller.getCurrentPlayer().getPowerupList().size() < 3) {
+        if (this.controller.getCurrentPlayer().getPowerupList().size() < max) {
 
             this.controller.getCurrentPlayer().addPowerUp(chosen);
 

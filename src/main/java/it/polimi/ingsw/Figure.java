@@ -49,6 +49,8 @@ public abstract class Figure {
 
     private ArrayList<Action> actions;
 
+    private boolean isDead;
+
     public ArrayList<Square> canGo() {
 
         int row;
@@ -78,6 +80,8 @@ public abstract class Figure {
         this.oldPosition = null;
         this.personalBoard = new PlayerBoard(this);
         this.actions = new ArrayList<>();
+        this.isDead = true;
+
 
     }
 
@@ -484,4 +488,11 @@ public abstract class Figure {
         this.actions = actions;
     }
 
+    public boolean isDead() {
+        return isDead;
+    }
+
+    public void setDead(boolean dead) {
+        isDead = dead;
+    }
 }

@@ -76,6 +76,7 @@ public class Player extends Figure {
         this.username = username;
         this.weaponsList = new ArrayList<>();
         this.powerupList = new ArrayList<>();
+        this.startedFrenzy = false;
 
     }
 
@@ -85,6 +86,7 @@ public class Player extends Figure {
         this.username = username;
         this.weaponsList = new ArrayList<>();
         this.powerupList = new ArrayList<>();
+        this.startedFrenzy = false;
 
     }
 

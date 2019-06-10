@@ -51,58 +51,64 @@ public class ActionBuilder {
         ArrayList<Action> actions = new ArrayList<>();
 
 
-        if(p.getModel().getMovesLeft() > 0) {
+        if(p.getModel().getTurn() <= p.getModel().getPlayerList().size() && p.isDead()){
 
-            if (!isFrenzy) {
+            actions.add(new Action("Start",0));
 
-                int damage = p.getPersonalBoard().getDamage().size();
-                int adrenalineStage;
+        }else {
+            if (p.getModel().getMovesLeft() > 0) {
 
-                adrenalineStage = 0;
+                if (!isFrenzy) {
 
-                if (damage > stage1) {
-                    adrenalineStage = 1;
+                    int damage = p.getPersonalBoard().getDamage().size();
+                    int adrenalineStage;
+
+                    adrenalineStage = 0;
+
+                    if (damage > stage1) {
+                        adrenalineStage = 1;
+                    }
+
+                    if (damage > stage2) {
+                        adrenalineStage = 2;
+                    }
+
+                    actions.add(new Action("Move", stage0MoveRange));
+
+                    if (adrenalineStage == 0) {
+
+                        actions.add(new Action("Pick", stage0PickRange));
+                        actions.add(new Action("Shoot", stage0ShootRange));
+
+                    } else if (adrenalineStage == 1) {
+
+                        actions.add(new Action("Pick", stage1PickRange));
+                        actions.add(new Action("Shoot", stage1ShootRange));
+
+                    } else if (adrenalineStage == 2) {
+
+                        actions.add(new Action("Pick", stage2PickRange));
+                        actions.add(new Action("Shoot", stage2ShootRange));
+
+                    }
+
+
+                } else {
+
+                    if (!p.getStartedFrenzy()) {
+                        actions.add(new Action("Move", frenzyMoveRange));
+                        actions.add(new Action("Pick", frenzyPickRange));
+                        actions.add(new Action("Move, reload and Shoot", frenzyMoveReloadShootRange));
+                    } else {
+                        actions.add(new Action("Pick", firstPlayerFrenzyPickRange));
+                        actions.add(new Action("Move, reload and Shoot", firstPlayerFrenzyMoveReloadShootRange));
+
+                    }
                 }
-
-                if (damage > stage2) {
-                    adrenalineStage = 2;
-                }
-
-                actions.add(new Action("Move", stage0MoveRange));
-
-                if (adrenalineStage == 0) {
-
-                    actions.add(new Action("Pick", stage0PickRange));
-                    actions.add(new Action("Shoot", stage0ShootRange));
-
-                } else if (adrenalineStage == 1) {
-
-                    actions.add(new Action("Pick", stage1PickRange));
-                    actions.add(new Action("Shoot", stage1ShootRange));
-
-                } else if (adrenalineStage == 2) {
-
-                    actions.add(new Action("Pick", stage2PickRange));
-                    actions.add(new Action("Shoot", stage2ShootRange));
-
-                }
-
 
             } else {
-
-                if (!p.getStartedFrenzy()) {
-                    actions.add(new Action("Move", frenzyMoveRange));
-                    actions.add(new Action("Pick", frenzyPickRange));
-                    actions.add(new Action("Move, reload and Shoot", frenzyMoveReloadShootRange));
-                } else {
-                    actions.add(new Action("Pick", firstPlayerFrenzyPickRange));
-                    actions.add(new Action("Move, reload and Shoot", firstPlayerFrenzyMoveReloadShootRange));
-
-                }
+                actions.add(new Action("Reload", 0));
             }
-
-        }else{
-            actions.add(new Action("Reload",0));
         }
 
         for(PowerUp pu : p.getPowerupList()){

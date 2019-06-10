@@ -31,6 +31,8 @@ public class GameModel {
 
     private boolean isFrenzy;
 
+    private int turn;
+
     private Controller controller;
 
     public GameModel(){
@@ -42,6 +44,7 @@ public class GameModel {
         this.playerList = playerList;
         this.board = new Board(map);
         this.controller = controller;
+        this.currentPlayer = this.playerList.get(0);
 
         for (Player p : this.playerList) {
             p.setModel(this);
@@ -148,5 +151,13 @@ public class GameModel {
 
     public void setController(Controller controller) {
         this.controller = controller;
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public void setTurn(int turn) {
+        this.turn = turn;
     }
 }

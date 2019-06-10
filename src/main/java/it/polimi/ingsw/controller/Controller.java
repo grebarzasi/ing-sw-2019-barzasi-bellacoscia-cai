@@ -151,12 +151,12 @@ public class Controller {
                 this.getBoard().getTrack().getKillsTrack().add(addToTrack);
 
                 if(this.getBoard().getTrack().getKillsTrack().size() == this.getBoard().getTrack().getSkullMax()){
+
                     if(this.hasFrenzy){
 
                         this.model.setFrenzy(true);
                         this.getCurrentPlayer().setStartedFrenzy(true);
                         this.model.getBoard().refillSquares();
-
 
 
                     }else if(!this.hasFrenzy){
@@ -180,6 +180,11 @@ public class Controller {
         } else {
             this.model.setCurrentPlayer(this.model.getPlayerList().get(0));
         }
+
+
+        this.model.setTurn(this.model.getTurn() + 1);
+
+
     }
 
 
