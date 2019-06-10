@@ -1,5 +1,7 @@
 package it.polimi.ingsw.CLI;
 
+import static it.polimi.ingsw.CLI.CliColor.*;
+
 /**
  * @author Gregorio Barzasi
  */
@@ -62,10 +64,13 @@ public class CliMessages {
 
     //Game msg
     public static final String CHOOSE_PU_Q = "\nSeleziona un powerup da utilizzare:";
-    public static final String CHOOSE_PU_ERR = "\nNon disponibile";
+    public static final String CHOOSE_PU_ERR = RED+ "\nNon disponibile";
 
-    public static final String CHOOSE_WP_Q = "\nSeleziona un powerup da utilizzare:";
-    public static final String CHOOSE_WP_ERR = "\nNon disponibile";
+    public static final String CHOOSE_WP_Q = "\nSeleziona un arma:";
+    public static final String CHOOSE_WP_ERR = RED+"\nNon disponibile";
+
+    public static final String CHOOSE_ACTION_Q = "\nSeleziona un azione:";
+    public static final String CHOOSE_ACTION_ERR = RED+"\nNon disponibile";
 
     public static void clearScreen() {
         System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");

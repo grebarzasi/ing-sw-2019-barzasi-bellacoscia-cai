@@ -6,12 +6,17 @@ import it.polimi.ingsw.virtual_model.VirtualModel;
 import it.polimi.ingsw.virtual_model.VirtualPlayer;
 import static it.polimi.ingsw.CLI.CLiBoardStuff.*;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import static it.polimi.ingsw.CLI.CliColor.*;
 
 
 public class CliBoard {
+    private File f;
+    private String all="";
     private String lastColor="";
     private String lastBackground="";
     private int cellsPlnum=12;
@@ -25,17 +30,26 @@ public class CliBoard {
         this.model=model;
     }
 
-    public void loadFile(String name)throws IOException {
-        File f=new File("src/main/resources/cli_files/" + name +".txt");
-        BufferedReader in = new BufferedReader(new FileReader(f));
+    public void draw(){
+        cellsPlnum=12;
+        cellsCPnum=12;
+        boardPrinted=0;
+        BufferedReader in = new BufferedReader(new StringReader(all));
         String line;
         String[] splitLine;
-        while((line=in.readLine())!=null){
-            splitLine=line.split(";");
-            for(String s : splitLine){
-                plotString(s);
+        try {
+            while ((line = in.readLine()) != null) {
+                splitLine = line.split(";");
+                for (String s : splitLine) {
+                    plotString(s);
+                }
             }
+        }catch(IOException e){
+            System.err.print("something went wrong drawing the board");
         }
+    }
+    public void loadMap(String name)throws IOException {
+            all=new String(Files.readAllBytes(Paths.get("src/main/resources/cli_files/" + name +".txt")));
     }
 
     public void plotString(String s){
@@ -382,7 +396,7 @@ public class CliBoard {
         String pu[];
         if(model.getOwner().getPowerUps().size()>k){
             pu= model.getOwner().getPowerUps().get(k).split(":");
-            System.out.print("├─< "+pu[0]+" [");
+            System.out.print("├─("+(k+1)+")─< "+pu[0]+" [");
             colorizeCP(pu[1].subSequence(0,1).toString().toUpperCase());
             System.out.print("]>");
         }

@@ -22,6 +22,23 @@ public class CliGame implements ViewClient {
         this.board=board;
     }
 
+    public String genericChoice(ArrayList<String> args,String q, String error) {
+        int i =1;
+        String temp[];
+        int reply=0;
+        do {
+            System.out.print(RESET+"\n");
+            for(String s: args) {
+                temp = s.split(INNER_SEP);
+                System.out.println(i + " - " + temp[0]);
+                i++;
+            }
+            System.out.print(RESET+q+"\n");
+            reply=chooseFromArray(args,error);
+        } while (reply==0);
+        return args.get(reply-1);
+    }
+
     public int chooseFromArray(ArrayList<String>args, String err){
         String s ="";
         int reply=0;
@@ -35,7 +52,9 @@ public class CliGame implements ViewClient {
         }catch(NumberFormatException e){
             reply=0;
         }
-        if (reply==0 || args.size()<(reply-1)) {
+        if (reply<=0 || args.size()<(reply)) {
+            clearScreen();
+            board.draw();
             System.out.println(err);
             reply=0;
         }
@@ -51,15 +70,9 @@ public class CliGame implements ViewClient {
         int i =1;
         String temp[];
         int reply=0;
+        clearScreen();
+        board.draw();
         do {
-            System.out.print(RESET);
-            for(String s: args) {
-                temp = s.split(INNER_SEP);
-                System.out.print(i + " - " + temp[0] + " [");
-                board.colorizeCP(temp[1].subSequence(0, 1).toString().toUpperCase());
-                System.out.print("]\n");
-                i++;
-            }
             System.out.print(RESET+CHOOSE_PU_Q+"\n");
             reply=chooseFromArray(args,CHOOSE_PU_ERR);
         } while (reply==0);
@@ -74,20 +87,7 @@ public class CliGame implements ViewClient {
      * @return the chosen one
      */
     public String showWeapon(ArrayList<String> args) {
-        int i =1;
-        String temp[];
-        int reply=0;
-        do {
-            System.out.print(RESET);
-            for(String s: args) {
-                temp = s.split(INNER_SEP);
-                System.out.println(i + " - " + temp[0]);
-                i++;
-            }
-            System.out.print(RESET+CHOOSE_WP_Q+"\n");
-            reply=chooseFromArray(args,CHOOSE_WP_ERR);
-        } while (reply==0);
-        return args.get(reply-1);
+        return genericChoice(args,CHOOSE_WP_Q,CHOOSE_WP_ERR);
     }
 
     /**
@@ -98,7 +98,7 @@ public class CliGame implements ViewClient {
      * @return the chosen one
      */
     public String showAction(ArrayList<String> args) {
-        return null;
+        return genericChoice(args,CHOOSE_ACTION_Q,CHOOSE_ACTION_ERR);
     }
 
     /**

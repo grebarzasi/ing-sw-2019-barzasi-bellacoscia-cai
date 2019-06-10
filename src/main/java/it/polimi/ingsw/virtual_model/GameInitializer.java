@@ -20,10 +20,6 @@ import it.polimi.ingsw.cards.weapon.Weapon;
 import it.polimi.ingsw.connection.socket.ClientThreadSocket;
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.controller.GameStateJsonBuilder;
-import it.polimi.ingsw.javaFX.GameJavaFX;
-import it.polimi.ingsw.javaFX.StartJavaFX;
-import javafx.application.Application;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,23 +28,17 @@ import java.util.HashMap;
 
 
 
-public class GameInitializer extends Application {
-
-    private VirtualModel vmodel;
-
-    public VirtualModel getVmodel() {
-        return vmodel;
-    }
-
-    public void setVmodel(VirtualModel vmodel) {
-        this.vmodel = vmodel;
-    }
+class GameInitializer {
 
     public static void main(String[] args){
-        launch(args);
+        try {
+            new GameInitializer().initAll();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void start(Stage primaryStage) throws IOException {
+    void initAll() throws IOException {
         Lobby lobby = new Lobby();
         ClientThreadSocket a =new ClientThreadSocket(lobby);
         ClientThreadSocket b =new ClientThreadSocket(lobby);
@@ -79,14 +69,14 @@ public class GameInitializer extends Application {
 
 
         Controller contr= new Controller(lobby);
-        contr.getModel().setBoard(new Board("large"));
+        contr.getModel().setBoard(new Board("medium1"));
         Map map = contr.getModel().getBoard().getMap();
         Square[][] matrix = map.getSquareMatrix();
         p1.setPosition(matrix[1][2]);
         p2.setPosition(matrix[1][2]);
         p3.setPosition(matrix[0][3]);
-        p4.setPosition(matrix[2][3]);
-        contr.getModel().setCurrentPlayer(p2);
+        p4.setPosition(matrix[1][3]);
+        contr.getModel().setCurrentPlayer(p3);
         //WEAPONS
         WeaponDeck weaponDeck = contr.getModel().getBoard().getWeaponDeck();
         Weapon w1 = (Weapon)weaponDeck.fetch();
@@ -109,9 +99,10 @@ public class GameInitializer extends Application {
         weaponList2.add((Weapon) weaponDeck.fetch());
         weaponList2.add((Weapon) weaponDeck.fetch());
 
-        weaponList3.add((Weapon) weaponDeck.fetch());
-        weaponList3.add((Weapon) weaponDeck.fetch());
+        //weaponList3.add((Weapon) weaponDeck.fetch());
+       // weaponList3.add((Weapon) weaponDeck.fetch());
 
+        weaponList4.add((Weapon) weaponDeck.fetch());
         weaponList4.add((Weapon) weaponDeck.fetch());
 
         p1.setWeaponsList(weaponList1);
@@ -191,7 +182,7 @@ public class GameInitializer extends Application {
 
         JsonNode node = new GameStateJsonBuilder(contr).create();
         System.out.println(node);
-        vmodel = new VirtualModel();
+        VirtualModel vmodel = new VirtualModel();
         vmodel.setOwner(new VirtualPlayer("gre","red"));
         UpdateParser parser=new UpdateParser(vmodel);
         parser.updateModel(node.toString());
@@ -205,18 +196,10 @@ public class GameInitializer extends Application {
         HashMap<String, VirtualCell> cells = vmodel.getBoard().getMap().getCells();
         System.out.println(cells);
 
-/*
-
         CliBoard cliBoard =new CliBoard(vmodel);
-        cliBoard.loadFile("cli_large_pos");
+        cliBoard.loadMap("cli_medium1");
         CliGame game =  new CliGame(cliBoard);
-
-*/
-        GameJavaFX game = new GameJavaFX(vmodel);
-        try {
-            game.start(primaryStage);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        System.out.print(game.showPowerUp(vP2.getPowerUps()));
+        System.out.print(game.showWeapon(new ArrayList<>(vP2.getWeapons().keySet())));
     }
 }

@@ -96,10 +96,7 @@ public class Board extends Subject {
                     tmp.setArmory(new Armory(new ArrayList<>()));
 
                     while(!((SpawnSquare)this.getMap().getSquareMatrix()[row][column]).getArmory().isFull()) {
-                        ((SpawnSquare)this.getMap().getSquareMatrix()[row][column]).getArmory().getWeaponList().add((Weapon)this.weaponDeck.getUsable().get(0));
-                        this.weaponDeck.getDiscarded().add(this.weaponDeck.getUsable().get(0));
-                        this.weaponDeck.getUsable().remove(0);
-
+                        ((SpawnSquare)this.getMap().getSquareMatrix()[row][column]).getArmory().getWeaponList().add((Weapon)this.weaponDeck.fetch());
                     }
 
                     this.map.getSquareMatrix()[row][column] = tmp;
