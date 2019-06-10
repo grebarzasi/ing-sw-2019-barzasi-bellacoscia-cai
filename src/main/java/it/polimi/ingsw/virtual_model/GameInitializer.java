@@ -81,7 +81,7 @@ public class GameInitializer extends Application {
         Square[][] matrix = map.getSquareMatrix();
         p1.setPosition(matrix[1][2]);
         p2.setPosition(matrix[1][2]);
-        p3.setPosition(matrix[0][3]);
+        p3.setPosition(matrix[0][1]);
         p4.setPosition(matrix[2][3]);
         contr.getModel().setCurrentPlayer(p2);
         //WEAPONS

@@ -780,7 +780,7 @@ public class GameJavaFX extends Application {
                 msg.setText(CHOOSE_SQUARE);
                 btnCancel.setOpacity(1);
                 for (ArrayList<Button> btnArr : btnCell) {
-                    chooseSquare(btnArr, btnCell.indexOf(btnArr));
+                    chooseSquare(btnArr, btnCell.indexOf(btnArr),false);
                 }
 
 
@@ -798,14 +798,12 @@ public class GameJavaFX extends Application {
                 msg.setText(CHOOSE_SQUARE);
                 btnCancel.setOpacity(1);
                 for (ArrayList<Button> btnArr : btnCell) {
-                    chooseSquare(btnArr, btnCell.indexOf(btnArr));
+                    chooseSquare(btnArr, btnCell.indexOf(btnArr),true);
                 }
 
                 for (String s : game.getHideSquare()) {
                     hideCell(btnCell.get(getCoordinate(s)), 0.5);
                 }
-
-                btnCell.get(getCoordinate(game.getTargetSquare())).get(5).setOpacity(0);
 
             }else
                 msg.setText("Aspetta il tuo turno...");
@@ -1409,22 +1407,9 @@ public class GameJavaFX extends Application {
             String name = info.split(":")[0].toLowerCase().replace(" ", "_");
             String color = info.split(":")[1].toLowerCase().replace(" ", "_");
 
-            System.out.println(name + " " + color + "\n");
-            ObjectMapper mapper = new ObjectMapper();
-
             File jsonFilePU = new File(PATH_PU);
 
             try {
-
-                JsonNode rootNodePu = null;
-                try {
-                    rootNodePu = mapper.readTree(jsonFilePU);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                JsonNode chamberNodePu = rootNodePu.path(name);
-
 
                 Image imgPu = null;
                 try {
@@ -1475,6 +1460,9 @@ public class GameJavaFX extends Application {
             int y = (i + 1) - (x * 4) - 1;
             String key = x + ":" + y;
 
+            if(model.getBoard().getMap().getCells().get(key).getContent().equals("empty")){
+                continue;
+            }
             try{
                 Image img = new Image(new FileInputStream(PATH_AMMO + model.getBoard().getMap().getCells().get(key).getContent() + ".png"),w,h,true,true);
                 BackgroundImage background = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
@@ -1505,7 +1493,7 @@ public class GameJavaFX extends Application {
         }
     }
 
-    public void chooseSquare(ArrayList<Button> btnArr, int btn){
+    public void chooseSquare(ArrayList<Button> btnArr, int btn, boolean pick){
 
         for (Button b : btnArr) {
             b.setOnAction(e->{
@@ -1516,11 +1504,17 @@ public class GameJavaFX extends Application {
 
                     model.getOwner().setRow(x);
                     model.getOwner().setColumn(y);
+
+
                     btnCancel.setOpacity(0);
 
                     update();
                 } else
                     msg.setText(ERR_SQUARE);
+
+                if(pick){
+                    btnArr.get(5).setOpacity(0);
+                }
             });
         }
 
