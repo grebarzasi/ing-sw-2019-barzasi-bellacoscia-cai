@@ -7,6 +7,8 @@ import java.io.*;
 import java.net.Socket;
 import java.rmi.RemoteException;
 
+import static it.polimi.ingsw.CLI.CliMessages.CONNECTION_ERR;
+
 /**
  * Client side Socket connection
  *
@@ -21,14 +23,19 @@ public class SClient extends ConnectionTech {
     /**
      * Initialize connection and input and output streams
      */
-    public void initConnection() throws IOException{
-            System.out.println("Connecting");
+        public void run() {
+            try {
+                System.out.println("Connecting");
 
-            this.server = new Socket(super.getIp(), super.getPort());
-            System.out.println("Connection established\n");
-            this.in = new BufferedReader(new InputStreamReader(server.getInputStream()));
-            this.out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(server.getOutputStream())),true);
-    }
+                this.server = new Socket(super.getIp(), super.getPort());
+                System.out.println("Connection established\n");
+                this.in = new BufferedReader(new InputStreamReader(server.getInputStream()));
+                this.out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(server.getOutputStream())), true);
+            }catch(IOException e){
+                System.err.println(CONNECTION_ERR);
+
+            }
+        }
 
     public Socket getServer() {
         return server;

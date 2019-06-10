@@ -1,6 +1,7 @@
 package it.polimi.ingsw;
 
 
+import it.polimi.ingsw.connection.MainServer;
 import it.polimi.ingsw.connection.socket.ClientThreadSocket;
 
 import java.util.ArrayList;
@@ -13,17 +14,19 @@ import java.util.Timer;
  * The game lobby, contains up to 5 players and their ready status
  */
 
-public class Lobby {
+public class Lobby extends Thread {
 
-    private boolean hasStarted;
+    private boolean started;
     private boolean hasTimerStarted;
     private Timer timer;
-    private final int DELAY=30;
+    private static final int DELAY=30;
 
     private int mapPref;
     private int killPref;
     private boolean terminatorPref;
     private boolean finalFrenzyPref;
+
+    private MainServer god;
 
 
     private final int maxPlayer = 5;
@@ -32,18 +35,25 @@ public class Lobby {
     private ArrayList<ClientThreadSocket> joinedPlayers;
 
 
+    public Lobby(MainServer god) {
+        this.joinedPlayers = new ArrayList<>();
+        this.timer= new Timer();
+        this.started=false;
+        this.hasTimerStarted=false;
+        this.god=god;
+    }
     public Lobby() {
         this.joinedPlayers = new ArrayList<>();
         this.timer= new Timer();
-        this.hasStarted=false;
+        this.started=false;
         this.hasTimerStarted=false;
     }
-
+    /**
+     * if is legal, a player is added to joined players
+     */
     public synchronized boolean addPlayer(ClientThreadSocket p) {
         if (joinedPlayers.size() < maxPlayer && usernameCheck(p) && characterCheck(p)) {
             joinedPlayers.add(p);
-           // if(!disconnectChecker.isAlive())
-           //     disconnectChecker.start();
             return true;
         }
 
@@ -71,7 +81,7 @@ public class Lobby {
 
 
     /**
-     * Updates all client when other player is added
+     * Updates all client when other player is added and starts countdown when the 3rd player join
      */
     public synchronized void updateClients() {
 
@@ -82,16 +92,20 @@ public class Lobby {
                 c.updateLobby();
             }
         }
-        if (i == 3 && !hasStarted) {
+        if (i == 3 && !hasStarted()) {
             hasTimerStarted=true;
             System.out.println("Countdown started");
             timer.schedule(new TimerGameStart(this), (DELAY * 1000));
         }
     }
 
-
+    /**
+     * check username already added. if not return true
+     */
 
     public boolean usernameCheck(ClientThreadSocket p){
+        if(p.getOwner().getUsername().isEmpty())
+            return false;
         for(ClientThreadSocket toCheck: joinedPlayers){
             if(toCheck.getOwner().getUsername().equals(p.getOwner().getUsername())){
                 return false;
@@ -99,6 +113,9 @@ public class Lobby {
         }
         return true;
     }
+    /**
+     * check character already added. if not return true
+     */
 
     public boolean characterCheck(ClientThreadSocket p){
         for(ClientThreadSocket toCheck: joinedPlayers){
@@ -108,6 +125,9 @@ public class Lobby {
         }
         return true;
     }
+    /**
+     * remove player on disconnection
+     */
 
     public void disconnectPlayer(ClientThreadSocket p){
         joinedPlayers.remove(p);
@@ -116,26 +136,6 @@ public class Lobby {
     }
 
 
-
-    public synchronized ArrayList<ClientThreadSocket> getJoinedPlayers() {
-        return joinedPlayers;
-    }
-
-    public void setJoinedPlayers(ArrayList<ClientThreadSocket> joinedPlayers) {
-        this.joinedPlayers = joinedPlayers;
-    }
-
-    public synchronized boolean hasStarted() {
-        return hasStarted;
-    }
-
-    public synchronized boolean hasTimerStarted() {
-        return hasTimerStarted;
-    }
-
-    public synchronized void setHasStarted(boolean hasStarted) {
-        this.hasStarted = hasStarted;
-    }
 
     @Override
     public synchronized String toString() {
@@ -203,10 +203,6 @@ public class Lobby {
     }
 
 
-    public boolean isHasStarted() {
-        return hasStarted;
-    }
-
     public boolean timerHasStarted() {
         return hasTimerStarted;
     }
@@ -221,10 +217,6 @@ public class Lobby {
 
     public void setTimer(Timer timer) {
         this.timer = timer;
-    }
-
-    public int getDELAY() {
-        return DELAY;
     }
 
     public int getMapPref() {
@@ -261,6 +253,44 @@ public class Lobby {
 
     public int getMaxPlayer() {
         return maxPlayer;
+    }
+
+
+    public synchronized ArrayList<ClientThreadSocket> getJoinedPlayers() {
+        return joinedPlayers;
+    }
+
+    public void setJoinedPlayers(ArrayList<ClientThreadSocket> joinedPlayers) {
+        this.joinedPlayers = joinedPlayers;
+    }
+
+    public synchronized boolean hasStarted() {
+        return started;
+    }
+
+    public synchronized boolean hasTimerStarted() {
+        return hasTimerStarted;
+    }
+
+    public synchronized void setStarted(boolean hasStarted) {
+        this.started = hasStarted;
+    }
+
+    public void run() {
+        while(!hasStarted()){
+            try {
+                sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        prefDecision();
+        System.out.println(killPref);
+        System.out.println(finalFrenzyPref);
+        System.out.println(mapPref);
+        System.out.println(terminatorPref);
+        god.startGame();
     }
 }
 

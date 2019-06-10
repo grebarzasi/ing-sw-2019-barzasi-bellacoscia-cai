@@ -141,12 +141,11 @@ public class GameInitializer extends Application {
         p4.setPowerupList(puList4);
 
         //BOARD
-        /*
-        p1.setPersonalBoard(new PlayerBoard(a.getOwner()));
-        p2.setPersonalBoard(new PlayerBoard(b.getOwner()));
-        p3.setPersonalBoard(new PlayerBoard(c.getOwner()));
-        p4.setPersonalBoard(new PlayerBoard(d.getOwner()));
-*/
+//        p1.setPersonalBoard(new PlayerBoard(a.getOwner()));
+//        p2.setPersonalBoard(new PlayerBoard(b.getOwner()));
+//        p3.setPersonalBoard(new PlayerBoard(c.getOwner()));
+//        p4.setPersonalBoard(new PlayerBoard(d.getOwner()));
+
         //damage & marks
         Token t1 = new Token(p1);
         Token t2 = new Token(p2);
@@ -188,7 +187,6 @@ public class GameInitializer extends Application {
 
 
         JsonNode node = new GameStateJsonBuilder(contr).create();
-        System.out.println(node);
         vmodel = new VirtualModel();
         vmodel.setOwner(new VirtualPlayer("gre","red"));
         UpdateParser parser=new UpdateParser(vmodel);
@@ -201,15 +199,6 @@ public class GameInitializer extends Application {
         vmodel.setOwner(vP2);
 
         HashMap<String, VirtualCell> cells = vmodel.getBoard().getMap().getCells();
-        System.out.println(cells);
-
-/*
-
-        CliBoard cliBoard =new CliBoard(vmodel);
-        cliBoard.loadFile("cli_large_pos");
-        CliGame game =  new CliGame(cliBoard);
-
-//*/
        }
 
         public void start(Stage primaryStage) throws IOException {

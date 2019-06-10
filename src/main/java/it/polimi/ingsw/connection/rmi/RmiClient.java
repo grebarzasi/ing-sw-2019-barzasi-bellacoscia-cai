@@ -21,7 +21,7 @@ public class RmiClient extends ConnectionTech implements RmiCInterf {
         return true;
     }
 
-    public void initConnection() throws RemoteException{
+    public void run() {
         try {
             Registry registry = LocateRegistry.getRegistry(super.getIp(),super.getPort());
             server = (RmiSInterf) registry.lookup("Server");
@@ -31,7 +31,7 @@ public class RmiClient extends ConnectionTech implements RmiCInterf {
         } catch (Exception e) {
             System.err.println("RMI connection error\n");
             e.printStackTrace();
-            throw new RemoteException();
+
         }
 
     }

@@ -199,17 +199,13 @@ public class StartJavaFX extends Application {
                 c.setRmi(false);
             }
 
-            try {
                 if(!ip.isEmpty()){
                     c.setIp(ip);
                 }
                 if(port != 0){
                     c.setPort(port);
                 }
-                c.initConnection();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+                c.run();
 
 
             Scene scene = new Scene(new BorderPane(),700,400);

@@ -49,15 +49,16 @@ public class ClientThreadSocket extends Thread {
     public boolean waitLogin()throws IOException {
         do {
             System.out.println("Waiting login");
-            owner.setUsername(in.readLine());
-            owner.setCharacter(in.readLine());
+            String username=in.readLine();
+            String character=in.readLine();
+            owner = new Player(username,character);
             if (lobby.addPlayer(this)) {
                 out.println("accepted");
                 System.out.println("repling to " + owner.getUsername() + ": accepted!");
                 break;
             } else {
                 out.println("refused");
-                System.out.println("repling to " + owner.getUsername() + ": refused!");
+                System.out.println("repling to " + username + ": refused!");
             }
         }while(true);
         return true;
@@ -68,19 +69,17 @@ public class ClientThreadSocket extends Thread {
      * if lobby refuse the login reply "refused" and keep waiting for login until a valid login is achieved.
      */
     public boolean waitLoginGS()throws IOException {
-        do {
-            System.out.println("Waiting login GS");
-            owner.setUsername(in.readLine());
-            owner.setCharacter(in.readLine());
-            if (lobby.restorePlayer(this)) {
-                out.println("accepted");
-                System.out.println("repling to " + owner.getUsername() + ": restored!");
-                break;
-            } else {
-                out.println("refused");
-                System.out.println("repling to " + owner.getUsername() + ": refused!");
-            }
-        }while(true);
+//        do {
+//            System.out.println("Waiting login GS");
+//            if (lobby.restorePlayer(this)) {
+//                out.println("accepted");
+//                System.out.println("repling to " + owner.getUsername() + ": restored!");
+//                break;
+//            } else {
+//                out.println("refused");
+//                System.out.println("repling to " + owner.getUsername() + ": refused!");
+//            }
+//        }while(true);
         return true;
     }
 

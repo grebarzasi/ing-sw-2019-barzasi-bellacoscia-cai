@@ -44,7 +44,9 @@ public class Player extends Figure {
     }
 
     public Player(){
-
+        super();
+        this.weaponsList = new ArrayList<>();
+        this.powerupList = new ArrayList<>();
     }
 
     /**

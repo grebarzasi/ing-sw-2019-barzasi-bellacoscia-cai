@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import it.polimi.ingsw.cards.Ammo;
-import it.polimi.ingsw.cards.power_up.PowerUp;
-import it.polimi.ingsw.cards.power_up.Teleporter;
+
+
 import it.polimi.ingsw.cards.weapon.Weapon;
 import it.polimi.ingsw.virtual_model.*;
 import javafx.application.Application;

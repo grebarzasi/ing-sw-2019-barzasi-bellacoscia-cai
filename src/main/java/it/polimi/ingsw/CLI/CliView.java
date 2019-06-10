@@ -72,7 +72,7 @@ public class CliView {
         else
             System.out.println(DEFAULT+" "+c.getIp()+"\n");
         System.out.println(LINE_SEP);
-        c.initConnection();
+        c.run();
         System.out.println(LINE_SEP);
     }
 

@@ -94,6 +94,11 @@ public abstract class Figure {
     }
 
     public Figure() {
+        this.points = 0;
+        this.position = null;
+        this.oldPosition = null;
+        this.personalBoard = new PlayerBoard(this);
+        this.actions = new ArrayList<>();
 
     }
 

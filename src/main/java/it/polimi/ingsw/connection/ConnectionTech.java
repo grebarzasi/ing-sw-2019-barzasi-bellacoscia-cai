@@ -2,7 +2,7 @@ package it.polimi.ingsw.connection;
 
 import java.io.IOException;
 
-public abstract class ConnectionTech {
+public abstract class ConnectionTech extends Thread {
 
     //default 127.0.0.1:1234
     private int port=1234;
@@ -35,5 +35,5 @@ public abstract class ConnectionTech {
         this.port = port;
     }
 
-    public abstract void  initConnection()throws IOException;
+    public abstract void run();
 }
