@@ -24,7 +24,7 @@
 	{
 		"row": 0,
 		"column": 3,
-		"room": null,
+		"room": "black",
 		"isRespawn": false
 	},
 

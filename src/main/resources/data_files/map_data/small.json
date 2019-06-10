@@ -23,7 +23,7 @@
     {
         "row": 0,
         "column": 3,
-        "room": null,
+        "room": "black",
         "isRespawn": false
     },
 
@@ -58,7 +58,7 @@
     {
         "row": 2,
         "column": 0,
-        "room": null,
+        "room": "black",
         "isRespawn": false
     },
 

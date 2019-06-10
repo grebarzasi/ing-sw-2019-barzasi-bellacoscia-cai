@@ -72,6 +72,11 @@ public class MapLoader {
                     squareMatrix[row][column] = new SpawnSquare(new Cell(row, column), parserList[i].getRoom());
                     squareMatrix[row][column].setRoom(parserList[i].getRoom());
                 }
+
+                if(parserList[i].getRoom().equals("black")){
+                    squareMatrix[row][column] = null;
+                }
+
                 i++;
 
             }
@@ -88,19 +93,19 @@ public class MapLoader {
             for( column = 0; column < 4; column++){
 
 
-                if(row != 0 && confinementList[i].getNorth()) {
+                if(row != 0 && confinementList[i].getNorth() && squareMatrix[row][column] != null) {
                     squareMatrix[row][column].setNorth(squareMatrix[row - 1][column]);
                 }
 
-                if(column != 3 && confinementList[i].getEast()) {
+                if(column != 3 && confinementList[i].getEast() && squareMatrix[row][column] != null) {
                     squareMatrix[row][column].setEast(squareMatrix[row][column+1]);
                 }
 
-                if(row != 2 && confinementList[i].getSouth()) {
+                if(row != 2 && confinementList[i].getSouth() && squareMatrix[row][column] != null) {
                     squareMatrix[row][column].setSouth(squareMatrix[row+1][column]);
                 }
 
-                if(column != 0 && confinementList[i].getWest()) {
+                if(column != 0 && confinementList[i].getWest() && squareMatrix[row][column] != null) {
                     squareMatrix[row][column].setWest(squareMatrix[row][column-1]);
                 }
 

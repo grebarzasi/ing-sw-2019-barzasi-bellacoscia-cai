@@ -59,7 +59,7 @@
 	{
 		"row": 2,
 		"column": 0,
-		"room": null,
+		"room": "black",
 		"isRespawn": false
 	},
 
