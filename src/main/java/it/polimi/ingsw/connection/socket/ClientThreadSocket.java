@@ -24,7 +24,7 @@ public class ClientThreadSocket extends Thread {
     private GameManagerSocket manager;
 
     //preferences
-    private String mapPref;
+    private int mapPref;
     private int killPref;
     private boolean terminatorPref;
     private boolean finalFrenzyPref;
@@ -91,7 +91,7 @@ public class ClientThreadSocket extends Thread {
 
     public void waitPref()throws IOException {
         System.out.println("Waiting pref for "+ owner.getUsername());
-        mapPref=in.readLine();
+        mapPref=Integer.parseInt(in.readLine());
         killPref=Integer.parseInt(in.readLine());
         terminatorPref=Boolean.parseBoolean(in.readLine());
         finalFrenzyPref=Boolean.parseBoolean(in.readLine());
@@ -194,11 +194,11 @@ public class ClientThreadSocket extends Thread {
         this.client = client;
     }
 
-    public String getMapPref() {
+    public int getMapPref() {
         return mapPref;
     }
 
-    public void setMapPref(String mapPref) {
+    public void setMapPref(int mapPref) {
         this.mapPref = mapPref;
     }
 

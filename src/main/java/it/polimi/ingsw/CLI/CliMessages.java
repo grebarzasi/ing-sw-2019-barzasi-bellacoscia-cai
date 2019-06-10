@@ -39,7 +39,7 @@ public class CliMessages {
     public static final String PREFERENCE_Y = "\nOk,check again:";
     public static final String PREFERENCE_N = "\nSending preferences";
 
-    public static final String MAP_OPT = "\n1-...\n2-...\n3-...\n4-...";
+    public static final String MAP_OPT = "\n1-large\n2-medium1\n3-medium2\n4-small";
     public static final String MAP_Q = "Select your map:";
     public static final String MAP_Y = "\nPerfect! you selected map number: ";
     public static final String MAP_N = "\nNot available,  again:";
