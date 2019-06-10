@@ -144,7 +144,10 @@ public class GameStateJsonBuilder {
                 }
                 if (!s.isSpawn() && !isArmory){
                     AmmoLot ammoLot =((NonSpawnSquare)s).getDrop();
-                    node.put(coord,ammoLot.toString());
+                    if(ammoLot!=null)
+                        node.put(coord,ammoLot.toString());
+                    else
+                        node.put(coord,"empty");
                 }
             }
                 return node;

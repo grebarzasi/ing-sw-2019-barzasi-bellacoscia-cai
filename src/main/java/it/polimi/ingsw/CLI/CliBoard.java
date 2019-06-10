@@ -50,8 +50,8 @@ public class CliBoard {
             System.err.print("something went wrong drawing the board");
         }
     }
-    public void loadMap(String name)throws IOException {
-            all=new String(Files.readAllBytes(Paths.get("src/main/resources/cli_files/" + name +".txt")));
+    public void loadMap()throws IOException {
+            all=new String(Files.readAllBytes(Paths.get("src/main/resources/cli_files/cli_" + model.getBoard().getMap().getName() +".txt")));
     }
 
     public void plotString(String s){
@@ -415,6 +415,10 @@ public class CliBoard {
      */
     public void colorizeCP(String pu){
         char[] array =pu.toCharArray();
+        if(pu.equals("empty")) {
+            System.out.print("   ");
+            return;
+        }
         for(char c:array){
             switch(Character.toString(c)){
                 case "R":
@@ -497,7 +501,7 @@ public class CliBoard {
         }
         CliBoard cli= new  CliBoard(game.getVmodel());
         try {
-            cli.loadMap("cli_large");
+            cli.loadMap();
             cli.draw();
         } catch (IOException e) {
             e.printStackTrace();

@@ -30,6 +30,7 @@ import java.util.HashMap;
 
 public class GameInitializer extends Application {
 
+    private static final String MAP_NAME="medium1";
     private VirtualModel vmodel;
 
     public VirtualModel getVmodel() {
@@ -75,7 +76,7 @@ public class GameInitializer extends Application {
 
 
         Controller contr= new Controller(lobby);
-        contr.getModel().setBoard(new Board("large"));
+        contr.getModel().setBoard(new Board(MAP_NAME));
         Map map = contr.getModel().getBoard().getMap();
         Square[][] matrix = map.getSquareMatrix();
         p1.setPosition(matrix[1][2]);
