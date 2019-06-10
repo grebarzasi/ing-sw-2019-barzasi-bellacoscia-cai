@@ -181,7 +181,7 @@ class GameInitializer {
 
 
         JsonNode node = new GameStateJsonBuilder(contr).create();
-        System.out.println(node);
+      //  System.out.println(node);
         VirtualModel vmodel = new VirtualModel();
         vmodel.setOwner(new VirtualPlayer("gre","red"));
         UpdateParser parser=new UpdateParser(vmodel);
@@ -201,5 +201,11 @@ class GameInitializer {
         CliGame game =  new CliGame(cliBoard);
         System.out.print(game.showPowerUp(vP2.getPowerUps()));
         System.out.print(game.showWeapon(new ArrayList<>(vP2.getWeapons().keySet())));
+        p2.getPersonalBoard().damage(t3);
+        p2.getPersonalBoard().damage(t3);
+        p2.getPersonalBoard().damage(t3);
+        node = new GameStateJsonBuilder(contr).create();
+        parser.updateModel(node.toString());
+        cliBoard.draw();
     }
 }

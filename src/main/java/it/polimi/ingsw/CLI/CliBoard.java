@@ -226,15 +226,18 @@ public class CliBoard {
 
     public void createBoard1(VirtualPlayer p) {
         int i = 0;
-        System.out.print(RESET+BOARD_LEFT);
+        //System.out.print(RESET+BOARD_LEFT);
 
         //UsernameSpace
-        System.out.print(WHITE+"╲");
-        if (p.getCharacter().equals(model.getTurn().getCharacter()))
-            System.out.print(BLACK_BACKGROUND_BRIGHT);
-        else
+        //System.out.print(WHITE+"╲");
+        System.out.print(RESET+""+BLACK_BOLD+"");
+        if (p.getCharacter().equals(model.getTurn().getCharacter())) {
+            System.out.print(BLACK_B);
+            System.out.print(WHITE_BOLD_BRIGHT +" " + p.getUsername() + "");
+        }else {
             System.out.print(WHITE_BACKGROUND_BRIGHT);
-        System.out.print(p.getUsername() + " ");
+            System.out.print(" " + p.getUsername() + "");
+        }
 
 
         for (i=p.getUsername().length(); i < USERNAME_SPACE; i++) {
@@ -244,7 +247,9 @@ public class CliBoard {
 
         printPawn(p.getCharacter());
         //Print marks
-        System.out.print(WHITE+"╱"+"╲"+WHITE_UNDERLINED+" ╭");
+        //System.out.print(WHITE+"╱"+"╲"+WHITE_UNDERLINED+" ╭");
+        System.out.print(WHITE_UNDERLINED+"   ["+BLACK_BOLD+(model.getAllPlayers().indexOf(p)+1)+""+WHITE_UNDERLINED+"] ╭");
+
         for (String d : p.getpBoard().getMarks()) {
             printToken(d);
             i++;

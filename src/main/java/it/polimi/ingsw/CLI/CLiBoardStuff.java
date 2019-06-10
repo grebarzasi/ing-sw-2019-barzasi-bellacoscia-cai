@@ -16,14 +16,19 @@ public class CLiBoardStuff {
     public static final String GRAY_P = WHITE_BACKGROUND_BRIGHT+" "+RESET;
     public static final String YELLOW_P = YELLOW_BACKGROUND_BRIGHT+" "+RESET;
 
-    public static final String ARMORY = " ۩ ";
-    public static final String AMMO = "ѻ";
+    public static final String ARMORY = " @ ";
+    //public static final String ARMORY = " ۩ ";
+    public static final String AMMO = "+";
+    //public static final String AMMO = "ѻ";
+
 
     public static final String YELLOW_AMMO = YELLOW+AMMO+RESET;
     public static final String BLUE_AMMO = BLUE+AMMO+RESET;
     public static final String RED_AMMO = RED+AMMO+RESET;
-    public static final String PU_AMMO = BLACK+"Ѻ"+RESET;
+    public static final String PU_AMMO = BLACK+"§"+RESET;
+    //public static final String PU_AMMO = BLACK+"Ѻ"+RESET;
 
+    //public static final String TOKEN = BLACK+"Ѻ"+RESET;
     public static final String RED_T = PURPLE_BOLD_BRIGHT+"o"+RESET;
     public static final String GREEN_T = GREEN_BOLD_BRIGHT+"o"+RESET;
     public static final String BLUE_T =CYAN_BOLD_BRIGHT+"o"+RESET;
