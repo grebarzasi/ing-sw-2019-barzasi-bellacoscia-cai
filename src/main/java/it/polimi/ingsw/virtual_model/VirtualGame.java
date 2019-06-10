@@ -6,12 +6,12 @@ import java.util.ArrayList;
 
 public class VirtualGame {
 
-    private String targetSquare;
-    private String targetPlayer;
+    private String targetSquare = "";
+    private String targetPlayer = "";
 
-    private String weapon;
-    private String powerup;
-    private String effect;
+    private String weapon = "";
+    private String powerup = "";
+    private String effect = "";
 
     private ArrayList<String> hideSquare = new ArrayList<>();
     private ArrayList<String> ammoTiles = new ArrayList<>();
