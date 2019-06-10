@@ -7,10 +7,7 @@ import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.power_up.Teleporter;
 import it.polimi.ingsw.cards.weapon.Weapon;
-import it.polimi.ingsw.virtual_model.VirtualGame;
-import it.polimi.ingsw.virtual_model.VirtualLobby;
-import it.polimi.ingsw.virtual_model.VirtualPlayer;
-import it.polimi.ingsw.virtual_model.VirtualPlayerBoard;
+import it.polimi.ingsw.virtual_model.*;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -36,8 +33,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import static it.polimi.ingsw.javaFX.GUIFiles.*;
-
-
 
 /*
 
@@ -98,145 +93,152 @@ RISALIRE ALLA CELLA!!
  */
 public class GameJavaFX extends Application {
 
+    private VirtualModel model;
+
+    private VirtualGame game;
+
+    private Font font;
+
+    private boolean move;
+    private boolean pick;
+    private boolean shoot;
+
+    private ArrayList<ArrayList<Button>> btnCell;
+    private TextField msg;
+    private TextField pointsField;
+    private GridPane gridSkull;
+
+    private Button btnMove;
+    private Button btnPick;
+    private Button btnShoot;
+    private Button btnRel;
+    private Button btnCancel;
+    private Button btnDeck;
+
+    private GridPane gridPBoard;
+
+    private Button btnPwe1;
+    private Button btnPwe2;
+    private Button btnPwe3;
+    private Button btnPpu1;
+    private Button btnPpu2;
+    private Button btnPpu3;
+
+    private GridPane gridPAmmo;
+
+    private GridPane gridOtherBoard1;
+    private GridPane gridOtherBoard2;
+    private GridPane gridOtherBoard3;
+    private GridPane gridOtherBoard4;
+    private GridPane gridOtherBoard5;
+
+    private ArrayList<Button> weOther1;
+    private ArrayList<Button> weOther2;
+    private ArrayList<Button> weOther3;
+    private ArrayList<Button> weOther4;
+    private  ArrayList<Button> weOther5;
+
+    private GridPane gridOtherAmmo1;
+    private GridPane gridOtherAmmo2;
+    private GridPane gridOtherAmmo3;
+    private GridPane gridOtherAmmo4;
+    private GridPane gridOtherAmmo5;
+
+    private double widthScreen;
+    private double widthLateral;
+    private double widthCenter;
+    private double widthSkull;
+    private double widthBoard;
+    private double widthPers;
+    private double widthCard;
+    private double widthOCard;
+    private double widthOther;
+    private double widthOtherWeapon;
+    private double heightScreen;
+    private double heightLateral;
+    private double heightCenter;
+    private double heightBoard;
+    private double heightPBoard;
+    private double heightPCards;
+    private double heightCard;
+    private double heightOther;
+    private double heightOtherWeapon;
+    private double heightOtherAmmo;
+    private double heightOtherBoard;
+
+    public GameJavaFX(VirtualModel model){
+
+        this.model = model ;
 
 
-    private int map = 3;
-    private javafx.scene.text.Font font = new Font(20);
-    private int skullMax = 8;
+        this.game = new VirtualGame();
+        this.font =  new Font(20);;
 
-    private VirtualLobby lobby;
-    private VirtualGame game = new VirtualGame();
+        this.move = false;
+        this.pick = false;
+        this.shoot = false;
 
+        this.btnCell = new ArrayList<>();
+        this.msg = new TextField();
+        this.pointsField = new TextField();
+        this.gridSkull = new GridPane();
+        this.btnMove = new Button("Muovi");
+        this.btnPick = new Button("Raccogli");
+        this.btnShoot = new Button("Spara");
+        this.btnRel = new Button("Ricarica");
+        this.btnCancel = new Button("Annulla");
+        this.btnDeck = new Button();
+        this.gridPBoard = new GridPane();
 
-    private String turn = "";
-    private boolean move = false;
-    private boolean pick = false;
-    private boolean shoot = false;
+        this.btnPwe1 = new Button();
+        this.btnPwe2 = new Button();
+        this.btnPwe3 = new Button();
+        this.btnPpu1 = new Button();
+        this.btnPpu2 = new Button();
+        this.btnPpu3 = new Button();
+        this.gridPAmmo = new GridPane();
+        this.gridOtherBoard1 = new GridPane();
+        this.gridOtherBoard2 = new GridPane();
+        this.gridOtherBoard3 = new GridPane();
+        this.gridOtherBoard4 = new GridPane();
+        this.gridOtherBoard5 = new GridPane();
+        this.weOther1 = new ArrayList<>();
+        this.weOther2 = new ArrayList<>();
+        this.weOther3 = new ArrayList<>();
+        this.weOther4 = new ArrayList<>();
+        this.weOther5 = new ArrayList<>();
+        this.gridOtherAmmo1 = new GridPane();
+        this.gridOtherAmmo2 = new GridPane();
+        this.gridOtherAmmo3 = new GridPane();
+        this.gridOtherAmmo4 = new GridPane();
+        this.gridOtherAmmo5 = new GridPane();
 
-    private VirtualPlayer player;
-    private ArrayList<VirtualPlayer> players;
-    private int points;
-
-
-    ArrayList<ArrayList<Button>> btnCell = new ArrayList<>();
-    TextField msg = new TextField();
-    TextField pointsField = new TextField();
-    GridPane gridSkull = new GridPane();
-
-    Button btnMove = new Button("Muovi");
-    Button btnPick = new Button("Raccogli");
-    Button btnShoot = new Button("Spara");
-    Button btnRel = new Button("Ricarica");
-    Button btnCancel = new Button("Annulla");
-    Button btnDeck = new Button();
-
-    GridPane gridPBoard = new GridPane();
-
-    Button btnPwe1 = new Button();
-    Button btnPwe2 = new Button();
-    Button btnPwe3 = new Button();
-    Button btnPpu1 = new Button();
-    Button btnPpu2 = new Button();
-    Button btnPpu3 = new Button();
-
-    GridPane gridPAmmo = new GridPane();
-
-    GridPane gridOtherBoard1 = new GridPane();
-    GridPane gridOtherBoard2 = new GridPane();
-    GridPane gridOtherBoard3 = new GridPane();
-    GridPane gridOtherBoard4 = new GridPane();
-    GridPane gridOtherBoard5 = new GridPane();
-
-    ArrayList<Button> weOther1 = new ArrayList<>();
-    ArrayList<Button> weOther2 = new ArrayList<>();
-    ArrayList<Button> weOther3 = new ArrayList<>();
-    ArrayList<Button> weOther4 = new ArrayList<>();
-    ArrayList<Button> weOther5 = new ArrayList<>();
-
-    GridPane gridOtherAmmo1 = new GridPane();
-    GridPane gridOtherAmmo2 = new GridPane();
-    GridPane gridOtherAmmo3 = new GridPane();
-    GridPane gridOtherAmmo4 = new GridPane();
-    GridPane gridOtherAmmo5 = new GridPane();
-
-    double widthScreen = Screen.getPrimary().getBounds().getWidth();
-    double widthLateral = widthScreen/4;
-    double widthCenter = widthScreen/2;
-    double widthSkull = widthLateral/9;
-    double widthBoard = (widthCenter-120)/4;
-    double widthPers = widthLateral;
-    double widthCard = widthPers/3;
-    double widthOCard = widthLateral/3;
-    double widthOther = widthOCard * 2;
-    double widthOtherWeapon = widthCard/3;
-    double heightScreen = Screen.getPrimary().getBounds().getHeight();
-    double heightLateral = heightScreen/6;
-    double heightCenter = heightScreen/2;
-    double heightBoard = heightCenter/3;
-    double heightPBoard = heightCenter/3;
-    double heightPCards = heightPBoard *2;
-    double heightCard = heightPCards/2;
-    double heightOther = heightCenter/5;
-    double heightOtherWeapon = heightCenter/5;
-    double heightOtherAmmo = heightOther/5;
-    double heightOtherBoard = heightOtherAmmo * 4;
-
-    public void setLobby(VirtualLobby lobby) {
-        this.lobby = lobby;
-
-/*
-
-        map = lobby.getMapPref()
-        player = lobby.getOwner();
-        players = lobby.getNewPlayersList();
-        points = player.getPoints();
-        skullMax = lobby.getKillPref();
-
-*/
+        this.widthScreen = Screen.getPrimary().getBounds().getWidth();
+        this.widthLateral = widthScreen/4;
+        this.widthCenter = widthScreen/2;
+        this.widthSkull = widthLateral/9;
+        this.widthBoard = (widthCenter-120)/4;
+        this.widthPers = widthLateral;
+        this.widthCard = widthPers/3;
+        this.widthOCard = widthLateral/3;
+        this.widthOther = widthOCard * 2;
+        this.widthOtherWeapon = widthCard/3;
+        this.heightScreen = Screen.getPrimary().getBounds().getHeight();
+        this.heightLateral = heightScreen/6;
+        this.heightCenter = heightScreen/2;
+        this.heightBoard = heightCenter/3;
+        this.heightPBoard = heightCenter/3;
+        this.heightPCards = heightPBoard *2;
+        this.heightCard = heightPCards/2;
+        this.heightOther = heightCenter/5;
+        this.heightOtherWeapon = heightCenter/5;
+        this.heightOtherAmmo = heightOther/5;
+        this.heightOtherBoard = heightOtherAmmo * 4;
 
     }
 
-
     @Override
     public void start(Stage primaryStage) throws Exception {
-
-        ///*
-
-        points = 0;
-        player = new VirtualPlayer("Mariangiangiangela", "yellow");
-        players = new ArrayList<>();
-        players.add(player);
-        players.add(new VirtualPlayer("AlbertoAngela","blue"));
-        players.add(new VirtualPlayer("Mussolini","red"));
-        players.add(new VirtualPlayer("MioPadre","green"));
-        players.add(new VirtualPlayer("Bignè","grey"));
-
-        turn = player.getCharacter();
-
-        ArrayList<String> damage = new ArrayList<>();
-        damage.add("red");
-        damage.add("red");
-        damage.add("yellow");
-        damage.add("blue");
-        damage.add("green");
-        damage.add("grey");
-        damage.add("blue");
-        damage.add("blue");
-        damage.add("green");
-        damage.add("green");
-        damage.add("green");
-        damage.add("green");
-
-        ArrayList<String> marks = new ArrayList<>();
-        marks.add("red");
-        marks.add("red");
-        marks.add("yellow");
-
-        player.getpBoard().setMarks(marks);
-        player.getpBoard().setDamage(damage);
-        player.getpBoard().setSkulls(7);
-
-        // */
 
         primaryStage.setTitle("ADRENALINA");
 
@@ -304,7 +306,7 @@ public class GameJavaFX extends Application {
 
         pointsField.setBackground(backPoints);
         pointsField.setPrefSize(widthLateral/3,heightLateral/3);
-        pointsField.setText("Punti: " + points);
+        pointsField.setText("Punti: " + model.getOwner().getPoints());
         pointsField.setAlignment(Pos.CENTER);
         pointsField.setEditable(false);
 
@@ -346,7 +348,6 @@ public class GameJavaFX extends Application {
         gridSkull.getColumnConstraints().addAll(kc1,kc2,kc3,kc4,kc5,kc6,kc7,kc8,kc9);
         gridSkull.getRowConstraints().add(kr1);
 
-        fillSkulls(gridSkull,skullMax, widthSkull-5,imgTrack.getHeight()-25);
 
         grid.add(gridSkull,0,0);
 
@@ -359,20 +360,20 @@ public class GameJavaFX extends Application {
 
 
         Image imgBoard = null;
-        switch (map){
-            case 1:{
+        switch (model.getBoard().getMap().getName()){
+            case("medium1"):{
                 imgBoard = new Image(new FileInputStream(PATH_MEDIUM1_MAP),widthCenter,heightCenter,true,true);
                 break;
             }
-            case 2:{
+            case("small"):{
                 imgBoard = new Image(new FileInputStream(PATH_SMALL_MAP),widthCenter,heightCenter,true,true);
                 break;
             }
-            case 3:{
+            case("large"):{
                 imgBoard = new Image(new FileInputStream(PATH_LARGE_MAP),widthCenter,heightCenter,true,true);
                 break;
             }
-            case 4:{
+            case("medium2"):{
                 imgBoard = new Image(new FileInputStream(PATH_MEDIUM2_MAP),widthCenter,heightCenter,true,true);
                 break;
             }
@@ -467,7 +468,7 @@ public class GameJavaFX extends Application {
 
         Image imgPBoard = null;
 
-        switch (player.getCharacter()){
+        switch (model.getOwner().getCharacter()){
             case "yellow":{
                 imgPBoard = new Image(new FileInputStream(PATH_YELLOW_BOARD),widthPers,heightPBoard,true,true);
                 break;
@@ -496,7 +497,6 @@ public class GameJavaFX extends Application {
         gridPBoard.setBackground(backPB);
 
         setCellBoard(gridPBoard,widthPers,heightPBoard-50);
-        fillBoard(gridPBoard,player,widthPers,heightPBoard/4-6,heightPBoard/4,heightPBoard/3-6);
 
         gridPers.add(gridPBoard,0,0);
 
@@ -572,7 +572,6 @@ public class GameJavaFX extends Application {
         gridPAmmo.getColumnConstraints().addAll(ac1,ac2,ac3);
         gridPAmmo.getRowConstraints().addAll(ar1,ar2,ar3);
 
-        fillAmmo(gridPAmmo,player.getpBoard(),widthAmmo,heightAmmo);
         grid.add(gridPAmmo,0,2);
 
 
@@ -644,42 +643,36 @@ public class GameJavaFX extends Application {
 
 
 
-        for (VirtualPlayer p : players ) {
-            if(!p.getCharacter().equals(player.getCharacter())){
+        for (VirtualPlayer p : model.getAllPlayers() ) {
+            if(!p.getCharacter().equals(model.getOwner().getCharacter())){
                 switch (p.getCharacter()) {
                     case "yellow": {
                         imgOther1 = setBoard(p.getCharacter(), widthOther, heightOtherBoard);
                         setGridBack(gridOtherBoard1,imgOther1);
-                        fillOtherAmmo(gridOtherAmmo1,p.getpBoard(),heightOtherAmmo,heightOtherAmmo);
                         weOther1 = setOtherWeapon(gridOtherWe,0,widthOtherWeapon,heightOtherWeapon);
                         break;
                     }
                     case "red": {
                         imgOther2 = setBoard(p.getCharacter(), widthOther, heightOtherBoard);
                         setGridBack(gridOtherBoard2,imgOther2);
-                        fillOtherAmmo(gridOtherAmmo2,p.getpBoard(),heightOtherAmmo,heightOtherAmmo);
-                        //fillBoard(gridOtherBoard2,p,widthOther,heightOtherBoard/4,heightOtherBoard/3,heightOtherBoard/4);
                         weOther2 = setOtherWeapon(gridOtherWe,1,widthOtherWeapon,heightOtherWeapon);
                         break;
                     }
                     case "blue": {
                         imgOther3 = setBoard(p.getCharacter(), widthOther, heightOtherBoard);
                         setGridBack(gridOtherBoard3,imgOther3);
-                        fillOtherAmmo(gridOtherAmmo3,p.getpBoard(),heightOtherAmmo,heightOtherAmmo);
                         weOther3 = setOtherWeapon(gridOtherWe,2,widthOtherWeapon,heightOtherWeapon);
                         break;
                     }
                     case "green": {
                         imgOther4 = setBoard(p.getCharacter(), widthOther, heightOtherBoard);
                         setGridBack(gridOtherBoard4,imgOther4);
-                        fillOtherAmmo(gridOtherAmmo4,p.getpBoard(),heightOtherAmmo,heightOtherAmmo);
                         weOther4 = setOtherWeapon(gridOtherWe,3,widthOtherWeapon,heightOtherWeapon);
                         break;
                     }
                     case "grey": {
                         imgOther5 = setBoard(p.getCharacter(), widthOther, heightOtherBoard);
                         setGridBack(gridOtherBoard5,imgOther5);
-                        fillOtherAmmo(gridOtherAmmo5,p.getpBoard(),heightOtherAmmo,heightOtherAmmo);
                         weOther5 = setOtherWeapon(gridOtherWe,4,widthOtherWeapon,heightOtherWeapon);
                         break;
                     }
@@ -763,7 +756,7 @@ public class GameJavaFX extends Application {
 
         msg.setText(WELCOME);
 
-        if(turn.equals(player.getCharacter()))
+        if(model.getTurn().getCharacter().equals(model.getOwner().getCharacter()))
             gridPBoard.setEffect(borderGlow);
 
         btnCancel.setOnAction(e->{
@@ -772,7 +765,7 @@ public class GameJavaFX extends Application {
         });
 
         btnMove.setOnAction(e->{
-            if (turn.equals(player.getCharacter()) && btnShoot.getOpacity() == 1) {
+            if (model.getTurn().getCharacter().equals(model.getOwner().getCharacter()) && btnShoot.getOpacity() == 1) {
 
                 move = true;
                 msg.setText(CHOOSE_SQUARE);
@@ -790,7 +783,7 @@ public class GameJavaFX extends Application {
 
         });
         btnPick.setOnAction(e->{
-            if(turn.equals(player.getCharacter()) && btnShoot.getOpacity() == 1) {
+            if(model.getTurn().getCharacter().equals(model.getOwner().getCharacter()) && btnShoot.getOpacity() == 1) {
 
                 pick = true;
                 msg.setText(CHOOSE_SQUARE);
@@ -809,7 +802,7 @@ public class GameJavaFX extends Application {
                 msg.setText("Aspetta il tuo turno...");
         });
         btnShoot.setOnAction(e->{
-            if(turn.equals(player.getCharacter()) && btnShoot.getOpacity() == 1){
+            if(model.getTurn().getCharacter().equals(model.getOwner().getCharacter()) && btnShoot.getOpacity() == 1){
 
                 shoot = true;
                 msg.setText(CHOOSE_PLAYER);
@@ -870,14 +863,10 @@ public class GameJavaFX extends Application {
 
         btnDeck.setOnAction(e->{System.out.println("ok");});
 
-        // ** HARDCODED TEST **
-        setPlayerOnCell(btnCell.get(0),player.getCharacter());
-        setPlayerOnCell(btnCell.get(0),players.get(1).getCharacter());
-        setPlayerOnCell(btnCell.get(0),players.get(2).getCharacter());
-        setPlayerOnCell(btnCell.get(0),players.get(3).getCharacter());
-        setPlayerOnCell(btnCell.get(0),players.get(4).getCharacter());
+        for (VirtualPlayer player : model.getAllPlayers()) {
+            setPlayerOnCell(btnCell.get(player.getRow()*4+player.getColumn()),player.getCharacter());
+        }
 
-        fillAmmoTiles();
 
         for (ArrayList<Button> btnArr : btnCell) {
             btnArr.get(5).setOnAction(e->{
@@ -888,6 +877,8 @@ public class GameJavaFX extends Application {
             });
         }
 
+        update();
+        msg.setText(WELCOME);
         primaryStage.show();
     }
 
@@ -1390,7 +1381,7 @@ public class GameJavaFX extends Application {
         }
         while(k <= p.getpBoard().getSkulls() + 2){
 
-            if(k == no){
+            if(k <= no){
                 k++;
                 continue;
             }
@@ -1398,7 +1389,7 @@ public class GameJavaFX extends Application {
             ImageView skull = null;
 
             try {
-                skull = new ImageView(new Image(new FileInputStream(PATH_SKULL), width-25, hskulls-25, true, true));
+                skull = new ImageView(new Image(new FileInputStream(PATH_SKULL), (width-25)/6, hskulls-25, true, true));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -1406,6 +1397,7 @@ public class GameJavaFX extends Application {
             grid.add(skull,k,2);
             k++;
         }
+
 
     }
 
@@ -1438,9 +1430,12 @@ public class GameJavaFX extends Application {
                 }
                 continue;
             }
+            int x = (int) Math.ceil((double) (i + 1) / 4) - 1;
+            int y = (i + 1) - (x * 4) - 1;
+            String key = x + ":" + y;
 
             try{
-                Image img = new Image(new FileInputStream(PATH_AMMO + game.getAmmoTiles().get(i) + ".png"),w,h,true,true);
+                Image img = new Image(new FileInputStream(PATH_AMMO + model.getBoard().getMap().getCells().get(key).getContent() + ".png"),w,h,true,true);
                 BackgroundImage background = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
                 Background back = new Background(background);
                 btnCell.get(i).get(5).setBackground(back);
@@ -1462,6 +1457,7 @@ public class GameJavaFX extends Application {
         return temp1*4 + temp2;
     }
 
+
     public void hideCell(ArrayList<Button> btn,double o){
         for (Button b : btn) {
             b.setOpacity(o);
@@ -1477,6 +1473,8 @@ public class GameJavaFX extends Application {
                     int y = (btn + 1) - (x * 4) - 1;
                     game.setTargetSquare(x + ":" + y);
 
+                    model.getOwner().setRow(x);
+                    model.getOwner().setColumn(y);
                     btnCancel.setOpacity(0);
 
                     update();
@@ -1547,60 +1545,52 @@ public class GameJavaFX extends Application {
             }
         }
 
+
+        fillSkulls(gridSkull,model.getBoard().getSkull(), widthSkull-5,heightLateral/3);
+
+        for (VirtualPlayer player : model.getAllPlayers()) {
+            setPlayerOnCell(btnCell.get(player.getRow() * 4 + player.getColumn()), player.getCharacter());
+        }
+
         fillAmmoTiles();
 
-        String pos = game.getTargetSquare();
-        int temp1 = Integer.parseInt(pos.split(":")[0]);
-        int temp2 = Integer.parseInt(pos.split(":")[1]);
-        int i = temp1*4 + temp2;
+        fillBoard(gridPBoard,model.getOwner(),widthBoard,heightPBoard/4-6, heightPBoard/4, heightPBoard/3-6);
+        fillAmmo(gridPAmmo,model.getOwner().getpBoard(),widthLateral/7,heightLateral/7);
 
-        /*
-        for (VirtualPlayer p : players) {
-            setPlayerOnCell(btnCell.get(p.getRow()*4 + p.getColumn()),players.get(1).getCharacter());
-        }
-         */
-        setPlayerOnCell(btnCell.get(i),player.getCharacter());
-        setPlayerOnCell(btnCell.get(0),players.get(1).getCharacter());
-        setPlayerOnCell(btnCell.get(0),players.get(2).getCharacter());
-        setPlayerOnCell(btnCell.get(0),players.get(3).getCharacter());
-        setPlayerOnCell(btnCell.get(0),players.get(4).getCharacter());
+        for (VirtualPlayer p : model.getAllPlayers()) {
 
-        for (VirtualPlayer p : players) {
-            if(players.indexOf(p) == 0) {
-                fillBoard(gridPBoard,p,widthBoard,heightPBoard/4-6, heightPBoard/4, heightPBoard/3-6);
-                fillAmmo(gridPAmmo,p.getpBoard(),widthLateral/7,heightLateral/7);
+            if(p.equals(model.getOwner())){
                 continue;
             }
-            /*
+
             switch (p.getCharacter()){
                 case("yellow"):{
-                    fillBoard(gridOtherBoard1,p,widthBoard,heightPBoard/4-6, heightPBoard/4, heightPBoard/3-6);
-                    fillAmmo(gridOtherAmmo1,p.getpBoard(),widthLateral/7,heightLateral/7);
+                    fillBoard(gridOtherBoard1,p,widthBoard,heightPBoard/5-10, heightPBoard/4-10, heightPBoard/5-10);
+                    fillOtherAmmo(gridOtherAmmo1,p.getpBoard(),widthLateral/7,heightLateral/7);
                     break;
                 }
                 case("red"):{
-                    fillBoard(gridOtherBoard2,p,widthBoard,heightPBoard/4-6, heightPBoard/4, heightPBoard/3-6);
-                    fillAmmo(gridOtherAmmo2,p.getpBoard(),widthLateral/7,heightLateral/7);
+                    fillBoard(gridOtherBoard2,p,widthBoard,heightPBoard/5-10, heightPBoard/4-10, heightPBoard/5-10);
+                    fillOtherAmmo(gridOtherAmmo2,p.getpBoard(),widthLateral/7,heightLateral/7);
                     break;
                 }
                 case("blue"):{
-                    fillBoard(gridOtherBoard3,p,widthBoard,heightPBoard/4-6, heightPBoard/4, heightPBoard/3-6);
-                    fillAmmo(gridOtherAmmo3,p.getpBoard(),widthLateral/7,heightLateral/7);
+                    fillBoard(gridOtherBoard3,p,widthBoard,heightPBoard/5-10, heightPBoard/4-10, heightPBoard/5-10);
+                    fillOtherAmmo(gridOtherAmmo3,p.getpBoard(),widthLateral/7,heightLateral/7);
                     break;
                 }
                 case("green"):{
-                    fillBoard(gridOtherBoard4,p,widthBoard,heightPBoard/4-6, heightPBoard/4, heightPBoard/3-6);
-                    fillAmmo(gridOtherAmmo4,p.getpBoard(),widthLateral/7,heightLateral/7);
+                    fillBoard(gridOtherBoard4,p,widthBoard,heightPBoard/5-10, heightPBoard/4-10, heightPBoard/5-10);
+                    fillOtherAmmo(gridOtherAmmo4,p.getpBoard(),widthLateral/7,heightLateral/7);
                     break;
                 }
                 case("grey"):{
-                    fillBoard(gridOtherBoard5,p,widthBoard,heightPBoard/4-6, heightPBoard/4, heightPBoard/3-6);
-                    fillAmmo(gridOtherAmmo5,p.getpBoard(),widthLateral/7,heightLateral/7);
+                    fillBoard(gridOtherBoard5,p,widthBoard,heightPBoard/5-10, heightPBoard/4-10, heightPBoard/5-10);
+                    fillOtherAmmo(gridOtherAmmo5,p.getpBoard(),widthLateral/7,heightLateral/7);
                     break;
                 }
             }
 
-             */
 
         }
 

@@ -17,25 +17,8 @@ public class VirtualGame {
     private ArrayList<String> ammoTiles = new ArrayList<>();
 
     public VirtualGame() {
-        hideSquare.add("2:1");
-        hideSquare.add("2:2");
-        hideSquare.add("2:3");
-        hideSquare.add("1:2");
-        hideSquare.add("1:3");
-        hideSquare.add("0:3");
-
-        ammoTiles.add("YBB");
-        ammoTiles.add("PRB");
-        ammoTiles.add("YBB");
-        ammoTiles.add("PRB");
-        ammoTiles.add("YBB");
-        ammoTiles.add("PRB");
-        ammoTiles.add("YBB");
-        ammoTiles.add("PRB");
-        ammoTiles.add("YBB");
-        ammoTiles.add("PRB");
-        ammoTiles.add("YBB");
-        ammoTiles.add("PRB");
+        hideSquare.add("0:0");
+        hideSquare.add("0:1");
     }
 
     public String getTargetSquare() {

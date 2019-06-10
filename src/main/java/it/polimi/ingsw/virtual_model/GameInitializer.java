@@ -20,6 +20,10 @@ import it.polimi.ingsw.cards.weapon.Weapon;
 import it.polimi.ingsw.connection.socket.ClientThreadSocket;
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.controller.GameStateJsonBuilder;
+import it.polimi.ingsw.javaFX.GameJavaFX;
+import it.polimi.ingsw.javaFX.StartJavaFX;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,17 +32,23 @@ import java.util.HashMap;
 
 
 
-class GameInitializer {
+public class GameInitializer extends Application {
 
-    public static void main(String[] args){
-        try {
-            new GameInitializer().initAll();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private VirtualModel vmodel;
+
+    public VirtualModel getVmodel() {
+        return vmodel;
     }
 
-    void initAll() throws IOException {
+    public void setVmodel(VirtualModel vmodel) {
+        this.vmodel = vmodel;
+    }
+
+    public static void main(String[] args){
+        launch(args);
+    }
+
+    public void start(Stage primaryStage) throws IOException {
         Lobby lobby = new Lobby();
         ClientThreadSocket a =new ClientThreadSocket(lobby);
         ClientThreadSocket b =new ClientThreadSocket(lobby);
@@ -76,7 +86,7 @@ class GameInitializer {
         p2.setPosition(matrix[1][2]);
         p3.setPosition(matrix[0][3]);
         p4.setPosition(matrix[2][3]);
-        contr.getModel().setCurrentPlayer(p3);
+        contr.getModel().setCurrentPlayer(p2);
         //WEAPONS
         WeaponDeck weaponDeck = contr.getModel().getBoard().getWeaponDeck();
         Weapon w1 = (Weapon)weaponDeck.fetch();
@@ -181,7 +191,7 @@ class GameInitializer {
 
         JsonNode node = new GameStateJsonBuilder(contr).create();
         System.out.println(node);
-        VirtualModel vmodel = new VirtualModel();
+        vmodel = new VirtualModel();
         vmodel.setOwner(new VirtualPlayer("gre","red"));
         UpdateParser parser=new UpdateParser(vmodel);
         parser.updateModel(node.toString());
@@ -195,8 +205,18 @@ class GameInitializer {
         HashMap<String, VirtualCell> cells = vmodel.getBoard().getMap().getCells();
         System.out.println(cells);
 
+/*
+
         CliBoard cliBoard =new CliBoard(vmodel);
         cliBoard.loadFile("cli_large_pos");
         CliGame game =  new CliGame(cliBoard);
+
+*/
+        GameJavaFX game = new GameJavaFX(vmodel);
+        try {
+            game.start(primaryStage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

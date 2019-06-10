@@ -2,6 +2,7 @@ package it.polimi.ingsw.javaFX;
 
 import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.virtual_model.VirtualLobby;
+import it.polimi.ingsw.virtual_model.VirtualModel;
 import it.polimi.ingsw.virtual_model.VirtualPlayer;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
@@ -46,7 +47,10 @@ public class LobbyJavaFX extends Application {
     private int skull;
     private ConnectionTech conn;
     private VirtualPlayer owner;
-    GameJavaFX game = new GameJavaFX();
+
+    VirtualModel vmodel = new VirtualModel();
+    GameJavaFX game = new GameJavaFX(vmodel);
+
     private boolean start = false;
 
     Font font = new Font("TimesRoman", 20);
@@ -298,7 +302,6 @@ public class LobbyJavaFX extends Application {
             }
             System.out.println("game started");
 
-            game.setLobby(lobby);
             Platform.runLater(()->gameStart());
 
         });
