@@ -53,14 +53,12 @@ public class Controller {
     private boolean hasFrenzy;
     private boolean hasBot;
     private GameModel model;
-    private Lobby lobby;
     private View view;
 
     //Starts the game from a lobby
 
     public Controller(Lobby lobby) {
 
-        this.lobby = lobby;
         ArrayList<Player> playerList = new ArrayList<>();
 
         for(ClientThreadSocket s: lobby.getJoinedPlayers()){
@@ -74,8 +72,8 @@ public class Controller {
         this.model = new GameModel(playerList,map, this);
 
         this.hasFrenzy = lobby.hasFinalFrenzy();
-        this.hasBot = this.lobby.hasTerminatorPref();
-        this.getModel().getBoard().getTrack().setSkullMax(this.lobby.getKillPref());
+        this.hasBot = lobby.hasTerminatorPref();
+        this.getModel().getBoard().getTrack().setSkullMax(lobby.getKillPref());
 
 
         this.asBot = new AsBot(this);
@@ -97,7 +95,6 @@ public class Controller {
 
     public Controller(Lobby lobby, View view) {
 
-        this.lobby = lobby;
         this.model = new GameModel(lobby, this);
         this.view = view;
 
@@ -385,14 +382,6 @@ public class Controller {
 
     public void setModel(GameModel model) {
         this.model = model;
-    }
-
-    public Lobby getLobby() {
-        return lobby;
-    }
-
-    public void setLobby(Lobby lobby) {
-        this.lobby = lobby;
     }
 
     public View getView() {
