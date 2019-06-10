@@ -52,14 +52,21 @@ public class Deck {
     }
 
 
-    //NEW
+    //NEWER
     public Card fetch(){
-        Card temp = usable.get(0);
-        usable.remove(0);
-        if(usable.isEmpty()){
-            reset();
+        Card temp;
+
+        if(!this.usable.isEmpty()){
+            temp = this.usable.get(0);
+            this.usable.remove(0);
+        }else{
+            this.reset();
+            temp = this.usable.get(0);
+            this.usable.remove(0);
         }
+
         return temp;
+
     }
 
 

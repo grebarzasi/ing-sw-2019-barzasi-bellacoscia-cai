@@ -18,7 +18,7 @@ class BoardTest {
     @Test
     public void constructorTest(){
 
-        Board fieldOfFire = new Board("large");
+        Board fieldOfFire = new Board("small");
 
         int row;
         int column;

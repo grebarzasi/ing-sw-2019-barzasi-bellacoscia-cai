@@ -528,11 +528,6 @@ public class GameJavaFX extends Application {
             e.printStackTrace();
         }
 
-        BackgroundImage backgroundOWe = new BackgroundImage(imgWe, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-        Background backWe = new Background(backgroundOWe);
-        BackgroundImage backgroundPPu = new BackgroundImage(imgPPU, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-        Background backPPu = new Background(backgroundPPu);
-
         btnPwe1.setPrefSize(widthCard,heightCard);
         btnPwe2.setPrefSize(widthCard,heightCard);
         btnPwe3.setPrefSize(widthCard,heightCard);
@@ -544,9 +539,13 @@ public class GameJavaFX extends Application {
         we.add(btnPwe2);
         we.add(btnPwe3);
 
-        btnPpu1.setBackground(backPPu);
-        btnPpu2.setBackground(backPPu);
-        btnPpu3.setBackground(backPPu);
+        btnPpu1.setOpacity(0);
+        btnPpu2.setOpacity(0);
+        btnPpu3.setOpacity(0);
+
+        pu.add(btnPpu1);
+        pu.add(btnPpu2);
+        pu.add(btnPpu3);
 
         gridCards.add(btnPwe1,0,0);
         gridCards.add(btnPwe2,1,0);
@@ -752,6 +751,10 @@ public class GameJavaFX extends Application {
         /**
          * set buttons' action.
          */
+
+        update();
+
+
         DropShadow borderGlow = new DropShadow();
         borderGlow.setColor(Color.RED);
         borderGlow.setHeight(50);
@@ -819,47 +822,28 @@ public class GameJavaFX extends Application {
                 msg.setText("Aspetta il tuo turno...");
         });
 
-        btnPwe1.setOnAction(e->{
-            if(shoot){
 
-            }else {
-                infoWindow iw = new infoWindow(false);
+        for (Button btn : we) {
+            btn.setOnAction(e->{
+                int i = we.indexOf(btn);
+                infoWindow iw = new infoWindow(i,false);
                 iw.show();
-            }
-        });
-        btnPwe2.setOnAction(e->{
-            if(shoot){
+            });
+        }
 
-            }else {
-                infoWindow iw = new infoWindow(false);
+        for (Button btn : pu) {
+            btn.setOnAction(e->{
+                int i = pu.indexOf(btn);
+                infoWindow iw = new infoWindow(i,true);
                 iw.show();
-            }
-        });
-        btnPwe3.setOnAction(e->{
-            if(shoot){
-
-            }else {
-                infoWindow iw = new infoWindow(false);
-                iw.show();
-            }
-        });
-        btnPpu1.setOnAction(e->{
-            infoWindow iw = new infoWindow(true);
-            iw.show();
-        });
-        btnPpu2.setOnAction(e->{
-            infoWindow iw = new infoWindow(true);
-            iw.show();
-        });
-        btnPpu3.setOnAction(e->{
-            infoWindow iw = new infoWindow(true);
-            iw.show();
-        });
+            });
+        }
 
         for (ArrayList<Button> btnArr : weOther){
             for (Button btn : btnArr) {
                 btn.setOnAction(e->{
-                    infoWindow iw = new infoWindow(false);
+                    int i = weOther.indexOf(btn);
+                    infoWindow iw = new infoWindow(i,false);
                     iw.show();
                 });
             }
@@ -872,7 +856,6 @@ public class GameJavaFX extends Application {
             setPlayerOnCell(btnCell.get(player.getRow()*4+player.getColumn()),player.getCharacter());
         }
 
-
         for (ArrayList<Button> btnArr : btnCell) {
             btnArr.get(5).setOnAction(e->{
                 if(btnCell.indexOf(btnArr) == 2 || btnCell.indexOf(btnArr) == 4 || btnCell.indexOf(btnArr) == 11){
@@ -881,9 +864,8 @@ public class GameJavaFX extends Application {
                 }
             });
         }
-
-        update();
         msg.setText(WELCOME);
+
         primaryStage.show();
     }
 
@@ -1223,6 +1205,7 @@ public class GameJavaFX extends Application {
         BackgroundImage background = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background back = new Background(background);
         btn.setBackground(back);
+        btn.setOpacity(1);
     }
 
     public void fillSkulls(GridPane grid, int skullMax, double w, double h) {
@@ -1427,6 +1410,48 @@ public class GameJavaFX extends Application {
         }
     }
 
+    public void fillPowerUp(ArrayList<Button> btnArr, VirtualPlayer p){
+
+        int i = 0;
+
+        for (String info : p.getPowerUps()) {
+
+            String name = info.split(":")[0].toLowerCase().replace(" ", "_");
+            String color = info.split(":")[1].toLowerCase().replace(" ", "_");
+
+            System.out.println(name + " " + color + "\n");
+            ObjectMapper mapper = new ObjectMapper();
+
+            File jsonFilePU = new File(PATH_PU);
+
+            try {
+
+                JsonNode rootNodePu = null;
+                try {
+                    rootNodePu = mapper.readTree(jsonFilePU);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                JsonNode chamberNodePu = rootNodePu.path(name);
+
+
+                Image imgPu = null;
+                try {
+                    imgPu = new Image(new FileInputStream(PATH_POWER_UP + name + "_" + color + ".png"), widthCard-20, heightCard-20, true, true);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+                setButtonBack(btnArr.get(i),imgPu);
+                i++;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public void fillAmmoTiles(){
 
         double w = btnCell.get(0).get(0).getPrefWidth();
@@ -1575,7 +1600,7 @@ public class GameJavaFX extends Application {
         fillSkulls(gridSkull,model.getBoard().getSkull(), widthSkull-5,heightLateral/3);
 
         for (VirtualPlayer player : model.getAllPlayers()) {
-            setPlayerOnCell(btnCell.get(player.getRow() * 4 + player.getColumn()), player.getCharacter());
+            setPlayerOnCell(btnCell.get((player.getRow() * 4)-1 + player.getColumn()+1), player.getCharacter());
         }
 
         fillAmmoTiles();
@@ -1584,6 +1609,7 @@ public class GameJavaFX extends Application {
         fillAmmo(gridPAmmo,model.getOwner().getpBoard(),widthLateral/7,heightLateral/7);
 
         fillWeapon(we,model.getOwner(),widthCard,heightCard);
+        fillPowerUp(pu,model.getOwner());
 
         for (VirtualPlayer p : model.getAllPlayers()) {
 
@@ -1633,7 +1659,7 @@ public class GameJavaFX extends Application {
 
         private boolean pu;
 
-        public infoWindow(boolean pu) {
+        public infoWindow(int i, boolean pu) {
 
             this.pu = pu;
 
@@ -1714,7 +1740,7 @@ public class GameJavaFX extends Application {
 
                 ImageView imgWe2 = null;
                 try {
-                    imgWe2 = new ImageView(new Image(new FileInputStream(PATH_WEAPON + textWe), widthScreen / 2 + 20, heightScreen + 20, true, true));
+                    imgWe2 = new ImageView(new Image(new FileInputStream(PATH_INFO + textWe), widthScreen / 2 + 20, heightScreen + 20, true, true));
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
