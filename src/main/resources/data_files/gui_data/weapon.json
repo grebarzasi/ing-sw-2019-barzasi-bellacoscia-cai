@@ -20,16 +20,16 @@
     "info": "fucile_di_precisione.png"
   },
   "Falce Protonica":{
-    "path": "falce_protonica",
-    "info": "falce_protonica"
+    "path": "falce_protonica.png",
+    "info": "falce_protonica.png"
   },
   "Raggio Traente":{
-    "path": "raggio_traente",
-    "info": "raggio_traente"
+    "path": "raggio_traente.png",
+    "info": "raggio_traente.png"
   },
   "Cannone Vortex":{
-    "path": "cannone_vortex",
-    "info": "cannone_vortex"
+    "path": "cannone_vortex.png",
+    "info": "cannone_vortex.png"
   },
   "Vulcanizzatore":{
     "path": "vulcanizzatore.png",
@@ -60,8 +60,8 @@
     "info": "fucile_laser.png"
   },
   "Spada Fotonica":{
-    "path": "spada_fotonica",
-    "info": "spada_fotonica"
+    "path": "spada_fotonica.png",
+    "info": "spada_fotonica.png"
   },
   "ZX-2":{
     "path": "zx_2.png",

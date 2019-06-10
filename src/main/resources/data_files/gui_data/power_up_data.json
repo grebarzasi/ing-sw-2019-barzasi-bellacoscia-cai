@@ -1,5 +1,5 @@
 {
-  "teleporter": {
+  "teletrasporto": {
     "color":{
       "red" :"teletrasporto_red.png",
       "yellow":"teletrasporto_yellow.png",
@@ -7,7 +7,7 @@
     },
     "info" : "teletrasporto.png"
   },
-  "tagback_granade": {
+  "granata venom": {
     "color":{
       "red" :"granata_venom_red.png",
       "yellow":"granata_venom_yellow.png",
@@ -15,7 +15,7 @@
     },
     "info" : "granata_venom.png"
   },
-  "newton": {
+  "raggio cinetico": {
     "color":{
       "red" :"raggio_cinetico_red.png",
       "yellow":"raggio_cinetico_yellow.png",
@@ -23,7 +23,7 @@
     },
     "info" : "raggio_cinetico.png"
   },
-  "targeting_scope": {
+  "mirino": {
     "color":{
       "red" :"mirino_red.png",
       "yellow":"mirino_yellow.png",
