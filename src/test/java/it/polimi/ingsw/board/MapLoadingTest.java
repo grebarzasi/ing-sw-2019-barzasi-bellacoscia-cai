@@ -23,21 +23,13 @@ public class MapLoadingTest {
     @Test
     public void testLoading(){
 
-        String selection = "large";
+        String selection = "medium1";
 
         Square[][] squareMatrix = new Square[height][width];
 
         loadTerrain(selection, squareMatrix);
 
-
-        assertEquals(squareMatrix[0][0].getRoom().getColor(),"red");
-        assertTrue(squareMatrix[0][0] instanceof NonSpawnSquare);
-        assertTrue(squareMatrix[0][2] instanceof SpawnSquare);
-        assertTrue(squareMatrix[2][2] instanceof NonSpawnSquare);
-
-        assertNull(squareMatrix[0][0].getNorth());
-        assertEquals(squareMatrix[0][0].getEast(),squareMatrix[0][1]);
-        assertEquals(squareMatrix[0][0].getSouth(),squareMatrix[2][0].getNorth());
+        assertEquals("black",squareMatrix[2][0].getRoom().getColor());
 
 
     }

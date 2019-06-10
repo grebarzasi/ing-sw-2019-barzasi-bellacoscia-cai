@@ -39,14 +39,14 @@ class BoardTest {
 
 
 
-                    if(((NonSpawnSquare) fieldOfFire.getMap().getSquareMatrix()[row][column]).getDrop().hasPowerup()) {
+                    if(((NonSpawnSquare) fieldOfFire.getMap().getSquareMatrix()[row][column]).getDrop() != null &&  ((NonSpawnSquare) fieldOfFire.getMap().getSquareMatrix()[row][column]).getDrop().hasPowerup()) {
 
                         //if it is a drop with power up it has 2 ammunition
 
                         assertEquals(2, ((NonSpawnSquare) fieldOfFire.getMap().getSquareMatrix()[row][column]).getDrop().getContent().getRed() +
                                 ((NonSpawnSquare) fieldOfFire.getMap().getSquareMatrix()[row][column]).getDrop().getContent().getBlue() +
                                 ((NonSpawnSquare) fieldOfFire.getMap().getSquareMatrix()[row][column]).getDrop().getContent().getYellow());
-                    }else{
+                    }else if (((NonSpawnSquare) fieldOfFire.getMap().getSquareMatrix()[row][column]).getDrop() != null){
 
                         //if not it should have 3 ammunition
 

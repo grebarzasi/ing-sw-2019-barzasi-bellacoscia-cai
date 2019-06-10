@@ -30,7 +30,7 @@ import java.util.HashMap;
 
 public class GameInitializer extends Application {
 
-    private static final String MAP_NAME="medium1";
+    private static final String MAP_NAME="large";
     private VirtualModel vmodel;
 
     public VirtualModel getVmodel() {

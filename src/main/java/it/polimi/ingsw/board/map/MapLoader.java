@@ -73,10 +73,6 @@ public class MapLoader {
                     squareMatrix[row][column].setRoom(parserList[i].getRoom());
                 }
 
-                if(parserList[i].getRoom().equals("black")){
-                    squareMatrix[row][column] = null;
-                }
-
                 i++;
 
             }

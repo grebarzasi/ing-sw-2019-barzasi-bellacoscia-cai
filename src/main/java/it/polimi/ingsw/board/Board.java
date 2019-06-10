@@ -76,7 +76,7 @@ public class Board extends Subject {
         for(row = 0 ; row < height; row ++){
             for(column = 0; column < width ; column++){
 
-                if(!this.map.getSquareMatrix()[row][column].isSpawn()){
+                if(!this.map.getSquareMatrix()[row][column].isSpawn() && !this.map.getSquareMatrix()[row][column].getRoom().getColor().equals("black")){
 
                     ((NonSpawnSquare)this.map.getSquareMatrix()[row][column]).setDrop((AmmoLot)this.ammoDeck.fetch());
 
@@ -124,9 +124,11 @@ public class Board extends Subject {
 
                 //if the square is not a respawn spot and if its drop has been collected
                 if (!this.getMap().getSquareMatrix()[row][column].isSpawn() && this.getMap().getSquareMatrix()[row][column].getRoom().getColor() != "black") {
+
                     //refill the drop
                     ((NonSpawnSquare) this.getMap().getSquareMatrix()[row][column]).setDrop((AmmoLot)this.ammoDeck.fetch());
                 }
+
             }
         }
     }
