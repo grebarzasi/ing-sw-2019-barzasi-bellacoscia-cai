@@ -50,7 +50,7 @@ public class PlayerTest {
         for (i = 0; i < 3; i++) {
 
 
-            GameModel empire = new GameModel(new ArrayList<>(), null, new Board("small"));
+            GameModel empire = new GameModel(new ArrayList<>(), "small", null);
             Board alderaan = empire.getBoard();
             Player luke = new Player("Luke", "Jedi");
             luke.setModel(empire);
@@ -98,7 +98,7 @@ public class PlayerTest {
    @Test
     public void consecutivePicking(){
 
-        GameModel empire = new GameModel(new ArrayList<>(), null, new Board("large"));
+        GameModel empire = new GameModel(new ArrayList<>(), "large", null);
         Board alderaan = empire.getBoard();
         Player luke = new Player("Luke", "Jedi");
         luke.setModel(empire);

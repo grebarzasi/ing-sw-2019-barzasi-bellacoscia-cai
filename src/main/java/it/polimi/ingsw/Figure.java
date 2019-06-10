@@ -94,7 +94,7 @@ public abstract class Figure {
     }
 
     public Figure() {
-        super();
+
     }
 
     public Square getPosition(){

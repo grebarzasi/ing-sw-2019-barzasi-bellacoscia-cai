@@ -201,6 +201,67 @@ public class Lobby {
         }
         return pref;
     }
+
+
+    public boolean isHasStarted() {
+        return hasStarted;
+    }
+
+    public boolean timerHasStarted() {
+        return hasTimerStarted;
+    }
+
+    public void setHasTimerStarted(boolean hasTimerStarted) {
+        this.hasTimerStarted = hasTimerStarted;
+    }
+
+    public Timer getTimer() {
+        return timer;
+    }
+
+    public void setTimer(Timer timer) {
+        this.timer = timer;
+    }
+
+    public int getDELAY() {
+        return DELAY;
+    }
+
+    public int getMapPref() {
+        return mapPref;
+    }
+
+    public void setMapPref(int mapPref) {
+        this.mapPref = mapPref;
+    }
+
+    public int getKillPref() {
+        return killPref;
+    }
+
+    public void setKillPref(int killPref) {
+        this.killPref = killPref;
+    }
+
+    public boolean hasTerminatorPref() {
+        return terminatorPref;
+    }
+
+    public void setTerminatorPref(boolean terminatorPref) {
+        this.terminatorPref = terminatorPref;
+    }
+
+    public boolean hasFinalFrenzy() {
+        return finalFrenzyPref;
+    }
+
+    public void setFinalFrenzyPref(boolean finalFrenzyPref) {
+        this.finalFrenzyPref = finalFrenzyPref;
+    }
+
+    public int getMaxPlayer() {
+        return maxPlayer;
+    }
 }
 
 

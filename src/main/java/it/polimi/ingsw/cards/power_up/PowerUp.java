@@ -9,7 +9,7 @@ import it.polimi.ingsw.cards.Card;
  *
  * @author Carlo Bellacoscia
  */
-public abstract class PowerUp extends Card {
+public class PowerUp extends Card {
 
     private Ammo ammoOnDiscard;
 

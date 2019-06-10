@@ -141,11 +141,12 @@ public class GameInitializer extends Application {
         p4.setPowerupList(puList4);
 
         //BOARD
+        /*
         p1.setPersonalBoard(new PlayerBoard(a.getOwner()));
         p2.setPersonalBoard(new PlayerBoard(b.getOwner()));
         p3.setPersonalBoard(new PlayerBoard(c.getOwner()));
         p4.setPersonalBoard(new PlayerBoard(d.getOwner()));
-
+*/
         //damage & marks
         Token t1 = new Token(p1);
         Token t2 = new Token(p2);

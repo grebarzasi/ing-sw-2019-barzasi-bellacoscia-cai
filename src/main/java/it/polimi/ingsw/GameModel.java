@@ -37,11 +37,11 @@ public class GameModel {
 
     }
 
-    public GameModel(ArrayList<Player> playerList, Player currentPlayer, Board board) {
+    public GameModel(ArrayList<Player> playerList, String map, Controller controller) {
 
         this.playerList = playerList;
-        this.currentPlayer = currentPlayer;
-        this.board = board;
+        this.board = new Board(map);
+        this.controller = controller;
 
         for (Player p : this.playerList) {
             p.setModel(this);

@@ -35,20 +35,7 @@ public class PowerupDeckBuilder {
                 String puName = rootNode.path(puKey).path("name").asText();
                 ArrayList<Ammo> occList = puOcc(rootNode.path(puKey).path("occ"));
                 for(Ammo a : occList) {
-                   switch (puKey) {
-                        case "teleporter":
-                            usablePU.add( new Teleporter(a, puName));
-                            break;
-                        case "newton":
-                            usablePU.add(new Newton(a, puName));
-                            break;
-                        case "tagback_granade":
-                            usablePU.add(new TagbackGrenade(a, puName));
-                            break;
-                        case "targeting_scope":
-                            usablePU.add(new TargetingScope(a, puName));
-                            break;
-                    }
+                    usablePU.add(new PowerUp(a, puName));
                 }
             }
             return new Deck(usablePU);

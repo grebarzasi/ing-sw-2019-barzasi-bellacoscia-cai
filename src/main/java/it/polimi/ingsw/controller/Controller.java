@@ -4,6 +4,7 @@ import it.polimi.ingsw.*;
 import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.Ammo;
+import it.polimi.ingsw.connection.socket.ClientThreadSocket;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -50,6 +51,7 @@ public class Controller {
 
 
     private boolean hasFrenzy;
+    private boolean hasBot;
     private GameModel model;
     private Lobby lobby;
     private View view;
@@ -59,7 +61,22 @@ public class Controller {
     public Controller(Lobby lobby) {
 
         this.lobby = lobby;
-        this.model = new GameModel(lobby, this);
+        ArrayList<Player> playerList = new ArrayList<>();
+
+        for(ClientThreadSocket s: lobby.getJoinedPlayers()){
+            playerList.add(s.getOwner());
+        }
+
+        String map = intToMap(lobby.getMapPref());
+
+
+
+        this.model = new GameModel(playerList,map, this);
+
+        this.hasFrenzy = lobby.hasFinalFrenzy();
+        this.hasBot = this.lobby.hasTerminatorPref();
+        this.getModel().getBoard().getTrack().setSkullMax(this.lobby.getKillPref());
+
 
         this.asBot = new AsBot(this);
         this.choosingMove = new ChoosingMove(this);
@@ -392,5 +409,28 @@ public class Controller {
 
     public Player getCurrentPlayer() {
         return this.model.getCurrentPlayer();
+    }
+
+    public String intToMap(int i){
+
+        String map = "large";
+
+        switch(i){
+            case 4:
+                map = "small";
+                break;
+            case 3:
+                map = "medium2";
+                break;
+            case 2:
+                map = "medium1";
+                break;
+            case 1:
+                map = "large";
+                break;
+
+        }
+
+        return map;
     }
 }
