@@ -12,6 +12,8 @@ import java.util.*;
 
 public class PlayerBoard {
 
+    private static final int[] points = {8,6,4,2,1,1};
+
     private Figure owner;
 
         //received damage tokens
@@ -44,12 +46,12 @@ public class PlayerBoard {
         this.mark = new ArrayList<>();
         this.ammoInventory = new Ammo(3,3,3);
 
-        this.pointVec[0]=8;
-        this.pointVec[1]=6;
-        this.pointVec[2]=4;
-        this.pointVec[3]=2;
-        this.pointVec[4]=1;
-        this.pointVec[5]=1;
+        this.pointVec[0]=points[0];
+        this.pointVec[1]=points[1];
+        this.pointVec[2]=points[2];
+        this.pointVec[3]=points[3];
+        this.pointVec[4]=points[4];
+        this.pointVec[5]=points[5];
 
     }
 

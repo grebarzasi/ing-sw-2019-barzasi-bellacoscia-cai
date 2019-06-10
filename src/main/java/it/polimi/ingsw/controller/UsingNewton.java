@@ -48,6 +48,7 @@ public class UsingNewton implements ControllerState {
 
         Square target = this.controller.getView().showPossibleMoves(options);
         choice.setPosition(target);
+        this.controller.getModel().getBoard().getPowerupDeck().getDiscarded().add(this.using);
 
         this.controller.setCurrentState(this.controller.choosingMove);
     }

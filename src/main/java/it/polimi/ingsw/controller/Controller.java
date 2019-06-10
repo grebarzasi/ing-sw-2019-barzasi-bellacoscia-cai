@@ -110,6 +110,10 @@ public class Controller {
         this.choosingMove.command();
     }
 
+    public void dereaseMoveLeft(){
+        this.setMovesLeft(this.getMovesLeft() -1 );
+    }
+
     /**
      * ends a turn
      * adds tokens to the killshot track

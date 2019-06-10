@@ -29,6 +29,7 @@ public class PickingWeapon implements ControllerState {
 
         if (this.controller.getCurrentPlayer().getWeaponsList().size() < 3) {
             this.controller.getCurrentPlayer().getWeaponsList().add(choice);
+            this.controller.dereaseMoveLeft();
         } else {
             this.discardWeapon(choice);
         }
@@ -47,7 +48,8 @@ public class PickingWeapon implements ControllerState {
         this.controller.getCurrentPlayer().setWeaponsList(options);
 
         ((SpawnSquare) this.controller.getCurrentPlayer().getPosition()).getArmory().getWeaponList().add(choice);
-        this.controller.setCurrentState(this.controller.choosingMove);
+        this.controller.dereaseMoveLeft();
+        this.controller.goBack();
 
     }
 }

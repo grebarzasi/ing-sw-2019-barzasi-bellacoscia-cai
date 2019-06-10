@@ -32,6 +32,7 @@ public class Picking implements ControllerState{
 
         if (choice.isSpawn()) {
             this.controller.setCurrentState(this.controller.pickingWeapon);
+            this.controller.getCurrentState().command();
         } else {
             this.controller.getCurrentPlayer().pickAmmo();
             if (this.controller.getCurrentPlayer().getPowerupList().size() == max) {
@@ -59,6 +60,7 @@ public class Picking implements ControllerState{
             options.remove(discarded);
             this.controller.getCurrentPlayer().getPowerupList().clear();
             this.controller.getCurrentPlayer().getPowerupList().addAll(options);
+            this.controller.dereaseMoveLeft();
 
         }
 
