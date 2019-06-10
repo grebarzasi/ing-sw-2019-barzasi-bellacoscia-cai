@@ -123,7 +123,7 @@ public class Board extends Subject {
             for (int column = 0; column < width; column++) {
 
                 //if the square is not a respawn spot and if its drop has been collected
-                if (!this.getMap().getSquareMatrix()[row][column].isSpawn() && this.getMap().getSquareMatrix()[row][column] == null) {
+                if (!this.getMap().getSquareMatrix()[row][column].isSpawn() && this.getMap().getSquareMatrix()[row][column].getRoom().getColor() != "black") {
                     //refill the drop
                     ((NonSpawnSquare) this.getMap().getSquareMatrix()[row][column]).setDrop((AmmoLot)this.ammoDeck.fetch());
                 }
