@@ -827,7 +827,7 @@ public class GameJavaFX extends Application {
         for (Button btn : we) {
             btn.setOnAction(e->{
                 int i = we.indexOf(btn);
-                infoWindow iw = new infoWindow(i,false);
+                infoWindow iw = new infoWindow(model.getOwner(),i,false);
                 iw.show();
             });
         }
@@ -835,20 +835,9 @@ public class GameJavaFX extends Application {
         for (Button btn : pu) {
             btn.setOnAction(e->{
                 int i = pu.indexOf(btn);
-                infoWindow iw = new infoWindow(i,true);
+                infoWindow iw = new infoWindow(model.getOwner(),i,true);
                 iw.show();
             });
-        }
-
-        for (ArrayList<Button> btnArr : weOther){
-            for (Button btn : btnArr) {
-                btn.setOnAction(e->{
-                    int i = weOther.indexOf(btn);
-                    infoWindow iw = new infoWindow(i,false);
-                    iw.show();
-                });
-            }
-
         }
 
         btnDeck.setOnAction(e->{System.out.println("ok");});
@@ -1612,6 +1601,8 @@ public class GameJavaFX extends Application {
         fillWeapon(we,model.getOwner(),widthCard,heightCard);
         fillPowerUp(pu,model.getOwner());
 
+
+
         for (VirtualPlayer p : model.getAllPlayers()) {
 
             if(p.equals(model.getOwner())){
@@ -1623,30 +1614,35 @@ public class GameJavaFX extends Application {
                     fillBoard(gridOtherBoard1,p,widthBoard,heightPBoard/5-10, heightPBoard/4-10, heightPBoard/5-10);
                     fillOtherAmmo(gridOtherAmmo1,p.getpBoard(),widthLateral/7,heightLateral/7);
                     fillWeapon(weOther1,p,widthOCard/3.7,heightOtherWeapon);
+                    setWeapon(p,weOther1);
                     break;
                 }
                 case("red"):{
                     fillBoard(gridOtherBoard2,p,widthBoard,heightPBoard/5-10, heightPBoard/4-10, heightPBoard/5-10);
                     fillOtherAmmo(gridOtherAmmo2,p.getpBoard(),widthLateral/7,heightLateral/7);
                     fillWeapon(weOther2,p,widthOCard/3.7,heightOtherWeapon);
+                    setWeapon(p,weOther2);
                     break;
                 }
                 case("blue"):{
                     fillBoard(gridOtherBoard3,p,widthBoard,heightPBoard/5-10, heightPBoard/4-10, heightPBoard/5-10);
                     fillOtherAmmo(gridOtherAmmo3,p.getpBoard(),widthLateral/7,heightLateral/7);
                     fillWeapon(weOther3,p,widthOCard/3.7,heightOtherWeapon);
+                    setWeapon(p,weOther3);
                     break;
                 }
                 case("green"):{
                     fillBoard(gridOtherBoard4,p,widthBoard,heightPBoard/5-10, heightPBoard/4-10, heightPBoard/5-10);
                     fillOtherAmmo(gridOtherAmmo4,p.getpBoard(),widthLateral/7,heightLateral/7);
                     fillWeapon(weOther4,p,widthOCard/3.7,heightOtherWeapon);
+                    setWeapon(p,weOther4);
                     break;
                 }
                 case("grey"):{
                     fillBoard(gridOtherBoard5,p,widthBoard,heightPBoard/5-10, heightPBoard/4-10, heightPBoard/5-10);
                     fillOtherAmmo(gridOtherAmmo5,p.getpBoard(),widthLateral/7,heightLateral/7);
                     fillWeapon(weOther5,p,widthOCard/3.7,heightOtherWeapon);
+                    setWeapon(p,weOther5);
                     break;
                 }
             }
@@ -1656,18 +1652,32 @@ public class GameJavaFX extends Application {
 
     }
 
+    private void setWeapon(VirtualPlayer p, ArrayList<Button> btnArr) {
+        for (Button btn : btnArr) {
+            btn.setOnAction(e->{
+                int i = btnArr.indexOf(btn);
+                infoWindow iw = new infoWindow(p,i,false);
+                iw.show();
+            });
+        }
+    }
+
     public class infoWindow extends Stage {
 
         private boolean pu;
 
-        public infoWindow(int i, boolean pu) {
+        public infoWindow(VirtualPlayer p,int i, boolean pu) {
 
             this.pu = pu;
+
+            /*
 
             //hardcoded test.
             Ammo a = new Ammo(0, 1, 0);
             Weapon w = new Weapon("ZX-2", a);
             Teleporter t = new Teleporter(a, "teleporter");
+
+             */
 
 
             String weapon = null;
@@ -1712,6 +1722,8 @@ public class GameJavaFX extends Application {
 
             ObjectMapper mapper = new ObjectMapper();
 
+
+
             if (!pu) {
                 File jsonFileWe = new File(PATH_WE);
                 try {
@@ -1723,7 +1735,7 @@ public class GameJavaFX extends Application {
                         e.printStackTrace();
                     }
 
-                    JsonNode chamberNodeWe = rootNodeWe.path(w.getName());
+                    JsonNode chamberNodeWe = rootNodeWe.path(p.getWeapons().get(i).split(":")[0]);
 
                     weapon = chamberNodeWe.path("path").asText();
                     textWe = chamberNodeWe.path("info").asText();
@@ -1749,6 +1761,7 @@ public class GameJavaFX extends Application {
                 grid.add(imgWe, 0, 0);
                 grid.add(imgWe2, 1, 0);
 
+
             } else if(pu){
 
 
@@ -1763,20 +1776,15 @@ public class GameJavaFX extends Application {
                         e.printStackTrace();
                     }
 
-                    JsonNode chamberNodePu = rootNodePu.path(t.getName());
+                    JsonNode chamberNodePu = rootNodePu.path(p.getPowerUps().get(i).split(":")[0].toLowerCase());
 
-                    Ammo r = new Ammo(1, 0, 0);
-                    Ammo b = new Ammo(0, 1, 0);
-                    Ammo y = new Ammo(0, 0, 1);
-
-
-                    if(t.getAmmoOnDiscard().getRed() == r.getRed()){
+                    if(p.getPowerUps().get(i).split(":")[1].equals("red")){
                         powerup = chamberNodePu.path("color").path("red").asText();
                     } else
-                        if (t.getAmmoOnDiscard().getBlue() == b.getBlue()){
+                        if (p.getPowerUps().get(i).split(":")[1].equals("blue")){
                             powerup = chamberNodePu.path("color").path("blue").asText();
                         }else
-                            if (t.getAmmoOnDiscard().getYellow() == y.getYellow()){
+                            if (p.getPowerUps().get(i).split(":")[1].equals("yellow")){
                             powerup = chamberNodePu.path("color").path("yellow").asText();
                         }
                     textPu = chamberNodePu.path("info").asText();
