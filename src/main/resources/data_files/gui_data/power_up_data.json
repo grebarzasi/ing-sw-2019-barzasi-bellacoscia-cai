@@ -1,34 +1,34 @@
 {
   "teleporter": {
     "color":{
-      "red" :"teleporter_red.png",
-      "yellow":"teleporter_yellow.png",
-      "blue": "teleporter_blue.png"
+      "red" :"teletrasporto_red.png",
+      "yellow":"teletrasporto_yellow.png",
+      "blue": "teletrasporto_blue.png"
     },
     "info" : "teletrasporto.png"
   },
   "tagback_granade": {
     "color":{
-      "red" :"tagback_granade_red.png",
-      "yellow":"tagback_granade_yellow.png",
-      "blue": "tagback_granade_blue.png"
+      "red" :"granata_venom_red.png",
+      "yellow":"granata_venom_yellow.png",
+      "blue": "granata_venom_blue.png"
     },
     "info" : "granata_venom.png"
   },
   "newton": {
     "color":{
-      "red" :"newton_red.png",
-      "yellow":"newton_yellow.png",
-      "blue": "newton_blue.png"
+      "red" :"raggio_cinetico_red.png",
+      "yellow":"raggio_cinetico_yellow.png",
+      "blue": "raggio_cinetico_blue.png"
     },
     "info" : "raggio_cinetico.png"
   },
   "targeting_scope": {
     "color":{
-      "red" :"targeting_scope_red.png",
-      "yellow":"targeting_scope_yellow.png",
-      "blue": "targeting_scope_blue.png"
+      "red" :"mirino_red.png",
+      "yellow":"mirino_yellow.png",
+      "blue": "mirino_blue.png"
     },
-    "info" : "teletrasporto.png"
+    "info" : "mirino.png"
   }
 }

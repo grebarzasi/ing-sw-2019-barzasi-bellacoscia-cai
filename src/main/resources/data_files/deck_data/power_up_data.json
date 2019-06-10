@@ -1,7 +1,7 @@
 {
     "teleporter": {
       "key": 0,
-      "name": "Teleporter",
+      "name": "Teletrasporto",
       "occ": {
         "blue": 2,
         "red": 2,
@@ -10,7 +10,7 @@
     },
     "newton": {
       "key": 1,
-      "name": "Newton",
+      "name": "Raggio Cinetico",
       "occ": {
         "blue": 2,
         "red": 2,
@@ -19,7 +19,7 @@
     },
     "tagback_granade": {
       "key": 2,
-      "name": "Tagback Grenade",
+      "name": "Granata Venom",
       "occ": {
         "blue": 2,
         "red": 2,
@@ -28,7 +28,7 @@
     },
     "targeting_scope": {
       "key": 3,
-      "name": "Targeting Scope",
+      "name": "Mirino",
       "occ": {
         "blue": 2,
         "red": 2,
