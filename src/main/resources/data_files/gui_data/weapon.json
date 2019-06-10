@@ -1,86 +1,86 @@
 {
   "Distruttore": {
-    "path": "AD_weapons_IT_0221.png",
+    "path": "distruttore.png",
     "info": "distruttore.png"
   },
   "Mitragliatrice":{
-    "path": "AD_weapons_IT_0220.png",
+    "path": "mitragliatrice.png",
     "info": "mitragliatrice.png"
   },
   "Torpedine":{
-    "path": "AD_weapons_IT_0216.png",
+    "path": "torpedine.png",
     "info": "torpedine.png"
   },
   "Fucile a plasma":{
-    "path": "AD_weapons_IT_0219.png",
+    "path": "fucile_al_plasma.png",
     "info": "fucile_al_plasma.png"
   },
   "Fucile di precisione":{
-    "path": "AD_weapons_IT_0218.png",
+    "path": "fucile_di_precisione.png",
     "info": "fucile_di_precisione.png"
   },
   "Falce Protonica":{
-    "path": "AD_weapons_IT_0222.png",
+    "path": "falce_protonica",
     "info": "falce_protonica"
   },
   "Raggio Traente":{
-    "path": "AD_weapons_IT_0217.png",
+    "path": "raggio_traente",
     "info": "raggio_traente"
   },
   "Cannone Vortex":{
-    "path": "AD_weapons_IT_029.png",
+    "path": "cannone_vortex",
     "info": "cannone_vortex"
   },
   "Vulcanizzatore":{
-    "path": "AD_weapons_IT_0214.png",
+    "path": "vulcanizzatore.png",
     "info": "vulcanizzatore.png"
   },
   "Razzo Termico":{
-    "path": "AD_weapons_IT_0210.png",
+    "path": "razzo_termico.png",
     "info": "razzo_termico.png"
   },
   "Raggio Solare":{
-    "path": "AD_weapons_IT_0215.png",
+    "path": "raggio_solare.png",
     "info": "raggio_solare.png"
   },
   "Lanciafiamme":{
-    "path": "AD_weapons_IT_0213.png",
+    "path": "lanciafiamme.png",
     "info": "lanciafiamme.png"
   },
   "Lanciagranate":{
-    "path": "AD_weapons_IT_0212.png",
+    "path": "lanciagranate.png",
     "info": "lanciagranate.png"
   },
   "Lanciarazzi":{
-    "path": "AD_weapons_IT_0211.png",
+    "path": "lanciarazzi.png",
     "info": "lanciarazzi.png"
   },
   "Fucile laser":{
-    "path": "/AD_weapons_IT_026.png/",
+    "path": "fucile_laser.png",
     "info": "fucile_laser.png"
   },
   "Spada Fotonica":{
-    "path": "AD_weapons_IT_023.png",
+    "path": "spada_fotonica",
     "info": "spada_fotonica"
   },
   "ZX-2":{
-    "path": "AD_weapons_IT_027.png",
+    "path": "zx_2.png",
     "info": "zx_2.png"
   },
   "Fucile a pompa":{
-    "path": "src/main/resources/images/weapon/AD_weapons_IT_025",
+    "path": "fucile_a_pompa.png",
     "info": "fucile_a_pompa.png"
   },
   "Cyberguanto":{
-    "path": "AD_weapons_IT_024.png",
+    "path": "cyberguanto.png",
     "info": "cyberguanto.png"
   },
   "Onda d'urto":{
-    "path": "AD_weapons_IT_028.png",
-    "info": "onda_durto.png"
+    "path": "onda_d'urto.png",
+    "info": "onda_d'urto.png"
   },
   "Martello Ionico":{
-    "path": "AD_weapons_IT_022.png",
+    "path": "martello_ionico.png",
     "info": "martello_ionico.png"
   }
 }
