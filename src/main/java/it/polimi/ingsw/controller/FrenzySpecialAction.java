@@ -1,5 +1,10 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.board.map.Square;
+import it.polimi.ingsw.cards.weapon.Weapon;
+
+import java.util.ArrayList;
+
 public class FrenzySpecialAction implements ControllerState {
 
 
@@ -9,7 +14,24 @@ public class FrenzySpecialAction implements ControllerState {
     @Override
     public void command() {
 
+        ArrayList<Square> options = this.controller.canGo(this.controller.getCurrentPlayer(), this.range);
 
+        Square choice = this.controller.getView().showPossibleMoves(options);
+        this.controller.getCurrentPlayer().setPosition(choice);
+
+        while(this.controller.getView().showBoolean("Vuoi sfruttare la ricarica?")){
+
+            ArrayList<Weapon> reloadOptions = this.controller.getCurrentPlayer().getWeaponsList();
+            Weapon reloadChoice = this.controller.getView().showWeapon(reloadOptions);
+            boolean check = reloadChoice.reload();
+
+            if (check == false) {
+                this.controller.getView().displayMessage("Non possiedi abbastanza risorse per caricare l'arma");
+            }
+
+        }
+
+        //TODO shooting part
 
     }
 
