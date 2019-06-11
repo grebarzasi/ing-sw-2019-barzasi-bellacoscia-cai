@@ -45,7 +45,8 @@ public class Spawning implements ControllerState {
                 options.add((PowerUp) this.controller.getModel().getBoard().getPowerupDeck().fetch());
             }
 
-            spawnOnChoice(options);
+            PowerUp choice = spawnOnChoice(options);
+            this.controller.getCurrentPlayer().addPowerUp(choice);
 
         }
 
@@ -56,7 +57,7 @@ public class Spawning implements ControllerState {
      * @param options the list of power up options
      */
 
-    private void spawnOnChoice(ArrayList<PowerUp> options){
+    private PowerUp spawnOnChoice(ArrayList<PowerUp> options){
 
         PowerUp choice = this.controller.getView().showPowerUp(options);
 
@@ -68,6 +69,8 @@ public class Spawning implements ControllerState {
         this.controller.getCurrentPlayer().setPosition(spawnPoint);
         this.controller.update();
         this.controller.goBack();
+
+        return choice;
 
     }
 
