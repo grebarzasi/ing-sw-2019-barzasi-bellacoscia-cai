@@ -47,6 +47,7 @@ public class Spawning implements ControllerState {
 
             PowerUp choice = spawnOnChoice(options);
             this.controller.getCurrentPlayer().addPowerUp(choice);
+            this.controller.update();
 
         }
 
