@@ -112,7 +112,7 @@ public class CliGame implements ViewClient {
      * @param args the moves to show
      * @return the chosen one
      */
-    public String showAction(ArrayList<String> args) {
+    public String showActions(ArrayList<String> args) {
         return genericChoice(args,CHOOSE_ACTION_Q,CHOOSE_ACTION_ERR);
     }
 
@@ -189,11 +189,6 @@ public class CliGame implements ViewClient {
      * @param args the moves to show
      * @return the chosen one
      */
-    @Override
-    public String showActions(ArrayList<String> args) {
-        return null;
-    }
-
     /**
      * Displays a message and makes the user make a boolean choice
      *
