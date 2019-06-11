@@ -17,6 +17,8 @@ import java.util.Set;
 
 public class GameModel {
 
+    private int frenzyTurn;
+
     private ArrayList<Player> playerList=new ArrayList<>();
 
     private Player currentPlayer;
@@ -45,6 +47,7 @@ public class GameModel {
         this.board = new Board(map);
         this.controller = controller;
         this.currentPlayer = this.playerList.get(0);
+        this.frenzyTurn = 0;
 
         for (Player p : this.playerList) {
             p.setModel(this);
@@ -159,5 +162,13 @@ public class GameModel {
 
     public void setTurn(int turn) {
         this.turn = turn;
+    }
+
+    public int getFrenzyState() {
+        return frenzyTurn;
+    }
+
+    public void setFrenzyState(int frenzyTurn) {
+        this.frenzyTurn = frenzyTurn;
     }
 }

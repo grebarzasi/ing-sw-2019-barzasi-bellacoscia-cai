@@ -169,15 +169,20 @@ public class Controller {
 
                     if(this.hasFrenzy){
 
-                        this.model.setFrenzy(true);
+                        this.startFrenzy();
                         this.getCurrentPlayer().setStartedFrenzy(true);
                         this.model.getBoard().refillSquares();
+                        if(this.model.getFrenzyState() == this.model.getPlayerList().size()){
+                            /*****************GAME_ENDS********************/
+                            this.endGame();
+                            /*****************GAME_ENDS********************/
+                        }
 
 
                     }else if(!this.hasFrenzy){
-
-                        this.view.displayLeaderboard();
-
+                        /*****************GAME_ENDS********************/
+                        this.endGame();
+                        /*****************GAME_ENDS********************/
                     }
 
                 }
@@ -199,7 +204,6 @@ public class Controller {
 
         this.model.setTurn(this.model.getTurn() + 1);
 
-
     }
 
 
@@ -213,6 +217,10 @@ public class Controller {
 
         this.view.displayLeaderboard();
 
+    }
+
+    public void startFrenzy(){
+        this.model.setFrenzy(true);
     }
 
 

@@ -36,6 +36,7 @@ public class CliBoard {
     }
 
     public void draw(){
+        armory.clear();
         if(all.isEmpty())
             loadMap();
         cellsPlnum=12;

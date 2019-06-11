@@ -39,10 +39,10 @@ public class CLiBoardStuff {
 
     public static final String WEAPON_CENSORED = "=";
 
-    public static final String BOARD_LINE =WHITE+ "───────────────┬─────────────╫──────────────────────────┤";
-    public static final String BOARD_SEP =WHITE+"├"+BOARD_LINE;
-    public static final String BOARD_LEFT = WHITE+"│";
-    public static final String BOARD_BOTTOM =WHITE+ "└─────────────────────────────╨──────────────────────────┘";
+    public static final String BOARD_LINE =WHITE+    "───────────────┬─────────────╫──────────────────────────┤";
+    public static final String BOARD_SEP =WHITE+     "├"+BOARD_LINE;
+    public static final String BOARD_LEFT = WHITE+   "│";
+    public static final String BOARD_BOTTOM =WHITE+  "└─────────────────────────────╨──────────────────────────┘";
 
 
     public static final int CELLS_NUM =12;
