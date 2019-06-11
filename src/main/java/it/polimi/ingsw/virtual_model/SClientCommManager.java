@@ -18,10 +18,11 @@ public class SClientCommManager extends Thread{
     public BufferedReader i;
     private ViewClient v;
 
-    public SClientCommManager(SClient s){
+    public SClientCommManager(SClient s,ViewClient v){
         this.s=s;
         this.o=s.getOutput();
         this.i=s.getInput();
+        this.v=v;
     }
 
     public void listen(){
@@ -112,6 +113,7 @@ public class SClientCommManager extends Thread{
 
     @Override
     public void run() {
-        listen();
+        while(true)
+            listen();
     }
 }

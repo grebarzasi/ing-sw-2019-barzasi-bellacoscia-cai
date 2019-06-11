@@ -35,6 +35,7 @@ public class UpdateParser {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        model.setUpdated(true);
     }
 
     public void parsePlayers(JsonNode node){

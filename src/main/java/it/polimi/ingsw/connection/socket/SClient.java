@@ -2,6 +2,7 @@ package it.polimi.ingsw.connection.socket;
 
 
 import it.polimi.ingsw.connection.ConnectionTech;
+import it.polimi.ingsw.virtual_model.SClientCommManager;
 
 import java.io.*;
 import java.net.Socket;
@@ -19,21 +20,19 @@ public class SClient extends ConnectionTech {
     private Socket server;
     private BufferedReader in;
     private PrintWriter out;
-
+    private SClientCommManager commManager;
     /**
      * Initialize connection and input and output streams
      */
         public void run() {
             try {
                 System.out.println("Connecting");
-
                 this.server = new Socket(super.getIp(), super.getPort());
                 System.out.println("Connection established\n");
                 this.in = new BufferedReader(new InputStreamReader(server.getInputStream()));
                 this.out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(server.getOutputStream())), true);
             }catch(IOException e){
                 System.err.println(CONNECTION_ERR);
-
             }
         }
 
@@ -48,4 +47,11 @@ public class SClient extends ConnectionTech {
         return in;
     }
 
+    public SClientCommManager getCommManager() {
+        return commManager;
+    }
+
+    public void setCommManager(SClientCommManager commManager) {
+        this.commManager = commManager;
+    }
 }

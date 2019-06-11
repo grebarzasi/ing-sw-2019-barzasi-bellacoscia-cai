@@ -7,6 +7,7 @@ import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.connection.socket.SClientHandler;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**

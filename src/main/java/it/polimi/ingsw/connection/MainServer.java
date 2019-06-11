@@ -34,6 +34,7 @@ public class MainServer {
 
     public void startGame() {
         contr= new Controller(lobby);
+        contr.update();
     }
 
 
