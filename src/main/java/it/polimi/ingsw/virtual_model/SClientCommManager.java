@@ -8,7 +8,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import static it.polimi.ingsw.connection.ConnMessage.*;
-
 /**
  * @author Gregorio Barzasi
  */
@@ -17,6 +16,7 @@ public class SClientCommManager extends Thread{
     public PrintWriter o;
     public BufferedReader i;
     private ViewClient v;
+    private boolean goOn=true;
 
     public SClientCommManager(SClient s,ViewClient v){
         this.s=s;
@@ -29,9 +29,10 @@ public class SClientCommManager extends Thread{
         String msg;
         String args;
         try {
-        while(true){
+        while(goOn){
 
             msg= i.readLine();
+            System.out.println(msg);
 
             switch (msg){
                 case PING:
@@ -86,14 +87,13 @@ public class SClientCommManager extends Thread{
                     o.println(AKN);
                     args=i.readLine();
                     v.updateModel(args);
+                    o.println(AKN);
                     break;
             }
 
-            break;
-
         }
            } catch (IOException e) {
-               e.printStackTrace();
+            System.err.print(CONNECTION_ERR);
         }
     }
 
@@ -113,7 +113,6 @@ public class SClientCommManager extends Thread{
 
     @Override
     public void run() {
-        while(true)
             listen();
     }
 }

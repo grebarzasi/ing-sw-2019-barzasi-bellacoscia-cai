@@ -13,28 +13,17 @@ public class VirtualModel {
 
     private ArrayList<VirtualPlayer> allPlayers;
     private VirtualBoard board;
-    private ConnectionTech conn;
     private VirtualPlayer owner;
     private VirtualPlayer turn;
     private boolean updated;
 
-    public VirtualModel(ConnectionTech conn,VirtualPlayer owner){
-        this.conn=conn;
+    public VirtualModel(VirtualPlayer owner){
         this.allPlayers = new ArrayList<>();
         this.board=new VirtualBoard();
         this.owner=owner;
+        this.allPlayers.add(owner);
     }
 
-    public VirtualModel(ConnectionTech conn){
-        this.conn=conn;
-        this.allPlayers = new ArrayList<>();
-        this.board=new VirtualBoard();
-    }
-
-    public VirtualModel(){
-        this.allPlayers = new ArrayList<>();
-        this.board=new VirtualBoard();
-    }
 
 
     public VirtualPlayer findPlayer(String character){
@@ -56,13 +45,6 @@ public class VirtualModel {
         this.board = board;
     }
 
-    public ConnectionTech getConn() {
-        return conn;
-    }
-
-    public void setConn(ConnectionTech conn) {
-        this.conn = conn;
-    }
 
     public ArrayList<VirtualPlayer> getAllPlayers() {
         return allPlayers;

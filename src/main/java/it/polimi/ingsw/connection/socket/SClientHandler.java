@@ -136,6 +136,7 @@ public class SClientHandler extends Thread {
         }
         out.println("*started*");
         System.out.println("sending start signal");
+        owner.setView(new SServerCommManager(this));
 
     }
 

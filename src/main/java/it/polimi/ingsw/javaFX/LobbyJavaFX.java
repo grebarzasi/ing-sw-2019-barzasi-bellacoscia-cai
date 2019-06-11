@@ -48,7 +48,7 @@ public class LobbyJavaFX extends Application {
     private ConnectionTech conn;
     private VirtualPlayer owner;
 
-    VirtualModel vmodel = new VirtualModel();
+    VirtualModel vmodel = new VirtualModel(owner);
     GameJavaFX game = new GameJavaFX(vmodel);
 
     private boolean start = false;

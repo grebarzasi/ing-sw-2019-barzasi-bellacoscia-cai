@@ -19,6 +19,9 @@ import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.util.ArrayList;
 
+import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
+import static it.polimi.ingsw.connection.ConnMessage.NOTHING;
+
 public class UpdateBuilder {
     private Controller controller;
     private ObjectMapper mapper = new ObjectMapper();
@@ -54,9 +57,13 @@ public class UpdateBuilder {
         //username,points and position ( "row:column")
         playerNode.put("username",p.getUsername());
         playerNode.put("points",p.getPoints());
-        playerNode.put("pos",p.getPosition().getPosition().getRow()+":"+p.getPosition().getPosition().getColumn());
 
-        //add Weapon
+        if(p.getPosition()!=null)
+             playerNode.put("pos",p.getPosition().getPosition().getRow()+":"+p.getPosition().getPosition().getColumn());
+        else
+            playerNode.put("pos",NOTHING+INNER_SEP+NOTHING);
+
+            //add Weapon
         ObjectNode weaponNode = mapper.createObjectNode();
         for(Weapon w:p.getWeaponsList())
             weaponNode.put(w.getName(),w.isLoaded());
@@ -66,7 +73,7 @@ public class UpdateBuilder {
         ObjectNode puNode = mapper.createObjectNode();
         Integer i=0;
         for(PowerUp pu :p.getPowerupList()) {
-            puNode.put(i.toString(),pu.getName()+":"+pu.getAmmoOnDiscard().toString());
+            puNode.put(i.toString(),pu.getName()+INNER_SEP+pu.getAmmoOnDiscard().toString());
             i++;
         }
 

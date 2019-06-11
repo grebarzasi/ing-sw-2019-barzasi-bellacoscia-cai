@@ -2,10 +2,7 @@ package it.polimi.ingsw.CLI;
 
 import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.connection.socket.SClient;
-import it.polimi.ingsw.virtual_model.SClientCommManager;
-import it.polimi.ingsw.virtual_model.UpdateParser;
-import it.polimi.ingsw.virtual_model.ViewClient;
-import it.polimi.ingsw.virtual_model.VirtualModel;
+import it.polimi.ingsw.virtual_model.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,8 +23,8 @@ public class CliGame implements ViewClient {
     private UpdateParser parser;
     private ConnectionTech c;
 
-    public CliGame(ConnectionTech c){
-        this.board=new CliBoard(new VirtualModel());
+    public CliGame(ConnectionTech c,VirtualPlayer p){
+        this.board=new CliBoard(new VirtualModel(p));
         this.parser=new UpdateParser(board.getModel());
         this.c=c;
     }
@@ -36,7 +33,7 @@ public class CliGame implements ViewClient {
         if(!c.isRmi())
             ((SClient)c).setCommManager(new SClientCommManager(((SClient)c),this));
         ((SClient)c).getCommManager().start();
-        System.out.print("waiting for game start");
+        System.out.print("\nWaiting for game start\n");
         while(!board.getModel().isUpdated()){
             try {
                 sleep(1000);
@@ -45,6 +42,8 @@ public class CliGame implements ViewClient {
             }
             System.out.print(".");
         }
+        System.out.print("\n");
+        clearScreen();
         board.draw();
     }
 

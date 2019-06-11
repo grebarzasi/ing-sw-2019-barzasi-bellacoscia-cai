@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
+import static it.polimi.ingsw.connection.ConnMessage.NOTHING;
 
 /**
  * @author Gregorio Barzasi
@@ -23,6 +24,7 @@ public class UpdateParser {
 
 
     public void updateModel(String s){
+        //System.out.println(s);
         ObjectMapper mapper = new ObjectMapper();
         // path of weapons data
         try {
@@ -52,7 +54,11 @@ public class UpdateParser {
 
             //parse player position
 
-            String[] posArray = node.path(character).get("pos").asText().split(":");
+            String[] posArray = node.path(character).get("pos").asText().split(INNER_SEP);
+            if(posArray[0].equals(NOTHING)) {
+                posArray[0] = "-1";
+                posArray[1] = "-1";
+            }
             player.setRow(Integer.parseInt(posArray[0]));
             player.setColumn(Integer.parseInt(posArray[1]));
 

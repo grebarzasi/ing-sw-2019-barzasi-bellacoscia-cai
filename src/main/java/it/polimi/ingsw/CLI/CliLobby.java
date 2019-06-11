@@ -41,6 +41,8 @@ public class CliLobby extends Thread{
         do {System.out.println(MAP_OPT);
             System.out.println(MAP_Q);
             temp = sc.readLine();
+            if(temp.isEmpty())
+                temp="1";
             try{
                 num = Integer.parseInt(temp);
             }
@@ -64,10 +66,10 @@ public class CliLobby extends Thread{
         do {
             System.out.println(question);
             temp = sc.readLine();
-            if (temp.equals("Y")||temp.equals("y")) {
+            if (temp.equals("Y")||temp.equals("y")||temp.equals("1")) {
                 System.out.println(yes);
                 return true;
-            } else if (temp.equals("N")||temp.equals("n")) {
+            } else if (temp.equals("N")||temp.equals("n")||temp.equals("2")||temp.isEmpty()) {
                 System.out.println(no);
                 return false;
             }else{
@@ -97,16 +99,18 @@ public class CliLobby extends Thread{
         do {
             System.out.println(SKULL_Q);
             temp = sc.readLine();
+            if(temp.isEmpty())
+                temp="8";
             try{
             num = Integer.parseInt(temp);
             }
             catch (NumberFormatException e)
             {num=0;
             }
-            if(num<3 || num>8){
+            if(num<5 || num>8){
                 System.err.println(SKULL_N);
             }
-        }while(num<3 || num>8);
+        }while(num<5 || num>8);
         lobby.setKillPref(num);
         System.out.println(SKULL_Y+num);
 
@@ -139,7 +143,7 @@ public class CliLobby extends Thread{
     }
 
     public void gameStart(){
-        new CliGame(c).gameStart();
+        new CliGame(c,p).gameStart();
     }
 
 

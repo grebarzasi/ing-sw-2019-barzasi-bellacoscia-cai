@@ -34,6 +34,8 @@ public class CliBoard {
     }
 
     public void draw(){
+        if(all.isEmpty())
+            loadMap();
         cellsPlnum=12;
         cellsCPnum=12;
         boardPrinted=0;
@@ -51,8 +53,12 @@ public class CliBoard {
             System.err.print("something went wrong drawing the board");
         }
     }
-    public void loadMap()throws IOException {
+    public void loadMap(){
+        try {
             all=new String(Files.readAllBytes(Paths.get("src/main/resources/cli_files/cli_" + model.getBoard().getMap().getName() +".txt")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void plotString(String s){
@@ -336,7 +342,9 @@ public class CliBoard {
         int i = 0;
         System.out.print(RESET+"├");
         System.out.print(RESET);
-        for(; i<(8-p.getpBoard().getSkulls()); i++){
+
+        //skulls
+        for(; i<(6-p.getpBoard().getSkulls()); i++){
             System.out.print("["+SKULL_T+"]");
         }
         for(; i< DEATH_TRACK.length; i++){
@@ -509,11 +517,6 @@ public class CliBoard {
             e.printStackTrace();
         }
         CliBoard cli= new  CliBoard(game.getVmodel());
-        try {
-            cli.loadMap();
-            cli.draw();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        cli.draw();
     }
 }

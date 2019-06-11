@@ -77,6 +77,7 @@ public class Controller {
             playerList.add(s.getOwner());
         }
 
+        this.view=playerList.get(0).getView();
         String map = intToMap(lobby.getMapPref());
 
 
@@ -277,7 +278,9 @@ public class Controller {
     }
 
     public void update(){
-        this.view.sendsUpdate(marshal.create().toString());
+        String s = marshal.create().toString();
+        for(Player p: model.getPlayerList())
+            p.getView().sendsUpdate(s);
     }
 
     public Board getBoard() {
@@ -370,6 +373,14 @@ public class Controller {
 
     public void setShooting(ControllerState shooting) {
         this.shooting = shooting;
+    }
+
+    public ControllerState getSpawning() {
+        return spawning;
+    }
+
+    public void setSpawning(ControllerState spawning) {
+        this.spawning = spawning;
     }
 
     public ControllerState getTeleporting() {

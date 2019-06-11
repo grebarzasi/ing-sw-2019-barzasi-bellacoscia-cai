@@ -175,17 +175,16 @@ class UpdateBuilderTest {
         p4.getPersonalBoard().setPointVec(test2);
 
 
+
         JsonNode node = new UpdateBuilder(contr).create();
-        VirtualModel vmodel = new VirtualModel();
-        vmodel.setOwner(new VirtualPlayer("gre","red"));
+        VirtualModel vmodel = new VirtualModel(new VirtualPlayer("Iron Man","red"));
         UpdateParser parser=new UpdateParser(vmodel);
         parser.updateModel(node.toString());
-
         VirtualPlayer vP1 = vmodel.findPlayer(p1.getCharacter());
         VirtualPlayer vP2 = vmodel.findPlayer(p2.getCharacter());
         VirtualPlayer vP3 = vmodel.findPlayer(p3.getCharacter());
         VirtualPlayer vP4 = vmodel.findPlayer(p4.getCharacter());
-        vmodel.setOwner(vP2);
+
 
 
 

@@ -23,12 +23,16 @@ public class SServerCommManager implements View {
         this.cl=cl;
     }
 
-    public String askAndWait(String question,String hint) {
+    public String askAndWait(String question,String args) {
         try{
             cl.getOut().println(question);
             while (!cl.getIn().readLine().equals(AKN));
-            cl.getOut().println(hint);
-            String rpl=cl.getIn().readLine();
+            cl.getOut().println(args);
+            String rpl;
+            do
+                rpl=cl.getIn().readLine();
+            while(rpl.isEmpty());
+
             if(rpl.equals(NOTHING))
                 return null;
             return rpl;

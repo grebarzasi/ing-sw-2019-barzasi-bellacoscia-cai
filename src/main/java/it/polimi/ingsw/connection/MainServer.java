@@ -35,6 +35,8 @@ public class MainServer {
     public void startGame() {
         contr= new Controller(lobby);
         contr.update();
+        contr.setCurrentState(contr.getSpawning());
+        contr.getCurrentState().command();
     }
 
 

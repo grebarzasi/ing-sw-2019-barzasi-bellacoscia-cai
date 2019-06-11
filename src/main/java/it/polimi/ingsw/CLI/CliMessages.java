@@ -53,7 +53,7 @@ public class CliMessages {
     public static final String FRENZY_Y = "\nFinal frenzy set!";
     public static final String FRENZY_N = "\nNo final frenzy, ok!";
 
-    public static final String SKULL_Q = "\nSkull on Kill Track? (3-8)";
+    public static final String SKULL_Q = "\nSkull on Kill Track? (5-8)";
     public static final String SKULL_Y = "\nPerfect! you selected the skulls amount on kill track: ";
     public static final String SKULL_N = "\nOut of range,  again:";
 
@@ -73,9 +73,7 @@ public class CliMessages {
     public static final String CHOOSE_ACTION_ERR = RED+"\nNon disponibile";
 
     public static void clearScreen() {
-        System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
+        System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
 
 }

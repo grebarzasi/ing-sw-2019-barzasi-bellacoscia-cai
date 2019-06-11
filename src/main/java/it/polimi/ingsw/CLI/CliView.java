@@ -10,6 +10,8 @@ import it.polimi.ingsw.virtual_model.VirtualPlayer;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CliView {
 
@@ -35,7 +37,7 @@ public class CliView {
             login();
             lobby = new CliLobby(c,sc,p);
             lobby.startLobby();
-        }catch(Exception e){
+        }catch(IOException e){
             System.err.println(CONNECTION_ERR);
         }
     }
@@ -85,6 +87,10 @@ public class CliView {
         VirtualLogin l;
         while(true){
             String username = acquireUsername();
+            if(username.isEmpty()) {
+                System.out.println("\n" + LOGIN_ERR);
+                continue;
+            }
             String character = acquireCharacter();
             l = new VirtualLogin(username, character, c);
             System.out.println(WAITING);
@@ -145,13 +151,15 @@ public class CliView {
      */
     private String acquireCharacter()throws IOException{
             String character;
+            ArrayList<String> allCharacter=new ArrayList<>();
+            allCharacter.addAll(Arrays.asList("blue", "red", "yellow", "gray", "green"));
             do {
                 System.out.println(CHARACTER);
                 character = sc.readLine();
-                if (!character.equals("blue") && !character.equals("red") && !character.equals("yellow") && !character.equals("green") && !character.equals("gray")) {
+                if (!allCharacter.contains(character)) {
                     System.out.println(CHARACTER_ERR);
                 }
-            } while (!character.equals("blue") && !character.equals("red") && !character.equals("yellow") && !character.equals("green") && !character.equals("gray"));
+            } while (!allCharacter.contains(character));
     return character;
     }
 }
