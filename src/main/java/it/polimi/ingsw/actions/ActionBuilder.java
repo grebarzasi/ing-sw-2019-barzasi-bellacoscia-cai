@@ -54,7 +54,6 @@ public class ActionBuilder {
         if (p.getModel().getMovesLeft() > 0) {
 
             if (!isFrenzy) {
-
                 int damage = p.getPersonalBoard().getDamage().size();
                 int adrenalineStage;
 

@@ -47,10 +47,11 @@ public class PlayerTest {
         //test is ran for 100 times since there is random factor;
         for (i = 0; i < 3; i++) {
 
-
-            GameModel empire = new GameModel(new ArrayList<>(), "small", null);
-            Board alderaan = empire.getBoard();
             Player luke = new Player("Luke", "Jedi");
+            ArrayList<Player> empirePlayers = new ArrayList<>();
+            empirePlayers.add(luke);
+            GameModel empire = new GameModel(empirePlayers, "small", null);
+            Board alderaan = empire.getBoard();
             luke.setModel(empire);
             Square aldera = alderaan.getMap().getSquareMatrix()[0][0];
 
@@ -96,10 +97,12 @@ public class PlayerTest {
    @Test
     public void consecutivePicking(){
 
-        GameModel empire = new GameModel(new ArrayList<>(), "large", null);
-        Board alderaan = empire.getBoard();
-        Player luke = new Player("Luke", "Jedi");
-        luke.setModel(empire);
+       Player luke = new Player("Luke", "Jedi");
+       ArrayList<Player> empirePlayers = new ArrayList<>();
+       empirePlayers.add(luke);
+       GameModel empire = new GameModel(empirePlayers, "small", null);
+       Board alderaan = empire.getBoard();
+       luke.setModel(empire);
 
         final int height = 3;
         final int width = 4;

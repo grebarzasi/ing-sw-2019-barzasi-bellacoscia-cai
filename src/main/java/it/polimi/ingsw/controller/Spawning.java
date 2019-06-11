@@ -38,22 +38,17 @@ public class Spawning implements ControllerState {
 
         } else {
 
-            ArrayList<Player> players = this.controller.getModel().getPlayerList();
+            ArrayList<PowerUp> options = new ArrayList<>();
 
-            for (Player p : this.controller.getModel().getPlayerList()) {
-
-                ArrayList<PowerUp> options = new ArrayList<>();
-
-                int i;
-
-                for (i = 0; i < 2; i++) {
-                    options.add((PowerUp) this.controller.getModel().getBoard().getPowerupDeck().fetch());
-                }
-
-                spawnOnChoice(options);
-
+            int i;
+            for (i = 0; i < 2; i++) {
+                options.add((PowerUp) this.controller.getModel().getBoard().getPowerupDeck().fetch());
             }
+
+            spawnOnChoice(options);
+
         }
+
     }
 
     /**
