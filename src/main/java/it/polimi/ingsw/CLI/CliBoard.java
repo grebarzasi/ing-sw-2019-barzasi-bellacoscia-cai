@@ -278,7 +278,7 @@ public class CliBoard {
         }
         for (; k < 8; k++) {
             System.out.print("[" +SKULL_T+ " ]");
-            i=i+3;
+            i=i+4;
         }
         for (; i < KILLSHOT_SPACE; i++) {
             System.out.print(" ");
@@ -478,7 +478,7 @@ public class CliBoard {
         String pu[];
         if(model.getOwner().getPowerUps().size()>k){
             pu= model.getOwner().getPowerUps().get(k).split(":");
-            System.out.print("├─("+(k+1)+")─< "+pu[0]+" [");
+            System.out.print("├──< "+pu[0]+" [");
             colorizeCP(pu[1].subSequence(0,1).toString().toUpperCase());
             System.out.print("]>");
         }
@@ -559,6 +559,9 @@ public class CliBoard {
             case "gray":
                 pawn=GRAY_T;
                 break;
+            case "":
+                pawn=" ";
+                break;
             default:
                 pawn="";
         }
@@ -582,5 +585,6 @@ public class CliBoard {
         }
         CliBoard cli= new  CliBoard(game.getVmodel());
         cli.draw();
+
     }
 }

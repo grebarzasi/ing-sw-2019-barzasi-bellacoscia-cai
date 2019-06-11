@@ -30,7 +30,7 @@ import java.util.HashMap;
 public class GameInitializer extends Application {
 
     private static final String MAP_NAME="small";
-    private static final int SKULLMAX=5;
+    private static final int SKULLMAX=6;
     private VirtualModel vmodel;
 
     public VirtualModel getVmodel() {
@@ -160,17 +160,17 @@ public class GameInitializer extends Application {
         tokenArrayList.add(t1);
         ArrayList<Token> tokenArrayList2=new ArrayList<>();
         tokenArrayList2.add(t2);
-
+//
         contr.getModel().getBoard().getTrack().addKill(tokenArrayList);
         contr.getModel().getBoard().getTrack().addKill(tokenArrayList2);
-//        contr.getModel().getBoard().getTrack().addKill(tokenArrayList2);
-//        contr.getModel().getBoard().getTrack().addKill(tokenArrayList2);
+        contr.getModel().getBoard().getTrack().addKill(tokenArrayList2);
+        contr.getModel().getBoard().getTrack().addKill(tokenArrayList2);
 //        contr.getModel().getBoard().getTrack().addKill(tokenArrayList);
 //        contr.getModel().getBoard().getTrack().addKill(tokenArrayList);
-//        contr.getModel().getBoard().getTrack().addKill(tokenArrayList);
-//        contr.getModel().getBoard().getTrack().addKill(tokenArrayList2);
-//        contr.getModel().getBoard().getTrack().addKill(tokenArrayList);
-//        contr.getModel().getBoard().getTrack().addKill(tokenArrayList2);
+        contr.getModel().getBoard().getTrack().addKill(tokenArrayList);
+        contr.getModel().getBoard().getTrack().addKill(tokenArrayList2);
+        contr.getModel().getBoard().getTrack().addKill(tokenArrayList);
+        contr.getModel().getBoard().getTrack().addKill(tokenArrayList2);
 //        contr.getModel().getBoard().getTrack().addKill(tokenArrayList2);
 
         p1.getPersonalBoard().addDamage(t2);
@@ -210,7 +210,7 @@ public class GameInitializer extends Application {
         JsonNode node = new UpdateBuilder(contr).create();
         vmodel = new VirtualModel(new VirtualPlayer("Iron Man","red"));
         UpdateParser parser=new UpdateParser(vmodel);
-        //System.out.println(node.toString());
+        System.out.println(node.toString());
         parser.updateModel(node.toString());
         VirtualPlayer vP1 = vmodel.findPlayer(p1.getCharacter());
         VirtualPlayer vP2 = vmodel.findPlayer(p2.getCharacter());

@@ -33,18 +33,7 @@ public class CliGame implements ViewClient {
         if(!c.isRmi())
             ((SClient)c).setCommManager(new SClientCommManager(((SClient)c),this));
         ((SClient)c).getCommManager().start();
-        System.out.print("\nWaiting for game start\n");
-        while(!board.getModel().isUpdated()){
-            try {
-                sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.print(".");
-        }
-        System.out.print("\n");
-        clearScreen();
-        board.draw();
+        System.out.print("\nWaiting for board to deploy\n");
     }
 
     public String genericChoice(ArrayList<String> args,String q, String error) {
@@ -67,6 +56,11 @@ public class CliGame implements ViewClient {
     public int chooseFromArray(ArrayList<String>args, String err){
         String s ="";
         int reply=0;
+        int i=1;
+        for(String k : args){
+            System.out.println(i+"- "+k);
+            i++;
+        }
         try {
             s = sc.readLine();
         } catch (IOException e) {
@@ -78,8 +72,6 @@ public class CliGame implements ViewClient {
             reply=0;
         }
         if (reply<=0 || args.size()<(reply)) {
-            clearScreen();
-            board.draw();
             System.out.println(err);
             reply=0;
         }
@@ -95,8 +87,6 @@ public class CliGame implements ViewClient {
         int i =1;
         String temp[];
         int reply=0;
-        clearScreen();
-        board.draw();
         do {
             System.out.print(RESET+CHOOSE_PU_Q+"\n");
             reply=chooseFromArray(args,CHOOSE_PU_ERR);
@@ -188,6 +178,8 @@ public class CliGame implements ViewClient {
 
     public void updateModel(String message) {
         parser.updateModel(message);
+        clearScreen();
+        board.draw();
     }
 
     /**

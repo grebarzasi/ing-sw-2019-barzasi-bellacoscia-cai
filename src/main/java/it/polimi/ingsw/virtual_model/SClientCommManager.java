@@ -30,7 +30,11 @@ public class SClientCommManager extends Thread{
         String args;
         try {
         while(goOn){
-
+            try {
+                sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             msg= i.readLine();
             System.out.println(msg);
 

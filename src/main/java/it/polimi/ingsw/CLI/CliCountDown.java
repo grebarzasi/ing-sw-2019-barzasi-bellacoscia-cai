@@ -15,9 +15,9 @@ public class CliCountDown extends Thread {
         System.out.println(COUNTDOWN_START);
         while(time>0){
             System.out.println(time + "s left");
-            time=time-10;
+            time=time-5;
             try {
-                Thread.sleep(10*1000);
+                Thread.sleep(5*1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

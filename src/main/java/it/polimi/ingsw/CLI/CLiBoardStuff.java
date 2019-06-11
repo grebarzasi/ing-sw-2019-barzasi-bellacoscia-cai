@@ -54,5 +54,5 @@ public class CLiBoardStuff {
     public static final int MARKS_SPACE =10;
     public static final int DAMAGE_SPACE =12;
     public static final int WEAPON_SPACE = 25;
-    public static final int KILLSHOT_SPACE = 46;
+    public static final int KILLSHOT_SPACE = 49;
 }
