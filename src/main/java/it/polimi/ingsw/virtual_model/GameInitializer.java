@@ -29,7 +29,7 @@ import java.util.HashMap;
 
 public class GameInitializer extends Application {
 
-    private static final String MAP_NAME="large";
+    private static final String MAP_NAME="small";
     private static final int SKULLMAX=5;
     private VirtualModel vmodel;
 
@@ -210,7 +210,7 @@ public class GameInitializer extends Application {
         JsonNode node = new UpdateBuilder(contr).create();
         vmodel = new VirtualModel(new VirtualPlayer("Iron Man","red"));
         UpdateParser parser=new UpdateParser(vmodel);
-        System.out.println(node.toString());
+        //System.out.println(node.toString());
         parser.updateModel(node.toString());
         VirtualPlayer vP1 = vmodel.findPlayer(p1.getCharacter());
         VirtualPlayer vP2 = vmodel.findPlayer(p2.getCharacter());
