@@ -216,8 +216,7 @@ public class GameInitializer extends Application {
         VirtualPlayer vP2 = vmodel.findPlayer(p2.getCharacter());
         VirtualPlayer vP3 = vmodel.findPlayer(p3.getCharacter());
         VirtualPlayer vP4 = vmodel.findPlayer(p4.getCharacter());
-
-
+        vmodel.setTurn(vP1);
 
         HashMap<String, VirtualCell> cells = vmodel.getBoard().getMap().getCells();
        }
