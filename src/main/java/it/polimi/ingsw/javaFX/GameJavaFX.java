@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.chrono.HijrahDate;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -540,9 +541,9 @@ public class GameJavaFX extends Application implements ViewClient{
         we.add(btnPwe2);
         we.add(btnPwe3);
 
-        btnPpu1.setOpacity(0);
-        btnPpu2.setOpacity(0);
-        btnPpu3.setOpacity(0);
+        hideBtn(btnPpu1,0);
+        hideBtn(btnPpu2,0);
+        hideBtn(btnPpu3,0);
 
         pu.add(btnPpu1);
         pu.add(btnPpu2);
@@ -743,9 +744,9 @@ public class GameJavaFX extends Application implements ViewClient{
         msg.setFont(font);
         msg.setEditable(false);
 
-        btnCancel.setOpacity(0);
-        btnReload.setOpacity(0);
-        btnTerminator.setOpacity(0);
+        hideBtn(btnCancel,0);
+        hideBtn(btnReload,0);
+        hideBtn(btnTerminator,0);
         HBox hBtn = new HBox(30);
         hBtn.setAlignment(Pos.CENTER);
         hBtn.getChildren().add(btnTerminator);
@@ -777,14 +778,14 @@ public class GameJavaFX extends Application implements ViewClient{
         borderGlow.setOffsetX(0f);
         borderGlow.setOffsetY(0f);
 
-        msg.setText(WELCOME);
 
         if(model.getTurn().getCharacter().equals(model.getOwner().getCharacter()))
             gridPBoard.setEffect(borderGlow);
 
+        /*
         btnCancel.setOnAction(e->{
             update();
-            btnCancel.setOpacity(0);
+            hideBtn(btnCancel,0);
         });
 
         btnMove.setOnAction(e->{
@@ -792,7 +793,7 @@ public class GameJavaFX extends Application implements ViewClient{
 
                 action = "move";
                 msg.setText(CHOOSE_SQUARE);
-                btnCancel.setOpacity(1);
+                hideBtn(btnCancel,1);
                 for (ArrayList<Button> btnArr : btnCell) {
                     chooseSquare(btnArr, btnCell.indexOf(btnArr),false);
                 }
@@ -810,7 +811,7 @@ public class GameJavaFX extends Application implements ViewClient{
 
                 action = "pick";
                 msg.setText(CHOOSE_SQUARE);
-                btnCancel.setOpacity(1);
+                hideBtn(btnCancel,1);
                 for (ArrayList<Button> btnArr : btnCell) {
                     chooseSquare(btnArr, btnCell.indexOf(btnArr),true);
                 }
@@ -828,15 +829,15 @@ public class GameJavaFX extends Application implements ViewClient{
 
                 action = "shoot";
                 msg.setText(CHOOSE_PLAYER);
-                btnCancel.setOpacity(1);
+                hideBtn(btnCancel,1);
                 for (ArrayList<Button> btnArr: btnCell) {
-                choosePlayer(btnArr, btnCell.indexOf(btnArr));
+                    choosePlayer(btnArr, btnCell.indexOf(btnArr));
                     for (Button btn : we) {
                         btn.setOnAction(es->{
                             game.setWeapon(model.getOwner().getWeapons().get(we.indexOf(btn)));
                         });
                     }
-            }
+                }
             }else
                 msg.setText("Aspetta il tuo turno...");
         });
@@ -844,11 +845,13 @@ public class GameJavaFX extends Application implements ViewClient{
         btnPowerUp.setOnAction(e->{
             int j = 0;
             for (Button btn : pu) {
-                String power = model.getOwner().getPowerUps().get(j);
-                btn.setOnAction(ep->{
-                    game.setPowerup(power);
-                });
-                j++;
+                if(j < model.getOwner().getPowerUps().size()) {
+                    String power = model.getOwner().getPowerUps().get(j);
+                    btn.setOnAction(ep -> {
+                        game.setPowerup(power);
+                    });
+                    j++;
+                }
             }
         });
 
@@ -883,6 +886,8 @@ public class GameJavaFX extends Application implements ViewClient{
                 }
             });
         }
+
+        */
         msg.setText(WELCOME);
 
         primaryStage.show();
@@ -917,12 +922,12 @@ public class GameJavaFX extends Application implements ViewClient{
         b4.setPrefSize(w,h);
         b5.setPrefSize(w,h);
         b6.setPrefSize(w,h);
-        b1.setOpacity(0);
-        b2.setOpacity(0);
-        b3.setOpacity(0);
-        b4.setOpacity(0);
-        b5.setOpacity(0);
-        b6.setOpacity(0);
+        hideBtn(b1,0);
+        hideBtn(b2,0);
+        hideBtn(b3,0);
+        hideBtn(b4,0);
+        hideBtn(b5,0);
+        hideBtn(b6,0);
         grid.add(b1,0,0);
         grid.add(b2,0,1);
         grid.add(b3,1,0);
@@ -1109,7 +1114,7 @@ public class GameJavaFX extends Application implements ViewClient{
 
             try {
                 imgAR = new ImageView(new Image(new FileInputStream(PATH_RED_AMMO),w,h,true,true));
-                            } catch (FileNotFoundException e) {
+            } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
             grid.add(imgAR,3-red,0);
@@ -1149,9 +1154,9 @@ public class GameJavaFX extends Application implements ViewClient{
         btn1.setPrefSize(w,h);
         btn2.setPrefSize(w,h);
         btn3.setPrefSize(w,h);
-        btn1.setOpacity(0);
-        btn2.setOpacity(0);
-        btn3.setOpacity(0);
+        hideBtn(btn1,0);
+        hideBtn(btn2,0);
+        hideBtn(btn3,0);
         grid.add(btn1,0,row);
         grid.add(btn2,1,row);
         grid.add(btn3,2,row);
@@ -1190,28 +1195,28 @@ public class GameJavaFX extends Application implements ViewClient{
         switch(color){
             case("red"):{
                 setButtonBack(btn.get(R),img);
-                btn.get(R).setOpacity(1);
+                hideBtn(btn.get(R),1);
                 btn.get(R).setEffect(borderGlow);
                 break;
             }
             case("blue"):{
                 setButtonBack(btn.get(B),img);
-                btn.get(B).setOpacity(1);
+                hideBtn(btn.get(B),1);
                 btn.get(B).setEffect(borderGlow);
                 break;
             }case("yellow"):{
                 setButtonBack(btn.get(Y),img);
-                btn.get(Y).setOpacity(1);
+                hideBtn(btn.get(Y),1);
                 btn.get(Y).setEffect(borderGlow);
                 break;
             }case("green"):{
                 setButtonBack(btn.get(G),img);
-                btn.get(G).setOpacity(1);
+                hideBtn(btn.get(G),1);
                 btn.get(G).setEffect(borderGlow);
                 break;
             }case("grey"):{
                 setButtonBack(btn.get(GR),img);
-                btn.get(GR).setOpacity(1);
+                hideBtn(btn.get(GR),1);
                 btn.get(GR).setEffect(borderGlow);
                 break;
             }
@@ -1224,7 +1229,7 @@ public class GameJavaFX extends Application implements ViewClient{
         BackgroundImage background = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background back = new Background(background);
         btn.setBackground(back);
-        btn.setOpacity(1);
+        hideBtn(btn,1);
     }
 
     public void fillSkulls(GridPane grid, int skullMax, double w, double h) {
@@ -1258,125 +1263,125 @@ public class GameJavaFX extends Application implements ViewClient{
         int no = 3;
 
         if(!p.getpBoard().getMarks().equals(null))
-        for (String color : p.getpBoard().getMarks()) {
-            switch (color){
-                case "yellow":{
-                    ImageView img = null;
+            for (String color : p.getpBoard().getMarks()) {
+                switch (color){
+                    case "yellow":{
+                        ImageView img = null;
 
-                    try {
-                        img = new ImageView(new Image(new FileInputStream(PATH_YELLOW_DAMAGE), width, hmarks, true, true));
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
+                        try {
+                            img = new ImageView(new Image(new FileInputStream(PATH_YELLOW_DAMAGE), width, hmarks, true, true));
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        grid.add(img,i,0);
+                        break;
                     }
-                    grid.add(img,i,0);
-                    break;
+                    case "red":{
+                        ImageView img = null;
+
+                        try {
+                            img = new ImageView(new Image(new FileInputStream(PATH_RED_DAMAGE), width, hmarks, true, true));
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        grid.add(img,i,0);
+                        break;
+                    }case "blue":{
+                        ImageView img = null;
+
+                        try {
+                            img = new ImageView(new Image(new FileInputStream(PATH_BLUE_DAMAGE), width, hmarks, true, true));
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        grid.add(img,i,0);
+                        break;
+                    }case "green":{
+                        ImageView img = null;
+
+                        try {
+                            img = new ImageView(new Image(new FileInputStream(PATH_GREEN_DAMAGE), width, hmarks, true, true));
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        grid.add(img,i,0);
+                        break;
+                    }case "grey":{
+                        ImageView img = null;
+
+                        try {
+                            img = new ImageView(new Image(new FileInputStream(PATH_GREY_DAMAGE), width, hmarks, true, true));
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        grid.add(img,i,0);
+                        break;
+                    }
                 }
-                case "red":{
-                    ImageView img = null;
-
-                    try {
-                        img = new ImageView(new Image(new FileInputStream(PATH_RED_DAMAGE), width, hmarks, true, true));
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                    grid.add(img,i,0);
-                    break;
-                }case "blue":{
-                    ImageView img = null;
-
-                    try {
-                        img = new ImageView(new Image(new FileInputStream(PATH_BLUE_DAMAGE), width, hmarks, true, true));
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                    grid.add(img,i,0);
-                    break;
-                }case "green":{
-                    ImageView img = null;
-
-                    try {
-                        img = new ImageView(new Image(new FileInputStream(PATH_GREEN_DAMAGE), width, hmarks, true, true));
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                    grid.add(img,i,0);
-                    break;
-                }case "grey":{
-                    ImageView img = null;
-
-                    try {
-                        img = new ImageView(new Image(new FileInputStream(PATH_GREY_DAMAGE), width, hmarks, true, true));
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                    grid.add(img,i,0);
-                    break;
-                }
+                i++;
             }
-            i++;
-        }
 
         if(!p.getpBoard().getDamage().equals(null))
-        for (String color : p.getpBoard().getDamage()) {
-            switch(color){
-                case "yellow":{
-                    ImageView img = null;
+            for (String color : p.getpBoard().getDamage()) {
+                switch(color){
+                    case "yellow":{
+                        ImageView img = null;
 
-                    try {
-                        img = new ImageView(new Image(new FileInputStream(PATH_YELLOW_DAMAGE), width, hmarks, true, true));
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
+                        try {
+                            img = new ImageView(new Image(new FileInputStream(PATH_YELLOW_DAMAGE), width, hmarks, true, true));
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        grid.add(img,j,1);
+                        break;
                     }
-                    grid.add(img,j,1);
-                    break;
-                }
-                case "red":{
-                    ImageView img = null;
+                    case "red":{
+                        ImageView img = null;
 
-                    try {
-                        img = new ImageView(new Image(new FileInputStream(PATH_RED_DAMAGE), width, hmarks, true, true));
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
+                        try {
+                            img = new ImageView(new Image(new FileInputStream(PATH_RED_DAMAGE), width, hmarks, true, true));
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        grid.add(img,j,1);
+                        break;
                     }
-                    grid.add(img,j,1);
-                    break;
-                }
-                case "blue":{
-                    ImageView img = null;
+                    case "blue":{
+                        ImageView img = null;
 
-                    try {
-                        img = new ImageView(new Image(new FileInputStream(PATH_BLUE_DAMAGE), width, hmarks, true, true));
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
+                        try {
+                            img = new ImageView(new Image(new FileInputStream(PATH_BLUE_DAMAGE), width, hmarks, true, true));
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        grid.add(img,j,1);
+                        break;
                     }
-                    grid.add(img,j,1);
-                    break;
-                }
-                case "green":{
-                    ImageView img = null;
+                    case "green":{
+                        ImageView img = null;
 
-                    try {
-                        img = new ImageView(new Image(new FileInputStream(PATH_GREEN_DAMAGE), width, hmarks, true, true));
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
+                        try {
+                            img = new ImageView(new Image(new FileInputStream(PATH_GREEN_DAMAGE), width, hmarks, true, true));
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        grid.add(img,j,1);
+                        break;
                     }
-                    grid.add(img,j,1);
-                    break;
-                }
-                case "grey":{
-                    ImageView img = null;
+                    case "grey":{
+                        ImageView img = null;
 
-                    try {
-                        img = new ImageView(new Image(new FileInputStream(PATH_GREY_DAMAGE), width, hmarks, true, true));
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
+                        try {
+                            img = new ImageView(new Image(new FileInputStream(PATH_GREY_DAMAGE), width, hmarks, true, true));
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        grid.add(img,j,1);
+                        break;
                     }
-                    grid.add(img,j,1);
-                    break;
                 }
+                j++;
             }
-            j++;
-        }
         while(k <= p.getpBoard().getSkulls() + 2){
 
             if(k <= no){
@@ -1414,7 +1419,7 @@ public class GameJavaFX extends Application implements ViewClient{
                         e.printStackTrace();
                     }
                     setButtonBack(btnArr.get(i), img);
-                    btnArr.get(i).setOpacity(1);
+                    hideBtn(btnArr.get(i),1);
                     i++;
                 } else {
                     Image img = null;
@@ -1424,7 +1429,7 @@ public class GameJavaFX extends Application implements ViewClient{
                         e.printStackTrace();
                     }
                     setButtonBack(btnArr.get(i), img);
-                    btnArr.get(i).setOpacity(1);
+                    hideBtn(btnArr.get(i),1);
                     i++;
                 }
             }
@@ -1479,7 +1484,7 @@ public class GameJavaFX extends Application implements ViewClient{
                     BackgroundImage background = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
                     Background back = new Background(background);
                     btnCell.get(i).get(5).setBackground(back);
-                    btnCell.get(i).get(5).setOpacity(1);
+                    hideBtn(btnCell.get(i).get(5),1);
                     btnCell.get(i).get(5).setAlignment(Pos.CENTER_LEFT);
                     borderGlow.setColor(Color.LIGHTGREEN);
                     btnCell.get(i).get(5).setEffect(borderGlow);
@@ -1501,7 +1506,7 @@ public class GameJavaFX extends Application implements ViewClient{
                 BackgroundImage background = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
                 Background back = new Background(background);
                 btnCell.get(i).get(5).setBackground(back);
-                btnCell.get(i).get(5).setOpacity(1);
+                hideBtn(btnCell.get(i).get(5),1);
                 borderGlow.setColor(Color.LIGHTCYAN);
                 btnCell.get(i).get(5).setEffect(borderGlow);
 
@@ -1523,6 +1528,21 @@ public class GameJavaFX extends Application implements ViewClient{
     public void hideCell(ArrayList<Button> btn,double o){
         for (Button b : btn) {
             b.setOpacity(o);
+            if(o == 0){
+                //b.setDisable(true);
+            }else{
+                //b.setDisable(false);
+            }
+        }
+
+    }
+
+    public void hideBtn(Button btn, double o){
+        btn.setOpacity(o);
+        if(o == 0){
+            //btn.setDisable(true);
+        } else {
+            //btn.setDisable(false);
         }
     }
 
@@ -1530,7 +1550,7 @@ public class GameJavaFX extends Application implements ViewClient{
 
         for (Button b : btnArr) {
             b.setOnAction(e->{
-                if(b.getOpacity() == 0) {
+                if(b.getOpacity() == 0 || btnArr.indexOf(b) == 5) {
                     int x = (int) Math.ceil((double) (btn + 1) / 4) - 1;
                     int y = (btn + 1) - (x * 4) - 1;
                     game.setTargetSquare(x + ":" + y);
@@ -1539,14 +1559,14 @@ public class GameJavaFX extends Application implements ViewClient{
                     model.getOwner().setColumn(y);
 
 
-                    btnCancel.setOpacity(0);
+                    hideBtn(btnCancel,0);
 
                     update();
                 } else
                     msg.setText(ERR_SQUARE);
 
                 if(pick){
-                    btnArr.get(5).setOpacity(0);
+                    hideBtn(btnArr.get(5),0);
                 }
             });
         }
@@ -1560,43 +1580,43 @@ public class GameJavaFX extends Application implements ViewClient{
 
         for (Button b : btnArr) {
             b.setOnAction(e->{
-                switch(btnArr.indexOf(b)){
-                    case(0):{
-                        if(b.getOpacity() != 0){
+                if(b.getOpacity() == 1) {
+
+                    switch (btnArr.indexOf(b)) {
+                        case (0): {
                             game.setTargetPlayer("yellow");
+
+                            break;
                         }
-                        break;
-                    }
-                    case(1):{
-                        if(b.getOpacity() != 0) {
+                        case (1): {
                             game.setTargetPlayer("grey");
+
+                            break;
                         }
-                        break;
-                    }
-                    case(2):{
-                        if(b.getOpacity() != 0){
+                        case (2): {
                             game.setTargetPlayer("green");
+
+                            break;
                         }
-                        break;
-                    }
-                    case(3):{
-                        if(b.getOpacity() != 0){
+                        case (3): {
                             game.setTargetPlayer("blue");
+
+                            break;
                         }
-                        break;
-                    }
-                    case(4):{
-                        if(b.getOpacity() != 0){
+                        case (4): {
                             game.setTargetPlayer("red");
+
+                            break;
                         }
-                        break;
+                        case (5): {
+                            msg.setText(ERR_PLAYER);
+                            break;
+                        }
                     }
-                    case(5):{
-                        msg.setText(ERR_PLAYER);
-                        break;
-                    }
+                    update();
+                }else {
+                    msg.setText(ERR_PLAYER);
                 }
-                update();
             });
         }
 
@@ -1611,6 +1631,110 @@ public class GameJavaFX extends Application implements ViewClient{
             for (Button b : btnArr) {
                 b.setOnAction(e->{});
             }
+        }
+
+        btnCancel.setOnAction(e->{
+            update();
+            hideBtn(btnCancel,0);
+        });
+
+        btnMove.setOnAction(e->{
+            if (model.getTurn().getCharacter().equals(model.getOwner().getCharacter()) && btnShoot.getOpacity() == 1) {
+
+                action = "move";
+                msg.setText(CHOOSE_SQUARE);
+                hideBtn(btnCancel,1);
+                for (ArrayList<Button> btnArr : btnCell) {
+                    chooseSquare(btnArr, btnCell.indexOf(btnArr),false);
+                }
+
+
+                for (String s : game.getHideSquare()) {
+                    hideCell(btnCell.get(getCoordinate(s)), 0.5);
+                }
+            }else
+                msg.setText("Aspetta il tuo turno...");
+
+        });
+        btnPick.setOnAction(e->{
+            if(model.getTurn().getCharacter().equals(model.getOwner().getCharacter()) && btnShoot.getOpacity() == 1) {
+
+                action = "pick";
+                msg.setText(CHOOSE_SQUARE);
+                hideBtn(btnCancel,1);
+                for (ArrayList<Button> btnArr : btnCell) {
+                    chooseSquare(btnArr, btnCell.indexOf(btnArr),true);
+                }
+
+                for (String s : game.getHideSquare()) {
+                    hideCell(btnCell.get(getCoordinate(s)), 0.5);
+                }
+
+            }else
+                msg.setText("Aspetta il tuo turno...");
+        });
+
+        btnShoot.setOnAction(e->{
+            if(model.getTurn().getCharacter().equals(model.getOwner().getCharacter()) && btnShoot.getOpacity() == 1){
+
+                action = "shoot";
+                msg.setText(CHOOSE_PLAYER);
+                hideBtn(btnCancel,1);
+                for (ArrayList<Button> btnArr: btnCell) {
+                    choosePlayer(btnArr, btnCell.indexOf(btnArr));
+                    for (Button btn : we) {
+                        btn.setOnAction(es->{
+                            game.setWeapon(model.getOwner().getWeapons().get(we.indexOf(btn)));
+                        });
+                    }
+                }
+            }else
+                msg.setText("Aspetta il tuo turno...");
+        });
+
+        btnPowerUp.setOnAction(e->{
+            int j = 0;
+            for (Button btn : pu) {
+                if(j < model.getOwner().getPowerUps().size()) {
+                    String power = model.getOwner().getPowerUps().get(j);
+                    btn.setOnAction(ep -> {
+                        game.setPowerup(power);
+                    });
+                    j++;
+                }
+            }
+        });
+
+
+        for (Button btn : we) {
+            btn.setOnAction(e->{
+                int j = we.indexOf(btn);
+                infoWindow iw = new infoWindow(model.getOwner(),j,false);
+                iw.show();
+            });
+        }
+
+        for (Button btn : pu) {
+            btn.setOnAction(e->{
+                int j = pu.indexOf(btn);
+                infoWindow iw = new infoWindow(model.getOwner(),j,true);
+                iw.show();
+            });
+        }
+
+        btnDeck.setOnAction(e->{System.out.println("ok");});
+
+        for (VirtualPlayer player : model.getAllPlayers()) {
+            setPlayerOnCell(btnCell.get(player.getRow()*4+player.getColumn()),player.getCharacter());
+        }
+
+        for (ArrayList<Button> btnArr : btnCell) {
+            btnArr.get(5).setOnAction(e->{
+                if(btnCell.indexOf(btnArr) == 2 || btnCell.indexOf(btnArr) == 4 || btnCell.indexOf(btnArr) == 11){
+                    chooseWeapon cw = new chooseWeapon();
+                    cw.show();
+                }
+            });
         }
 
 
@@ -1713,28 +1837,29 @@ public class GameJavaFX extends Application implements ViewClient{
             for (String act : args) {
                 switch(act){
                     case("move"):{
-                        btnMove.setOpacity(1);
+                        hideBtn(btnMove,1);
                         break;
                     }
                     case("pick"):{
-                        btnPick.setOpacity(1);
+                        hideBtn(btnPick,1);
                         break;
                     }case("shoot"):{
-                        btnShoot.setOpacity(1);
+                        hideBtn(btnShoot,1);
                         break;
                     }case("reload"):{
-                        btnReload.setOpacity(1);
+                        hideBtn(btnReload,1);
                         break;
                     }case("terminator"):{
-                        btnTerminator.setOpacity(1);
+                        hideBtn(btnTerminator,1);
                         break;
                     }case("power_up"):{
-                        btnPowerUp.setOpacity(1);
+                        hideBtn(btnPowerUp,1);
                         break;
                     }
                 }
             }
         };
+
 
         Platform.runLater(run);
         while(action.equals(""));
@@ -1767,6 +1892,11 @@ public class GameJavaFX extends Application implements ViewClient{
     @Override
     public String showTargets(ArrayList<String> args) {
         Runnable run = () -> {
+
+            for (ArrayList<Button> btnArr : btnCell) {
+                hideCell(btnArr,0.5);
+            }
+
 
         };
 
@@ -1932,36 +2062,35 @@ public class GameJavaFX extends Application implements ViewClient{
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                    if(i < p.getPowerUps().size()) {
+                        JsonNode chamberNodePu = rootNodePu.path(p.getPowerUps().get(i).split(":")[0].toLowerCase());
 
-                    JsonNode chamberNodePu = rootNodePu.path(p.getPowerUps().get(i).split(":")[0].toLowerCase());
-
-                    if(p.getPowerUps().get(i).split(":")[1].equals("red")){
-                        powerup = chamberNodePu.path("color").path("red").asText();
-                    } else
-                        if (p.getPowerUps().get(i).split(":")[1].equals("blue")){
+                        if (p.getPowerUps().get(i).split(":")[1].equals("red")) {
+                            powerup = chamberNodePu.path("color").path("red").asText();
+                        } else if (p.getPowerUps().get(i).split(":")[1].equals("blue")) {
                             powerup = chamberNodePu.path("color").path("blue").asText();
-                        }else
-                            if (p.getPowerUps().get(i).split(":")[1].equals("yellow")){
+                        } else if (p.getPowerUps().get(i).split(":")[1].equals("yellow")) {
                             powerup = chamberNodePu.path("color").path("yellow").asText();
                         }
-                    textPu = chamberNodePu.path("info").asText();
+                        textPu = chamberNodePu.path("info").asText();
 
-                    ImageView imgPu = null;
-                    try {
-                        imgPu = new ImageView(new Image(new FileInputStream(PATH_POWER_UP + powerup), widthScreen / 2 - 50, heightScreen - 50, true, true));
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
+                        ImageView imgPu = null;
+                        try {
+                            imgPu = new ImageView(new Image(new FileInputStream(PATH_POWER_UP + powerup), widthScreen / 2 - 50, heightScreen - 50, true, true));
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+
+                        ImageView imgPu2 = null;
+                        try {
+                            imgPu2 = new ImageView(new Image(new FileInputStream(PATH_POWER_UP + textPu), widthScreen / 2 + 20, heightScreen + 20, true, true));
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+
+                        grid.add(imgPu, 0, 0);
+                        grid.add(imgPu2, 1, 0);
                     }
-
-                    ImageView imgPu2 = null;
-                    try {
-                        imgPu2 = new ImageView(new Image(new FileInputStream(PATH_POWER_UP + textPu), widthScreen / 2 + 20, heightScreen + 20, true, true));
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-
-                    grid.add(imgPu, 0, 0);
-                    grid.add(imgPu2, 1, 0);
 
 
                 } catch (Exception e) {
