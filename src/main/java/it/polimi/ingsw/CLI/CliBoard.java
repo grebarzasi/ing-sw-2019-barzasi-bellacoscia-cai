@@ -13,6 +13,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import static it.polimi.ingsw.CLI.CliColor.*;
+import static it.polimi.ingsw.connection.ConnMessage.INFO_SEP;
 import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
 
 
@@ -25,6 +26,7 @@ public class CliBoard {
     private int cellsCPnum=12;
     private int boardPrinted=0;
 
+    private ArrayList<String> armory=new ArrayList<>();
 
     private ArrayList<String> weaponTemp;
     private VirtualModel model;
@@ -125,7 +127,7 @@ public class CliBoard {
 
                 //New Line
             case"#?":
-                System.out.println();
+                System.out.println(RESET);
                 break;
                 //Powerup or Armory
             case "%%%":
@@ -157,6 +159,12 @@ public class CliBoard {
                 System.out.println();
                 createBoard3(model.getOwner());
                 System.out.println();
+                break;
+            case"#KILLSHOT_T":
+                createKillshotTrack();
+                break;
+            case"#ARMORY":
+                createAmory();
                 break;
             case "":
                 break;
@@ -210,9 +218,10 @@ public class CliBoard {
         int col =getColNum(room);
         String key=row+":"+col;
         VirtualCell cell = model.getBoard().getMap().getCells().get(key);
-        if(cell.isArmory())
-            System.out.print(ARMORY);
-        else
+        if(cell.isArmory()) {
+            armory.add(cell.getContent());
+            System.out.print(ARMORY+armory.size());
+        }else
             colorizeCP(cell.getContent());
 
         System.out.print(lastColor);
@@ -220,6 +229,60 @@ public class CliBoard {
     }
 
     /*PLAYER BOARD ZONE*/
+
+    public void createAmory(){
+        int i = 1;
+        for (String s: armory) {
+            System.out.println(BLACK +i + "- "+ s.replace(INFO_SEP,",   "));
+            i++;
+        }
+    }
+
+
+    public void createKillshotTrack(){
+        ArrayList<String> kill=model.getBoard().getKillshotTrack();
+        int skullMax= model.getBoard().getSkull();
+
+        String[] temp;
+        int i=0;
+        int h=0;
+        int k=0;
+        int totalSkull=skullMax+kill.size();
+        for (; totalSkull < 8; totalSkull++) {
+            System.out.print("[  ]");
+            i=i+4;
+            k++;
+        }
+        for(String s : kill){
+            k++;
+            if(k<9) {
+                System.out.print("[");
+                i++;
+            }
+            temp=s.split(INNER_SEP);
+            for(String j:temp){
+                printToken(j);
+                i++;
+                h++;
+            }
+            for (; h < 2; h++) {
+                System.out.print(" ");
+                i++;
+            }
+            h=0;
+            if(k<9) {
+                System.out.print("]");
+                i++;
+            }
+        }
+        for (; k < 8; k++) {
+            System.out.print("[" +SKULL_T+ " ]");
+            i=i+3;
+        }
+        for (; i < KILLSHOT_SPACE; i++) {
+            System.out.print(" ");
+        }
+    }
 
     /**
      * print player board info in the right spot on map

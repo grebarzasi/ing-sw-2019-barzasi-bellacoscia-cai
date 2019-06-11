@@ -8,8 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
-import static it.polimi.ingsw.connection.ConnMessage.NOTHING;
+import static it.polimi.ingsw.connection.ConnMessage.*;
 
 /**
  * @author Gregorio Barzasi
@@ -126,9 +125,11 @@ public class UpdateParser {
 
         //parse killshotTrack
         ArrayList<String> kills = new ArrayList<>();
-        Iterator<JsonNode> killIter = node.path("killshot_track").elements();
-        while (killIter.hasNext())
-            kills.add(killIter.next().toString().replace("\"", ""));
+        String all=node.path("killshot_truck").asText();
+        String[] outer = all.split(INFO_SEP);
+
+        for(String s : outer)
+            kills.add(s);
         model.getBoard().setKillshotTrack(kills);
 
         //parse cells

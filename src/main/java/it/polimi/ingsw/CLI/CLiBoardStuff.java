@@ -16,7 +16,7 @@ public class CLiBoardStuff {
     public static final String GRAY_P = WHITE_BACKGROUND_BRIGHT+" "+RESET;
     public static final String YELLOW_P = YELLOW_BACKGROUND_BRIGHT+" "+RESET;
 
-    public static final String ARMORY = " @ ";
+    public static final String ARMORY = " @";
     //public static final String ARMORY = " ۩ ";
     public static final String AMMO = "+";
     //public static final String AMMO = "ѻ";
@@ -54,4 +54,5 @@ public class CLiBoardStuff {
     public static final int MARKS_SPACE =10;
     public static final int DAMAGE_SPACE =12;
     public static final int WEAPON_SPACE = 25;
+    public static final int KILLSHOT_SPACE = 46;
 }

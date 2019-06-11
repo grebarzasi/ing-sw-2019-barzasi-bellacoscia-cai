@@ -37,7 +37,7 @@ public class KillshotTrack {
     }
 
     public void removeSkull() {
-        this.skullMax --;
+        skullMax --;
     }
 
     public void addKill(ArrayList <Token> token) {
