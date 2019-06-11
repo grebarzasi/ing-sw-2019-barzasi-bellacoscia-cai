@@ -117,6 +117,8 @@ public class ActionBuilder {
 
         }
 
+        actions.add(new Action("End Turn", 0));
+
         return actions;
     }
 
