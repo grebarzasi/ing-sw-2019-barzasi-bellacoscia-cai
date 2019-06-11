@@ -44,6 +44,7 @@ public class UpdateParser {
         while (characterIterator.hasNext()){
             String character = characterIterator.next();
             //if is a new player, add
+
             if(model.findPlayer(character)==null)
                 model.getAllPlayers().add(new VirtualPlayer(node.path(character).path("username").asText(),character));
             VirtualPlayer player = model.findPlayer(character);
