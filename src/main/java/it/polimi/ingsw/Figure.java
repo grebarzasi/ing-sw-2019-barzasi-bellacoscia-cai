@@ -395,6 +395,7 @@ public abstract class Figure {
 
         this.getPersonalBoard().resetDamage();
         this.getPersonalBoard().addSkull();
+        this.isDead = true;
 
     }
 

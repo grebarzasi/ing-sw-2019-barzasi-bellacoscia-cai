@@ -50,6 +50,7 @@ public class Spawning implements ControllerState {
 
         }
 
+        this.controller.getCurrentPlayer().setDead(false);
         this.controller.update();
         this.controller.goBack();
 
