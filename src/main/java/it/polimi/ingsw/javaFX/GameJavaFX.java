@@ -27,6 +27,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Set;
 
 import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
 import static it.polimi.ingsw.javaFX.GUIFiles.*;
@@ -88,17 +89,17 @@ RISALIRE ALLA CELLA!!
  *
  * @author Carlo Bellacoscia
  */
-public class GameJavaFX extends Application {
+public class GameJavaFX extends Application implements ViewClient{
 
     private VirtualModel model;
 
     private VirtualGame game;
 
+    UpdateParser parser;
+
     private Font font;
 
-    private boolean move;
-    private boolean pick;
-    private boolean shoot;
+    private String action;
 
     private ArrayList<ArrayList<Button>> btnCell;
     private TextField msg;
@@ -175,13 +176,12 @@ public class GameJavaFX extends Application {
 
         this.model = model ;
 
+        this.parser = new UpdateParser(model);
 
         this.game = new VirtualGame();
         this.font =  new Font(20);;
 
-        this.move = false;
-        this.pick = false;
-        this.shoot = false;
+        this.action = "";
 
         this.btnCell = new ArrayList<>();
         this.msg = new TextField();
@@ -790,7 +790,7 @@ public class GameJavaFX extends Application {
         btnMove.setOnAction(e->{
             if (model.getTurn().getCharacter().equals(model.getOwner().getCharacter()) && btnShoot.getOpacity() == 1) {
 
-                move = true;
+                action = "move";
                 msg.setText(CHOOSE_SQUARE);
                 btnCancel.setOpacity(1);
                 for (ArrayList<Button> btnArr : btnCell) {
@@ -808,7 +808,7 @@ public class GameJavaFX extends Application {
         btnPick.setOnAction(e->{
             if(model.getTurn().getCharacter().equals(model.getOwner().getCharacter()) && btnShoot.getOpacity() == 1) {
 
-                pick = true;
+                action = "pick";
                 msg.setText(CHOOSE_SQUARE);
                 btnCancel.setOpacity(1);
                 for (ArrayList<Button> btnArr : btnCell) {
@@ -822,10 +822,11 @@ public class GameJavaFX extends Application {
             }else
                 msg.setText("Aspetta il tuo turno...");
         });
+
         btnShoot.setOnAction(e->{
             if(model.getTurn().getCharacter().equals(model.getOwner().getCharacter()) && btnShoot.getOpacity() == 1){
 
-                shoot = true;
+                action = "shoot";
                 msg.setText(CHOOSE_PLAYER);
                 btnCancel.setOpacity(1);
                 for (ArrayList<Button> btnArr: btnCell) {
@@ -838,6 +839,17 @@ public class GameJavaFX extends Application {
             }
             }else
                 msg.setText("Aspetta il tuo turno...");
+        });
+
+        btnPowerUp.setOnAction(e->{
+            int j = 0;
+            for (Button btn : pu) {
+                String power = model.getOwner().getPowerUps().get(j);
+                btn.setOnAction(ep->{
+                    game.setPowerup(power);
+                });
+                j++;
+            }
         });
 
 
@@ -1644,6 +1656,7 @@ public class GameJavaFX extends Application {
         }
     }
 
+    @Override
     public String showWeapon(ArrayList<String> args){
 
         Runnable run = () -> {
@@ -1660,8 +1673,6 @@ public class GameJavaFX extends Application {
 
         Platform.runLater(run);
 
-        btnShoot.fire();
-
         while(game.getWeapon().equals(""));
         String res;
         res = game.getWeapon();
@@ -1671,6 +1682,142 @@ public class GameJavaFX extends Application {
         return res;
     }
 
+    @Override
+    public String showPowerUp(ArrayList<String> args) {
+        Runnable run = () -> {
+            DropShadow borderGlow = new DropShadow();
+            borderGlow.setColor(Color.WHITE);
+            borderGlow.setHeight(50);
+            borderGlow.setWidth(50);
+            borderGlow.setOffsetX(0f);
+            borderGlow.setOffsetY(0f);
+            for (Button btn : pu) {
+                btn.setEffect(borderGlow);
+            }
+        };
+
+        Platform.runLater(run);
+
+        while(game.getPowerup().equals(""));
+        String res;
+        res = game.getPowerup();
+
+        game.setWeapon("");
+
+        return res;
+    }
+
+    @Override
+    public String showActions(ArrayList<String> args) {
+        Runnable run = () -> {
+            for (String act : args) {
+                switch(act){
+                    case("move"):{
+                        btnMove.setOpacity(1);
+                        break;
+                    }
+                    case("pick"):{
+                        btnPick.setOpacity(1);
+                        break;
+                    }case("shoot"):{
+                        btnShoot.setOpacity(1);
+                        break;
+                    }case("reload"):{
+                        btnReload.setOpacity(1);
+                        break;
+                    }case("terminator"):{
+                        btnTerminator.setOpacity(1);
+                        break;
+                    }case("power_up"):{
+                        btnPowerUp.setOpacity(1);
+                        break;
+                    }
+                }
+            }
+        };
+
+        Platform.runLater(run);
+        while(action.equals(""));
+        String res = action;
+        action = "";
+
+        return res;
+    }
+
+    @Override
+    public String showPossibleMoves(ArrayList<String> args) {
+        Runnable run = () -> {
+            for (ArrayList<Button> btnArr : btnCell) {
+                hideCell(btnArr,0.5);
+            }
+            for(String s: args){
+                hideCell(btnCell.get(getCoordinate(s)),0);
+            }
+        };
+
+        Platform.runLater(run);
+
+        while(game.getTargetSquare().equals(""));
+        String res = game.getTargetSquare();
+        game.setTargetSquare("");
+
+        return res;
+    }
+
+    @Override
+    public String showTargets(ArrayList<String> args) {
+        Runnable run = () -> {
+
+        };
+
+        Platform.runLater(run);
+        return null;
+    }
+
+    @Override
+    public String chooseDirection() {
+        Runnable run = () -> {
+
+        };
+
+        Platform.runLater(run);
+        return null;
+    }
+
+    @Override
+    public String showEffects(Set<String> args) {
+        return null;
+    }
+
+    @Override
+    public boolean showBoolean(String message) {
+        Runnable run = () -> {
+
+        };
+
+        Platform.runLater(run);
+        return false;
+    }
+
+    @Override
+    public void displayMessage(String message) {
+        msg.setText(message);
+    }
+
+    @Override
+    public void displayLeaderboard() {
+    }
+
+    @Override
+    public String singleTargetingShowTarget(ArrayList<String> args) {
+        return null;
+    }
+
+    @Override
+    public void updateModel(String message) {
+        parser.updateModel(message);
+        update();
+    }
 
     public class infoWindow extends Stage {
 

@@ -16,6 +16,8 @@ public class VirtualGame {
     private ArrayList<String> hideSquare = new ArrayList<>();
     private ArrayList<String> ammoTiles = new ArrayList<>();
 
+    private ArrayList<String> actions = new ArrayList<>();
+
     public VirtualGame() {
         hideSquare.add("0:0");
         hideSquare.add("0:1");
