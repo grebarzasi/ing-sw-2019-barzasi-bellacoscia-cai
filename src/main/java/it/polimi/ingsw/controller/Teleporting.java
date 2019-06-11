@@ -49,12 +49,15 @@ public class Teleporting implements ControllerState {
         }else{
 
             this.controller.getCurrentPlayer().setPosition(choice);
-            this.controller.setCurrentState(this.controller.choosingMove);
-            this.controller.getCurrentPlayer().removePowerUp(this.using);
+
             this.controller.getModel().getBoard().getPowerupDeck().getDiscarded().add(this.using);
+            this.controller.getCurrentPlayer().removePowerUp(this.using);
+            this.controller.update();
+            this.controller.goBack();
         }
 
     }
+
 
 
     public PowerUp getUsing() {

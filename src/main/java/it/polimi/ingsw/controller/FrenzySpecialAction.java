@@ -37,6 +37,8 @@ public class FrenzySpecialAction implements ControllerState {
 
         //TODO shooting part
 
+        this.controller.update();
+
     }
 
     public FrenzySpecialAction(Controller controller) {

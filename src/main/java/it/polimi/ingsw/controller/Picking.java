@@ -48,6 +48,8 @@ public class Picking implements ControllerState{
         if (this.controller.getCurrentPlayer().getPowerupList().size() < max) {
 
             this.controller.getCurrentPlayer().addPowerUp(chosen);
+            this.controller.update();
+            this.controller.goBack();
 
         } else {
 
@@ -60,6 +62,8 @@ public class Picking implements ControllerState{
             this.controller.getCurrentPlayer().getPowerupList().clear();
             this.controller.getCurrentPlayer().getPowerupList().addAll(options);
             this.controller.dereaseMoveLeft();
+            this.controller.update();
+            this.controller.goBack();
 
         }
 

@@ -28,6 +28,7 @@ public class ChoosingMove implements ControllerState{
     @Override
     public void command() {
 
+
         this.options = new ArrayList<>();
 
         options = ActionBuilder.build(controller.getCurrentPlayer(), this.controller.getModel().isFrenzy());

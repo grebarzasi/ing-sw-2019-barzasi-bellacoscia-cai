@@ -71,7 +71,8 @@ public class Spawning implements ControllerState {
         Square spawnPoint = powerUptoSpawn(choice);
 
         this.controller.getCurrentPlayer().setPosition(spawnPoint);
-        this.controller.setCurrentState(this.controller.choosingMove);
+        this.controller.update();
+        this.controller.goBack();
 
     }
 

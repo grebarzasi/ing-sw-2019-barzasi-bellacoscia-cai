@@ -36,7 +36,8 @@ public class Reloading implements ControllerState {
             this.controller.getView().displayMessage("Non possiedi le risorse per caricare l'arma selezionata");
         }
 
-        this.controller.setCurrentState(this.controller.choosingMove);
+        this.controller.update();
+        this.controller.goBack();
 
     }
 
