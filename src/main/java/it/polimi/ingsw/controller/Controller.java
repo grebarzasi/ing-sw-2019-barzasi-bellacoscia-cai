@@ -172,6 +172,10 @@ public class Controller {
                         this.startFrenzy();
                         this.getCurrentPlayer().setStartedFrenzy(true);
                         this.model.getBoard().refillSquares();
+
+                        this.goBack();
+                        this.model.setFrenzyState(this.model.getFrenzyState() + 1);
+
                         if(this.model.getFrenzyState() == this.model.getPlayerList().size()){
                             /*****************GAME_ENDS********************/
                             this.endGame();
@@ -203,6 +207,7 @@ public class Controller {
 
 
         this.model.setTurn(this.model.getTurn() + 1);
+        this.goBack();
 
     }
 
