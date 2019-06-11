@@ -45,11 +45,11 @@ public class SServer extends ConnectionTech {
 
             //loops until game start waiting for other players
 
-            ClientThreadSocket temp;
+            SClientHandler temp;
             while(true){
                 Socket client = server.accept();
                 System.out.println("\n\nconnection established with\n" + client);
-                temp = new ClientThreadSocket(client,mainServer.getLobby());
+                temp = new SClientHandler(client,mainServer.getLobby());
                 temp.start();
             }
 

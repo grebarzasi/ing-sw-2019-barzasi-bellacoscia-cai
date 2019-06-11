@@ -32,7 +32,7 @@ public class ChoosingMove implements ControllerState{
 
         options = ActionBuilder.build(controller.getCurrentPlayer(), this.controller.getModel().isFrenzy());
 
-        Action choice = this.controller.getView().showMoves(options);
+        Action choice = this.controller.getView().showActions(options);
 
         if(this.controller.getCurrentPlayer().isDead()){
 

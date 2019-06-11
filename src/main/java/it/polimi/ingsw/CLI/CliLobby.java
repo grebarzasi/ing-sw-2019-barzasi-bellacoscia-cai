@@ -2,6 +2,7 @@ package it.polimi.ingsw.CLI;
 
 import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.virtual_model.VirtualLobby;
+import it.polimi.ingsw.virtual_model.VirtualModel;
 import it.polimi.ingsw.virtual_model.VirtualPlayer;
 import static it.polimi.ingsw.CLI.CliMessages.*;
 import java.io.BufferedReader;
@@ -133,9 +134,13 @@ public class CliLobby extends Thread{
             }
 
         }
+        gameStart();
 
     }
 
+    public void gameStart(){
+        new CliGame(c).gameStart();
+    }
 
 
 }

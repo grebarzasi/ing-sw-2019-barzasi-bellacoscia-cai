@@ -37,7 +37,7 @@ public interface View {
      * @return the chosen one
      */
 
-    public Action showMoves(ArrayList<Action> args);
+    public Action showActions(ArrayList<Action> args);
 
     /**
      * Shows the possible destinations a figure can reach and then returns the chosen value
@@ -54,7 +54,7 @@ public interface View {
      * @return the chosen targets
      */
 
-    public ArrayList<Figure> showMultipleTargets(ArrayList<Figure> args);
+    public ArrayList<Figure> showTargets(ArrayList<Figure> args);
 
     /**
      * Shows the valid targets a Figure can target, then returns the chosen one
@@ -62,6 +62,14 @@ public interface View {
      * @return the chosen one
      */
 
+    public String chooseDirection();
+
+    /**
+     * Displays a message and makes the user make a boolean choice
+     *
+     * @param message the question's message
+     * @return the user's choice
+     */
     public Figure singleTargetingShowTarget(ArrayList<Figure> args);
 
     /**
@@ -71,7 +79,7 @@ public interface View {
      * @return the user's choice
      */
 
-    public boolean showBoolean(String message);
+    public Boolean showBoolean(String message);
 
     /**
      * Displays a message to the user
@@ -86,6 +94,8 @@ public interface View {
      */
 
     public void displayLeaderboard();
+
+    public boolean sendsUpdate(String s);
 
     public Effect showEffects(Set<Effect> args);
 

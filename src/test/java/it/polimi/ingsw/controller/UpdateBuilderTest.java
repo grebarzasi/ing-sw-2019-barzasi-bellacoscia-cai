@@ -2,9 +2,6 @@ package it.polimi.ingsw.controller;
 
 
 import com.fasterxml.jackson.databind.JsonNode;
-import it.polimi.ingsw.CLI.CliBoard;
-import it.polimi.ingsw.CLI.CliGame;
-import it.polimi.ingsw.CLI.CliView;
 import it.polimi.ingsw.Lobby;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.PlayerBoard;
@@ -18,9 +15,8 @@ import it.polimi.ingsw.cards.Deck;
 import it.polimi.ingsw.cards.WeaponDeck;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Weapon;
-import it.polimi.ingsw.connection.socket.ClientThreadSocket;
+import it.polimi.ingsw.connection.socket.SClientHandler;
 import it.polimi.ingsw.virtual_model.UpdateParser;
-import it.polimi.ingsw.virtual_model.VirtualCell;
 import it.polimi.ingsw.virtual_model.VirtualModel;
 import it.polimi.ingsw.virtual_model.VirtualPlayer;
 import org.junit.jupiter.api.Test;
@@ -30,18 +26,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 
-class GameStateJsonBuilderTest {
+class UpdateBuilderTest {
 
     @Test
     void create() throws IOException {
         Lobby lobby = new Lobby();
-        ClientThreadSocket a =new ClientThreadSocket(lobby);
-        ClientThreadSocket b =new ClientThreadSocket(lobby);
-        ClientThreadSocket c =new ClientThreadSocket(lobby);
-        ClientThreadSocket d =new ClientThreadSocket(lobby);
+        SClientHandler a =new SClientHandler(lobby);
+        SClientHandler b =new SClientHandler(lobby);
+        SClientHandler c =new SClientHandler(lobby);
+        SClientHandler d =new SClientHandler(lobby);
 
         Player p1 = a.getOwner();
         Player p2 = b.getOwner();
@@ -180,7 +175,7 @@ class GameStateJsonBuilderTest {
         p4.getPersonalBoard().setPointVec(test2);
 
 
-        JsonNode node = new GameStateJsonBuilder(contr).create();
+        JsonNode node = new UpdateBuilder(contr).create();
         VirtualModel vmodel = new VirtualModel();
         vmodel.setOwner(new VirtualPlayer("gre","red"));
         UpdateParser parser=new UpdateParser(vmodel);

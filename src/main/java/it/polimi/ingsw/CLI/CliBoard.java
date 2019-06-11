@@ -1,6 +1,7 @@
 package it.polimi.ingsw.CLI;
 
 
+import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.virtual_model.GameInitializer;
 import it.polimi.ingsw.virtual_model.VirtualCell;
 import it.polimi.ingsw.virtual_model.VirtualModel;
@@ -8,7 +9,6 @@ import it.polimi.ingsw.virtual_model.VirtualPlayer;
 import static it.polimi.ingsw.CLI.CLiBoardStuff.*;
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
@@ -24,6 +24,7 @@ public class CliBoard {
     private int cellsPlnum=12;
     private int cellsCPnum=12;
     private int boardPrinted=0;
+
 
     private ArrayList<String> weaponTemp;
     private VirtualModel model;
@@ -490,6 +491,14 @@ public class CliBoard {
                 pawn="";
         }
         System.out.print(pawn);
+    }
+
+    public VirtualModel getModel() {
+        return model;
+    }
+
+    public void setModel(VirtualModel model) {
+        this.model = model;
     }
 
     public static void main(String[] args){

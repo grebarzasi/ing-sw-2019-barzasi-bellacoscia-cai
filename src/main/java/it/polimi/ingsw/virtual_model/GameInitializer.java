@@ -4,7 +4,6 @@ package it.polimi.ingsw.virtual_model;
 import com.fasterxml.jackson.databind.JsonNode;
 import it.polimi.ingsw.Lobby;
 import it.polimi.ingsw.Player;
-import it.polimi.ingsw.PlayerBoard;
 import it.polimi.ingsw.Token;
 import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.map.Map;
@@ -14,9 +13,9 @@ import it.polimi.ingsw.cards.Deck;
 import it.polimi.ingsw.cards.WeaponDeck;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Weapon;
-import it.polimi.ingsw.connection.socket.ClientThreadSocket;
+import it.polimi.ingsw.connection.socket.SClientHandler;
 import it.polimi.ingsw.controller.Controller;
-import it.polimi.ingsw.controller.GameStateJsonBuilder;
+import it.polimi.ingsw.controller.UpdateBuilder;
 import it.polimi.ingsw.javaFX.GameJavaFX;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -47,10 +46,10 @@ public class GameInitializer extends Application {
 
     public void initAll() throws IOException {
         Lobby lobby = new Lobby();
-        ClientThreadSocket a =new ClientThreadSocket(lobby);
-        ClientThreadSocket b =new ClientThreadSocket(lobby);
-        ClientThreadSocket c =new ClientThreadSocket(lobby);
-        ClientThreadSocket d =new ClientThreadSocket(lobby);
+        SClientHandler a =new SClientHandler(lobby);
+        SClientHandler b =new SClientHandler(lobby);
+        SClientHandler c =new SClientHandler(lobby);
+        SClientHandler d =new SClientHandler(lobby);
 
         Player p1 = a.getOwner();
         Player p2 = b.getOwner();
@@ -186,7 +185,7 @@ public class GameInitializer extends Application {
         p4.getPersonalBoard().setPointVec(test2);
 
 
-        JsonNode node = new GameStateJsonBuilder(contr).create();
+        JsonNode node = new UpdateBuilder(contr).create();
         vmodel = new VirtualModel();
         vmodel.setOwner(new VirtualPlayer("gre","red"));
         UpdateParser parser=new UpdateParser(vmodel);

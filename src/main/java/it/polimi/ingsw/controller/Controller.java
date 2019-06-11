@@ -4,9 +4,10 @@ import it.polimi.ingsw.*;
 import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.Ammo;
-import it.polimi.ingsw.connection.socket.ClientThreadSocket;
+import it.polimi.ingsw.connection.socket.SClientHandler;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -55,14 +56,15 @@ public class Controller {
     private boolean hasBot;
     private GameModel model;
     private View view;
+    private UpdateBuilder marshal;
 
     //Starts the game from a lobby
 
     public Controller(Lobby lobby) {
-
+        this.marshal=new UpdateBuilder(this);
         ArrayList<Player> playerList = new ArrayList<>();
 
-        for(ClientThreadSocket s: lobby.getJoinedPlayers()){
+        for(SClientHandler s: lobby.getJoinedPlayers()){
             playerList.add(s.getOwner());
         }
 
@@ -263,6 +265,10 @@ public class Controller {
 
         return options;
 
+    }
+
+    public void update(){
+        this.view.sendsUpdate(marshal.create().toString());
     }
 
     public Board getBoard() {

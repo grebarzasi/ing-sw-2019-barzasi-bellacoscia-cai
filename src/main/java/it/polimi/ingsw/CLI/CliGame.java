@@ -1,6 +1,11 @@
 package it.polimi.ingsw.CLI;
 
+import it.polimi.ingsw.connection.ConnectionTech;
+import it.polimi.ingsw.connection.socket.SClient;
+import it.polimi.ingsw.virtual_model.SClientCommManager;
+import it.polimi.ingsw.virtual_model.UpdateParser;
 import it.polimi.ingsw.virtual_model.ViewClient;
+import it.polimi.ingsw.virtual_model.VirtualModel;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,15 +16,36 @@ import java.util.Set;
 import static it.polimi.ingsw.CLI.CliColor.*;
 import static it.polimi.ingsw.CLI.CliMessages.*;
 import static it.polimi.ingsw.connection.ConnMessage.*;
+import static java.lang.Thread.sleep;
 
 public class CliGame implements ViewClient {
 
     private BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
 
     private CliBoard board;
+    private UpdateParser parser;
+    private ConnectionTech c;
 
-    public CliGame(CliBoard board){
-        this.board=board;
+    public CliGame(ConnectionTech c){
+        this.board=new CliBoard(new VirtualModel());
+        this.parser=new UpdateParser(board.getModel());
+        this.c=c;
+    }
+
+    public void gameStart(){
+        if(!c.isRmi())
+            ((SClient)c).setCommManager(new SClientCommManager(((SClient)c),this));
+        ((SClient)c).getCommManager().start();
+        System.out.print("waiting for game start");
+        while(!board.getModel().isUpdated()){
+            try {
+                sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.print(".");
+        }
+        board.draw();
     }
 
     public String genericChoice(ArrayList<String> args,String q, String error) {
@@ -162,6 +188,29 @@ public class CliGame implements ViewClient {
     }
 
     public void updateModel(String message) {
+        parser.updateModel(message);
+    }
 
+    /**
+     * Show the possible moves that a player can perform then makes the user choose one,
+     * then returns it
+     *
+     * @param args the moves to show
+     * @return the chosen one
+     */
+    @Override
+    public String showActions(ArrayList<String> args) {
+        return null;
+    }
+
+    /**
+     * Displays a message and makes the user make a boolean choice
+     *
+     * @param args
+     * @return the user's choice
+     */
+    @Override
+    public String singleTargetingShowTarget(ArrayList<String> args) {
+        return null;
     }
 }

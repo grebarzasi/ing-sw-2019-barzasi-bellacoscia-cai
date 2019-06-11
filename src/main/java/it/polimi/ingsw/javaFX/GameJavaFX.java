@@ -2,13 +2,11 @@ package it.polimi.ingsw.javaFX;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import it.polimi.ingsw.cards.Ammo;
 
 
-import it.polimi.ingsw.cards.weapon.Weapon;
 import it.polimi.ingsw.virtual_model.*;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -23,14 +21,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import org.json.simple.JSONObject;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Set;
 
 import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
 import static it.polimi.ingsw.javaFX.GUIFiles.*;
@@ -92,17 +89,17 @@ RISALIRE ALLA CELLA!!
  *
  * @author Carlo Bellacoscia
  */
-public class GameJavaFX extends Application {
+public class GameJavaFX extends Application implements ViewClient{
 
     private VirtualModel model;
 
     private VirtualGame game;
 
+    UpdateParser parser;
+
     private Font font;
 
-    private boolean move;
-    private boolean pick;
-    private boolean shoot;
+    private String action;
 
     private ArrayList<ArrayList<Button>> btnCell;
     private TextField msg;
@@ -112,9 +109,12 @@ public class GameJavaFX extends Application {
     private Button btnMove;
     private Button btnPick;
     private Button btnShoot;
-    private Button btnRel;
+    private Button btnReload;
     private Button btnCancel;
     private Button btnDeck;
+    private Button btnTerminator;
+    private Button btnPowerUp;
+
 
     private GridPane gridPBoard;
 
@@ -134,18 +134,21 @@ public class GameJavaFX extends Application {
     private GridPane gridOtherBoard3;
     private GridPane gridOtherBoard4;
     private GridPane gridOtherBoard5;
+    private ArrayList<GridPane> gridOtherBoards;
 
     private ArrayList<Button> weOther1;
     private ArrayList<Button> weOther2;
     private ArrayList<Button> weOther3;
     private ArrayList<Button> weOther4;
     private  ArrayList<Button> weOther5;
+    private ArrayList<ArrayList<Button>> otherWe;
 
     private GridPane gridOtherAmmo1;
     private GridPane gridOtherAmmo2;
     private GridPane gridOtherAmmo3;
     private GridPane gridOtherAmmo4;
     private GridPane gridOtherAmmo5;
+    private ArrayList<GridPane> gridOtherAmmo;
 
     private double widthScreen;
     private double widthLateral;
@@ -173,13 +176,12 @@ public class GameJavaFX extends Application {
 
         this.model = model ;
 
+        this.parser = new UpdateParser(model);
 
         this.game = new VirtualGame();
         this.font =  new Font(20);;
 
-        this.move = false;
-        this.pick = false;
-        this.shoot = false;
+        this.action = "";
 
         this.btnCell = new ArrayList<>();
         this.msg = new TextField();
@@ -188,8 +190,10 @@ public class GameJavaFX extends Application {
         this.btnMove = new Button("Muovi");
         this.btnPick = new Button("Raccogli");
         this.btnShoot = new Button("Spara");
-        this.btnRel = new Button("Ricarica");
+        this.btnReload = new Button("Ricarica");
         this.btnCancel = new Button("Annulla");
+        this.btnTerminator = new Button("Terminator");
+        this.btnPowerUp = new Button("Power-up");
         this.btnDeck = new Button();
         this.gridPBoard = new GridPane();
 
@@ -207,16 +211,19 @@ public class GameJavaFX extends Application {
         this.gridOtherBoard3 = new GridPane();
         this.gridOtherBoard4 = new GridPane();
         this.gridOtherBoard5 = new GridPane();
+        this.gridOtherBoards = new ArrayList<>();
         this.weOther1 = new ArrayList<>();
         this.weOther2 = new ArrayList<>();
         this.weOther3 = new ArrayList<>();
         this.weOther4 = new ArrayList<>();
         this.weOther5 = new ArrayList<>();
+        this.otherWe = new ArrayList<>();
         this.gridOtherAmmo1 = new GridPane();
         this.gridOtherAmmo2 = new GridPane();
         this.gridOtherAmmo3 = new GridPane();
         this.gridOtherAmmo4 = new GridPane();
         this.gridOtherAmmo5 = new GridPane();
+        this.gridOtherAmmo = new ArrayList<>();
 
         this.widthScreen = Screen.getPrimary().getBounds().getWidth();
         this.widthLateral = widthScreen/4;
@@ -522,13 +529,6 @@ public class GameJavaFX extends Application {
         Image imgWe = null;
         Image imgPPU = null;
 
-        try {
-            imgWe = new Image(new FileInputStream(PATH_BACK_WEAPON),widthCard,heightCard,true,true);
-            imgPPU = new Image(new FileInputStream(PATH_BACK_POWERUP),widthCard-20,heightCard-20,true,true);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
         btnPwe1.setPrefSize(widthCard,heightCard);
         btnPwe2.setPrefSize(widthCard,heightCard);
         btnPwe3.setPrefSize(widthCard,heightCard);
@@ -584,6 +584,18 @@ public class GameJavaFX extends Application {
         /**
          * set other boards
          */
+        gridOtherBoards.add(gridOtherBoard1);
+        gridOtherBoards.add(gridOtherBoard2);
+        gridOtherBoards.add(gridOtherBoard3);
+        gridOtherBoards.add(gridOtherBoard4);
+        gridOtherBoards.add(gridOtherBoard5);
+
+        gridOtherAmmo.add(gridOtherAmmo1);
+        gridOtherAmmo.add(gridOtherAmmo2);
+        gridOtherAmmo.add(gridOtherAmmo3);
+        gridOtherAmmo.add(gridOtherAmmo4);
+        gridOtherAmmo.add(gridOtherAmmo5);
+
         GridPane gridOther = new GridPane();
         gridOther.setAlignment(Pos.CENTER);
 
@@ -645,70 +657,69 @@ public class GameJavaFX extends Application {
         Image imgOther4;
         Image imgOther5;
 
-
-
-
-        for (VirtualPlayer p : model.getAllPlayers() ) {
-            if(!p.getCharacter().equals(model.getOwner().getCharacter())){
-                switch (p.getCharacter()) {
-                    case "yellow": {
-                        imgOther1 = setBoard(p.getCharacter(), widthOther, heightOtherBoard);
-                        setGridBack(gridOtherBoard1,imgOther1);
-                        weOther1 = setOtherWeapon(gridOtherWe,0,widthOtherWeapon,heightOtherWeapon);
-                        break;
-                    }
-                    case "red": {
-                        imgOther2 = setBoard(p.getCharacter(), widthOther, heightOtherBoard);
-                        setGridBack(gridOtherBoard2,imgOther2);
-                        weOther2 = setOtherWeapon(gridOtherWe,1,widthOtherWeapon,heightOtherWeapon);
-                        break;
-                    }
-                    case "blue": {
-                        imgOther3 = setBoard(p.getCharacter(), widthOther, heightOtherBoard);
-                        setGridBack(gridOtherBoard3,imgOther3);
-                        weOther3 = setOtherWeapon(gridOtherWe,2,widthOtherWeapon,heightOtherWeapon);
-                        break;
-                    }
-                    case "green": {
-                        imgOther4 = setBoard(p.getCharacter(), widthOther, heightOtherBoard);
-                        setGridBack(gridOtherBoard4,imgOther4);
-                        weOther4 = setOtherWeapon(gridOtherWe,3,widthOtherWeapon,heightOtherWeapon);
-                        break;
-                    }
-                    case "grey": {
-                        imgOther5 = setBoard(p.getCharacter(), widthOther, heightOtherBoard);
-                        setGridBack(gridOtherBoard5,imgOther5);
-                        weOther5 = setOtherWeapon(gridOtherWe,4,widthOtherWeapon,heightOtherWeapon);
-                        break;
-                    }
-                }
-            }
-        }
-
-        ArrayList<ArrayList<Button>> weOther = new ArrayList<>();
-        weOther.add(weOther1);
-        weOther.add(weOther2);
-        weOther.add(weOther3);
-        weOther.add(weOther4);
-        weOther.add(weOther5);
-
-
-        gridOtherSpace1.add(gridOtherBoard1,0,0);
-        gridOtherSpace1.add(gridOtherAmmo1,0,1);
-        gridOtherSpace2.add(gridOtherBoard2,0,0);
-        gridOtherSpace2.add(gridOtherAmmo2,0,1);
-        gridOtherSpace3.add(gridOtherBoard3,0,0);
-        gridOtherSpace3.add(gridOtherAmmo3,0,1);
-        gridOtherSpace4.add(gridOtherBoard4,0,0);
-        gridOtherSpace4.add(gridOtherAmmo4,0,1);
-        gridOtherSpace5.add(gridOtherBoard5,0,0);
-        gridOtherSpace5.add(gridOtherAmmo5,0,1);
-
         setCellBoard(gridOtherBoard1,widthOther,heightOtherBoard);
         setCellBoard(gridOtherBoard2,widthOther,heightOtherBoard);
         setCellBoard(gridOtherBoard3,widthOther,heightOtherBoard);
         setCellBoard(gridOtherBoard4,widthOther,heightOtherBoard);
         setCellBoard(gridOtherBoard5,widthOther,heightOtherBoard);
+
+        int i = 0;
+        for (VirtualPlayer p : model.getAllPlayers() ) {
+            if(!p.getCharacter().equals(model.getOwner().getCharacter())){
+                switch (p.getCharacter()) {
+                    case "yellow": {
+                        imgOther1 = setBoard(p.getCharacter(), widthOther, heightOtherBoard);
+                        setGridBack(gridOtherBoards.get(i),imgOther1);
+                        weOther1 = setOtherWeapon(gridOtherWe,0,widthOtherWeapon,heightOtherWeapon);
+                        break;
+                    }
+                    case "red": {
+                        imgOther2 = setBoard(p.getCharacter(), widthOther, heightOtherBoard);
+                        setGridBack(gridOtherBoards.get(i),imgOther2);
+                        weOther2 = setOtherWeapon(gridOtherWe,1,widthOtherWeapon,heightOtherWeapon);
+                        break;
+                    }
+                    case "blue": {
+                        imgOther3 = setBoard(p.getCharacter(), widthOther, heightOtherBoard);
+                        setGridBack(gridOtherBoards.get(i),imgOther3);
+                        weOther3 = setOtherWeapon(gridOtherWe,2,widthOtherWeapon,heightOtherWeapon);
+                        break;
+                    }
+                    case "green": {
+                        imgOther4 = setBoard(p.getCharacter(), widthOther, heightOtherBoard);
+                        setGridBack(gridOtherBoards.get(i),imgOther4);
+                        weOther4 = setOtherWeapon(gridOtherWe,3,widthOtherWeapon,heightOtherWeapon);
+                        break;
+                    }
+                    case "grey": {
+                        imgOther5 = setBoard(p.getCharacter(), widthOther, heightOtherBoard);
+                        setGridBack(gridOtherBoards.get(i),imgOther5);
+                        weOther5 = setOtherWeapon(gridOtherWe,4,widthOtherWeapon,heightOtherWeapon);
+                        break;
+                    }
+                }
+                i++;
+            }
+        }
+
+        otherWe.add(weOther1);
+        otherWe.add(weOther2);
+        otherWe.add(weOther3);
+        otherWe.add(weOther4);
+        otherWe.add(weOther5);
+
+        ArrayList<GridPane> gridOtherSpace = new ArrayList<>();
+        gridOtherSpace.add(gridOtherSpace1);
+        gridOtherSpace.add(gridOtherSpace2);
+        gridOtherSpace.add(gridOtherSpace3);
+        gridOtherSpace.add(gridOtherSpace4);
+        gridOtherSpace.add(gridOtherSpace5);
+
+
+        for(int j = 0; j < 4; j++) {
+            gridOtherSpace.get(j).add(gridOtherBoards.get(j), 0, 0);
+            gridOtherSpace.get(j).add(gridOtherAmmo.get(j), 0, 1);
+        }
 
 
         /**
@@ -733,13 +744,16 @@ public class GameJavaFX extends Application {
         msg.setEditable(false);
 
         btnCancel.setOpacity(0);
-        btnRel.setOpacity(0);
+        btnReload.setOpacity(0);
+        btnTerminator.setOpacity(0);
         HBox hBtn = new HBox(30);
         hBtn.setAlignment(Pos.CENTER);
-        hBtn.getChildren().add(btnRel);
+        hBtn.getChildren().add(btnTerminator);
+        hBtn.getChildren().add(btnPowerUp);
         hBtn.getChildren().add(btnMove);
         hBtn.getChildren().add(btnPick);
         hBtn.getChildren().add(btnShoot);
+        hBtn.getChildren().add(btnReload);
         hBtn.getChildren().add(btnCancel);
 
         VBox vmsg = new VBox(25);
@@ -776,7 +790,7 @@ public class GameJavaFX extends Application {
         btnMove.setOnAction(e->{
             if (model.getTurn().getCharacter().equals(model.getOwner().getCharacter()) && btnShoot.getOpacity() == 1) {
 
-                move = true;
+                action = "move";
                 msg.setText(CHOOSE_SQUARE);
                 btnCancel.setOpacity(1);
                 for (ArrayList<Button> btnArr : btnCell) {
@@ -794,7 +808,7 @@ public class GameJavaFX extends Application {
         btnPick.setOnAction(e->{
             if(model.getTurn().getCharacter().equals(model.getOwner().getCharacter()) && btnShoot.getOpacity() == 1) {
 
-                pick = true;
+                action = "pick";
                 msg.setText(CHOOSE_SQUARE);
                 btnCancel.setOpacity(1);
                 for (ArrayList<Button> btnArr : btnCell) {
@@ -808,32 +822,49 @@ public class GameJavaFX extends Application {
             }else
                 msg.setText("Aspetta il tuo turno...");
         });
+
         btnShoot.setOnAction(e->{
             if(model.getTurn().getCharacter().equals(model.getOwner().getCharacter()) && btnShoot.getOpacity() == 1){
 
-                shoot = true;
+                action = "shoot";
                 msg.setText(CHOOSE_PLAYER);
                 btnCancel.setOpacity(1);
                 for (ArrayList<Button> btnArr: btnCell) {
                 choosePlayer(btnArr, btnCell.indexOf(btnArr));
+                    for (Button btn : we) {
+                        btn.setOnAction(es->{
+                            game.setWeapon(model.getOwner().getWeapons().get(we.indexOf(btn)));
+                        });
+                    }
             }
             }else
                 msg.setText("Aspetta il tuo turno...");
         });
 
+        btnPowerUp.setOnAction(e->{
+            int j = 0;
+            for (Button btn : pu) {
+                String power = model.getOwner().getPowerUps().get(j);
+                btn.setOnAction(ep->{
+                    game.setPowerup(power);
+                });
+                j++;
+            }
+        });
+
 
         for (Button btn : we) {
             btn.setOnAction(e->{
-                int i = we.indexOf(btn);
-                infoWindow iw = new infoWindow(model.getOwner(),i,false);
+                int j = we.indexOf(btn);
+                infoWindow iw = new infoWindow(model.getOwner(),j,false);
                 iw.show();
             });
         }
 
         for (Button btn : pu) {
             btn.setOnAction(e->{
-                int i = pu.indexOf(btn);
-                infoWindow iw = new infoWindow(model.getOwner(),i,true);
+                int j = pu.indexOf(btn);
+                infoWindow iw = new infoWindow(model.getOwner(),j,true);
                 iw.show();
             });
         }
@@ -1374,26 +1405,28 @@ public class GameJavaFX extends Application {
 
         for (String name : p.getWeapons()) {
             wpState = name.split(INNER_SEP);
-            if(wpState[1].equals("true")){
-                Image img = null;
-                try {
-                    img = new Image(new FileInputStream(PATH_WEAPON + wpState[0].toLowerCase().replace(" ", "_").replace("-","_") + ".png"),width, height, true,true  );
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
+            if (!btnArr.isEmpty()) {
+                if (wpState[1].equals("true")) {
+                    Image img = null;
+                    try {
+                        img = new Image(new FileInputStream(PATH_WEAPON + wpState[0].toLowerCase().replace(" ", "_").replace("-", "_") + ".png"), width, height, true, true);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    setButtonBack(btnArr.get(i), img);
+                    btnArr.get(i).setOpacity(1);
+                    i++;
+                } else {
+                    Image img = null;
+                    try {
+                        img = new Image(new FileInputStream(PATH_BACK_WEAPON), width, height, true, true);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    setButtonBack(btnArr.get(i), img);
+                    btnArr.get(i).setOpacity(1);
+                    i++;
                 }
-                setButtonBack(btnArr.get(i),img);
-                btnArr.get(i).setOpacity(1);
-                i++;
-            } else{
-                Image img = null;
-                try {
-                    img = new Image(new FileInputStream(PATH_BACK_WEAPON),width, height, true,true  );
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-                setButtonBack(btnArr.get(i),img);
-                btnArr.get(i).setOpacity(1);
-                i++;
             }
         }
     }
@@ -1596,51 +1629,18 @@ public class GameJavaFX extends Application {
         fillPowerUp(pu,model.getOwner());
 
 
-
+        int i = 0;
         for (VirtualPlayer p : model.getAllPlayers()) {
 
             if(p.equals(model.getOwner())){
                 continue;
             }
 
-            switch (p.getCharacter()){
-                case("yellow"):{
-                    fillBoard(gridOtherBoard1,p,widthBoard,heightPBoard/5-10, heightPBoard/4-10, heightPBoard/5-10);
-                    fillOtherAmmo(gridOtherAmmo1,p.getpBoard(),widthLateral/7,heightLateral/7);
-                    fillWeapon(weOther1,p,widthOCard/3.7,heightOtherWeapon);
-                    setWeapon(p,weOther1);
-                    break;
-                }
-                case("red"):{
-                    fillBoard(gridOtherBoard2,p,widthBoard,heightPBoard/5-10, heightPBoard/4-10, heightPBoard/5-10);
-                    fillOtherAmmo(gridOtherAmmo2,p.getpBoard(),widthLateral/7,heightLateral/7);
-                    fillWeapon(weOther2,p,widthOCard/3.7,heightOtherWeapon);
-                    setWeapon(p,weOther2);
-                    break;
-                }
-                case("blue"):{
-                    fillBoard(gridOtherBoard3,p,widthBoard,heightPBoard/5-10, heightPBoard/4-10, heightPBoard/5-10);
-                    fillOtherAmmo(gridOtherAmmo3,p.getpBoard(),widthLateral/7,heightLateral/7);
-                    fillWeapon(weOther3,p,widthOCard/3.7,heightOtherWeapon);
-                    setWeapon(p,weOther3);
-                    break;
-                }
-                case("green"):{
-                    fillBoard(gridOtherBoard4,p,widthBoard,heightPBoard/5-10, heightPBoard/4-10, heightPBoard/5-10);
-                    fillOtherAmmo(gridOtherAmmo4,p.getpBoard(),widthLateral/7,heightLateral/7);
-                    fillWeapon(weOther4,p,widthOCard/3.7,heightOtherWeapon);
-                    setWeapon(p,weOther4);
-                    break;
-                }
-                case("grey"):{
-                    fillBoard(gridOtherBoard5,p,widthBoard,heightPBoard/5-10, heightPBoard/4-10, heightPBoard/5-10);
-                    fillOtherAmmo(gridOtherAmmo5,p.getpBoard(),widthLateral/7,heightLateral/7);
-                    fillWeapon(weOther5,p,widthOCard/3.7,heightOtherWeapon);
-                    setWeapon(p,weOther5);
-                    break;
-                }
-            }
-
+            fillBoard(gridOtherBoards.get(i),p,widthBoard,heightPBoard/5-10, heightPBoard/4-10, heightPBoard/5-10);
+            fillOtherAmmo(gridOtherAmmo.get(i),p.getpBoard(),widthLateral/7,heightLateral/7);
+            fillWeapon(otherWe.get(i),p,widthOCard/3.7,heightOtherWeapon);
+            setWeapon(p,otherWe.get(i));
+            i++;
 
         }
 
@@ -1654,6 +1654,169 @@ public class GameJavaFX extends Application {
                 iw.show();
             });
         }
+    }
+
+    @Override
+    public String showWeapon(ArrayList<String> args){
+
+        Runnable run = () -> {
+            DropShadow borderGlow = new DropShadow();
+            borderGlow.setColor(Color.WHITE);
+            borderGlow.setHeight(50);
+            borderGlow.setWidth(50);
+            borderGlow.setOffsetX(0f);
+            borderGlow.setOffsetY(0f);
+            for (Button btn : we) {
+                btn.setEffect(borderGlow);
+            }
+        };
+
+        Platform.runLater(run);
+
+        while(game.getWeapon().equals(""));
+        String res;
+        res = game.getWeapon();
+
+        game.setWeapon("");
+
+        return res;
+    }
+
+    @Override
+    public String showPowerUp(ArrayList<String> args) {
+        Runnable run = () -> {
+            DropShadow borderGlow = new DropShadow();
+            borderGlow.setColor(Color.WHITE);
+            borderGlow.setHeight(50);
+            borderGlow.setWidth(50);
+            borderGlow.setOffsetX(0f);
+            borderGlow.setOffsetY(0f);
+            for (Button btn : pu) {
+                btn.setEffect(borderGlow);
+            }
+        };
+
+        Platform.runLater(run);
+
+        while(game.getPowerup().equals(""));
+        String res;
+        res = game.getPowerup();
+
+        game.setWeapon("");
+
+        return res;
+    }
+
+    @Override
+    public String showActions(ArrayList<String> args) {
+        Runnable run = () -> {
+            for (String act : args) {
+                switch(act){
+                    case("move"):{
+                        btnMove.setOpacity(1);
+                        break;
+                    }
+                    case("pick"):{
+                        btnPick.setOpacity(1);
+                        break;
+                    }case("shoot"):{
+                        btnShoot.setOpacity(1);
+                        break;
+                    }case("reload"):{
+                        btnReload.setOpacity(1);
+                        break;
+                    }case("terminator"):{
+                        btnTerminator.setOpacity(1);
+                        break;
+                    }case("power_up"):{
+                        btnPowerUp.setOpacity(1);
+                        break;
+                    }
+                }
+            }
+        };
+
+        Platform.runLater(run);
+        while(action.equals(""));
+        String res = action;
+        action = "";
+
+        return res;
+    }
+
+    @Override
+    public String showPossibleMoves(ArrayList<String> args) {
+        Runnable run = () -> {
+            for (ArrayList<Button> btnArr : btnCell) {
+                hideCell(btnArr,0.5);
+            }
+            for(String s: args){
+                hideCell(btnCell.get(getCoordinate(s)),0);
+            }
+        };
+
+        Platform.runLater(run);
+
+        while(game.getTargetSquare().equals(""));
+        String res = game.getTargetSquare();
+        game.setTargetSquare("");
+
+        return res;
+    }
+
+    @Override
+    public String showTargets(ArrayList<String> args) {
+        Runnable run = () -> {
+
+        };
+
+        Platform.runLater(run);
+        return null;
+    }
+
+    @Override
+    public String chooseDirection() {
+        Runnable run = () -> {
+
+        };
+
+        Platform.runLater(run);
+        return null;
+    }
+
+    @Override
+    public String showEffects(Set<String> args) {
+        return null;
+    }
+
+    @Override
+    public boolean showBoolean(String message) {
+        Runnable run = () -> {
+
+        };
+
+        Platform.runLater(run);
+        return false;
+    }
+
+    @Override
+    public void displayMessage(String message) {
+        msg.setText(message);
+    }
+
+    @Override
+    public void displayLeaderboard() {
+    }
+
+    @Override
+    public String singleTargetingShowTarget(ArrayList<String> args) {
+        return null;
+    }
+
+    @Override
+    public void updateModel(String message) {
+        parser.updateModel(message);
+        update();
     }
 
     public class infoWindow extends Stage {

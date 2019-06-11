@@ -16,6 +16,7 @@ public class VirtualModel {
     private ConnectionTech conn;
     private VirtualPlayer owner;
     private VirtualPlayer turn;
+    private boolean updated;
 
     public VirtualModel(ConnectionTech conn,VirtualPlayer owner){
         this.conn=conn;
@@ -81,5 +82,13 @@ public class VirtualModel {
 
     public void setTurn(VirtualPlayer turn) {
         this.turn = turn;
+    }
+
+    public boolean isUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(boolean updated) {
+        this.updated = updated;
     }
 }

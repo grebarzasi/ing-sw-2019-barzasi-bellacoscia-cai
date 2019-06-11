@@ -33,7 +33,8 @@ public class MainServer {
     }
 
     public void startGame() {
-        System.out.print("iniziato");
+        contr= new Controller(lobby);
+        contr.update();
     }
 
 

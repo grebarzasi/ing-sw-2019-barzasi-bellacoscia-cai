@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static it.polimi.ingsw.connection.ConnMessage.INFO_SEP;
+
 /**
  * This class represent a virtual version of server-side lobby
  * @author Gregorio Barzasi
@@ -88,7 +90,7 @@ public class VirtualLobby {
      * Updates in game players info.
      */
     private synchronized void updatePlayers(String s){
-        String [] allPl = s.split(";");
+        String [] allPl = s.split(INFO_SEP);
         for(String p : allPl){
             String [] plStat = p.split(",");
             if(!players.containsKey(plStat[0])){

@@ -2,7 +2,7 @@ package it.polimi.ingsw;
 
 
 import it.polimi.ingsw.connection.MainServer;
-import it.polimi.ingsw.connection.socket.ClientThreadSocket;
+import it.polimi.ingsw.connection.socket.SClientHandler;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,7 +32,7 @@ public class Lobby extends Thread {
     private final int maxPlayer = 5;
 
     //List of players who have joined the lobby
-    private ArrayList<ClientThreadSocket> joinedPlayers;
+    private ArrayList<SClientHandler> joinedPlayers;
 
 
     public Lobby(MainServer god) {
@@ -51,7 +51,7 @@ public class Lobby extends Thread {
     /**
      * if is legal, a player is added to joined players
      */
-    public synchronized boolean addPlayer(ClientThreadSocket p) {
+    public synchronized boolean addPlayer(SClientHandler p) {
         if (joinedPlayers.size() < maxPlayer && usernameCheck(p) && characterCheck(p)) {
             joinedPlayers.add(p);
             return true;
@@ -64,9 +64,9 @@ public class Lobby extends Thread {
      * Restore session on connection start
      */
 
-    public synchronized boolean restorePlayer(ClientThreadSocket p) {
+    public synchronized boolean restorePlayer(SClientHandler p) {
         if (!usernameCheck(p)) {
-            for(ClientThreadSocket toCheck: this.joinedPlayers){
+            for(SClientHandler toCheck: this.joinedPlayers){
                 if(toCheck.getOwner().getUsername().equals(p.getOwner().getUsername())){
                    if(toCheck.isExpired())
                        return false;
@@ -86,7 +86,7 @@ public class Lobby extends Thread {
     public synchronized void updateClients() {
 
         int i = 0;
-        for (ClientThreadSocket c : joinedPlayers) {
+        for (SClientHandler c : joinedPlayers) {
             if (c.isReady()) {
                 i++;
                 c.updateLobby();
@@ -103,10 +103,10 @@ public class Lobby extends Thread {
      * check username already added. if not return true
      */
 
-    public boolean usernameCheck(ClientThreadSocket p){
+    public boolean usernameCheck(SClientHandler p){
         if(p.getOwner().getUsername().isEmpty())
             return false;
-        for(ClientThreadSocket toCheck: joinedPlayers){
+        for(SClientHandler toCheck: joinedPlayers){
             if(toCheck.getOwner().getUsername().equals(p.getOwner().getUsername())){
                 return false;
             }
@@ -117,8 +117,8 @@ public class Lobby extends Thread {
      * check character already added. if not return true
      */
 
-    public boolean characterCheck(ClientThreadSocket p){
-        for(ClientThreadSocket toCheck: joinedPlayers){
+    public boolean characterCheck(SClientHandler p){
+        for(SClientHandler toCheck: joinedPlayers){
             if(toCheck.getOwner().getCharacter().equals(p.getOwner().getCharacter())){
                 return false;
             }
@@ -129,7 +129,7 @@ public class Lobby extends Thread {
      * remove player on disconnection
      */
 
-    public void disconnectPlayer(ClientThreadSocket p){
+    public void disconnectPlayer(SClientHandler p){
         joinedPlayers.remove(p);
         updateClients();
         System.out.print(p.getOwner().getUsername() + " has cowardly left the battle before it began\n");
@@ -140,7 +140,7 @@ public class Lobby extends Thread {
     @Override
     public synchronized String toString() {
         String s="";
-        for(ClientThreadSocket c: joinedPlayers){
+        for(SClientHandler c: joinedPlayers){
             s= s + c.toString()+";";
         }
         return s;
@@ -153,7 +153,7 @@ public class Lobby extends Thread {
         ArrayList<Boolean> terminatorList=new ArrayList<>();
         ArrayList<Boolean> finalFrenzyList=new ArrayList<>();
 
-        for(ClientThreadSocket c: joinedPlayers){
+        for(SClientHandler c: joinedPlayers){
             killPrefList.add(c.getKillPref());
             mapPrefList.add(c.getMapPref());
             terminatorList.add(c.isTerminatorPref());
@@ -256,11 +256,11 @@ public class Lobby extends Thread {
     }
 
 
-    public synchronized ArrayList<ClientThreadSocket> getJoinedPlayers() {
+    public synchronized ArrayList<SClientHandler> getJoinedPlayers() {
         return joinedPlayers;
     }
 
-    public void setJoinedPlayers(ArrayList<ClientThreadSocket> joinedPlayers) {
+    public void setJoinedPlayers(ArrayList<SClientHandler> joinedPlayers) {
         this.joinedPlayers = joinedPlayers;
     }
 

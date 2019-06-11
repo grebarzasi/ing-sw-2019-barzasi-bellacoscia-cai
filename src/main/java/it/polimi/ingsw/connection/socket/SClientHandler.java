@@ -2,17 +2,19 @@ package it.polimi.ingsw.connection.socket;
 
 import it.polimi.ingsw.Lobby;
 import it.polimi.ingsw.Player;
+import it.polimi.ingsw.TimerDisconnected;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.ArrayList;
+import java.util.Timer;
 
 /**
  * A thread for each client that handle the communication using Socket tech
  * @author Gregorio Barzasi
  */
-public class ClientThreadSocket extends Thread {
+public class SClientHandler extends Thread {
 
+    private static final int DISCONNECT_TIMER = 30;
     private Lobby lobby;
     private Player owner;
     private Socket client;
@@ -20,8 +22,12 @@ public class ClientThreadSocket extends Thread {
     private PrintWriter out;
     private boolean ready=false;
     private boolean expired=false;
+    private boolean disconnected=false;
 
-    private GameManagerSocket manager;
+    private Timer disconnectCountdown;
+    private Timer expiredCountdown;
+
+    private SServerCommManager manager;
 
     //preferences
     private int mapPref;
@@ -29,17 +35,21 @@ public class ClientThreadSocket extends Thread {
     private boolean terminatorPref;
     private boolean finalFrenzyPref;
 
-    public ClientThreadSocket(Socket s, Lobby lobby) throws IOException{
+    public SClientHandler(Socket s, Lobby lobby) throws IOException{
         this.lobby=lobby;
         this.client = s;
         this.in = new BufferedReader(new InputStreamReader(client.getInputStream()));
         this.out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(client.getOutputStream())),true);
         this.owner = new Player();
+        this.disconnectCountdown=new Timer();
+        this.expiredCountdown= new Timer();
     }
 
-    public ClientThreadSocket(Lobby lobby) throws IOException{
+    public SClientHandler(Lobby lobby) throws IOException{
         this.lobby=lobby;
         this.owner = new Player();
+        this.disconnectCountdown=new Timer();
+        this.expiredCountdown= new Timer();
     }
 
     /**
@@ -130,9 +140,14 @@ public class ClientThreadSocket extends Thread {
     }
 
     public void game() {
-        manager=new GameManagerSocket(this);
+        manager=new SServerCommManager(this);
     }
 
+
+    public void disconnectReset(){
+        disconnectCountdown.cancel();
+        disconnectCountdown.schedule(new TimerDisconnected(this),DISCONNECT_TIMER*1000);
+    }
     public void run() {
         try {
             System.out.println("Thread started");
@@ -223,6 +238,14 @@ public class ClientThreadSocket extends Thread {
 
     public void setFinalFrenzyPref(boolean finalFrenzyPref) {
         this.finalFrenzyPref = finalFrenzyPref;
+    }
+
+    public boolean isDisconnected() {
+        return disconnected;
+    }
+
+    public void setDisconnected(boolean disconnected) {
+        this.disconnected = disconnected;
     }
 
     @Override
