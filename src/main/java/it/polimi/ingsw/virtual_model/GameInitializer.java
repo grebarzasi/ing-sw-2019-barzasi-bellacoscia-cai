@@ -30,6 +30,7 @@ import java.util.HashMap;
 public class GameInitializer extends Application {
 
     private static final String MAP_NAME="small";
+    private static final int SKULLMAX=5;
     private VirtualModel vmodel;
 
     public VirtualModel getVmodel() {
@@ -83,6 +84,9 @@ public class GameInitializer extends Application {
         p3.setPosition(matrix[0][1]);
         p4.setPosition(matrix[2][3]);
         contr.getModel().setCurrentPlayer(p2);
+        contr.getModel().getBoard().getTrack().setSkullMax(SKULLMAX);
+
+
         //WEAPONS
         WeaponDeck weaponDeck = contr.getModel().getBoard().getWeaponDeck();
         Weapon w1 = (Weapon)weaponDeck.fetch();
@@ -151,6 +155,23 @@ public class GameInitializer extends Application {
         Token t3 = new Token(p3);
         Token t4 = new Token(p4);
 
+        ArrayList<Token> tokenArrayList=new ArrayList<>();
+        tokenArrayList.add(t1);
+        tokenArrayList.add(t1);
+        ArrayList<Token> tokenArrayList2=new ArrayList<>();
+        tokenArrayList2.add(t2);
+
+        contr.getModel().getBoard().getTrack().addKill(tokenArrayList);
+        contr.getModel().getBoard().getTrack().addKill(tokenArrayList2);
+//        contr.getModel().getBoard().getTrack().addKill(tokenArrayList2);
+//        contr.getModel().getBoard().getTrack().addKill(tokenArrayList2);
+//        contr.getModel().getBoard().getTrack().addKill(tokenArrayList);
+//        contr.getModel().getBoard().getTrack().addKill(tokenArrayList);
+//        contr.getModel().getBoard().getTrack().addKill(tokenArrayList);
+//        contr.getModel().getBoard().getTrack().addKill(tokenArrayList2);
+//        contr.getModel().getBoard().getTrack().addKill(tokenArrayList);
+//        contr.getModel().getBoard().getTrack().addKill(tokenArrayList2);
+//        contr.getModel().getBoard().getTrack().addKill(tokenArrayList2);
 
         p1.getPersonalBoard().addDamage(t2);
         p1.getPersonalBoard().addDamage(t2);
@@ -189,6 +210,7 @@ public class GameInitializer extends Application {
         JsonNode node = new UpdateBuilder(contr).create();
         vmodel = new VirtualModel(new VirtualPlayer("Iron Man","red"));
         UpdateParser parser=new UpdateParser(vmodel);
+        //System.out.println(node.toString());
         parser.updateModel(node.toString());
         VirtualPlayer vP1 = vmodel.findPlayer(p1.getCharacter());
         VirtualPlayer vP2 = vmodel.findPlayer(p2.getCharacter());

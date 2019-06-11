@@ -19,8 +19,7 @@ import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.util.ArrayList;
 
-import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
-import static it.polimi.ingsw.connection.ConnMessage.NOTHING;
+import static it.polimi.ingsw.connection.ConnMessage.*;
 
 public class UpdateBuilder {
     private Controller controller;
@@ -126,6 +125,8 @@ public class UpdateBuilder {
          //map
          mainBoardNode.put("map",map.getName());
 
+         //killshotTruck
+         mainBoardNode.put("killshot_truck",killshottruck());
          //cells
          ObjectNode cellsNode = mapper.createObjectNode();
          cellsNode.set("cells_pu",createCellNode(map,false));
@@ -134,6 +135,18 @@ public class UpdateBuilder {
 
          return mainBoardNode;
         }
+
+    public String killshottruck(){
+        Board board=controller.getModel().getBoard();
+        ArrayList<ArrayList<Token>> killshot = board.getTrack().getKillsTrack();
+        String s="";
+        for(ArrayList<Token> aT: killshot) {
+            for (Token t : aT)
+                s = s+t.getOwner().getCharacter()+INNER_SEP;
+            s=s+INFO_SEP;
+        }
+        return s;
+    }
 
         public ObjectNode createCellNode(Map map, boolean isArmory){
         ObjectNode node = mapper.createObjectNode();
