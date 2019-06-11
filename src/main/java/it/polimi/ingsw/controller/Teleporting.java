@@ -5,6 +5,10 @@ import it.polimi.ingsw.cards.power_up.PowerUp;
 
 import java.util.ArrayList;
 
+/**
+ * State in which a player uses a teleporter
+ */
+
 public class Teleporting implements ControllerState {
 
     private PowerUp using;
@@ -18,6 +22,10 @@ public class Teleporting implements ControllerState {
     public Teleporting(Controller controller) {
         this.controller = controller;
     }
+
+    /**
+     * Makes the player choose a square to teleport to
+     */
 
     @Override
     public void command() {

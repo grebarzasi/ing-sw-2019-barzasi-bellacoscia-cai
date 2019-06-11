@@ -7,6 +7,10 @@ import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.util.ArrayList;
 
+/**
+ * Controller state of choosing a PowerUp to use
+ */
+
 public class ChoosingPowerUpToUse implements ControllerState {
 
     private Controller controller;
@@ -14,6 +18,10 @@ public class ChoosingPowerUpToUse implements ControllerState {
     public ChoosingPowerUpToUse(Controller controller) {
         this.controller = controller;
     }
+
+    /**
+     * takes the choice of PowerUp and sets the controller state to the corresponding choice
+     */
 
     @Override
     public void command() {

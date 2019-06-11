@@ -56,6 +56,7 @@ public class Picking implements ControllerState{
             options.add(chosen);
             PowerUp discarded = this.controller.getView().showPowerUp(options);
             options.remove(discarded);
+            this.controller.getModel().getBoard().getPowerupDeck().getDiscarded().add(discarded);
             this.controller.getCurrentPlayer().getPowerupList().clear();
             this.controller.getCurrentPlayer().getPowerupList().addAll(options);
             this.controller.dereaseMoveLeft();

@@ -52,10 +52,19 @@ public class Controller {
     ControllerState currentState;
 
 
+    //the game has frenzy
     private boolean hasFrenzy;
+    //the game has bot
     private boolean hasBot;
+
+
+    //Model
     private GameModel model;
+
+    //View interface
     private View view;
+
+    //notifier
     private UpdateBuilder marshal;
 
     //Starts the game from a lobby

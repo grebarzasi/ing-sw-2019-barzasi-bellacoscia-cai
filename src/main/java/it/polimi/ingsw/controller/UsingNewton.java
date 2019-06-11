@@ -8,6 +8,10 @@ import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.util.ArrayList;
 
+/**
+ * State of using a newton powerup
+ */
+
 public class UsingNewton implements ControllerState {
 
     private Controller controller;

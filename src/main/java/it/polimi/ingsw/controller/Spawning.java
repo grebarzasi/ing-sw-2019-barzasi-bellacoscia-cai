@@ -6,6 +6,10 @@ import it.polimi.ingsw.cards.power_up.PowerUp;
 
 import java.util.ArrayList;
 
+/**
+ * Controller state corresponding to the spawning phase
+ */
+
 public class Spawning implements ControllerState {
 
     private static final int height = 3;
@@ -18,10 +22,14 @@ public class Spawning implements ControllerState {
         this.controller = controller;
     }
 
+    /**
+     * Spawning a player
+     */
+
     @Override
     public void command() {
 
-        if (!controller.getBoard().getTrack().getKillsTrack().isEmpty()) {
+        if (this.controller.getModel().getTurn() >= this.controller.getModel().getPlayerList().size()) {
 
             ArrayList<PowerUp> options = this.controller.getCurrentPlayer().getPowerupList();
             options.add((PowerUp) this.controller.getBoard().getPowerupDeck().fetch());
@@ -48,11 +56,17 @@ public class Spawning implements ControllerState {
         }
     }
 
+    /**
+     * Makes the player choose a powerup and spawns the player on the corresponding spot
+     * @param options the list of power up options
+     */
+
     private void spawnOnChoice(ArrayList<PowerUp> options){
 
         PowerUp choice = this.controller.getView().showPowerUp(options);
 
         options.remove(choice);
+        this.controller.getModel().getBoard().getPowerupDeck().getDiscarded().add(choice);
 
         Square spawnPoint = powerUptoSpawn(choice);
 
@@ -60,6 +74,12 @@ public class Spawning implements ControllerState {
         this.controller.setCurrentState(this.controller.choosingMove);
 
     }
+
+    /**
+     * Matches a PowerUp colour to the spawnpoint of that colour
+     * @param toMatch the PowerUp to match
+     * @return the corresponding spawn point
+     */
 
     private Square powerUptoSpawn(PowerUp toMatch){
 

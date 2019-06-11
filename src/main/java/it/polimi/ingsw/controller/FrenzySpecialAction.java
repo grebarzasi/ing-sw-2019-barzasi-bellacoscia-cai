@@ -5,6 +5,10 @@ import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.util.ArrayList;
 
+/**
+ * State in which a player can move, reload and shoot
+ */
+
 public class FrenzySpecialAction implements ControllerState {
 
 

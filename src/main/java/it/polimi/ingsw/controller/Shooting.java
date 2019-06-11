@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * State of shooting enemies in the face
+ */
+
 public class Shooting implements ControllerState {
 
     private int range;

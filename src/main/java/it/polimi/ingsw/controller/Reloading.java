@@ -7,6 +7,10 @@ import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.util.ArrayList;
 
+/**
+ * State of reloading a weapon
+ */
+
 public class Reloading implements ControllerState {
 
     private Controller controller;
@@ -14,6 +18,11 @@ public class Reloading implements ControllerState {
     public Reloading(Controller controller) {
         this.controller = controller;
     }
+
+    /**
+     * Makes a player choose one of his weapons,
+     * if he can afford it, reloads the weapon
+     */
 
     @Override
     public void command() {

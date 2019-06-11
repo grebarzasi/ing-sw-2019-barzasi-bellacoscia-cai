@@ -9,6 +9,10 @@ import it.polimi.ingsw.cards.weapon.Weapon;
 import javax.lang.model.type.ArrayType;
 import java.util.ArrayList;
 
+/**
+ * Controller state corresponding to the phase of using a bot
+ */
+
 public class AsBot implements ControllerState{
 
     private static final int height = 3;

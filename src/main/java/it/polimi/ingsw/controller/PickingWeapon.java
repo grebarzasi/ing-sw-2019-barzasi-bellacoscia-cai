@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 public class PickingWeapon implements ControllerState {
 
+    private static final int max = 3;
     private Controller controller;
 
     public PickingWeapon(Controller controller) {
@@ -27,7 +28,7 @@ public class PickingWeapon implements ControllerState {
 
         ((SpawnSquare) this.controller.getCurrentPlayer().getPosition()).getArmory().getWeaponList().remove(choice);
 
-        if (this.controller.getCurrentPlayer().getWeaponsList().size() < 3) {
+        if (this.controller.getCurrentPlayer().getWeaponsList().size() < max) {
             this.controller.getCurrentPlayer().getWeaponsList().add(choice);
             this.controller.dereaseMoveLeft();
         } else {
@@ -40,12 +41,13 @@ public class PickingWeapon implements ControllerState {
     private void discardWeapon(Weapon arg) {
 
         ArrayList<Weapon> options = this.controller.getCurrentPlayer().getWeaponsList();
-        options.add(arg);
 
         Weapon choice = this.controller.getView().showWeapon(options);
         options.remove(choice);
+        options.add(arg);
 
-        this.controller.getCurrentPlayer().setWeaponsList(options);
+        this.controller.getCurrentPlayer().getWeaponsList().clear();
+        this.controller.getCurrentPlayer().getWeaponsList().addAll(options);
 
         ((SpawnSquare) this.controller.getCurrentPlayer().getPosition()).getArmory().getWeaponList().add(choice);
         this.controller.dereaseMoveLeft();

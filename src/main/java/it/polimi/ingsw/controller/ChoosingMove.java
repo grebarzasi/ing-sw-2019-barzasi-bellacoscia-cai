@@ -43,9 +43,6 @@ public class ChoosingMove implements ControllerState{
 
         switch (choice.getDescription()){
 
-            case "Start":
-                this.controller.setCurrentState(this.controller.starting);
-
                 //sets the state to moving and sets the range accordingly
             case "Move":
                 this.controller.setCurrentState(this.controller.moving);
