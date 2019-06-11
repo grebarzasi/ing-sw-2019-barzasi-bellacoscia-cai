@@ -164,4 +164,27 @@ public class CliGame implements ViewClient {
     public void updateModel(String message) {
 
     }
+
+    /**
+     * Show the possible moves that a player can perform then makes the user choose one,
+     * then returns it
+     *
+     * @param args the moves to show
+     * @return the chosen one
+     */
+    @Override
+    public String showActions(ArrayList<String> args) {
+        return null;
+    }
+
+    /**
+     * Displays a message and makes the user make a boolean choice
+     *
+     * @param args
+     * @return the user's choice
+     */
+    @Override
+    public String singleTargetingShowTarget(ArrayList<String> args) {
+        return null;
+    }
 }

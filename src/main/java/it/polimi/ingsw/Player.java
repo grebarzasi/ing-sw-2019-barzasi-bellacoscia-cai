@@ -19,6 +19,7 @@ public class Player extends Figure {
 
     private Preferences pref;
 
+    private View view;
     //chosen username
 
     private String username;
@@ -149,5 +150,17 @@ public class Player extends Figure {
 
     public void setStartedFrenzy(boolean startedFrenzy) {
         this.startedFrenzy = startedFrenzy;
+    }
+
+    public View getView() {
+        return view;
+    }
+
+    public void setView(View view) {
+        this.view = view;
+    }
+
+    public boolean isStartedFrenzy() {
+        return startedFrenzy;
     }
 }

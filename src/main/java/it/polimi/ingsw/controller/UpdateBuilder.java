@@ -19,15 +19,12 @@ import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.util.ArrayList;
 
-public class GameStateJsonBuilder {
+public class UpdateBuilder {
     private Controller controller;
     private ObjectMapper mapper = new ObjectMapper();
 
-    public GameStateJsonBuilder(Controller conn){
+    public UpdateBuilder(Controller conn){
         this.controller=conn;
-    }
-
-    public GameStateJsonBuilder(){
     }
 
 

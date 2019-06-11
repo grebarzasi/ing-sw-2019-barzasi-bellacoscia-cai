@@ -1,11 +1,9 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.CLI.Cli;
 import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.map.NonSpawnSquare;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.AmmoLot;
-import it.polimi.ingsw.controller.Controller;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

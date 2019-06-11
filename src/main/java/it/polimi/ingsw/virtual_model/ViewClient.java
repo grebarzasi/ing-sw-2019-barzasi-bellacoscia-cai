@@ -1,5 +1,6 @@
 package it.polimi.ingsw.virtual_model;
 
+import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.actions.Action;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
@@ -35,7 +36,7 @@ public interface ViewClient {
      * @return the chosen one
      */
 
-    public String showAction(ArrayList<String> args);
+    public String showActions(ArrayList<String> args);
 
     /**
      * Shows the possible destinations a figure can reach and then returns the chosen value
@@ -60,6 +61,14 @@ public interface ViewClient {
      */
 
     public String chooseDirection();
+
+    /**
+     * Displays a message and makes the user make a boolean choice
+     *
+     *
+     * @return the user's choice
+     */
+    public String singleTargetingShowTarget(ArrayList<String> args);
 
     /**
      * Displays a message and makes the user make a boolean choice

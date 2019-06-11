@@ -12,13 +12,13 @@ import static it.polimi.ingsw.connection.ConnMessage.*;
 /**
  * @author Gregorio Barzasi
  */
-public class GameComSocket extends Thread{
+public class SClientCommManager extends Thread{
     private SClient s;
     public PrintWriter o;
     public BufferedReader i;
     private ViewClient v;
 
-    public GameComSocket(SClient s){
+    public SClientCommManager(SClient s){
         this.s=s;
         this.o=s.getOutput();
         this.i=s.getInput();
@@ -37,29 +37,52 @@ public class GameComSocket extends Thread{
                     o.println(PONG);
                     break;
                 case SHOW_PU:
+                    o.println(AKN);
                     args=i.readLine();
                     o.println(v.showPowerUp(parseString(args)));
                     break;
                 case SHOW_WEAPONS:
+                    o.println(AKN);
                     args=i.readLine();
                     o.println(v.showWeapon(parseString(args)));
                     break;
                 case SHOW_ACTIONS:
+                    o.println(AKN);
                     args=i.readLine();
-                    o.println(v.showAction(parseString(args)));
+                    o.println(v.showActions(parseString(args)));
                     break;
                 case SHOW_MOVES:
+                    o.println(AKN);
                     args=i.readLine();
                     o.println(v.showPossibleMoves(parseString(args)));
                     break;
                 case SHOW_TARGETS:
+                    o.println(AKN);
                     args=i.readLine();
                     o.println(v.showTargets(parseString(args)));
                     break;
                 case CHOOSE_DIRECTION:
+                    o.println(AKN);
                     o.println(v.chooseDirection());
                     break;
+                case SHOW_SINGLE_TARGET:
+                    o.println(AKN);
+                    args=i.readLine();
+                    o.println(v.singleTargetingShowTarget(parseString(args)));
+                    break;
+                case SHOW_MESSAGE:
+                    o.println(AKN);
+                    args=i.readLine();
+                    v.displayMessage(args);
+                    o.println(AKN);
+                    break;
+                case SHOW_BOOLEAN:
+                    o.println(AKN);
+                    args=i.readLine();
+                    o.println(v.showBoolean(args));
+                    break;
                 case UPDATE:
+                    o.println(AKN);
                     args=i.readLine();
                     v.updateModel(args);
                     break;
@@ -85,6 +108,7 @@ public class GameComSocket extends Thread{
         }
         return sList;
     }
+
 
     @Override
     public void run() {
