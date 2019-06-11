@@ -135,8 +135,8 @@ public class Controller {
      */
 
     public void goBack(){
-        this.setCurrentState(this.choosingMove);
-        this.choosingMove.command();
+        this.currentState = this.choosingMove;
+        this.currentState.command();
     }
 
     public void dereaseMoveLeft(){
