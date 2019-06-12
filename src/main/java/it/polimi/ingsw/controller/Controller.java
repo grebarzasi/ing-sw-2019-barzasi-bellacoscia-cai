@@ -29,22 +29,21 @@ public class Controller {
 
     //State pattern states
 
-    ControllerState starting;
     ControllerState asBot;
     ControllerState choosingMove;
     ControllerState choosingPowerUpToUse;
     ControllerState choosingWeapon;
     ControllerState discardingPowerUp;
-    ControllerState discardingWeapon;
+    ControllerState frenzySpecialAction;
     ControllerState moving;
     ControllerState picking;
     ControllerState pickingWeapon;
     ControllerState reloading;
     ControllerState shooting;
+    ControllerState spawning;
     ControllerState teleporting;
     ControllerState usingNewton;
-    ControllerState spawning;
-    ControllerState frenzySpecialAction;
+
 
 
     //current state patten state
@@ -94,6 +93,7 @@ public class Controller {
         this.asBot = new AsBot(this);
         this.choosingMove = new ChoosingMove(this);
         this.choosingPowerUpToUse = new ChoosingPowerUpToUse(this);
+        this.discardingPowerUp = new DiscardingPowerUp(this);
         this.choosingWeapon = new ChoosingWeapon(this);
         this.moving = new Moving(this);
         this.picking = new Picking(this);
@@ -152,10 +152,6 @@ public class Controller {
 
     public void endTurn() {
 
-        int k;
-        int i;
-        int flag = 0;
-
         for (Figure f : this.model.getPlayerList()) {
 
             if (f.getPersonalBoard().getDamage().size() >= deathDamage) {
@@ -206,9 +202,9 @@ public class Controller {
         }
 
         this.model.setMovesLeft(2);
-
-
+        this.model.setHasBotAction(true);
         this.model.setTurn(this.model.getTurn() + 1);
+        this.update();
         this.goBack();
 
     }
@@ -301,6 +297,29 @@ public class Controller {
             p.getView().sendsUpdate(s);
     }
 
+    private String intToMap(int i){
+
+        String map = "large";
+
+        switch(i){
+            case 4:
+                map = "small";
+                break;
+            case 3:
+                map = "medium2";
+                break;
+            case 2:
+                map = "medium1";
+                break;
+            case 1:
+                map = "large";
+                break;
+
+        }
+
+        return map;
+    }
+
     public Board getBoard() {
         return this.getModel().getBoard();
     }
@@ -343,14 +362,6 @@ public class Controller {
 
     public void setDiscardingPowerUp(ControllerState discardingPowerUp) {
         this.discardingPowerUp = discardingPowerUp;
-    }
-
-    public ControllerState getDiscardingWeapon() {
-        return discardingWeapon;
-    }
-
-    public void setDiscardingWeapon(ControllerState discardingWeapon) {
-        this.discardingWeapon = discardingWeapon;
     }
 
     public ControllerState getMoving() {
@@ -449,26 +460,5 @@ public class Controller {
         return this.model.getCurrentPlayer();
     }
 
-    public String intToMap(int i){
 
-        String map = "large";
-
-        switch(i){
-            case 4:
-                map = "small";
-                break;
-            case 3:
-                map = "medium2";
-                break;
-            case 2:
-                map = "medium1";
-                break;
-            case 1:
-                map = "large";
-                break;
-
-        }
-
-        return map;
-    }
 }

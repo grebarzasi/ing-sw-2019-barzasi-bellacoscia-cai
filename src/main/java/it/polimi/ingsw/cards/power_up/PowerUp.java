@@ -20,10 +20,6 @@ public class PowerUp extends Card {
         this.name = name;
     }
 
-    public void discard(){
-        this.getOwner().getPersonalBoard().addAmmo(this.ammoOnDiscard);
-    }
-
     public Ammo getAmmoOnDiscard() {
         return ammoOnDiscard;
     }

@@ -7,6 +7,10 @@ import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.util.ArrayList;
 
+/**
+ * State of picking an ammo or weapon
+ */
+
 public class Picking implements ControllerState{
 
     private int range;
@@ -18,6 +22,11 @@ public class Picking implements ControllerState{
         this.controller = controller;
     }
 
+    /**
+     * Generates a list of squares the current player can pick items from based on range
+     * and sends it to the view, then takes an input and picks the item or redirects to
+     * another state according to player's choice
+     */
 
     @Override
     public void command() {
@@ -40,6 +49,11 @@ public class Picking implements ControllerState{
 
 
     }
+
+    /**
+     * Sends the power up options composed of player's 3 existing powerups and the drawn one
+     * asks the player to discard one and puts the rest into the player's powerup list
+     */
 
     private void choosePU() {
 

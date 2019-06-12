@@ -9,6 +9,11 @@ import it.polimi.ingsw.cards.weapon.Weapon;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+/**
+ * Controller state of picking a weapon
+ */
+
+
 public class PickingWeapon implements ControllerState {
 
     private static final int max = 3;
@@ -17,6 +22,11 @@ public class PickingWeapon implements ControllerState {
     public PickingWeapon(Controller controller) {
         this.controller = controller;
     }
+
+    /**
+     * Makes the player select a weapon fro the armory to pick, if the player already
+     * has three weapons calls discardWeapon() method to manage discarding
+     */
 
     @Override
     public void command() {
@@ -39,6 +49,11 @@ public class PickingWeapon implements ControllerState {
 
     }
 
+    /**
+     * Makes the player choose one weapon between four to dicard, then
+     * puts the rest into the player's weapon list
+     * @param arg the weapons to choose from
+     */
 
     private void discardWeapon(Weapon arg) {
 

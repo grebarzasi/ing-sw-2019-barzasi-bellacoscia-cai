@@ -5,6 +5,10 @@ import it.polimi.ingsw.board.map.Square;
 
 import java.util.ArrayList;
 
+/**
+ * Controller state of moving your figure
+ */
+
 public class Moving implements ControllerState{
 
     private int range;
@@ -17,6 +21,12 @@ public class Moving implements ControllerState{
     public Moving(Controller controller) {
         this.controller = controller;
     }
+
+    /**
+     * Generates a list of squares the current player can move to based on range
+     * and send them to the view, takes an input to the view and moves the figure
+     * to that square
+     */
 
     @Override
     public void command() {
@@ -34,7 +44,7 @@ public class Moving implements ControllerState{
         }else{
             this.controller.update();
             this.controller.getCurrentPlayer().setPosition(choice);
-            this.controller.getModel().setMovesLeft(this.controller.getMovesLeft() - 1);
+            this.controller.dereaseMoveLeft();
             this.controller.goBack();
             this.controller.currentState.command();
         }

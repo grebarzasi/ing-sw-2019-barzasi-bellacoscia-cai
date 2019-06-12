@@ -29,6 +29,6 @@ class WeaponBuilderTest {
 
       assertNotEquals(wp.getAddTwoEffect().getEffectList(),wp.getAlternativeEffect().getEffectList());
 
-      assertFalse(wp.isLoaded());
+      assertTrue(wp.isLoaded());
     }
 }

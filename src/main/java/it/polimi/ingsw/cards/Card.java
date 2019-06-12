@@ -7,17 +7,8 @@ import it.polimi.ingsw.Player;
 
 public abstract class Card {
 
-    private Player owner;
+    public Card(){
 
-    public Card() {
-    }
-
-    public Player getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Player owner) {
-        this.owner = owner;
     }
 
 }

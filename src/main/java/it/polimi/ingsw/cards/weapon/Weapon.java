@@ -17,9 +17,11 @@ import java.util.*;
 
 public class Weapon extends Card {
 
+    private Player owner;
+
     private String name;
     private Ammo chamber;
-    private boolean loaded=false;
+    private boolean isLoaded;
 
     private Preferences pref = new Preferences(this);
 
@@ -40,12 +42,15 @@ public class Weapon extends Card {
      */
     private Figure lastHit;
 
-    public Weapon(){};
+    public Weapon(){
+        this.isLoaded = true;
+    }
 
 
     public Weapon(String name,Ammo chamber) {
         this.name=name;
         this.chamber=chamber;
+        this.isLoaded = true;
     }
 
     /**
@@ -117,11 +122,11 @@ public class Weapon extends Card {
     }
 
     public boolean isLoaded() {
-        return loaded;
+        return isLoaded;
     }
 
     public void setLoaded(boolean loaded) {
-        this.loaded = loaded;
+        this.isLoaded = loaded;
     }
 
     public Effect getBasicEffect() {
@@ -173,8 +178,34 @@ public class Weapon extends Card {
     }
 
     public Player getOwner() {
-        return super.getOwner();
+        return owner;
     }
 
+    public void setOwner(Player owner) {
+        this.owner = owner;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setChamber(Ammo chamber) {
+        this.chamber = chamber;
+    }
+
+    public Preferences getPref() {
+        return pref;
+    }
+
+    public void setPref(Preferences pref) {
+        this.pref = pref;
+    }
+
+    public boolean isBeforeBasic() {
+        return beforeBasic;
+    }
+
+    public void setBeforeBasic(boolean beforeBasic) {
+        this.beforeBasic = beforeBasic;
+    }
 }

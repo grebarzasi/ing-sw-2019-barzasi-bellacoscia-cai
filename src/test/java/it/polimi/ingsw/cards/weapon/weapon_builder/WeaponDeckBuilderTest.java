@@ -19,7 +19,7 @@ class WeaponDeckBuilderTest {
         assertEquals(20, wDeck.getUsable().size());
         for (Card c : wDeck.getUsable()) {
             Weapon weaponCheck = (Weapon) c;
-            assertNull(c.getOwner());
+            assertNull(((Weapon)c).getOwner());
         }
         Weapon w;
         while (!wDeck.getUsable().isEmpty()) {

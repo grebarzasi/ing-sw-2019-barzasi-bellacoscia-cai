@@ -105,22 +105,29 @@ public class ActionBuilder {
             actions.add(new Action("Reload", 0));
 
         }
-        boolean flag = false;
 
-        for(PowerUp pu : p.getPowerupList()){
 
-            if(pu.getName() == "Teleporter" || pu.getName() == "Newton"){
-                flag = true;
+        if(!p.getPowerupList().isEmpty()){
+
+            actions.add(new Action("Discard PowerUp",0));
+            boolean flag = false;
+
+            for(PowerUp pu : p.getPowerupList()){
+
+                if(pu.getName().equals("Teletrasporto") || pu.getName().equals("Raggio Cionetico")){
+                    flag = true;
+                }
             }
+            if(flag == true){
+                actions.add(new Action("PowerUp",0));
+            }
+        }
 
-        }
-        if(flag == true){
-            actions.add(new Action("PowerUp",0));
-        }
 
         actions.add(new Action("End Turn", 0));
 
         return actions;
+
     }
 
 }
