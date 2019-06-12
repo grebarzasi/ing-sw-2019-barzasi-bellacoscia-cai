@@ -12,6 +12,7 @@ public class VirtualGame {
     private String weapon = "";
     private String powerup = "";
     private String effect = "";
+    private String direction = "";
 
     private ArrayList<String> hideSquare = new ArrayList<>();
     private ArrayList<String> ammoTiles = new ArrayList<>();
@@ -21,6 +22,22 @@ public class VirtualGame {
     public VirtualGame() {
         hideSquare.add("0:0");
         hideSquare.add("0:1");
+    }
+
+    public String getDirection() {
+        return direction;
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
+
+    public ArrayList<String> getActions() {
+        return actions;
+    }
+
+    public void setActions(ArrayList<String> actions) {
+        this.actions = actions;
     }
 
     public String getTargetSquare() {
