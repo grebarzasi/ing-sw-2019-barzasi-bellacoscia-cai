@@ -1,6 +1,5 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.board.map.Square;
 
 import java.util.ArrayList;
@@ -35,7 +34,7 @@ public class Moving implements ControllerState{
 
         options = this.controller.canGo(this.controller.getCurrentPlayer(),this.range);
 
-        Square choice = this.controller.getView().showPossibleMoves(options);
+        Square choice = this.controller.getView().showPossibleMoves(options, this.range);
 
         if(choice == null){
             this.controller.update();

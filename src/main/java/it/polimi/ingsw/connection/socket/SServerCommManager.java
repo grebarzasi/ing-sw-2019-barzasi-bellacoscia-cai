@@ -96,7 +96,7 @@ public class SServerCommManager implements View {
         return null;
     }
 
-    public Square showPossibleMoves(ArrayList<Square> args) {
+    public Square showPossibleMoves(ArrayList<Square> args, int range) {
         String s="";
         String rpl="";
         for(Square p : args){

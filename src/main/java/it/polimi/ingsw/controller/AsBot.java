@@ -3,10 +3,7 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.board.map.Square;
-import it.polimi.ingsw.cards.power_up.PowerUp;
-import it.polimi.ingsw.cards.weapon.Weapon;
 
-import javax.lang.model.type.ArrayType;
 import java.util.ArrayList;
 
 /**
@@ -37,7 +34,7 @@ public class AsBot implements ControllerState{
 
         if(this.controller.getModel().getBot().isDead() || this.controller.getModel().getTurn() != 0){
 
-            Square spawnPoint = this.controller.getView().showPossibleMoves(this.returnSpawns());
+            Square spawnPoint = this.controller.getView().showPossibleMoves(this.returnSpawns(), 100);
             this.controller.getModel().getBot().setPosition(spawnPoint);
 
         }
@@ -59,7 +56,7 @@ public class AsBot implements ControllerState{
 
 
         //makes the player select a destination
-        Square botDestination = this.controller.getView().showPossibleMoves(canGo);
+        Square botDestination = this.controller.getView().showPossibleMoves(canGo, 1);
         if(botDestination != null) {
             this.controller.getModel().getBot().setPosition(botDestination);
 

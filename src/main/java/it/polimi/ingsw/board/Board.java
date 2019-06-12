@@ -1,6 +1,6 @@
 package it.polimi.ingsw.board;
 
-import it.polimi.ingsw.Subject;
+
 import it.polimi.ingsw.board.map.Map;
 import it.polimi.ingsw.board.map.NonSpawnSquare;
 import it.polimi.ingsw.board.map.SpawnSquare;
@@ -22,7 +22,7 @@ import static it.polimi.ingsw.cards.AmmoDeckLoader.loadDeck;
  * @author Yuting Cai
  */
 
-public class Board extends Subject {
+public class Board{
 
 
 

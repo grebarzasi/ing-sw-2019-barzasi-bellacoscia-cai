@@ -20,7 +20,7 @@ public class FrenzySpecialAction implements ControllerState {
 
         ArrayList<Square> options = this.controller.canGo(this.controller.getCurrentPlayer(), this.range);
 
-        Square choice = this.controller.getView().showPossibleMoves(options);
+        Square choice = this.controller.getView().showPossibleMoves(options, 2);
         this.controller.getCurrentPlayer().setPosition(choice);
 
         while(this.controller.getView().showBoolean("Vuoi sfruttare la ricarica?")){

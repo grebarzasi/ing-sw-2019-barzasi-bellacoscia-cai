@@ -5,10 +5,8 @@ import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Effect;
 import it.polimi.ingsw.cards.weapon.Weapon;
-import it.polimi.ingsw.controller.Controller;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Set;
 
 public interface View {
@@ -42,10 +40,11 @@ public interface View {
     /**
      * Shows the possible destinations a figure can reach and then returns the chosen value
      * @param args the possible destinations
+     * @param range
      * @return the chosen one
      */
 
-    public Square showPossibleMoves(ArrayList<Square> args);
+    public Square showPossibleMoves(ArrayList<Square> args, int range);
 
     /**
      * Shows the valid targets a Figure can target, then returns the targets the user decides
