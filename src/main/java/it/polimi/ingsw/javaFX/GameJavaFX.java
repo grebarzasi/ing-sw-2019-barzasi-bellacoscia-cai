@@ -19,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -106,6 +107,7 @@ public class GameJavaFX extends Application implements ViewClient{
     private TextField msg;
     private TextField pointsField;
     private GridPane gridSkull;
+    private String decision;
 
     private Button btnMove;
     private Button btnPick;
@@ -183,6 +185,7 @@ public class GameJavaFX extends Application implements ViewClient{
         this.font =  new Font(20);;
 
         this.action = "";
+        this.decision = "";
 
         this.btnCell = new ArrayList<>();
         this.msg = new TextField();
@@ -1170,12 +1173,6 @@ public class GameJavaFX extends Application implements ViewClient{
 
     public void setPlayerOnCell(ArrayList<Button> btn, String color){
 
-        final int R = 4;
-        final int B = 3;
-        final int Y = 0;
-        final int G = 2;
-        final int GR = 1;
-
         DropShadow borderGlow = new DropShadow();
         borderGlow.setColor(Color.WHITE);
         borderGlow.setHeight(30);
@@ -1897,36 +1894,190 @@ public class GameJavaFX extends Application implements ViewClient{
                 hideCell(btnArr,0.5);
             }
 
+            for (String color : args) {
+                for (VirtualPlayer p : model.getAllPlayers()) {
+                    if(p.getCharacter().equals(color)) {
+                        switch (p.getCharacter()) {
+                            case ("yellow"): {
+                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(Y), 1);
+                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(Y).setOnAction(e -> {
+                                    game.setTargetPlayer(p.getCharacter());
+                                });
+                                break;
+                            }
+                            case ("red"): {
+                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(R), 1);
+                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(R).setOnAction(e -> {
+                                    game.setTargetPlayer(p.getCharacter());
+                                });
+                                break;
+                            }
+                            case ("blue"): {
+                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(B), 1);
+                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(B).setOnAction(e -> {
+                                    game.setTargetPlayer(p.getCharacter());
+                                });
+                                break;
+                            }
+                            case ("green"): {
+                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(G), 1);
+                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(G).setOnAction(e -> {
+                                    game.setTargetPlayer(p.getCharacter());
+                                });
+                                break;
+                            }
+                            case ("grey"): {
+                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(GR), 1);
+                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(GR).setOnAction(e -> {
+                                    game.setTargetPlayer(p.getCharacter());
+                                });
+                                break;
+                            }
+                        }
+                    }
+                }
 
+            }
         };
 
         Platform.runLater(run);
-        return null;
+
+        while(game.getTargetPlayer().equals(""));
+        String res = game.getTargetPlayer();
+        game.setTargetPlayer("");
+
+        return res;
     }
 
     @Override
     public String chooseDirection() {
         Runnable run = () -> {
+            msg.setText(CHOOSE_DIRECTION);
 
+            int i = model.getOwner().getRow();
+            int j = model.getOwner().getColumn();
+
+
+            for(; i < 2; i++){
+                for (Button btn: btnCell.get((i*4)+j)) {
+                    btn.setOnAction(e->{
+                        game.setDirection("east");
+                    });
+                }
+            }
+
+            i = model.getOwner().getRow();
+            j = model.getOwner().getColumn();
+
+
+            for(; i > 0; i--){
+                for (Button btn: btnCell.get((i*4)+j)) {
+                    btn.setOnAction(e->{
+                        game.setDirection("west");
+                    });
+                }
+            }
+
+            i = model.getOwner().getRow();
+            j = model.getOwner().getColumn();
+
+
+            for(; j < 3; j++){
+                for (Button btn: btnCell.get((i*4)+j)) {
+                    btn.setOnAction(e->{
+                        game.setDirection("north");
+                    });
+                }
+            }
+
+            i = model.getOwner().getRow();
+            j = model.getOwner().getColumn();
+
+
+            for(; j > 0; j--){
+                for (Button btn: btnCell.get((i*4)+j)) {
+                    btn.setOnAction(e->{
+                        game.setDirection("south");
+                    });
+                }
+            }
         };
 
         Platform.runLater(run);
-        return null;
+
+        while(game.getDirection().equals(""));
+        String res = game.getDirection();
+        game.setDirection("");
+
+        return res;
     }
 
     @Override
     public String showEffects(Set<String> args) {
-        return null;
+
+        ArrayList<String> effects = new ArrayList<>();
+        for (String s : args) {
+            effects.add(s);
+        }
+
+        Runnable run = () -> {
+            switch (effects.size()){
+                case(4):{
+                    btnPowerUp.setText(effects.get(0));
+                    btnPowerUp.setOnAction(e->{
+                        game.setEffect(effects.get(0));
+                    });
+                }
+                case(3):{
+                    btnMove.setText(effects.get(1));
+                    btnMove.setOnAction(e->{
+                        game.setEffect(effects.get(1));
+                    });
+                }
+                case(2):{
+                    btnPick.setText(effects.get(2));
+                    btnPick.setOnAction(e->{
+                        game.setEffect(effects.get(2));
+                    });
+                }
+                case(1):{
+                    btnShoot.setText(effects.get(3));
+                    btnShoot.setOnAction(e->{
+                        game.setEffect(effects.get(3));
+                    });
+                }
+
+            }
+        };
+
+        Platform.runLater(run);
+
+        while(game.getEffect().equals(""));
+        String res = game.getEffect();
+        game.setEffect("");
+        update();
+
+        return res;
     }
 
     @Override
     public boolean showBoolean(String message) {
         Runnable run = () -> {
-
+            decisionWindow dw = new decisionWindow(message);
+            dw.show();
         };
 
         Platform.runLater(run);
-        return false;
+
+        while(decision.equals(""));
+        String res = decision;
+        decision = "";
+
+        if( res.equals("SI")){
+            return true;
+        }else {
+            return false;
+        }
     }
 
     @Override
@@ -1949,6 +2100,67 @@ public class GameJavaFX extends Application implements ViewClient{
         update();
     }
 
+    public class decisionWindow extends Stage{
+
+        public decisionWindow(String message){
+
+            double widthScreen = Screen.getPrimary().getBounds().getWidth() / 4;
+            double heightScreen = Screen.getPrimary().getBounds().getHeight() / 4;
+
+            Group root = new Group();
+            Scene theScene = new Scene(root);
+            this.setScene(theScene);
+
+            GridPane grid = new GridPane();
+            grid.setAlignment(Pos.CENTER);
+            grid.setHgap(30);
+            grid.setVgap(20);
+            grid.setPadding(new Insets(0, 0, 0, 0));
+
+            try {
+                Image back = new Image(new FileInputStream(PATH_BACK_GAME), 2190, 1920, true, true);
+                BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+                grid.setBackground(new Background(backgroundImage));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            Scene scene = new Scene(grid, widthScreen, heightScreen);
+            this.setScene(scene);
+
+            scene.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> grid.setPrefWidth((double) newSceneWidth));
+            scene.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> grid.setPrefHeight((double) newSceneHeight));
+
+            ColumnConstraints c1 = new ColumnConstraints(widthScreen);
+
+            RowConstraints r1 = new RowConstraints(heightScreen);
+            RowConstraints r2 = new RowConstraints(heightScreen);
+
+            grid.getColumnConstraints().add(c1);
+            grid.getRowConstraints().addAll(r1,r2);
+
+            Text msg = new Text(message);
+
+            Button btnY = new Button("SI");
+            Button btnN = new Button("NO");
+
+            btnY.setOnAction(e->{
+                decision = "SI";
+            });
+            btnN.setOnAction(e->{
+                decision = "NO";
+            });
+
+            VBox v = new VBox(20);
+            v.getChildren().add(btnY);
+            v.getChildren().add(btnN);
+
+            grid.add(msg,0,0);
+            grid.add(v,0,1);
+
+        }
+    }
+
     public class infoWindow extends Stage {
 
         private boolean pu;
@@ -1956,16 +2168,6 @@ public class GameJavaFX extends Application implements ViewClient{
         public infoWindow(VirtualPlayer p,int i, boolean pu) {
 
             this.pu = pu;
-
-            /*
-
-            //hardcoded test.
-            Ammo a = new Ammo(0, 1, 0);
-            Weapon w = new Weapon("ZX-2", a);
-            Teleporter t = new Teleporter(a, "teleporter");
-
-             */
-
 
             String weapon = null;
             String textWe = null;

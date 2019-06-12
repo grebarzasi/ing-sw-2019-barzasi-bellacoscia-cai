@@ -82,5 +82,13 @@ public class GUIFiles {
     public static final String ERR_SQUARE = "Quadrato non raggiungibile";
     public static final String ERR_PLAYER = "Giocatore non disponibile";
     public static final String ERR_WEAPON = "Arma scarica";
+    public static final String CHOOSE_DIRECTION = "Scegli un quadrato nella direzione desiderata";
+
+
+    public static final int R = 4;
+    public static final int B = 3;
+    public static final int Y = 0;
+    public static final int G = 2;
+    public static final int GR = 1;
 
 }
