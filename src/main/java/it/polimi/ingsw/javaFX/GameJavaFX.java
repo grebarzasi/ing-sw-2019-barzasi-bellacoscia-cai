@@ -33,6 +33,7 @@ import java.util.Set;
 
 import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
 import static it.polimi.ingsw.javaFX.GUIFiles.*;
+import static java.lang.Thread.sleep;
 
 /*
 
@@ -1882,7 +1883,13 @@ public class GameJavaFX extends Application implements ViewClient {
 
         Platform.runLater(run);
 
-        while (game.getPowerup().equals("")) ;
+        while (game.getPowerup().equals("")){
+            try {
+                sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        };
         String res;
         res = game.getPowerup();
 
@@ -2162,9 +2169,9 @@ public class GameJavaFX extends Application implements ViewClient {
     public void updateModel(String message) {
 
         parser.updateModel(message);
-
+        Runnable runnable=()->{update();};
         if(model.isUpdated()){
-            update();
+            Platform.runLater(runnable);
         }
     }
 
@@ -2559,6 +2566,7 @@ public class GameJavaFX extends Application implements ViewClient {
                             setButtonBack(btnArr.get(cards.indexOf(n)),imgPu);
                             Runnable run = () -> btnArr.get(cards.indexOf(n)).setOnAction(e->{
                                 game.setPowerup(n);
+                                System.out.print(n);
                             });
 
                             Platform.runLater(run);
