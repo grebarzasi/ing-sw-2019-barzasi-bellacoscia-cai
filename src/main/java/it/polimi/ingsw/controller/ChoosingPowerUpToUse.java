@@ -36,9 +36,12 @@ public class ChoosingPowerUpToUse implements ControllerState {
                 case "Newton":
                     this.controller.setCurrentState(this.controller.usingNewton);
                     ((UsingNewton)this.controller.usingNewton).setUsing(chosen);
+                    break;
+
                 case "Teleporter":
                     this.controller.setCurrentState(this.controller.teleporting);
                     ((Teleporting)this.controller.teleporting).setUsing(chosen);
+                    break;
             }
 
         }
