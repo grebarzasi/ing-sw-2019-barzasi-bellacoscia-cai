@@ -24,8 +24,8 @@ public class DiscardingPowerUp implements ControllerState{
     @Override
     public void command() {
 
-        ArrayList<PowerUp> options = this.controller.getCurrentPlayer().getPowerupList();
-
+        ArrayList<PowerUp> options = new ArrayList<>();
+        options.addAll(this.controller.getCurrentPlayer().getPowerupList());
         PowerUp choice = this.controller.getView().showPowerUp(options);
 
         if(choice == null){

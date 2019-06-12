@@ -70,8 +70,8 @@ public class Picking implements ControllerState{
 
         } else {
 
-            ArrayList<PowerUp> options;
-            options = this.controller.getCurrentPlayer().getPowerupList();
+            ArrayList<PowerUp> options = new ArrayList<>();
+            options.addAll(this.controller.getCurrentPlayer().getPowerupList());
             options.add(chosen);
             PowerUp discarded = this.controller.getView().showPowerUp(options);
             options.remove(discarded);

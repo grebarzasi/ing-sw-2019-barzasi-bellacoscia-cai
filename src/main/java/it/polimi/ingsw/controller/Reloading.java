@@ -27,7 +27,9 @@ public class Reloading implements ControllerState {
     @Override
     public void command() {
 
-        ArrayList<Weapon> options = this.controller.getCurrentPlayer().getWeaponsList();
+        ArrayList<Weapon> options = new ArrayList<>();
+        options.addAll(this.controller.getCurrentPlayer().getWeaponsList());
+
         Weapon choice = this.controller.getView().showWeapon(options);
 
         boolean check = choice.reload();

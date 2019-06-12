@@ -31,7 +31,8 @@ public class Spawning implements ControllerState {
 
         if (this.controller.getModel().getTurn() >= this.controller.getModel().getPlayerList().size()) {
 
-            ArrayList<PowerUp> options = this.controller.getCurrentPlayer().getPowerupList();
+            ArrayList<PowerUp> options = new ArrayList<>();
+            options.addAll(this.controller.getCurrentPlayer().getPowerupList());
             options.add((PowerUp) this.controller.getBoard().getPowerupDeck().fetch());
 
             spawnOnChoice(options);

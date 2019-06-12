@@ -31,9 +31,10 @@ public class PickingWeapon implements ControllerState {
     @Override
     public void command() {
 
-        ArrayList<Weapon> options;
+        ArrayList<Weapon> options = new ArrayList<>();
 
-        options = ((SpawnSquare) this.controller.getCurrentPlayer().getPosition()).getArmory().getWeaponList();
+        options.addAll(((SpawnSquare) this.controller.getCurrentPlayer().getPosition()).getArmory().getWeaponList());
+
         Weapon choice = this.controller.getView().showWeapon(options);
 
         if(choice == null){
@@ -62,7 +63,8 @@ public class PickingWeapon implements ControllerState {
 
     private void discardWeapon(Weapon arg) {
 
-        ArrayList<Weapon> options = this.controller.getCurrentPlayer().getWeaponsList();
+        ArrayList<Weapon> options = new ArrayList<>();
+        options.addAll(this.controller.getCurrentPlayer().getWeaponsList());
 
         Weapon choice = this.controller.getView().showWeapon(options);
         options.remove(choice);

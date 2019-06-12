@@ -28,7 +28,9 @@ public class ChoosingWeapon implements ControllerState {
     public void command() {
 
         //load the current player's weapons into "options"
-        ArrayList<Weapon> options = this.controller.getCurrentPlayer().getWeaponsList();
+        ArrayList<Weapon> options = new ArrayList<>();
+
+        options.addAll(this.controller.getCurrentPlayer().getWeaponsList());
 
         for(Weapon w : options){
             if(!w.isLoaded()){
