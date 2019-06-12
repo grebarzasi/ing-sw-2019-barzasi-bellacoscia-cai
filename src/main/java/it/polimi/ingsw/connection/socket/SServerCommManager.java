@@ -96,8 +96,8 @@ public class SServerCommManager implements View {
         return null;
     }
 
-    public Square showPossibleMoves(ArrayList<Square> args, boolean show) {
-        String s="";
+    public Square showPossibleMoves(ArrayList<Square> args, Boolean show) {
+        String s=show.toString()+INFO_SEP;
         String rpl="";
         for(Square p : args){
             s=s+p.getPosition().getRow()+INNER_SEP+p.getPosition().getColumn()+INFO_SEP;

@@ -44,7 +44,7 @@ public interface View {
      * @return the chosen one
      */
 
-    public Square showPossibleMoves(ArrayList<Square> args, boolean show);
+    public Square showPossibleMoves(ArrayList<Square> args, Boolean show);
 
     /**
      * Shows the valid targets a Figure can target, then returns the targets the user decides

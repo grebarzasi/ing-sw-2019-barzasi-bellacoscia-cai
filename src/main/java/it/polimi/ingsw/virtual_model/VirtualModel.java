@@ -15,7 +15,7 @@ public class VirtualModel {
     private VirtualBoard board;
     private VirtualPlayer owner;
     private VirtualPlayer turn;
-    private boolean updated;
+    private boolean updated=false;
 
     public VirtualModel(VirtualPlayer owner){
         this.allPlayers = new ArrayList<>();
