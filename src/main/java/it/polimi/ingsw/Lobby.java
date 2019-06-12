@@ -22,6 +22,8 @@ public class Lobby extends Thread {
     private boolean hasTimerStarted;
     private Timer timer;
 
+    private static final int MIN_PLAYERS=1;
+
     private int mapPref;
     private int killPref;
     private boolean terminatorPref;
@@ -93,7 +95,7 @@ public class Lobby extends Thread {
                 c.updateLobby();
             }
         }
-        if (i == 3 && !hasStarted()) {
+        if (i == MIN_PLAYERS && !hasStarted()) {
             hasTimerStarted=true;
             System.out.println("Countdown started");
             timer.schedule(new TimerGameStart(this), (COUNTDOWN * 1000));

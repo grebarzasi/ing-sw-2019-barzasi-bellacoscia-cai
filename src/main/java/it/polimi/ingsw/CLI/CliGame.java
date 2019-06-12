@@ -8,8 +8,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Set;
 
+import static it.polimi.ingsw.CLI.CLiBoardStuff.ALL_AMMO;
 import static it.polimi.ingsw.CLI.CLiBoardStuff.ALL_CHARACTERS;
 import static it.polimi.ingsw.CLI.CliColor.*;
 import static it.polimi.ingsw.CLI.CliMessages.*;
@@ -30,9 +32,10 @@ public class CliGame implements ViewClient {
     }
 
     public void gameStart(){
-        if(!c.isRmi())
-            ((SClient)c).setCommManager(new SClientCommManager(((SClient)c),this));
-        ((SClient)c).getCommManager().start();
+        if(!c.isRmi()) {
+            ((SClient) c).setCommManager(new SClientCommManager(((SClient) c), this));
+            ((SClient) c).getCommManager().start();
+        }
         System.out.print("\nWaiting for board to deploy\n");
     }
 
@@ -41,14 +44,14 @@ public class CliGame implements ViewClient {
         String temp[];
         int reply=0;
         do {
-            System.out.print(RESET+"\n");
+            System.out.print(RESET);
             if(printArgs) {
                 for (String s : args) {
                     temp = s.split(INNER_SEP);
                     System.out.print(i + " - " + temp[0]);
-                    if (ALL_CHARACTERS.contains(temp[1])) {
+                    if (ALL_AMMO.contains(temp[1])) {
                         System.out.print("<");
-                        board.printToken(temp[1]);
+                        board.colorizeCP(temp[1]);
                         System.out.println(">");
                     } else
                         System.out.println();
@@ -140,7 +143,62 @@ public class CliGame implements ViewClient {
      * @return the chosen one
      */
     public String showPossibleMoves(ArrayList<String> args) {
-        return null;
+        String reply="";
+        String[] temp;
+        HashMap<String,String> column=new HashMap<>();
+        column.put("A","0");
+        column.put("B","1");
+        column.put("C","2");
+        column.put("D","3");
+        HashMap<String,String> row=new HashMap<>();
+        row.put("1","0");
+        row.put("2","1");
+        row.put("3","2");
+        row.put("4","3");
+
+        do {
+            if (args.get(0).equals("true")) {
+                args.remove(0);
+                printCells(args);
+            }
+            System.out.println(WHITE+CHOOSE_SQUARE_Q);
+            try {
+                reply = sc.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            reply=reply.toUpperCase();
+            temp=reply.split(INNER_SEP);
+            if(reply.isEmpty()||(temp.length==2&&row.containsKey(temp[0])&&column.containsKey(temp[1])))
+                reply=row.get(temp[0])+INNER_SEP+column.get(temp[1]);
+            else {
+                System.out.println(CHOOSE_SQUARE_ERR);
+                reply = "";
+            }
+        }while (reply.isEmpty()||!args.contains(reply));
+
+        return reply;
+    }
+
+    public void printCells(ArrayList<String> args) {
+        HashMap<String,String> orizontal=new HashMap<>();
+        orizontal.put("0","A");
+        orizontal.put("1","B");
+        orizontal.put("2","C");
+        orizontal.put("3","D");
+        HashMap<String,String> vertical=new HashMap<>();
+        vertical.put("0","1");
+        vertical.put("1","2");
+        vertical.put("2","3");
+        vertical.put("3","4");
+
+        String[] temp;
+        for(String s: args){
+            temp=s.split(INNER_SEP);
+            System.out.print(vertical.get(temp[0])+INNER_SEP+orizontal.get(temp[1]));
+            System.out.println();
+        }
+
     }
 
     /**

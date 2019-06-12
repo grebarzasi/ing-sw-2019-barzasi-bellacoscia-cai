@@ -23,7 +23,7 @@ public class UpdateParser {
 
 
     public void updateModel(String s){
-        System.out.println(s);
+        //System.out.println(s);
         ObjectMapper mapper = new ObjectMapper();
         // path of weapons data
         try {

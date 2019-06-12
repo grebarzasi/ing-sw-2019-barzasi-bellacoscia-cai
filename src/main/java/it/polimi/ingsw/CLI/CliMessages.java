@@ -1,6 +1,7 @@
 package it.polimi.ingsw.CLI;
 
 import static it.polimi.ingsw.CLI.CliColor.*;
+import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
 
 /**
  * @author Gregorio Barzasi
@@ -74,6 +75,9 @@ public class CliMessages {
 
     public static final String CHOOSE_TARGET_Q = "\nSeleziona un bersaglio:";
     public static final String CHOOSE_TARGET_ERR = RED+"\nNon disponibile";
+
+    public static final String CHOOSE_SQUARE_Q = "\nSeleziona una destinazione (riga"+INNER_SEP+"colonna):";
+    public static final String CHOOSE_SQUARE_ERR = RED+"\nNon disponibile";
 
     public static void clearScreen() {
        System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");

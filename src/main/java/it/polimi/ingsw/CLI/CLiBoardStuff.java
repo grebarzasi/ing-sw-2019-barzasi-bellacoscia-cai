@@ -64,4 +64,6 @@ public class CLiBoardStuff {
 
 
     public static final ArrayList<String> ALL_CHARACTERS=new ArrayList<>(Arrays.asList("blue", "red", "yellow", "gray", "green"));
+    public static final ArrayList<String> ALL_AMMO=new ArrayList<>(Arrays.asList("B", "R", "Y"));
+
 }
