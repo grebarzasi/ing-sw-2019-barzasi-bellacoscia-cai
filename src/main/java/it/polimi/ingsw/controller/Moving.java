@@ -34,7 +34,7 @@ public class Moving implements ControllerState{
 
         options = this.controller.canGo(this.controller.getCurrentPlayer(),this.range);
 
-        Square choice = this.controller.getView().showPossibleMoves(options, this.range);
+        Square choice = this.controller.getView().showPossibleMoves(options, false);
 
         if(choice == null){
             this.controller.update();

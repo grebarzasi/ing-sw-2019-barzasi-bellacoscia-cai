@@ -40,11 +40,11 @@ public interface View {
     /**
      * Shows the possible destinations a figure can reach and then returns the chosen value
      * @param args the possible destinations
-     * @param range
+     * @param show FOR CLI ONLY: if true show options first, if false only ask for target
      * @return the chosen one
      */
 
-    public Square showPossibleMoves(ArrayList<Square> args, int range);
+    public Square showPossibleMoves(ArrayList<Square> args, boolean show);
 
     /**
      * Shows the valid targets a Figure can target, then returns the targets the user decides

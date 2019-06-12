@@ -4,7 +4,6 @@ import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.View;
 import it.polimi.ingsw.actions.Action;
 import it.polimi.ingsw.board.map.Square;
-import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Effect;
 import it.polimi.ingsw.cards.weapon.Weapon;
@@ -97,7 +96,7 @@ public class SServerCommManager implements View {
         return null;
     }
 
-    public Square showPossibleMoves(ArrayList<Square> args, int range) {
+    public Square showPossibleMoves(ArrayList<Square> args, boolean show) {
         String s="";
         String rpl="";
         for(Square p : args){
