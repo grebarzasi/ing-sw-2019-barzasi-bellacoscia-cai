@@ -3,6 +3,8 @@ package it.polimi.ingsw.CLI;
 import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.connection.socket.SClient;
 import it.polimi.ingsw.connection.rmi.RmiClient;
+
+import static it.polimi.ingsw.CLI.CLiBoardStuff.ALL_CHARACTERS;
 import static it.polimi.ingsw.CLI.CliMessages.*;
 import static java.lang.Thread.sleep;
 
@@ -153,15 +155,14 @@ public class CliView {
      */
     private String acquireCharacter()throws IOException{
             String character;
-            ArrayList<String> allCharacter=new ArrayList<>();
-            allCharacter.addAll(Arrays.asList("blue", "red", "yellow", "gray", "green"));
+
             do {
                 System.out.println(CHARACTER);
                 character = sc.readLine();
-                if (!allCharacter.contains(character)) {
+                if (!ALL_CHARACTERS.contains(character)) {
                     System.out.println(CHARACTER_ERR);
                 }
-            } while (!allCharacter.contains(character));
+            } while (!ALL_CHARACTERS.contains(character));
     return character;
     }
 }

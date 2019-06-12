@@ -1,5 +1,8 @@
 package it.polimi.ingsw.CLI;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static it.polimi.ingsw.CLI.CliColor.*;
 import static it.polimi.ingsw.CLI.CliColor.RESET;
 
@@ -55,4 +58,10 @@ public class CLiBoardStuff {
     public static final int DAMAGE_SPACE =12;
     public static final int WEAPON_SPACE = 25;
     public static final int KILLSHOT_SPACE = 49;
+    public static final int ARMORY_SPACE = 30;
+
+
+
+
+    public static final ArrayList<String> ALL_CHARACTERS=new ArrayList<>(Arrays.asList("blue", "red", "yellow", "gray", "green"));
 }

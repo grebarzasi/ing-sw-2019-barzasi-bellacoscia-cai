@@ -1,4 +1,7 @@
 package it.polimi.ingsw.cards;
+
+import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
+
 /**
  * @author Gregorio Barzasi
  */
@@ -40,10 +43,18 @@ public class Ammo{
     }
 
     public String toString(){
-        if(yellow==1)
-            return "yellow";
-        if(blue==1)
-            return "blue";
-        return "red";
+        String s="";
+//        if(yellow==1)
+//            return "yellow";
+//        if(blue==1)
+//            return "blue";
+//        return "red";
+        for(int i=0;i<yellow;i++)
+            s=s+"Y";
+        for(int i=0;i<blue;i++)
+            s=s+"B";
+        for(int i=0;i<red;i++)
+            s=s+"R";
+        return s;
     }
 }

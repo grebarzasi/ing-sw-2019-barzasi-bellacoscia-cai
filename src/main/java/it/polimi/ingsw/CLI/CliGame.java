@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Set;
 
+import static it.polimi.ingsw.CLI.CLiBoardStuff.ALL_CHARACTERS;
 import static it.polimi.ingsw.CLI.CliColor.*;
 import static it.polimi.ingsw.CLI.CliMessages.*;
 import static it.polimi.ingsw.connection.ConnMessage.*;
@@ -35,16 +36,24 @@ public class CliGame implements ViewClient {
         System.out.print("\nWaiting for board to deploy\n");
     }
 
-    public String genericChoice(ArrayList<String> args,String q, String error) {
+    public String genericChoice(ArrayList<String> args,String q, String error, boolean printArgs) {
         int i =1;
         String temp[];
         int reply=0;
         do {
             System.out.print(RESET+"\n");
-            for(String s: args) {
-                temp = s.split(INNER_SEP);
-                System.out.println(i + " - " + temp[0]);
-                i++;
+            if(printArgs) {
+                for (String s : args) {
+                    temp = s.split(INNER_SEP);
+                    System.out.print(i + " - " + temp[0]);
+                    if (ALL_CHARACTERS.contains(temp[1])) {
+                        System.out.print("<");
+                        board.printToken(temp[1]);
+                        System.out.println(">");
+                    } else
+                        System.out.println();
+                    i++;
+                }
             }
             System.out.print(RESET+q+"\n");
             reply=chooseFromArray(args,error);
@@ -60,12 +69,7 @@ public class CliGame implements ViewClient {
             while(sc.ready()) {
                 sc.read();
             }
-            for(String k : args){
-                System.out.println(i+"- "+k);
-                i++;
-            }
-
-                s = sc.readLine();
+            s = sc.readLine();
 
             try {
                 reply = Integer.parseInt(s);
@@ -88,15 +92,7 @@ public class CliGame implements ViewClient {
      * @return the chosen one
      */
     public String showPowerUp(ArrayList<String> args) {
-        int i =1;
-        String temp[];
-        int reply=0;
-        do {
-            System.out.print(RESET+CHOOSE_PU_Q+"\n");
-            reply=chooseFromArray(args,CHOOSE_PU_ERR);
-        } while (reply==0);
-
-        return args.get(reply-1);
+        return genericChoice(args,CHOOSE_PU_Q,CHOOSE_PU_ERR,true);
     }
 
     /**
@@ -106,7 +102,24 @@ public class CliGame implements ViewClient {
      * @return the chosen one
      */
     public String showWeapon(ArrayList<String> args) {
-        return genericChoice(args,CHOOSE_WP_Q,CHOOSE_WP_ERR);
+        int i =1;
+        String temp[];
+        int reply=0;
+        do {
+            System.out.print(RESET+"\n");
+                for (String s : args) {
+                    temp = s.split(INNER_SEP);
+                    System.out.print(i + " - " + temp[0]+"[");
+                    board.colorizeCP(temp[1]);
+                    System.out.print("]");
+                    if(temp.length>2)
+                        board.colorizeCP(temp[2]);
+                    i++;
+                }
+            System.out.print(RESET+CHOOSE_WP_Q+"\n");
+            reply=chooseFromArray(args,CHOOSE_WP_ERR);
+        } while (reply==0);
+        return args.get(reply-1);
     }
 
     /**
@@ -117,7 +130,7 @@ public class CliGame implements ViewClient {
      * @return the chosen one
      */
     public String showActions(ArrayList<String> args) {
-        return genericChoice(args,CHOOSE_ACTION_Q,CHOOSE_ACTION_ERR);
+        return genericChoice(args,CHOOSE_ACTION_Q,CHOOSE_ACTION_ERR,true);
     }
 
     /**
@@ -138,7 +151,7 @@ public class CliGame implements ViewClient {
      * @return the chosen targets
      */
     public String showTargets(ArrayList<String> args) {
-        return genericChoice(args,CHOOSE_TARGET_Q,CHOOSE_TARGET_ERR);
+        return genericChoice(args,CHOOSE_TARGET_Q,CHOOSE_TARGET_ERR,true);
     }
 
     /**

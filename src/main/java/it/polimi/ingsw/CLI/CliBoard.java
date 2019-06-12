@@ -233,8 +233,28 @@ public class CliBoard {
 
     public void createAmory(){
         int i = 1;
+        int h = 0;
+        String[] temp;
+        String[] temp2;
         for (String s: armory) {
-            System.out.println(BLACK +i + "- "+ s.replace(INFO_SEP,",   "));
+            temp2=s.split(INFO_SEP);
+            System.out.print(BLACK + i +"- " );
+            for(String k:temp2) {
+                h=0;
+                temp = k.split(INNER_SEP);
+                System.out.print(temp[0] + "[");
+                colorizeCP(temp[1]);
+                System.out.print("]");
+                h=h+temp[0].length()+temp[1].length()+2;
+                if(temp.length>2) {
+                    colorizeCP(temp[2]);
+                    h=h+temp[2].length();
+                }
+                System.out.print(BLACK);
+                for(;h<ARMORY_SPACE;h++)
+                    System.out.print(" ");
+            }
+            System.out.println();
             i++;
         }
     }
@@ -479,7 +499,7 @@ public class CliBoard {
         if(model.getOwner().getPowerUps().size()>k){
             pu= model.getOwner().getPowerUps().get(k).split(":");
             System.out.print("├──< "+pu[0]+" [");
-            colorizeCP(pu[1].subSequence(0,1).toString().toUpperCase());
+            colorizeCP(pu[1]);
             System.out.print("]>");
         }
     }

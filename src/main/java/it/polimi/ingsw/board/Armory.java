@@ -4,6 +4,9 @@ import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.util.*;
 
+import static it.polimi.ingsw.connection.ConnMessage.INFO_SEP;
+import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
+
 public class
 
 /**
@@ -46,7 +49,7 @@ Armory {
     public String toString(){
         String s="";
         for(Weapon w: weaponList)
-            s=s+w.getName()+";";
+            s=s+w.getName()+INNER_SEP+w.getChamber().toString()+INNER_SEP+w.getBasicEffect().getCost().toString().replaceFirst(w.getChamber().toString(),"")+INFO_SEP;
         return s;
     }
 }
