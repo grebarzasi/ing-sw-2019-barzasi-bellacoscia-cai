@@ -7,7 +7,15 @@ import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.util.ArrayList;
 
+/**
+ * State pattern interface
+ */
+
 public interface ControllerState {
+
+    /**
+     * Controller's interaction method, interacts with the user through the view interface
+     */
 
     void command();
 

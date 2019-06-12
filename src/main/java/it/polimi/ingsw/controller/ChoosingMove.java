@@ -77,6 +77,10 @@ public class ChoosingMove implements ControllerState{
                 this.controller.setCurrentState(this.controller.frenzySpecialAction);
                 this.controller.currentState.command();
 
+            case "Discard PowerUp":
+                this.controller.setCurrentState(this.controller.discardingPowerUp);
+                this.controller.currentState.command();
+
                 //ends the turn
             case "End Turn":
                 this.controller.endTurn();

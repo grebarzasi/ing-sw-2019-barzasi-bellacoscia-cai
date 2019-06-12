@@ -19,9 +19,9 @@ public class PowerupDeckBuilder {
 
         ObjectMapper mapper = new ObjectMapper();
 
-        String path = "src/main/resources/data_files/deck_data/";
+        String PATH = "src/main/resources/data_files/deck_data/";
 
-        File jsonFile = new File(path + "power_up_data.json");
+        File jsonFile = new File(PATH + "power_up_data.json");
 
         ArrayList<Card> usablePU = new ArrayList<>();
 

@@ -110,6 +110,7 @@ public class ActionBuilder {
         if(!p.getPowerupList().isEmpty()){
 
             actions.add(new Action("Discard PowerUp",0));
+
             boolean flag = false;
 
             for(PowerUp pu : p.getPowerupList()){

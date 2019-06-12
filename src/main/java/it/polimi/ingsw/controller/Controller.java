@@ -45,34 +45,50 @@ public class Controller {
     ControllerState usingNewton;
 
 
-
-    //current state patten state
+    /**
+     * Current controller state
+     */
 
     ControllerState currentState;
 
 
-    //the game has frenzy
+    /**
+     * True if the game has frenzy mode, false otherwise
+     */
     private boolean hasFrenzy;
-    //the game has bot
+
+    /**
+     * True if the game has bot, false otherwise
+     */
     private boolean hasBot;
 
 
-    //Model
+    /**
+     * Main model of the controller, sends update based on this
+     */
     private GameModel model;
 
-    //View interface
+
+    /**
+     * View interface to communicate with user
+     */
     private View view;
 
-    //notifier
+    /**
+     * Notifier
+     */
     private UpdateBuilder marshal;
 
 
-
-
-    //Starts the game from a lobby
+    /**
+     * Starts the game reading parameters from a lobby
+     * @param lobby Lobby to start from
+     */
 
     public Controller(Lobby lobby) {
+
         this.marshal=new UpdateBuilder(this);
+
         ArrayList<Player> playerList = new ArrayList<>();
 
         for(SClientHandler s: lobby.getJoinedPlayers()){
@@ -108,27 +124,6 @@ public class Controller {
 
     }
 
-    public Controller(Lobby lobby, View view) {
-
-        this.model = new GameModel(lobby, this);
-        this.view = view;
-
-        this.asBot = new AsBot(this);
-        this.choosingMove = new ChoosingMove(this);
-        this.choosingPowerUpToUse = new ChoosingPowerUpToUse(this);
-        this.choosingWeapon = new ChoosingWeapon(this);
-        this.moving = new Moving(this);
-        this.picking = new Picking(this);
-        this.pickingWeapon = new PickingWeapon(this);
-        this.reloading = new Reloading(this);
-        this.shooting = new Shooting(this);
-        this.teleporting = new Teleporting(this);
-        this.usingNewton = new UsingNewton(this);
-        this.shooting = new Spawning(this);
-        this.spawning = new Spawning(this);
-        this.frenzySpecialAction = new FrenzySpecialAction(this);
-
-    }
 
     /**
      * Goes back to choosing the move
@@ -204,6 +199,7 @@ public class Controller {
         this.model.setMovesLeft(2);
         this.model.setHasBotAction(true);
         this.model.setTurn(this.model.getTurn() + 1);
+        this.view = this.getCurrentPlayer().getView();
         this.update();
         this.goBack();
 
