@@ -23,7 +23,7 @@ public class UpdateParser {
 
 
     public void updateModel(String s){
-        //System.out.println(s);
+        System.out.println(s);
         ObjectMapper mapper = new ObjectMapper();
         // path of weapons data
         try {
@@ -41,12 +41,11 @@ public class UpdateParser {
 
     public void parsePlayers(JsonNode node){
         Iterator<String> characterIterator = node.fieldNames();
+        model.getAllPlayers().clear();
         while (characterIterator.hasNext()){
             String character = characterIterator.next();
             //if is a new player, add
-
-            if(model.findPlayer(character)==null)
-                model.getAllPlayers().add(new VirtualPlayer(node.path(character).path("username").asText(),character));
+            model.getAllPlayers().add(new VirtualPlayer(node.path(character).path("username").asText(),character));
             VirtualPlayer player = model.findPlayer(character);
 
             //parse player points
@@ -70,8 +69,8 @@ public class UpdateParser {
 
             //parse player board
             parsePlayerBoard(node.path(character).path("board"),player.getpBoard());
-
         }
+        model.setOwner(model.findPlayer(model.getOwner().getCharacter()));
     }
 
     public  ArrayList<String> parseWeapon(JsonNode node){

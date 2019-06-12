@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Set;
 import java.util.Timer;
 
+import static it.polimi.ingsw.connection.ConnMessage.COUNTDOWN;
+
 
 /**
  * The game lobby, contains up to 5 players and their ready status
@@ -19,7 +21,6 @@ public class Lobby extends Thread {
     private boolean started;
     private boolean hasTimerStarted;
     private Timer timer;
-    private static final int DELAY=30;
 
     private int mapPref;
     private int killPref;
@@ -95,7 +96,7 @@ public class Lobby extends Thread {
         if (i == 3 && !hasStarted()) {
             hasTimerStarted=true;
             System.out.println("Countdown started");
-            timer.schedule(new TimerGameStart(this), (DELAY * 1000));
+            timer.schedule(new TimerGameStart(this), (COUNTDOWN * 1000));
         }
     }
 

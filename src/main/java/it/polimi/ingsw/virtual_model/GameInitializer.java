@@ -83,7 +83,7 @@ public class GameInitializer extends Application {
         p2.setPosition(matrix[1][2]);
         p3.setPosition(matrix[0][1]);
         p4.setPosition(matrix[2][3]);
-        contr.getModel().setCurrentPlayer(p2);
+        contr.getModel().setCurrentPlayer(p3);
         contr.getModel().getBoard().getTrack().setSkullMax(SKULLMAX);
 
 
@@ -208,7 +208,7 @@ public class GameInitializer extends Application {
 
 
         JsonNode node = new UpdateBuilder(contr).create();
-        vmodel = new VirtualModel(new VirtualPlayer("Iron Man","red"));
+        vmodel = new VirtualModel(new VirtualPlayer("Iron Man","yellow"));
         UpdateParser parser=new UpdateParser(vmodel);
         System.out.println(node.toString());
         parser.updateModel(node.toString());
@@ -216,7 +216,7 @@ public class GameInitializer extends Application {
         VirtualPlayer vP2 = vmodel.findPlayer(p2.getCharacter());
         VirtualPlayer vP3 = vmodel.findPlayer(p3.getCharacter());
         VirtualPlayer vP4 = vmodel.findPlayer(p4.getCharacter());
-        vmodel.setTurn(vP1);
+
 
         HashMap<String, VirtualCell> cells = vmodel.getBoard().getMap().getCells();
        }

@@ -5,6 +5,8 @@ import it.polimi.ingsw.virtual_model.VirtualLobby;
 import it.polimi.ingsw.virtual_model.VirtualModel;
 import it.polimi.ingsw.virtual_model.VirtualPlayer;
 import static it.polimi.ingsw.CLI.CliMessages.*;
+import static it.polimi.ingsw.connection.ConnMessage.COUNTDOWN;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 
@@ -12,7 +14,6 @@ import java.io.IOException;
  * @author Gregorio Barzasi
  */
 public class CliLobby extends Thread{
-    private final int COUNTDOWN = 30;
     private VirtualLobby lobby;
     private ConnectionTech c;
     private BufferedReader sc;

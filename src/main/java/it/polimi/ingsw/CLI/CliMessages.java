@@ -72,8 +72,11 @@ public class CliMessages {
     public static final String CHOOSE_ACTION_Q = "\nSeleziona un azione:";
     public static final String CHOOSE_ACTION_ERR = RED+"\nNon disponibile";
 
+    public static final String CHOOSE_TARGET_Q = "\nSeleziona un bersaglio:";
+    public static final String CHOOSE_TARGET_ERR = RED+"\nNon disponibile";
+
     public static void clearScreen() {
-        System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+       System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
 
 }

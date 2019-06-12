@@ -87,7 +87,7 @@ public class SServerCommManager implements View {
         for(Action a : args){
             s=s+a.getDescription()+INNER_SEP+a.getRange()+INFO_SEP;
         }
-        rpl=askAndWait(SHOW_MOVES,s);
+        rpl=askAndWait(SHOW_ACTIONS,s);
         temp=rpl.split(INNER_SEP);
         for(Action p : args){
             if(p.getDescription().equals(temp[0]))

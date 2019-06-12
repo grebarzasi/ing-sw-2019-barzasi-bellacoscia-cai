@@ -17,8 +17,7 @@ import static java.lang.Thread.sleep;
 
 public class CliGame implements ViewClient {
 
-    private BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
-
+    private BufferedReader sc=new BufferedReader(new InputStreamReader(System.in));
     private CliBoard board;
     private UpdateParser parser;
     private ConnectionTech c;
@@ -57,24 +56,29 @@ public class CliGame implements ViewClient {
         String s ="";
         int reply=0;
         int i=1;
-        for(String k : args){
-            System.out.println(i+"- "+k);
-            i++;
-        }
         try {
-            s = sc.readLine();
+            while(sc.ready()) {
+                sc.read();
+            }
+            for(String k : args){
+                System.out.println(i+"- "+k);
+                i++;
+            }
+
+                s = sc.readLine();
+
+            try {
+                reply = Integer.parseInt(s);
+            }catch(NumberFormatException e){
+                reply=0;
+            }
+            if (reply<=0 || args.size()<(reply)) {
+                System.out.println(err);
+                reply=0;
+            }
         } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            reply = Integer.parseInt(s);
-        }catch(NumberFormatException e){
-            reply=0;
-        }
-        if (reply<=0 || args.size()<(reply)) {
-            System.out.println(err);
-            reply=0;
-        }
+        e.printStackTrace();
+    }
         return reply;
     }
     /**
@@ -134,7 +138,7 @@ public class CliGame implements ViewClient {
      * @return the chosen targets
      */
     public String showTargets(ArrayList<String> args) {
-        return null;
+        return genericChoice(args,CHOOSE_TARGET_Q,CHOOSE_TARGET_ERR);
     }
 
     /**
