@@ -205,6 +205,8 @@ public class Controller {
             this.model.setCurrentPlayer(this.model.getPlayerList().get(0));
         }
 
+        this.model.setMovesLeft(2);
+
 
         this.model.setTurn(this.model.getTurn() + 1);
         this.goBack();

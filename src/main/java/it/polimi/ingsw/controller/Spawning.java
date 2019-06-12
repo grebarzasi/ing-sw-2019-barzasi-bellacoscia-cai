@@ -98,6 +98,7 @@ public class Spawning implements ControllerState {
             colour = "yellow";
         }
 
+        System.out.println("COLOR IS: " + colour);
 
         if(colour == "nothing"){
             return null;
@@ -106,9 +107,11 @@ public class Spawning implements ControllerState {
         for (row = 0; row < height; row++) {
             for (column = 0; column < width; column++) {
 
-                if(this.controller.getBoard().getMap().getSquareMatrix()[row][column].getRoom().getColor() == colour &&
+                if(this.controller.getBoard().getMap().getSquareMatrix()[row][column].getRoom().getColor().equals(colour) &&
                         this.controller.getBoard().getMap().getSquareMatrix()[row][column].isSpawn()){
 
+
+                    System.out.println("SPAWNING IN : " + this.controller.getBoard().getMap().getSquareMatrix()[row][column].getRoom().getColor());
                     return this.controller.getBoard().getMap().getSquareMatrix()[row][column];
                 }
 

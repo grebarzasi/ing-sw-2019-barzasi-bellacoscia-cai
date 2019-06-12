@@ -101,20 +101,21 @@ public class ActionBuilder {
             }
 
         } else {
+
             actions.add(new Action("Reload", 0));
+
         }
+        boolean flag = false;
 
         for(PowerUp pu : p.getPowerupList()){
-
-            boolean flag = false;
 
             if(pu.getName() == "Teleporter" || pu.getName() == "Newton"){
                 flag = true;
             }
-            if(flag == true){
-                actions.add(new Action("PowerUp",0));
-            }
 
+        }
+        if(flag == true){
+            actions.add(new Action("PowerUp",0));
         }
 
         actions.add(new Action("End Turn", 0));

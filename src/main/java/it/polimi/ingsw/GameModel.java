@@ -48,6 +48,7 @@ public class GameModel {
         this.controller = controller;
         this.currentPlayer = this.playerList.get(0);
         this.frenzyTurn = 0;
+        this.movesLeft = 2;
 
         for (Player p : this.playerList) {
             p.setModel(this);
