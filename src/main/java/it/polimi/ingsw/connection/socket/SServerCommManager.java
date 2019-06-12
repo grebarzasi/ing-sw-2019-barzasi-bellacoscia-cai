@@ -4,6 +4,7 @@ import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.View;
 import it.polimi.ingsw.actions.Action;
 import it.polimi.ingsw.board.map.Square;
+import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Effect;
 import it.polimi.ingsw.cards.weapon.Weapon;
@@ -69,7 +70,7 @@ public class SServerCommManager implements View {
             String rpl="";
             String[] temp;
             for(Weapon p : args){
-                s=s+p.getName()+INNER_SEP+p.isLoaded()+INFO_SEP;
+                s=s+p.getName()+INNER_SEP+p.getChamber().toString()+INNER_SEP+p.getBasicEffect().toString().replaceFirst(p.getChamber().toString(),"")+INNER_SEP;
             }
             rpl=askAndWait(SHOW_WEAPONS,s);
             temp=rpl.split(INNER_SEP);
@@ -138,7 +139,7 @@ public class SServerCommManager implements View {
         String[] temp;
         HashMap<String,Figure> players = new HashMap<>();
         for(Figure a : args){
-            s=s+a.getCharacter()+INFO_SEP;
+            s=s+a.getCharacter()+INNER_SEP+" "+INFO_SEP;
             players.put(a.getCharacter(),a);
         }
         rpl=askAndWait(SHOW_SINGLE_TARGET,s);

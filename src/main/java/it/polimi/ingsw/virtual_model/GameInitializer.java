@@ -90,11 +90,11 @@ public class GameInitializer extends Application {
         //WEAPONS
         WeaponDeck weaponDeck = contr.getModel().getBoard().getWeaponDeck();
         Weapon w1 = (Weapon)weaponDeck.fetch();
-        w1.setLoaded(true);
+        w1.setLoaded(false);
         Weapon w2 = (Weapon)weaponDeck.fetch();
-        w2.setLoaded(true);
+        w2.setLoaded(false);
         Weapon w3 = (Weapon)weaponDeck.fetch();
-        w3.setLoaded(true);
+        w3.setLoaded(false);
 
         ArrayList<Weapon> weaponList1= new ArrayList<>();
         ArrayList<Weapon> weaponList2= new ArrayList<>();
@@ -208,7 +208,7 @@ public class GameInitializer extends Application {
 
 
         JsonNode node = new UpdateBuilder(contr).create();
-        vmodel = new VirtualModel(new VirtualPlayer("Iron Man","yellow"));
+        vmodel = new VirtualModel(new VirtualPlayer("Iron Man","red"));
         UpdateParser parser=new UpdateParser(vmodel);
         System.out.println(node.toString());
         parser.updateModel(node.toString());
