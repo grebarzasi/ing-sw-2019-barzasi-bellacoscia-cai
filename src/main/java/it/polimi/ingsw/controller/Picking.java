@@ -37,13 +37,18 @@ public class Picking implements ControllerState{
 
         Square choice = this.controller.getView().showPossibleMoves(options);
 
-        if (choice.isSpawn()) {
-            this.controller.setCurrentState(this.controller.pickingWeapon);
-            this.controller.getCurrentState().command();
-        } else {
-            this.controller.getCurrentPlayer().pickAmmo();
-            if (this.controller.getCurrentPlayer().getPowerupList().size() == max) {
-                this.choosePU();
+        if(choice == null){
+            this.controller.goBack();
+        }else {
+
+            if (choice.isSpawn()) {
+                this.controller.setCurrentState(this.controller.pickingWeapon);
+                this.controller.getCurrentState().command();
+            } else {
+                this.controller.getCurrentPlayer().pickAmmo();
+                if (this.controller.getCurrentPlayer().getPowerupList().size() == max) {
+                    this.choosePU();
+                }
             }
         }
 

@@ -79,13 +79,6 @@ public class GameModel {
 
     }
 
-    public Set<Figure> askTarget(int num){
-        return null;
-    }
-
-    public Weapon askWeapon(){
-        return null;
-    }
 
     public void askUseEffect(Set<Effect> eff){}
 
@@ -141,7 +134,7 @@ public class GameModel {
         isFrenzy = frenzy;
     }
 
-    public boolean isHasBotAction() {
+    public boolean hasBotAction() {
         return hasBotAction;
     }
 

@@ -32,12 +32,17 @@ public class Reloading implements ControllerState {
 
         boolean check = choice.reload();
 
-        if (check == false) {
-            this.controller.getView().displayMessage("Non possiedi le risorse per caricare l'arma selezionata");
-        }
+        if(choice == null){
+            this.controller.goBack();
+        }else {
 
-        this.controller.update();
-        this.controller.goBack();
+            if (check == false) {
+                this.controller.getView().displayMessage("Non possiedi le risorse per caricare l'arma selezionata");
+            }
+
+            this.controller.update();
+            this.controller.goBack();
+        }
 
     }
 

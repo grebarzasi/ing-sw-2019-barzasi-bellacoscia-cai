@@ -3,12 +3,9 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.*;
 import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.map.Square;
-import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.connection.socket.SClientHandler;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
 
 /**
  * Main controller class, implemented with satate pattern.
@@ -20,11 +17,11 @@ public class Controller {
 
     private static final int[] frenzyPointsVec = {2,1,1,1};
 
-    private static final int height = 3;
-    private static final int width = 4;
+    private static final int HEIGHT = 3;
+    private static final int WIDTH = 4;
 
-    private static final int deathDamage = 11;
-    private static final int overKillDamage = 12;
+    private static final int DEATH_DAMAGE = 11;
+    private static final int OVER_KILL_DAMAGE = 12;
 
 
     //State pattern states
@@ -134,7 +131,7 @@ public class Controller {
         this.currentState.command();
     }
 
-    public void dereaseMoveLeft(){
+    void dereaseMoveLeft(){
         this.setMovesLeft(this.getMovesLeft() -1 );
     }
 
@@ -145,42 +142,18 @@ public class Controller {
      * on the player list
      */
 
-    public void endTurn() {
+    void endTurn() {
 
         for (Figure f : this.model.getPlayerList()) {
 
-            if (f.getPersonalBoard().getDamage().size() >= deathDamage) {
+            if (f.getPersonalBoard().getDamage().size() >= DEATH_DAMAGE) {
 
                 ArrayList<Token> addToTrack = new ArrayList<>();
-                addToTrack.add(f.getPersonalBoard().getDamage().get(deathDamage - 1));
-                addToTrack.add(f.getPersonalBoard().getDamage().get(overKillDamage -1));
+                addToTrack.add(f.getPersonalBoard().getDamage().get(DEATH_DAMAGE - 1));
+                addToTrack.add(f.getPersonalBoard().getDamage().get(OVER_KILL_DAMAGE -1));
                 this.getBoard().getTrack().getKillsTrack().add(addToTrack);
 
-                if(this.getBoard().getTrack().getKillsTrack().size() == this.getBoard().getTrack().getSkullMax()){
-
-                    if(this.hasFrenzy){
-
-                        this.startFrenzy();
-                        this.getCurrentPlayer().setStartedFrenzy(true);
-                        this.model.getBoard().refillSquares();
-
-                        this.goBack();
-                        this.model.setFrenzyState(this.model.getFrenzyState() + 1);
-
-                        if(this.model.getFrenzyState() == this.model.getPlayerList().size()){
-                            /*****************GAME_ENDS********************/
-                            this.endGame();
-                            /*****************GAME_ENDS********************/
-                        }
-
-
-                    }else if(!this.hasFrenzy){
-                        /*****************GAME_ENDS********************/
-                        this.endGame();
-                        /*****************GAME_ENDS********************/
-                    }
-
-                }
+                this.checkEndStatus();
 
             }
 
@@ -189,12 +162,52 @@ public class Controller {
         this.model.getBoard().refillSquares();
 
 
-        //iterates the current player
+        this.iteratePlayer();
+        this.resetTurn();
+
+    }
+
+    private void checkEndStatus(){
+
+        if(this.getBoard().getTrack().getKillsTrack().size() == this.getBoard().getTrack().getSkullMax()){
+
+            if(this.hasFrenzy){
+
+                this.startFrenzy();
+                this.getCurrentPlayer().setStartedFrenzy(true);
+                this.model.getBoard().refillSquares();
+
+                this.goBack();
+                this.model.setFrenzyState(this.model.getFrenzyState() + 1);
+
+                if(this.model.getFrenzyState() == this.model.getPlayerList().size()){
+                    /* ****************GAME_ENDS******************* */
+                    this.endGame();
+                    /* ****************GAME_ENDS******************* */
+                }
+
+
+            }else if(!this.hasFrenzy){
+                /* ****************GAME_ENDS******************* */
+                this.endGame();
+                /* ****************GAME_ENDS******************* */
+            }
+
+        }
+    }
+
+    private void iteratePlayer(){
+
         if (this.model.getPlayerList().indexOf(this.model.getCurrentPlayer()) != this.model.getPlayerList().size() - 1) {
             this.model.setCurrentPlayer(this.model.getPlayerList().get(this.model.getPlayerList().indexOf(model.getCurrentPlayer()) + 1));
         } else {
             this.model.setCurrentPlayer(this.model.getPlayerList().get(0));
         }
+
+
+    }
+
+    private void resetTurn(){
 
         this.model.setMovesLeft(2);
         this.model.setHasBotAction(true);
@@ -205,55 +218,14 @@ public class Controller {
 
     }
 
-
-    /**
-     * ask player
-     * @author Gregorio Barzasi
-     *
-     */
-
-    public void endGame(){
+    private void endGame(){
 
         this.view.displayLeaderboard();
 
     }
 
-    public void startFrenzy(){
+    private void startFrenzy(){
         this.model.setFrenzy(true);
-    }
-
-
-    public Square askPosition(){
-
-        Scanner sc = new Scanner(System.in);
-        int row = sc.nextInt();
-        int column = sc.nextInt();
-
-        return this.model.getBoard().getMap().getSquareMatrix()[row][column];
-    }
-    public Ammo askAmmo(){
-
-        Figure p = this.model.getCurrentPlayer();
-        Scanner sc = new Scanner(System.in);
-        int red = sc.nextInt();
-        int blue = sc.nextInt();
-        int yellow = sc.nextInt();
-
-        Ammo a = new Ammo(red, blue, yellow);
-        p.getPersonalBoard().removeAmmo(a);
-
-        return a;
-    }
-    public Figure askOneTarget(){
-
-        Scanner sc = new Scanner(System.in);
-        String name = sc.next();
-        for (Player p : this.model.getPlayerList()) {
-            if(p.getUsername().equals(name)){
-                return p;
-            }
-        }
-        return null;
     }
 
     /**
@@ -264,15 +236,15 @@ public class Controller {
      * @return the list of possible squares
      */
 
-    public ArrayList<Square> canGo(Figure p, int range){
+    ArrayList<Square> canGo(Figure p, int range){
 
         int row;
         int column;
 
         ArrayList<Square> options = new ArrayList<>();
 
-        for(row = 0; row < height; row++){
-            for(column = 0; column < width; column++){
+        for(row = 0; row < HEIGHT; row++){
+            for(column = 0; column < WIDTH; column++){
 
                 if(p.distanceTo(this.getModel().getBoard().getMap().getSquareMatrix()[row][column])
                         < range){
@@ -298,6 +270,7 @@ public class Controller {
         String map = "large";
 
         switch(i){
+
             case 4:
                 map = "small";
                 break;
@@ -456,5 +429,59 @@ public class Controller {
         return this.model.getCurrentPlayer();
     }
 
+    public static int[] getFrenzyPointsVec() {
+        return frenzyPointsVec;
+    }
 
+    public static int getHeight() {
+        return HEIGHT;
+    }
+
+    public static int getWidth() {
+        return WIDTH;
+    }
+
+    public static int getDeathDamage() {
+        return DEATH_DAMAGE;
+    }
+
+    public static int getOverKillDamage() {
+        return OVER_KILL_DAMAGE;
+    }
+
+    public ControllerState getFrenzySpecialAction() {
+        return frenzySpecialAction;
+    }
+
+    public void setFrenzySpecialAction(ControllerState frenzySpecialAction) {
+        this.frenzySpecialAction = frenzySpecialAction;
+    }
+
+    public boolean isHasFrenzy() {
+        return hasFrenzy;
+    }
+
+    public void setHasFrenzy(boolean hasFrenzy) {
+        this.hasFrenzy = hasFrenzy;
+    }
+
+    public boolean hasBot() {
+        return hasBot;
+    }
+
+    public void setHasBot(boolean hasBot) {
+        this.hasBot = hasBot;
+    }
+
+    public void setView(View view) {
+        this.view = view;
+    }
+
+    public UpdateBuilder getMarshal() {
+        return marshal;
+    }
+
+    public void setMarshal(UpdateBuilder marshal) {
+        this.marshal = marshal;
+    }
 }

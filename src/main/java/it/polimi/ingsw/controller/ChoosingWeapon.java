@@ -30,6 +30,12 @@ public class ChoosingWeapon implements ControllerState {
         //load the current player's weapons into "options"
         ArrayList<Weapon> options = this.controller.getCurrentPlayer().getWeaponsList();
 
+        for(Weapon w : options){
+            if(!w.isLoaded()){
+                options.remove(w);
+            }
+        }
+
         //Displays the options to the view and the view returns the chosen weapon
         Weapon choice = this.controller.getView().showWeapon(options);
 

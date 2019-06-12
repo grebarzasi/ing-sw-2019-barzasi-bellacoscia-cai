@@ -28,12 +28,16 @@ public class DiscardingPowerUp implements ControllerState{
 
         PowerUp choice = this.controller.getView().showPowerUp(options);
 
-        this.controller.getCurrentPlayer().getPersonalBoard().addAmmo(choice.getAmmoOnDiscard());
-        this.controller.getCurrentPlayer().getPowerupList().remove(choice);
-        this.controller.getBoard().getPowerupDeck().getDiscarded().add(choice);
+        if(choice == null){
+            this.controller.goBack();
+        }else {
+            this.controller.getCurrentPlayer().getPersonalBoard().addAmmo(choice.getAmmoOnDiscard());
+            this.controller.getCurrentPlayer().getPowerupList().remove(choice);
+            this.controller.getBoard().getPowerupDeck().getDiscarded().add(choice);
 
-        this.controller.update();
-        this.controller.goBack();
+            this.controller.update();
+            this.controller.goBack();
+        }
 
     }
 

@@ -1,13 +1,9 @@
 package it.polimi.ingsw.actions;
 
-import it.polimi.ingsw.Figure;
-import it.polimi.ingsw.GameModel;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Genetrates actions a player can perform
@@ -35,8 +31,6 @@ public class ActionBuilder {
     public static final int firstPlayerFrenzyPickRange = 3;
     public static final int firstPlayerFrenzyMoveReloadShootRange = 2;
 
-
-    //TODO Generate bot action
 
     /**
      * Generates available actions based on information taken from the game
@@ -122,6 +116,10 @@ public class ActionBuilder {
             if(flag == true){
                 actions.add(new Action("PowerUp",0));
             }
+        }
+
+        if(p.getModel().hasBotAction() && p.getModel().getController().hasBot()){
+            actions.add(new Action("Use Bot",0));
         }
 
 

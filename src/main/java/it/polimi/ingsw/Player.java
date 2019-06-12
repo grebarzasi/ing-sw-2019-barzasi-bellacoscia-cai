@@ -96,8 +96,7 @@ public class Player extends Figure {
     }
 
     public void removePowerUp(PowerUp toRemove) {
-        int index = this.getPowerupList().indexOf(toRemove);
-        this.getPowerupList().remove(index);
+        this.powerupList.remove(toRemove);
     }
 
     public void addWeapon(Weapon weaponToAdd){

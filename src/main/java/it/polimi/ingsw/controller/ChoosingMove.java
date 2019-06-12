@@ -89,6 +89,11 @@ public class ChoosingMove implements ControllerState{
                     this.controller.currentState.command();
                     break;
 
+                case "Use Bot":
+                    this.controller.setCurrentState(this.controller.asBot);
+                    this.controller.currentState.command();
+                    break;
+
                 //ends the turn
                 case "End Turn":
                     this.controller.endTurn();

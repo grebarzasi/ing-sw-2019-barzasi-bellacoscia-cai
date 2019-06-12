@@ -278,7 +278,7 @@ public class GameJavaFX extends Application implements ViewClient{
          * set Background.
          */
         try {
-            Image back = new Image(new FileInputStream(PATH_BACK_GAME), 2190, 1920, true, true);
+            Image back = new Image(new FileInputStream(PATH_BACK_GAME), widthScreen, heightScreen, true, true);
             BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
             grid.setBackground(new Background(backgroundImage));
         }catch (IOException e){
