@@ -1,6 +1,8 @@
 package it.polimi.ingsw.javaFX;
 
 import it.polimi.ingsw.connection.ConnectionTech;
+import it.polimi.ingsw.connection.socket.SClient;
+import it.polimi.ingsw.virtual_model.SClientCommManager;
 import it.polimi.ingsw.virtual_model.VirtualLobby;
 import it.polimi.ingsw.virtual_model.VirtualModel;
 import it.polimi.ingsw.virtual_model.VirtualPlayer;
@@ -33,6 +35,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import static it.polimi.ingsw.javaFX.GUIFiles.*;
+import static java.lang.Thread.sleep;
 
 
 /**
@@ -41,17 +44,17 @@ import static it.polimi.ingsw.javaFX.GUIFiles.*;
 public class LobbyJavaFX extends Application {
 
 
-    private boolean terminator = false;
-    private boolean frenzy = false;
+    private boolean terminator;
+    private boolean frenzy;
     private int map;
     private int skull;
     private ConnectionTech conn;
     private VirtualPlayer owner;
 
-    VirtualModel vmodel = new VirtualModel(owner);
-    GameJavaFX game = new GameJavaFX(vmodel);
+    private VirtualModel vmodel;
+    private GameJavaFX game;
 
-    private boolean start = false;
+    private boolean start;
 
     Font font = new Font("TimesRoman", 20);
     Font titleFont = new Font("TimesRoman", 36);
@@ -65,6 +68,13 @@ public class LobbyJavaFX extends Application {
         this.conn = conn;
         this.owner = owner;
         this.lobby = new VirtualLobby(conn, owner);
+        vmodel = new VirtualModel(owner);
+        game = new GameJavaFX(vmodel);
+        terminator = false;
+        frenzy = false;
+        map = 0;
+        skull = 0;
+        start = false;
     }
 
     public VirtualPlayer getOwner() {
@@ -337,7 +347,28 @@ public class LobbyJavaFX extends Application {
     }
 
     public void gameStart(){
+
+        if(!conn.isRmi()){
+            ((SClient)conn).setCommManager(new SClientCommManager(((SClient)conn),game));
+            ((SClient)conn).getCommManager().start();
+        }
+
+        while(!vmodel.isUpdated()){
+            try {
+                sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
         try {
+            sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            game.setStart(true);
             game.start(primaryStage);
         } catch (Exception e) {
             e.printStackTrace();

@@ -109,7 +109,7 @@ public class CliBoard {
             case"#y":
                 System.out.print(YELLOW_B);
                 lastBackground=YELLOW_B;
-                break;
+                 ;
             case"#w":
                 System.out.print(WHITE_B);
                 lastBackground=WHITE_B;
