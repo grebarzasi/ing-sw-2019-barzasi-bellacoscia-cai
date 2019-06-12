@@ -33,8 +33,8 @@ public class Board{
     private Deck powerupDeck;
     private WeaponDeck weaponDeck;
 
-    private static final int width = 4;
-    private static final int height = 3;
+    private static final int WIDTH = 4;
+    private static final int HEIGHT = 3;
 
     /**
      * Constructor of the board, initiates the map according to the chosen selection
@@ -73,8 +73,8 @@ public class Board{
 
 
         //loads the ammolots into the squares without a respawn spot
-        for(row = 0 ; row < height; row ++){
-            for(column = 0; column < width ; column++){
+        for(row = 0 ; row < HEIGHT; row ++){
+            for(column = 0; column < WIDTH ; column++){
 
                 if(!this.map.getSquareMatrix()[row][column].isSpawn() && !this.map.getSquareMatrix()[row][column].getRoom().getColor().equals("black")){
 
@@ -86,8 +86,8 @@ public class Board{
 
         //loads the weapons into the armories
 
-        for(row = 0 ; row < height; row ++){
-            for(column = 0; column < width ; column++){
+        for(row = 0 ; row < HEIGHT; row ++){
+            for(column = 0; column < WIDTH ; column++){
 
                 if(this.map.getSquareMatrix()[row][column].isSpawn()){
 
@@ -119,8 +119,8 @@ public class Board{
 
     public void fillAmmoLots(){
 
-        for (int row = 0; row < height; row++) {
-            for (int column = 0; column < width; column++) {
+        for (int row = 0; row < HEIGHT; row++) {
+            for (int column = 0; column < WIDTH; column++) {
 
                 //if the square is not a respawn spot and if its drop has been collected
                 if (!this.getMap().getSquareMatrix()[row][column].isSpawn() && this.getMap().getSquareMatrix()[row][column].getRoom().getColor() != "black") {
@@ -135,8 +135,8 @@ public class Board{
 
     public void fillArmories() {
 
-        for (int row = 0; row < height; row++) {
-            for (int column = 0; column < width; column++) {
+        for (int row = 0; row < HEIGHT; row++) {
+            for (int column = 0; column < WIDTH; column++) {
                 //for each cell of the square matrix if it is a spawn square
                 if (this.getMap().getSquareMatrix()[row][column].isSpawn()) {
 

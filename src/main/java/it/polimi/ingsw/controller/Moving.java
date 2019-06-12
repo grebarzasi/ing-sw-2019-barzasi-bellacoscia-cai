@@ -12,8 +12,8 @@ public class Moving implements ControllerState{
 
     private int range;
 
-    private static final int height = 3;
-    private static final int width = 4;
+    private static final int HEIGHT = 3;
+    private static final int WIDTH = 4;
 
     private Controller controller;
 
