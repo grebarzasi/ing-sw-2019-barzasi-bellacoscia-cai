@@ -738,15 +738,17 @@ public class GameJavaFX extends Application implements ViewClient {
         }
 
 
-        /**
-         * set deck
-         */
+        /*
+        ** SET DECK **
+
         Image imgDeck = new Image(new FileInputStream(PATH_BACK_POWERUP), widthCard, widthCard, true, true);
         BackgroundImage backgroundDeck = new BackgroundImage(imgDeck, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background backDeck = new Background(backgroundDeck);
         btnDeck.setBackground(backDeck);
         btnDeck.setPrefSize(widthCard, widthCard);
         grid.add(btnDeck, 2, 2);
+
+        */
 
         /**
          * set buttons
@@ -902,7 +904,7 @@ public class GameJavaFX extends Application implements ViewClient {
         */
         msg.setText(WELCOME);
 
-        primaryStage.setFullScreen(true);
+        //primaryStage.setFullScreen(true);
         primaryStage.show();
     }
 
@@ -1772,9 +1774,13 @@ public class GameJavaFX extends Application implements ViewClient {
                 });
             }
 
+            /*
+
             btnDeck.setOnAction(e -> {
                 System.out.println("ok");
             });
+
+             */
 
 
             for (VirtualPlayer player : model.getAllPlayers()) {
