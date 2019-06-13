@@ -18,81 +18,89 @@ public class VirtualGame {
     private ArrayList<String> ammoTiles = new ArrayList<>();
 
     private ArrayList<String> actions = new ArrayList<>();
+    private String action = "";
+
 
     public VirtualGame() {
-        hideSquare.add("0:0");
-        hideSquare.add("0:1");
     }
 
-    public String getDirection() {
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+
+    public synchronized String getDirection() {
         return direction;
     }
 
-    public void setDirection(String direction) {
+    public synchronized void setDirection(String direction) {
         this.direction = direction;
     }
 
-    public ArrayList<String> getActions() {
+    public synchronized ArrayList<String> getActions() {
         return actions;
     }
 
-    public void setActions(ArrayList<String> actions) {
+    public synchronized void setActions(ArrayList<String> actions) {
         this.actions = actions;
     }
 
-    public String getTargetSquare() {
+    public synchronized String getTargetSquare() {
         return targetSquare;
     }
 
-    public void setTargetSquare(String targetSquare) {
+    public synchronized void setTargetSquare(String targetSquare) {
         this.targetSquare = targetSquare;
     }
 
-    public String getTargetPlayer() {
+    public synchronized String getTargetPlayer() {
         return targetPlayer;
     }
 
-    public void setTargetPlayer(String targetPlayer) {
+    public synchronized void setTargetPlayer(String targetPlayer) {
         this.targetPlayer = targetPlayer;
     }
 
-    public String getWeapon() {
+    public synchronized String getWeapon() {
         return weapon;
     }
 
-    public void setWeapon(String weapon) {
+    public synchronized void setWeapon(String weapon) {
         this.weapon = weapon;
     }
 
-    public String getPowerup() {
+    public synchronized String getPowerup() {
         return powerup;
     }
 
-    public void setPowerup(String powerup) {
+    public synchronized void setPowerup(String powerup) {
         this.powerup = powerup;
     }
 
-    public String getEffect() {
+    public synchronized String getEffect() {
         return effect;
     }
 
-    public void setEffect(String effect) {
+    public synchronized void setEffect(String effect) {
         this.effect = effect;
     }
 
-    public ArrayList<String> getHideSquare() {
+    public synchronized ArrayList<String> getHideSquare() {
         return hideSquare;
     }
 
-    public void setHideSquare(ArrayList<String> hideSquare) {
+    public synchronized void setHideSquare(ArrayList<String> hideSquare) {
         this.hideSquare = hideSquare;
     }
 
-    public ArrayList<String> getAmmoTiles() {
+    public synchronized ArrayList<String> getAmmoTiles() {
         return ammoTiles;
     }
 
-    public void setAmmoTiles(ArrayList<String> ammoTiles) {
+    public synchronized void setAmmoTiles(ArrayList<String> ammoTiles) {
         this.ammoTiles = ammoTiles;
     }
 }

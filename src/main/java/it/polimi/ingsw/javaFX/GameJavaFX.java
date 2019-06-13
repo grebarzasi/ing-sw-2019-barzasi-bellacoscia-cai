@@ -33,6 +33,7 @@ import java.util.Set;
 
 import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
 import static it.polimi.ingsw.javaFX.GUIFiles.*;
+import static java.lang.Thread.sleep;
 
 /*
 
@@ -93,11 +94,13 @@ RISALIRE ALLA CELLA!!
  */
 public class GameJavaFX extends Application implements ViewClient {
 
+    private boolean start;
+
     private VirtualModel model;
 
     private VirtualGame game;
 
-    UpdateParser parser;
+    private UpdateParser parser;
 
     private Font font;
 
@@ -175,7 +178,17 @@ public class GameJavaFX extends Application implements ViewClient {
     private double heightOtherAmmo;
     private double heightOtherBoard;
 
+    public boolean isStart() {
+        return start;
+    }
+
+    public void setStart(boolean start) {
+        this.start = start;
+    }
+
     public GameJavaFX(VirtualModel model) {
+
+        this.start = false;
 
         this.model = model;
 
@@ -183,7 +196,6 @@ public class GameJavaFX extends Application implements ViewClient {
 
         this.game = new VirtualGame();
         this.font = new Font(20);
-        ;
 
         this.action = "";
         this.decision = "";
@@ -746,9 +758,6 @@ public class GameJavaFX extends Application implements ViewClient {
         msg.setFont(font);
         msg.setEditable(false);
 
-        hideBtn(btnCancel, 0);
-        hideBtn(btnReload, 0);
-        hideBtn(btnTerminator, 0);
         HBox hBtn = new HBox(30);
         hBtn.setAlignment(Pos.CENTER);
         hBtn.getChildren().add(btnTerminator);
@@ -1384,7 +1393,7 @@ public class GameJavaFX extends Application implements ViewClient {
                 }
                 j++;
             }
-        while (k <= p.getpBoard().getSkulls() + 2) {
+        while (k <= 6 - p.getpBoard().getSkulls() + 1) {
 
             if (k <= no) {
                 k++;
@@ -1536,6 +1545,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
     public int getCoordinate(String s) {
 
+
         int temp1 = Integer.parseInt(s.split(":")[0]);
         int temp2 = Integer.parseInt(s.split(":")[1]);
 
@@ -1567,7 +1577,7 @@ public class GameJavaFX extends Application implements ViewClient {
     public void chooseSquare(ArrayList<Button> btnArr, int btn, boolean pick) {
 
         for (Button b : btnArr) {
-            b.setOnAction(e -> {
+            Runnable run = () -> b.setOnAction(e -> {
                 if (b.getOpacity() == 0 || btnArr.indexOf(b) == 5) {
                     int x = (int) Math.ceil((double) (btn + 1) / 4) - 1;
                     int y = (btn + 1) - (x * 4) - 1;
@@ -1587,6 +1597,9 @@ public class GameJavaFX extends Application implements ViewClient {
                     hideBtn(btnArr.get(5), 0);
                 }
             });
+
+            Platform.runLater(run);
+
         }
 
 
@@ -1641,160 +1654,173 @@ public class GameJavaFX extends Application implements ViewClient {
 
     public void update() {
 
-        msg.setText(CLEAR);
+        if(start) {
+            msg.setText(CLEAR);
 
-        for (ArrayList<Button> btnArr : btnCell) {
-            hideCell(btnArr, 0);
-            for (Button b : btnArr) {
-                b.setOnAction(e -> {
-                });
+            for (ArrayList<Button> btnArr : btnCell) {
+                hideCell(btnArr, 0);
+                for (Button b : btnArr) {
+                    b.setOnAction(e -> {
+                    });
+                }
             }
-        }
 
-        btnCancel.setOnAction(e -> {
-            update();
             hideBtn(btnCancel, 0);
-        });
+            hideBtn(btnReload, 0);
+            hideBtn(btnTerminator, 0);
+            hideBtn(btnMove, 0);
+            hideBtn(btnPick, 0);
+            hideBtn(btnShoot, 0);
+            hideBtn(btnPowerUp, 0);
 
-        btnMove.setOnAction(e -> {
-            if (model.getTurn().getCharacter().equals(model.getOwner().getCharacter()) && btnShoot.getOpacity() == 1) {
+            btnCancel.setOnAction(e -> {
+                update();
+            });
 
-                action = "move";
-                msg.setText(CHOOSE_SQUARE);
-                hideBtn(btnCancel, 1);
-                for (ArrayList<Button> btnArr : btnCell) {
-                    chooseSquare(btnArr, btnCell.indexOf(btnArr), false);
-                }
+            btnMove.setOnAction(e -> {
+                if (model.getTurn().getCharacter().equals(model.getOwner().getCharacter()) && btnShoot.getOpacity() == 1) {
+
+                    action = "move";
+                    msg.setText(CHOOSE_SQUARE);
+                    hideBtn(btnCancel, 1);
+                    for (ArrayList<Button> btnArr : btnCell) {
+                        chooseSquare(btnArr, btnCell.indexOf(btnArr), false);
+                    }
 
 
-                for (String s : game.getHideSquare()) {
-                    hideCell(btnCell.get(getCoordinate(s)), 0.5);
-                }
-            } else
-                msg.setText("Aspetta il tuo turno...");
+                    for (String s : game.getHideSquare()) {
+                        hideCell(btnCell.get(getCoordinate(s)), 0.5);
+                    }
+                } else
+                    msg.setText("Aspetta il tuo turno...");
 
-        });
-        btnPick.setOnAction(e -> {
-            if (model.getTurn().getCharacter().equals(model.getOwner().getCharacter()) && btnShoot.getOpacity() == 1) {
+            });
+            btnPick.setOnAction(e -> {
+                if (model.getTurn().getCharacter().equals(model.getOwner().getCharacter()) && btnShoot.getOpacity() == 1) {
 
-                action = "pick";
-                msg.setText(CHOOSE_SQUARE);
-                hideBtn(btnCancel, 1);
-                for (ArrayList<Button> btnArr : btnCell) {
-                    chooseSquare(btnArr, btnCell.indexOf(btnArr), true);
-                }
+                    action = "pick";
+                    msg.setText(CHOOSE_SQUARE);
+                    hideBtn(btnCancel, 1);
+                    for (ArrayList<Button> btnArr : btnCell) {
+                        chooseSquare(btnArr, btnCell.indexOf(btnArr), true);
+                    }
 
-                for (String s : game.getHideSquare()) {
-                    hideCell(btnCell.get(getCoordinate(s)), 0.5);
-                }
+                    for (String s : game.getHideSquare()) {
+                        hideCell(btnCell.get(getCoordinate(s)), 0.5);
+                    }
 
-            } else
-                msg.setText("Aspetta il tuo turno...");
-        });
+                } else
+                    msg.setText("Aspetta il tuo turno...");
+            });
 
-        btnShoot.setOnAction(e -> {
-            if (model.getTurn().getCharacter().equals(model.getOwner().getCharacter()) && btnShoot.getOpacity() == 1) {
+            btnShoot.setOnAction(e -> {
+                if (model.getTurn().getCharacter().equals(model.getOwner().getCharacter()) && btnShoot.getOpacity() == 1) {
 
-                action = "shoot";
-                msg.setText(CHOOSE_PLAYER);
-                hideBtn(btnCancel, 1);
-                for (ArrayList<Button> btnArr : btnCell) {
-                    choosePlayer(btnArr, btnCell.indexOf(btnArr));
-                    for (Button btn : we) {
-                        btn.setOnAction(es -> {
-                            game.setWeapon(model.getOwner().getWeapons().get(we.indexOf(btn)));
+                    action = "shoot";
+                    msg.setText(CHOOSE_PLAYER);
+                    hideBtn(btnCancel, 1);
+                    for (ArrayList<Button> btnArr : btnCell) {
+                        choosePlayer(btnArr, btnCell.indexOf(btnArr));
+                        for (Button btn : we) {
+                            btn.setOnAction(es -> {
+                                game.setWeapon(model.getOwner().getWeapons().get(we.indexOf(btn)));
+                            });
+                        }
+                    }
+                } else
+                    msg.setText("Aspetta il tuo turno...");
+            });
+
+            btnPowerUp.setOnAction(e -> {
+                int j = 0;
+                for (Button btn : pu) {
+                    if (j < model.getOwner().getPowerUps().size()) {
+                        String power = model.getOwner().getPowerUps().get(j);
+                        btn.setOnAction(ep -> {
+                            game.setPowerup(power);
                         });
+                        j++;
                     }
                 }
-            } else
-                msg.setText("Aspetta il tuo turno...");
-        });
+            });
 
-        btnPowerUp.setOnAction(e -> {
-            int j = 0;
+
+            for (Button btn : we) {
+                btn.setOnAction(e -> {
+                    int j = we.indexOf(btn);
+                    infoWindow iw = new infoWindow(model.getOwner(), j, false);
+                    iw.show();
+                });
+            }
+
             for (Button btn : pu) {
-                if (j < model.getOwner().getPowerUps().size()) {
-                    String power = model.getOwner().getPowerUps().get(j);
-                    btn.setOnAction(ep -> {
-                        game.setPowerup(power);
-                    });
-                    j++;
-                }
-            }
-        });
-
-
-        for (Button btn : we) {
-            btn.setOnAction(e -> {
-                int j = we.indexOf(btn);
-                infoWindow iw = new infoWindow(model.getOwner(), j, false);
-                iw.show();
-            });
-        }
-
-        for (Button btn : pu) {
-            btn.setOnAction(e -> {
-                int j = pu.indexOf(btn);
-                infoWindow iw = new infoWindow(model.getOwner(), j, true);
-                iw.show();
-            });
-        }
-
-        btnDeck.setOnAction(e -> {
-            System.out.println("ok");
-        });
-
-        for (VirtualPlayer player : model.getAllPlayers()) {
-            setPlayerOnCell(btnCell.get(player.getRow() * 4 + player.getColumn()), player.getCharacter());
-        }
-
-        for (ArrayList<Button> btnArr : btnCell) {
-            btnArr.get(5).setOnAction(e -> {
-                if (btnCell.indexOf(btnArr) == 2 || btnCell.indexOf(btnArr) == 4 || btnCell.indexOf(btnArr) == 11) {
-                    chooseWeapon cw = new chooseWeapon();
-                    cw.show();
-                }
-            });
-        }
-
-
-        fillSkulls(gridSkull, model.getBoard().getSkull(), widthSkull - 5, heightLateral / 3);
-
-        for (VirtualPlayer player : model.getAllPlayers()) {
-            setPlayerOnCell(btnCell.get((player.getRow() * 4) - 1 + player.getColumn() + 1), player.getCharacter());
-        }
-
-        fillAmmoTiles();
-
-        fillBoard(gridPBoard, model.getOwner(), widthBoard, heightPBoard / 4 - 6, heightPBoard / 4, heightPBoard / 3 - 6);
-        fillAmmo(gridPAmmo, model.getOwner().getpBoard(), widthLateral / 7, heightLateral / 7);
-
-
-        for (Button btn : we) {
-            hideBtn(btn, 0);
-        }
-        for (Button btn : pu) {
-            hideBtn(btn, 0);
-        }
-        fillWeapon(we, model.getOwner(), widthCard, heightCard);
-        fillPowerUp(pu, model.getOwner());
-
-
-        int i = 0;
-        for (VirtualPlayer p : model.getAllPlayers()) {
-
-            if (p.equals(model.getOwner())) {
-                continue;
+                btn.setOnAction(e -> {
+                    int j = pu.indexOf(btn);
+                    infoWindow iw = new infoWindow(model.getOwner(), j, true);
+                    iw.show();
+                });
             }
 
-            fillBoard(gridOtherBoards.get(i), p, widthBoard, heightPBoard / 5 - 10, heightPBoard / 4 - 10, heightPBoard / 5 - 10);
-            fillOtherAmmo(gridOtherAmmo.get(i), p.getpBoard(), widthLateral / 7, heightLateral / 7);
-            fillWeapon(otherWe.get(i), p, widthOCard / 3.7, heightOtherWeapon);
-            setWeapon(p, otherWe.get(i));
-            i++;
+            btnDeck.setOnAction(e -> {
+                System.out.println("ok");
+            });
 
+
+            for (VirtualPlayer player : model.getAllPlayers()) {
+                if (player.getRow() != -1) {
+                    setPlayerOnCell(btnCell.get(player.getRow() * 4 + player.getColumn()), player.getCharacter());
+                }
+            }
+
+            for (ArrayList<Button> btnArr : btnCell) {
+                btnArr.get(5).setOnAction(e -> {
+                    if (btnCell.indexOf(btnArr) == 2 || btnCell.indexOf(btnArr) == 4 || btnCell.indexOf(btnArr) == 11) {
+                        chooseWeapon cw = new chooseWeapon();
+                        cw.show();
+                    }
+                });
+            }
+
+
+            fillSkulls(gridSkull, model.getBoard().getSkull(), widthSkull - 5, heightLateral / 3);
+
+            for (VirtualPlayer player : model.getAllPlayers()) {
+                if (player.getRow() != -1) {
+                    setPlayerOnCell(btnCell.get((player.getRow() * 4) - 1 + player.getColumn() + 1), player.getCharacter());
+                }
+            }
+
+            fillAmmoTiles();
+
+            fillBoard(gridPBoard, model.getOwner(), widthBoard, heightPBoard / 4 - 6, heightPBoard / 4, heightPBoard / 3 - 6);
+            fillAmmo(gridPAmmo, model.getOwner().getpBoard(), widthLateral / 7, heightLateral / 7);
+
+
+            for (Button btn : we) {
+                hideBtn(btn, 0);
+            }
+            for (Button btn : pu) {
+                hideBtn(btn, 0);
+            }
+            fillWeapon(we, model.getOwner(), widthCard, heightCard);
+            fillPowerUp(pu, model.getOwner());
+
+
+            int i = 0;
+            for (VirtualPlayer p : model.getAllPlayers()) {
+
+                if (p.equals(model.getOwner())) {
+                    continue;
+                }
+
+                fillBoard(gridOtherBoards.get(i), p, widthBoard, heightPBoard / 5 - 10, heightPBoard / 4 - 10, heightPBoard / 5 - 10);
+                fillOtherAmmo(gridOtherAmmo.get(i), p.getpBoard(), widthLateral / 7, heightLateral / 7);
+                fillWeapon(otherWe.get(i), p, widthOCard / 3.7, heightOtherWeapon);
+                setWeapon(p, otherWe.get(i));
+                i++;
+
+            }
         }
-
     }
 
     private void setWeapon(VirtualPlayer p, ArrayList<Button> btnArr) {
@@ -1842,8 +1868,11 @@ public class GameJavaFX extends Application implements ViewClient {
     public String showPowerUp(ArrayList<String> args) {
         Runnable run = () -> {
 
-            if(args.size() < 4) {
+            if(args.size() != model.getOwner().getPowerUps().size()) {
+                discardCards dc = new discardCards(args,true);
+                dc.show();
 
+            }else{
                 DropShadow borderGlow = new DropShadow();
                 borderGlow.setColor(Color.WHITE);
                 borderGlow.setHeight(50);
@@ -1854,15 +1883,18 @@ public class GameJavaFX extends Application implements ViewClient {
                 for (Button btn : pu) {
                     btn.setEffect(borderGlow);
                 }
-            }else{
-                discardCards dc = new discardCards(args,true);
-                dc.show();
             }
         };
 
         Platform.runLater(run);
 
-        while (game.getPowerup().equals("")) ;
+        while (game.getPowerup().equals("")){
+            try {
+                sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         String res;
         res = game.getPowerup();
 
@@ -1873,31 +1905,59 @@ public class GameJavaFX extends Application implements ViewClient {
 
     @Override
     public String showActions(ArrayList<String> args) {
+
         Runnable run = () -> {
             for (String act : args) {
-                switch (act) {
-                    case ("move"): {
-                        hideBtn(btnMove, 1);
+
+
+                switch (Integer.parseInt(act.split(INNER_SEP)[1])) {
+                    case (3): { //move
+                        hideBtn(btnMove,1);
+                        btnMove.setOnAction(e->{
+                            game.setAction("Move:3");
+                            for (ArrayList<Button> btnArr : btnCell) {
+                                chooseSquare(btnArr,btnCell.indexOf(btnArr),false);
+                            }
+
+                        });
                         break;
                     }
-                    case ("pick"): {
+                    case (1): { //pick
                         hideBtn(btnPick, 1);
+                        btnPick.setOnAction(e->{
+                            game.setAction("Move:1");
+                            for (ArrayList<Button> btnArr : btnCell) {
+                                chooseSquare(btnArr,btnCell.indexOf(btnArr),true);
+                            }
+                        });
                         break;
                     }
-                    case ("shoot"): {
+                    case (2): { //shoot
                         hideBtn(btnShoot, 1);
+                        btnShoot.setOnAction(e->{
+                            game.setAction("Move:0");
+                        });
                         break;
                     }
-                    case ("reload"): {
+                    case (4): { //reload
                         hideBtn(btnReload, 1);
+                        btnReload.setOnAction(e->{
+                            game.setAction("reload");
+                        });
                         break;
                     }
-                    case ("terminator"): {
+                    case (5): { //terminator
                         hideBtn(btnTerminator, 1);
+                        btnTerminator.setOnAction(e->{
+                            game.setAction("terminator");
+                        });
                         break;
                     }
-                    case ("power_up"): {
+                    case (0): { //power-up
                         hideBtn(btnPowerUp, 1);
+                        btnPowerUp.setOnAction(e->{
+                            game.setAction("power-up");
+                        });
                         break;
                     }
                 }
@@ -1906,9 +1966,17 @@ public class GameJavaFX extends Application implements ViewClient {
 
 
         Platform.runLater(run);
-        while (action.equals("")) ;
-        String res = action;
-        action = "";
+
+        while (game.getAction().equals("")){
+            try {
+                sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println(game.getAction());
+        String res = game.getAction();
+        game.setAction("");
 
         return res;
     }
@@ -1919,9 +1987,12 @@ public class GameJavaFX extends Application implements ViewClient {
             for (ArrayList<Button> btnArr : btnCell) {
                 hideCell(btnArr, 0.5);
             }
+            args.remove(0);
             for (String s : args) {
                 hideCell(btnCell.get(getCoordinate(s)), 0);
             }
+
+
         };
 
         Platform.runLater(run);
@@ -2140,8 +2211,12 @@ public class GameJavaFX extends Application implements ViewClient {
 
     @Override
     public void updateModel(String message) {
+
         parser.updateModel(message);
-        update();
+        Runnable runnable=()->{update();};
+        if(model.isUpdated()){
+            Platform.runLater(runnable);
+        }
     }
 
 
@@ -2405,6 +2480,8 @@ public class GameJavaFX extends Application implements ViewClient {
 
             GridPane grid = new GridPane();
             grid.setAlignment(Pos.CENTER);
+            grid.setHgap(20);
+            grid.setVgap(0);
             grid.setPadding(new Insets(0, 0, 0, 0));
 
             try {
@@ -2471,7 +2548,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
                     for (String name : cards) {
 
-                        JsonNode chamberNodeWe = rootNodeWe.path(name.split(":")[0]);
+                        JsonNode chamberNodeWe = rootNodeWe.path(name.split(INNER_SEP)[0]);
 
                         String weapon = chamberNodeWe.path("path").asText();
 
@@ -2484,7 +2561,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
                         setButtonBack(btnArr.get(cards.indexOf(name)),imgWe);
                         btnArr.get(cards.indexOf(name)).setOnAction(e->{
-                            game.setWeapon(name.split(":")[0]);
+                            game.setWeapon(name.split(INNER_SEP)[0]);
                         });
                         grid.add(btnArr.get(cards.indexOf(name)),cards.indexOf(name),0);
                     }
@@ -2509,15 +2586,19 @@ public class GameJavaFX extends Application implements ViewClient {
                             e.printStackTrace();
                         }
 
-                        for (String name : cards) {
-                            JsonNode chamberNodePu = rootNodePu.path(name);
-
+                        for (String n : cards) {
+                            String name = n.toLowerCase();
+                            String[] temp;
+                            temp=name.split(INNER_SEP);
+                            JsonNode chamberNodePu = rootNodePu.path(temp[0]);
+                            System.out.println(temp);
+                            System.out.println(rootNodePu);
                             String powerup = null;
-                            if (name.split(":")[1].equals("R")) {
+                            if (temp[1].equals("r")) {
                                 powerup = chamberNodePu.path("color").path("red").asText();
-                            } else if (name.split(":")[1].equals("B")) {
+                            } else if (temp[1].equals("b")) {
                                 powerup = chamberNodePu.path("color").path("blue").asText();
-                            } else if (name.split(":")[1].equals("Y")) {
+                            } else if (temp[1].equals("y")) {
                                 powerup = chamberNodePu.path("color").path("yellow").asText();
                             }
 
@@ -2528,12 +2609,15 @@ public class GameJavaFX extends Application implements ViewClient {
                                 e.printStackTrace();
                             }
 
-                            setButtonBack(btnArr.get(cards.indexOf(name)),imgPu);
-                            btnArr.get(cards.indexOf(name)).setOnAction(e->{
-                                game.setPowerup(name.split(":")[0]);
+                            setButtonBack(btnArr.get(cards.indexOf(n)),imgPu);
+                            Runnable run = () -> btnArr.get(cards.indexOf(n)).setOnAction(e->{
+                                game.setPowerup(n);
+                                System.out.print(n);
                             });
-                            grid.add(btnArr.get(cards.indexOf(name)),cards.indexOf(name),0);
 
+                            Platform.runLater(run);
+
+                            grid.add(btnArr.get(cards.indexOf(n)),cards.indexOf(n),0);
                         }
 
                         } catch (Exception e) {

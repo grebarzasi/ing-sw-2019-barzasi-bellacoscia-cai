@@ -44,6 +44,7 @@ public class CliGame implements ViewClient {
         String temp[];
         int reply=0;
         do {
+            i=1;
             System.out.print(RESET);
             if(printArgs) {
                 for (String s : args) {
@@ -67,7 +68,6 @@ public class CliGame implements ViewClient {
     public int chooseFromArray(ArrayList<String>args, String err){
         String s ="";
         int reply=0;
-        int i=1;
         try {
             while(sc.ready()) {
                 sc.read();

@@ -22,6 +22,7 @@ public class VirtualModel {
         this.board=new VirtualBoard();
         this.owner=owner;
         this.allPlayers.add(owner);
+        updated = false;
     }
 
 

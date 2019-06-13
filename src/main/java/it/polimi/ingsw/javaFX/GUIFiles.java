@@ -28,7 +28,7 @@ public class GUIFiles {
     public static final String PATH_RED = "src/main/resources/images/character/red.png";
     public static final String PATH_BLUE = "src/main/resources/images/character/blue.png";
     public static final String PATH_GREEN = "src/main/resources/images/character/green.png";
-    public static final String PATH_GREY = "src/main/resources/images/character/gray.png";
+    public static final String PATH_GREY = "src/main/resources/images/character/grey.png";
     public static final String PATH_YELLOW_CHARACTER = "src/main/resources/images/character/D-struct-0R.png";
     public static final String PATH_RED_CHARACTER = "src/main/resources/images/character/violet.png";
     public static final String PATH_BLUE_CHARACTER = "src/main/resources/images/character/banshee.png";
