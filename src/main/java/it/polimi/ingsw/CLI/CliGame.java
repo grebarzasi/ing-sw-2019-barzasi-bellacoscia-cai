@@ -259,6 +259,7 @@ public class CliGame implements ViewClient {
     }
 
     public void updateModel(String message) {
+        System.out.println(message);
         parser.updateModel(message);
         clearScreen();
         board.draw();

@@ -55,7 +55,9 @@ public class SClientCommManager extends Thread{
                 case SHOW_ACTIONS:
                     o.println(AKN);
                     args=i.readLine();
-                    o.println(v.showActions(parseString(args)));
+                    String rpl = v.showActions(parseString(args));
+                    System.out.print(rpl);
+                    o.println(rpl);
                     break;
                 case SHOW_MOVES:
                     o.println(AKN);
