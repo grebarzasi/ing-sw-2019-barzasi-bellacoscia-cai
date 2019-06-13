@@ -49,13 +49,13 @@ public class CliGame implements ViewClient {
             if(printArgs) {
                 for (String s : args) {
                     temp = s.split(INNER_SEP);
-                    System.out.print(i + " - " + temp[0]);
+                    System.out.print("( "+i + "- " + temp[0]);
                     if (ALL_AMMO.contains(temp[1])) {
                         System.out.print("<");
                         board.colorizeCP(temp[1]);
-                        System.out.println(">");
+                        System.out.print("> )  ");
                     } else
-                        System.out.println();
+                        System.out.print(" )  ");
                     i++;
                 }
             }
@@ -115,9 +115,9 @@ public class CliGame implements ViewClient {
             System.out.print(RESET+"\n");
                 for (String s : args) {
                     temp = s.split(INNER_SEP);
-                    System.out.print(i + " - " + temp[0]+"[");
+                    System.out.print("("+i + "- " + temp[0]+"[");
                     board.colorizeCP(temp[1]);
-                    System.out.print("]");
+                    System.out.print("] )  ");
                     if(temp.length>2)
                         board.colorizeCP(temp[2]);
                     i++;
