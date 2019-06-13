@@ -51,7 +51,7 @@ public abstract class Figure {
 
     private boolean isDead;
 
-    public ArrayList<Square> canGo() {
+    public ArrayList<Square> canGo(int range) {
 
         int row;
         int column;
@@ -60,7 +60,7 @@ public abstract class Figure {
 
         for (row = 0; row < HEIGHT; row++) {
             for (column = 0; column < WIDTH; column++) {
-                if (this.distanceTo(this.model.getBoard().getMap().getSquareMatrix()[row][column]) <= 3) {
+                if (this.distanceTo(this.model.getBoard().getMap().getSquareMatrix()[row][column]) <= range) {
 
                     destinations.add(this.model.getBoard().getMap().getSquareMatrix()[row][column]);
 

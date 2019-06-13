@@ -17,6 +17,8 @@ import java.util.ArrayList;
 
 public class Player extends Figure {
 
+    private static final int MAX_PU = 3;
+
     private Preferences pref;
 
     private View view;
@@ -55,18 +57,34 @@ public class Player extends Figure {
      * Maximum powerup case managed in controller;
      */
 
-    public void pickAmmo(){
+    public PowerUp pickAmmo(){
 
-        if( !this.getPosition().isSpawn() && !(!this.getPosition().isSpawn() && ((NonSpawnSquare)this.getPosition()).getDrop() == null)) {
+        if(!this.getPosition().isSpawn()) {
 
-            if (this.getPosition().isSpawn() || ((NonSpawnSquare) this.getPosition()).getDrop().hasPowerup()) {
-                this.powerupList.add((PowerUp) this.getModel().getBoard().getPowerupDeck().fetch());
+            Ammo tmp = ((NonSpawnSquare) this.getPosition()).getDrop().getContent();
+
+            this.getPersonalBoard().addAmmo(tmp);
+
+
+            if (((NonSpawnSquare) this.getPosition()).getDrop().hasPowerup()) {
+
+                if (this.getPowerupList().size() < MAX_PU) {
+                    this.getPowerupList().add((PowerUp) this.getModel().getBoard().getPowerupDeck().fetch());
+                    return null;
+                } else {
+                    return (PowerUp) this.getModel().getBoard().getPowerupDeck().fetch();
+                }
+            }else{
+
+                return null;
+
             }
-            if (!this.getPosition().isSpawn()) {
-                Ammo tmp = ((NonSpawnSquare) this.getPosition()).getDrop().getContent();
-                this.getPersonalBoard().addAmmo(tmp);
-                ((NonSpawnSquare) this.getPosition()).setDrop(null);
-            }
+
+
+        } else {
+
+            return null;
+
         }
 
     }

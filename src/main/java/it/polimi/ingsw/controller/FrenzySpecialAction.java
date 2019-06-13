@@ -15,6 +15,8 @@ public class FrenzySpecialAction implements ControllerState {
     private int range;
     private Controller controller;
 
+
+
     @Override
     public void command() {
 
@@ -51,5 +53,13 @@ public class FrenzySpecialAction implements ControllerState {
 
     public void setController(Controller controller) {
         this.controller = controller;
+    }
+
+    public int getRange() {
+        return range;
+    }
+
+    public void setRange(int range) {
+        this.range = range;
     }
 }

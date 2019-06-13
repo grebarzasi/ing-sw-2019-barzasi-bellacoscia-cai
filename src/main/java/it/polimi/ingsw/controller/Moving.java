@@ -44,6 +44,7 @@ public class Moving implements ControllerState{
             this.controller.dereaseMoveLeft();
             this.controller.update();
             this.controller.goBack();
+            this.controller.update();
             this.controller.currentState.command();
         }
     }

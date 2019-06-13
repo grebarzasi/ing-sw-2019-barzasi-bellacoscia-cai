@@ -39,8 +39,9 @@ public class Terminator extends Figure{
 
     }
 
+
     @Override
-    public ArrayList<Square> canGo() {
+    public ArrayList<Square> canGo(int range) {
 
 
         int row;

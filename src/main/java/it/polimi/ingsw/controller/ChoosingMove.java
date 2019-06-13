@@ -55,7 +55,7 @@ public class ChoosingMove implements ControllerState{
                 //sets the state to picking and sets the range accordingly
                 case "Pick":
                     this.controller.setCurrentState(this.controller.picking);
-                    ((Picking) this.controller.moving).setRange(choice.getRange());
+                    ((Picking) this.controller.picking).setRange(choice.getRange());
                     this.controller.currentState.command();
                     break;
 
@@ -81,6 +81,7 @@ public class ChoosingMove implements ControllerState{
                 //sets the state to special weir useless and complicated frenzy action
                 case "Move, Reload and Shoot":
                     this.controller.setCurrentState(this.controller.frenzySpecialAction);
+                    ((FrenzySpecialAction)this.controller.getFrenzySpecialAction()).setRange(choice.getRange());
                     this.controller.currentState.command();
                     break;
 

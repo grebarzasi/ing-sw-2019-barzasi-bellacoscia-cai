@@ -2,6 +2,7 @@ package it.polimi.ingsw.actions;
 
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.cards.power_up.PowerUp;
+import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.util.ArrayList;
 
@@ -11,25 +12,25 @@ import java.util.ArrayList;
 
 public class ActionBuilder {
 
-    private static final int stage1 = 2;
-    private static final int stage2 = 5;
+    private static final int STAGE_1 = 2;
+    private static final int STAGE_2 = 5;
 
-    public static final int stage0PickRange = 1;
-    public static final int stage0ShootRange = 0;
-    public static final int stage0MoveRange = 3;
+    private static final int STAGE_0_PICK_RANGE = 1;
+    private static final int STAGE_0_SHOOT_RANGE = 0;
+    private static final int STAGE_0_MOVE_RANGE = 3;
 
-    public static final int stage1PickRange = 2;
-    public static final int stage1ShootRange = 0;
+    private static final int STAGE_1_PICK_RANGE = 2;
+    private static final int STAGE_1_SHOOT_RANGE = 0;
 
-    public static final int stage2PickRange = 2;
-    public static final int stage2ShootRange = 1;
+    private static final int STAGE_2_PICK_RANGE = 2;
+    private static final int STAGE_2_SHOOT_RANGE = 1;
 
-    public static final int frenzyMoveRange = 4;
-    public static final int frenzyPickRange = 2;
-    public static final int frenzyMoveReloadShootRange = 1;
+    private static final int FRENZY_MOVE_RANGE = 4;
+    private static final int FRENZY_PICK_RANGE = 2;
+    private static final int FRENZY_MOVE_RELOAD_SHOOT_RANGE = 1;
 
-    public static final int firstPlayerFrenzyPickRange = 3;
-    public static final int firstPlayerFrenzyMoveReloadShootRange = 2;
+    private static final int FIRST_PLAYER_FRENZY_PICK_RANGE = 3;
+    private static final int FIRST_PLAYER_FRENZY_MOVE_RELOAD_SHOOT_RANGE = 2;
 
 
     /**
@@ -48,35 +49,34 @@ public class ActionBuilder {
         if (p.getModel().getMovesLeft() > 0) {
 
             if (!isFrenzy) {
+
                 int damage = p.getPersonalBoard().getDamage().size();
                 int adrenalineStage;
 
                 adrenalineStage = 0;
 
-                if (damage > stage1) {
+                if (damage > STAGE_1) {
                     adrenalineStage = 1;
-                }
-
-                if (damage > stage2) {
+                } else if (damage > STAGE_2) {
                     adrenalineStage = 2;
                 }
 
-                actions.add(new Action("Move", stage0MoveRange));
+                actions.add(new Action("Move", STAGE_0_MOVE_RANGE));
 
                 if (adrenalineStage == 0) {
 
-                    actions.add(new Action("Pick", stage0PickRange));
-                    actions.add(new Action("Shoot", stage0ShootRange));
+                    actions.add(new Action("Pick", STAGE_0_PICK_RANGE));
+                    actions.add(new Action("Shoot", STAGE_0_SHOOT_RANGE));
 
                 } else if (adrenalineStage == 1) {
 
-                    actions.add(new Action("Pick", stage1PickRange));
-                    actions.add(new Action("Shoot", stage1ShootRange));
+                    actions.add(new Action("Pick", STAGE_1_PICK_RANGE));
+                    actions.add(new Action("Shoot", STAGE_1_SHOOT_RANGE));
 
                 } else if (adrenalineStage == 2) {
 
-                    actions.add(new Action("Pick", stage2PickRange));
-                    actions.add(new Action("Shoot", stage2ShootRange));
+                    actions.add(new Action("Pick", STAGE_2_PICK_RANGE));
+                    actions.add(new Action("Shoot", STAGE_2_SHOOT_RANGE));
 
                 }
 
@@ -84,19 +84,28 @@ public class ActionBuilder {
             } else {
 
                 if (!p.getStartedFrenzy()) {
-                    actions.add(new Action("Move", frenzyMoveRange));
-                    actions.add(new Action("Pick", frenzyPickRange));
-                    actions.add(new Action("Move, reload and Shoot", frenzyMoveReloadShootRange));
+                    actions.add(new Action("Move", FRENZY_MOVE_RANGE));
+                    actions.add(new Action("Pick", FRENZY_PICK_RANGE));
+                    actions.add(new Action("Move, reload and Shoot", FRENZY_MOVE_RELOAD_SHOOT_RANGE));
                 } else {
-                    actions.add(new Action("Pick", firstPlayerFrenzyPickRange));
-                    actions.add(new Action("Move, reload and Shoot", firstPlayerFrenzyMoveReloadShootRange));
+                    actions.add(new Action("Pick", FIRST_PLAYER_FRENZY_PICK_RANGE));
+                    actions.add(new Action("Move, reload and Shoot", FIRST_PLAYER_FRENZY_MOVE_RELOAD_SHOOT_RANGE));
 
                 }
             }
 
-        } else {
+        } else{
 
-            actions.add(new Action("Reload", 0));
+            boolean canReload = false;
+
+            for(Weapon w: p.getWeaponsList()){
+                if(w.isLoaded()){
+                    canReload = true;
+                }
+            }
+            if(canReload) {
+                actions.add(new Action("Reload", 0));
+            }
 
         }
 
@@ -109,7 +118,7 @@ public class ActionBuilder {
 
             for(PowerUp pu : p.getPowerupList()){
 
-                if(pu.getName().equals("Teletrasporto") || pu.getName().equals("Raggio Cionetico")){
+                if(pu.getName().equals("Teletrasporto") || pu.getName().equals("Raggio Cinetico")){
                     flag = true;
                 }
             }
@@ -128,5 +137,6 @@ public class ActionBuilder {
         return actions;
 
     }
+
 
 }
