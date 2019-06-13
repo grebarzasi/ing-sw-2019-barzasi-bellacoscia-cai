@@ -123,7 +123,8 @@ public class Board{
             for (int column = 0; column < WIDTH; column++) {
 
                 //if the square is not a respawn spot and if its drop has been collected
-                if (!this.getMap().getSquareMatrix()[row][column].isSpawn() && this.getMap().getSquareMatrix()[row][column].getRoom().getColor() != "black") {
+                if (!this.getMap().getSquareMatrix()[row][column].isSpawn() && ((NonSpawnSquare)this.getMap().getSquareMatrix()[row][column]).getDrop() ==null
+                        && !this.getMap().getSquareMatrix()[row][column].getRoom().getColor().equals("black")) {
 
                     //refill the drop
                     ((NonSpawnSquare) this.getMap().getSquareMatrix()[row][column]).setDrop((AmmoLot)this.ammoDeck.fetch());

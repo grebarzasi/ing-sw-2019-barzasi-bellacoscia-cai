@@ -54,6 +54,7 @@ public class Deck {
 
     //NEWER
     public Card fetch(){
+
         Card temp;
 
         if(!this.usable.isEmpty()){
@@ -72,9 +73,13 @@ public class Deck {
 
 
     public void reset(){
-        this.usable=this.discarded;
-        this.discarded= new ArrayList<>();
+
+        this.usable.clear();
+        this.usable.addAll(this.discarded);
+
+        this.discarded.clear();
         shuffle();
+
     }
 
     public void discard(Card c){

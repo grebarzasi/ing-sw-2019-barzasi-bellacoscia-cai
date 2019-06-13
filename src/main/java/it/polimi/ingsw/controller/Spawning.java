@@ -66,15 +66,23 @@ public class Spawning implements ControllerState {
 
         PowerUp choice = this.controller.getView().showPowerUp(options);
 
-        options.remove(choice);
-        this.controller.getModel().getBoard().getPowerupDeck().getDiscarded().add(choice);
+        if(choice == null){
+            this.command();
 
-        Square spawnPoint = powerUptoSpawn(choice);
+            return null;
 
-        this.controller.getCurrentPlayer().setPosition(spawnPoint);
+        }else {
 
-        choice = options.get(0);
-        return choice;
+            options.remove(choice);
+            this.controller.getModel().getBoard().getPowerupDeck().getDiscarded().add(choice);
+
+            Square spawnPoint = powerUptoSpawn(choice);
+
+            this.controller.getCurrentPlayer().setPosition(spawnPoint);
+
+            choice = options.get(0);
+            return choice;
+        }
 
     }
 

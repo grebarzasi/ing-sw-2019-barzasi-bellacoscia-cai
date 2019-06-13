@@ -64,19 +64,23 @@ public class Player extends Figure {
 
             Ammo tmp = ((NonSpawnSquare) this.getPosition()).getDrop().getContent();
             AmmoLot lotTemp = ((NonSpawnSquare)this.getPosition()).getDrop();
+
             this.getPersonalBoard().addAmmo(tmp);
             ((NonSpawnSquare)this.getPosition()).setDrop(null);
-            this.getModel().getBoard().getPowerupDeck().getDiscarded().add(lotTemp);
 
-
+            this.getModel().getBoard().getPowerupDeck().discard(lotTemp);
 
             if (lotTemp.hasPowerup()) {
 
                 if (this.getPowerupList().size() < MAX_PU) {
+
                     this.addPowerUp((PowerUp)this.getModel().getBoard().getPowerupDeck().fetch());
                     return null;
+
                 } else {
+
                     return (PowerUp) this.getModel().getBoard().getPowerupDeck().fetch();
+
                 }
             }else{
 

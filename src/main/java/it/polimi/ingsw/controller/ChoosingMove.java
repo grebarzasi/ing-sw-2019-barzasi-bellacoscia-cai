@@ -35,7 +35,7 @@ public class ChoosingMove implements ControllerState{
             this.controller.setCurrentState(this.controller.spawning);
             this.controller.getCurrentState().command();
 
-        }else{
+        }else {
 
             this.options = new ArrayList<>();
 
@@ -43,62 +43,68 @@ public class ChoosingMove implements ControllerState{
 
             Action choice = this.controller.getView().showActions(options);
 
-            switch (choice.getDescription()) {
+            if (choice == null) {
+                this.command();
+            } else {
 
-                //sets the state to moving and sets the range accordingly
-                case "Move":
-                    this.controller.setCurrentState(this.controller.moving);
-                    ((Moving) this.controller.moving).setRange(choice.getRange());
-                    this.controller.currentState.command();
-                    break;
+                switch (choice.getDescription()) {
 
-                //sets the state to picking and sets the range accordingly
-                case "Pick":
-                    this.controller.setCurrentState(this.controller.picking);
-                    ((Picking) this.controller.moving).setRange(choice.getRange());
-                    this.controller.currentState.command();
-                    break;
 
-                //sets the range to shooting and sets the range accordingly
-                case "Shoot":
-                    this.controller.setCurrentState(this.controller.choosingWeapon);
-                    ((Shooting) this.controller.shooting).setRange(choice.getRange());
-                    this.controller.currentState.command();
-                    break;
+                    //sets the state to moving and sets the range accordingly
+                    case "Move":
+                        this.controller.setCurrentState(this.controller.moving);
+                        ((Moving) this.controller.moving).setRange(choice.getRange());
+                        this.controller.currentState.command();
+                        break;
 
-                //sets the range to choosing power up
-                case "PowerUp":
-                    this.controller.setCurrentState(this.controller.choosingPowerUpToUse);
-                    this.controller.currentState.command();
-                    break;
+                    //sets the state to picking and sets the range accordingly
+                    case "Pick":
+                        this.controller.setCurrentState(this.controller.picking);
+                        ((Picking) this.controller.picking).setRange(choice.getRange());
+                        this.controller.currentState.command();
+                        break;
 
-                //sets the state to reloading
-                case "Reload":
-                    this.controller.setCurrentState(this.controller.reloading);
-                    this.controller.currentState.command();
-                    break;
+                    //sets the range to shooting and sets the range accordingly
+                    case "Shoot":
+                        this.controller.setCurrentState(this.controller.choosingWeapon);
+                        ((Shooting) this.controller.shooting).setRange(choice.getRange());
+                        this.controller.currentState.command();
+                        break;
 
-                //sets the state to special weir useless and complicated frenzy action
-                case "Move, Reload and Shoot":
-                    this.controller.setCurrentState(this.controller.frenzySpecialAction);
-                    this.controller.currentState.command();
-                    break;
+                    //sets the range to choosing power up
+                    case "PowerUp":
+                        this.controller.setCurrentState(this.controller.choosingPowerUpToUse);
+                        this.controller.currentState.command();
+                        break;
 
-                case "Discard PowerUp":
-                    this.controller.setCurrentState(this.controller.discardingPowerUp);
-                    this.controller.currentState.command();
-                    break;
+                    //sets the state to reloading
+                    case "Reload":
+                        this.controller.setCurrentState(this.controller.reloading);
+                        this.controller.currentState.command();
+                        break;
 
-                case "Use Bot":
-                    this.controller.setCurrentState(this.controller.asBot);
-                    this.controller.currentState.command();
-                    break;
+                    //sets the state to special weir useless and complicated frenzy action
+                    case "Move, Reload and Shoot":
+                        this.controller.setCurrentState(this.controller.frenzySpecialAction);
+                        this.controller.currentState.command();
+                        break;
 
-                //ends the turn
-                case "End Turn":
-                    this.controller.endTurn();
-                    break;
+                    case "Discard PowerUp":
+                        this.controller.setCurrentState(this.controller.discardingPowerUp);
+                        this.controller.currentState.command();
+                        break;
 
+                    case "Use Bot":
+                        this.controller.setCurrentState(this.controller.asBot);
+                        this.controller.currentState.command();
+                        break;
+
+                    //ends the turn
+                    case "End Turn":
+                        this.controller.endTurn();
+                        break;
+
+                }
             }
         }
     }

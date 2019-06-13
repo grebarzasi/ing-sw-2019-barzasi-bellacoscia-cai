@@ -31,6 +31,7 @@ public class GameInitializer extends Application {
 
     private static final String MAP_NAME="large";
     private static final int SKULLMAX=6;
+
     private VirtualModel vmodel;
 
     public VirtualModel getVmodel() {

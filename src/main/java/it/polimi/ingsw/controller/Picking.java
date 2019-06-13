@@ -1,8 +1,10 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.board.map.NonSpawnSquare;
+import it.polimi.ingsw.board.map.SpawnSquare;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import java.util.ArrayList;
 
@@ -35,7 +37,16 @@ public class Picking implements ControllerState{
         options = this.controller.canGo(this.controller.getCurrentPlayer(),this.range);
         options.add(this.controller.getCurrentPlayer().getPosition());
 
+        for(Square s : options){
+            if(!s.isSpawn() && ((NonSpawnSquare)s).getDrop() == null){
+                options.remove(s);
+            }
+        }
+
         Square choice = this.controller.getView().showPossibleMoves(options, false);
+
+        System.out.println("AMMO DECK SIZE: " + this.controller.getBoard().getAmmoDeck().getUsable().size());
+        System.out.println("AMMO DECK SIZE: " + this.controller.getBoard().getAmmoDeck().getDiscarded().size());
 
         if(choice == null){
             this.controller.goBack();
@@ -44,12 +55,17 @@ public class Picking implements ControllerState{
             if (choice.isSpawn()) {
 
                 this.controller.setCurrentState(this.controller.pickingWeapon);
+                ((PickingWeapon)this.controller.getPickingWeapon()).setLocation(choice);
+                this.controller.update();
                 this.controller.getCurrentState().command();
 
             } else {
 
                 this.controller.getCurrentPlayer().setPosition(choice);
                 PowerUp check = this.controller.getCurrentPlayer().pickAmmo();
+
+
+
 
                 if(check == null){
 

@@ -17,6 +17,8 @@ import java.util.ArrayList;
 public class PickingWeapon implements ControllerState {
 
     private static final int max = 3;
+
+    private Square location;
     private Controller controller;
 
     public PickingWeapon(Controller controller) {
@@ -33,27 +35,36 @@ public class PickingWeapon implements ControllerState {
 
         ArrayList<Weapon> options = new ArrayList<>();
 
-        options.addAll(((SpawnSquare) this.controller.getCurrentPlayer().getPosition()).getArmory().getWeaponList());
+
+        options.addAll(((SpawnSquare)this.location).getArmory().getWeaponList());
 
         Weapon choice = this.controller.getView().showWeapon(options);
 
         if(choice == null){
+
             this.controller.goBack();
+
         }else {
 
-
             if (this.controller.getCurrentPlayer().getWeaponsList().size() < max) {
+
                 this.controller.getCurrentPlayer().getWeaponsList().add(choice);
                 this.controller.dereaseMoveLeft();
-                ((SpawnSquare) this.controller.getCurrentPlayer().getPosition()).getArmory().getWeaponList().remove(choice);
+                ((SpawnSquare) this.location).getArmory().getWeaponList().remove(choice);
+
                 choice.setOwner(this.controller.getCurrentPlayer());
+
+                this.controller.getCurrentPlayer().setPosition(this.location);
+
                 this.controller.update();
                 this.controller.goBack();
+
             } else {
+
                 this.discardWeapon(choice);
+
             }
         }
-
     }
 
     /**
@@ -74,12 +85,21 @@ public class PickingWeapon implements ControllerState {
         this.controller.getCurrentPlayer().getWeaponsList().clear();
         this.controller.getCurrentPlayer().getWeaponsList().addAll(options);
 
-        ((SpawnSquare) this.controller.getCurrentPlayer().getPosition()).getArmory().getWeaponList().remove(choice);
-        ((SpawnSquare) this.controller.getCurrentPlayer().getPosition()).getArmory().getWeaponList().add(choice);
+        ((SpawnSquare) this.location).getArmory().getWeaponList().remove(choice);
+        ((SpawnSquare) this.location).getArmory().getWeaponList().add(choice);
         choice.setOwner(this.controller.getCurrentPlayer());
         this.controller.dereaseMoveLeft();
+        this.controller.getCurrentPlayer().setPosition(this.location);
         this.controller.update();
         this.controller.goBack();
 
+    }
+
+    public Square getLocation() {
+        return location;
+    }
+
+    public void setLocation(Square location) {
+        this.location = location;
     }
 }
