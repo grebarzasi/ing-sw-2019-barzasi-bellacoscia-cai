@@ -13,8 +13,8 @@ public class Teleporting implements ControllerState {
 
     private PowerUp using;
 
-    private static final int height = 3;
-    private static final int width = 4;
+    private static final int HEIGHT = 3;
+    private static final int WIDTH = 4;
 
 
     private Controller controller;
@@ -35,8 +35,8 @@ public class Teleporting implements ControllerState {
         int row;
         int column;
 
-        for (row = 0; row < height; row++) {
-            for (column = 0; column < width; column++) {
+        for (row = 0; row < HEIGHT; row++) {
+            for (column = 0; column < WIDTH; column++) {
                 options.add(this.controller.getModel().getBoard().getMap().getSquareMatrix()[row][column]);
             }
         }

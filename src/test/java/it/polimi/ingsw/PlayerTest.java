@@ -111,8 +111,10 @@ public class PlayerTest {
 
         for(row = 0 ; row < height ; row++){
             for(column = 0; column < width; column ++){
-                luke.setPosition(alderaan.getMap().getSquareMatrix()[row][column]);
-                luke.pickAmmo();
+                if(!alderaan.getMap().getSquareMatrix()[row][column].getRoom().getColor().equals("black")) {
+                    luke.setPosition(alderaan.getMap().getSquareMatrix()[row][column]);
+                    luke.pickAmmo();
+                }
             }
         }
 

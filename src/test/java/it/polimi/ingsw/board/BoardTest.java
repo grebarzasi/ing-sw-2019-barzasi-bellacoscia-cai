@@ -8,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
 
-    private static final int width = 4;
-    private static final int height = 3;
+    private static final int WIDTH = 4;
+    private static final int HEIGHT = 3;
 
     /**
      * Tests that the Board has been Initiated correctly with all its elements in check
@@ -23,8 +23,8 @@ class BoardTest {
         int row;
         int column;
 
-        for(row = 0; row < height; row++){
-            for(column = 0; column < width ; column ++){
+        for(row = 0; row < HEIGHT; row++){
+            for(column = 0; column < WIDTH ; column ++){
 
 
                 if(fieldOfFire.getMap().getSquareMatrix()[row][column].isSpawn()){

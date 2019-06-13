@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.board.map.NonSpawnSquare;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 
@@ -32,6 +33,7 @@ public class Picking implements ControllerState{
         ArrayList<Square> options;
 
         options = this.controller.canGo(this.controller.getCurrentPlayer(),this.range);
+        options.add(this.controller.getCurrentPlayer().getPosition());
 
         Square choice = this.controller.getView().showPossibleMoves(options, false);
 
@@ -40,13 +42,29 @@ public class Picking implements ControllerState{
         }else {
 
             if (choice.isSpawn()) {
+
                 this.controller.setCurrentState(this.controller.pickingWeapon);
                 this.controller.getCurrentState().command();
+
             } else {
-                this.controller.getCurrentPlayer().pickAmmo();
-                if (this.controller.getCurrentPlayer().getPowerupList().size() == max) {
-                    this.choosePU();
+
+                this.controller.getCurrentPlayer().setPosition(choice);
+                PowerUp check = this.controller.getCurrentPlayer().pickAmmo();
+
+                if(check == null){
+
+                    this.controller.dereaseMoveLeft();
+                    this.controller.update();
+                    this.controller.goBack();
+
+                }else{
+
+                    this.choosePU(check);
+
+
                 }
+
+
             }
         }
 
@@ -58,32 +76,53 @@ public class Picking implements ControllerState{
      * asks the player to discard one and puts the rest into the player's powerup list
      */
 
-    private void choosePU() {
+    private void choosePU(PowerUp check) {
 
-        PowerUp chosen = this.controller.getView().showPowerUp(this.controller.getCurrentPlayer().getPowerupList());
+        ArrayList<PowerUp> options = new ArrayList<>();
+        options.addAll(this.controller.getCurrentPlayer().getPowerupList());
+        options.add(check);
 
-        if (this.controller.getCurrentPlayer().getPowerupList().size() < max) {
+        PowerUp chosen = this.controller.getView().showPowerUp(options);
 
-            this.controller.getCurrentPlayer().addPowerUp(chosen);
-            this.controller.update();
-            this.controller.goBack();
 
-        } else {
+        if(chosen == null){
 
-            ArrayList<PowerUp> options = new ArrayList<>();
-            options.addAll(this.controller.getCurrentPlayer().getPowerupList());
-            options.add(chosen);
-            PowerUp discarded = this.controller.getView().showPowerUp(options);
-            options.remove(discarded);
-            this.controller.getModel().getBoard().getPowerupDeck().getDiscarded().add(discarded);
-            this.controller.getCurrentPlayer().getPowerupList().clear();
-            this.controller.getCurrentPlayer().getPowerupList().addAll(options);
-            this.controller.dereaseMoveLeft();
-            this.controller.update();
-            this.controller.goBack();
+            chosen = options.get(getRandom(options.size(),0));
+            options.remove(chosen);
+            this.controller.getModel().getBoard().getPowerupDeck().getDiscarded().add(chosen);
+
+            this.substitute(options);
+
+
+        }else {
+
+            options.remove(chosen);
+
+            this.controller.getModel().getBoard().getPowerupDeck().getDiscarded().add(chosen);
+            this.substitute(options);
 
         }
 
+        this.controller.dereaseMoveLeft();
+        this.controller.update();
+        this.controller.goBack();
+
+    }
+
+    private void substitute(ArrayList<PowerUp> options ){
+
+        this.controller.getCurrentPlayer().getPowerupList().clear();
+        this.controller.getCurrentPlayer().getPowerupList().addAll(options);
+
+
+    }
+
+
+    private int getRandom(int max, int min){
+
+        int rand = (int)Math.random()* ((max - min) + 1) + min;
+
+        return rand;
     }
 
     public int getRange() {

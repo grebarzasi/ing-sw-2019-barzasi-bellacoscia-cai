@@ -15,7 +15,11 @@ import java.util.ArrayList;
 
 public class Controller {
 
-    private static final int[] frenzyPointsVec = {2,1,1,1};
+    private static final int[] frenzyPointsVec;
+
+    static {
+        frenzyPointsVec = new int[]{2, 1, 1, 1};
+    }
 
     private static final int HEIGHT = 3;
     private static final int WIDTH = 4;
@@ -247,7 +251,7 @@ public class Controller {
             for(column = 0; column < WIDTH; column++){
 
                 if(p.distanceTo(this.getModel().getBoard().getMap().getSquareMatrix()[row][column])
-                        < range){
+                        <= range && ! this.getBoard().getMap().getSquareMatrix()[row][column].getRoom().getColor().equals("black")){
 
                     options.add(this.getBoard().getMap().getSquareMatrix()[row][column]);
 

@@ -11,8 +11,8 @@ import java.util.ArrayList;
 public class Terminator extends Figure{
 
 
-    private static final int width = 4;
-    private static final int height = 3;
+    private static final int WIDTH = 4;
+    private static final int HEIGHT = 3;
 
     public static final int stage2 = 5;
 
@@ -39,8 +39,9 @@ public class Terminator extends Figure{
 
     }
 
+
     @Override
-    public ArrayList<Square> canGo() {
+    public ArrayList<Square> canGo(int range) {
 
 
         int row;
@@ -48,8 +49,8 @@ public class Terminator extends Figure{
 
         ArrayList<Square> destinations = new ArrayList<>();
 
-        for (row = 0; row < height; row++) {
-            for (column = 0; column < width; column++) {
+        for (row = 0; row < HEIGHT; row++) {
+            for (column = 0; column < WIDTH; column++) {
                 if (this.getPosition().isAdjacent((this.getModel().getBoard().getMap().getSquareMatrix()[row][column]))) {
 
                     destinations.add(this.getModel().getBoard().getMap().getSquareMatrix()[row][column]);

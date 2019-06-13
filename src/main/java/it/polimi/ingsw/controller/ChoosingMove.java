@@ -55,7 +55,7 @@ public class ChoosingMove implements ControllerState{
                 //sets the state to picking and sets the range accordingly
                 case "Pick":
                     this.controller.setCurrentState(this.controller.picking);
-                    ((Moving) this.controller.moving).setRange(choice.getRange());
+                    ((Picking) this.controller.moving).setRange(choice.getRange());
                     this.controller.currentState.command();
                     break;
 

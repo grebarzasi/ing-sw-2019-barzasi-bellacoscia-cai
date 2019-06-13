@@ -18,8 +18,8 @@ import java.util.*;
 
 public abstract class Figure {
 
-    private static final int width = 4;
-    private static final int height = 3;
+    private static final int WIDTH = 4;
+    private static final int HEIGHT = 3;
     private static final int range = 3;
 
 
@@ -51,16 +51,16 @@ public abstract class Figure {
 
     private boolean isDead;
 
-    public ArrayList<Square> canGo() {
+    public ArrayList<Square> canGo(int range) {
 
         int row;
         int column;
 
         ArrayList<Square> destinations = new ArrayList<>();
 
-        for (row = 0; row < height; row++) {
-            for (column = 0; column < width; column++) {
-                if (this.distanceTo(this.model.getBoard().getMap().getSquareMatrix()[row][column]) <= 3) {
+        for (row = 0; row < HEIGHT; row++) {
+            for (column = 0; column < WIDTH; column++) {
+                if (this.distanceTo(this.model.getBoard().getMap().getSquareMatrix()[row][column]) <= range) {
 
                     destinations.add(this.model.getBoard().getMap().getSquareMatrix()[row][column]);
 

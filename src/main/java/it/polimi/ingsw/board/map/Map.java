@@ -18,8 +18,8 @@ public class Map {
     private ArrayList<Room> roomList;
 
     //Standard sizes of a map
-    private static final int width = 4;
-    private static final int height = 3;
+    private static final int WIDTH = 4;
+    private static final int HEIGHT = 3;
 
 
     /**
@@ -31,7 +31,7 @@ public class Map {
     public Map(String selection) {
 
         //loads the map into a matrix
-        this.squareMatrix = new Square[height][width];
+        this.squareMatrix = new Square[HEIGHT][WIDTH];
         loadTerrain(selection, this.squareMatrix);
         this.roomList = new ArrayList<>();
         this.name=selection;
@@ -42,8 +42,8 @@ public class Map {
         //initiates the room list
 
         //for every square
-        for( row = 0 ; row < height ; row++ ){
-            for(column = 0 ; column < width ; column ++ ){
+        for( row = 0 ; row < HEIGHT ; row++ ){
+            for(column = 0 ; column < WIDTH ; column ++ ){
 
                 //if its room its not in the list add it to the list
                 if(!this.roomList.contains(this.squareMatrix[row][column].getRoom())){

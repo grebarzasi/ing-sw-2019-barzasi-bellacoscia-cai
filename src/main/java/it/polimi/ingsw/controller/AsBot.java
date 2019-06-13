@@ -12,8 +12,8 @@ import java.util.ArrayList;
 
 public class AsBot implements ControllerState{
 
-    private static final int height = 3;
-    private static final int width = 4;
+    private static final int HEIGHT = 3;
+    private static final int WIDTH = 4;
 
     private Controller controller;
 
@@ -45,8 +45,8 @@ public class AsBot implements ControllerState{
         int row;
         int column;
 
-        for(row = 0; row < height; row++){
-            for(column = 0; column < width; column++){
+        for(row = 0; row < HEIGHT; row++){
+            for(column = 0; column < WIDTH; column++){
 
                 if(this.controller.getBoard().getMap().getSquareMatrix()[row][column].isAdjacent(this.controller.getModel().getBot().getPosition())){
                     canGo.add(this.controller.getBoard().getMap().getSquareMatrix()[row][column]);
@@ -103,8 +103,8 @@ public class AsBot implements ControllerState{
         int row;
         int column;
 
-        for(row = 0; row < height; row++){
-            for(column = 0; column < width; column ++){
+        for(row = 0; row < HEIGHT; row++){
+            for(column = 0; column < WIDTH; column ++){
                 if(this.controller.getBoard().getMap().getSquareMatrix()[row][column].isSpawn())
                     spawns.add(this.controller.getBoard().getMap().getSquareMatrix()[row][column]);
             }
