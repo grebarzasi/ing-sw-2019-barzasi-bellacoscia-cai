@@ -142,10 +142,10 @@ public class PlayerTest {
 
             luke.setPosition(alderaan.getMap().getSquareMatrix()[0][0]);
             luke.pickAmmo();
-            Deck deck=  alderaan.getPowerupDeck();
-            System.out.println("Cycle number: " + i);
-            System.out.println("Usable: "+ alderaan.getPowerupDeck().getUsable().size());
-            System.out.println("Discarded: "+ alderaan.getPowerupDeck().getDiscarded().size());
+            Deck deck=  alderaan.getAmmoDeck();
+            System.out.println("\nCycle number: " + i);
+            System.out.println("Usable: "+ deck.getUsable().size());
+            System.out.println("Discarded: "+ deck.getDiscarded().size());
             alderaan.refillSquares();
 
         }

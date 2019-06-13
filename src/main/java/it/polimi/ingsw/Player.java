@@ -4,6 +4,7 @@ import it.polimi.ingsw.board.map.NonSpawnSquare;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.cards.AmmoLot;
+import it.polimi.ingsw.cards.Deck;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Preferences;
 import it.polimi.ingsw.cards.weapon.Weapon;
@@ -59,7 +60,7 @@ public class Player extends Figure {
      */
 
     public PowerUp pickAmmo(){
-
+        Deck deck= this.getModel().getBoard().getPowerupDeck();
         if(!this.getPosition().isSpawn()) {
 
             Ammo tmp = ((NonSpawnSquare) this.getPosition()).getDrop().getContent();
@@ -68,7 +69,7 @@ public class Player extends Figure {
             this.getPersonalBoard().addAmmo(tmp);
             ((NonSpawnSquare)this.getPosition()).setDrop(null);
 
-            this.getModel().getBoard().getPowerupDeck().discard(lotTemp);
+            this.getModel().getBoard().getAmmoDeck().discard(lotTemp);
 
             if (lotTemp.hasPowerup()) {
 

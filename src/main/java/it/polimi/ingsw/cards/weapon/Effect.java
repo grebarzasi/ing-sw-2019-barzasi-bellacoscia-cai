@@ -19,6 +19,8 @@ public class Effect {
     private boolean used;
     private Weapon myWeapon;
 
+
+
     public Effect(){};
 
     public Effect(Ammo cost,ArrayList<SubEffect> effectList){
@@ -26,6 +28,7 @@ public class Effect {
         this.effectList=effectList;
         this.targetHitSet= new HashSet<>();
         this.used= false;
+
     }
 
     public Ammo getCost() {
