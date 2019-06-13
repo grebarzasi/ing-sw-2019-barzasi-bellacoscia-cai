@@ -31,7 +31,6 @@ public class Lobby extends Thread {
 
     private MainServer god;
 
-
     private final int maxPlayer = 5;
 
     //List of players who have joined the lobby

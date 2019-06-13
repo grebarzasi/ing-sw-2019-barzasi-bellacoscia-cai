@@ -69,7 +69,7 @@ public class SServerCommManager implements View {
             String rpl="";
             String[] temp;
             for(Weapon p : args){
-                s=s+p.getName()+INNER_SEP+p.getChamber().toString()+INNER_SEP+p.getBasicEffect().toString().replaceFirst(p.getChamber().toString(),"")+INNER_SEP;
+                s=s+p.getName()+INNER_SEP+p.getChamber().toString()+INNER_SEP+p.getBasicEffect().getCost().toString().replaceFirst(p.getChamber().toString(),"")+INNER_SEP;
             }
             rpl=askAndWait(SHOW_WEAPONS,s);
             temp=rpl.split(INNER_SEP);

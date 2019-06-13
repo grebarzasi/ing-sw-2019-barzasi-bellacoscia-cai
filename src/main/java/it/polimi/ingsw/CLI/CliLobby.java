@@ -43,7 +43,7 @@ public class CliLobby extends Thread{
             System.out.println(MAP_Q);
             temp = sc.readLine();
             if(temp.isEmpty())
-                temp="1";
+                temp="2";
             try{
                 num = Integer.parseInt(temp);
             }

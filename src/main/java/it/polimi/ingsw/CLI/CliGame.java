@@ -62,6 +62,8 @@ public class CliGame implements ViewClient {
             System.out.print(RESET+q+"\n");
             reply=chooseFromArray(args,error);
         } while (reply==0);
+        if(reply==-1)
+            return NOTHING;
         return args.get(reply-1);
     }
 
@@ -73,7 +75,8 @@ public class CliGame implements ViewClient {
                 sc.read();
             }
             s = sc.readLine();
-
+            if(s.equals("<"))
+                return -1;
             try {
                 reply = Integer.parseInt(s);
             }catch(NumberFormatException e){
@@ -122,6 +125,8 @@ public class CliGame implements ViewClient {
             System.out.print(RESET+CHOOSE_WP_Q+"\n");
             reply=chooseFromArray(args,CHOOSE_WP_ERR);
         } while (reply==0);
+        if(reply==-1)
+            return NOTHING;
         return args.get(reply-1);
     }
 
@@ -164,6 +169,8 @@ public class CliGame implements ViewClient {
             System.out.println(WHITE+CHOOSE_SQUARE_Q);
             try {
                 reply = sc.readLine();
+                if(reply.equals("<"))
+                    return NOTHING;
             } catch (IOException e) {
                 e.printStackTrace();
             }
