@@ -56,6 +56,8 @@ public class SServerCommManager implements View {
                 s = s + p.getName() + INNER_SEP + p.getAmmoOnDiscard().toString() + INFO_SEP;
             }
             rpl = askAndWait(SHOW_PU,s);
+            if(rpl==null)
+                return null;
             temp = rpl.split(INNER_SEP);
             for (PowerUp p : args) {
                 if (p.getName().equals(temp[0]) && p.getAmmoOnDiscard().toString().equals(temp[1]))
@@ -72,6 +74,8 @@ public class SServerCommManager implements View {
                 s=s+p.getName()+INNER_SEP+p.getChamber().toString()+INNER_SEP+p.getBasicEffect().getCost().toString().replaceFirst(p.getChamber().toString(),"")+INNER_SEP;
             }
             rpl=askAndWait(SHOW_WEAPONS,s);
+            if(rpl==null)
+                return null;
             temp=rpl.split(INNER_SEP);
             for(Weapon p : args){
                 if(p.getName().equals(temp[0]))
@@ -88,6 +92,8 @@ public class SServerCommManager implements View {
             s=s+a.getDescription()+INNER_SEP+a.getRange()+INFO_SEP;
         }
         rpl=askAndWait(SHOW_ACTIONS,s);
+        if(rpl==null)
+            return null;
         temp=rpl.split(INNER_SEP);
         for(Action p : args){
             if(p.getDescription().equals(temp[0]))
@@ -103,6 +109,8 @@ public class SServerCommManager implements View {
             s=s+p.getPosition().getRow()+INNER_SEP+p.getPosition().getColumn()+INFO_SEP;
         }
         rpl=askAndWait(SHOW_MOVES,s);
+        if(rpl==null)
+            return null;
         for(Square p : args){
             if((p.getPosition().getRow()+INNER_SEP+p.getPosition().getColumn()).equals(rpl))
                 return p;
@@ -122,6 +130,8 @@ public class SServerCommManager implements View {
             players.put(a.getCharacter(),a);
         }
         rpl=askAndWait(SHOW_MOVES,s);
+        if(rpl==null)
+            return null;
         ArrayList<Figure> target = new ArrayList<>();
         temp=rpl.split(INFO_SEP);
         for(String a : temp){
@@ -142,6 +152,8 @@ public class SServerCommManager implements View {
             players.put(a.getCharacter(),a);
         }
         rpl=askAndWait(SHOW_SINGLE_TARGET,s);
+        if(rpl==null)
+            return null;
         if(!players.containsKey(rpl))
             return null;
          return players.get(rpl);
@@ -149,6 +161,8 @@ public class SServerCommManager implements View {
 
     public Boolean showBoolean(String message) {
         String rpl=askAndWait(SHOW_BOOLEAN,message);
+        if(rpl==null)
+            return null;
         if(rpl.equals("true"))
             return true;
         else if( rpl.equals("false"))
