@@ -116,7 +116,7 @@ public class GameJavaFX extends Application implements ViewClient {
     private Button btnMove;
     private Button btnPick;
     private Button btnShoot;
-    private Button btnReload;
+    private Button btnEnd;
     private Button btnCancel;
     private Button btnDeck;
     private Button btnTerminator;
@@ -208,7 +208,7 @@ public class GameJavaFX extends Application implements ViewClient {
         this.btnMove = new Button("Muovi");
         this.btnPick = new Button("Raccogli");
         this.btnShoot = new Button("Spara");
-        this.btnReload = new Button("Ricarica");
+        this.btnEnd = new Button("Termina il turno");
         this.btnCancel = new Button("Annulla");
         this.btnTerminator = new Button("Terminator");
         this.btnPowerUp = new Button("Power-up");
@@ -766,7 +766,7 @@ public class GameJavaFX extends Application implements ViewClient {
         hBtn.getChildren().add(btnMove);
         hBtn.getChildren().add(btnPick);
         hBtn.getChildren().add(btnShoot);
-        hBtn.getChildren().add(btnReload);
+        hBtn.getChildren().add(btnEnd);
         hBtn.getChildren().add(btnCancel);
 
         VBox vmsg = new VBox(25);
@@ -902,6 +902,7 @@ public class GameJavaFX extends Application implements ViewClient {
         */
         msg.setText(WELCOME);
 
+        primaryStage.setFullScreen(true);
         primaryStage.show();
     }
 
@@ -1530,9 +1531,7 @@ public class GameJavaFX extends Application implements ViewClient {
                 int y = (i + 1) - (x * 4) - 1;
                 String key = x + ":" + y;
 
-                if (model.getBoard().getMap().getCells().get(key).getContent().equals("empty")) {
-                    continue;
-                }
+
                 try {
                     Image img = new Image(new FileInputStream(PATH_AMMO + model.getBoard().getMap().getCells().get(key).getContent() + ".png"), w, h, true, true);
                     BackgroundImage background = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
@@ -1678,7 +1677,7 @@ public class GameJavaFX extends Application implements ViewClient {
             }
 
             hideBtn(btnCancel, 0);
-            hideBtn(btnReload, 0);
+            hideBtn(btnEnd, 0);
             hideBtn(btnTerminator, 0);
             hideBtn(btnMove, 0);
             hideBtn(btnPick, 0);
@@ -1804,6 +1803,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
             fillAmmoTiles();
 
+
             fillBoard(gridPBoard, model.getOwner(), widthBoard, heightPBoard / 4 - 6, heightPBoard / 4, heightPBoard / 3 - 6);
             fillAmmo(gridPAmmo, model.getOwner().getpBoard(), widthLateral / 7, heightLateral / 7);
 
@@ -1921,12 +1921,12 @@ public class GameJavaFX extends Application implements ViewClient {
         Runnable run = () -> {
             for (String act : args) {
 
-
-                switch (Integer.parseInt(act.split(INNER_SEP)[1])) {
-                    case (3): { //move
+                switch (act.split(INNER_SEP)[0].toLowerCase()) {
+                    case ("move"): { //move
                         hideBtn(btnMove,1);
                         btnMove.setOnAction(e->{
-                            game.setAction("Move:3");
+                            System.out.println(act);
+                            game.setAction(act);
                             for (ArrayList<Button> btnArr : btnCell) {
                                 chooseSquare(btnArr,btnCell.indexOf(btnArr),false);
                             }
@@ -1934,43 +1934,52 @@ public class GameJavaFX extends Application implements ViewClient {
                         });
                         break;
                     }
-                    case (1): { //pick
+                    case ("pick"): { //pick
                         hideBtn(btnPick, 1);
                         btnPick.setOnAction(e->{
-                            game.setAction("Move:1");
+                            System.out.println(act);
+
+                            game.setAction(act);
                             for (ArrayList<Button> btnArr : btnCell) {
                                 chooseSquare(btnArr,btnCell.indexOf(btnArr),true);
                             }
                         });
                         break;
                     }
-                    case (2): { //shoot
+                    case ("shoot"): { //shoot
                         hideBtn(btnShoot, 1);
                         btnShoot.setOnAction(e->{
-                            game.setAction("Move:0");
+                            game.setAction(act);
                         });
                         break;
                     }
-                    case (4): { //reload
-                        hideBtn(btnReload, 1);
-                        btnReload.setOnAction(e->{
-                            game.setAction("reload");
+                    case ("reload"): { //reload
+                        hideBtn(btnShoot, 1);
+                        btnShoot.setText("Ricarica");
+                        btnShoot.setOnAction(e->{
+                            game.setAction(act);
                         });
                         break;
                     }
-                    case (5): { //terminator
+                    case ("terminator"): { //terminator
                         hideBtn(btnTerminator, 1);
                         btnTerminator.setOnAction(e->{
-                            game.setAction("terminator");
+                            game.setAction(act);
                         });
                         break;
                     }
-                    case (0): { //power-up
+                    case ("powerup"): { //power-up
                         hideBtn(btnPowerUp, 1);
                         btnPowerUp.setOnAction(e->{
-                            game.setAction("power-up");
+                            game.setAction(act);
                         });
                         break;
+                    }
+                    case("end turn"):{ //end turn
+                        hideBtn(btnEnd,1);
+                        btnEnd.setOnAction(e->{
+                            game.setAction(act);
+                        });
                     }
                 }
             }
@@ -1986,7 +1995,6 @@ public class GameJavaFX extends Application implements ViewClient {
                 e.printStackTrace();
             }
         }
-        System.out.println(game.getAction());
         String res = game.getAction();
         game.setAction("");
 
