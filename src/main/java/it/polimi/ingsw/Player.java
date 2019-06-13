@@ -3,6 +3,7 @@ package it.polimi.ingsw;
 import it.polimi.ingsw.board.map.NonSpawnSquare;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.Ammo;
+import it.polimi.ingsw.cards.AmmoLot;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Preferences;
 import it.polimi.ingsw.cards.weapon.Weapon;
@@ -62,14 +63,17 @@ public class Player extends Figure {
         if(!this.getPosition().isSpawn()) {
 
             Ammo tmp = ((NonSpawnSquare) this.getPosition()).getDrop().getContent();
-
+            AmmoLot lotTemp = ((NonSpawnSquare)this.getPosition()).getDrop();
             this.getPersonalBoard().addAmmo(tmp);
+            ((NonSpawnSquare)this.getPosition()).setDrop(null);
+            this.getModel().getBoard().getPowerupDeck().getDiscarded().add(lotTemp);
 
 
-            if (((NonSpawnSquare) this.getPosition()).getDrop().hasPowerup()) {
+
+            if (lotTemp.hasPowerup()) {
 
                 if (this.getPowerupList().size() < MAX_PU) {
-                    this.getPowerupList().add((PowerUp) this.getModel().getBoard().getPowerupDeck().fetch());
+                    this.addPowerUp((PowerUp)this.getModel().getBoard().getPowerupDeck().fetch());
                     return null;
                 } else {
                     return (PowerUp) this.getModel().getBoard().getPowerupDeck().fetch();

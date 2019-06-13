@@ -48,6 +48,7 @@ public class Picking implements ControllerState{
 
             } else {
 
+                this.controller.getCurrentPlayer().setPosition(choice);
                 PowerUp check = this.controller.getCurrentPlayer().pickAmmo();
 
                 if(check == null){
