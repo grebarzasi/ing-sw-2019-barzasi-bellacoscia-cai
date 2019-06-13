@@ -4,6 +4,7 @@ import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.map.NonSpawnSquare;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.AmmoLot;
+import it.polimi.ingsw.cards.Deck;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -141,7 +142,7 @@ public class PlayerTest {
 
             luke.setPosition(alderaan.getMap().getSquareMatrix()[0][0]);
             luke.pickAmmo();
-
+            Deck deck=  alderaan.getPowerupDeck();
             System.out.println("Cycle number: " + i);
             System.out.println("Usable: "+ alderaan.getPowerupDeck().getUsable().size());
             System.out.println("Discarded: "+ alderaan.getPowerupDeck().getDiscarded().size());
