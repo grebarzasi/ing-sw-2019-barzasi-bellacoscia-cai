@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
+import static it.polimi.ingsw.connection.ConnMessage.NOTHING;
 import static it.polimi.ingsw.javaFX.GUIFiles.*;
 import static java.lang.Thread.sleep;
 
@@ -1494,53 +1495,60 @@ public class GameJavaFX extends Application implements ViewClient {
 
     public void fillAmmoTiles() {
 
-        double w = btnCell.get(0).get(0).getPrefWidth();
-        double h = btnCell.get(0).get(0).getPrefHeight();
+        Runnable run = () -> {
 
-        DropShadow borderGlow = new DropShadow();
-        borderGlow.setHeight(20);
-        borderGlow.setWidth(20);
-        borderGlow.setOffsetX(0f);
-        borderGlow.setOffsetY(0f);
 
-        for (int i = 0; i < 12; i++) {
+            double w = btnCell.get(0).get(0).getPrefWidth();
+            double h = btnCell.get(0).get(0).getPrefHeight();
 
-            if (i == 2 || i == 4 || i == 11) {
+            DropShadow borderGlow = new DropShadow();
+            borderGlow.setHeight(20);
+            borderGlow.setWidth(20);
+            borderGlow.setOffsetX(0f);
+            borderGlow.setOffsetY(0f);
+
+            for (int i = 0; i < 12; i++) {
+
+
+                if (i == 2 || i == 4 || i == 11) {
+                    try {
+                        Image img = new Image(new FileInputStream(PATH_BACK_WEAPON), w, h, true, true);
+                        BackgroundImage background = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+                        Background back = new Background(background);
+                        btnCell.get(i).get(5).setBackground(back);
+                        hideBtn(btnCell.get(i).get(5), 1);
+                        btnCell.get(i).get(5).setAlignment(Pos.CENTER_LEFT);
+                        borderGlow.setColor(Color.LIGHTGREEN);
+                        btnCell.get(i).get(5).setEffect(borderGlow);
+
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    continue;
+                }
+                int x = (int) Math.ceil((double) (i + 1) / 4) - 1;
+                int y = (i + 1) - (x * 4) - 1;
+                String key = x + ":" + y;
+
+                if (model.getBoard().getMap().getCells().get(key).getContent().equals("empty")) {
+                    continue;
+                }
                 try {
-                    Image img = new Image(new FileInputStream(PATH_BACK_WEAPON), w, h, true, true);
+                    Image img = new Image(new FileInputStream(PATH_AMMO + model.getBoard().getMap().getCells().get(key).getContent() + ".png"), w, h, true, true);
                     BackgroundImage background = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
                     Background back = new Background(background);
                     btnCell.get(i).get(5).setBackground(back);
                     hideBtn(btnCell.get(i).get(5), 1);
-                    btnCell.get(i).get(5).setAlignment(Pos.CENTER_LEFT);
-                    borderGlow.setColor(Color.LIGHTGREEN);
+                    borderGlow.setColor(Color.LIGHTCYAN);
                     btnCell.get(i).get(5).setEffect(borderGlow);
 
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
-                continue;
             }
-            int x = (int) Math.ceil((double) (i + 1) / 4) - 1;
-            int y = (i + 1) - (x * 4) - 1;
-            String key = x + ":" + y;
+        };
 
-            if (model.getBoard().getMap().getCells().get(key).getContent().equals("empty")) {
-                continue;
-            }
-            try {
-                Image img = new Image(new FileInputStream(PATH_AMMO + model.getBoard().getMap().getCells().get(key).getContent() + ".png"), w, h, true, true);
-                BackgroundImage background = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-                Background back = new Background(background);
-                btnCell.get(i).get(5).setBackground(back);
-                hideBtn(btnCell.get(i).get(5), 1);
-                borderGlow.setColor(Color.LIGHTCYAN);
-                btnCell.get(i).get(5).setEffect(borderGlow);
-
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
+        Platform.runLater(run);
     }
 
     public int getCoordinate(String s) {
@@ -1554,12 +1562,16 @@ public class GameJavaFX extends Application implements ViewClient {
 
 
     public void hideCell(ArrayList<Button> btn, double o) {
+
         for (Button b : btn) {
+            if(btn.indexOf(b) == 5){
+                continue;
+            }
             b.setOpacity(o);
-            if (o == 0) {
-                //b.setDisable(true);
-            } else {
-                //b.setDisable(false);
+        }
+        for (VirtualPlayer player : model.getAllPlayers()) {
+            if (player.getRow() != -1) {
+                setPlayerOnCell(btnCell.get((player.getRow() * 4) - 1 + player.getColumn() + 1), player.getCharacter());
             }
         }
 
@@ -1984,6 +1996,14 @@ public class GameJavaFX extends Application implements ViewClient {
     @Override
     public String showPossibleMoves(ArrayList<String> args) {
         Runnable run = () -> {
+
+            hideBtn(btnCancel,1);
+
+            btnCancel.setOnAction(e->{
+                update();
+                game.setTargetSquare(NOTHING);
+            });
+
             for (ArrayList<Button> btnArr : btnCell) {
                 hideCell(btnArr, 0.5);
             }
@@ -2613,6 +2633,7 @@ public class GameJavaFX extends Application implements ViewClient {
                             Runnable run = () -> btnArr.get(cards.indexOf(n)).setOnAction(e->{
                                 game.setPowerup(n);
                                 System.out.print(n);
+                                this.close();
                             });
 
                             Platform.runLater(run);
