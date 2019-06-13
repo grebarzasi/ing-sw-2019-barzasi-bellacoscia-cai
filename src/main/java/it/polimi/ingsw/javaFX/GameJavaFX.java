@@ -758,9 +758,6 @@ public class GameJavaFX extends Application implements ViewClient {
         msg.setFont(font);
         msg.setEditable(false);
 
-        hideBtn(btnCancel, 0);
-        hideBtn(btnReload, 0);
-        hideBtn(btnTerminator, 0);
         HBox hBtn = new HBox(30);
         hBtn.setAlignment(Pos.CENTER);
         hBtn.getChildren().add(btnTerminator);
@@ -1548,6 +1545,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
     public int getCoordinate(String s) {
 
+
         int temp1 = Integer.parseInt(s.split(":")[0]);
         int temp2 = Integer.parseInt(s.split(":")[1]);
 
@@ -1667,9 +1665,16 @@ public class GameJavaFX extends Application implements ViewClient {
                 }
             }
 
+            hideBtn(btnCancel, 0);
+            hideBtn(btnReload, 0);
+            hideBtn(btnTerminator, 0);
+            hideBtn(btnMove, 0);
+            hideBtn(btnPick, 0);
+            hideBtn(btnShoot, 0);
+            hideBtn(btnPowerUp, 0);
+
             btnCancel.setOnAction(e -> {
                 update();
-                hideBtn(btnCancel, 0);
             });
 
             btnMove.setOnAction(e -> {
@@ -1889,7 +1894,7 @@ public class GameJavaFX extends Application implements ViewClient {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        };
+        }
         String res;
         res = game.getPowerup();
 
@@ -1900,31 +1905,59 @@ public class GameJavaFX extends Application implements ViewClient {
 
     @Override
     public String showActions(ArrayList<String> args) {
+
         Runnable run = () -> {
             for (String act : args) {
-                switch (act) {
-                    case ("move"): {
-                        hideBtn(btnMove, 1);
+
+
+                switch (Integer.parseInt(act.split(INNER_SEP)[1])) {
+                    case (3): { //move
+                        hideBtn(btnMove,1);
+                        btnMove.setOnAction(e->{
+                            game.setAction("Move:3");
+                            for (ArrayList<Button> btnArr : btnCell) {
+                                chooseSquare(btnArr,btnCell.indexOf(btnArr),false);
+                            }
+
+                        });
                         break;
                     }
-                    case ("pick"): {
+                    case (1): { //pick
                         hideBtn(btnPick, 1);
+                        btnPick.setOnAction(e->{
+                            game.setAction("Move:1");
+                            for (ArrayList<Button> btnArr : btnCell) {
+                                chooseSquare(btnArr,btnCell.indexOf(btnArr),true);
+                            }
+                        });
                         break;
                     }
-                    case ("shoot"): {
+                    case (2): { //shoot
                         hideBtn(btnShoot, 1);
+                        btnShoot.setOnAction(e->{
+                            game.setAction("Move:0");
+                        });
                         break;
                     }
-                    case ("reload"): {
+                    case (4): { //reload
                         hideBtn(btnReload, 1);
+                        btnReload.setOnAction(e->{
+                            game.setAction("reload");
+                        });
                         break;
                     }
-                    case ("terminator"): {
+                    case (5): { //terminator
                         hideBtn(btnTerminator, 1);
+                        btnTerminator.setOnAction(e->{
+                            game.setAction("terminator");
+                        });
                         break;
                     }
-                    case ("power_up"): {
+                    case (0): { //power-up
                         hideBtn(btnPowerUp, 1);
+                        btnPowerUp.setOnAction(e->{
+                            game.setAction("power-up");
+                        });
                         break;
                     }
                 }
@@ -1933,9 +1966,17 @@ public class GameJavaFX extends Application implements ViewClient {
 
 
         Platform.runLater(run);
-        while (action.equals("")) ;
-        String res = action;
-        action = "";
+
+        while (game.getAction().equals("")){
+            try {
+                sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println(game.getAction());
+        String res = game.getAction();
+        game.setAction("");
 
         return res;
     }
@@ -1946,9 +1987,12 @@ public class GameJavaFX extends Application implements ViewClient {
             for (ArrayList<Button> btnArr : btnCell) {
                 hideCell(btnArr, 0.5);
             }
+            args.remove(0);
             for (String s : args) {
                 hideCell(btnCell.get(getCoordinate(s)), 0);
             }
+
+
         };
 
         Platform.runLater(run);
@@ -2436,6 +2480,8 @@ public class GameJavaFX extends Application implements ViewClient {
 
             GridPane grid = new GridPane();
             grid.setAlignment(Pos.CENTER);
+            grid.setHgap(20);
+            grid.setVgap(0);
             grid.setPadding(new Insets(0, 0, 0, 0));
 
             try {

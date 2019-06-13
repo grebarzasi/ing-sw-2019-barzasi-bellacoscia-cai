@@ -18,10 +18,18 @@ public class VirtualGame {
     private ArrayList<String> ammoTiles = new ArrayList<>();
 
     private ArrayList<String> actions = new ArrayList<>();
+    private String action = "";
+
 
     public VirtualGame() {
-        hideSquare.add("0:0");
-        hideSquare.add("0:1");
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
     }
 
     public synchronized String getDirection() {
