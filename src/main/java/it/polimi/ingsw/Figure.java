@@ -119,7 +119,8 @@ public abstract class Figure {
      */
 
     public boolean canSee(Figure p) {
-
+        if(this.getPosition()==null||p.getPosition()==null)
+            return false;
         if (this.getPosition().getRoom() == p.getPosition().getRoom()) {
             return true;
 

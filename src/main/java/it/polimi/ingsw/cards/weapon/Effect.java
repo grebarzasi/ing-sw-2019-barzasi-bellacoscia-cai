@@ -13,7 +13,7 @@ import java.util.Set;
  * @author Gregorio Barzasi
  */
 public class Effect {
-    private String name="Vuoto";
+    private String name;
     private Ammo cost;
     private ArrayList<SubEffect> effectList;
     private Set<Figure> targetHitSet;
@@ -27,7 +27,9 @@ public class Effect {
     public Effect(){};
 
     public Effect(String name, Ammo cost,ArrayList<SubEffect> effectList){
-        this.name=name;
+        this.name="Vuoto";
+        if(!name.isEmpty())
+            this.name=name;
         this.cost=cost;
         this.effectList=effectList;
         this.targetHitSet= new HashSet<>();

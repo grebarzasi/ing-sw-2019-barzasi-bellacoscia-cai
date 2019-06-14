@@ -50,6 +50,7 @@
       }
     },
     "extraMove": {
+      "name": "movimento extra",
       "cost": {},
       "beforeBasic": false,
       "subEffect": {

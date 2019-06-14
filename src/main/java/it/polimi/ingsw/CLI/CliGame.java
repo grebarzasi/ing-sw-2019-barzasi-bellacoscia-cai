@@ -149,6 +149,7 @@ public class CliGame implements ViewClient {
      * @return the chosen one
      */
     public String showPossibleMoves(ArrayList<String> args) {
+        VirtualPlayer owner=board.getModel().getOwner();
         String reply="";
         String[] temp;
         HashMap<String,String> column=new HashMap<>();
@@ -172,6 +173,9 @@ public class CliGame implements ViewClient {
                 reply = sc.readLine();
                 if(reply.equals("<"))
                     return NOTHING;
+                if(reply.equals(">")) {
+                    reply="MINE";
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -179,6 +183,8 @@ public class CliGame implements ViewClient {
             temp=reply.split(INNER_SEP);
             if(reply.isEmpty()||(temp.length==2&&row.containsKey(temp[0])&&column.containsKey(temp[1])))
                 reply=row.get(temp[0])+INNER_SEP+column.get(temp[1]);
+            else if(reply=="MINE")
+                reply = owner.getRow()+ INNER_SEP +owner.getColumn();
             else {
                 System.out.println(CHOOSE_SQUARE_ERR);
                 reply = "";
@@ -311,6 +317,7 @@ public class CliGame implements ViewClient {
     }
 
     public String showEffects(ArrayList<String> args) {
+        System.out.println("\n"+args);
         int i;
         String temp[];
         int reply=0;
@@ -320,11 +327,12 @@ public class CliGame implements ViewClient {
             for (String s : args) {
                 temp = s.split(INNER_SEP);
                 System.out.print("("+i + "- " + temp[0]+")[");
-                board.colorizeCP(temp[1]);
+                if(!temp[1].equals(NOTHING))
+                     board.colorizeCP(temp[1]);
                 System.out.print("]  ");
                 i++;
             }
-            System.out.print(RESET);
+            System.out.println(RESET);
             reply=chooseFromArray(args,SHOW_EFFECTS_ERR);
         } while (reply==0);
         if(reply==-1)

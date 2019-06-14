@@ -34,6 +34,8 @@ public class TargetAcquisition implements SubEffect {
             AimingFilter a = aimRoutine.get(indexTemp);
             p = a.filter(w, p);
             //if is empty you have no target available
+            if(p==null)
+                return null;
             if (p.isEmpty())
                 return p;
         }
