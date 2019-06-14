@@ -6,6 +6,8 @@ import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * State of using a newton powerup
@@ -33,12 +35,14 @@ public class UsingNewton implements ControllerState {
                 targets.add(p);
             }
         }
+        Set<Figure> targetTemp=new HashSet<>(targets);
 
-        Figure choice = this.controller.getView().singleTargetingShowTarget(targets);
+        ArrayList<Figure> choiceTemp = this.controller.getView().showTargetAdvanced(targetTemp,1,false,"Seleziona un bersaglio da spostare:");
 
-        if(choice == null){
+        if(choiceTemp == null){
             this.controller.goBack();
         }else {
+            Figure choice = choiceTemp.get(0);
 
             int row;
             int column;

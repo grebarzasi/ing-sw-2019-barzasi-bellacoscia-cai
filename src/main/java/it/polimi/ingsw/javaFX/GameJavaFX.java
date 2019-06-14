@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
+import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.virtual_model.*;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -784,17 +785,6 @@ public class GameJavaFX extends Application implements ViewClient {
 
         update();
 
-
-        DropShadow borderGlow = new DropShadow();
-        borderGlow.setColor(Color.RED);
-        borderGlow.setHeight(50);
-        borderGlow.setWidth(50);
-        borderGlow.setOffsetX(0f);
-        borderGlow.setOffsetY(0f);
-
-
-        if (model.getTurn().getCharacter().equals(model.getOwner().getCharacter()))
-            gridPBoard.setEffect(borderGlow);
 
         /*
         btnCancel.setOnAction(e->{
@@ -1599,6 +1589,13 @@ public class GameJavaFX extends Application implements ViewClient {
                     model.getOwner().setRow(x);
                     model.getOwner().setColumn(y);
 
+                    String key = x + ":" + y;
+
+                    if(x+y == 2 || x+y == 4 || x+y == 11 ){
+                        //chooseWeapon cw = new chooseWeapon(model.getBoard().getMap().getCells().get(key).getContent());
+                        //cw.show();
+                    }
+
 
                     hideBtn(btnCancel, 0);
 
@@ -1669,6 +1666,32 @@ public class GameJavaFX extends Application implements ViewClient {
 
         if(start) {
             msg.setText(CLEAR);
+
+            DropShadow borderGlow = new DropShadow();
+            borderGlow.setColor(Color.RED);
+            borderGlow.setHeight(50);
+            borderGlow.setWidth(50);
+            borderGlow.setOffsetX(0f);
+            borderGlow.setOffsetY(0f);
+
+
+            if (model.getTurn().getCharacter().equals(model.getOwner().getCharacter())) {
+                gridPBoard.setEffect(borderGlow);
+            }else {
+                gridPBoard.setEffect(null);
+                for (GridPane grid : gridOtherBoards) {
+                    grid.setEffect(null);
+                }
+
+                ArrayList<Button> btns = new ArrayList<>();
+                String turn = model.getTurn().getCharacter();
+                for (VirtualPlayer p: model.getAllPlayers()) {
+                    if(turn.equals(p.getCharacter())){
+                        gridOtherBoards.get(model.getAllPlayers().indexOf(p)).setEffect(null);
+                    }
+                }
+
+            }
 
             for (ArrayList<Button> btnArr : btnCell) {
                 hideCell(btnArr, 0);
@@ -1792,8 +1815,8 @@ public class GameJavaFX extends Application implements ViewClient {
             for (ArrayList<Button> btnArr : btnCell) {
                 btnArr.get(5).setOnAction(e -> {
                     if (btnCell.indexOf(btnArr) == 2 || btnCell.indexOf(btnArr) == 4 || btnCell.indexOf(btnArr) == 11) {
-                        chooseWeapon cw = new chooseWeapon();
-                        cw.show();
+                        //chooseWeapon cw = new chooseWeapon();
+                        //cw.show();
                     }
                 });
             }
@@ -1856,15 +1879,21 @@ public class GameJavaFX extends Application implements ViewClient {
 
         Runnable run = () -> {
             if(args.size() < 4) {
+
                 DropShadow borderGlow = new DropShadow();
                 borderGlow.setColor(Color.WHITE);
                 borderGlow.setHeight(50);
                 borderGlow.setWidth(50);
                 borderGlow.setOffsetX(0f);
                 borderGlow.setOffsetY(0f);
+
                 for (Button btn : we) {
                     btn.setEffect(borderGlow);
                 }
+
+                chooseWeapon cw = new chooseWeapon(args);
+                cw.show();
+
             }else{
                 discardCards dc = new discardCards(args,false);
                 dc.show();
@@ -1878,6 +1907,10 @@ public class GameJavaFX extends Application implements ViewClient {
         res = game.getWeapon();
 
         game.setWeapon("");
+
+        for (Button btn : we) {
+            btn.setEffect(null);
+        }
 
         return res;
     }
@@ -1900,6 +1933,9 @@ public class GameJavaFX extends Application implements ViewClient {
 
                 for (Button btn : pu) {
                     btn.setEffect(borderGlow);
+                    btn.setOnAction(e->{
+                        game.setPowerup(args.get(pu.indexOf(btn)));
+                    });
                 }
             }
         };
@@ -1917,6 +1953,10 @@ public class GameJavaFX extends Application implements ViewClient {
         res = game.getPowerup();
 
         game.setWeapon("");
+
+        for (Button btn : pu) {
+            btn.setEffect(null);
+        }
 
         return res;
     }
@@ -2459,8 +2499,9 @@ public class GameJavaFX extends Application implements ViewClient {
     }
 
     public class chooseWeapon extends Stage {
-        public chooseWeapon() {
+        public chooseWeapon(ArrayList<String> args) {
 
+            System.out.println(args);
             this.setTitle("SCEGLI UN'ARMA");
 
             double widthScreen = Screen.getPrimary().getBounds().getWidth() / 3;
@@ -2471,6 +2512,7 @@ public class GameJavaFX extends Application implements ViewClient {
             this.setScene(theScene);
 
             GridPane grid = new GridPane();
+            grid.setHgap(10);
             grid.setAlignment(Pos.CENTER);
             grid.setPadding(new Insets(0, 0, 0, 0));
 
@@ -2496,6 +2538,60 @@ public class GameJavaFX extends Application implements ViewClient {
 
             grid.getColumnConstraints().addAll(c1, c2, c3);
             grid.getRowConstraints().add(r);
+
+            Button we1 = new Button();
+            Button we2 = new Button();
+            Button we3 = new Button();
+            we1.setPrefSize(widthScreen,heightScreen);
+            we2.setPrefSize(widthScreen,heightScreen);
+            we3.setPrefSize(widthScreen,heightScreen);
+            ArrayList<Button> btnArr = new ArrayList<>();
+            btnArr.add(we1);
+            btnArr.add(we2);
+            btnArr.add(we3);
+
+            ObjectMapper mapper = new ObjectMapper();
+            String weapon = null;
+
+            for (String s : args) {
+                System.out.println(s);
+                File jsonFileWe = new File(PATH_WE);
+                try {
+
+                    JsonNode rootNodeWe = null;
+                    try {
+                        rootNodeWe = mapper.readTree(jsonFileWe);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    JsonNode chamberNodeWe = rootNodeWe.path(s.split(INNER_SEP)[0]);
+
+                    weapon = chamberNodeWe.path("path").asText();
+                    System.out.println(weapon);
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+                Image imgWe = null;
+                try {
+                    imgWe = new Image(new FileInputStream(PATH_WEAPON + weapon), widthScreen, heightScreen, true, true);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+                setButtonBack(btnArr.get(args.indexOf(s)),imgWe);
+                btnArr.get(args.indexOf(s)).setOnAction(e->{
+                    game.setWeapon(s);
+                });
+
+            }
+
+            grid.add(btnArr.get(0),0,0);
+            grid.add(btnArr.get(1),1,0);
+            grid.add(btnArr.get(2),2,0);
+
 
         }
     }
@@ -2596,6 +2692,7 @@ public class GameJavaFX extends Application implements ViewClient {
                         setButtonBack(btnArr.get(cards.indexOf(name)),imgWe);
                         btnArr.get(cards.indexOf(name)).setOnAction(e->{
                             game.setWeapon(name.split(INNER_SEP)[0]);
+                            this.close();
                         });
                         grid.add(btnArr.get(cards.indexOf(name)),cards.indexOf(name),0);
                     }
@@ -2662,4 +2759,9 @@ public class GameJavaFX extends Application implements ViewClient {
                 }
         }
     }
-}
+
+    public String showTargetAdvanced(ArrayList<String> args) {
+        return null;
+    }
+
+    }

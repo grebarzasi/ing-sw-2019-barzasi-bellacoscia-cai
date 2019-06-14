@@ -90,7 +90,8 @@ public class CliLobby extends Thread{
 
         String temp;
         //TERMINATOR
-        lobby.setTerminatorPref(ynAsk(TERMINATOR_Q,TERMINATOR_Y,TERMINATOR_N));
+        //lobby.setTerminatorPref(ynAsk(TERMINATOR_Q,TERMINATOR_Y,TERMINATOR_N));
+        lobby.setTerminatorPref(true);
 
         //FINAL FRENZY
         lobby.setFinalFrenzyPref(ynAsk(FRENZY_Q,FRENZY_Y,FRENZY_N));

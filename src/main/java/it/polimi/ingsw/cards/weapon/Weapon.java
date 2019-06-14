@@ -1,6 +1,5 @@
 package it.polimi.ingsw.cards.weapon;
 
-import com.sun.xml.internal.fastinfoset.tools.FI_DOM_Or_XML_DOM_SAX_SAXEvent;
 import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.cards.Ammo;

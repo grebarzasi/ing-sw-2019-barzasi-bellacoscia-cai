@@ -6,6 +6,7 @@ public class ConnMessage {
     public static final String AKN = "*OK*";
     public static final String SHOW_PU = "*SHOW_PowerUP*";
 
+    public static final String SHOW_TARGET_ADV = "*SHOW_Target_adv*";
     public static final String SHOW_WEAPONS = "*SHOW_Weapons*";
     public static final String SHOW_ACTIONS = "*SHOW_Action*";
     public static final String SHOW_MOVES = "*SHOW_Moves*";

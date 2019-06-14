@@ -53,7 +53,7 @@ public interface View {
      * @return the chosen targets
      */
 
-    public ArrayList<Figure> showTargets(ArrayList<Figure> args);
+//    public ArrayList<Figure> showTargets(ArrayList<Figure> args);
 
     /**
      * Shows the valid targets a Figure can target, then returns the chosen one
@@ -69,7 +69,7 @@ public interface View {
      * @param message the question's message
      * @return the user's choice
      */
-    public Figure singleTargetingShowTarget(ArrayList<Figure> args);
+//    public Figure singleTargetingShowTarget(ArrayList<Figure> args);
 
     /**
      * Displays a message and makes the user make a boolean choice
@@ -98,4 +98,7 @@ public interface View {
 
     public Effect showEffects(Set<Effect> args);
 
-}
+    public ArrayList<Figure> showTargetAdvanced(Set<Figure> args,int maxNum,boolean fromDiffSquare, String msg);
+
+
+    }
