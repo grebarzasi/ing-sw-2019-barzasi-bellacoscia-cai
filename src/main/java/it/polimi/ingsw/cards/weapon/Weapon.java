@@ -113,7 +113,7 @@ public class Weapon extends Card {
             usable.add(addTwoEffect);
         if(extraMove!=null&&extraMove.isUsable())
             usable.add(extraMove);
-        return null;
+        return usable;
     }
 
     public void resetWeapon() {
@@ -121,11 +121,16 @@ public class Weapon extends Card {
         directionTemp=null;
         askTemp=null;
 
-        extraMove.resetEffect();
-        basicEffect.resetEffect();
-        addOneEffect.resetEffect();
-        addTwoEffect.resetEffect();
-        alternativeEffect.resetEffect();
+        if(basicEffect!=null)
+            basicEffect.resetEffect();
+        if(alternativeEffect!=null)
+            alternativeEffect.resetEffect();
+        if(addOneEffect!=null)
+            addOneEffect.resetEffect();
+        if(addTwoEffect!=null)
+            addTwoEffect.resetEffect();
+        if(extraMove!=null)
+            extraMove.resetEffect();
     }
 
 
