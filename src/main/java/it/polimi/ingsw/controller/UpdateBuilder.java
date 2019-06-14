@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.Token;
 import it.polimi.ingsw.board.Armory;
@@ -23,6 +24,8 @@ import static it.polimi.ingsw.connection.ConnMessage.*;
 
 public class UpdateBuilder {
     private Controller controller;
+    private static final String TERMINATOR_NAME="*Terminator*";
+
     private ObjectMapper mapper = new ObjectMapper();
 
     public UpdateBuilder(Controller conn){
@@ -46,10 +49,46 @@ public class UpdateBuilder {
         for(Player p : players){
             playersNode.set(p.getCharacter(),playerNode(p));
         }
-
+        if(controller.getModel().getBot()!=null)
+            playersNode.set(controller.getModel().getBot().getCharacter(),botNode(controller.getModel().getBot()));
 
         return playersNode;
     }
+
+    public ObjectNode botNode(Figure p){
+        ObjectNode playerNode = mapper.createObjectNode();
+        //username,points and position ( "row:column")
+        playerNode.put("username",TERMINATOR_NAME);
+        playerNode.put("points",p.getPoints());
+
+        if(p.getPosition()!=null)
+            playerNode.put("pos",p.getPosition().getPosition().getRow()+":"+p.getPosition().getPosition().getColumn());
+        else
+            playerNode.put("pos",NOTHING+INNER_SEP+NOTHING);
+
+        //add Weapon
+        ObjectNode weaponNode = mapper.createObjectNode();
+        weaponNode.put("I'M",true);
+        weaponNode.put("THE",true);
+        weaponNode.put("TERMINATOR",true);
+        playerNode.set("weapons",weaponNode);
+
+//        //add pu
+            ObjectNode puNode = mapper.createObjectNode();
+//        Integer i=0;
+//        for(PowerUp pu :p.getPowerupList()) {
+//            puNode.put(i.toString(),pu.getName()+INNER_SEP+pu.getAmmoOnDiscard().toString());
+//            i++;
+//        }
+
+        playerNode.set("powerups",puNode);
+
+        //add board section
+        playerNode.set("board",boardNode(p));
+
+        return playerNode;
+    }
+
 
     public ObjectNode playerNode(Player p){
         ObjectNode playerNode = mapper.createObjectNode();
@@ -84,7 +123,7 @@ public class UpdateBuilder {
         return playerNode;
     }
 
-    public ObjectNode boardNode(Player p){
+    public ObjectNode boardNode(Figure p){
 
             ObjectNode boardNode = mapper.createObjectNode();
 
