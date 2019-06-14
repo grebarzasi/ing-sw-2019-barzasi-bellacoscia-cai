@@ -37,15 +37,17 @@ public class Moving implements ControllerState{
         Square choice = this.controller.getView().showPossibleMoves(options, false);
 
         if(choice == null){
+
             this.controller.update();
             this.controller.goBack();
+
         }else{
+
             this.controller.getCurrentPlayer().setPosition(choice);
             this.controller.dereaseMoveLeft();
             this.controller.update();
             this.controller.goBack();
-            this.controller.update();
-            this.controller.currentState.command();
+
         }
     }
 

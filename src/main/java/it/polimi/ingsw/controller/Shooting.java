@@ -46,34 +46,45 @@ public class Shooting implements ControllerState {
         Effect choice = this.controller.getView().showEffects(effects);
         if(choice==null){
             this.controller.goBack();
-            this.controller.choosingMove.command();
+            //this.controller.choosingMove.command(); goBack already does command
         }
 
         do{
             if(shootingWith.getDirectionTemp()!=null) {
+
                 dir = shootingWith.getDirectionTemp();
                 String rpl = controller.getView().chooseDirection(new ArrayList<>(dir.getTargetTemp()));
+
                 if(rpl==null) {
+
                     shootingWith.resetWeapon();
                     this.controller.goBack();
-                    this.controller.choosingMove.command();
+
                 }
+
                 dir.setDirectionTemp(rpl);
+
             }else if(shootingWith.getAskTemp()!=null) {
+
                 ask = shootingWith.getAskTemp();
                 ArrayList<Figure> rpl = controller.getView().showTargetAdvanced(ask.getTargetTemp(), ask.getNumMax(), ask.isFromDiffSquare(), ask.getMsg());
                 if (rpl == null) {
+
                     shootingWith.resetWeapon();
                     this.controller.goBack();
-                    this.controller.choosingMove.command();
+
                 }
                 ask.setTargetTemp(new HashSet<>(rpl));
             }
             ok=choice.executeEffect();
         }while (!ok);
+
         shootingWith.resetWeapon();
+
+        this.controller.dereaseMoveLeft();
         this.controller.update();
         this.controller.goBack();
+
     }
 
     public Controller getController() {

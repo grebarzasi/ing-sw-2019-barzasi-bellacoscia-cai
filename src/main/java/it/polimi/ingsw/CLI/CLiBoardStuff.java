@@ -19,7 +19,7 @@ public class CLiBoardStuff {
     public static final String GRAY_P = WHITE_BACKGROUND_BRIGHT+" "+RESET;
     public static final String YELLOW_P = YELLOW_BACKGROUND_BRIGHT+" "+RESET;
 
-    public static final String ARMORY = " @";
+    public static final String ARMORY = " W";
     //public static final String ARMORY = " ۩ ";
     public static final String AMMO = "+";
     //public static final String AMMO = "ѻ";

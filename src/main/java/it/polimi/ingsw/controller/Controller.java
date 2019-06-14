@@ -139,10 +139,10 @@ public class Controller {
 
     }
 
-    private String firstAvailableColor(ArrayList<Player> playerList){
+    private static String firstAvailableColor(ArrayList<Player> playerList){
 
         int i;
-        for( i = 0 ; i < this.ALL_CHARACTERS.length ; i++){
+        for(i = 0 ; i < ALL_CHARACTERS.length ; i++){
             for (Player p : playerList) {
                 if (p.getCharacter().equals(ALL_CHARACTERS[i])){
                     ALL_CHARACTERS[i] = "taken";
@@ -150,7 +150,7 @@ public class Controller {
             }
         }
 
-        for( i = 0 ; i < this.ALL_CHARACTERS.length ; i++){
+        for(i = 0 ; i < ALL_CHARACTERS.length ; i++){
             if(!ALL_CHARACTERS[i].equals("taken")){
                 return ALL_CHARACTERS[i];
             }
@@ -158,33 +158,6 @@ public class Controller {
 
         return "red";
     }
-
-    public Controller(ArrayList<Player> playerList){
-
-        this.model = new GameModel(playerList,"medium1", this);
-
-        this.hasFrenzy = false;
-        this.hasBot = false;
-        this.getModel().getBoard().getTrack().setSkullMax(8);
-
-        this.asBot = new AsBot(this);
-        this.choosingMove = new ChoosingMove(this);
-        this.choosingPowerUpToUse = new ChoosingPowerUpToUse(this);
-        this.discardingPowerUp = new DiscardingPowerUp(this);
-        this.choosingWeapon = new ChoosingWeapon(this);
-        this.moving = new Moving(this);
-        this.picking = new Picking(this);
-        this.pickingWeapon = new PickingWeapon(this);
-        this.reloading = new Reloading(this);
-        this.shooting = new Shooting(this);
-        this.teleporting = new Teleporting(this);
-        this.usingNewton = new UsingNewton(this);
-        this.shooting = new Shooting(this);
-        this.spawning = new Spawning(this);
-        this.frenzySpecialAction = new FrenzySpecialAction(this);
-
-    }
-
 
     /**
      * Goes back to choosing the move

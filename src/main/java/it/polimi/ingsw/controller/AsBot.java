@@ -118,7 +118,7 @@ public class AsBot implements ControllerState{
         this.controller.goBack();
     }
 
-    public ArrayList<Square> returnSpawns(){
+    private ArrayList<Square> returnSpawns(){
 
         ArrayList<Square> spawns = new ArrayList<>();
         int row;
