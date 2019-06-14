@@ -38,10 +38,6 @@ public class Effect {
 
     }
 
-    public boolean isUsable() {
-        return true;
-    }
-
 
         public Ammo getCost() {
         return cost;
@@ -75,12 +71,14 @@ public class Effect {
             targetHitSet = e.applyEffect(myWeapon, targetHitSet);
         }
         indexTemp=0;
+        used=true;
         return true;
     }
     public void resetEffect(){
         indexTemp=0;
         for(SubEffect e:effectList)
             e.resetSubEffect();
+        used=false;
     }
 
     public String getName() {

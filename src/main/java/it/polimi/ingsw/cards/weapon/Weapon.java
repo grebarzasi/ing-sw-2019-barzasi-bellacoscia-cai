@@ -91,27 +91,21 @@ public class Weapon extends Card {
         return true;
     }
 
-    public void basic(){}
-
-    public void alternative(){}
-
-    public void additionalOne(){}
-
-    public void additionalTwo(){}
-
-    public void extraMove(){}
 
     public Set<Effect> getUsableEff(){
+
+
+
         Set<Effect> usable=new HashSet<>();
-        if(basicEffect!=null&&basicEffect.isUsable())
+        if(basicEffect!=null&&!basicEffect.isUsed())
             usable.add(basicEffect);
-        if(alternativeEffect!=null&&alternativeEffect.isUsable())
+        if(alternativeEffect!=null&&!alternativeEffect.isUsed())
             usable.add(alternativeEffect);
-        if(addOneEffect!=null&&addOneEffect.isUsable())
+        if(addOneEffect!=null&&!addOneEffect.isUsed()&&basicEffect.isUsed())
             usable.add(addOneEffect);
-        if(addTwoEffect!=null&&addTwoEffect.isUsable())
+        if(addTwoEffect!=null&&!addTwoEffect.isUsed()&&basicEffect.isUsed())
             usable.add(addTwoEffect);
-        if(extraMove!=null&&extraMove.isUsable())
+        if(extraMove!=null&&!extraMove.isUsed())
             usable.add(extraMove);
         return usable;
     }
