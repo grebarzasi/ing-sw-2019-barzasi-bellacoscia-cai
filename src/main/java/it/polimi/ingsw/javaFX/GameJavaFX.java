@@ -2205,9 +2205,9 @@ public class GameJavaFX extends Application implements ViewClient {
     }
 
     @Override
-    public String showEffects(Set<String> args) {
+    public String showEffects(ArrayList<String> args) {
 
-        ArrayList<String> effects = new ArrayList<>(args);
+        ArrayList<String> effects = args;
 
         Runnable run = () -> {
             switch (effects.size()) {

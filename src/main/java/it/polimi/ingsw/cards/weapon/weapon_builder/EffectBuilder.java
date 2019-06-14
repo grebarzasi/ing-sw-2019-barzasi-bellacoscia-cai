@@ -21,6 +21,7 @@ public class EffectBuilder {
     public static Effect buildEffect(JsonNode effectsNode){
         //initialize effect cost
         Ammo cost = buildCost(effectsNode.path("cost"));
+        String name = effectsNode.path("name").asText();
 
         ArrayList<SubEffect> subEffList = new ArrayList<>();
 
@@ -59,7 +60,7 @@ public class EffectBuilder {
             }
         }
         //return the created Effect Object
-        return new Effect(cost,subEffList);
+        return new Effect(name,cost,subEffList);
     }
 
     public static MoveTarget buildMoveTarget(JsonNode node){
