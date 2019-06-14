@@ -219,6 +219,8 @@ public class Controller {
                 }
                 this.getBoard().getTrack().getKillsTrack().add(addToTrack);
 
+                f.die();
+
                 this.checkEndStatus();
 
             }

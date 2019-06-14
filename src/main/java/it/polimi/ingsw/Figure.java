@@ -381,18 +381,11 @@ public abstract class Figure {
             }
         }
 
-
-
-        ordered.set(1,ordered.get(1));
-
-
         for( i=0 ; i<ordered.size() ; i++) {
 
             ordered.get(i).addPoints(this.getPersonalBoard().getPointVec()[i]);
 
         }
-
-        ordered.set(1,ordered.get(1));
 
         this.getPersonalBoard().resetDamage();
         this.getPersonalBoard().addSkull();
