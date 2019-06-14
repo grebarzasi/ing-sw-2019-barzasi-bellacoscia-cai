@@ -6,6 +6,7 @@
 
   "effects": {
     "basic": {
+      "name": "effetto",
       "cost": {
         "blue": 2,
         "yellow": 1

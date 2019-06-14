@@ -192,8 +192,11 @@ public class SServerCommManager implements View {
         String s="";
         String rpl="";
         String[] temp;
+        int i=1;
         for(Effect e : args){
             s=s+e.getName()+INNER_SEP+e.getCost().toString()+INFO_SEP;
+//            s=s+"effetto"+i+INNER_SEP+e.getCost().toString()+INFO_SEP;
+            i++;
         }
         rpl=askAndWait(SHOW_EFFECTS,s);
         if(rpl==null)

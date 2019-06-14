@@ -5,6 +5,7 @@
   },
   "effects": {
     "basic": {
+      "name": "modalità base",
       "cost": {
         "blue": 1
       },
@@ -20,6 +21,7 @@
       }
     },
     "alternative": {
+      "name": "modalità mietitore",
       "cost": {
         "blue": 1,
         "red": 1

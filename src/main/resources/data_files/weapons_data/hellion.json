@@ -5,6 +5,7 @@
   },
   "effects": {
     "basic": {
+      "name": "modalità base",
       "cost": {
         "red": 1,
         "yellow": 1
@@ -36,6 +37,7 @@
       }
     },
     "alternative": {
+      "name": "modalità nano-traccianti",
       "cost": {
         "red": 1
       },

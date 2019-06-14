@@ -5,6 +5,7 @@
   },
   "effects": {
     "basic": {
+      "name": "modalità base",
       "cost": {
         "yellow": 1,
         "red": 1
@@ -28,6 +29,7 @@
       }
     },
     "alternative": {
+      "name": "modalità scanner",
       "cost": {},
       "subEffect": {
         "1": {

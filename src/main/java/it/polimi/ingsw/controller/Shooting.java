@@ -44,6 +44,10 @@ public class Shooting implements ControllerState {
         effects = shootingWith.getUsableEff();
 
         Effect choice = this.controller.getView().showEffects(effects);
+        if(choice==null){
+            this.controller.goBack();
+            this.controller.choosingMove.command();
+        }
 
         do{
             if(shootingWith.getDirectionTemp()!=null) {

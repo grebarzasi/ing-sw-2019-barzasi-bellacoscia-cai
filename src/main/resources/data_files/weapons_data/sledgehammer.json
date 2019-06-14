@@ -5,6 +5,7 @@
   },
   "effects": {
     "basic": {
+      "name": "modalità base",
       "cost": {
         "yellow": 1
       },
@@ -24,6 +25,7 @@
       }
     },
     "alternative": {
+      "name": "modalità polverizzare",
       "cost": {
         "red": 1
       },

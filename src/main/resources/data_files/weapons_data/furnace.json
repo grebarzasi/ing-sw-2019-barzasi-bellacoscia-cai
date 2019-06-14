@@ -5,7 +5,7 @@
   },
   "effects": {
     "basic": {
-      "name": "",
+      "name": "modalità base",
       "cost": {
         "red": 1,
         "blue": 1
@@ -30,7 +30,7 @@
       }
     },
     "alternative": {
-      "name": "",
+      "name": "modalità fuoco confortevole",
       "cost": {},
       "subEffect": {
         "1": {

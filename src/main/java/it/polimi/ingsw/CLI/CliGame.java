@@ -316,14 +316,15 @@ public class CliGame implements ViewClient {
         int reply=0;
         do {
             i=1;
-            System.out.print(RESET+"\n");
+            System.out.println(RESET+SHOW_EFFECTS_Q);
             for (String s : args) {
                 temp = s.split(INNER_SEP);
-                System.out.print("("+i + "- " + temp[0]+")");
+                System.out.print("("+i + "- " + temp[0]+")[");
                 board.colorizeCP(temp[1]);
+                System.out.print("]  ");
                 i++;
             }
-            System.out.print(RESET+SHOW_EFFECTS_Q+"\n");
+            System.out.print(RESET);
             reply=chooseFromArray(args,SHOW_EFFECTS_ERR);
         } while (reply==0);
         if(reply==-1)

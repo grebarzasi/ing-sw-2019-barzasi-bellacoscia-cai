@@ -48,6 +48,7 @@ public class ChoosingWeapon implements ControllerState {
             //Sets the shooting state's weapon to the chosen one and changes the current state to shooting
             ((Shooting) this.controller.getShooting()).setShootingWith(choice);
             this.controller.setCurrentState(this.controller.shooting);
+            this.controller.currentState.command();
         }
     }
 

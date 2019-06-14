@@ -88,7 +88,7 @@ public class CliMessages {
     public static final String SHOW_DIRECTION_Q = "Scegli una direzione (N/S/E/O).\n Bersagli attualmente colpibili:";
     public static final String SHOW_DIRECTION_ERR = RED+"Direzione non disponibile";
 
-    public static final String SHOW_EFFECTS_Q = "Scegli una direzione (N/S/E/O).\n Bersagli attualmente colpibili:";
+    public static final String SHOW_EFFECTS_Q = "\nScegli un effetto da utilizzare:";
     public static final String SHOW_EFFECTS_ERR = RED+"Direzione non disponibile";
 
     public static final String BACK = "<";
