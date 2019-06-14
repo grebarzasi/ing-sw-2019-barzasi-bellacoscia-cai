@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 public class ActionBuilder {
 
+    private static final String SHOOT = "Shoot";
+
     private static final int STAGE_1 = 2;
     private static final int STAGE_2 = 5;
 
@@ -66,17 +68,23 @@ public class ActionBuilder {
                 if (adrenalineStage == 0) {
 
                     actions.add(new Action("Pick", STAGE_0_PICK_RANGE));
-                    actions.add(new Action("Shoot", STAGE_0_SHOOT_RANGE));
+                    if(canShoot(p)) {
+                        actions.add(new Action(SHOOT, STAGE_0_SHOOT_RANGE));
+                    }
 
                 } else if (adrenalineStage == 1) {
 
                     actions.add(new Action("Pick", STAGE_1_PICK_RANGE));
-                    actions.add(new Action("Shoot", STAGE_1_SHOOT_RANGE));
+                    if(canShoot(p)) {
+                        actions.add(new Action(SHOOT, STAGE_1_SHOOT_RANGE));
+                    }
 
                 } else if (adrenalineStage == 2) {
 
                     actions.add(new Action("Pick", STAGE_2_PICK_RANGE));
-                    actions.add(new Action("Shoot", STAGE_2_SHOOT_RANGE));
+                    if(canShoot(p)) {
+                        actions.add(new Action(SHOOT, STAGE_2_SHOOT_RANGE));
+                    }
 
                 }
 
@@ -86,10 +94,14 @@ public class ActionBuilder {
                 if (!p.getStartedFrenzy()) {
                     actions.add(new Action("Move", FRENZY_MOVE_RANGE));
                     actions.add(new Action("Pick", FRENZY_PICK_RANGE));
-                    actions.add(new Action("Move, reload and Shoot", FRENZY_MOVE_RELOAD_SHOOT_RANGE));
+                    if(canShoot(p)) {
+                        actions.add(new Action(SHOOT, FRENZY_MOVE_RELOAD_SHOOT_RANGE));
+                    }
                 } else {
                     actions.add(new Action("Pick", FIRST_PLAYER_FRENZY_PICK_RANGE));
-                    actions.add(new Action("Move, reload and Shoot", FIRST_PLAYER_FRENZY_MOVE_RELOAD_SHOOT_RANGE));
+                    if(canShoot(p)) {
+                        actions.add(new Action(SHOOT, FIRST_PLAYER_FRENZY_MOVE_RELOAD_SHOOT_RANGE));
+                    }
 
                 }
             }
@@ -110,7 +122,23 @@ public class ActionBuilder {
 
         }
 
+        generatePowerUpActions(p,actions);
+        
 
+        if(p.getModel().hasBotAction() && p.getModel().getController().hasBot()){
+            actions.add(new Action("Use Bot",0));
+        }
+
+
+        actions.add(new Action("End Turn", 0));
+
+        return actions;
+
+    }
+    
+    
+    private static void generatePowerUpActions(Player p, ArrayList<Action> actions){
+        
         if(!p.getPowerupList().isEmpty()){
 
             actions.add(new Action("Discard PowerUp",0));
@@ -127,16 +155,16 @@ public class ActionBuilder {
                 actions.add(new Action("PowerUp",0));
             }
         }
-
-        if(p.getModel().hasBotAction() && p.getModel().getController().hasBot()){
-            actions.add(new Action("Use Bot",0));
+        
+    }
+    
+    private static boolean canShoot(Player p){
+        for(Weapon w: p.getWeaponsList()){
+            if(w.isLoaded()){
+                return true;
+            }
         }
-
-
-        actions.add(new Action("End Turn", 0));
-
-        return actions;
-
+        return false;
     }
 
 
