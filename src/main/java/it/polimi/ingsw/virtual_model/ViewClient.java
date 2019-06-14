@@ -1,11 +1,5 @@
 package it.polimi.ingsw.virtual_model;
 
-import it.polimi.ingsw.Figure;
-import it.polimi.ingsw.actions.Action;
-import it.polimi.ingsw.board.map.Square;
-import it.polimi.ingsw.cards.power_up.PowerUp;
-import it.polimi.ingsw.cards.weapon.Effect;
-import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -100,7 +94,9 @@ public interface ViewClient {
     /**
      * Displays a message to the user
      *
-     * @param message the message
      */
 
-}
+    public String showTargetAdvanced(ArrayList<String> args);
+
+
+    }

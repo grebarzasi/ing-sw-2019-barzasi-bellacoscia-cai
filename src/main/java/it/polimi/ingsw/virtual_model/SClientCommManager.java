@@ -78,6 +78,11 @@ public class SClientCommManager extends Thread{
                     args=i.readLine();
                     o.println(v.singleTargetingShowTarget(parseString(args)));
                     break;
+                case SHOW_TARGET_ADV:
+                    o.println(AKN);
+                    args=i.readLine();
+                    o.println(v.showTargetAdvanced(parseString(args)));
+                    break;
                 case SHOW_MESSAGE:
                     o.println(AKN);
                     args=i.readLine();

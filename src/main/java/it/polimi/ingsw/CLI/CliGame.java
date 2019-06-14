@@ -117,9 +117,10 @@ public class CliGame implements ViewClient {
                     temp = s.split(INNER_SEP);
                     System.out.print("("+i + "- " + temp[0]+"[");
                     board.colorizeCP(temp[1]);
-                    System.out.print("] )  ");
+                    System.out.print("]");
                     if(temp.length>2)
                         board.colorizeCP(temp[2]);
+                    System.out.print(")  ");
                     i++;
                 }
             System.out.print(RESET+CHOOSE_WP_Q+"\n");
@@ -281,5 +282,83 @@ public class CliGame implements ViewClient {
     @Override
     public String singleTargetingShowTarget(ArrayList<String> args) {
         return null;
+    }
+    public String showTargetAdvanced(ArrayList<String> args) {
+        String[] temp;
+        temp=args.get(0).split(INNER_SEP);
+        args.remove(0);
+        ArrayList<String> allTargets=new ArrayList<>();
+
+        int maxNum=Integer.parseInt(temp[0]);
+        boolean fromDiffSquare = Boolean.parseBoolean(temp[1]);
+        String msg = temp[2];
+
+        int i =1;
+        int reply=0;
+        while(allTargets.size()<maxNum){
+            i=1;
+            System.out.print(RESET);
+            for (String s : args) {
+                System.out.print("( "+i + "- ");
+                board.printPawn(s);
+                System.out.print(" )  ");
+                i++;
+            }
+            System.out.println(RESET+msg);
+            if(!allTargets.isEmpty()) {
+                System.out.println(RESET + allTargets.size() + " selezionati: ");
+                System.out.print("[ ");
+                for (String s : allTargets) {
+                    board.printPawn(s);
+                    System.out.print(" ");
+                }
+                System.out.print("]  ");
+            }
+            String s;
+            try {
+                while(sc.ready()) {
+                    sc.read();
+                }
+                s = sc.readLine();
+                if(s.equals("<"))
+                    return NOTHING;
+                if(s.equals(">")) {
+                    break;
+                }
+                try {
+                    reply = Integer.parseInt(s);
+                }catch(NumberFormatException e){
+                    reply=0;
+                }
+
+                if (reply<=0 || args.size()<(reply)) {
+                    System.out.println(SHOW_TARGET_ADV_ERR);
+                    reply=0;
+                }else if (!fromDiffSquare || verifyDiffSquare(allTargets,args.get(reply))){
+                    allTargets.add(args.get(reply));
+                    args.remove(args.get(reply));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        String def="";
+        for(String k: allTargets)
+            def=def+k+INFO_SEP;
+
+        return def;
+    }
+
+    public boolean verifyDiffSquare(ArrayList<String> args,String test){
+        VirtualPlayer p = board.getModel().findPlayer(test);
+        VirtualPlayer v;
+        for(String s: args) {
+            v = board.getModel().findPlayer(s);
+            if (p.getRow() == v.getRow() && p.getColumn() == v.getColumn()) {
+                return false;
+            }
+        }
+        return true;
     }
 }

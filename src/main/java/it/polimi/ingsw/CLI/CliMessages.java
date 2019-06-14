@@ -79,6 +79,9 @@ public class CliMessages {
     public static final String CHOOSE_SQUARE_Q = "\nSeleziona una destinazione (riga"+INNER_SEP+"colonna):";
     public static final String CHOOSE_SQUARE_ERR = RED+"\nNon disponibile";
 
+    public static final String SHOW_TARGET_ADV_Q = "\nSeleziona i target";
+    public static final String SHOW_TARGET_ADV_ERR = RED+"\nNon disponibile";
+
     public static void clearScreen() {
        System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }

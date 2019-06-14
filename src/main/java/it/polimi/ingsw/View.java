@@ -98,4 +98,7 @@ public interface View {
 
     public Effect showEffects(Set<Effect> args);
 
-}
+    public ArrayList<Figure> showTargetAdvanced(Set<Figure> args,int maxNum,boolean fromDiffSquare, String msg);
+
+
+    }

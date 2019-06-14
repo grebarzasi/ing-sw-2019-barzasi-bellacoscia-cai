@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
+import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.virtual_model.*;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -2758,4 +2759,9 @@ public class GameJavaFX extends Application implements ViewClient {
                 }
         }
     }
-}
+
+    public String showTargetAdvanced(ArrayList<String> args) {
+        return null;
+    }
+
+    }

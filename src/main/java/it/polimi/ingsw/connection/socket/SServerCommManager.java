@@ -11,6 +11,7 @@ import it.polimi.ingsw.cards.weapon.Weapon;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 
 import static it.polimi.ingsw.connection.ConnMessage.*;
@@ -182,6 +183,42 @@ public class SServerCommManager implements View {
 
     public Effect showEffects(Set<Effect> args) {
         return null;
+    }
+
+    public ArrayList<Figure> showTargetAdvanced(Set<Figure> args,int maxNum,boolean fromDiffSquare, String msg) {
+        String s="";
+        String rpl="";
+        String[] temp;
+        HashMap<String,Figure> players = new HashMap<>();
+        s=s+maxNum+INNER_SEP+fromDiffSquare+INNER_SEP+msg.replaceAll(INNER_SEP,"").replaceAll(INFO_SEP,"")+INFO_SEP;
+        for(Figure a : args){
+            s=s+a.getCharacter()+INFO_SEP;
+            players.put(a.getCharacter(),a);
+        }
+
+        try{
+            cl.getOut().println(SHOW_TARGET_ADV);
+            while (!cl.getIn().readLine().equals(AKN));
+            cl.getOut().println(args);
+            do
+                rpl=cl.getIn().readLine();
+            while(rpl.isEmpty());
+
+            if(rpl.equals(NOTHING))
+                return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ArrayList<Figure> target = new ArrayList<>();
+        temp=rpl.split(INFO_SEP);
+        if(temp.length>maxNum)
+            return null;
+        for(String a : temp){
+            if(!players.containsKey(a))
+                return null;
+            target.add(players.get(a));
+        }
+        return target;
     }
 
     public boolean sendsUpdate(String s){

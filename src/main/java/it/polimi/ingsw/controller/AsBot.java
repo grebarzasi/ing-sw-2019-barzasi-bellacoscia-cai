@@ -5,6 +5,8 @@ import it.polimi.ingsw.Player;
 import it.polimi.ingsw.board.map.Square;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Controller state corresponding to the phase of using a bot
@@ -50,9 +52,7 @@ public class AsBot implements ControllerState{
 
             this.controller.getModel().getBot().setPosition(botDestination);
             this.controller.update();
-
         }else{
-
             this.goBack();
         }
 
@@ -68,16 +68,16 @@ public class AsBot implements ControllerState{
         }
 
         if(!targets.isEmpty()) {
-
+            Set<Figure> temp=new HashSet<>(targets);
             //shoots the target
-            Figure choice = this.controller.getView().singleTargetingShowTarget(targets);
+            ArrayList<Figure> choice = this.controller.getView().showTargetAdvanced(temp,1,false,"Seleziona un bersaglio da colpire");
 
             if(choice == null){
                 this.botHasMoved();
                 this.controller.update();
                 this.goBack();
             }else {
-                this.controller.getModel().getBot().shoot((Player) choice);
+                this.controller.getModel().getBot().shoot((Player) choice.get(0));
                 this.botHasMoved();
                 this.controller.update();
                 this.goBack();
