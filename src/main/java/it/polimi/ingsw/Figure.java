@@ -96,6 +96,18 @@ public abstract class Figure {
         this.character = character;
         this.personalBoard = personalBoard;
     }
+    public Figure(String character, GameModel model) {
+        this.character = character;
+        this.model = model;
+        this.character = character;
+        this.points = 0;
+        this.position = null;
+        this.oldPosition = null;
+        this.personalBoard = new PlayerBoard(this);
+        this.actions = new ArrayList<>();
+        this.isDead = true;
+
+    }
 
     public Figure() {
         this.points = 0;

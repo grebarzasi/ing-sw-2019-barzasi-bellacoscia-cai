@@ -111,7 +111,7 @@ public class Controller {
         if(this.hasBot){
 
             String botColor = firstAvailableColor(playerList);
-            this.model.setBot(new Terminator(botColor));
+            this.model.setBot(new Terminator(botColor,model));
 
         }
 

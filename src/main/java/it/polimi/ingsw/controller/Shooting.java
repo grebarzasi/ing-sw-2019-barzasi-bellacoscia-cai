@@ -59,19 +59,21 @@ public class Shooting implements ControllerState {
                     this.controller.choosingMove.command();
                 }
                 dir.setDirectionTemp(rpl);
-            }else if(shootingWith.getAskTemp()!=null){
+            }else if(shootingWith.getAskTemp()!=null) {
                 ask = shootingWith.getAskTemp();
-                ArrayList<Figure> rpl = controller.getView().showTargetAdvanced(ask.getTargetTemp(),ask.getNumMax(),ask.isFromDiffSquare(),ask.getMsg());
-                if(rpl==null) {
+                ArrayList<Figure> rpl = controller.getView().showTargetAdvanced(ask.getTargetTemp(), ask.getNumMax(), ask.isFromDiffSquare(), ask.getMsg());
+                if (rpl == null) {
                     shootingWith.resetWeapon();
                     this.controller.goBack();
                     this.controller.choosingMove.command();
                 }
                 ask.setTargetTemp(new HashSet<>(rpl));
-            }else
-                ok=choice.executeEffect();
+            }
+            ok=choice.executeEffect();
         }while (!ok);
         shootingWith.resetWeapon();
+        this.controller.update();
+        this.controller.goBack();
     }
 
     public Controller getController() {

@@ -26,7 +26,7 @@ public class AimDifferent extends AimComparator implements AimingFilter{
     public Set<Figure> filter(Weapon w, Set<Figure> p) {
         if(p==null)
             return null;
-        Figure target = (Figure)p;
+        Figure target = (Figure)p.toArray()[0];
         p.removeAll(getPlayersFromSource(w,target));
         return p;
     }

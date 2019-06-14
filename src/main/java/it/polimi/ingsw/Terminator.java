@@ -15,9 +15,9 @@ public class Terminator extends Figure{
 
     public static final int stage2 = 5;
 
-    public Terminator(String character) {
+    public Terminator(String character,GameModel model) {
 
-        super(character);
+        super(character,model);
 
     }
 
