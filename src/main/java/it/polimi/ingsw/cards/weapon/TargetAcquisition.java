@@ -15,10 +15,12 @@ import java.util.Set;
 public class TargetAcquisition implements SubEffect {
 
     private ArrayList<AimingFilter> aimRoutine;
+    private int indexTemp;
+    private Set<Figure> targetTemp;
 
     public TargetAcquisition( ArrayList<AimingFilter> aimRoutine){
         this.aimRoutine=aimRoutine;
-
+        this.indexTemp=0;
     }
 
     public ArrayList<AimingFilter> getAimRoutine() {
@@ -26,7 +28,10 @@ public class TargetAcquisition implements SubEffect {
     }
 
     public Set<Figure> applyEffect(Weapon w, Set<Figure> p){
-        for(AimingFilter a: aimRoutine) {
+        if(p==null)
+            return null;
+        for(;indexTemp<aimRoutine.size();indexTemp++){
+            AimingFilter a = aimRoutine.get(indexTemp);
             p = a.filter(w, p);
             //if is empty you have no target available
             if (p.isEmpty())

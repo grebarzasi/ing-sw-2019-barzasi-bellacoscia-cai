@@ -5,6 +5,8 @@ import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.cards.Card;
+import it.polimi.ingsw.cards.weapon.aiming.AimAskPlayer;
+import it.polimi.ingsw.cards.weapon.aiming.AimDirection;
 
 import java.util.*;
 
@@ -24,8 +26,8 @@ public class Weapon extends Card {
     private Ammo chamber;
     private boolean isLoaded;
     private int indexTemp;
-    private Set<Figure> targetTemp;
-    private String directionTemp;
+    private AimDirection directionTemp;
+    private AimAskPlayer askTemp;
 
     private Preferences pref = new Preferences(this);
 
@@ -211,5 +213,30 @@ public class Weapon extends Card {
 
     public void setBeforeBasic(boolean beforeBasic) {
         this.beforeBasic = beforeBasic;
+    }
+
+    public int getIndexTemp() {
+        return indexTemp;
+    }
+
+    public void setIndexTemp(int indexTemp) {
+        this.indexTemp = indexTemp;
+    }
+
+
+    public AimAskPlayer getAskTemp() {
+        return askTemp;
+    }
+
+    public void setAskTemp(AimAskPlayer askTemp) {
+        this.askTemp = askTemp;
+    }
+
+    public AimDirection getDirectionTemp() {
+        return directionTemp;
+    }
+
+    public void setDirectionTemp(AimDirection directionTemp) {
+        this.directionTemp = directionTemp;
     }
 }

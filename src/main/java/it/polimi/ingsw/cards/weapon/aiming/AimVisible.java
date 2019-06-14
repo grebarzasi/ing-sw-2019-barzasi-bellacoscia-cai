@@ -36,6 +36,8 @@ public class AimVisible implements AimingFilter {
 
 
     public Set<Figure> filter(Weapon w, Set<Figure> p) {
+        if(p==null)
+            return null;
         if(visible) {
             if (origin.isEmpty())
                 p.retainAll(w.getOwner().allCanSee());

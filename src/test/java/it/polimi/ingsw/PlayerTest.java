@@ -5,6 +5,7 @@ import it.polimi.ingsw.board.map.NonSpawnSquare;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.AmmoLot;
 import it.polimi.ingsw.cards.Deck;
+import it.polimi.ingsw.cards.weapon.Weapon;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -128,6 +129,8 @@ public class PlayerTest {
 
     @Test
     public void consecutivePickingOnSameSpot() {
+
+
 
         Player luke = new Player("Luke", "Jedi");
         ArrayList<Player> empirePlayers = new ArrayList<>();

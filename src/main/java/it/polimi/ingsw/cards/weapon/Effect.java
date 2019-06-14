@@ -17,7 +17,9 @@ public class Effect {
     private ArrayList<SubEffect> effectList;
     private Set<Figure> targetHitSet;
     private boolean used;
+    private boolean stop;
     private Weapon myWeapon;
+    private int indexTemp;
 
 
 
@@ -28,6 +30,7 @@ public class Effect {
         this.effectList=effectList;
         this.targetHitSet= new HashSet<>();
         this.used= false;
+        this.indexTemp=0;
 
     }
 
@@ -51,10 +54,17 @@ public class Effect {
         return targetHitSet;
     }
 
-    public void executeEffect() {
+    public boolean executeEffect() {
+        SubEffect e;
         targetHitSet=myWeapon.getOwner().allFigures();
-        for (SubEffect e : effectList)
+        for(; indexTemp<effectList.size();indexTemp++) {
+            e = effectList.get(indexTemp);
+            if(targetHitSet==null)
+                return false;
             targetHitSet = e.applyEffect(myWeapon, targetHitSet);
+        }
+        indexTemp=0;
+        return true;
     }
 
 }

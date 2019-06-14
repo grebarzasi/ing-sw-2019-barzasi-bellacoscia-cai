@@ -129,7 +129,7 @@ public class SServerCommManager implements View {
             s=s+a.getCharacter()+INFO_SEP;
             players.put(a.getCharacter(),a);
         }
-        rpl=askAndWait(SHOW_MOVES,s);
+        rpl=askAndWait(SHOW_TARGETS,s);
         if(rpl==null)
             return null;
         ArrayList<Figure> target = new ArrayList<>();

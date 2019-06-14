@@ -29,6 +29,8 @@ public class MoveTarget implements SubEffect {
     }
 
     public Set<Figure> applyEffect(Weapon w, Set<Figure> p){
+        if(p==null)
+            return null;
         Square s = null;
         switch(finalPos){
             case "last":

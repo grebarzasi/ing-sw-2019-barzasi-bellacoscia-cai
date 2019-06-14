@@ -18,6 +18,7 @@ public class AimAskPlayer implements AimingFilter {
     private Integer numMax;
     private boolean fromDiffSquare;
     private String msg;
+    private Set<Figure> targetTemp;
 
     public Integer getNumMax() {
         return numMax;
@@ -39,7 +40,11 @@ public class AimAskPlayer implements AimingFilter {
 
 
     public Set<Figure> filter(Weapon w, Set<Figure> p) {
-        return  w.getPreferences().getTargetSet(p,msg,numMax,fromDiffSquare);
-
+        if(w.getAskTemp()==null){
+        targetTemp=p;
+        w.setAskTemp(this);
+        return null;
+    }else
+        return targetTemp;
     }
 }

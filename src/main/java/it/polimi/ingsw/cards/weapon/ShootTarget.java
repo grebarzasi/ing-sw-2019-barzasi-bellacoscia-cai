@@ -28,6 +28,8 @@ public class ShootTarget implements SubEffect {
 
 
     public Set<Figure> applyEffect(Weapon w, Set<Figure> p){
+        if(p==null)
+            return null;
         if(damageNum != 0) {
             for (Figure target : p) {
                 w.getOwner().inflictDamage(damageNum, target);

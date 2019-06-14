@@ -37,6 +37,8 @@ public class AimRange implements AimingFilter {
     }
 
     public Set<Figure> filter(Weapon w, Set<Figure> p) {
+        if(p==null)
+            return null;
         Set<Figure> temp = new HashSet<>(p);
         for(Figure i : p){
            int dist = w.getOwner().distanceTo(i.getPosition());

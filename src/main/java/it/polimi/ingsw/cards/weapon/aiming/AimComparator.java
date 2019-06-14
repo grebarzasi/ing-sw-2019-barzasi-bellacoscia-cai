@@ -25,6 +25,8 @@ public class AimComparator {
 
 
     public Set<Figure> getPlayersFromSource(Weapon w, Figure target) {
+        if(target==null)
+            return null;
         Set<Figure> pSet = new HashSet<>();
         for (String s : sourceList) {
             switch (s) {

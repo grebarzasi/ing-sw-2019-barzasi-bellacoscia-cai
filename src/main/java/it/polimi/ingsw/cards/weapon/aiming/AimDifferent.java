@@ -24,6 +24,8 @@ public class AimDifferent extends AimComparator implements AimingFilter{
 
     //does the exclusion between the set of available target and the one from source
     public Set<Figure> filter(Weapon w, Set<Figure> p) {
+        if(p==null)
+            return null;
         Figure target = (Figure)p;
         p.removeAll(getPlayersFromSource(w,target));
         return p;
