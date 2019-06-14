@@ -56,6 +56,8 @@ public class Weapon extends Card {
         this.name=name;
         this.chamber=chamber;
         this.isLoaded = true;
+        this.directionTemp=null;
+        this.askTemp=null;
     }
 
     /**
@@ -86,7 +88,6 @@ public class Weapon extends Card {
         if (a.getBlue() - b.getBlue() < 0 || a.getRed() - b.getRed() < 0 || a.getYellow() - b.getYellow() < 0) {
             return false;
         }
-
         return true;
     }
 
@@ -101,7 +102,30 @@ public class Weapon extends Card {
     public void extraMove(){}
 
     public Set<Effect> getUsableEff(){
+        Set<Effect> usable=new HashSet<>();
+        if(basicEffect!=null&&basicEffect.isUsable())
+            usable.add(basicEffect);
+        if(alternativeEffect!=null&&alternativeEffect.isUsable())
+            usable.add(alternativeEffect);
+        if(addOneEffect!=null&&addOneEffect.isUsable())
+            usable.add(addOneEffect);
+        if(addTwoEffect!=null&&addTwoEffect.isUsable())
+            usable.add(addTwoEffect);
+        if(extraMove!=null&&extraMove.isUsable())
+            usable.add(extraMove);
         return null;
+    }
+
+    public void resetWeapon() {
+
+        directionTemp=null;
+        askTemp=null;
+
+        extraMove.resetEffect();
+        basicEffect.resetEffect();
+        addOneEffect.resetEffect();
+        addTwoEffect.resetEffect();
+        alternativeEffect.resetEffect();
     }
 
 

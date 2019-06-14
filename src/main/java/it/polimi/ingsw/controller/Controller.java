@@ -133,7 +133,7 @@ public class Controller {
         this.shooting = new Shooting(this);
         this.teleporting = new Teleporting(this);
         this.usingNewton = new UsingNewton(this);
-        this.shooting = new Spawning(this);
+        this.shooting = new Shooting(this);
         this.spawning = new Spawning(this);
         this.frenzySpecialAction = new FrenzySpecialAction(this);
 
@@ -179,7 +179,7 @@ public class Controller {
         this.shooting = new Shooting(this);
         this.teleporting = new Teleporting(this);
         this.usingNewton = new UsingNewton(this);
-        this.shooting = new Spawning(this);
+        this.shooting = new Shooting(this);
         this.spawning = new Spawning(this);
         this.frenzySpecialAction = new FrenzySpecialAction(this);
 

@@ -177,11 +177,32 @@ public class SServerCommManager implements View {
 
     public void displayLeaderboard() {
     }
-    public String chooseDirection() {
-        return askAndWait(CHOOSE_DIRECTION,null);
+    public String chooseDirection(ArrayList<Figure> args) {
+        String s="";
+        String rpl;
+        for(Figure f: args)
+            s=s+f.getCharacter()+INFO_SEP;
+        rpl= askAndWait(CHOOSE_DIRECTION,s).toUpperCase();
+        if(rpl.equals(NOTHING))
+            return null;
+        return rpl;
     }
 
     public Effect showEffects(Set<Effect> args) {
+        String s="";
+        String rpl="";
+        String[] temp;
+        for(Effect e : args){
+            s=s+e.getName()+INNER_SEP+e.getCost().toString()+INFO_SEP;
+        }
+        rpl=askAndWait(SHOW_EFFECTS,s);
+        if(rpl==null)
+            return null;
+        temp=rpl.split(INNER_SEP);
+        for(Effect p : args){
+            if(p.getName().equals(temp[0]))
+                return p;
+        }
         return null;
     }
 

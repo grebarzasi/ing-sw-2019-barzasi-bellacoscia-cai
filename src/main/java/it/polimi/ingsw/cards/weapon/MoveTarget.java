@@ -50,4 +50,7 @@ public class MoveTarget implements SubEffect {
         //implement
     }
 
+    @Override
+    public void resetSubEffect() {
+    }
 }

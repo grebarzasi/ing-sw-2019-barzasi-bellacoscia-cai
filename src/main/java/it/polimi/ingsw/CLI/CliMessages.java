@@ -62,6 +62,8 @@ public class CliMessages {
     public static final String WAITINGROOM_HEAD ="\n\n----------------------------------------\n" +"*** Waiting room..." +"\n----------------------------------------";
     public static final String COUNTDOWN_START = "Countdown started!";
     public static final String GAME_START = "Game started";
+    public static final String TERMINATOR_NAME = "THANOS";
+
 
     //Game msg
     public static final String CHOOSE_PU_Q = "\nSeleziona un powerup da utilizzare:";
@@ -81,9 +83,22 @@ public class CliMessages {
 
     public static final String SHOW_TARGET_ADV_Q = "\nSeleziona i target";
     public static final String SHOW_TARGET_ADV_ERR = RED+"\nNon disponibile";
+    public static final String SHOW_TARGET_SELECTED = " bersagli selezionati:";
+
+    public static final String SHOW_DIRECTION_Q = "Scegli una direzione (N/S/E/O).\n Bersagli attualmente colpibili:";
+    public static final String SHOW_DIRECTION_ERR = RED+"Direzione non disponibile";
+
+    public static final String SHOW_EFFECTS_Q = "Scegli una direzione (N/S/E/O).\n Bersagli attualmente colpibili:";
+    public static final String SHOW_EFFECTS_ERR = RED+"Direzione non disponibile";
+
+    public static final String BACK = "<";
+    public static final String NEXT = ">";
+
 
     public static void clearScreen() {
-       System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        final int CLEAR_NUM=20;
+        for(int i =0; i<CLEAR_NUM;i++)
+           System.out.print("\n");
     }
 
 }

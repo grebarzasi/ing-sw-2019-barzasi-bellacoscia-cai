@@ -40,4 +40,9 @@ public class TargetAcquisition implements SubEffect {
        return p;
     }
 
+
+    public void resetSubEffect() {
+        indexTemp=0;
+    }
+
 }

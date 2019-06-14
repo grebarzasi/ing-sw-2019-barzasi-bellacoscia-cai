@@ -323,16 +323,16 @@ class PlayerBoardTest {
         Ammo b = new Ammo(2,1,0);
         Player pip = new Player("pip","watchman");
 
-        assertEquals(3,pip.getPersonalBoard().getAmmoInventory().getYellow());
-        assertEquals(3,pip.getPersonalBoard().getAmmoInventory().getBlue());
-        assertEquals(3,pip.getPersonalBoard().getAmmoInventory().getRed());
+        assertEquals(1,pip.getPersonalBoard().getAmmoInventory().getYellow());
+        assertEquals(1,pip.getPersonalBoard().getAmmoInventory().getBlue());
+        assertEquals(1,pip.getPersonalBoard().getAmmoInventory().getRed());
 
         pip.getPersonalBoard().removeAmmo(b);
         pip.getPersonalBoard().addAmmo(a);
 
         assertEquals(2,pip.getPersonalBoard().getAmmoInventory().getRed());
-        assertEquals(2,pip.getPersonalBoard().getAmmoInventory().getBlue());
-        assertEquals(3,pip.getPersonalBoard().getAmmoInventory().getYellow());
+        assertEquals(1,pip.getPersonalBoard().getAmmoInventory().getBlue());
+        assertEquals(1,pip.getPersonalBoard().getAmmoInventory().getYellow());
 
     }
 

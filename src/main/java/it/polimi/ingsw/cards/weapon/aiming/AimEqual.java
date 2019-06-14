@@ -26,4 +26,7 @@ public class AimEqual extends AimComparator implements AimingFilter {
         p.retainAll(getPlayersFromSource(w,target));
         return p;
     }
+
+    public void resetFilter() {
+    }
 }

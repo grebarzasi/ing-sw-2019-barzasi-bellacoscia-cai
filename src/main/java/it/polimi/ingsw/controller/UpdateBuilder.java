@@ -20,11 +20,11 @@ import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.util.ArrayList;
 
+import static it.polimi.ingsw.CLI.CliMessages.TERMINATOR_NAME;
 import static it.polimi.ingsw.connection.ConnMessage.*;
 
 public class UpdateBuilder {
     private Controller controller;
-    private static final String TERMINATOR_NAME="*Terminator*";
 
     private ObjectMapper mapper = new ObjectMapper();
 

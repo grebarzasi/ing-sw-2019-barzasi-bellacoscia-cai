@@ -1,6 +1,5 @@
 package it.polimi.ingsw.cards;
 
-import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
 
 /**
  * @author Gregorio Barzasi

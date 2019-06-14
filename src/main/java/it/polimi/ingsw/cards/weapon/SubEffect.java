@@ -11,6 +11,8 @@ import java.util.*;
  */
 public interface SubEffect {
 
-   Set<Figure> applyEffect(Weapon w, Set<Figure> target);
+   public Set<Figure> applyEffect(Weapon w, Set<Figure> target);
+   public void resetSubEffect();
+
 
 }

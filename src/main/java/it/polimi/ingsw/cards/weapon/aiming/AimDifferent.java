@@ -32,4 +32,8 @@ public class AimDifferent extends AimComparator implements AimingFilter{
     }
 
 
+
+    public void resetFilter() {
+    }
+
 }

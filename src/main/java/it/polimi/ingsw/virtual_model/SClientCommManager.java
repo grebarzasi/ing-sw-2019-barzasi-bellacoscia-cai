@@ -52,6 +52,11 @@ public class SClientCommManager extends Thread{
                     args=i.readLine();
                     o.println(v.showWeapon(parseString(args)));
                     break;
+                case SHOW_EFFECTS:
+                    o.println(AKN);
+                    args=i.readLine();
+                    o.println(v.showEffects(parseString(args)));
+                    break;
                 case SHOW_ACTIONS:
                     o.println(AKN);
                     args=i.readLine();
@@ -71,7 +76,8 @@ public class SClientCommManager extends Thread{
                     break;
                 case CHOOSE_DIRECTION:
                     o.println(AKN);
-                    o.println(v.chooseDirection());
+                    args=i.readLine();
+                    o.println(v.chooseDirection(parseString(args)));
                     break;
                 case SHOW_SINGLE_TARGET:
                     o.println(AKN);

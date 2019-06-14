@@ -5,6 +5,7 @@
   },
   "effects": {
     "basic": {
+      "name": "",
       "cost": {
         "red": 1,
         "blue": 1
@@ -29,6 +30,7 @@
       }
     },
     "alternative": {
+      "name": "",
       "cost": {},
       "subEffect": {
         "1": {

@@ -4,6 +4,7 @@ import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.cards.weapon.TargetAcquisition;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -36,15 +37,41 @@ public class AimAskPlayer implements AimingFilter {
         this.numMax = numMax;
         this.fromDiffSquare = fromDiffSquare;
         this.msg=msg;
+        this.targetTemp=new HashSet<>();
     }
 
 
     public Set<Figure> filter(Weapon w, Set<Figure> p) {
         if(w.getAskTemp()==null){
-        targetTemp=p;
-        w.setAskTemp(this);
-        return null;
-    }else
+          targetTemp=p;
+          w.setAskTemp(this);
+          return null;
+       }else
+            return targetTemp;
+    }
+
+
+    public void resetFilter() {
+        targetTemp.clear();
+    }
+
+    public void setNumMax(Integer numMax) {
+        this.numMax = numMax;
+    }
+
+    public void setFromDiffSquare(boolean fromDiffSquare) {
+        this.fromDiffSquare = fromDiffSquare;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public Set<Figure> getTargetTemp() {
         return targetTemp;
+    }
+
+    public void setTargetTemp(Set<Figure> targetTemp) {
+        this.targetTemp = targetTemp;
     }
 }

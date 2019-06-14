@@ -54,7 +54,7 @@ public interface ViewClient {
      * @return the chosen one
      */
 
-    public String chooseDirection();
+    public String chooseDirection(ArrayList<String> args);
 
     /**
      * Displays a message and makes the user make a boolean choice
@@ -87,7 +87,7 @@ public interface ViewClient {
 
     public void displayLeaderboard();
 
-    public String showEffects(Set<String> args);
+    public String showEffects(ArrayList<String> args);
 
     public void updateModel(String message);
 

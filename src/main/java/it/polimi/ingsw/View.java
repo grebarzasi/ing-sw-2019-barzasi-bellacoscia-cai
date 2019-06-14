@@ -61,7 +61,7 @@ public interface View {
      * @return the chosen one
      */
 
-    public String chooseDirection();
+    public String chooseDirection(ArrayList<Figure> args);
 
     /**
      * Displays a message and makes the user make a boolean choice

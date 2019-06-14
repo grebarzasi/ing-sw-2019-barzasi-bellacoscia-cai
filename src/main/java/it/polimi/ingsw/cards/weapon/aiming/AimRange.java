@@ -47,4 +47,6 @@ public class AimRange implements AimingFilter {
         }
         return temp;
     }
+    public void resetFilter() {
+    }
 }

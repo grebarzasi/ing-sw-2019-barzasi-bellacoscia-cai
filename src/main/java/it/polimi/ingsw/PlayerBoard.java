@@ -13,6 +13,9 @@ import java.util.*;
 public class PlayerBoard {
 
     private static final int[] points = {8,6,4,2,1,1};
+    private static final int INIT_AMMO_RED = 1;
+    private static final int INIT_AMMO_BLU = 1;
+    private static final int INIT_AMMO_YELLOW = 1;
 
     private Figure owner;
 
@@ -44,7 +47,7 @@ public class PlayerBoard {
         this.damage = new ArrayList<>();
         this.pointVec = new int[6];
         this.mark = new ArrayList<>();
-        this.ammoInventory = new Ammo(3,3,3);
+        this.ammoInventory = new Ammo(INIT_AMMO_RED,INIT_AMMO_BLU,INIT_AMMO_YELLOW);
 
         this.pointVec[0]=points[0];
         this.pointVec[1]=points[1];

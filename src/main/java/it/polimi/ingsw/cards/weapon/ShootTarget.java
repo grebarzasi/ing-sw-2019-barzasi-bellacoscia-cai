@@ -45,4 +45,6 @@ public class ShootTarget implements SubEffect {
         return p;
     }
 
+    public void resetSubEffect() {
+    }
 }

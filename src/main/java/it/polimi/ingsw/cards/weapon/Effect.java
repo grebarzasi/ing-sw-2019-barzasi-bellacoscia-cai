@@ -13,6 +13,7 @@ import java.util.Set;
  * @author Gregorio Barzasi
  */
 public class Effect {
+    private String name="Vuoto";
     private Ammo cost;
     private ArrayList<SubEffect> effectList;
     private Set<Figure> targetHitSet;
@@ -25,7 +26,8 @@ public class Effect {
 
     public Effect(){};
 
-    public Effect(Ammo cost,ArrayList<SubEffect> effectList){
+    public Effect(String name, Ammo cost,ArrayList<SubEffect> effectList){
+        this.name=name;
         this.cost=cost;
         this.effectList=effectList;
         this.targetHitSet= new HashSet<>();
@@ -34,7 +36,12 @@ public class Effect {
 
     }
 
-    public Ammo getCost() {
+    public boolean isUsable() {
+        return true;
+    }
+
+
+        public Ammo getCost() {
         return cost;
     }
 
@@ -57,6 +64,7 @@ public class Effect {
     public boolean executeEffect() {
         SubEffect e;
         targetHitSet=myWeapon.getOwner().allFigures();
+//        targetHitSet.remove(myWeapon.getOwner());
         for(; indexTemp<effectList.size();indexTemp++) {
             e = effectList.get(indexTemp);
             if(targetHitSet==null)
@@ -66,5 +74,29 @@ public class Effect {
         indexTemp=0;
         return true;
     }
+    public void resetEffect(){
+        indexTemp=0;
+        for(SubEffect e:effectList)
+            e.resetSubEffect();
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public boolean isUsed() {
+        return used;
+    }
+
+    public boolean isStop() {
+        return stop;
+    }
+
+    public Weapon getMyWeapon() {
+        return myWeapon;
+    }
+
+    public int getIndexTemp() {
+        return indexTemp;
+    }
 }

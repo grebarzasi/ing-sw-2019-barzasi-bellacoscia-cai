@@ -13,6 +13,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import static it.polimi.ingsw.CLI.CliColor.*;
+import static it.polimi.ingsw.CLI.CliMessages.TERMINATOR_NAME;
 import static it.polimi.ingsw.connection.ConnMessage.INFO_SEP;
 import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
 
@@ -326,11 +327,14 @@ public class CliBoard {
         System.out.print(RESET+""+BLACK_BOLD+"");
         if (p.getCharacter().equals(model.getTurn().getCharacter())) {
             System.out.print(BLACK_B);
-            System.out.print(WHITE_BOLD_BRIGHT +" " + p.getUsername() + "");
+            System.out.print(WHITE_BOLD_BRIGHT);
         }else {
             System.out.print(WHITE_BACKGROUND_BRIGHT);
-            System.out.print(" " + p.getUsername() + "");
+            if(p.getUsername().equals(TERMINATOR_NAME)) {
+                System.out.print(RED_BOLD_BRIGHT);
+            }
         }
+        System.out.print(" " + p.getUsername() + "");
 
 
         for (i=p.getUsername().length(); i < USERNAME_SPACE; i++) {

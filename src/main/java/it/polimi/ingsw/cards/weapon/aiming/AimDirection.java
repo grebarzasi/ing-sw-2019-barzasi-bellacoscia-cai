@@ -18,6 +18,7 @@ import java.util.Set;
 public class AimDirection implements AimingFilter {
 
     private boolean wallBang;
+    private String directionTemp="";
     private Set<Figure> targetTemp;
 
     public AimDirection(boolean wallBang) {
@@ -30,7 +31,9 @@ public class AimDirection implements AimingFilter {
             targetTemp=p;
             return null;
         }else {
-            String dir = w.getPreferences().getDirection();
+            if(directionTemp.isEmpty())
+                return null;
+            String dir = directionTemp;
             if (wallBang)
                 return directionAll(dir, w.getOwner(), targetTemp);
             return directionWall(dir, w.getOwner(), targetTemp);
@@ -96,5 +99,34 @@ public class AimDirection implements AimingFilter {
             }
         }
         return temp;
+    }
+
+    public boolean isWallBang() {
+        return wallBang;
+    }
+
+    public void setWallBang(boolean wallBang) {
+        this.wallBang = wallBang;
+    }
+
+    public String getDirectionTemp() {
+        return directionTemp;
+    }
+
+    public void setDirectionTemp(String directionTemp) {
+        this.directionTemp = directionTemp;
+    }
+
+    public Set<Figure> getTargetTemp() {
+        return targetTemp;
+    }
+
+    public void setTargetTemp(Set<Figure> targetTemp) {
+        this.targetTemp = targetTemp;
+    }
+
+    public void resetFilter() {
+        directionTemp="";
+        targetTemp.clear();
     }
 }

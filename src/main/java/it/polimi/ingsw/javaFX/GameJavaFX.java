@@ -2142,7 +2142,7 @@ public class GameJavaFX extends Application implements ViewClient {
     }
 
     @Override
-    public String chooseDirection() {
+    public String chooseDirection(ArrayList<String> args) {
         Runnable run = () -> {
             msg.setText(CHOOSE_DIRECTION);
 

@@ -21,4 +21,6 @@ public interface AimingFilter {
      */
     Set<Figure> filter(Weapon w, Set<Figure> p);
 
+    public void resetFilter();
+
 }

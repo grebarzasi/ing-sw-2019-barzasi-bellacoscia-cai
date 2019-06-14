@@ -7,6 +7,7 @@
   },
   "effects": {
     "basic": {
+      "name": "BasicEffect",
       "cost": {
         "red": 1,
         "blue": 4,
@@ -100,6 +101,7 @@
       }
     },
     "addOne": {
+      "name": "AddOneEffect",
       "cost": {
         "red": 1,
         "blue": 4,
@@ -195,6 +197,7 @@
       }
     },
     "addTwo": {
+      "name": "AddTwoEffect",
       "cost": {
         "red": 1,
         "blue": 4,
@@ -288,6 +291,7 @@
       }
     },
     "alternative": {
+      "name": "AlternativeEffect",
       "cost": {
         "red": 1,
         "blue": 4,
@@ -383,6 +387,7 @@
       }
     },
     "extraMove": {
+      "name": "ExtraMove",
       "cost": {
         "red":0
       },

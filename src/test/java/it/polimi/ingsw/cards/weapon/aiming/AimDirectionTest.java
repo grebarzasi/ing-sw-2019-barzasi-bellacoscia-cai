@@ -54,11 +54,12 @@ class AimDirectionTest {
     @Test
     void wallBlock() {
         AimDirection dir = new AimDirection(false);
-        w.getPreferences().setDirection("w");
         Set<Figure> figureSet;
         Set<Figure> result=new HashSet<>();
         result.add(playerArrayList.get(4));
         result.add(playerArrayList.get(0));
+        figureSet = dir.filter(w,w.getOwner().allFigures());
+        w.getDirectionTemp().setDirectionTemp("w");
         figureSet = dir.filter(w,w.getOwner().allFigures());
         assertEquals(result,figureSet);
     }

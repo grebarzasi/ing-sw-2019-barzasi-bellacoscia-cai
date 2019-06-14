@@ -31,5 +31,7 @@ public class AimSubstitute extends AimComparator implements AimingFilter{
         return p;
     }
 
+    public void resetFilter() {
+    }
 
 }
