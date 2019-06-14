@@ -10,12 +10,10 @@ import java.util.ArrayList;
 
 public class Terminator extends Figure{
 
-
     private static final int WIDTH = 4;
     private static final int HEIGHT = 3;
 
     public static final int stage2 = 5;
-
 
     public Terminator(String character) {
 
@@ -30,12 +28,12 @@ public class Terminator extends Figure{
 
     public void shoot(Player p){
 
-        this.inflictDamage(1,p);
+        this.inflictDamage(6,p);
         if(this.getPersonalBoard().getDamage().size() > stage2){
+
             this.inflictMark(1,p);
+
         }
-
-
     }
 
 

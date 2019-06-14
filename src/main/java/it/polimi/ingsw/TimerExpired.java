@@ -8,12 +8,16 @@ import java.util.TimerTask;
  * @author Gregorio Barzasi
  */
 public class TimerExpired extends TimerTask {
+
     private SClientHandler cl;
+
     public TimerExpired(SClientHandler cl){
         this.cl=cl;
     }
+
     @Override
     public void run() {
         cl.setExpired(true);
     }
+
 }

@@ -47,6 +47,7 @@ public class GameInitializer extends Application {
     }
 
     public void initAll() throws IOException {
+
         Lobby lobby = new Lobby();
         SClientHandler a =new SClientHandler(lobby);
         SClientHandler b =new SClientHandler(lobby);

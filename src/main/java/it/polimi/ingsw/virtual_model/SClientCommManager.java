@@ -12,6 +12,7 @@ import static it.polimi.ingsw.connection.ConnMessage.*;
  * @author Gregorio Barzasi
  */
 public class SClientCommManager extends Thread{
+
     private SClient s;
     public PrintWriter o;
     public BufferedReader i;

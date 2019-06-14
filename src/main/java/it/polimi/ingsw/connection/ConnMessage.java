@@ -1,6 +1,7 @@
 package it.polimi.ingsw.connection;
 
 public class ConnMessage {
+
     public static final String PING = "*PING*";
     public static final String PONG = "*PONG*";
     public static final String AKN = "*OK*";
@@ -16,7 +17,6 @@ public class ConnMessage {
     public static final String SHOW_MESSAGE = "*SHOW_Message*";
     public static final String SHOW_EFFECTS = "*SHOW_Effects*";
 
-
     public static final String CHOOSE_DIRECTION = "*CHOOSE_Direction";
     public static final String UPDATE = "*UPDATE*";
     public static final String NOTHING = "*NULL*";
@@ -24,6 +24,5 @@ public class ConnMessage {
     public static final String INNER_SEP = ":";
     public static final String CONNECTION_ERR = "Something went wrong, check server connection";
     public static final int COUNTDOWN = 5;
-
 
 }

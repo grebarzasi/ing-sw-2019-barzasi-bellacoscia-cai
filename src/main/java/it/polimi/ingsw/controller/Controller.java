@@ -214,7 +214,9 @@ public class Controller {
 
                 ArrayList<Token> addToTrack = new ArrayList<>();
                 addToTrack.add(f.getPersonalBoard().getDamage().get(DEATH_DAMAGE - 1));
-                addToTrack.add(f.getPersonalBoard().getDamage().get(OVER_KILL_DAMAGE -1));
+                if(f.getPersonalBoard().getDamage().size() >= OVER_KILL_DAMAGE) {
+                    addToTrack.add(f.getPersonalBoard().getDamage().get(OVER_KILL_DAMAGE - 1));
+                }
                 this.getBoard().getTrack().getKillsTrack().add(addToTrack);
 
                 this.checkEndStatus();
