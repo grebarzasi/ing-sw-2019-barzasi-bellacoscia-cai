@@ -121,44 +121,44 @@ public class SServerCommManager implements View {
 
 
 
-    public ArrayList<Figure> showTargets(ArrayList<Figure> args) {
-        String s="";
-        String rpl="";
-        String[] temp;
-        HashMap<String,Figure> players = new HashMap<>();
-        for(Figure a : args){
-            s=s+a.getCharacter()+INFO_SEP;
-            players.put(a.getCharacter(),a);
-        }
-        rpl=askAndWait(SHOW_TARGETS,s);
-        if(rpl==null)
-            return null;
-        ArrayList<Figure> target = new ArrayList<>();
-        temp=rpl.split(INFO_SEP);
-        for(String a : temp){
-            if(!players.containsKey(a))
-                return null;
-            target.add(players.get(a));
-        }
-        return target;
-    }
-
-    public Figure singleTargetingShowTarget(ArrayList<Figure> args) {
-        String s="";
-        String rpl="";
-        String[] temp;
-        HashMap<String,Figure> players = new HashMap<>();
-        for(Figure a : args){
-            s=s+a.getCharacter()+INNER_SEP+" "+INFO_SEP;
-            players.put(a.getCharacter(),a);
-        }
-        rpl=askAndWait(SHOW_SINGLE_TARGET,s);
-        if(rpl==null)
-            return null;
-        if(!players.containsKey(rpl))
-            return null;
-         return players.get(rpl);
-    }
+//    public ArrayList<Figure> showTargets(ArrayList<Figure> args) {
+//        String s="";
+//        String rpl="";
+//        String[] temp;
+//        HashMap<String,Figure> players = new HashMap<>();
+//        for(Figure a : args){
+//            s=s+a.getCharacter()+INFO_SEP;
+//            players.put(a.getCharacter(),a);
+//        }
+//        rpl=askAndWait(SHOW_TARGETS,s);
+//        if(rpl==null)
+//            return null;
+//        ArrayList<Figure> target = new ArrayList<>();
+//        temp=rpl.split(INFO_SEP);
+//        for(String a : temp){
+//            if(!players.containsKey(a))
+//                return null;
+//            target.add(players.get(a));
+//        }
+//        return target;
+//    }
+//
+//    public Figure singleTargetingShowTarget(ArrayList<Figure> args) {
+//        String s="";
+//        String rpl="";
+//        String[] temp;
+//        HashMap<String,Figure> players = new HashMap<>();
+//        for(Figure a : args){
+//            s=s+a.getCharacter()+INNER_SEP+" "+INFO_SEP;
+//            players.put(a.getCharacter(),a);
+//        }
+//        rpl=askAndWait(SHOW_SINGLE_TARGET,s);
+//        if(rpl==null)
+//            return null;
+//        if(!players.containsKey(rpl))
+//            return null;
+//         return players.get(rpl);
+//    }
 
     public Boolean showBoolean(String message) {
         String rpl=askAndWait(SHOW_BOOLEAN,message);
@@ -190,7 +190,7 @@ public class SServerCommManager implements View {
         String rpl="";
         String[] temp;
         HashMap<String,Figure> players = new HashMap<>();
-        s=s+maxNum+INNER_SEP+fromDiffSquare+INNER_SEP+msg.replaceAll(INNER_SEP,"").replaceAll(INFO_SEP,"")+INFO_SEP;
+        s=maxNum+INNER_SEP+fromDiffSquare+INNER_SEP+msg.replaceAll(INNER_SEP,"").replaceAll(INFO_SEP,"")+INFO_SEP;
         for(Figure a : args){
             s=s+a.getCharacter()+INFO_SEP;
             players.put(a.getCharacter(),a);
@@ -199,7 +199,7 @@ public class SServerCommManager implements View {
         try{
             cl.getOut().println(SHOW_TARGET_ADV);
             while (!cl.getIn().readLine().equals(AKN));
-            cl.getOut().println(args);
+            cl.getOut().println(s);
             do
                 rpl=cl.getIn().readLine();
             while(rpl.isEmpty());

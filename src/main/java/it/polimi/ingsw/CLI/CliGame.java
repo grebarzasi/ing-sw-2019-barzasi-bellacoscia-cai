@@ -279,10 +279,10 @@ public class CliGame implements ViewClient {
      * @param args
      * @return the user's choice
      */
-    @Override
     public String singleTargetingShowTarget(ArrayList<String> args) {
         return null;
     }
+
     public String showTargetAdvanced(ArrayList<String> args) {
         String[] temp;
         temp=args.get(0).split(INNER_SEP);
@@ -297,16 +297,17 @@ public class CliGame implements ViewClient {
         int reply=0;
         while(allTargets.size()<maxNum){
             i=1;
-            System.out.print(RESET);
+            System.out.println("\n"+RESET+msg);
+            System.out.println(RESET);
             for (String s : args) {
                 System.out.print("( "+i + "- ");
                 board.printPawn(s);
                 System.out.print(" )  ");
                 i++;
             }
-            System.out.println(RESET+msg);
+
             if(!allTargets.isEmpty()) {
-                System.out.println(RESET + allTargets.size() + " selezionati: ");
+                System.out.println(RESET + allTargets.size() + "bersagli selezionati: ");
                 System.out.print("[ ");
                 for (String s : allTargets) {
                     board.printPawn(s);
@@ -335,8 +336,8 @@ public class CliGame implements ViewClient {
                     System.out.println(SHOW_TARGET_ADV_ERR);
                     reply=0;
                 }else if (!fromDiffSquare || verifyDiffSquare(allTargets,args.get(reply))){
-                    allTargets.add(args.get(reply));
-                    args.remove(args.get(reply));
+                    allTargets.add(args.get(reply-1));
+                    args.remove(args.get(reply-1));
                 }
             } catch (IOException e) {
                 e.printStackTrace();

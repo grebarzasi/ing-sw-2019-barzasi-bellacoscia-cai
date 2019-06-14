@@ -70,7 +70,7 @@ public class AsBot implements ControllerState{
         if(!targets.isEmpty()) {
             Set<Figure> temp=new HashSet<>(targets);
             //shoots the target
-            ArrayList<Figure> choice = this.controller.getView().showTargetAdvanced(temp,1,false,"Seleziona un bersaglio da colpire");
+            ArrayList<Figure> choice = this.controller.getView().showTargetAdvanced(temp,1,false,"Seleziona un bersaglio da colpire:");
 
             if(choice == null){
                 this.botHasMoved();
