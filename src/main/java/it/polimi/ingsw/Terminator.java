@@ -30,12 +30,11 @@ public class Terminator extends Figure{
 
     public void shoot(Player p){
 
-        if(canSee(p)){
-            this.inflictDamage(1,p);
-            if(this.getPersonalBoard().getDamage().size() > stage2){
-                this.inflictMark(1,p);
-            }
+        this.inflictDamage(1,p);
+        if(this.getPersonalBoard().getDamage().size() > stage2){
+            this.inflictMark(1,p);
         }
+
 
     }
 

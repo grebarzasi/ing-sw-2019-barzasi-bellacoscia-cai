@@ -37,6 +37,7 @@ public class AsBot implements ControllerState{
             Square spawnPoint = this.controller.getView().showPossibleMoves(this.returnSpawns(), true);
             this.controller.getModel().getBot().setPosition(spawnPoint);
             this.controller.getModel().getBot().setDead(false);
+            this.controller.update();
 
         }
 
@@ -46,9 +47,12 @@ public class AsBot implements ControllerState{
         //makes the player select a destination
         Square botDestination = this.controller.getView().showPossibleMoves(canGo, false);
         if(botDestination != null) {
+
             this.controller.getModel().getBot().setPosition(botDestination);
+            this.controller.update();
 
         }else{
+
             this.goBack();
         }
 
@@ -68,10 +72,17 @@ public class AsBot implements ControllerState{
             //shoots the target
             Figure choice = this.controller.getView().singleTargetingShowTarget(targets);
 
-            this.controller.getModel().getBot().shoot((Player) choice);
-            this.goBack();
-            this.botHasMoved();
-            this.controller.update();
+            if(choice == null){
+                this.botHasMoved();
+                this.controller.update();
+                this.goBack();
+            }else {
+                this.controller.getModel().getBot().shoot((Player) choice);
+                this.botHasMoved();
+                this.controller.update();
+                this.goBack();
+
+            }
 
         }else {
 

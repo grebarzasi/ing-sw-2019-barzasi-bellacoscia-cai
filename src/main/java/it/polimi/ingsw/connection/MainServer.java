@@ -9,6 +9,7 @@ import it.polimi.ingsw.controller.Controller;
 
 
 public class MainServer {
+
     private SServer socketServer;
     private RmiServer rmiServer;
     private Lobby lobby;
