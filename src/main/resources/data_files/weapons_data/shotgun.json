@@ -5,6 +5,7 @@
   },
   "effects": {
     "basic": {
+      "name": "modalità base",
       "cost": {
         "yellow": 2
       },
@@ -27,6 +28,7 @@
       }
     },
     "alternative": {
+      "name":"modalità CANNA LUNGA",
       "cost": {},
       "subEffect": {
         "1": {

@@ -6,6 +6,7 @@
 
   "effects": {
     "basic": {
+      "name": "effetto base",
       "cost": {
         "blue": 1,
         "red": 1
@@ -26,6 +27,7 @@
       }
     },
     "addOne": {
+      "name": "colpo focalizzato",
       "cost": {
         "yellow": 1
       },
@@ -44,6 +46,7 @@
       }
     },
     "addTwo": {
+      "name": "tripode di supporto",
       "cost": {
         "blue": 1
       },

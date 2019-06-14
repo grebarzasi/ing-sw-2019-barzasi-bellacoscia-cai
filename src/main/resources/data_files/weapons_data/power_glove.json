@@ -5,6 +5,7 @@
   },
   "effects": {
     "basic": {
+      "name": "modalità base",
       "cost": {
         "yellow": 1,
         "blue": 1
@@ -37,6 +38,7 @@
       }
     },
     "alternative": {
+      "name": "modalità cento pugni",
       "cost": {
         "blue": 1
       },

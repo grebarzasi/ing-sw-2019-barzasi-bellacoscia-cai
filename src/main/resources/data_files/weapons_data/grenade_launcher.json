@@ -5,6 +5,7 @@
   },
   "effects": {
     "basic": {
+      "name": "effetto base",
       "cost": {
         "red": 1
       },
@@ -26,6 +27,7 @@
       }
     },
     "addOne": {
+      "name": "granata extra",
       "cost": {
         "red": 1
       },

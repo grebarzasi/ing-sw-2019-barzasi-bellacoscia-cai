@@ -5,6 +5,7 @@
   },
   "effects": {
     "basic": {
+      "name": "effetto base",
       "cost": {
         "yellow": 1,
         "red": 1
@@ -25,6 +26,7 @@
       }
     },
     "addTwo":{
+      "name": "modalità sminuzzare",
       "cost": {
         "yellow": 1
       },
@@ -45,6 +47,7 @@
       }
     },
     "extraMove": {
+      "name": "passo d'ombra",
       "cost": {},
       "subEffect": {
         "1": {
