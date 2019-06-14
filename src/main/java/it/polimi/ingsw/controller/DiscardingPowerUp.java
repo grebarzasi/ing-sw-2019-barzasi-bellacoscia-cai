@@ -35,7 +35,7 @@ public class DiscardingPowerUp implements ControllerState{
             this.controller.getCurrentPlayer().getPowerupList().remove(choice);
             this.controller.getBoard().getPowerupDeck().getDiscarded().add(choice);
 
-            SHOOT();
+//            SHOOT();
             this.controller.goBack();
         }
 

@@ -39,7 +39,6 @@ public class FrenzySpecialAction implements ControllerState {
 
         //TODO shooting part
 
-        SHOOT
 
     }
 

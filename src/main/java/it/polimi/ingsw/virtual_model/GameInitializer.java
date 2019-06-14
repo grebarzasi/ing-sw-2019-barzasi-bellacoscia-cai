@@ -188,8 +188,8 @@ public class GameInitializer extends Application {
         p1.getPersonalBoard().addDamage(t2);
         p1.getPersonalBoard().addDamage(t3);
         p1.getPersonalBoard().addMark(t2);
-
-        p2.getPersonalBoard().addDamage(t1);
+        for(int i=0; i<14;i++)
+            p2.getPersonalBoard().addDamage(t1);
         p2.getPersonalBoard().addMark(t3);
 
         p3.getPersonalBoard().addMark(t1);

@@ -383,14 +383,14 @@ public class CliBoard {
         //UsernameSpace
         System.out.print(WHITE+"╾");
         for (String d : p.getpBoard().getDamage()) {
-            printToken(d);
-            i++;
             if(i==2||i==5||i==10){
                 System.out.print(WHITE_UNDERLINED+"╮╭"+RESET);
             }
+            i++;
+            printToken(d);
         }
         for (; i < DAMAGE_SPACE; i++) {
-            if(i==2||i==5||i==10){
+            if((i==2||i==5||i==10)){
                 System.out.print(WHITE_UNDERLINED+"╮╭"+RESET);
             }
             System.out.print("─");

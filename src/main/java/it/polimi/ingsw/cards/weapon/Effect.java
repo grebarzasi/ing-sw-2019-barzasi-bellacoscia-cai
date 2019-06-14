@@ -66,6 +66,7 @@ public class Effect {
     public boolean executeEffect() {
         SubEffect e;
         targetHitSet=myWeapon.getOwner().allFigures();
+        targetHitSet.remove(myWeapon.getOwner());
 //        targetHitSet.remove(myWeapon.getOwner());
         for(; indexTemp<effectList.size();indexTemp++) {
             e = effectList.get(indexTemp);
