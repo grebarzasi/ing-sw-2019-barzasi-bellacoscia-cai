@@ -32,28 +32,16 @@ public class AsBot implements ControllerState{
     @Override
     public void command() {
 
-        if(this.controller.getModel().getBot().isDead() || this.controller.getModel().getTurn() != 0){
+        if(this.controller.getModel().getBot().isDead() && this.controller.getModel().getTurn() != 0){
 
             Square spawnPoint = this.controller.getView().showPossibleMoves(this.returnSpawns(), true);
             this.controller.getModel().getBot().setPosition(spawnPoint);
+            this.controller.getModel().getBot().setDead(false);
 
         }
 
-        //adds adjacent squares to the bots possible destinations
-        ArrayList<Square> canGo = new ArrayList<>();
 
-        int row;
-        int column;
-
-        for(row = 0; row < HEIGHT; row++){
-            for(column = 0; column < WIDTH; column++){
-
-                if(this.controller.getBoard().getMap().getSquareMatrix()[row][column].isAdjacent(this.controller.getModel().getBot().getPosition())){
-                    canGo.add(this.controller.getBoard().getMap().getSquareMatrix()[row][column]);
-                }
-            }
-        }
-
+        ArrayList<Square> canGo = botCanGo();
 
         //makes the player select a destination
         Square botDestination = this.controller.getView().showPossibleMoves(canGo, false);
@@ -69,6 +57,7 @@ public class AsBot implements ControllerState{
         ArrayList<Figure> targets = new ArrayList<>();
 
         for(Player p : this.controller.getModel().getPlayerList()){
+
             if(this.controller.getModel().getBot().canSee(p) && p!= this.controller.getModel().getCurrentPlayer()){
                 targets.add(p);
             }
@@ -90,6 +79,27 @@ public class AsBot implements ControllerState{
             this.controller.update();
             this.goBack();
         }
+
+    }
+
+    private ArrayList<Square> botCanGo(){
+
+        //adds adjacent squares to the bots possible destinations
+        ArrayList<Square> canGo = new ArrayList<>();
+
+        int row;
+        int column;
+
+        for(row = 0; row < HEIGHT; row++){
+            for(column = 0; column < WIDTH; column++){
+
+                if(this.controller.getBoard().getMap().getSquareMatrix()[row][column].isAdjacent(this.controller.getModel().getBot().getPosition())){
+                    canGo.add(this.controller.getBoard().getMap().getSquareMatrix()[row][column]);
+                }
+            }
+        }
+
+        return canGo;
 
     }
 

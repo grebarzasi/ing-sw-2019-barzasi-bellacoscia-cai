@@ -37,16 +37,17 @@ public class Picking implements ControllerState{
         options = this.controller.canGo(this.controller.getCurrentPlayer(),this.range);
         options.add(this.controller.getCurrentPlayer().getPosition());
 
+        ArrayList<Square> toRemove = new ArrayList<>();
+
         for(Square s : options){
-            if(!s.isSpawn() && ((NonSpawnSquare)s).getDrop() == null){
-                options.remove(s);
+            if((!s.isSpawn() && ((NonSpawnSquare)s).getDrop() == null) || s.getRoom().getColor().equals("black")){
+                toRemove.add(s);
             }
         }
 
-        Square choice = this.controller.getView().showPossibleMoves(options, false);
+        options.removeAll(toRemove);
 
-        System.out.println("AMMO DECK SIZE: " + this.controller.getBoard().getAmmoDeck().getUsable().size());
-        System.out.println("AMMO DECK SIZE: " + this.controller.getBoard().getAmmoDeck().getDiscarded().size());
+        Square choice = this.controller.getView().showPossibleMoves(options, false);
 
         if(choice == null){
             this.controller.goBack();

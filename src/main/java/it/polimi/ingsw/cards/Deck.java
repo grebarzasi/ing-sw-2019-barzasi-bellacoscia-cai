@@ -58,12 +58,16 @@ public class Deck {
         Card temp;
 
         if(!this.usable.isEmpty()){
+
             temp = this.usable.get(0);
             this.usable.remove(0);
+
         }else{
+
             this.reset();
             temp = this.usable.get(0);
             this.usable.remove(0);
+
         }
 
         return temp;

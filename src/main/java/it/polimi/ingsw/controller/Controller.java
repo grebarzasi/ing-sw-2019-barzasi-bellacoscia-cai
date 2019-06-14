@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 public class Controller {
 
+    private static String[] ALL_CHARACTERS = {"red","blue","yellow","green","gray"};
     private static final int[] frenzyPointsVec;
 
     static {
@@ -105,7 +106,20 @@ public class Controller {
 
         this.hasFrenzy = lobby.hasFinalFrenzy();
         this.hasBot = lobby.hasTerminatorPref();
+
+
+        if(this.hasBot){
+
+            String botColor = firstAvailableColor(playerList);
+            this.model.setBot(new Terminator(botColor));
+
+        }
+
+
+
+
         this.getModel().getBoard().getTrack().setSkullMax(lobby.getKillPref());
+
 
         this.asBot = new AsBot(this);
         this.choosingMove = new ChoosingMove(this);
@@ -123,6 +137,26 @@ public class Controller {
         this.spawning = new Spawning(this);
         this.frenzySpecialAction = new FrenzySpecialAction(this);
 
+    }
+
+    private String firstAvailableColor(ArrayList<Player> playerList){
+
+        int i;
+        for( i = 0 ; i < this.ALL_CHARACTERS.length ; i++){
+            for (Player p : playerList) {
+                if (p.getCharacter().equals(ALL_CHARACTERS[i])){
+                    ALL_CHARACTERS[i] = "taken";
+                }
+            }
+        }
+
+        for( i = 0 ; i < this.ALL_CHARACTERS.length ; i++){
+            if(!ALL_CHARACTERS[i].equals("taken")){
+                return ALL_CHARACTERS[i];
+            }
+        }
+
+        return "red";
     }
 
     public Controller(ArrayList<Player> playerList){

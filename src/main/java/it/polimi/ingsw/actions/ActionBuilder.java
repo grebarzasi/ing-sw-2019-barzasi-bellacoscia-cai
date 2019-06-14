@@ -99,10 +99,11 @@ public class ActionBuilder {
             boolean canReload = false;
 
             for(Weapon w: p.getWeaponsList()){
-                if(w.isLoaded()){
+                if(!w.isLoaded()){
                     canReload = true;
                 }
             }
+
             if(canReload) {
                 actions.add(new Action("Reload", 0));
             }
