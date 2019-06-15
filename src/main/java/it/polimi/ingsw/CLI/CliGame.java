@@ -151,7 +151,8 @@ public class CliGame implements ViewClient {
     public String showPossibleMoves(ArrayList<String> args) {
         VirtualPlayer owner=board.getModel().getOwner();
         String reply="";
-        String[] temp;
+        char[] temp;
+        String charTemp;
         HashMap<String,String> column=new HashMap<>();
         column.put("A","0");
         column.put("B","1");
@@ -180,7 +181,8 @@ public class CliGame implements ViewClient {
                 e.printStackTrace();
             }
             reply=reply.toUpperCase();
-            temp=reply.split(INNER_SEP);
+            charTemp=reply.replaceAll(INNER_SEP,"");
+            temp = charTemp.toCharArray();
             if(reply.isEmpty()||(temp.length==2&&row.containsKey(temp[0])&&column.containsKey(temp[1])))
                 reply=row.get(temp[0])+INNER_SEP+column.get(temp[1]);
             else if(reply=="MINE")
