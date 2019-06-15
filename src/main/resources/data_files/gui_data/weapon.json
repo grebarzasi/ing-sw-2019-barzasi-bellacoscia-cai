@@ -1,85 +1,85 @@
 {
-  "Distruttore": {
+  "distruttore": {
     "path": "distruttore.png",
     "info": "distruttore.png"
   },
-  "Mitragliatrice":{
+  "mitragliatrice":{
     "path": "mitragliatrice.png",
     "info": "mitragliatrice.png"
   },
-  "Torpedine":{
+  "forpedine":{
     "path": "torpedine.png",
     "info": "torpedine.png"
   },
-  "Fucile al Plasma":{
+  "fucile al plasma":{
     "path": "fucile_al_plasma.png",
     "info": "fucile_al_plasma.png"
   },
-  "Fucile di Precisione":{
+  "fucile di precisione":{
     "path": "fucile_di_precisione.png",
     "info": "fucile_di_precisione.png"
   },
-  "Falce Protonica":{
+  "falce protonica":{
     "path": "falce_protonica.png",
     "info": "falce_protonica.png"
   },
-  "Raggio Traente":{
+  "raggio traente":{
     "path": "raggio_traente.png",
     "info": "raggio_traente.png"
   },
-  "Cannone Vortex":{
+  "cannone vortex":{
     "path": "cannone_vortex.png",
     "info": "cannone_vortex.png"
   },
-  "Vulcanizzatore":{
+  "vulcanizzatore":{
     "path": "vulcanizzatore.png",
     "info": "vulcanizzatore.png"
   },
-  "Razzo Termico":{
+  "razzo termico":{
     "path": "razzo_termico.png",
     "info": "razzo_termico.png"
   },
-  "Raggio Solare":{
+  "raggio solare":{
     "path": "raggio_solare.png",
     "info": "raggio_solare.png"
   },
-  "Lanciafiamme":{
+  "lanciafiamme":{
     "path": "lanciafiamme.png",
     "info": "lanciafiamme.png"
   },
-  "Lanciagranate":{
+  "lanciagranate":{
     "path": "lanciagranate.png",
     "info": "lanciagranate.png"
   },
-  "Lanciarazzi":{
+  "lanciarazzi":{
     "path": "lanciarazzi.png",
     "info": "lanciarazzi.png"
   },
-  "Fucile laser":{
+  "fucile laser":{
     "path": "fucile_laser.png",
     "info": "fucile_laser.png"
   },
-  "Spada Fotonica":{
+  "spada fotonica":{
     "path": "spada_fotonica.png",
     "info": "spada_fotonica.png"
   },
-  "ZX-2":{
+  "zx-2":{
     "path": "zx_2.png",
     "info": "zx_2.png"
   },
-  "Fucile a pompa":{
+  "fucile a pompa":{
     "path": "fucile_a_pompa.png",
     "info": "fucile_a_pompa.png"
   },
-  "Cyberguanto":{
+  "cyberguanto":{
     "path": "cyberguanto.png",
     "info": "cyberguanto.png"
   },
-  "Onda d'urto":{
+  "onda d'urto":{
     "path": "onda_d'urto.png",
     "info": "onda_d'urto.png"
   },
-  "Martello Ionico":{
+  "martello ionico":{
     "path": "martello_ionico.png",
     "info": "martello_ionico.png"
   }
