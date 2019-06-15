@@ -67,7 +67,7 @@ public class Weapon extends Card {
      */
     public boolean reload() {
 
-        if (covers(this.getOwner().getPersonalBoard().getAmmoInventory(), this.getBasicEffect().getCost())) {
+        if (this.getOwner().getPersonalBoard().getAmmoInventory().covers(this.getBasicEffect().getCost())) {
             this.getOwner().getPersonalBoard().removeAmmo(this.getBasicEffect().getCost());
             this.setLoaded(true);
             return true;
@@ -76,20 +76,7 @@ public class Weapon extends Card {
         }
     }
 
-    /**
-     * Checks if an ammo covers the reload cost of another ammo object
-     *
-     * @param a available ammunition
-     * @param b ammunition cost
-     * @return true if it the cost can be covered, false otherwise
-     */
-    public boolean covers(Ammo a, Ammo b) {
 
-        if (a.getBlue() - b.getBlue() < 0 || a.getRed() - b.getRed() < 0 || a.getYellow() - b.getYellow() < 0) {
-            return false;
-        }
-        return true;
-    }
 
 
     public Set<Effect> getUsableEff(){

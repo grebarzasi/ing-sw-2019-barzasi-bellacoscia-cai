@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Figure;
+import it.polimi.ingsw.Player;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Effect;
@@ -9,6 +10,7 @@ import it.polimi.ingsw.cards.weapon.aiming.AimAskPlayer;
 import it.polimi.ingsw.cards.weapon.aiming.AimDirection;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -36,7 +38,8 @@ public class Shooting implements ControllerState {
 
     @Override
     public void command() {
-        boolean ok=false;
+
+        boolean ok = false;
         AimDirection dir;
         AimAskPlayer ask;
 
@@ -44,46 +47,101 @@ public class Shooting implements ControllerState {
         effects = shootingWith.getUsableEff();
 
         Effect choice = this.controller.getView().showEffects(effects);
+
+        HashMap<Player,Integer> revengeCheck = new HashMap<>();
+
         if(choice==null){
             this.controller.goBack();
             //this.controller.choosingMove.command(); goBack already does command
         }
 
-        do{
-            if(shootingWith.getDirectionTemp()!=null) {
+        if(this.controller.getCurrentPlayer().getPersonalBoard().getAmmoInventory().covers(choice.getCost())) {
 
-                dir = shootingWith.getDirectionTemp();
-                String rpl = controller.getView().chooseDirection(new ArrayList<>(dir.getTargetTemp()));
 
-                if(rpl==null) {
+            do {
 
-                    shootingWith.resetWeapon();
-                    this.controller.goBack();
+                if (shootingWith.getDirectionTemp() != null) {
 
+                    dir = shootingWith.getDirectionTemp();
+                    String rpl = controller.getView().chooseDirection(new ArrayList<>(dir.getTargetTemp()));
+
+                    if (rpl == null) {
+
+                        shootingWith.resetWeapon();
+                        this.controller.goBack();
+
+                    }
+
+                    dir.setDirectionTemp(rpl);
+
+                } else if (shootingWith.getAskTemp() != null) {
+
+                    ask = shootingWith.getAskTemp();
+                    ArrayList<Figure> rpl = controller.getView().showTargetAdvanced(ask.getTargetTemp(), ask.getNumMax(), ask.isFromDiffSquare(), ask.getMsg());
+                    if (rpl == null) {
+
+                        shootingWith.resetWeapon();
+                        this.controller.goBack();
+
+                    }
+                    ask.setTargetTemp(new HashSet<>(rpl));
                 }
 
-                dir.setDirectionTemp(rpl);
+                ok = choice.executeEffect();
 
-            }else if(shootingWith.getAskTemp()!=null) {
+            } while (!ok);
 
-                ask = shootingWith.getAskTemp();
-                ArrayList<Figure> rpl = controller.getView().showTargetAdvanced(ask.getTargetTemp(), ask.getNumMax(), ask.isFromDiffSquare(), ask.getMsg());
-                if (rpl == null) {
+            if(this.canUseScope()) {
+                boolean useScope = this.controller.getView().showBoolean("Vuoi usare anche il mirino?: ");
+                if(useScope){
 
-                    shootingWith.resetWeapon();
-                    this.controller.goBack();
+                    ArrayList<Figure> options = new ArrayList<>();
+                    options.addAll(this.shootingWith.getBasicEffect().getTargetHitSet());
 
+                    ArrayList<Figure> chosenTarget = this.controller.getView().showTargetAdvanced(this.shootingWith.getBasicEffect().getTargetHitSet(),
+                            1,false,"Scegli il bersaglio: ");
+
+                    chosenTarget.get(0).inflictMark(2,this.getController().getCurrentPlayer());
                 }
-                ask.setTargetTemp(new HashSet<>(rpl));
+
+                shootingWith.resetWeapon();
+                this.controller.update();
+                this.controller.dereaseMoveLeft();
+                this.controller.goBack();
+
             }
-            ok=choice.executeEffect();
-        }while (!ok);
 
-        shootingWith.resetWeapon();
 
-        this.controller.dereaseMoveLeft();
-        this.controller.update();
-        this.controller.goBack();
+        }else {
+
+            shootingWith.resetWeapon();
+
+            this.controller.dereaseMoveLeft();
+            this.controller.update();
+            this.controller.goBack();
+
+        }
+
+
+
+    }
+
+    public boolean canUseScope(){
+
+        if(!this.controller.getCurrentPlayer().getPersonalBoard().getAmmoInventory().isEmpty()) {
+
+            for (PowerUp p : this.controller.getCurrentPlayer().getPowerupList()) {
+                if (p.getName().equals("Mirino")) {
+                    return true;
+                }
+            }
+
+            return false;
+
+        }else{
+
+            return false;
+        }
 
     }
 

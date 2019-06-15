@@ -56,4 +56,28 @@ public class Ammo{
             s=s+"R";
         return s;
     }
+
+    /**
+     * Checks if an ammo covers the reload cost of another ammo object
+     *
+     * @param a ammunition cost
+     * @return true if it the cost can be covered, false otherwise
+     */
+    public boolean covers(Ammo a) {
+
+        if (this.getBlue() - a.getBlue() < 0 || this.getRed() - a.getRed() < 0 || this.getYellow() - a.getYellow() < 0) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isEmpty(){
+
+        if(this.red == 0 && this.blue == 0 && this.yellow == 0){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
 }

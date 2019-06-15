@@ -237,7 +237,7 @@ public class Controller {
         }
     }
 
-    private void iteratePlayer(){
+    void iteratePlayer(){
 
         if (this.model.getPlayerList().indexOf(this.model.getCurrentPlayer()) != this.model.getPlayerList().size() - 1) {
             this.model.setCurrentPlayer(this.model.getPlayerList().get(this.model.getPlayerList().indexOf(model.getCurrentPlayer()) + 1));
