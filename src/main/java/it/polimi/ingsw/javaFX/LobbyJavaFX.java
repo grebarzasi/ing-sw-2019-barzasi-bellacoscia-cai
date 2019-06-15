@@ -26,6 +26,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -42,6 +43,15 @@ import static java.lang.Thread.sleep;
  * @author Carlo Bellacoscia
  */
 public class LobbyJavaFX extends Application {
+
+    private double widthScreen;
+    private double widthLateral;
+    private double widthCenter;
+    private double heightScreen;
+    private double heightRows;
+    private double heightTitle;
+    private double heightMaps;
+    private double heightPlayers;
 
 
     private boolean terminator;
@@ -75,6 +85,16 @@ public class LobbyJavaFX extends Application {
         map = 0;
         skull = 0;
         start = false;
+
+        widthScreen = Screen.getPrimary().getBounds().getWidth();
+        widthLateral = widthScreen/6;
+        widthCenter = widthLateral * 4;
+
+        heightScreen = Screen.getPrimary().getBounds().getHeight();
+        heightRows = heightScreen / 20;
+        heightTitle = heightRows * 2;
+        heightMaps = heightRows * 3;
+        heightPlayers = heightRows * 4;
     }
 
     public VirtualPlayer getOwner() {
@@ -94,12 +114,34 @@ public class LobbyJavaFX extends Application {
 
         GridPane lobbyGrid = new GridPane();
         lobbyGrid.setAlignment(Pos.CENTER);
-        lobbyGrid.setHgap(40);
-        lobbyGrid.setVgap(20);
-        lobbyGrid.setPadding(new Insets(25, 25, 0, 25));
+        lobbyGrid.setHgap(0);
+        lobbyGrid.setVgap(0);
+        lobbyGrid.setPadding(new Insets(50, 50, 50, 50));
 
-        Scene scene = new Scene(lobbyGrid, 900, 900);
+        Scene scene = new Scene(lobbyGrid, widthScreen, heightScreen);
         primaryStage.setScene(scene);
+
+        RowConstraints r1 = new RowConstraints(heightRows);
+        RowConstraints r2 = new RowConstraints(heightTitle);
+        RowConstraints r3 = new RowConstraints(heightRows);
+        RowConstraints r4 = new RowConstraints(heightRows);
+        RowConstraints r5 = new RowConstraints(heightRows);
+        RowConstraints r6 = new RowConstraints(heightRows);
+        RowConstraints r7 = new RowConstraints(heightMaps);
+        RowConstraints r8 = new RowConstraints(heightRows);
+        RowConstraints r9 = new RowConstraints(heightPlayers);
+        RowConstraints r10 = new RowConstraints(heightRows);
+        RowConstraints r11 = new RowConstraints(heightRows);
+        RowConstraints r12 = new RowConstraints(heightRows);
+        RowConstraints r13 = new RowConstraints(heightRows);
+
+
+        ColumnConstraints c1 = new ColumnConstraints(widthLateral);
+        ColumnConstraints c2 = new ColumnConstraints(widthCenter);
+        ColumnConstraints c3 = new ColumnConstraints(widthLateral);
+
+        lobbyGrid.getRowConstraints().addAll(r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13);
+        lobbyGrid.getColumnConstraints().addAll(c1,c2,c3);
 
         Text title = new Text("Lobby");
         title.setFont(titleFont);
@@ -107,7 +149,7 @@ public class LobbyJavaFX extends Application {
             /**
              * set background
              */
-        Image back = new Image(new FileInputStream(PATH_BACK), 2000, 1200, true, true);
+        Image back = new Image(new FileInputStream(PATH_BACK), widthScreen * 2, heightScreen * 2, true, true);
         BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         lobbyGrid.setBackground(new Background(backgroundImage));
 
@@ -219,6 +261,7 @@ public class LobbyJavaFX extends Application {
         btnStart.setFont(font);
 
         Button btnBack = new Button("Indietro");
+        btnBack.setAlignment(Pos.CENTER);
 
             /**
              * merge layout
@@ -235,11 +278,11 @@ public class LobbyJavaFX extends Application {
         lobbyGrid.add(lblPlayer, 1, 7);
         lobbyGrid.add(playerBox, 1, 8);
 
-        lobbyGrid.add(btnStart, 1, 10);
+        lobbyGrid.add(btnStart, 1, 9);
 
         ImageView load = null;
         try {
-            load = new ImageView(new Image(new FileInputStream(PATH_LOADING), 70, 70, true, true));
+            load = new ImageView(new Image(new FileInputStream(PATH_LOADING), heightRows, heightRows, true, true));
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         }
@@ -383,27 +426,27 @@ public class LobbyJavaFX extends Application {
             try {
                 switch (p.getCharacter()) {
                     case "yellow": {
-                        ImageView yellowV = new ImageView(new Image(new FileInputStream(PATH_YELLOW_CHARACTER), 150, 150, true, true));
+                        ImageView yellowV = new ImageView(new Image(new FileInputStream(PATH_YELLOW_CHARACTER), widthCenter, heightPlayers, true, true));
                         v.getChildren().add(yellowV);
                         break;
                     }
                     case "red": {
-                        ImageView redV = new ImageView(new Image(new FileInputStream(PATH_RED_CHARACTER), 150, 150, true, true));
+                        ImageView redV = new ImageView(new Image(new FileInputStream(PATH_RED_CHARACTER), widthCenter, heightPlayers, true, true));
                         v.getChildren().add(redV);
                         break;
                     }
                     case "blue": {
-                        ImageView blueV = new ImageView(new Image(new FileInputStream(PATH_BLUE_CHARACTER), 150, 150, true, true));
+                        ImageView blueV = new ImageView(new Image(new FileInputStream(PATH_BLUE_CHARACTER), widthCenter, heightPlayers, true, true));
                         v.getChildren().add(blueV);
                         break;
                     }
                     case "green": {
-                        ImageView greenV = new ImageView(new Image(new FileInputStream(PATH_GREEN_CHARACTER), 150, 150, true, true));
+                        ImageView greenV = new ImageView(new Image(new FileInputStream(PATH_GREEN_CHARACTER), widthCenter, heightPlayers, true, true));
                         v.getChildren().add(greenV);
                         break;
                     }
                     case "grey": {
-                        ImageView grayV = new ImageView(new Image(new FileInputStream(PATH_GREY_CHARACTER), 150, 150, true, true));
+                        ImageView grayV = new ImageView(new Image(new FileInputStream(PATH_GREY_CHARACTER), widthCenter, heightPlayers, true, true));
                         v.getChildren().add(grayV);
                         break;
                     }
@@ -413,7 +456,7 @@ public class LobbyJavaFX extends Application {
             }
 
             TextField txtUsername = new TextField(p.getUsername());
-            txtUsername.setPrefSize(150, 30);
+            txtUsername.setPrefSize(widthCenter/5, heightRows);
             txtUsername.setFont(font);
             txtUsername.setEditable(false);
             v.getChildren().add(txtUsername);
