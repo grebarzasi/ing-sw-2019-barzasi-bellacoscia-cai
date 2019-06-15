@@ -2385,7 +2385,7 @@ public class GameJavaFX extends Application implements ViewClient {
                         e.printStackTrace();
                     }
 
-                    JsonNode chamberNodeWe = rootNodeWe.path(p.getWeapons().get(i).split(":")[0]);
+                    JsonNode chamberNodeWe = rootNodeWe.path(p.getWeapons().get(i).split(INNER_SEP)[0].toLowerCase());
 
                     weapon = chamberNodeWe.path("path").asText();
                     textWe = chamberNodeWe.path("info").asText();
@@ -2426,9 +2426,9 @@ public class GameJavaFX extends Application implements ViewClient {
                         e.printStackTrace();
                     }
                     if (i < p.getPowerUps().size()) {
-                        JsonNode chamberNodePu = rootNodePu.path(p.getPowerUps().get(i).split(":")[0].toLowerCase());
+                        JsonNode chamberNodePu = rootNodePu.path(p.getPowerUps().get(i).split(INNER_SEP)[0].toLowerCase());
 
-                        if (p.getPowerUps().get(i).split(":")[1].equals("R")) {
+                        if (p.getPowerUps().get(i).split(INNER_SEP)[1].equals("R")) {
                             powerup = chamberNodePu.path("color").path("red").asText();
                         } else if (p.getPowerUps().get(i).split(":")[1].equals("B")) {
                             powerup = chamberNodePu.path("color").path("blue").asText();
@@ -2532,7 +2532,7 @@ public class GameJavaFX extends Application implements ViewClient {
                         e.printStackTrace();
                     }
 
-                    JsonNode chamberNodeWe = rootNodeWe.path(s.split(INNER_SEP)[0]);
+                    JsonNode chamberNodeWe = rootNodeWe.path(s.split(INNER_SEP)[0].toLowerCase());
 
                     weapon = chamberNodeWe.path("path").asText();
                     System.out.println(weapon);
@@ -2646,7 +2646,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
                     for (String name : cards) {
 
-                        JsonNode chamberNodeWe = rootNodeWe.path(name.split(INNER_SEP)[0]);
+                        JsonNode chamberNodeWe = rootNodeWe.path(name.split(INNER_SEP)[0].toLowerCase());
 
                         String weapon = chamberNodeWe.path("path").asText();
 
