@@ -115,10 +115,50 @@ public class Controller {
 
         }
 
-
-
-
         this.getModel().getBoard().getTrack().setSkullMax(lobby.getKillPref());
+
+
+        this.asBot = new AsBot(this);
+        this.choosingMove = new ChoosingMove(this);
+        this.choosingPowerUpToUse = new ChoosingPowerUpToUse(this);
+        this.discardingPowerUp = new DiscardingPowerUp(this);
+        this.choosingWeapon = new ChoosingWeapon(this);
+        this.moving = new Moving(this);
+        this.picking = new Picking(this);
+        this.pickingWeapon = new PickingWeapon(this);
+        this.reloading = new Reloading(this);
+        this.shooting = new Shooting(this);
+        this.teleporting = new Teleporting(this);
+        this.usingNewton = new UsingNewton(this);
+        this.shooting = new Shooting(this);
+        this.spawning = new Spawning(this);
+        this.frenzySpecialAction = new FrenzySpecialAction(this);
+
+    }
+
+
+    public Controller(ArrayList<Player> playerList){
+
+        this.marshal=new UpdateBuilder(this);
+
+        String map = intToMap(3);
+
+
+
+        this.model = new GameModel(playerList,map, this);
+
+        this.hasFrenzy = true;
+        this.hasBot = true;
+
+
+        if(this.hasBot){
+
+            String botColor = firstAvailableColor(playerList);
+            this.model.setBot(new Terminator(botColor,model));
+
+        }
+
+        this.getModel().getBoard().getTrack().setSkullMax(8);
 
 
         this.asBot = new AsBot(this);
@@ -168,7 +208,7 @@ public class Controller {
         this.currentState.command();
     }
 
-    void dereaseMoveLeft(){
+    public void dereaseMoveLeft(){
         this.setMovesLeft(this.getMovesLeft() -1 );
     }
 
@@ -179,7 +219,7 @@ public class Controller {
      * on the player list
      */
 
-    void endTurn() {
+    public void endTurn() {
 
         for (Figure f : this.model.getPlayerList()) {
 
@@ -329,6 +369,8 @@ public class Controller {
 
         return map;
     }
+
+
 
     public Board getBoard() {
         return this.getModel().getBoard();
