@@ -32,10 +32,10 @@ import java.time.chrono.HijrahDate;
 import java.util.ArrayList;
 import java.util.Set;
 
-import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
-import static it.polimi.ingsw.connection.ConnMessage.NOTHING;
+import static it.polimi.ingsw.connection.ConnMessage.*;
 import static it.polimi.ingsw.javaFX.GUIFiles.*;
 import static it.polimi.ingsw.CLI.CliMessages.*;
+import static it.polimi.ingsw.javaFX.GUIFiles.CHOOSE_DIRECTION;
 import static java.lang.Thread.sleep;
 
 /*
@@ -1573,12 +1573,11 @@ public class GameJavaFX extends Application implements ViewClient {
     }
 
     public void hideBtn(Button btn, double o) {
-        btn.setOpacity(o);
         if (o == 0) {
-            //btn.setDisable(true);
-        } else {
-            //btn.setDisable(false);
+            btn.cancelButtonProperty();
         }
+        btn.setOpacity(o);
+
     }
 
     public void chooseSquare(ArrayList<Button> btnArr, int btn, boolean pick) {
@@ -2100,69 +2099,6 @@ public class GameJavaFX extends Application implements ViewClient {
         while (game.getTargetSquare().equals("")) ;
         String res = game.getTargetSquare();
         game.setTargetSquare("");
-
-        return res;
-    }
-
-    @Override
-    public String showTargets(ArrayList<String> args) {
-        Runnable run = () -> {
-
-            for (ArrayList<Button> btnArr : btnCell) {
-                hideCell(btnArr, 0.5);
-            }
-
-            for (String color : args) {
-                for (VirtualPlayer p : model.getAllPlayers()) {
-                    if (p.getCharacter().equals(color)) {
-                        switch (p.getCharacter()) {
-                            case ("yellow"): {
-                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(Y), 1);
-                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(Y).setOnAction(e -> {
-                                    game.setTargetPlayer(p.getCharacter());
-                                });
-                                break;
-                            }
-                            case ("red"): {
-                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(R), 1);
-                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(R).setOnAction(e -> {
-                                    game.setTargetPlayer(p.getCharacter());
-                                });
-                                break;
-                            }
-                            case ("blue"): {
-                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(B), 1);
-                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(B).setOnAction(e -> {
-                                    game.setTargetPlayer(p.getCharacter());
-                                });
-                                break;
-                            }
-                            case ("green"): {
-                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(G), 1);
-                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(G).setOnAction(e -> {
-                                    game.setTargetPlayer(p.getCharacter());
-                                });
-                                break;
-                            }
-                            case ("grey"): {
-                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(GR), 1);
-                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(GR).setOnAction(e -> {
-                                    game.setTargetPlayer(p.getCharacter());
-                                });
-                                break;
-                            }
-                        }
-                    }
-                }
-
-            }
-        };
-
-        Platform.runLater(run);
-
-        while (game.getTargetPlayer().equals("")) ;
-        String res = game.getTargetPlayer();
-        game.setTargetPlayer("");
 
         return res;
     }
@@ -2796,14 +2732,164 @@ public class GameJavaFX extends Application implements ViewClient {
         }
     }
 
+
+    @Override
+    public String showTargets(ArrayList<String> args) {return null;}
+
+            /*
+
+        Runnable run = () -> {
+
+            for (ArrayList<Button> btnArr : btnCell) {
+                hideCell(btnArr, 0.5);
+            }
+
+            for (String color : args) {
+                for (VirtualPlayer p : model.getAllPlayers()) {
+                    if (p.getCharacter().equals(color)) {
+                        switch (p.getCharacter()) {
+                            case ("yellow"): {
+                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(Y), 1);
+                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(Y).setOnAction(e -> {
+                                    game.setTargetPlayer(p.getCharacter());
+                                });
+                                break;
+                            }
+                            case ("red"): {
+                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(R), 1);
+                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(R).setOnAction(e -> {
+                                    game.setTargetPlayer(p.getCharacter());
+                                });
+                                break;
+                            }
+                            case ("blue"): {
+                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(B), 1);
+                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(B).setOnAction(e -> {
+                                    game.setTargetPlayer(p.getCharacter());
+                                });
+                                break;
+                            }
+                            case ("green"): {
+                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(G), 1);
+                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(G).setOnAction(e -> {
+                                    game.setTargetPlayer(p.getCharacter());
+                                });
+                                break;
+                            }
+                            case ("grey"): {
+                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(GR), 1);
+                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(GR).setOnAction(e -> {
+                                    game.setTargetPlayer(p.getCharacter());
+                                });
+                                break;
+                            }
+                        }
+                    }
+                }
+
+            }
+        };
+
+        Platform.runLater(run);
+
+        while (game.getTargetPlayer().equals("")) ;
+        String res = game.getTargetPlayer();
+        game.setTargetPlayer("");
+
+        return res;
+    }
+
+    */
+
     public String showTargetAdvanced(ArrayList<String> args) {
         // primo: numero massimo di target:from different square (boo) : messaggio
         // poi: colori
 
         Runnable run = () -> {
 
+                msg.setText(args.get(0).split(INNER_SEP)[2]);
+
+                for (ArrayList<Button> btnArr : btnCell) {
+                    hideCell(btnArr, 0.5);
+                }
+
+                Boolean diff = Boolean.parseBoolean(args.get(0).split(INNER_SEP)[1]);
+                args.remove(0);
+                for (String color : args) {
+                    for (VirtualPlayer p : model.getAllPlayers()) {
+                        if (p.getCharacter().equals(color) && (!diff || verifyDiffSquare(game.getTargetPlayers(),p.getCharacter()) )) {
+                            switch (p.getCharacter()) {
+                                case ("yellow"): {
+                                    hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(Y), 1);
+                                    btnCell.get(p.getRow() * 4 + p.getColumn()).get(Y).setOnAction(e -> {
+                                        System.out.println(p.getCharacter());
+                                        game.getTargetPlayers().add(p.getCharacter());
+                                    });
+                                    break;
+                                }
+                                case ("red"): {
+                                    hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(R), 1);
+                                    btnCell.get(p.getRow() * 4 + p.getColumn()).get(R).setOnAction(e -> {
+                                        System.out.println(p.getCharacter());
+                                        game.getTargetPlayers().add(p.getCharacter());
+                                    });
+                                    break;
+                                }
+                                case ("blue"): {
+                                    hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(B), 1);
+                                    btnCell.get(p.getRow() * 4 + p.getColumn()).get(B).setOnAction(e -> {
+                                        System.out.println(p.getCharacter());
+                                        game.getTargetPlayers().add(p.getCharacter());
+                                    });
+                                    break;
+                                }
+                                case ("green"): {
+                                    hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(G), 1);
+                                    btnCell.get(p.getRow() * 4 + p.getColumn()).get(G).setOnAction(e -> {
+                                        System.out.println(p.getCharacter());
+                                        game.getTargetPlayers().add(p.getCharacter());
+                                    });
+                                    break;
+                                }
+                                case ("grey"): {
+                                    hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(GR), 1);
+                                    btnCell.get(p.getRow() * 4 + p.getColumn()).get(GR).setOnAction(e -> {
+                                        System.out.println(p.getCharacter());
+                                        game.getTargetPlayers().add(p.getCharacter());
+                                    });
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                }
         };
-        return null;
+
+        int max = Integer.parseInt(args.get(0).split(INNER_SEP)[0]);
+        System.out.println(max);
+        Platform.runLater(run);
+        int k = game.getTargetPlayers().size();
+        while(game.getTargetPlayers().size() != max);
+
+        String res = "";
+        for(String targ : game.getTargetPlayers()){
+            res = res + targ + INFO_SEP;
+        }
+        game.setTargetPlayers(new ArrayList<>());
+        return res;
+    }
+
+    public boolean verifyDiffSquare(ArrayList<String> args,String test){
+        VirtualPlayer p = model.findPlayer(test);
+        VirtualPlayer v;
+        for(String s: args) {
+            v = model.findPlayer(s);
+            if (p.getRow() == v.getRow() && p.getColumn() == v.getColumn()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     }

@@ -8,9 +8,12 @@ public class VirtualGame {
 
     private String targetSquare = "";
     private String targetPlayer = "";
+    private ArrayList<String> targetPlayers  = new ArrayList<>();
 
     private String weapon = "";
     private String powerup = "";
+
+
     private String effect = "";
     private String direction = "";
 
@@ -22,6 +25,14 @@ public class VirtualGame {
 
 
     public VirtualGame() {
+    }
+
+    public synchronized ArrayList<String> getTargetPlayers() {
+        return targetPlayers;
+    }
+
+    public synchronized void setTargetPlayers(ArrayList<String> targetPlayers) {
+        this.targetPlayers = targetPlayers;
     }
 
     public String getAction() {
