@@ -2373,7 +2373,8 @@ public class GameJavaFX extends Application implements ViewClient {
             ObjectMapper mapper = new ObjectMapper();
 
 
-            if (!pu) {
+            if (!pu && i<p.getWeapons().size()) {
+
 
                 File jsonFileWe = new File(PATH_WE);
                 try {
@@ -2412,7 +2413,7 @@ public class GameJavaFX extends Application implements ViewClient {
                 grid.add(imgWe2, 1, 0);
 
 
-            } else if (pu) {
+            } else if (pu && i<p.getPowerUps().size()) {
 
 
                 File jsonFilePU = new File(PATH_PU);
