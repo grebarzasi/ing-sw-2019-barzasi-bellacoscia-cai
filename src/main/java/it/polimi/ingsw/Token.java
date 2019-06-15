@@ -20,4 +20,12 @@ public class Token {
         return owner.getCharacter();
     }
 
+    public boolean equals(Token t){
+        if(t.getOwner().getCharacter().equals(owner.getCharacter()))
+            return true;
+        return false;
+
+    }
+
+
 }

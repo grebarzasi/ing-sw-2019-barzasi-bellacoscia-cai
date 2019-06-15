@@ -38,7 +38,7 @@ public class ShootTarget implements SubEffect {
         }
         if(markNum != 0) {
             for (Figure target : p) {
-                w.getOwner().inflictMark(damageNum, target);
+                w.getOwner().inflictMark(markNum, target);
                 w.setLastHit(target);
             }
         }

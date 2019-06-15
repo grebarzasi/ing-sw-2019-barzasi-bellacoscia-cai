@@ -102,14 +102,14 @@ public class PlayerBoard {
 
     public void addDamage(Token t){
 
-        while(this.getMark().contains(t)) {
+        while(mark.contains(t)) {
 
-            this.mark.remove(t);
-            this.damage(t);
+            mark.remove(t);
+            damage(t);
 
         }
 
-        this.damage(t);
+        damage(t);
 
     }
 
