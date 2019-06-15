@@ -35,6 +35,7 @@ import java.util.Set;
 import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
 import static it.polimi.ingsw.connection.ConnMessage.NOTHING;
 import static it.polimi.ingsw.javaFX.GUIFiles.*;
+import static it.polimi.ingsw.CLI.CliMessages.*;
 import static java.lang.Thread.sleep;
 
 /*
@@ -1416,6 +1417,9 @@ public class GameJavaFX extends Application implements ViewClient {
         for (String name : p.getWeapons()) {
             wpState = name.split(INNER_SEP);
             if (!btnArr.isEmpty() && i < btnArr.size()) {
+                if(wpState[0].toLowerCase().replace(" ", "_").replace("-", "_").equals("i'm") || wpState[0].toLowerCase().replace(" ", "_").replace("-", "_").equals("the") || wpState[0].toLowerCase().replace(" ", "_").replace("-", "_").equals("terminator")){
+                    continue;
+                }
                 if (wpState[1].equals("true")) {
                     Image img = null;
                     try {
@@ -1850,7 +1854,7 @@ public class GameJavaFX extends Application implements ViewClient {
             int i = 0;
             for (VirtualPlayer p : model.getAllPlayers()) {
 
-                if (p.equals(model.getOwner())) {
+                if (p.equals(model.getOwner()) || p.getUsername().equals(TERMINATOR_NAME)) {
                     continue;
                 }
 
@@ -1889,11 +1893,15 @@ public class GameJavaFX extends Application implements ViewClient {
 
                 for (Button btn : we) {
                     btn.setEffect(borderGlow);
+                    btn.setOnAction(e->{
+                        game.setWeapon(args.get(we.indexOf(btn)));
+                    });
                 }
 
-                chooseWeapon cw = new chooseWeapon(args);
-                cw.show();
-
+                if(model.getOwner().getRow()*4 + model.getOwner().getColumn() == 2 || model.getOwner().getRow()*4 + model.getOwner().getColumn() == 4 || model.getOwner().getRow()*4 + model.getOwner().getColumn() == 11) {
+                    chooseWeapon cw = new chooseWeapon(args);
+                    cw.show();
+                }
             }else{
                 discardCards dc = new discardCards(args,false);
                 dc.show();
@@ -1976,7 +1984,7 @@ public class GameJavaFX extends Application implements ViewClient {
                             for (ArrayList<Button> btnArr : btnCell) {
                                 chooseSquare(btnArr,btnCell.indexOf(btnArr),false);
                             }
-
+                            update();
                         });
                         break;
                     }
@@ -1989,13 +1997,18 @@ public class GameJavaFX extends Application implements ViewClient {
                             for (ArrayList<Button> btnArr : btnCell) {
                                 chooseSquare(btnArr,btnCell.indexOf(btnArr),true);
                             }
+                            update();
+
                         });
                         break;
                     }
                     case ("shoot"): { //shoot
+                        btnShoot.setText("Spara");
                         hideBtn(btnShoot, 1);
                         btnShoot.setOnAction(e->{
                             game.setAction(act);
+                            update();
+
                         });
                         break;
                     }
@@ -2004,6 +2017,8 @@ public class GameJavaFX extends Application implements ViewClient {
                         btnShoot.setText("Ricarica");
                         btnShoot.setOnAction(e->{
                             game.setAction(act);
+                            update();
+
                         });
                         break;
                     }
@@ -2011,6 +2026,8 @@ public class GameJavaFX extends Application implements ViewClient {
                         hideBtn(btnTerminator, 1);
                         btnTerminator.setOnAction(e->{
                             game.setAction(act);
+                            update();
+
                         });
                         break;
                     }
@@ -2018,6 +2035,8 @@ public class GameJavaFX extends Application implements ViewClient {
                         hideBtn(btnPowerUp, 1);
                         btnPowerUp.setOnAction(e->{
                             game.setAction(act);
+                            update();
+
                         });
                         break;
                     }
@@ -2025,6 +2044,8 @@ public class GameJavaFX extends Application implements ViewClient {
                         hideBtn(btnEnd,1);
                         btnEnd.setOnAction(e->{
                             game.setAction(act);
+                            update();
+
                         });
                     }
                 }
@@ -2064,6 +2085,11 @@ public class GameJavaFX extends Application implements ViewClient {
             args.remove(0);
             for (String s : args) {
                 hideCell(btnCell.get(getCoordinate(s)), 0);
+                for(Button btn:btnCell.get(getCoordinate(s))){
+                    btn.setOnAction(e->{
+                        game.setTargetSquare(s);
+                    });
+                }
             }
 
 
@@ -2207,32 +2233,36 @@ public class GameJavaFX extends Application implements ViewClient {
     @Override
     public String showEffects(ArrayList<String> args) {
 
-        ArrayList<String> effects = args;
 
         Runnable run = () -> {
-            switch (effects.size()) {
+            switch (args.size()) {
                 case (4): {
-                    btnPowerUp.setText(effects.get(0));
+                    hideBtn(btnPowerUp,1);
+                    btnPowerUp.setText(args.get(3).split(INNER_SEP)[0]);
                     btnPowerUp.setOnAction(e -> {
-                        game.setEffect(effects.get(0));
+                        game.setEffect(args.get(3).split(INNER_SEP)[0]);
                     });
                 }
                 case (3): {
-                    btnMove.setText(effects.get(1));
-                    btnMove.setOnAction(e -> {
-                        game.setEffect(effects.get(1));
+                    hideBtn(btnPick,1);
+                    btnPick.setText(args.get(2).split(INNER_SEP)[0]);
+                    btnPick.setOnAction(e -> {
+                        game.setEffect(args.get(2).split(INNER_SEP)[0]);
                     });
+
                 }
                 case (2): {
-                    btnPick.setText(effects.get(2));
-                    btnPick.setOnAction(e -> {
-                        game.setEffect(effects.get(2));
+                    hideBtn(btnMove,1);
+                    btnMove.setText(args.get(1).split(INNER_SEP)[0]);
+                    btnMove.setOnAction(e -> {
+                        game.setEffect(args.get(1).split(INNER_SEP)[0]);
                     });
                 }
                 case (1): {
-                    btnShoot.setText(effects.get(3));
+                    hideBtn(btnShoot,1);
+                    btnShoot.setText(args.get(0).split(INNER_SEP)[0]);
                     btnShoot.setOnAction(e -> {
-                        game.setEffect(effects.get(3));
+                        game.setEffect(args.get(0).split(INNER_SEP)[0]);
                     });
                 }
 
@@ -2244,7 +2274,8 @@ public class GameJavaFX extends Application implements ViewClient {
         while (game.getEffect().equals("")) ;
         String res = game.getEffect();
         game.setEffect("");
-        update();
+        Runnable up = () -> update();
+        Platform.runLater(up);
 
         return res;
     }
@@ -2584,6 +2615,7 @@ public class GameJavaFX extends Application implements ViewClient {
                 setButtonBack(btnArr.get(args.indexOf(s)),imgWe);
                 btnArr.get(args.indexOf(s)).setOnAction(e->{
                     game.setWeapon(s);
+                    this.close();
                 });
 
             }
@@ -2608,25 +2640,25 @@ public class GameJavaFX extends Application implements ViewClient {
             Scene theScene = new Scene(root);
             this.setScene(theScene);
 
-            GridPane grid = new GridPane();
-            grid.setAlignment(Pos.CENTER);
-            grid.setHgap(20);
-            grid.setVgap(0);
-            grid.setPadding(new Insets(0, 0, 0, 0));
+            GridPane gridDisc = new GridPane();
+            gridDisc.setAlignment(Pos.CENTER);
+            gridDisc.setHgap(20);
+            gridDisc.setVgap(0);
+            gridDisc.setPadding(new Insets(0, 0, 0, 0));
 
             try {
                 Image back = new Image(new FileInputStream(PATH_BACK_GAME), widthScreen * 3, heightScreen * 3, true, true);
                 BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-                grid.setBackground(new Background(backgroundImage));
+                gridDisc.setBackground(new Background(backgroundImage));
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            Scene scene = new Scene(grid, widthScreen + 50, heightScreen + 50);
+            Scene scene = new Scene(gridDisc, widthScreen + 50, heightScreen + 50);
             this.setScene(scene);
 
-            scene.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> grid.setPrefWidth((double) newSceneWidth));
-            scene.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> grid.setPrefHeight((double) newSceneHeight));
+            scene.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> gridDisc.setPrefWidth((double) newSceneWidth));
+            scene.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> gridDisc.setPrefHeight((double) newSceneHeight));
 
             ColumnConstraints c1 = new ColumnConstraints(widthScreen / 4);
             ColumnConstraints c2 = new ColumnConstraints(widthScreen / 4);
@@ -2636,8 +2668,8 @@ public class GameJavaFX extends Application implements ViewClient {
 
             RowConstraints r = new RowConstraints(heightScreen);
 
-            grid.getColumnConstraints().addAll(c1, c2, c3, c4);
-            grid.getRowConstraints().add(r);
+            gridDisc.getColumnConstraints().addAll(c1, c2, c3, c4);
+            gridDisc.getRowConstraints().add(r);
 
             Button btn1 = new Button();
             Button btn2 = new Button();
@@ -2694,7 +2726,7 @@ public class GameJavaFX extends Application implements ViewClient {
                             game.setWeapon(name.split(INNER_SEP)[0]);
                             this.close();
                         });
-                        grid.add(btnArr.get(cards.indexOf(name)),cards.indexOf(name),0);
+                        gridDisc.add(btnArr.get(cards.indexOf(name)),cards.indexOf(name),0);
                     }
 
 
@@ -2717,6 +2749,7 @@ public class GameJavaFX extends Application implements ViewClient {
                             e.printStackTrace();
                         }
 
+
                         for (String n : cards) {
                             String name = n.toLowerCase();
                             String[] temp;
@@ -2733,6 +2766,7 @@ public class GameJavaFX extends Application implements ViewClient {
                                 powerup = chamberNodePu.path("color").path("yellow").asText();
                             }
 
+                            System.out.println(powerup);
                             Image imgPu = null;
                             try {
                                 imgPu = new Image(new FileInputStream(PATH_POWER_UP + powerup), widthScreen / 2 - 50, heightScreen - 50, true, true);
@@ -2749,7 +2783,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
                             Platform.runLater(run);
 
-                            grid.add(btnArr.get(cards.indexOf(n)),cards.indexOf(n),0);
+                            gridDisc.add(btnArr.get(cards.indexOf(n)),cards.indexOf(n),0);
                         }
 
                         } catch (Exception e) {
