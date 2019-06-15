@@ -2749,7 +2749,7 @@ public class GameJavaFX extends Application implements ViewClient {
                             e.printStackTrace();
                         }
 
-
+                        int i = 0;
                         for (String n : cards) {
                             String name = n.toLowerCase();
                             String[] temp;
@@ -2774,8 +2774,9 @@ public class GameJavaFX extends Application implements ViewClient {
                                 e.printStackTrace();
                             }
 
-                            setButtonBack(btnArr.get(cards.indexOf(n)),imgPu);
-                            Runnable run = () -> btnArr.get(cards.indexOf(n)).setOnAction(e->{
+                            final int key = i;
+                            setButtonBack(btnArr.get(i),imgPu);
+                            Runnable run = () -> btnArr.get(key).setOnAction(e->{
                                 game.setPowerup(n);
                                 System.out.print(n);
                                 this.close();
@@ -2783,7 +2784,8 @@ public class GameJavaFX extends Application implements ViewClient {
 
                             Platform.runLater(run);
 
-                            gridDisc.add(btnArr.get(cards.indexOf(n)),cards.indexOf(n),0);
+                            gridDisc.add(btnArr.get(i),i,0);
+                            i++;
                         }
 
                         } catch (Exception e) {
@@ -2795,6 +2797,12 @@ public class GameJavaFX extends Application implements ViewClient {
     }
 
     public String showTargetAdvanced(ArrayList<String> args) {
+        // primo: numero massimo di target:from different square (boo) : messaggio
+        // poi: colori
+
+        Runnable run = () -> {
+
+        };
         return null;
     }
 
