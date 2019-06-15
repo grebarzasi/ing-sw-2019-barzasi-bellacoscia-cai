@@ -66,8 +66,10 @@ public class Effect {
 //        targetHitSet.remove(myWeapon.getOwner());
         for(; indexTemp<effectList.size();indexTemp++) {
             e = effectList.get(indexTemp);
-            if(targetHitSet==null)
+            if(targetHitSet==null){
+                indexTemp--;
                 return false;
+            }
             targetHitSet = e.applyEffect(myWeapon, targetHitSet);
         }
         indexTemp=0;

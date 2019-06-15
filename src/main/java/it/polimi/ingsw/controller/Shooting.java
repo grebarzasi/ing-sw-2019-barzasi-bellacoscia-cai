@@ -104,22 +104,15 @@ public class Shooting implements ControllerState {
                     chosenTarget.get(0).inflictMark(2,this.getController().getCurrentPlayer());
                 }
 
-                shootingWith.resetWeapon();
-                this.controller.update();
-                this.controller.dereaseMoveLeft();
-                this.controller.goBack();
-
             }
-
-
-        }else {
-
             shootingWith.resetWeapon();
-
-            this.controller.dereaseMoveLeft();
             this.controller.update();
+            this.controller.dereaseMoveLeft();
             this.controller.goBack();
 
+        }else {
+            this.controller.update();
+            this.controller.goBack();
         }
 
 
