@@ -1,6 +1,7 @@
 package it.polimi.ingsw.connection.socket;
 
 
+import it.polimi.ingsw.Lobby;
 import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.virtual_model.SClientCommManager;
 
@@ -21,9 +22,11 @@ public class SClient extends ConnectionTech {
     private BufferedReader in;
     private PrintWriter out;
     private SClientCommManager commManager;
+
     /**
      * Initialize connection and input and output streams
      */
+
         public void run() {
             try {
                 System.out.println("Connecting");

@@ -13,29 +13,26 @@ import static java.lang.Thread.sleep;
 /**
  * @author Gregorio Barzasi
  */
-public class RmiServer extends ConnectionTech implements RmiSInterf {
+public class RmiServer extends ConnectionTech implements RmiServerInterface{
 
-    private Lobby lobby;
-    public RmiCInterf client;
 
-    public boolean login(String username, String color) throws RemoteException {
-        System.out.println("logged " + username +" "+ color);
-        return true;
+    public RmiServer(Lobby lobby){
+        super(lobby);
     }
 
-    public RmiCInterf sendClient(RmiCInterf temp)throws RemoteException{
-        this.client=temp;
-        System.out.println(client.isConnected());
-        return temp;
+
+    public RmiPrefInterf getClientHandler(RmiCInterf c)throws RemoteException{
+        RmiPrefInterf temp=new RmiClientHandler(super.getLobby(),c);
+        return(RmiPrefInterf) UnicastRemoteObject.exportObject(temp, 0);
     }
 
     public void run(){
-        try {
-            super.getPort();
-            RmiSInterf stub = (RmiSInterf) UnicastRemoteObject.exportObject(this, 0);
 
+        try {
             // Bind the remote object's stub in the registry
             Registry registry = LocateRegistry.createRegistry(super.getPort());
+
+            RmiServerInterface stub = (RmiServerInterface) UnicastRemoteObject.exportObject(this, super.getPort());
             registry.bind("Server", stub);
             System.err.println("RMI Server ready");
 
@@ -45,9 +42,4 @@ public class RmiServer extends ConnectionTech implements RmiSInterf {
         }
     }
 
-    public static void main(String args[]){
-            new RmiServer().start();
-
-
-    }
 }

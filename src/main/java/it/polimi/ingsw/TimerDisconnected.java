@@ -1,6 +1,6 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.connection.socket.SClientHandler;
+import it.polimi.ingsw.connection.ClientHandler;
 
 import java.util.TimerTask;
 
@@ -8,8 +8,8 @@ import java.util.TimerTask;
  * @author Gregorio Barzasi
  */
 public class TimerDisconnected extends TimerTask {
-    private SClientHandler cl;
-    public TimerDisconnected(SClientHandler cl){
+    private ClientHandler cl;
+    public TimerDisconnected(ClientHandler cl){
         this.cl=cl;
     }
     @Override

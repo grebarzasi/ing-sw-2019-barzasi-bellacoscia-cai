@@ -22,9 +22,8 @@ public class VirtualLogin {
 
     public boolean send() throws IOException {
         boolean flag=false;
-
         if (connController.isRmi()) {
-            flag = ((RmiClient) connController).getServerRmi().login(this.username, this.character);
+            return ((RmiClient) connController).getClientHandler().login(this.username, this.character);
         } else {
             SClient c = ((SClient) connController);
             System.out.println("sending");

@@ -3,7 +3,7 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.*;
 import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.map.Square;
-import it.polimi.ingsw.connection.socket.SClientHandler;
+import it.polimi.ingsw.connection.ClientHandler;
 
 import java.util.ArrayList;
 
@@ -93,7 +93,7 @@ public class Controller {
 
         ArrayList<Player> playerList = new ArrayList<>();
 
-        for(SClientHandler s: lobby.getJoinedPlayers()){
+        for(ClientHandler s: lobby.getJoinedPlayers()){
             playerList.add(s.getOwner());
         }
 

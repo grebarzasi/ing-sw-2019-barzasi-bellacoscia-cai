@@ -1,6 +1,7 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.connection.socket.SClientHandler;
+import it.polimi.ingsw.connection.ClientHandler;
+import it.polimi.ingsw.connection.socket.SocketClientHandler;
 
 import java.util.TimerTask;
 
@@ -9,9 +10,9 @@ import java.util.TimerTask;
  */
 public class TimerExpired extends TimerTask {
 
-    private SClientHandler cl;
+    private ClientHandler cl;
 
-    public TimerExpired(SClientHandler cl){
+    public TimerExpired(SocketClientHandler cl){
         this.cl=cl;
     }
 

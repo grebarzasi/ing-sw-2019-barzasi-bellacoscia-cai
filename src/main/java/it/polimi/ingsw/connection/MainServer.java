@@ -5,7 +5,8 @@ import it.polimi.ingsw.connection.rmi.RmiServer;
 import it.polimi.ingsw.connection.socket.SServer;
 import it.polimi.ingsw.controller.Controller;
 
-
+import static it.polimi.ingsw.CLI.CliColor.GREEN;
+import static it.polimi.ingsw.CLI.CliColor.YELLOW;
 
 
 public class MainServer {
@@ -16,9 +17,9 @@ public class MainServer {
     private Controller contr;
 
     public MainServer(){
-        this.socketServer=new SServer(this);
-        //this.rmiServer=new RmiServer(this);
         this.lobby=new Lobby(this);
+        this.socketServer=new SServer(lobby);
+        this.rmiServer=new RmiServer(lobby);
     }
 
     public static void main(String[] args){
@@ -27,9 +28,14 @@ public class MainServer {
     }
 
     public void startAll() {
-            lobby.start();
-            socketServer.start();
-            //rmiServer.initConnection();
+        lobby.start();
+        System.out.print(YELLOW+"RMI SERVER");
+        rmiServer.acquireConnInfo();
+        rmiServer.run();
+        System.out.print(GREEN+"SOCKET SERVER");
+        socketServer.acquireConnInfo();
+        socketServer.start();
+        //rmiServer.initConnection();
 
     }
 

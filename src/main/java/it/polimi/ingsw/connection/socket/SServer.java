@@ -1,8 +1,10 @@
 package it.polimi.ingsw.connection.socket;
 
 import it.polimi.ingsw.CLI.CliView;
+import it.polimi.ingsw.Lobby;
 import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.connection.MainServer;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -14,30 +16,15 @@ import java.net.Socket;
  */
 public class SServer extends ConnectionTech {
 
-    private MainServer mainServer;
 
 
-    public SServer(MainServer mainServer){
-        this.mainServer=mainServer;
+    public SServer(Lobby lobby){
+        super(lobby);
     }
     /**
      * Initialize connection and wait for client to connect
      */
     public void run() {
-
-        CliView cli = new CliView();
-        System.out.print("SOCKET SERVER");
-        try {
-            int port=cli.acquirePort();
-            String ip =cli.acquireIp();
-            if(port!=0)
-                setPort(port);
-            if(!ip.isEmpty())
-                setIp(ip);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         try {
             ServerSocket server = new ServerSocket(super.getPort());
 
@@ -45,11 +32,11 @@ public class SServer extends ConnectionTech {
 
             //loops until game start waiting for other players
 
-            SClientHandler temp;
+            SocketClientHandler temp;
             while(true){
                 Socket client = server.accept();
                 System.out.println("\n\nconnection established with\n" + client);
-                temp = new SClientHandler(client,mainServer.getLobby());
+                temp = new SocketClientHandler(client,super.getLobby());
                 temp.start();
             }
 

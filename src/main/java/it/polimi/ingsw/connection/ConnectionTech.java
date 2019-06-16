@@ -1,15 +1,39 @@
 package it.polimi.ingsw.connection;
 
+import it.polimi.ingsw.CLI.CliView;
+import it.polimi.ingsw.Lobby;
+
 import java.io.IOException;
 
 public abstract class ConnectionTech extends Thread {
 
+    private Lobby lobby;
     //default 127.0.0.1:1234
     private int port=1234;
     private String ip = "127.0.0.1";
 
     //default is rmi
     private boolean rmi=false;
+
+    public ConnectionTech(Lobby lobby){
+        this.lobby=lobby;
+    }
+    public ConnectionTech(){
+    }
+
+    public void acquireConnInfo(){
+        CliView cli = new CliView();
+        try {
+            int port=cli.acquirePort();
+            String ip =cli.acquireIp();
+            if(port!=0)
+                setPort(port);
+            if(!ip.isEmpty())
+                setIp(ip);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void setIp(String ip) {
         this.ip = ip;
@@ -36,4 +60,12 @@ public abstract class ConnectionTech extends Thread {
     }
 
     public abstract void run();
+
+    public Lobby getLobby() {
+        return lobby;
+    }
+
+    public void setLobby(Lobby lobby) {
+        this.lobby = lobby;
+    }
 }

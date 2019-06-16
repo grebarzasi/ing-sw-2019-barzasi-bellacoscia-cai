@@ -11,16 +11,15 @@ import it.polimi.ingsw.cards.weapon.Weapon;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Set;
 
 import static it.polimi.ingsw.connection.ConnMessage.*;
 
 public class SServerCommManager implements View {
 
-    private SClientHandler cl;
+    private SocketClientHandler cl;
 
-    public SServerCommManager(SClientHandler cl){
+    public SServerCommManager(SocketClientHandler cl){
         this.cl=cl;
     }
 

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.virtual_model;
 
 import it.polimi.ingsw.connection.ConnectionTech;
+import it.polimi.ingsw.connection.rmi.RmiClient;
 import it.polimi.ingsw.connection.socket.SClient;
 
 import java.io.IOException;
@@ -38,9 +39,9 @@ public class VirtualLobby {
     /**
      * send your game preferences to server
      */
-    public boolean sendPref() throws IOException {
+    public void sendPref() throws IOException {
         if (conn.isRmi()) {
-            return false;
+            ((RmiClient) conn).getClientHandler().sendPref(mapPref,killPref,terminatorPref,finalFrenzyPref);
         } else {
             SClient c = ((SClient) conn);
             System.out.println("sending preferences");
@@ -51,10 +52,6 @@ public class VirtualLobby {
             String reply = c.getInput().readLine();
             if(reply.equals("accepted")){
                 System.out.println(reply);
-                return true;
-            }else{
-                System.out.println("Something went wrong");
-                return false;
             }
         }
     }
@@ -63,26 +60,35 @@ public class VirtualLobby {
      */
 
 
-    public synchronized boolean waitUpdate()throws IOException {
+    public synchronized void waitUpdate()throws IOException {
+        String all;
         if (conn.isRmi()) {
-            return false;
+            if(((RmiClient) conn).getClientHandler().isGameStarted()) {
+                gameStarted = true;
+                return;
+            }
+            if(((RmiClient) conn).getClientHandler().isTimerStarted()) {
+                gameTimerStarted = true;
+                return;
+            }
+            all = ((RmiClient) conn).getClientHandler().waitUpdate();
+            updatePlayers(all);
         } else {
-            String all;
             SClient c = ((SClient) conn);
             all = c.getInput().readLine();
             if(all.equals("*started*")) {
                 gameStarted = true;
-                return true;
+                return;
             }
             if(all.equals("*timer_started*")) {
                 gameTimerStarted = true;
-                return true;
+                return;
             }if(all.equals("*PING*")) {
                 c.getOutput().println("*PONG*");
-                return true;
+                return;
             }
             updatePlayers(all);
-            return true;
+            return;
         }
     }
 

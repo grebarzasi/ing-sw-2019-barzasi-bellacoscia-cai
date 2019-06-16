@@ -15,7 +15,8 @@ import it.polimi.ingsw.cards.Deck;
 import it.polimi.ingsw.cards.WeaponDeck;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Weapon;
-import it.polimi.ingsw.connection.socket.SClientHandler;
+import it.polimi.ingsw.connection.ClientHandler;
+import it.polimi.ingsw.connection.socket.SocketClientHandler;
 import it.polimi.ingsw.virtual_model.UpdateParser;
 import it.polimi.ingsw.virtual_model.VirtualModel;
 import it.polimi.ingsw.virtual_model.VirtualPlayer;
@@ -33,10 +34,10 @@ class UpdateBuilderTest {
     @Test
     void create() throws IOException {
         Lobby lobby = new Lobby();
-        SClientHandler a =new SClientHandler(lobby);
-        SClientHandler b =new SClientHandler(lobby);
-        SClientHandler c =new SClientHandler(lobby);
-        SClientHandler d =new SClientHandler(lobby);
+        ClientHandler a =new SocketClientHandler(lobby);
+        ClientHandler b =new SocketClientHandler(lobby);
+        ClientHandler c =new SocketClientHandler(lobby);
+        ClientHandler d =new SocketClientHandler(lobby);
 
         Player p1 = a.getOwner();
         Player p2 = b.getOwner();

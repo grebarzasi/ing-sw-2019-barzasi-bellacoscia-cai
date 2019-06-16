@@ -1,10 +1,11 @@
 package it.polimi.ingsw.virtual_model;
 
 
+import java.rmi.Remote;
 import java.util.ArrayList;
 import java.util.Set;
 
-public interface ViewClient {
+public interface ViewClient extends Remote {
 
     /**
      * Shows the PowerUps and makes the user choose one, then returns it

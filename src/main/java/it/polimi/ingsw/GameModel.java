@@ -3,7 +3,7 @@ package it.polimi.ingsw;
 import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.cards.weapon.Effect;
 import it.polimi.ingsw.cards.weapon.Weapon;
-import it.polimi.ingsw.connection.socket.SClientHandler;
+import it.polimi.ingsw.connection.ClientHandler;
 import it.polimi.ingsw.controller.Controller;
 
 
@@ -66,7 +66,7 @@ public class GameModel {
     public GameModel(Lobby lobbyToStartFrom, Controller controller) {
 
 
-        for (SClientHandler client : lobbyToStartFrom.getJoinedPlayers()){
+        for (ClientHandler client : lobbyToStartFrom.getJoinedPlayers()){
            this.playerList.add(client.getOwner());
        }
         for (Player p : this.playerList) {
