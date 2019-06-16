@@ -19,11 +19,13 @@ public class CliLobby extends Thread{
     private ConnectionTech c;
     private BufferedReader sc;
     private VirtualPlayer p;
+    private CliCountDown count;
 
     public CliLobby(ConnectionTech c, BufferedReader sc, VirtualPlayer p){
         this.c=c;
         this.sc=sc;
         this.p=p;
+        this.count=new CliCountDown(COUNTDOWN);
     }
 
     public void startLobby()throws IOException{
@@ -128,16 +130,8 @@ public class CliLobby extends Thread{
         System.out.println(WAITINGROOM_HEAD);
 
         while (!lobby.isGameStarted()){
-            if(lobby.hasGameTimerStarted()) {
-                System.out.println("\n"+this.getThreadGroup()+INNER_SEP+this.getId());
-                System.out.println(lobby.hasGameTimerStarted());
-                lobby.setGameTimerStarted(false);
-                new CliCountDown(COUNTDOWN).start();
-                try {
-                    sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            if(lobby.hasGameTimerStarted()&&!count.isAlive()) {
+                count.start();
             }
             lobby.waitUpdate();
             for(VirtualPlayer p : lobby.getNewPlayersList() ){

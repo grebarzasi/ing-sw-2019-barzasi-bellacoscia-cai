@@ -95,16 +95,16 @@ public class RmiClientHandler extends ClientHandler implements RmiPrefInterf {
         e.printStackTrace();
     }
     }
-    //remote
-    public synchronized void setView(ViewClient view) {
+    //reset
+    public void setView(ViewClient view) {
        setViewClient(view);
     }
 
-    public synchronized ViewClient getViewClient() {
+    public ViewClient getViewClient() {
         return viewClient;
     }
 
-    public synchronized void setViewClient(ViewClient viewClient) {
+    public void setViewClient(ViewClient viewClient) {
         this.viewClient = viewClient;
     }
 

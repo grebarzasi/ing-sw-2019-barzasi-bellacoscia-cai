@@ -69,10 +69,8 @@ public class VirtualLobby {
             }
             if(((RmiClient) conn).getClientHandler().isTimerStarted()) {
                 gameTimerStarted = true;
-                return;
             }
             all = ((RmiClient) conn).getClientHandler().waitUpdate();
-            updatePlayers(all);
         } else {
             SClient c = ((SClient) conn);
             all = c.getInput().readLine();
@@ -87,9 +85,8 @@ public class VirtualLobby {
                 c.getOutput().println("*PONG*");
                 return;
             }
-            updatePlayers(all);
-            return;
         }
+        updatePlayers(all);
     }
 
     /**
