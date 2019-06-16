@@ -397,7 +397,7 @@ public class StartJavaFX extends Application {
 
     public  void setBackground(GridPane grid){
         try {
-            Image back = new Image(new FileInputStream(PATH_BACK), widthScreen *2, heightScreen *2, true, true);
+            Image back = new Image(new FileInputStream(PATH_BACK), widthScreen , heightScreen , true, true);
             BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
             grid.setBackground(new Background(backgroundImage));
         }catch (IOException e){

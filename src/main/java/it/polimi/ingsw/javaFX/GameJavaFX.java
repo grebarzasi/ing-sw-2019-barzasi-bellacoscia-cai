@@ -294,7 +294,7 @@ public class GameJavaFX extends Application implements ViewClient {
          * set Background.
          */
         try {
-            Image back = new Image(new FileInputStream(PATH_BACK_GAME), widthScreen * 2, heightScreen * 2, true, true);
+            Image back = new Image(new FileInputStream(PATH_BACK_GAME), widthScreen , heightScreen , true, true);
             BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
             grid.setBackground(new Background(backgroundImage));
         } catch (IOException e) {
@@ -2581,7 +2581,7 @@ public class GameJavaFX extends Application implements ViewClient {
             gridDisc.setAlignment(Pos.CENTER);
             gridDisc.setHgap(20);
             gridDisc.setVgap(0);
-            gridDisc.setPadding(new Insets(0, 0, 0, 0));
+            gridDisc.setPadding(new Insets(50, 50, 50, 50));
 
             try {
                 Image back = new Image(new FileInputStream(PATH_BACK_GAME), widthScreen * 3, heightScreen * 3, true, true);
@@ -2591,7 +2591,7 @@ public class GameJavaFX extends Application implements ViewClient {
                 e.printStackTrace();
             }
 
-            Scene scene = new Scene(gridDisc, widthScreen + 50, heightScreen + 50);
+            Scene scene = new Scene(gridDisc, widthScreen + 200, heightScreen + 100);
             this.setScene(scene);
 
             scene.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> gridDisc.setPrefWidth((double) newSceneWidth));

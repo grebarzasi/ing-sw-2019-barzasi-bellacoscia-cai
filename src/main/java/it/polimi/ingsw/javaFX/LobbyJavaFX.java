@@ -260,14 +260,14 @@ public class LobbyJavaFX extends Application {
         btnStart.setAlignment(Pos.CENTER);
         btnStart.setFont(font);
 
-        Button btnBack = new Button("Indietro");
-        btnBack.setAlignment(Pos.CENTER);
+        //Button btnBack = new Button("Indietro");
+        //btnBack.setAlignment(Pos.CENTER);
 
             /**
              * merge layout
              */
 
-        lobbyGrid.add(btnBack, 0, 0);
+        //lobbyGrid.add(btnBack, 0, 0);
         lobbyGrid.add(title, 1, 1);
         lobbyGrid.add(skuH, 1, 2);
         lobbyGrid.add(terH, 1, 3);
@@ -303,6 +303,7 @@ public class LobbyJavaFX extends Application {
             skull = Integer.parseInt(skuBox.getValue().toString());
         });
 
+        /*
         btnBack.setOnAction(e -> {
             StartJavaFX start = new StartJavaFX();
             try {
@@ -311,6 +312,7 @@ public class LobbyJavaFX extends Application {
                 ex.printStackTrace();
             }
         });
+        */
 
         terBox.setOnAction(e -> {
             if (terBox.getValue().toString().equals("SI")) {
