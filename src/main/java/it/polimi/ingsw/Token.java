@@ -20,11 +20,17 @@ public class Token {
         return owner.getCharacter();
     }
 
-    public boolean equals(Token t){
-        if(t.getOwner().getCharacter().equals(owner.getCharacter()))
+    @Override
+    public boolean equals(Object o){
+        if(o==this)
+            return true;
+        if (!(o instanceof Token)) {
+            return false;
+        }
+        Token c=(Token)o;
+        if(c.getOwner().getCharacter().equals(owner.getCharacter()))
             return true;
         return false;
-
     }
 
 

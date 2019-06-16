@@ -106,7 +106,6 @@ public class PlayerBoard {
 
             mark.remove(t);
             damage(t);
-
         }
 
         damage(t);

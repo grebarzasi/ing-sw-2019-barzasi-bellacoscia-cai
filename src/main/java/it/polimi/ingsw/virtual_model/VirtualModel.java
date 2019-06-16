@@ -34,10 +34,6 @@ public class VirtualModel {
         }
         return null;
     }
-    public void setAllPlayers(ArrayList<VirtualPlayer> allPlayers) {
-        this.allPlayers = allPlayers;
-    }
-
     public VirtualBoard getBoard() {
         return board;
     }
@@ -47,7 +43,7 @@ public class VirtualModel {
     }
 
 
-    public ArrayList<VirtualPlayer> getAllPlayers() {
+    public synchronized ArrayList<VirtualPlayer> getAllPlayers() {
         return allPlayers;
     }
 
