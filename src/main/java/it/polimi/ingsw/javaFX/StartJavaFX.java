@@ -20,6 +20,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
@@ -46,6 +47,15 @@ public class StartJavaFX extends Application {
     private ConnectionTech c;
     private VirtualPlayer p;
 
+    double widthScreen = Screen.getPrimary().getBounds().getWidth();
+    double heightScreen = Screen.getPrimary().getBounds().getHeight();
+    double heightBtn = heightScreen / 15;
+    double heightTitle = heightBtn * 4;
+    double heightCharac = heightBtn * 5;
+
+    Button btnLobby = new Button("Lobby");
+
+
 
     public static void main(String[] args){
 
@@ -55,9 +65,6 @@ public class StartJavaFX extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        double width = primaryStage.getMaxWidth();
-        double height = primaryStage.getMaxHeight();
-
         primaryStage.setTitle("Adrenalina");
 
         Group root = new Group();
@@ -66,11 +73,21 @@ public class StartJavaFX extends Application {
 
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
-        grid.setHgap(50);
-        grid.setVgap(30);
-        grid.setPadding(new Insets(25, 25, 0, 25));
+        grid.setHgap(30);
+        grid.setVgap(110);
+        grid.setPadding(new Insets(10, 25, 0, 25));
 
-        Scene scene = new Scene(grid,width,height);
+        RowConstraints r1 = new RowConstraints(heightTitle);
+        RowConstraints r2 = new RowConstraints(heightBtn);
+        RowConstraints r3 = new RowConstraints(heightCharac);
+
+        ColumnConstraints c1 = new ColumnConstraints(widthScreen - 30);
+
+        grid.getColumnConstraints().add(c1);
+        grid.getRowConstraints().addAll(r1,r2,r3);
+
+
+        Scene scene = new Scene(grid,widthScreen,heightScreen);
         primaryStage.setScene(scene);
 
         /**
@@ -83,7 +100,7 @@ public class StartJavaFX extends Application {
          */
         Image title;
         ImageView titleV;
-        title = new Image(new FileInputStream(PATH_TITLE),1200,700,true,true);
+        title = new Image(new FileInputStream(PATH_TITLE),widthScreen,heightTitle,true,true);
         titleV = new ImageView(title);
         VBox ver = new VBox();
         ver.setAlignment(Pos.TOP_CENTER);
@@ -92,13 +109,13 @@ public class StartJavaFX extends Application {
         /**
          * set bottom characters
          */
-        ImageView yellowV = new ImageView(new Image(new FileInputStream(PATH_YELLOW_CHARACTER), 250 ,250,true,true));
-        ImageView redV = new ImageView(new Image(new FileInputStream(PATH_RED_CHARACTER), 250 ,250,true,true));;
-        ImageView blueV = new ImageView(new Image(new FileInputStream(PATH_BLUE_CHARACTER), 250 ,250,true,true));;
-        ImageView greenV = new ImageView(new Image(new FileInputStream(PATH_GREEN_CHARACTER), 250 ,250,true,true));;
-        ImageView grayV = new ImageView(new Image(new FileInputStream(PATH_GREY_CHARACTER), 250 ,250,true,true));;
+        ImageView yellowV = new ImageView(new Image(new FileInputStream(PATH_YELLOW_CHARACTER), widthScreen ,heightCharac,true,true));
+        ImageView redV = new ImageView(new Image(new FileInputStream(PATH_RED_CHARACTER), widthScreen ,heightCharac,true,true));;
+        ImageView blueV = new ImageView(new Image(new FileInputStream(PATH_BLUE_CHARACTER), widthScreen ,heightCharac,true,true));;
+        ImageView greenV = new ImageView(new Image(new FileInputStream(PATH_GREEN_CHARACTER), widthScreen ,heightCharac,true,true));;
+        ImageView grayV = new ImageView(new Image(new FileInputStream(PATH_GREY_CHARACTER), widthScreen ,heightCharac,true,true));;
 
-        HBox charList = new HBox(40);
+        HBox charList = new HBox(10);
         charList.setAlignment(Pos.BOTTOM_CENTER);
         charList.getChildren().add(yellowV);
         charList.getChildren().add(redV);
@@ -113,11 +130,11 @@ public class StartJavaFX extends Application {
         Button btnRules = new Button();
         Button btnLogin = new Button("Login");
         Button btnSettings = new Button("Settings");
-        Image imgLogin = new Image(new FileInputStream(PATH_LOGIN),50,50,true,true);
+        Image imgLogin = new Image(new FileInputStream(PATH_LOGIN),widthScreen/3,heightBtn,true,true);
         btnLogin.setGraphic(new ImageView(imgLogin));
-        Image imgSettings = new Image(new FileInputStream(PATH_SETTINGS),50,50,true,true);
+        Image imgSettings = new Image(new FileInputStream(PATH_SETTINGS),widthScreen/3,heightBtn,true,true);
         btnSettings.setGraphic(new ImageView(imgSettings));
-        Image imgRules = new Image(new FileInputStream(PATH_RULES),100,100,true,true);
+        Image imgRules = new Image(new FileInputStream(PATH_RULES),widthScreen/3,heightBtn,true,true);
         btnRules.setGraphic(new ImageView(imgRules));
 
         HBox buttonList = new HBox(20);
@@ -126,10 +143,11 @@ public class StartJavaFX extends Application {
         buttonList.getChildren().add(btnLogin);
         buttonList.getChildren().add(btnSettings);
 
-        Button btnLobby = new Button("Lobby");
 
 
-        VBox v = new VBox(50);
+        VBox v = new VBox(20);
+        btnLobby.setPrefSize(widthScreen/10,heightScreen);
+        btnLobby.setOpacity(0);
         v.setAlignment(Pos.CENTER);
         v.getChildren().add(buttonList);
         v.getChildren().add(btnLobby);
@@ -143,8 +161,10 @@ public class StartJavaFX extends Application {
         layout.getChildren().add(v);
         layout.getChildren().add(charList);
 
-        grid.add(layout,1,1);
-
+        //grid.add(layout,1,1);
+        grid.add(titleV,0,0);
+        grid.add(v,0,1);
+        grid.add(charList,0,2);
 
         btnLogin.setOnAction(e -> {
 
@@ -312,7 +332,7 @@ public class StartJavaFX extends Application {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-
+                btnLobby.setOpacity(1);
             });
 
         }
@@ -377,7 +397,7 @@ public class StartJavaFX extends Application {
 
     public  void setBackground(GridPane grid){
         try {
-            Image back = new Image(new FileInputStream(PATH_BACK), 2000, 1200, true, true);
+            Image back = new Image(new FileInputStream(PATH_BACK), widthScreen *2, heightScreen *2, true, true);
             BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
             grid.setBackground(new Background(backgroundImage));
         }catch (IOException e){

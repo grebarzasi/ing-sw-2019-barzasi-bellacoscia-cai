@@ -282,7 +282,7 @@ public class GameJavaFX extends Application implements ViewClient {
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(0);
         grid.setVgap(0);
-        grid.setPadding(new Insets(0, 0, 0, 0));
+        grid.setPadding(new Insets(10, 20, 100, 10));
 
         Scene scene = new Scene(grid, widthScreen, heightScreen);
         primaryStage.setScene(scene);
@@ -294,7 +294,7 @@ public class GameJavaFX extends Application implements ViewClient {
          * set Background.
          */
         try {
-            Image back = new Image(new FileInputStream(PATH_BACK_GAME), widthScreen, heightScreen, true, true);
+            Image back = new Image(new FileInputStream(PATH_BACK_GAME), widthScreen * 2, heightScreen * 2, true, true);
             BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
             grid.setBackground(new Background(backgroundImage));
         } catch (IOException e) {
