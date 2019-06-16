@@ -98,6 +98,10 @@ RISALIRE ALLA CELLA!!
 public class GameJavaFX extends Application implements ViewClient {
 
     private boolean start;
+    private boolean move;
+    private boolean pick;
+    private boolean shoot;
+
 
     private VirtualModel model;
 
@@ -191,81 +195,84 @@ public class GameJavaFX extends Application implements ViewClient {
 
     public GameJavaFX(VirtualModel model) {
 
-        this.start = false;
-
         this.model = model;
 
-        this.parser = new UpdateParser(model);
+        start = false;
+        move = false;
+        pick = false;
+        shoot = false;
 
-        this.game = new VirtualGame();
-        this.font = new Font(20);
+        parser = new UpdateParser(model);
 
-        this.action = "";
-        this.decision = "";
+        game = new VirtualGame();
+        font = new Font(20);
 
-        this.btnCell = new ArrayList<>();
-        this.msg = new TextField();
-        this.pointsField = new TextField();
-        this.gridSkull = new GridPane();
-        this.btnMove = new Button("Muovi");
-        this.btnPick = new Button("Raccogli");
-        this.btnShoot = new Button("Spara");
-        this.btnEnd = new Button("Termina il turno");
-        this.btnCancel = new Button("Annulla");
-        this.btnTerminator = new Button("Terminator");
-        this.btnPowerUp = new Button("Power-up");
-        this.btnDeck = new Button();
-        this.gridPBoard = new GridPane();
+        action = "";
+        decision = "";
 
-        this.btnPwe1 = new Button();
-        this.btnPwe2 = new Button();
-        this.btnPwe3 = new Button();
-        this.btnPpu1 = new Button();
-        this.btnPpu2 = new Button();
-        this.btnPpu3 = new Button();
-        this.pu = new ArrayList<>();
-        this.we = new ArrayList<>();
-        this.gridPAmmo = new GridPane();
-        this.gridOtherBoard1 = new GridPane();
-        this.gridOtherBoard2 = new GridPane();
-        this.gridOtherBoard3 = new GridPane();
-        this.gridOtherBoard4 = new GridPane();
-        this.gridOtherBoard5 = new GridPane();
-        this.gridOtherBoards = new ArrayList<>();
-        this.weOther1 = new ArrayList<>();
-        this.weOther2 = new ArrayList<>();
-        this.weOther3 = new ArrayList<>();
-        this.weOther4 = new ArrayList<>();
-        this.weOther5 = new ArrayList<>();
-        this.otherWe = new ArrayList<>();
-        this.gridOtherAmmo1 = new GridPane();
-        this.gridOtherAmmo2 = new GridPane();
-        this.gridOtherAmmo3 = new GridPane();
-        this.gridOtherAmmo4 = new GridPane();
-        this.gridOtherAmmo5 = new GridPane();
-        this.gridOtherAmmo = new ArrayList<>();
+        btnCell = new ArrayList<>();
+        msg = new TextField();
+        pointsField = new TextField();
+        gridSkull = new GridPane();
+        btnMove = new Button("Muovi");
+        btnPick = new Button("Raccogli");
+        btnShoot = new Button("Spara");
+        btnEnd = new Button("Termina il turno");
+        btnCancel = new Button("Annulla");
+        btnTerminator = new Button("Terminator");
+        btnPowerUp = new Button("Power-up");
+        btnDeck = new Button();
+        gridPBoard = new GridPane();
 
-        this.widthScreen = Screen.getPrimary().getBounds().getWidth();
-        this.widthLateral = widthScreen / 4;
-        this.widthCenter = widthScreen / 2;
-        this.widthSkull = widthLateral / 9;
-        this.widthBoard = (widthCenter - 120) / 4;
-        this.widthPers = widthLateral;
-        this.widthCard = widthPers / 3;
-        this.widthOCard = widthLateral / 3;
-        this.widthOther = widthOCard * 2;
-        this.widthOtherWeapon = widthCard / 3;
-        this.heightScreen = Screen.getPrimary().getBounds().getHeight();
-        this.heightLateral = heightScreen / 6;
-        this.heightCenter = heightScreen / 2;
-        this.heightBoard = heightCenter / 3;
-        this.heightPBoard = heightCenter / 3;
-        this.heightPCards = heightPBoard * 2;
-        this.heightCard = heightPCards / 2;
-        this.heightOther = heightCenter / 5;
-        this.heightOtherWeapon = heightCenter / 5;
-        this.heightOtherAmmo = heightOther / 5;
-        this.heightOtherBoard = heightOtherAmmo * 4;
+        btnPwe1 = new Button();
+        btnPwe2 = new Button();
+        btnPwe3 = new Button();
+        btnPpu1 = new Button();
+        btnPpu2 = new Button();
+        btnPpu3 = new Button();
+        pu = new ArrayList<>();
+        we = new ArrayList<>();
+        gridPAmmo = new GridPane();
+        gridOtherBoard1 = new GridPane();
+        gridOtherBoard2 = new GridPane();
+        gridOtherBoard3 = new GridPane();
+        gridOtherBoard4 = new GridPane();
+        gridOtherBoard5 = new GridPane();
+        gridOtherBoards = new ArrayList<>();
+        weOther1 = new ArrayList<>();
+        weOther2 = new ArrayList<>();
+        weOther3 = new ArrayList<>();
+        weOther4 = new ArrayList<>();
+        weOther5 = new ArrayList<>();
+        otherWe = new ArrayList<>();
+        gridOtherAmmo1 = new GridPane();
+        gridOtherAmmo2 = new GridPane();
+        gridOtherAmmo3 = new GridPane();
+        gridOtherAmmo4 = new GridPane();
+        gridOtherAmmo5 = new GridPane();
+        gridOtherAmmo = new ArrayList<>();
+
+        widthScreen = Screen.getPrimary().getBounds().getWidth();
+        widthLateral = widthScreen / 4;
+        widthCenter = widthScreen / 2;
+        widthSkull = widthLateral / 9;
+        widthBoard = (widthCenter - 120) / 4;
+        widthPers = widthLateral;
+        widthCard = widthPers / 3;
+        widthOCard = widthLateral / 3;
+        widthOther = widthOCard * 2;
+        widthOtherWeapon = widthCard / 3;
+        heightScreen = Screen.getPrimary().getBounds().getHeight();
+        heightLateral = heightScreen / 6;
+        heightCenter = heightScreen / 2;
+        heightBoard = heightCenter / 3;
+        heightPBoard = heightCenter / 3;
+        heightPCards = heightPBoard * 2;
+        heightCard = heightPCards / 2;
+        heightOther = heightCenter / 5;
+        heightOtherWeapon = heightCenter / 5;
+        heightOtherAmmo = heightOther / 5;
+        heightOtherBoard = heightOtherAmmo * 4;
 
     }
 
@@ -1657,12 +1664,37 @@ public class GameJavaFX extends Application implements ViewClient {
                         }
                     }
                     update();
+
+                    hideBtn(btnCancel, 0);
+
                 } else {
                     msg.setText(ERR_PLAYER);
                 }
             });
         }
 
+    }
+
+    private void setWeapon(VirtualPlayer p, ArrayList<Button> btnArr) {
+        for (Button btn : btnArr) {
+            btn.setOnAction(e -> {
+                int i = btnArr.indexOf(btn);
+                infoWindow iw = new infoWindow(p, i, false);
+                iw.show();
+            });
+        }
+    }
+
+    public boolean verifyDiffSquare(ArrayList<String> args,String test){
+        VirtualPlayer p = model.findPlayer(test);
+        VirtualPlayer v;
+        for(String s: args) {
+            v = model.findPlayer(s);
+            if (p.getRow() == v.getRow() && p.getColumn() == v.getColumn()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void update() {
@@ -1712,10 +1744,6 @@ public class GameJavaFX extends Application implements ViewClient {
             hideBtn(btnShoot, 0);
             hideBtn(btnPowerUp, 0);
 
-            btnCancel.setOnAction(e -> {
-                update();
-            });
-
             btnMove.setOnAction(e -> {
                 if (model.getTurn().getCharacter().equals(model.getOwner().getCharacter()) && btnShoot.getOpacity() == 1) {
 
@@ -1731,7 +1759,7 @@ public class GameJavaFX extends Application implements ViewClient {
                         hideCell(btnCell.get(getCoordinate(s)), 0.5);
                     }
                 } else
-                    msg.setText("Aspetta il tuo turno...");
+                    msg.setText(WAIT);
 
             });
             btnPick.setOnAction(e -> {
@@ -1749,7 +1777,7 @@ public class GameJavaFX extends Application implements ViewClient {
                     }
 
                 } else
-                    msg.setText("Aspetta il tuo turno...");
+                    msg.setText(WAIT);
             });
 
             btnShoot.setOnAction(e -> {
@@ -1767,7 +1795,7 @@ public class GameJavaFX extends Application implements ViewClient {
                         }
                     }
                 } else
-                    msg.setText("Aspetta il tuo turno...");
+                    msg.setText(WAIT);
             });
 
             btnPowerUp.setOnAction(e -> {
@@ -1815,11 +1843,33 @@ public class GameJavaFX extends Application implements ViewClient {
                 }
             }
 
+            ArrayList<String> infoWe = new ArrayList<>();
             for (ArrayList<Button> btnArr : btnCell) {
                 btnArr.get(5).setOnAction(e -> {
                     if (btnCell.indexOf(btnArr) == 2 || btnCell.indexOf(btnArr) == 4 || btnCell.indexOf(btnArr) == 11) {
-                        //chooseWeapon cw = new chooseWeapon();
-                        //cw.show();
+
+                        for (String pos : model.getBoard().getMap().getCells().keySet()) {
+
+                            if(getCoordinate(pos) == btnCell.indexOf(btnArr)){
+                                switch(model.getBoard().getMap().getCells().get(pos).getContent().split(INFO_SEP).length){
+                                    case(3):{
+                                        infoWe.add(model.getBoard().getMap().getCells().get(pos).getContent().split(INFO_SEP)[2]);
+
+                                    }
+                                    case(2):{
+                                        infoWe.add(model.getBoard().getMap().getCells().get(pos).getContent().split(INFO_SEP)[1]);
+
+                                    }
+                                    case(1):{
+                                        infoWe.add(model.getBoard().getMap().getCells().get(pos).getContent().split(INFO_SEP)[0]);
+
+                                    }
+                                }
+                                chooseWeapon cw = new chooseWeapon(infoWe);
+                                cw.show();
+
+                            }
+                        }
                     }
                 });
             }
@@ -1867,20 +1917,16 @@ public class GameJavaFX extends Application implements ViewClient {
         }
     }
 
-    private void setWeapon(VirtualPlayer p, ArrayList<Button> btnArr) {
-        for (Button btn : btnArr) {
-            btn.setOnAction(e -> {
-                int i = btnArr.indexOf(btn);
-                infoWindow iw = new infoWindow(p, i, false);
-                iw.show();
-            });
-        }
-    }
-
     @Override
     public String showWeapon(ArrayList<String> args) {
 
         Runnable run = () -> {
+
+            btnCancel.setOnAction(e->{
+                update();
+                game.setWeapon(NOTHING);
+            });
+
             if(args.size() < 4) {
 
                 DropShadow borderGlow = new DropShadow();
@@ -1890,16 +1936,33 @@ public class GameJavaFX extends Application implements ViewClient {
                 borderGlow.setOffsetX(0f);
                 borderGlow.setOffsetY(0f);
 
-                for (Button btn : we) {
-                    btn.setEffect(borderGlow);
-                    btn.setOnAction(e->{
-                        game.setWeapon(args.get(we.indexOf(btn)));
-                    });
+                if(shoot) {
+                    for (Button btn : we) {
+                        btn.setEffect(borderGlow);
+                        btn.setOnAction(e -> {
+                            game.setWeapon(args.get(we.indexOf(btn)));
+                        });
+                    }
+                    shoot = false;
                 }
 
-                if(model.getOwner().getRow()*4 + model.getOwner().getColumn() == 2 || model.getOwner().getRow()*4 + model.getOwner().getColumn() == 4 || model.getOwner().getRow()*4 + model.getOwner().getColumn() == 11) {
+                if(model.getOwner().getRow()*4 + model.getOwner().getColumn() == 2
+                        || model.getOwner().getRow()*4 + model.getOwner().getColumn() == 4
+                        || model.getOwner().getRow()*4 + model.getOwner().getColumn() == 11
+                        || pick
+                ){
                     chooseWeapon cw = new chooseWeapon(args);
                     cw.show();
+                    pick = false;
+                }else{
+                    for (ArrayList<Button> btnArr : btnCell) {
+                        btnArr.get(5).setOnAction(e -> {
+                            if (btnCell.indexOf(btnArr) == 2 || btnCell.indexOf(btnArr) == 4 || btnCell.indexOf(btnArr) == 11) {
+                                chooseWeapon cw = new chooseWeapon(args);
+                                cw.show();
+                            }
+                        });
+                    }
                 }
             }else{
                 discardCards dc = new discardCards(args,false);
@@ -1925,6 +1988,11 @@ public class GameJavaFX extends Application implements ViewClient {
     @Override
     public String showPowerUp(ArrayList<String> args) {
         Runnable run = () -> {
+
+            btnCancel.setOnAction(e->{
+                update();
+                game.setPowerup(NOTHING);
+            });
 
             if(args.size() != model.getOwner().getPowerUps().size()) {
                 discardCards dc = new discardCards(args,true);
@@ -1978,6 +2046,7 @@ public class GameJavaFX extends Application implements ViewClient {
                     case ("move"): { //move
                         hideBtn(btnMove,1);
                         btnMove.setOnAction(e->{
+                            move = true;
                             System.out.println(act);
                             game.setAction(act);
                             for (ArrayList<Button> btnArr : btnCell) {
@@ -1990,6 +2059,7 @@ public class GameJavaFX extends Application implements ViewClient {
                     case ("pick"): { //pick
                         hideBtn(btnPick, 1);
                         btnPick.setOnAction(e->{
+                            pick = true;
                             System.out.println(act);
 
                             game.setAction(act);
@@ -2002,10 +2072,18 @@ public class GameJavaFX extends Application implements ViewClient {
                         break;
                     }
                     case ("shoot"): { //shoot
+                        hideBtn(btnCancel,1);
+                        btnCancel.setOnAction(e->{
+                            update();
+                            game.setAction(NOTHING);
+                        });
                         btnShoot.setText("Spara");
                         hideBtn(btnShoot, 1);
                         btnShoot.setOnAction(e->{
+                            shoot = true;
+
                             game.setAction(act);
+
                             update();
 
                         });
@@ -2108,6 +2186,12 @@ public class GameJavaFX extends Application implements ViewClient {
         Runnable run = () -> {
             msg.setText(CHOOSE_DIRECTION);
 
+            hideBtn(btnCancel,1);
+            btnCancel.setOnAction(e->{
+                update();
+                game.setDirection(NOTHING);
+            });
+
             int i = model.getOwner().getRow();
             int j = model.getOwner().getColumn();
 
@@ -2171,6 +2255,13 @@ public class GameJavaFX extends Application implements ViewClient {
 
 
         Runnable run = () -> {
+
+            hideBtn(btnCancel,1);
+            btnCancel.setOnAction(e->{
+                update();
+                game.setEffect(NOTHING);
+            });
+
             switch (args.size()) {
                 case (4): {
                     hideBtn(btnPowerUp,1);
@@ -2213,6 +2304,160 @@ public class GameJavaFX extends Application implements ViewClient {
         Runnable up = () -> update();
         Platform.runLater(up);
 
+        return res;
+    }
+
+    @Override
+    public String showTargets(ArrayList<String> args) {return null;}
+
+            /*
+
+        Runnable run = () -> {
+
+            for (ArrayList<Button> btnArr : btnCell) {
+                hideCell(btnArr, 0.5);
+            }
+
+            for (String color : args) {
+                for (VirtualPlayer p : model.getAllPlayers()) {
+                    if (p.getCharacter().equals(color)) {
+                        switch (p.getCharacter()) {
+                            case ("yellow"): {
+                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(Y), 1);
+                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(Y).setOnAction(e -> {
+                                    game.setTargetPlayer(p.getCharacter());
+                                });
+                                break;
+                            }
+                            case ("red"): {
+                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(R), 1);
+                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(R).setOnAction(e -> {
+                                    game.setTargetPlayer(p.getCharacter());
+                                });
+                                break;
+                            }
+                            case ("blue"): {
+                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(B), 1);
+                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(B).setOnAction(e -> {
+                                    game.setTargetPlayer(p.getCharacter());
+                                });
+                                break;
+                            }
+                            case ("green"): {
+                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(G), 1);
+                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(G).setOnAction(e -> {
+                                    game.setTargetPlayer(p.getCharacter());
+                                });
+                                break;
+                            }
+                            case ("grey"): {
+                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(GR), 1);
+                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(GR).setOnAction(e -> {
+                                    game.setTargetPlayer(p.getCharacter());
+                                });
+                                break;
+                            }
+                        }
+                    }
+                }
+
+            }
+        };
+
+        Platform.runLater(run);
+
+        while (game.getTargetPlayer().equals("")) ;
+        String res = game.getTargetPlayer();
+        game.setTargetPlayer("");
+
+        return res;
+    }
+
+    */
+
+    @Override
+    public String showTargetAdvanced(ArrayList<String> args) {
+        // primo: numero massimo di target:from different square (boo) : messaggio
+        // poi: colori
+
+        Runnable run = () -> {
+
+            msg.setText(args.get(0).split(INNER_SEP)[2]);
+
+            hideBtn(btnCancel,1);
+            btnCancel.setOnAction(e->{
+                update();
+                game.setTargetPlayer(NOTHING);
+            });
+
+            for (ArrayList<Button> btnArr : btnCell) {
+                hideCell(btnArr, 0.5);
+            }
+
+            Boolean diff = Boolean.parseBoolean(args.get(0).split(INNER_SEP)[1]);
+            args.remove(0);
+            for (String color : args) {
+                for (VirtualPlayer p : model.getAllPlayers()) {
+                    if (p.getCharacter().equals(color) && (!diff || verifyDiffSquare(game.getTargetPlayers(),p.getCharacter()) )) {
+                        switch (p.getCharacter()) {
+                            case ("yellow"): {
+                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(Y), 1);
+                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(Y).setOnAction(e -> {
+                                    System.out.println(p.getCharacter());
+                                    game.getTargetPlayers().add(p.getCharacter());
+                                });
+                                break;
+                            }
+                            case ("red"): {
+                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(R), 1);
+                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(R).setOnAction(e -> {
+                                    System.out.println(p.getCharacter());
+                                    game.getTargetPlayers().add(p.getCharacter());
+                                });
+                                break;
+                            }
+                            case ("blue"): {
+                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(B), 1);
+                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(B).setOnAction(e -> {
+                                    System.out.println(p.getCharacter());
+                                    game.getTargetPlayers().add(p.getCharacter());
+                                });
+                                break;
+                            }
+                            case ("green"): {
+                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(G), 1);
+                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(G).setOnAction(e -> {
+                                    System.out.println(p.getCharacter());
+                                    game.getTargetPlayers().add(p.getCharacter());
+                                });
+                                break;
+                            }
+                            case ("grey"): {
+                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(GR), 1);
+                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(GR).setOnAction(e -> {
+                                    System.out.println(p.getCharacter());
+                                    game.getTargetPlayers().add(p.getCharacter());
+                                });
+                                break;
+                            }
+                        }
+                    }
+                }
+
+            }
+        };
+
+        int max = Integer.parseInt(args.get(0).split(INNER_SEP)[0]);
+        System.out.println(max);
+        Platform.runLater(run);
+        int k = game.getTargetPlayers().size();
+        while(game.getTargetPlayers().size() != max);
+
+        String res = "";
+        for(String targ : game.getTargetPlayers()){
+            res = res + targ + INFO_SEP;
+        }
+        game.setTargetPlayers(new ArrayList<>());
         return res;
     }
 
@@ -2513,6 +2758,9 @@ public class GameJavaFX extends Application implements ViewClient {
             we1.setPrefSize(widthScreen,heightScreen);
             we2.setPrefSize(widthScreen,heightScreen);
             we3.setPrefSize(widthScreen,heightScreen);
+            hideBtn(we1,0);
+            hideBtn(we2,0);
+            hideBtn(we3,0);
             ArrayList<Button> btnArr = new ArrayList<>();
             btnArr.add(we1);
             btnArr.add(we2);
@@ -2521,7 +2769,11 @@ public class GameJavaFX extends Application implements ViewClient {
             ObjectMapper mapper = new ObjectMapper();
             String weapon = null;
 
+            int numWe = 0;
             for (String s : args) {
+                if(numWe > args.size()){
+                    break;
+                }
                 System.out.println(s);
                 File jsonFileWe = new File(PATH_WE);
                 try {
@@ -2549,17 +2801,32 @@ public class GameJavaFX extends Application implements ViewClient {
                     e.printStackTrace();
                 }
 
-                setButtonBack(btnArr.get(args.indexOf(s)),imgWe);
-                btnArr.get(args.indexOf(s)).setOnAction(e->{
+                setButtonBack(btnArr.get(numWe),imgWe);
+                hideBtn(btnArr.get(numWe),1);
+                btnArr.get(numWe).setOnAction(e->{
                     game.setWeapon(s);
                     this.close();
                 });
 
+            numWe++;
             }
+            switch (args.size()){
+                case(3):{
+                    grid.add(btnArr.get(2),1,0);
+                    args.remove(1);
 
-            grid.add(btnArr.get(0),0,0);
-            grid.add(btnArr.get(1),1,0);
-            grid.add(btnArr.get(2),2,0);
+                }
+                case(2):{
+                    grid.add(btnArr.get(1),0,0);
+                    args.remove(0);
+
+                }
+                case(1):{
+                    grid.add(btnArr.get(0),2,0);
+                    args.remove(0);
+
+                }
+            }
 
 
         }
@@ -2732,165 +2999,4 @@ public class GameJavaFX extends Application implements ViewClient {
                 }
         }
     }
-
-
-    @Override
-    public String showTargets(ArrayList<String> args) {return null;}
-
-            /*
-
-        Runnable run = () -> {
-
-            for (ArrayList<Button> btnArr : btnCell) {
-                hideCell(btnArr, 0.5);
-            }
-
-            for (String color : args) {
-                for (VirtualPlayer p : model.getAllPlayers()) {
-                    if (p.getCharacter().equals(color)) {
-                        switch (p.getCharacter()) {
-                            case ("yellow"): {
-                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(Y), 1);
-                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(Y).setOnAction(e -> {
-                                    game.setTargetPlayer(p.getCharacter());
-                                });
-                                break;
-                            }
-                            case ("red"): {
-                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(R), 1);
-                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(R).setOnAction(e -> {
-                                    game.setTargetPlayer(p.getCharacter());
-                                });
-                                break;
-                            }
-                            case ("blue"): {
-                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(B), 1);
-                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(B).setOnAction(e -> {
-                                    game.setTargetPlayer(p.getCharacter());
-                                });
-                                break;
-                            }
-                            case ("green"): {
-                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(G), 1);
-                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(G).setOnAction(e -> {
-                                    game.setTargetPlayer(p.getCharacter());
-                                });
-                                break;
-                            }
-                            case ("grey"): {
-                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(GR), 1);
-                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(GR).setOnAction(e -> {
-                                    game.setTargetPlayer(p.getCharacter());
-                                });
-                                break;
-                            }
-                        }
-                    }
-                }
-
-            }
-        };
-
-        Platform.runLater(run);
-
-        while (game.getTargetPlayer().equals("")) ;
-        String res = game.getTargetPlayer();
-        game.setTargetPlayer("");
-
-        return res;
-    }
-
-    */
-
-    public String showTargetAdvanced(ArrayList<String> args) {
-        // primo: numero massimo di target:from different square (boo) : messaggio
-        // poi: colori
-
-        Runnable run = () -> {
-
-                msg.setText(args.get(0).split(INNER_SEP)[2]);
-
-                for (ArrayList<Button> btnArr : btnCell) {
-                    hideCell(btnArr, 0.5);
-                }
-
-                Boolean diff = Boolean.parseBoolean(args.get(0).split(INNER_SEP)[1]);
-                args.remove(0);
-                for (String color : args) {
-                    for (VirtualPlayer p : model.getAllPlayers()) {
-                        if (p.getCharacter().equals(color) && (!diff || verifyDiffSquare(game.getTargetPlayers(),p.getCharacter()) )) {
-                            switch (p.getCharacter()) {
-                                case ("yellow"): {
-                                    hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(Y), 1);
-                                    btnCell.get(p.getRow() * 4 + p.getColumn()).get(Y).setOnAction(e -> {
-                                        System.out.println(p.getCharacter());
-                                        game.getTargetPlayers().add(p.getCharacter());
-                                    });
-                                    break;
-                                }
-                                case ("red"): {
-                                    hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(R), 1);
-                                    btnCell.get(p.getRow() * 4 + p.getColumn()).get(R).setOnAction(e -> {
-                                        System.out.println(p.getCharacter());
-                                        game.getTargetPlayers().add(p.getCharacter());
-                                    });
-                                    break;
-                                }
-                                case ("blue"): {
-                                    hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(B), 1);
-                                    btnCell.get(p.getRow() * 4 + p.getColumn()).get(B).setOnAction(e -> {
-                                        System.out.println(p.getCharacter());
-                                        game.getTargetPlayers().add(p.getCharacter());
-                                    });
-                                    break;
-                                }
-                                case ("green"): {
-                                    hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(G), 1);
-                                    btnCell.get(p.getRow() * 4 + p.getColumn()).get(G).setOnAction(e -> {
-                                        System.out.println(p.getCharacter());
-                                        game.getTargetPlayers().add(p.getCharacter());
-                                    });
-                                    break;
-                                }
-                                case ("grey"): {
-                                    hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(GR), 1);
-                                    btnCell.get(p.getRow() * 4 + p.getColumn()).get(GR).setOnAction(e -> {
-                                        System.out.println(p.getCharacter());
-                                        game.getTargetPlayers().add(p.getCharacter());
-                                    });
-                                    break;
-                                }
-                            }
-                        }
-                    }
-
-                }
-        };
-
-        int max = Integer.parseInt(args.get(0).split(INNER_SEP)[0]);
-        System.out.println(max);
-        Platform.runLater(run);
-        int k = game.getTargetPlayers().size();
-        while(game.getTargetPlayers().size() != max);
-
-        String res = "";
-        for(String targ : game.getTargetPlayers()){
-            res = res + targ + INFO_SEP;
-        }
-        game.setTargetPlayers(new ArrayList<>());
-        return res;
-    }
-
-    public boolean verifyDiffSquare(ArrayList<String> args,String test){
-        VirtualPlayer p = model.findPlayer(test);
-        VirtualPlayer v;
-        for(String s: args) {
-            v = model.findPlayer(s);
-            if (p.getRow() == v.getRow() && p.getColumn() == v.getColumn()) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    }
+}
