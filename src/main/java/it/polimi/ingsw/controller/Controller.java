@@ -3,6 +3,7 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.*;
 import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.map.Square;
+import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.connection.ClientHandler;
 
 import java.util.ArrayList;
@@ -120,7 +121,7 @@ public class Controller {
 
         this.asBot = new AsBot(this);
         this.choosingMove = new ChoosingMove(this);
-        this.choosingPowerUpToUse = new ChoosingPowerUpToUse(this);
+        this.choosingPowerUpToUse = new ChoosingPowerUp(this);
         this.discardingPowerUp = new DiscardingPowerUp(this);
         this.choosingWeapon = new ChoosingWeapon(this);
         this.moving = new Moving(this);
@@ -163,7 +164,7 @@ public class Controller {
 
         this.asBot = new AsBot(this);
         this.choosingMove = new ChoosingMove(this);
-        this.choosingPowerUpToUse = new ChoosingPowerUpToUse(this);
+        this.choosingPowerUpToUse = new ChoosingPowerUp(this);
         this.discardingPowerUp = new DiscardingPowerUp(this);
         this.choosingWeapon = new ChoosingWeapon(this);
         this.moving = new Moving(this);
@@ -233,6 +234,7 @@ public class Controller {
                 this.getBoard().getTrack().getKillsTrack().add(addToTrack);
 
                 f.die();
+                f.setPosition(null);
 
                 this.checkEndStatus();
 
@@ -368,6 +370,17 @@ public class Controller {
         }
 
         return map;
+    }
+
+    static void filterPUs(ArrayList<PowerUp> puList , String toKeep){
+
+        int i;
+        for(i = 0 ; i < puList.size() ; i++ ){
+            if(!puList.get(i).getName().equals(toKeep)){
+                puList.remove(i);
+            }
+        }
+
     }
 
 

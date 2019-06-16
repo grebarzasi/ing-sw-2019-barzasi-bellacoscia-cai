@@ -76,16 +76,10 @@ public class PlayerBoard {
     public void damage(Token t) {
 
 
-        if (this.damage.size() < maxhealth - 1 ){
+        if(this.damage.size() < maxhealth){
 
             this.damage.add(t);
-
-        }else if(this.damage.size() < maxhealth){
-
-            this.damage.add(t);
-        }
-
-        else if (this.damage.size() == maxhealth) {
+        } else if (this.damage.size() == maxhealth) {
 
             this.damage.add(t);
             t.getOwner().getPersonalBoard().addMark(new Token(this.owner));
