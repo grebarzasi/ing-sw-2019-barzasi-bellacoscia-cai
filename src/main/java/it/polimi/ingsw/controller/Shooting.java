@@ -50,13 +50,9 @@ public class Shooting implements ControllerState {
 
         HashMap<Player,Integer> revengeCheck = new HashMap<>();
 
-        if(choice==null){
-            this.controller.goBack();
-            //this.controller.choosingMove.command(); goBack already does command
-        }
+        checkNull(choice);
 
         if(this.controller.getCurrentPlayer().getPersonalBoard().getAmmoInventory().covers(choice.getCost())) {
-
 
             do {
 
@@ -91,20 +87,8 @@ public class Shooting implements ControllerState {
 
             } while (!ok);
 
-            if(this.canUseScope()) {
-                boolean useScope = this.controller.getView().showBoolean("Vuoi usare anche il mirino?: ");
-                if(useScope){
+            this.useScope();
 
-                    ArrayList<Figure> options = new ArrayList<>();
-                    options.addAll(this.shootingWith.getBasicEffect().getTargetHitSet());
-
-                    ArrayList<Figure> chosenTarget = this.controller.getView().showTargetAdvanced(this.shootingWith.getBasicEffect().getTargetHitSet(),
-                            1,false,"Scegli il bersaglio: ");
-
-                    chosenTarget.get(0).inflictMark(2,this.getController().getCurrentPlayer());
-                }
-
-            }
             shootingWith.resetWeapon();
             this.controller.update();
             this.controller.dereaseMoveLeft();
@@ -115,7 +99,24 @@ public class Shooting implements ControllerState {
             this.controller.goBack();
         }
 
+    }
 
+    private void checkNull(Effect choice){
+        if(choice==null){
+            this.controller.goBack();
+            //this.controller.choosingMove.command(); goBack already does command
+        }
+
+
+    }
+
+    private void useScope(){
+
+        if(this.canUseScope()) {
+
+            this.activateScope();
+
+        }
 
     }
 
@@ -124,7 +125,7 @@ public class Shooting implements ControllerState {
         if(!this.controller.getCurrentPlayer().getPersonalBoard().getAmmoInventory().isEmpty()) {
 
             for (PowerUp p : this.controller.getCurrentPlayer().getPowerupList()) {
-                if (p.getName().equals("Mirino")) {
+                if (p.getName().equals(PowerUp.TARGETING_SCOPE)) {
                     return true;
                 }
             }
@@ -134,6 +135,31 @@ public class Shooting implements ControllerState {
         }else{
 
             return false;
+        }
+
+    }
+
+    private void activateScope() {
+
+        boolean useScope = this.controller.getView().showBoolean("Vuoi usare anche il mirino?: ");
+
+        if (useScope) {
+
+            ArrayList<PowerUp> scopes = new ArrayList<>();
+            scopes.addAll(this.controller.getCurrentPlayer().getPowerupList());
+
+            Controller.filterPUs(scopes, PowerUp.TARGETING_SCOPE);
+
+            PowerUp toUse = this.controller.getView().showPowerUp(scopes);
+
+            ArrayList<Figure> options = new ArrayList<>();
+            options.addAll(this.shootingWith.getBasicEffect().getTargetHitSet());
+
+            ArrayList<Figure> chosenTarget = this.controller.getView().showTargetAdvanced(this.shootingWith.getBasicEffect().getTargetHitSet(),
+                    1, false, "Scegli il bersaglio: ");
+
+            this.controller.getCurrentPlayer().inflictDamage(1, chosenTarget.get(0));
+            this.controller.getCurrentPlayer().removePowerUp(toUse);
         }
 
     }

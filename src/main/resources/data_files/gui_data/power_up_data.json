@@ -1,5 +1,5 @@
 {
-  "teletrasporto": {
+  PowerUp.TELEPORTER : {
     "color":{
       "red" :"teletrasporto_red.png",
       "yellow":"teletrasporto_yellow.png",
@@ -15,7 +15,7 @@
     },
     "info" : "granata_venom.png"
   },
-  "raggio cinetico": {
+  PowerUp.NEWTON: {
     "color":{
       "red" :"raggio_cinetico_red.png",
       "yellow":"raggio_cinetico_yellow.png",
@@ -23,7 +23,7 @@
     },
     "info" : "raggio_cinetico.png"
   },
-  "mirino": {
+  Powerup.TARGETING_SCOPE: {
     "color":{
       "red" :"mirino_red.png",
       "yellow":"mirino_yellow.png",

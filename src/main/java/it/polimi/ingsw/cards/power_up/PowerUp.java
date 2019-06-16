@@ -9,7 +9,14 @@ import it.polimi.ingsw.cards.Card;
  *
  * @author Carlo Bellacoscia
  */
+
 public class PowerUp extends Card {
+
+
+    public static final String TELEPORTER = "Teletrasporto";
+    public static final String NEWTON = "Raggio Cinetico";
+    public static final String TARGETING_SCOPE = "Mirino";
+    public static final String TAGBACK_GRENADE = "Granata Venom";
 
     private Ammo ammoOnDiscard;
 

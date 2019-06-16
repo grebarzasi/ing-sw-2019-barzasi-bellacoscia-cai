@@ -147,7 +147,7 @@ public class ActionBuilder {
 
             for(PowerUp pu : p.getPowerupList()){
 
-                if(pu.getName().equals("Teletrasporto") || pu.getName().equals("Raggio Cinetico")){
+                if(pu.getName().equals(PowerUp.TELEPORTER ) || pu.getName().equals(PowerUp.NEWTON)){
                     flag = true;
                 }
             }
