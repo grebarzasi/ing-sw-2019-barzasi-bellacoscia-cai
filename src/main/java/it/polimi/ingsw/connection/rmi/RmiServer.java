@@ -1,7 +1,9 @@
 package it.polimi.ingsw.connection.rmi;
 
+import it.polimi.ingsw.connection.ClientHandler;
 import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.Lobby;
+import it.polimi.ingsw.virtual_model.ViewClient;
 
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -21,8 +23,9 @@ public class RmiServer extends ConnectionTech implements RmiServerInterface{
     }
 
 
-    public RmiPrefInterf getClientHandler(RmiCInterf c)throws RemoteException{
-        RmiPrefInterf temp=new RmiClientHandler(super.getLobby(),c);
+    public RmiPrefInterf getClientHandler()throws RemoteException{
+        RmiPrefInterf temp=new RmiClientHandler(super.getLobby());
+        ((ClientHandler)temp).start();
         return(RmiPrefInterf) UnicastRemoteObject.exportObject(temp, 0);
     }
 

@@ -25,7 +25,6 @@ public abstract class ClientHandler extends Thread {
     private Timer disconnectCountdown;
     private Timer expiredCountdown;
 
-    private View manager;
 
     //preferences
     private int mapPref;
@@ -133,14 +132,6 @@ public abstract class ClientHandler extends Thread {
 
     public void setDisconnected(boolean disconnected) {
         this.disconnected = disconnected;
-    }
-
-    public View getManager() {
-        return manager;
-    }
-
-    public void setManager(View manager) {
-        this.manager = manager;
     }
 
     @Override

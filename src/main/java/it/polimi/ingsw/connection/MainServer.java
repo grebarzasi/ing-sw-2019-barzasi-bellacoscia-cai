@@ -30,6 +30,7 @@ public class MainServer {
     public void startAll() {
         lobby.start();
         System.out.print(YELLOW+"RMI SERVER");
+        rmiServer.setPort(1235);
         rmiServer.acquireConnInfo();
         rmiServer.run();
         System.out.print(GREEN+"SOCKET SERVER");

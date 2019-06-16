@@ -8,6 +8,7 @@ import static it.polimi.ingsw.CLI.CLiBoardStuff.ALL_CHARACTERS;
 import static it.polimi.ingsw.CLI.CliMessages.*;
 import static java.lang.Thread.sleep;
 
+import it.polimi.ingsw.virtual_model.ViewClient;
 import it.polimi.ingsw.virtual_model.VirtualLogin;
 import it.polimi.ingsw.virtual_model.VirtualPlayer;
 
@@ -23,6 +24,7 @@ public class CliView {
     private BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
     private VirtualPlayer p;
     private CliLobby lobby;
+    private CliGame view;
 
     private String ip;
     private int port;

@@ -1,4 +1,4 @@
-package it.polimi.ingsw.connection.socket;
+package it.polimi.ingsw.connection;
 
 import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.View;
@@ -7,30 +7,40 @@ import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Effect;
 import it.polimi.ingsw.cards.weapon.Weapon;
+import it.polimi.ingsw.connection.socket.SocketClientHandler;
+import it.polimi.ingsw.virtual_model.ViewClient;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
 import static it.polimi.ingsw.connection.ConnMessage.*;
 
-public class SServerCommManager implements View {
+public class ServerCommManager implements View {
 
-    private SocketClientHandler cl;
+    private SocketClientHandler socketClient;
+    private boolean rmi;
+    private ViewClient rmiClient;
 
-    public SServerCommManager(SocketClientHandler cl){
-        this.cl=cl;
+    public ServerCommManager(SocketClientHandler socketClient){
+        this.socketClient = socketClient;
+        this.rmi=false;
+    }
+    public ServerCommManager(ViewClient cl){
+        this.rmiClient=cl;
+        this.rmi=true;
     }
 
     public String askAndWait(String question,String args) {
         try{
-            cl.getOut().println(question);
-            while (!cl.getIn().readLine().equals(AKN));
-            cl.getOut().println(args);
+            socketClient.getOut().println(question);
+            while (!socketClient.getIn().readLine().equals(AKN));
+            socketClient.getOut().println(args);
             String rpl;
             do
-                rpl=cl.getIn().readLine();
+                rpl= socketClient.getIn().readLine();
             while(rpl.isEmpty());
 
             if(rpl.equals(NOTHING))
@@ -55,7 +65,15 @@ public class SServerCommManager implements View {
             for (PowerUp p : args) {
                 s = s + p.getName() + INNER_SEP + p.getAmmoOnDiscard().toString() + INFO_SEP;
             }
-            rpl = askAndWait(SHOW_PU,s);
+            if (rmi) {
+                try {
+                    rpl=rmiClient.showPowerUp(parseString(s));
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+            else
+                rpl = askAndWait(SHOW_PU,s);
             if(rpl==null)
                 return null;
             temp = rpl.split(INNER_SEP);
@@ -73,6 +91,14 @@ public class SServerCommManager implements View {
             for(Weapon p : args){
                 s=s+p.getName()+INNER_SEP+p.getChamber().toString()+INNER_SEP+p.getBasicEffect().getCost().toString().replaceFirst(p.getChamber().toString(),"")+INFO_SEP;
             }
+            if (rmi) {
+                try {
+                    rpl=rmiClient.showWeapon(parseString(s));
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+            else
             rpl=askAndWait(SHOW_WEAPONS,s);
             if(rpl==null)
                 return null;
@@ -91,6 +117,14 @@ public class SServerCommManager implements View {
         for(Action a : args){
             s=s+a.getDescription()+INNER_SEP+a.getRange()+INFO_SEP;
         }
+        if (rmi) {
+            try {
+                rpl=rmiClient.showActions(parseString(s));
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+        else
         rpl=askAndWait(SHOW_ACTIONS,s);
         if(rpl==null)
             return null;
@@ -108,6 +142,14 @@ public class SServerCommManager implements View {
         for(Square p : args){
             s=s+p.getPosition().getRow()+INNER_SEP+p.getPosition().getColumn()+INFO_SEP;
         }
+        if (rmi) {
+            try {
+                rpl=rmiClient.showPossibleMoves(parseString(s));
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+        else
         rpl=askAndWait(SHOW_MOVES,s);
         if(rpl==null)
             return null;
@@ -119,48 +161,17 @@ public class SServerCommManager implements View {
     }
 
 
-
-//    public ArrayList<Figure> showTargets(ArrayList<Figure> args) {
-//        String s="";
-//        String rpl="";
-//        String[] temp;
-//        HashMap<String,Figure> players = new HashMap<>();
-//        for(Figure a : args){
-//            s=s+a.getCharacter()+INFO_SEP;
-//            players.put(a.getCharacter(),a);
-//        }
-//        rpl=askAndWait(SHOW_TARGETS,s);
-//        if(rpl==null)
-//            return null;
-//        ArrayList<Figure> target = new ArrayList<>();
-//        temp=rpl.split(INFO_SEP);
-//        for(String a : temp){
-//            if(!players.containsKey(a))
-//                return null;
-//            target.add(players.get(a));
-//        }
-//        return target;
-//    }
-//
-//    public Figure singleTargetingShowTarget(ArrayList<Figure> args) {
-//        String s="";
-//        String rpl="";
-//        String[] temp;
-//        HashMap<String,Figure> players = new HashMap<>();
-//        for(Figure a : args){
-//            s=s+a.getCharacter()+INNER_SEP+" "+INFO_SEP;
-//            players.put(a.getCharacter(),a);
-//        }
-//        rpl=askAndWait(SHOW_SINGLE_TARGET,s);
-//        if(rpl==null)
-//            return null;
-//        if(!players.containsKey(rpl))
-//            return null;
-//         return players.get(rpl);
-//    }
-
     public Boolean showBoolean(String message) {
-        String rpl=askAndWait(SHOW_BOOLEAN,message);
+        String rpl="";
+        if (rmi) {
+            try {
+                rpl=Boolean.toString(rmiClient.showBoolean(message));
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+        else
+            rpl=askAndWait(SHOW_BOOLEAN,message);
         if(rpl==null)
             return null;
         if(rpl.equals("true"))
@@ -171,16 +182,32 @@ public class SServerCommManager implements View {
     }
 
     public void displayMessage(String message) {
-        askAndWait(SHOW_MESSAGE,message);
+        if (rmi) {
+            try {
+                rmiClient.displayMessage(message);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+        else
+            askAndWait(SHOW_MESSAGE,message);
     }
 
     public void displayLeaderboard() {
     }
     public String chooseDirection(ArrayList<Figure> args) {
         String s="";
-        String rpl;
+        String rpl="";
         for(Figure f: args)
             s=s+f.getCharacter()+INFO_SEP;
+        if (rmi) {
+            try {
+                rpl=rmiClient.chooseDirection(parseString(s));
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+        else
         rpl= askAndWait(CHOOSE_DIRECTION,s).toUpperCase();
         if(rpl.equals(NOTHING))
             return null;
@@ -197,9 +224,15 @@ public class SServerCommManager implements View {
             if(cost.isEmpty())
                 cost=NOTHING;
             s=s+e.getName()+INNER_SEP+cost+INFO_SEP;
-//            s=s+"effetto"+i+INNER_SEP+e.getCost().toString()+INFO_SEP;
-
         }
+        if (rmi) {
+            try {
+                rpl=rmiClient.showEffects(parseString(s));
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+        else
         rpl=askAndWait(SHOW_EFFECTS,s);
         if(rpl==null)
             return null;
@@ -221,20 +254,30 @@ public class SServerCommManager implements View {
             s=s+a.getCharacter()+INFO_SEP;
             players.put(a.getCharacter(),a);
         }
-
-        try{
-            cl.getOut().println(SHOW_TARGET_ADV);
-            while (!cl.getIn().readLine().equals(AKN));
-            cl.getOut().println(s);
-            do
-                rpl=cl.getIn().readLine();
-            while(rpl.isEmpty());
-
-            if(rpl.equals(NOTHING))
-                return null;
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (rmi) {
+            try {
+                rpl=rmiClient.showTargetAdvanced(parseString(s));
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         }
+        else{
+            try {
+                socketClient.getOut().println(SHOW_TARGET_ADV);
+                while (!socketClient.getIn().readLine().equals(AKN)) ;
+                socketClient.getOut().println(s);
+                do {
+                    rpl = socketClient.getIn().readLine();
+                }
+            while (rpl.isEmpty());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if(rpl.equals(NOTHING))
+                return null;
+
         ArrayList<Figure> target = new ArrayList<>();
         temp=rpl.split(INFO_SEP);
         if(temp.length>maxNum)
@@ -248,8 +291,28 @@ public class SServerCommManager implements View {
     }
 
     public boolean sendsUpdate(String s){
-       if(askAndWait(UPDATE,s)!=null)
-           return true;
-       return false;
+        if (rmi) {
+            try {
+                rmiClient.updateModel(s);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            askAndWait(UPDATE, s);
+        }
+       return true;
+    }
+
+    public ArrayList<String> parseString(String args){
+        ArrayList<String> sList = new ArrayList<>();
+        if(args.equals(NOTHING)) {
+            return sList;
+        }
+        String[] s=args.split(INFO_SEP);
+        for(String x : s){
+            sList.add(x);
+        }
+        return sList;
     }
 }

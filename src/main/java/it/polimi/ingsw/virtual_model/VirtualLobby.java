@@ -107,10 +107,10 @@ public class VirtualLobby {
         }
     }
 
-    public boolean hasGameTimerStarted() {
+    public synchronized boolean hasGameTimerStarted() {
         return gameTimerStarted;
     }
-    public void setGameTimerStarted(boolean time) {
+    public synchronized void setGameTimerStarted(boolean time) {
         this.gameTimerStarted=time;
     }
 
@@ -118,7 +118,7 @@ public class VirtualLobby {
         return mapPref;
     }
 
-    public void setMapPref(int mapPref) {
+    public synchronized void setMapPref(int mapPref) {
         this.mapPref = mapPref;
     }
 
@@ -165,11 +165,11 @@ public class VirtualLobby {
         this.newPlayersList = list;
     }
 
-    public HashMap<String, VirtualPlayer> getPlayers() {
+    public synchronized HashMap<String, VirtualPlayer> getPlayers() {
         return players;
     }
 
-    public void setPlayers(HashMap<String, VirtualPlayer> players) {
+    public synchronized void setPlayers(HashMap<String, VirtualPlayer> players) {
         this.players = players;
     }
 }

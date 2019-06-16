@@ -27,7 +27,7 @@
 //    private Timer disconnectCountdown;
 //    private Timer expiredCountdown;
 //
-//    private SServerCommManager manager;
+//    private ServerCommManager manager;
 //
 //    //preferences
 //    private int mapPref;
@@ -136,12 +136,12 @@
 //        }
 //        out.println("*started*");
 //        System.out.println("sending start signal");
-//        owner.setView(new SServerCommManager(this));
+//        owner.setView(new ServerCommManager(this));
 //
 //    }
 //
 //    public void game() {
-//        manager=new SServerCommManager(this);
+//        manager=new ServerCommManager(this);
 //    }
 //
 //

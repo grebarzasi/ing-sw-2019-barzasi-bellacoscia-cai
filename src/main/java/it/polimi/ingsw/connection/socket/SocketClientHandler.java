@@ -3,6 +3,7 @@ package it.polimi.ingsw.connection.socket;
 import it.polimi.ingsw.Lobby;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.connection.ClientHandler;
+import it.polimi.ingsw.connection.ServerCommManager;
 
 import java.io.*;
 import java.net.Socket;
@@ -24,7 +25,7 @@ public class SocketClientHandler extends ClientHandler {
     }
 
     public void game() {
-            super.setManager(new SServerCommManager(this));
+        super.getOwner().setView(new ServerCommManager(this));
     }
 
 
@@ -85,7 +86,7 @@ public class SocketClientHandler extends ClientHandler {
         }
         out.println("*started*");
         System.out.println("sending start signal");
-        super.getOwner().setView(new SServerCommManager(this));
+
 
     }
 

@@ -1,12 +1,15 @@
 package it.polimi.ingsw.CLI;
 
 import it.polimi.ingsw.connection.ConnectionTech;
+import it.polimi.ingsw.connection.rmi.RmiClient;
 import it.polimi.ingsw.connection.socket.SClient;
 import it.polimi.ingsw.virtual_model.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
@@ -35,6 +38,12 @@ public class CliGame implements ViewClient {
         if(!c.isRmi()) {
             ((SClient) c).setCommManager(new SClientCommManager(((SClient) c), this));
             ((SClient) c).getCommManager().start();
+        }else {
+            try {
+                ((RmiClient)c).getClientHandler().setView((ViewClient) UnicastRemoteObject.exportObject(this, 0));
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         }
         System.out.print("\nWaiting for board to deploy\n");
     }

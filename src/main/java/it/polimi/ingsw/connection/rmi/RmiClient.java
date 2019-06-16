@@ -19,8 +19,7 @@ public class RmiClient extends ConnectionTech implements RmiCInterf{
         try {
             Registry serverRegistry = LocateRegistry.getRegistry(super.getIp(),super.getPort());
             RmiServerInterface server = (RmiServerInterface) serverRegistry.lookup("Server");
-            RmiCInterf client = (RmiCInterf) UnicastRemoteObject.exportObject(this,0);
-            clientHandler = server.getClientHandler(client);
+            clientHandler = server.getClientHandler();
             System.out.println("RMI connection established\n");
         } catch (Exception e) {
             System.err.println("RMI connection error\n");
