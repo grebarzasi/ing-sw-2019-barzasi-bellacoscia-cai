@@ -6,6 +6,7 @@ import it.polimi.ingsw.virtual_model.VirtualModel;
 import it.polimi.ingsw.virtual_model.VirtualPlayer;
 import static it.polimi.ingsw.CLI.CliMessages.*;
 import static it.polimi.ingsw.connection.ConnMessage.COUNTDOWN;
+import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -128,8 +129,15 @@ public class CliLobby extends Thread{
 
         while (!lobby.isGameStarted()){
             if(lobby.hasGameTimerStarted()) {
-                new CliCountDown(COUNTDOWN).start();
+                System.out.println("\n"+this.getThreadGroup()+INNER_SEP+this.getId());
+                System.out.println(lobby.hasGameTimerStarted());
                 lobby.setGameTimerStarted(false);
+                new CliCountDown(COUNTDOWN).start();
+                try {
+                    sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
             lobby.waitUpdate();
             for(VirtualPlayer p : lobby.getNewPlayersList() ){

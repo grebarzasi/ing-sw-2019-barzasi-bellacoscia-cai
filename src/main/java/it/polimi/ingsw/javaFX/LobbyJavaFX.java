@@ -1,11 +1,9 @@
 package it.polimi.ingsw.javaFX;
 
 import it.polimi.ingsw.connection.ConnectionTech;
+import it.polimi.ingsw.connection.rmi.RmiClient;
 import it.polimi.ingsw.connection.socket.SClient;
-import it.polimi.ingsw.virtual_model.SClientCommManager;
-import it.polimi.ingsw.virtual_model.VirtualLobby;
-import it.polimi.ingsw.virtual_model.VirtualModel;
-import it.polimi.ingsw.virtual_model.VirtualPlayer;
+import it.polimi.ingsw.virtual_model.*;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
@@ -33,6 +31,8 @@ import javafx.util.Duration;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import static it.polimi.ingsw.javaFX.GUIFiles.*;
@@ -396,7 +396,13 @@ public class LobbyJavaFX extends Application {
         if(!conn.isRmi()){
             ((SClient)conn).setCommManager(new SClientCommManager(((SClient)conn),game));
             ((SClient)conn).getCommManager().start();
-        }
+        }else{
+            try {
+                ((RmiClient)conn).getClientHandler().setView((ViewClient) UnicastRemoteObject.exportObject(game, 0));
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+         }
 
         while(!vmodel.isUpdated()){
             try {

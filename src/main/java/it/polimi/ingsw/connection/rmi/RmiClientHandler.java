@@ -3,18 +3,20 @@ package it.polimi.ingsw.connection.rmi;
 import it.polimi.ingsw.Lobby;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.connection.ClientHandler;
+import it.polimi.ingsw.connection.ServerCommManager;
+import it.polimi.ingsw.virtual_model.ViewClient;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
 
 public class RmiClientHandler extends ClientHandler implements RmiPrefInterf {
 
-    public RmiCInterf client;
-    public String tempPlayer;
 
-    public RmiClientHandler(Lobby lobby, RmiCInterf client){
+    public String tempPlayer;
+    public ViewClient viewClient;
+
+    public RmiClientHandler(Lobby lobby){
         super(lobby);
-        this.client=client;
     }
 
     public boolean login(String username, String character) throws RemoteException{
@@ -56,26 +58,54 @@ public class RmiClientHandler extends ClientHandler implements RmiPrefInterf {
      * Wait for ready status
      */
     @Override
-    public void waitStart() throws IOException {
+    public void waitStart()throws IOException {
+        System.out.println("Waiting for game start");
+        try {
+        while (!super.getLobby().hasTimerStarted()){
+                sleep(500);
+        }
+        while (!super.getLobby().hasStarted()){
+            sleep(500);
+        }
+        } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
 
     }
 
     @Override
-    public void game() {
+    public void game(){
+        while(viewClient==null) {
+            try {
+                sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        super.getOwner().setView(new ServerCommManager(viewClient));
 
     }
 
     @Override
     public void run() {
-
+        try {
+            waitStart();
+            game();
+        } catch (IOException e) {
+        e.printStackTrace();
+    }
+    }
+    //remote
+    public synchronized void setView(ViewClient view) {
+       setViewClient(view);
     }
 
-    public RmiCInterf getClient() {
-        return client;
+    public synchronized ViewClient getViewClient() {
+        return viewClient;
     }
 
-    public void setClient(RmiCInterf client) {
-        this.client = client;
+    public synchronized void setViewClient(ViewClient viewClient) {
+        this.viewClient = viewClient;
     }
 
     public synchronized String getTempPlayer() {
