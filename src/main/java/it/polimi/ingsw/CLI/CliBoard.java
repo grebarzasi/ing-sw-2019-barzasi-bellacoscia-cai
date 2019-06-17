@@ -408,7 +408,7 @@ public class CliBoard {
             colorizeCP("R");
             System.out.print(")╫");
         }else
-            System.out.print("(-- -- --)╫" + p.getpBoard().getAmmoRed());
+            System.out.print("(-- -- --)╫");
 
         //Weapon
         printWeapon(1,p);

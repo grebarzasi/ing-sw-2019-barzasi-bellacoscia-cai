@@ -5,6 +5,7 @@ import it.polimi.ingsw.Player;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Effect;
+import it.polimi.ingsw.cards.weapon.MoveTarget;
 import it.polimi.ingsw.cards.weapon.Weapon;
 import it.polimi.ingsw.cards.weapon.aiming.AimAskPlayer;
 import it.polimi.ingsw.cards.weapon.aiming.AimDirection;
@@ -46,6 +47,7 @@ public class Shooting implements ControllerState {
         boolean ok = false;
         AimDirection dir;
         AimAskPlayer ask;
+        MoveTarget mv;
 
         Set<Effect> effects;
 
@@ -99,6 +101,17 @@ public class Shooting implements ControllerState {
 
                         }
                         ask.setTargetTemp(new HashSet<>(rpl));
+
+                    }else if (shootingWith.getMoveTemp() != null) {
+
+                        mv = shootingWith.getMoveTemp();
+                        ArrayList<Square> options = this.controller.canGo((Figure)mv.getTargetTemp().toArray()[0],mv.getMaxSteps());
+                        Square rpl = controller.getView().showPossibleMoves(options,false);
+                        if (rpl == null) {
+                            shootingWith.resetWeapon();
+                            this.controller.goBack();
+                        }
+                        mv.setSquareTemp(rpl);
                     }
 
                     ok = choice.executeEffect();

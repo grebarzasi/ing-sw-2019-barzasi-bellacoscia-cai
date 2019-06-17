@@ -72,6 +72,10 @@ public class Effect {
             }
             targetHitSet = e.applyEffect(myWeapon, targetHitSet);
         }
+        if(targetHitSet==null){
+            indexTemp--;
+            return false;
+        }
         indexTemp=0;
         used=true;
         return true;

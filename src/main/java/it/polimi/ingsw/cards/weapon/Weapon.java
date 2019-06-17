@@ -27,8 +27,8 @@ public class Weapon extends Card {
     private int indexTemp;
     private AimDirection directionTemp;
     private AimAskPlayer askTemp;
+    private MoveTarget moveTemp;
 
-    private Preferences pref = new Preferences(this);
 
     private Effect basicEffect;
     private Effect addOneEffect;
@@ -98,6 +98,7 @@ public class Weapon extends Card {
 
         directionTemp=null;
         askTemp=null;
+        moveTemp=null;
 
         if(basicEffect!=null)
             basicEffect.resetEffect();
@@ -111,11 +112,6 @@ public class Weapon extends Card {
             extraMove.resetEffect();
     }
 
-
-    public void use(){
-        this.getOwner().getModel().askUseEffect(getUsableEff());
-    }
-
     //setters&getters
     public void setBeforeBasicExtra(boolean b){
         this.beforeBasic=false;
@@ -123,10 +119,6 @@ public class Weapon extends Card {
 
     public String getName() {
         return name;
-    }
-
-    public Preferences getPreferences() {
-        return pref;
     }
 
     public Ammo getChamber() {
@@ -205,13 +197,6 @@ public class Weapon extends Card {
         this.chamber = chamber;
     }
 
-    public Preferences getPref() {
-        return pref;
-    }
-
-    public void setPref(Preferences pref) {
-        this.pref = pref;
-    }
 
     public boolean isBeforeBasic() {
         return beforeBasic;
@@ -244,5 +229,13 @@ public class Weapon extends Card {
 
     public void setDirectionTemp(AimDirection directionTemp) {
         this.directionTemp = directionTemp;
+    }
+
+    public MoveTarget getMoveTemp() {
+        return moveTemp;
+    }
+
+    public void setMoveTemp(MoveTarget moveTemp) {
+        this.moveTemp = moveTemp;
     }
 }
