@@ -1244,7 +1244,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
     public void fillSkulls(GridPane grid, int skullMax, double w, double h) {
 
-        int i = skullMax  + 1 ;
+        int i = skullMax  + 3 ;
 
         while (i >= 0) {
 
@@ -1256,7 +1256,7 @@ public class GameJavaFX extends Application implements ViewClient {
                 e.printStackTrace();
             }
 
-            grid.add(skull, i, 0);
+            grid.add(skull, 7-i, 0);
             i--;
         }
     }

@@ -65,7 +65,6 @@ public class ServerCommManager  extends Thread implements View {
                 s = s + p.getName() + INNER_SEP + p.getAmmoOnDiscard().toString() + INFO_SEP;
             }
             setInUse(true);
-
             if (rmi)
                 rpl=rmiClient.showPowerUp(parseString(s));
             else

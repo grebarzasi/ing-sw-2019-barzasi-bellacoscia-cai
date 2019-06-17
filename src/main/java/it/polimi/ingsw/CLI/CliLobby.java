@@ -57,7 +57,7 @@ public class CliLobby extends Thread{
                 System.err.println(MAP_N);
             }
         }while(num<1 || num>4);
-        lobby.setKillPref(num);
+        lobby.setMapPref(num);
         System.out.println(MAP_Y+num);
         return num;
     }
