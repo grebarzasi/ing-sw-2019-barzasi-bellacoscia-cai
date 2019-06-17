@@ -21,9 +21,9 @@ import static it.polimi.ingsw.connection.ConnMessage.*;
 public class ServerCommManager  extends Thread implements View {
 
     private SocketClientHandler socketClient;
+    private ViewClient rmiClient;
     private boolean rmi;
     private boolean inUse =false;
-    private ViewClient rmiClient;
 
     public ServerCommManager(SocketClientHandler socketClient){
         this.socketClient = socketClient;
@@ -34,7 +34,7 @@ public class ServerCommManager  extends Thread implements View {
         this.rmi=true;
     }
 
-    public synchronized String askAndWait(String question,String args) throws IOException {
+    public String askAndWait(String question,String args) throws IOException {
 
             socketClient.getOut().println(question);
             while (!socketClient.getIn().readLine().equals(AKN));
@@ -296,6 +296,7 @@ public class ServerCommManager  extends Thread implements View {
             while (true) {
                 if(!isInUse()) {
                     if (!isRmi()) {
+                        synchronized (socketClient){}
                         socketClient.getOut().println(PING);
                         while (!socketClient.getIn().readLine().equals(PONG)) ;
                     } else
