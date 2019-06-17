@@ -124,8 +124,13 @@ public class Shooting implements ControllerState {
             }
 
         } while (true);
+
+
         shootingWith.resetWeapon();
         this.controller.goBack();
+
+
+
     }
 
 
