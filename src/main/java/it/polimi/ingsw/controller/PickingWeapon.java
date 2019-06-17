@@ -50,7 +50,7 @@ public class PickingWeapon implements ControllerState {
             if (this.controller.getCurrentPlayer().getWeaponsList().size() < max) {
 
                 this.controller.getCurrentPlayer().getWeaponsList().add(choice);
-                this.controller.dereaseMoveLeft();
+                this.controller.decreaseMoveLeft();
                 ((SpawnSquare) this.location).getArmory().getWeaponList().remove(choice);
 
                 choice.setOwner(this.controller.getCurrentPlayer());
@@ -89,7 +89,7 @@ public class PickingWeapon implements ControllerState {
         ((SpawnSquare) this.location).getArmory().getWeaponList().remove(choice);
         ((SpawnSquare) this.location).getArmory().getWeaponList().add(choice);
         choice.setOwner(this.controller.getCurrentPlayer());
-        this.controller.dereaseMoveLeft();
+        this.controller.decreaseMoveLeft();
         this.controller.getCurrentPlayer().setPosition(this.location);
         this.controller.update();
         this.controller.goBack();

@@ -45,7 +45,7 @@ public class Moving implements ControllerState{
         }else{
 
             this.controller.getCurrentPlayer().setPosition(choice);
-            this.controller.dereaseMoveLeft();
+            this.controller.decreaseMoveLeft();
             this.controller.update();
             this.controller.goBack();
 

@@ -1,6 +1,5 @@
 package it.polimi.ingsw.actions;
 
-import it.polimi.ingsw.GameModel;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.cards.power_up.PowerUp;
@@ -42,8 +41,8 @@ class ActionBuilderTest {
 
         assertEquals(4,trumpActions.size());
 
-        whiteHouse.dereaseMoveLeft();
-        whiteHouse.dereaseMoveLeft();
+        whiteHouse.decreaseMoveLeft();
+        whiteHouse.decreaseMoveLeft();
 
         trumpActions = ActionBuilder.build(trump,true);
 

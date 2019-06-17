@@ -1,10 +1,8 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.board.map.NonSpawnSquare;
-import it.polimi.ingsw.board.map.SpawnSquare;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -71,7 +69,7 @@ public class Picking implements ControllerState{
 
                 if(check == null){
 
-                    this.controller.dereaseMoveLeft();
+                    this.controller.decreaseMoveLeft();
                     this.controller.update();
                     this.controller.goBack();
 
@@ -121,7 +119,7 @@ public class Picking implements ControllerState{
 
         }
 
-        this.controller.dereaseMoveLeft();
+        this.controller.decreaseMoveLeft();
         this.controller.update();
         this.controller.goBack();
 
