@@ -41,6 +41,7 @@ public class MoveTarget implements SubEffect {
                 break;
         }
         if(s==null)
+            return p;
             //s = w.getOwner().getModel().askDestination();
 
         for (Figure target : p) {

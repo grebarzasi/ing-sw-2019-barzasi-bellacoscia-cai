@@ -36,9 +36,8 @@ public class SClientCommManager extends Thread{
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
             msg= i.readLine();
-            if(!msg.equals(PING))
-                System.out.println(msg);
 
             switch (msg){
                 case PING:
@@ -63,7 +62,6 @@ public class SClientCommManager extends Thread{
                     o.println(AKN);
                     args=i.readLine();
                     String rpl = v.showActions(parseString(args));
-                    System.out.print(rpl);
                     o.println(rpl);
                     break;
                 case SHOW_MOVES:

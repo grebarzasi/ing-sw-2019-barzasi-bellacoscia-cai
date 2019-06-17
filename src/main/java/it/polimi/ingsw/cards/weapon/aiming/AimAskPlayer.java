@@ -46,10 +46,9 @@ public class AimAskPlayer implements AimingFilter {
           targetTemp=p;
           w.setAskTemp(this);
           return null;
-       }else{
-
-        }
-            return targetTemp;
+       }
+        w.setAskTemp(null);
+        return targetTemp;
     }
 
 

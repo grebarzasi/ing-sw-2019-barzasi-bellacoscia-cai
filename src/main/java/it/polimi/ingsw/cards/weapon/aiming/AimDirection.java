@@ -30,14 +30,14 @@ public class AimDirection implements AimingFilter {
             w.setDirectionTemp(this);
             targetTemp=p;
             return null;
-        }else {
-            if(directionTemp.isEmpty())
-                return null;
-            String dir = directionTemp;
-            if (wallBang)
-                return directionAll(dir, w.getOwner(), targetTemp);
-            return directionWall(dir, w.getOwner(), targetTemp);
         }
+        w.setDirectionTemp(null);
+        if(directionTemp.isEmpty())
+            return null;
+        String dir = directionTemp;
+        if (wallBang)
+            return directionAll(dir, w.getOwner(), targetTemp);
+        return directionWall(dir, w.getOwner(), targetTemp);
     }
 
 
