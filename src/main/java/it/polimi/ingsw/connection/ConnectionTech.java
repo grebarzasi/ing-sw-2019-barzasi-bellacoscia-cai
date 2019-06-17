@@ -21,15 +21,22 @@ public abstract class ConnectionTech extends Thread {
     public ConnectionTech(){
     }
 
-    public void acquireConnInfo(){
+    public void acquireIP(){
+        CliView cli = new CliView();
+        try {
+            String ip =cli.acquireIp();
+            if(!ip.isEmpty())
+                setIp(ip);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void acquirePort(){
         CliView cli = new CliView();
         try {
             int port=cli.acquirePort();
-            String ip =cli.acquireIp();
             if(port!=0)
                 setPort(port);
-            if(!ip.isEmpty())
-                setIp(ip);
         } catch (IOException e) {
             e.printStackTrace();
         }

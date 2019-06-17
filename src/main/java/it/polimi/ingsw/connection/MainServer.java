@@ -5,8 +5,13 @@ import it.polimi.ingsw.connection.rmi.RmiServer;
 import it.polimi.ingsw.connection.socket.SServer;
 import it.polimi.ingsw.controller.Controller;
 
+import java.io.IOException;
+
 import static it.polimi.ingsw.CLI.CliColor.GREEN;
 import static it.polimi.ingsw.CLI.CliColor.YELLOW;
+import static it.polimi.ingsw.CLI.CliMessages.LINE_SEP;
+import static it.polimi.ingsw.connection.ServerMessage.*;
+import static java.lang.Thread.sleep;
 
 
 public class MainServer {
@@ -29,18 +34,29 @@ public class MainServer {
 
     public void startAll() {
         lobby.start();
-        System.out.print(YELLOW+"RMI SERVER");
+        System.out.println(SERVER_HEAD);
+        System.out.println(RMI_MSG);
         rmiServer.setPort(1235);
-        rmiServer.acquireConnInfo();
+        System.out.print("DEFAULT PORT: 1235");
+        rmiServer.acquirePort();
         rmiServer.run();
-        System.out.print(GREEN+"SOCKET SERVER");
-        socketServer.acquireConnInfo();
+        try {
+            sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.print(LINE_SEP);
+        System.out.println(SOCKET_MSG);
+        System.out.print("DEFAULT IP: 127.0.0.1");
+        socketServer.acquireIP();
+        System.out.print("DEFAULT PORT: 1234");
+        socketServer.acquirePort();
         socketServer.start();
         //rmiServer.initConnection();
 
     }
 
-    public void startGame() {
+    public void startGame()throws IOException {
         contr= new Controller(lobby);
         contr.update();
         contr.setCurrentState(contr.getSpawning());

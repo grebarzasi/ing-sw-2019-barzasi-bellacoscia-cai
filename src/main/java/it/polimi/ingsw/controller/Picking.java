@@ -6,6 +6,7 @@ import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -30,7 +31,7 @@ public class Picking implements ControllerState{
      */
 
     @Override
-    public void command() {
+    public void command() throws IOException {
 
         ArrayList<Square> options;
 
@@ -93,7 +94,7 @@ public class Picking implements ControllerState{
      * asks the player to discard one and puts the rest into the player's powerup list
      */
 
-    private void choosePU(PowerUp check) {
+    private void choosePU(PowerUp check) throws IOException{
 
         ArrayList<PowerUp> options = new ArrayList<>();
         options.addAll(this.controller.getCurrentPlayer().getPowerupList());

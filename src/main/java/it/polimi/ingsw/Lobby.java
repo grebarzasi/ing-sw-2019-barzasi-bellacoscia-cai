@@ -5,6 +5,7 @@ import it.polimi.ingsw.connection.ClientHandler;
 import it.polimi.ingsw.connection.MainServer;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
@@ -294,7 +295,11 @@ public class Lobby extends Thread {
         System.out.println(finalFrenzyPref);
         System.out.println(mapPref);
         System.out.println(terminatorPref);
-        god.startGame();
+        try {
+            god.startGame();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 

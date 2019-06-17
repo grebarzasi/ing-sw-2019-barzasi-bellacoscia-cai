@@ -5,6 +5,7 @@ import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -25,7 +26,7 @@ public class ChoosingWeapon implements ControllerState {
      */
 
     @Override
-    public void command() {
+    public void command() throws IOException {
 
         //load the current player's weapons into "options"
         ArrayList<Weapon> options = new ArrayList<>();

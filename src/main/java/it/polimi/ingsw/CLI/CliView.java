@@ -139,7 +139,7 @@ public class CliView {
     }
 
     public String acquireIp()throws IOException{
-        System.out.println(IP_SELECT);
+        System.out.println("\n"+IP_SELECT);
         return sc.readLine();
     }
 

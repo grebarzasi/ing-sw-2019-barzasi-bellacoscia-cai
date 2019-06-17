@@ -4,6 +4,7 @@ import it.polimi.ingsw.Player;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -27,7 +28,7 @@ public class Spawning implements ControllerState {
      */
 
     @Override
-    public void command() {
+    public void command() throws IOException {
 
         if (this.controller.getModel().getTurn() >= this.controller.getModel().getPlayerList().size()) {
 
@@ -62,7 +63,7 @@ public class Spawning implements ControllerState {
      * @param options the list of power up options
      */
 
-    private PowerUp spawnOnChoice(ArrayList<PowerUp> options){
+    private PowerUp spawnOnChoice(ArrayList<PowerUp> options)throws IOException{
 
         PowerUp choice = this.controller.getView().showPowerUp(options);
 

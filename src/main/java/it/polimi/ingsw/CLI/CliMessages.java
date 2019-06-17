@@ -7,7 +7,7 @@ import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
  * @author Gregorio Barzasi
  */
 public class CliMessages {
-    
+
     public static final String HEAD_MSG="------------------------------\n"+"*** Welcome to ADRENALINA! ***"+"\n------------------------------";
     public static final String SELECT_CONN = "Select connection type: (RMI/SOCKET)";
 

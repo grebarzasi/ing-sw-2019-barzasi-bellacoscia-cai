@@ -4,6 +4,7 @@ import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.board.map.Square;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -32,7 +33,7 @@ public class AsBot implements ControllerState{
 
 
     @Override
-    public void command() {
+    public void command() throws IOException {
 
         if(this.controller.getModel().getBot().isDead() && this.controller.getModel().getTurn() != 0){
 
@@ -114,7 +115,7 @@ public class AsBot implements ControllerState{
 
     }
 
-    public void goBack(){
+    public void goBack()throws IOException{
         this.controller.goBack();
     }
 

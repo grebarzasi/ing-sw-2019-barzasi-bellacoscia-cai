@@ -6,6 +6,7 @@ import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.connection.ClientHandler;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -204,7 +205,7 @@ public class Controller {
      * Goes back to choosing the move
      */
 
-    public void goBack(){
+    public void goBack()throws IOException{
         this.currentState = this.choosingMove;
         this.currentState.command();
     }
@@ -220,7 +221,7 @@ public class Controller {
      * on the player list
      */
 
-    public void endTurn() {
+    public void endTurn()throws IOException {
 
         for (Figure f : this.model.getPlayerList()) {
 
@@ -250,7 +251,7 @@ public class Controller {
 
     }
 
-    private void checkEndStatus(){
+    private void checkEndStatus()throws IOException{
 
         if(this.getBoard().getTrack().getKillsTrack().size() == this.getBoard().getTrack().getSkullMax()){
 
@@ -290,7 +291,7 @@ public class Controller {
 
     }
 
-    private void resetTurn(){
+    private void resetTurn()throws IOException{
 
         this.model.setMovesLeft(2);
         this.model.setHasBotAction(true);
@@ -301,7 +302,7 @@ public class Controller {
 
     }
 
-    private void endGame(){
+    private void endGame()throws IOException{
 
         this.view.displayLeaderboard();
 
@@ -342,7 +343,7 @@ public class Controller {
 
     }
 
-    public void update(){
+    public void update()throws IOException {
         String s = marshal.create().toString();
         for(Player p: model.getPlayerList())
             p.getView().sendsUpdate(s);
