@@ -27,9 +27,9 @@ public class ChoosingPowerUp implements ControllerState {
 
         ArrayList<PowerUp> options = new ArrayList<>();
         options.addAll(this.controller.getCurrentPlayer().getPowerupList());
-
-        Controller.filterPUs(options,PowerUp.TELEPORTER );
-        Controller.filterPUs(options,PowerUp.NEWTON);
+//
+//        Controller.filterPUs(options,PowerUp.TELEPORTER );
+//        Controller.filterPUs(options,PowerUp.NEWTON);
 
         PowerUp chosen = this.controller.getView().showPowerUp(options);
         if(chosen == null){

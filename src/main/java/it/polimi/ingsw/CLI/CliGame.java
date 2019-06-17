@@ -58,7 +58,7 @@ public class CliGame implements ViewClient {
             if(printArgs) {
                 for (String s : args) {
                     temp = s.split(INNER_SEP);
-                    System.err.println(temp);
+                    System.out.println(s);
                     System.out.print("( "+i + "- " + temp[0]);
                     if (ALL_AMMO.contains(temp[1])) {
                         System.out.print("<");
