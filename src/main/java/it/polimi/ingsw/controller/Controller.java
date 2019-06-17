@@ -384,12 +384,12 @@ public class Controller {
 
     }
 
-    public void timeOut(){
+    public void timeOut()throws IOException{
         this.goBack();
         this.decreaseMoveLeft();
     }
 
-    public void finalTimeOut(){
+    public void finalTimeOut() throws IOException{
         this.goBack();
         this.endTurn();
     }
