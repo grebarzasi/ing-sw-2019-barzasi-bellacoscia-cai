@@ -104,7 +104,7 @@ public class Shooting implements ControllerState {
                 } while (!ok);
 
                 if(!additionalEffect) {
-                    this.controller.dereaseMoveLeft();
+                    this.controller.decreaseMoveLeft();
                 }
                 //now the effect is been executed
 
