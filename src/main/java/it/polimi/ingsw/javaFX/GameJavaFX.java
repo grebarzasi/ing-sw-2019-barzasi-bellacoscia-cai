@@ -1244,7 +1244,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
     public void fillSkulls(GridPane grid, int skullMax, double w, double h) {
 
-        int i = skullMax  + 3 ;
+        int i = skullMax  - 1 ;
 
         while (i >= 0) {
 
@@ -2029,7 +2029,7 @@ public class GameJavaFX extends Application implements ViewClient {
         String res;
         res = game.getPowerup();
 
-        game.setWeapon("");
+        game.setPowerup("");
 
         for (Button btn : pu) {
             btn.setEffect(null);
