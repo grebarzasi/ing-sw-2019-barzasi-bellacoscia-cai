@@ -80,4 +80,10 @@ public class Ammo{
         }
 
     }
+
+    public void substract (Ammo a){
+        this.red = this.red - a.red;
+        this.blue = this.blue - a.blue;
+        this.yellow = this.yellow - a.yellow;
+    }
 }

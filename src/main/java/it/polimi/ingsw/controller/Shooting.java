@@ -39,6 +39,8 @@ public class Shooting implements ControllerState {
 
     @Override
     public void command() throws IOException {
+
+
         boolean additionalEffect = false;
         boolean scopeUsed=false;
         boolean ok = false;
@@ -100,6 +102,8 @@ public class Shooting implements ControllerState {
                     }
 
                     ok = choice.executeEffect();
+                    //this.controller.getCurrentPlayer().getPersonalBoard().getAmmoInventory().substract(choice.getCost());
+
 
                 } while (!ok);
 
@@ -114,6 +118,7 @@ public class Shooting implements ControllerState {
                 if(!scopeUsed)
                     scopeUsed=this.useScope();
 
+
                 this.controller.update();
 
             }else{
@@ -123,6 +128,8 @@ public class Shooting implements ControllerState {
                 this.controller.goBack();
             }
 
+            askVenoms(choice.getTargetHitSet());
+
         } while (true);
 
 
@@ -130,6 +137,77 @@ public class Shooting implements ControllerState {
         this.controller.goBack();
 
 
+
+    }
+
+    public void askVenoms(Set<Figure> targets){
+
+        if(this.controller.hasBot()) {
+            targets.remove(this.controller.getModel().getBot());
+        }
+
+        ArrayList<Player> finalTargets = new ArrayList<>();
+
+        for(Figure p : targets){
+            finalTargets.add((Player)p);
+        }
+
+        Player tmp = this.controller.getCurrentPlayer();
+        int i;
+
+        for(i = 0 ; i < finalTargets.size() ; i++){
+
+            ArrayList<PowerUp> filtered = new ArrayList<>();
+            filtered.addAll(finalTargets.get(i).getPowerupList());
+            Controller.filterPUs(filtered,PowerUp.TAGBACK_GRENADE);
+
+            if(filtered.isEmpty()){
+                finalTargets.remove(i);
+            }
+        }
+
+        for(Player p : finalTargets){
+
+            this.controller.getModel().setCurrentPlayer(p);
+
+            boolean useTagback = false;
+
+            try {
+                useTagback = this.controller.getView().showBoolean("Vuoi usare la Granata Venom? \n");
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+
+            if(useTagback){
+
+                ArrayList<PowerUp> options = new ArrayList<>();
+                options.addAll(p.getPowerupList());
+
+                Controller.filterPUs(options,PowerUp.TAGBACK_GRENADE);
+
+                PowerUp choice = null;
+                try {
+                    choice = this.controller.getView().showPowerUp(options);
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+
+                if(choice != null){
+                    p.inflictMark(1,tmp);
+                    p.removePowerUp(choice);
+                }
+
+            }
+
+            try {
+                this.controller.update();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+
+        }
+
+        this.controller.getModel().setCurrentPlayer(tmp);
 
     }
 
@@ -163,7 +241,7 @@ public class Shooting implements ControllerState {
 
     private boolean activateScope()throws IOException {
 
-        boolean useScope = this.controller.getView().showBoolean("Vuoi usare anche il mirino?: ");
+        boolean useScope = this.controller.getView().showBoolean("Vuoi usare anche il mirino?: \n");
 
         if (useScope) {
 
@@ -178,7 +256,7 @@ public class Shooting implements ControllerState {
             options.addAll(this.shootingWith.getBasicEffect().getTargetHitSet());
 
             ArrayList<Figure> chosenTarget = this.controller.getView().showTargetAdvanced(this.shootingWith.getBasicEffect().getTargetHitSet(),
-                    1, false, "Scegli il bersaglio: ");
+                    1, false, "Scegli il bersaglio: \n");
 
             this.controller.getCurrentPlayer().inflictDamage(1, chosenTarget.get(0));
             this.controller.getCurrentPlayer().removePowerUp(toUse);
