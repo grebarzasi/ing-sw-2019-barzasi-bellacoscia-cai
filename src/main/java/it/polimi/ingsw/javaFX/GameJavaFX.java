@@ -2029,7 +2029,7 @@ public class GameJavaFX extends Application implements ViewClient {
         String res;
         res = game.getPowerup();
 
-        game.setWeapon("");
+        game.setPowerup("");
 
         for (Button btn : pu) {
             btn.setEffect(null);
