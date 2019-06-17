@@ -210,7 +210,7 @@ public class Controller {
         this.currentState.command();
     }
 
-    public void dereaseMoveLeft(){
+    public void decreaseMoveLeft(){
         this.setMovesLeft(this.getMovesLeft() -1 );
     }
 
@@ -384,7 +384,15 @@ public class Controller {
 
     }
 
+    public void timeOut(){
+        this.goBack();
+        this.decreaseMoveLeft();
+    }
 
+    public void finalTimeOut(){
+        this.goBack();
+        this.endTurn();
+    }
 
     public Board getBoard() {
         return this.getModel().getBoard();
@@ -581,4 +589,7 @@ public class Controller {
     public void setMarshal(UpdateBuilder marshal) {
         this.marshal = marshal;
     }
+
+
+
 }

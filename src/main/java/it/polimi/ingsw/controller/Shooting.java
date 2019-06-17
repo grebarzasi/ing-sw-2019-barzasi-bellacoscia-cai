@@ -2,7 +2,6 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.Player;
-import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Effect;
 import it.polimi.ingsw.cards.weapon.Weapon;
@@ -91,7 +90,7 @@ public class Shooting implements ControllerState {
 
             shootingWith.resetWeapon();
             this.controller.update();
-            this.controller.dereaseMoveLeft();
+            this.controller.decreaseMoveLeft();
             this.controller.goBack();
 
         }else {
