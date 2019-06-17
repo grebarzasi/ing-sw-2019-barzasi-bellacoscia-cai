@@ -398,15 +398,17 @@ public class CliBoard {
         System.out.print(WHITE+"┴"+RESET);
 
         //print ammo
-        System.out.print("(");
-        System.out.print(p.getpBoard().getAmmoBlue());
-        colorizeCP("B");
-        System.out.print(" "+p.getpBoard().getAmmoYellow());
-        colorizeCP("Y");
-        System.out.print(" "+p.getpBoard().getAmmoRed());
-        colorizeCP("R");
-        System.out.print(")╫");
-
+        if(!p.getUsername().equals(TERMINATOR_NAME)) {
+            System.out.print("(");
+            System.out.print(p.getpBoard().getAmmoBlue());
+            colorizeCP("B");
+            System.out.print(" " + p.getpBoard().getAmmoYellow());
+            colorizeCP("Y");
+            System.out.print(" " + p.getpBoard().getAmmoRed());
+            colorizeCP("R");
+            System.out.print(")╫");
+        }else
+            System.out.print("(-- -- --)╫" + p.getpBoard().getAmmoRed());
 
         //Weapon
         printWeapon(1,p);
