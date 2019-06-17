@@ -1,3 +1,4 @@
+
 package it.polimi.ingsw.CLI;
 
 import static it.polimi.ingsw.CLI.CliColor.*;

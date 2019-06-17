@@ -26,10 +26,17 @@ public class ChoosingPowerUp implements ControllerState {
     public void command() throws IOException {
 
         ArrayList<PowerUp> options = new ArrayList<>();
-        options.addAll(this.controller.getCurrentPlayer().getPowerupList());
+        ArrayList<PowerUp> newtons = new ArrayList<>();
+        ArrayList<PowerUp> teleporters = new ArrayList<>();
 
-        Controller.filterPUs(options,PowerUp.TELEPORTER );
-        Controller.filterPUs(options,PowerUp.NEWTON);
+        newtons.addAll(this.controller.getCurrentPlayer().getPowerupList());
+        teleporters.addAll(this.controller.getCurrentPlayer().getPowerupList());
+
+        Controller.filterPUs(teleporters,PowerUp.TELEPORTER );
+        Controller.filterPUs(newtons,PowerUp.NEWTON);
+
+        options.addAll(newtons);
+        options.addAll(teleporters);
 
         PowerUp chosen = this.controller.getView().showPowerUp(options);
         if(chosen == null){
