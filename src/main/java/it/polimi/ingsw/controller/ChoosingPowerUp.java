@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.cards.power_up.PowerUp;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -22,7 +23,7 @@ public class ChoosingPowerUp implements ControllerState {
      */
 
     @Override
-    public void command() {
+    public void command() throws IOException {
 
         ArrayList<PowerUp> options = new ArrayList<>();
         options.addAll(this.controller.getCurrentPlayer().getPowerupList());

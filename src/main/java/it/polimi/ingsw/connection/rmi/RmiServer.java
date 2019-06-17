@@ -10,6 +10,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
+import static it.polimi.ingsw.connection.ServerMessage.*;
 import static java.lang.Thread.sleep;
 
 /**
@@ -37,10 +38,10 @@ public class RmiServer extends ConnectionTech implements RmiServerInterface{
 
             RmiServerInterface stub = (RmiServerInterface) UnicastRemoteObject.exportObject(this, super.getPort());
             registry.bind("Server", stub);
-            System.err.println("RMI Server ready");
+            System.out.println(RMI_S_READY+super.getPort());
 
         } catch (Exception e) {
-            System.err.println("RMI Server exception");
+            System.out.println(RMI_S_ERR);
             e.printStackTrace();
         }
     }

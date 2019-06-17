@@ -4,6 +4,7 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.actions.Action;
 import it.polimi.ingsw.actions.ActionBuilder;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -21,7 +22,7 @@ public class ChoosingMove implements ControllerState{
      */
 
     @Override
-    public void command() {
+    public void command() throws IOException {
 
         if(this.controller.getCurrentPlayer().isDead()){
 

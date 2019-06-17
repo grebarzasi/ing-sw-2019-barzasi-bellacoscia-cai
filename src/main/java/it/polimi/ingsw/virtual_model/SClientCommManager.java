@@ -37,7 +37,8 @@ public class SClientCommManager extends Thread{
                 e.printStackTrace();
             }
             msg= i.readLine();
-            System.out.println(msg);
+            if(!msg.equals(PING))
+                System.out.println(msg);
 
             switch (msg){
                 case PING:

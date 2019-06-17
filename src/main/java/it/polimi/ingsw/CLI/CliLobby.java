@@ -131,7 +131,9 @@ public class CliLobby extends Thread{
 
         while (!lobby.isGameStarted()){
             if(lobby.hasGameTimerStarted()&&!count.isAlive()) {
+                System.out.println(this.getId());
                 count.start();
+                lobby.setGameTimerStarted(false);
             }
             lobby.waitUpdate();
             for(VirtualPlayer p : lobby.getNewPlayersList() ){

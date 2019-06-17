@@ -460,4 +460,8 @@ public class CliGame implements ViewClient {
         }
         return true;
     }
+
+    public boolean isConnected(){
+        return true;
+    }
 }

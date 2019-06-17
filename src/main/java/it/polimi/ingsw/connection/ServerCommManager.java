@@ -18,10 +18,11 @@ import java.util.Set;
 
 import static it.polimi.ingsw.connection.ConnMessage.*;
 
-public class ServerCommManager implements View {
+public class ServerCommManager  extends Thread implements View {
 
     private SocketClientHandler socketClient;
     private boolean rmi;
+    private boolean inUse =false;
     private ViewClient rmiClient;
 
     public ServerCommManager(SocketClientHandler socketClient){
@@ -33,8 +34,8 @@ public class ServerCommManager implements View {
         this.rmi=true;
     }
 
-    public String askAndWait(String question,String args) {
-        try{
+    public synchronized String askAndWait(String question,String args) throws IOException {
+
             socketClient.getOut().println(question);
             while (!socketClient.getIn().readLine().equals(AKN));
             socketClient.getOut().println(args);
@@ -43,13 +44,11 @@ public class ServerCommManager implements View {
                 rpl= socketClient.getIn().readLine();
             while(rpl.isEmpty());
 
-            if(rpl.equals(NOTHING))
+            if(rpl.equals(NOTHING)) {
                 return null;
+            }
             return rpl;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+
     }
     /**
      * Convert args into Strings, sends it to client and wait for a reply.
@@ -58,22 +57,20 @@ public class ServerCommManager implements View {
      * @return a pu element
      * @throws IOException
      */
-    public PowerUp showPowerUp(ArrayList<PowerUp> args) {
+    public PowerUp showPowerUp(ArrayList<PowerUp> args)throws IOException {
             String s = "";
             String rpl = "";
             String[] temp;
             for (PowerUp p : args) {
                 s = s + p.getName() + INNER_SEP + p.getAmmoOnDiscard().toString() + INFO_SEP;
             }
+            setInUse(true);
             if (rmi) {
-                try {
                     rpl=rmiClient.showPowerUp(parseString(s));
-                } catch (RemoteException e) {
-                    e.printStackTrace();
-                }
             }
             else
                 rpl = askAndWait(SHOW_PU,s);
+            setInUse(false);
             if(rpl==null)
                 return null;
             temp = rpl.split(INNER_SEP);
@@ -84,22 +81,20 @@ public class ServerCommManager implements View {
             return null;
     }
 
-    public Weapon showWeapon(ArrayList<Weapon> args) {
+    public Weapon showWeapon(ArrayList<Weapon> args)throws IOException {
             String s="";
             String rpl="";
             String[] temp;
             for(Weapon p : args){
                 s=s+p.getName()+INNER_SEP+p.getChamber().toString()+INNER_SEP+p.getBasicEffect().getCost().toString().replaceFirst(p.getChamber().toString(),"")+INFO_SEP;
             }
+            setInUse(true);
             if (rmi) {
-                try {
                     rpl=rmiClient.showWeapon(parseString(s));
-                } catch (RemoteException e) {
-                    e.printStackTrace();
-                }
             }
             else
             rpl=askAndWait(SHOW_WEAPONS,s);
+            setInUse(false);
             if(rpl==null)
                 return null;
             temp=rpl.split(INNER_SEP);
@@ -110,22 +105,20 @@ public class ServerCommManager implements View {
         return null;
     }
 
-    public Action showActions(ArrayList<Action> args) {
+    public Action showActions(ArrayList<Action> args)throws IOException {
         String s="";
         String rpl="";
         String[] temp;
         for(Action a : args){
             s=s+a.getDescription()+INNER_SEP+a.getRange()+INFO_SEP;
         }
+        setInUse(true);
         if (rmi) {
-            try {
                 rpl=rmiClient.showActions(parseString(s));
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
         }
         else
         rpl=askAndWait(SHOW_ACTIONS,s);
+        setInUse(false);
         if(rpl==null)
             return null;
         temp=rpl.split(INNER_SEP);
@@ -136,21 +129,19 @@ public class ServerCommManager implements View {
         return null;
     }
 
-    public Square showPossibleMoves(ArrayList<Square> args, Boolean show) {
+    public Square showPossibleMoves(ArrayList<Square> args, Boolean show)throws IOException {
         String s=show.toString()+INFO_SEP;
         String rpl="";
         for(Square p : args){
             s=s+p.getPosition().getRow()+INNER_SEP+p.getPosition().getColumn()+INFO_SEP;
         }
+        setInUse(true);
         if (rmi) {
-            try {
                 rpl=rmiClient.showPossibleMoves(parseString(s));
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
         }
         else
         rpl=askAndWait(SHOW_MOVES,s);
+        setInUse(false);
         if(rpl==null)
             return null;
         for(Square p : args){
@@ -161,17 +152,15 @@ public class ServerCommManager implements View {
     }
 
 
-    public Boolean showBoolean(String message) {
+    public Boolean showBoolean(String message)throws IOException {
         String rpl="";
+        setInUse(true);
         if (rmi) {
-            try {
                 rpl=Boolean.toString(rmiClient.showBoolean(message));
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
         }
         else
             rpl=askAndWait(SHOW_BOOLEAN,message);
+        setInUse(false);
         if(rpl==null)
             return null;
         if(rpl.equals("true"))
@@ -181,40 +170,36 @@ public class ServerCommManager implements View {
         return false;
     }
 
-    public void displayMessage(String message) {
+    public void displayMessage(String message) throws IOException{
+        setInUse(true);
         if (rmi) {
-            try {
                 rmiClient.displayMessage(message);
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
         }
         else
             askAndWait(SHOW_MESSAGE,message);
+        setInUse(false);
     }
 
-    public void displayLeaderboard() {
+    public void displayLeaderboard() throws IOException{
     }
-    public String chooseDirection(ArrayList<Figure> args) {
+    public String chooseDirection(ArrayList<Figure> args) throws IOException {
         String s="";
         String rpl="";
         for(Figure f: args)
             s=s+f.getCharacter()+INFO_SEP;
+        setInUse(true);
         if (rmi) {
-            try {
                 rpl=rmiClient.chooseDirection(parseString(s));
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
         }
         else
-        rpl= askAndWait(CHOOSE_DIRECTION,s).toUpperCase();
+             rpl= askAndWait(CHOOSE_DIRECTION,s).toUpperCase();
+        setInUse(false);
         if(rpl.equals(NOTHING))
             return null;
         return rpl;
     }
 
-    public Effect showEffects(Set<Effect> args) {
+    public Effect showEffects(Set<Effect> args)throws IOException {
         String s="";
         String rpl="";
         String[] temp;
@@ -225,15 +210,13 @@ public class ServerCommManager implements View {
                 cost=NOTHING;
             s=s+e.getName()+INNER_SEP+cost+INFO_SEP;
         }
+        setInUse(true);
         if (rmi) {
-            try {
                 rpl=rmiClient.showEffects(parseString(s));
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
         }
         else
-        rpl=askAndWait(SHOW_EFFECTS,s);
+             rpl=askAndWait(SHOW_EFFECTS,s);
+        setInUse(false);
         if(rpl==null)
             return null;
         temp=rpl.split(INNER_SEP);
@@ -244,7 +227,7 @@ public class ServerCommManager implements View {
         return null;
     }
 
-    public ArrayList<Figure> showTargetAdvanced(Set<Figure> args,int maxNum,boolean fromDiffSquare, String msg) {
+    public ArrayList<Figure> showTargetAdvanced(Set<Figure> args,int maxNum,boolean fromDiffSquare, String msg) throws IOException{
         String s="";
         String rpl="";
         String[] temp;
@@ -254,15 +237,11 @@ public class ServerCommManager implements View {
             s=s+a.getCharacter()+INFO_SEP;
             players.put(a.getCharacter(),a);
         }
+        setInUse(true);
         if (rmi) {
-            try {
                 rpl=rmiClient.showTargetAdvanced(parseString(s));
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
         }
         else{
-            try {
                 socketClient.getOut().println(SHOW_TARGET_ADV);
                 while (!socketClient.getIn().readLine().equals(AKN)) ;
                 socketClient.getOut().println(s);
@@ -270,11 +249,8 @@ public class ServerCommManager implements View {
                     rpl = socketClient.getIn().readLine();
                 }
             while (rpl.isEmpty());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
-
+        setInUse(false);
         if(rpl.equals(NOTHING))
                 return null;
 
@@ -290,17 +266,15 @@ public class ServerCommManager implements View {
         return target;
     }
 
-    public boolean sendsUpdate(String s){
+    public boolean sendsUpdate(String s)throws IOException{
+        setInUse(true);
         if (rmi) {
-            try {
                 rmiClient.updateModel(s);
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
         }
         else {
             askAndWait(UPDATE, s);
         }
+        setInUse(false);
        return true;
     }
 
@@ -314,5 +288,55 @@ public class ServerCommManager implements View {
             sList.add(x);
         }
         return sList;
+    }
+
+    @Override
+    public void run(){
+        try {
+            while (true) {
+                if(!isInUse()) {
+                    if (!isRmi()) {
+                        socketClient.getOut().println(PING);
+                        while (!socketClient.getIn().readLine().equals(PONG)) ;
+                    } else
+                        rmiClient.isConnected();
+                }
+                sleep(2000);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public SocketClientHandler getSocketClient() {
+        return socketClient;
+    }
+
+    public void setSocketClient(SocketClientHandler socketClient) {
+        this.socketClient = socketClient;
+    }
+
+    public synchronized boolean isRmi() {
+        return rmi;
+    }
+
+    public void setRmi(boolean rmi) {
+        this.rmi = rmi;
+    }
+
+    public synchronized boolean isInUse() {
+        return inUse;
+    }
+
+    public synchronized void setInUse(boolean inUse) {
+        this.inUse = inUse;
+    }
+
+    public ViewClient getRmiClient() {
+        return rmiClient;
+    }
+
+    public void setRmiClient(ViewClient rmiClient) {
+        this.rmiClient = rmiClient;
     }
 }

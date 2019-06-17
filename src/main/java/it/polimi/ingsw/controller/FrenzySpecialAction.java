@@ -3,6 +3,7 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -18,7 +19,7 @@ public class FrenzySpecialAction implements ControllerState {
 
 
     @Override
-    public void command() {
+    public void command() throws IOException {
 
         ArrayList<Square> options = this.controller.canGo(this.controller.getCurrentPlayer(), this.range);
 

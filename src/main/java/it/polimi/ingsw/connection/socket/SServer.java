@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import static it.polimi.ingsw.connection.ServerMessage.*;
+
 /**
  * Client side Socket connection
  *
@@ -28,14 +30,14 @@ public class SServer extends ConnectionTech {
         try {
             ServerSocket server = new ServerSocket(super.getPort());
 
-            System.out.println("Server started  " + super.getIp() + " : "+super.getPort());
+            System.out.println(SOCKET_S_READY + super.getIp() + " : "+super.getPort());
 
             //loops until game start waiting for other players
 
             SocketClientHandler temp;
             while(true){
                 Socket client = server.accept();
-                System.out.println("\n\nconnection established with\n" + client);
+                System.out.println( SOCKET_S_CONN+ client);
                 temp = new SocketClientHandler(client,super.getLobby());
                 temp.start();
             }
@@ -43,13 +45,13 @@ public class SServer extends ConnectionTech {
 
 
         } catch (Exception e) {
-            System.err.println("socket connection error\n");
+            System.err.println(SOCKET_S_ERR);
             e.printStackTrace();
         }
 
     }
 
-    public void game() {
-        System.out.println("*SERVER IN GAME*");
-    }
+//    public void game() {
+//        System.out.println("*SERVER IN GAME*");
+//    }
 }

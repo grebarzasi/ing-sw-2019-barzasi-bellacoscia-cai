@@ -6,6 +6,7 @@ import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -31,7 +32,7 @@ public class PickingWeapon implements ControllerState {
      */
 
     @Override
-    public void command() {
+    public void command()throws IOException {
 
         ArrayList<Weapon> options = new ArrayList<>();
 
@@ -73,7 +74,7 @@ public class PickingWeapon implements ControllerState {
      * @param arg the weapons to choose from
      */
 
-    private void discardWeapon(Weapon arg) {
+    private void discardWeapon(Weapon arg) throws IOException{
 
         ArrayList<Weapon> options = new ArrayList<>();
         options.addAll(this.controller.getCurrentPlayer().getWeaponsList());

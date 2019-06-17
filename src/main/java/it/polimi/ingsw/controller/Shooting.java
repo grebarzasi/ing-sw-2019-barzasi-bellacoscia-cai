@@ -9,6 +9,7 @@ import it.polimi.ingsw.cards.weapon.Weapon;
 import it.polimi.ingsw.cards.weapon.aiming.AimAskPlayer;
 import it.polimi.ingsw.cards.weapon.aiming.AimDirection;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -37,7 +38,7 @@ public class Shooting implements ControllerState {
 
 
     @Override
-    public void command() {
+    public void command() throws IOException {
 
         boolean ok = false;
         AimDirection dir;
@@ -101,7 +102,7 @@ public class Shooting implements ControllerState {
 
     }
 
-    private void checkNull(Effect choice){
+    private void checkNull(Effect choice)throws IOException{
         if(choice==null){
             this.controller.goBack();
             //this.controller.choosingMove.command(); goBack already does command
@@ -110,7 +111,7 @@ public class Shooting implements ControllerState {
 
     }
 
-    private void useScope(){
+    private void useScope()throws IOException{
 
         if(this.canUseScope()) {
 
@@ -139,7 +140,7 @@ public class Shooting implements ControllerState {
 
     }
 
-    private void activateScope() {
+    private void activateScope()throws IOException {
 
         boolean useScope = this.controller.getView().showBoolean("Vuoi usare anche il mirino?: ");
 

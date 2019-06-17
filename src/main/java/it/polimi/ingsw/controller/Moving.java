@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.board.map.Square;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -28,7 +29,7 @@ public class Moving implements ControllerState{
      */
 
     @Override
-    public void command() {
+    public void command()throws IOException {
 
         ArrayList<Square> options;
 

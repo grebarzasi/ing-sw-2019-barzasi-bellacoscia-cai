@@ -2999,4 +2999,8 @@ public class GameJavaFX extends Application implements ViewClient {
                 }
         }
     }
+
+    public boolean isConnected(){
+        return true;
+    }
 }

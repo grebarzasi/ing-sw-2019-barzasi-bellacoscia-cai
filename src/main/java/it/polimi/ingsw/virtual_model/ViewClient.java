@@ -100,5 +100,8 @@ public interface ViewClient extends Remote {
 
     public String showTargetAdvanced(ArrayList<String> args)throws RemoteException;
 
+    public boolean isConnected()throws RemoteException;
 
-    }
+
+
+}

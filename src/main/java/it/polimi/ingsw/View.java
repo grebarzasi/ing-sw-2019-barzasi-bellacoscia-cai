@@ -6,6 +6,7 @@ import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Effect;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -18,7 +19,7 @@ public interface View {
      * @return the chosen one
      */
 
-    public PowerUp showPowerUp(ArrayList<PowerUp> args);
+    public PowerUp showPowerUp(ArrayList<PowerUp> args)throws IOException;
 
     /**
      * Shows the Weapons and makes the user choose one, the returns is
@@ -26,7 +27,7 @@ public interface View {
      * @return the chosen one
      */
 
-    public Weapon showWeapon(ArrayList<Weapon> args);
+    public Weapon showWeapon(ArrayList<Weapon> args)throws IOException;
 
     /**
      * Show the possible moves that a player can perform then makes the user choose one,
@@ -35,7 +36,7 @@ public interface View {
      * @return the chosen one
      */
 
-    public Action showActions(ArrayList<Action> args);
+    public Action showActions(ArrayList<Action> args)throws IOException;
 
     /**
      * Shows the possible destinations a figure can reach and then returns the chosen value
@@ -44,7 +45,7 @@ public interface View {
      * @return the chosen one
      */
 
-    public Square showPossibleMoves(ArrayList<Square> args, Boolean show);
+    public Square showPossibleMoves(ArrayList<Square> args, Boolean show)throws IOException;
 
     /**
      * Shows the valid targets a Figure can target, then returns the targets the user decides
@@ -61,7 +62,7 @@ public interface View {
      * @return the chosen one
      */
 
-    public String chooseDirection(ArrayList<Figure> args);
+    public String chooseDirection(ArrayList<Figure> args)throws IOException;
 
     /**
      * Displays a message and makes the user make a boolean choice
@@ -78,7 +79,7 @@ public interface View {
      * @return the user's choice
      */
 
-    public Boolean showBoolean(String message);
+    public Boolean showBoolean(String message)throws IOException;
 
     /**
      * Displays a message to the user
@@ -86,19 +87,19 @@ public interface View {
      * @param message the message
      */
 
-    public void displayMessage(String message);
+    public void displayMessage(String message)throws IOException;
 
     /**
      * Displays the leaderboard of the game to the user
      */
 
-    public void displayLeaderboard();
+    public void displayLeaderboard()throws IOException;
 
-    public boolean sendsUpdate(String s);
+    public boolean sendsUpdate(String s)throws IOException;
 
-    public Effect showEffects(Set<Effect> args);
+    public Effect showEffects(Set<Effect> args)throws IOException;
 
-    public ArrayList<Figure> showTargetAdvanced(Set<Figure> args,int maxNum,boolean fromDiffSquare, String msg);
+    public ArrayList<Figure> showTargetAdvanced(Set<Figure> args,int maxNum,boolean fromDiffSquare, String msg)throws IOException;
 
 
     }

@@ -5,6 +5,7 @@ import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -25,7 +26,7 @@ public class Reloading implements ControllerState {
      */
 
     @Override
-    public void command() {
+    public void command()throws IOException {
 
         ArrayList<Weapon> options = new ArrayList<>();
         options.addAll(this.controller.getCurrentPlayer().getWeaponsList());
