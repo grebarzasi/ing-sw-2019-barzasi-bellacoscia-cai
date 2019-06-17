@@ -87,7 +87,7 @@ public class Shooting implements ControllerState {
 
             } while (!ok);
 
-            this.useScope();
+            this.useScope(choice);
 
             shootingWith.resetWeapon();
             this.controller.update();
@@ -110,11 +110,11 @@ public class Shooting implements ControllerState {
 
     }
 
-    private void useScope(){
+    private void useScope(Effect choice){
 
         if(this.canUseScope()) {
 
-            this.activateScope();
+            this.activateScope(choice);
 
         }
 
@@ -139,7 +139,7 @@ public class Shooting implements ControllerState {
 
     }
 
-    private void activateScope() {
+    private void activateScope(Effect choice) {
 
         boolean useScope = this.controller.getView().showBoolean("Vuoi usare anche il mirino?: ");
 
@@ -152,10 +152,10 @@ public class Shooting implements ControllerState {
 
             PowerUp toUse = this.controller.getView().showPowerUp(scopes);
 
-            ArrayList<Figure> options = new ArrayList<>();
-            options.addAll(this.shootingWith.getBasicEffect().getTargetHitSet());
+            Set<Figure> options = new HashSet<>();
+            options.addAll(choice.getTargetHitSet());
 
-            ArrayList<Figure> chosenTarget = this.controller.getView().showTargetAdvanced(this.shootingWith.getBasicEffect().getTargetHitSet(),
+            ArrayList<Figure> chosenTarget = this.controller.getView().showTargetAdvanced(options,
                     1, false, "Scegli il bersaglio: ");
 
             this.controller.getCurrentPlayer().inflictDamage(1, chosenTarget.get(0));
