@@ -39,85 +39,101 @@ public class Shooting implements ControllerState {
 
     @Override
     public void command() throws IOException {
-
+        boolean additionalEffect = false;
+        boolean scopeUsed=false;
         boolean ok = false;
         AimDirection dir;
         AimAskPlayer ask;
 
         Set<Effect> effects;
-        effects = shootingWith.getUsableEff();
 
-        Effect choice = this.controller.getView().showEffects(effects);
 
-        HashMap<Player,Integer> revengeCheck = new HashMap<>();
+        //Execute until no more effect is left or player go back
+        do{
+            effects = shootingWith.getUsableEff();
 
-        checkNull(choice);
+            //if empty no effect are available and you can go on
+            if(effects.isEmpty()) {
+                break;
+            }
 
-        if(this.controller.getCurrentPlayer().getPersonalBoard().getAmmoInventory().covers(choice.getCost())) {
+            Effect choice = this.controller.getView().showEffects(effects);
 
-            do {
+            //if you already used a effect and you exit the second choose you can go on
+            if(choice==null) {
+                break;
+            }
 
-                if (shootingWith.getDirectionTemp() != null) {
 
-                    dir = shootingWith.getDirectionTemp();
-                    String rpl = controller.getView().chooseDirection(new ArrayList<>(dir.getTargetTemp()));
+            //if the player can afford the effect execute
 
-                    if (rpl == null) {
+            if(this.controller.getCurrentPlayer().getPersonalBoard().getAmmoInventory().covers(choice.getCost())) {
+                //repeat until no more action from player are required
 
-                        shootingWith.resetWeapon();
-                        this.controller.goBack();
+                do {
 
+                    if (shootingWith.getDirectionTemp() != null) {
+
+                        dir = shootingWith.getDirectionTemp();
+                        String rpl = controller.getView().chooseDirection(new ArrayList<>(dir.getTargetTemp()));
+
+                        if (rpl == null) {
+
+                            shootingWith.resetWeapon();
+                            this.controller.goBack();
+
+                        }
+
+                        dir.setDirectionTemp(rpl);
+
+                    } else if (shootingWith.getAskTemp() != null) {
+
+                        ask = shootingWith.getAskTemp();
+                        ArrayList<Figure> rpl = controller.getView().showTargetAdvanced(ask.getTargetTemp(), ask.getNumMax(), ask.isFromDiffSquare(), ask.getMsg());
+                        if (rpl == null) {
+
+                            shootingWith.resetWeapon();
+                            this.controller.goBack();
+
+                        }
+                        ask.setTargetTemp(new HashSet<>(rpl));
                     }
 
-                    dir.setDirectionTemp(rpl);
+                    ok = choice.executeEffect();
 
-                } else if (shootingWith.getAskTemp() != null) {
+                } while (!ok);
 
-                    ask = shootingWith.getAskTemp();
-                    ArrayList<Figure> rpl = controller.getView().showTargetAdvanced(ask.getTargetTemp(), ask.getNumMax(), ask.isFromDiffSquare(), ask.getMsg());
-                    if (rpl == null) {
-
-                        shootingWith.resetWeapon();
-                        this.controller.goBack();
-
-                    }
-                    ask.setTargetTemp(new HashSet<>(rpl));
+                if(!additionalEffect) {
+                    this.controller.dereaseMoveLeft();
                 }
+                //now the effect is been executed
 
-                ok = choice.executeEffect();
+                ok=false;
+                additionalEffect=true;
 
-            } while (!ok);
+                if(!scopeUsed)
+                    scopeUsed=this.useScope();
 
-            this.useScope();
+                this.controller.update();
 
-            shootingWith.resetWeapon();
-            this.controller.update();
-            this.controller.dereaseMoveLeft();
-            this.controller.goBack();
+            }else{
+                if(additionalEffect)
+                    shootingWith.resetWeapon();
+                this.controller.update();
+                this.controller.goBack();
+            }
 
-        }else {
-            this.controller.update();
-            this.controller.goBack();
-        }
-
+        } while (true);
+        shootingWith.resetWeapon();
+        this.controller.goBack();
     }
 
-    private void checkNull(Effect choice)throws IOException{
-        if(choice==null){
-            this.controller.goBack();
-            //this.controller.choosingMove.command(); goBack already does command
-        }
 
+    private boolean useScope()throws IOException{
 
-    }
-
-    private void useScope()throws IOException{
-
-        if(this.canUseScope()) {
-
-            this.activateScope();
-
-        }
+        if(this.canUseScope())
+            return this.activateScope();
+        return false;
 
     }
 
@@ -140,7 +156,7 @@ public class Shooting implements ControllerState {
 
     }
 
-    private void activateScope()throws IOException {
+    private boolean activateScope()throws IOException {
 
         boolean useScope = this.controller.getView().showBoolean("Vuoi usare anche il mirino?: ");
 
@@ -161,8 +177,9 @@ public class Shooting implements ControllerState {
 
             this.controller.getCurrentPlayer().inflictDamage(1, chosenTarget.get(0));
             this.controller.getCurrentPlayer().removePowerUp(toUse);
+            return true;
         }
-
+        return false;
     }
 
     public Controller getController() {

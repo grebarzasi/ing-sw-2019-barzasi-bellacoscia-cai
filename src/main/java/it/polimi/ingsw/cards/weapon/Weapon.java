@@ -80,9 +80,6 @@ public class Weapon extends Card {
 
 
     public Set<Effect> getUsableEff(){
-
-
-
         Set<Effect> usable=new HashSet<>();
         if(basicEffect!=null&&!basicEffect.isUsed())
             usable.add(basicEffect);
@@ -92,7 +89,7 @@ public class Weapon extends Card {
             usable.add(addOneEffect);
         if(addTwoEffect!=null&&!addTwoEffect.isUsed()&&basicEffect.isUsed())
             usable.add(addTwoEffect);
-        if(extraMove!=null&&!extraMove.isUsed())
+        if((extraMove!=null&&!extraMove.isUsed())&&(beforeBasic||basicEffect.isUsed()))
             usable.add(extraMove);
         return usable;
     }
