@@ -34,11 +34,13 @@ public class GUIFiles {
     public static final String PATH_BLUE_CHARACTER = "src/main/resources/images/character/banshee.png";
     public static final String PATH_GREEN_CHARACTER = "src/main/resources/images/character/sprog.png";
     public static final String PATH_GREY_CHARACTER = "src/main/resources/images/character/dozer.png";
+    public static final String PATH_EMPTY_CELL = "src/main/resources/images/character/empty2.png";
 
     public static final String PATH_RED_AMMO = "src/main/resources/images/ammo/red_ammo.png";
     public static final String PATH_BLUE_AMMO = "src/main/resources/images/ammo/blue_ammo.png";
     public static final String PATH_YELLOW_AMMO = "src/main/resources/images/ammo/yellow_ammo.png";
 
+    public static final String PATH_EMPTY_DAMAGE = "src/main/resources/images/damage/empty.png";
     public static final String PATH_YELLOW_DAMAGE = "src/main/resources/images/damage/yellow.png";
     public static final String PATH_RED_DAMAGE = "src/main/resources/images/damage/red.png";
     public static final String PATH_BLUE_DAMAGE = "src/main/resources/images/damage/blue.png";
@@ -74,9 +76,11 @@ public class GUIFiles {
      */
     public static final String CLEAR = "";
     public static final String WELCOME = "BENVENUTO";
+    public static final String CHOOSE_ACTION = "Seleziona un'azione";
     public static final String CHOOSE_SQUARE = "Scegli un quadrato";
     public static final String CHOOSE_PLAYER = "Scegli un Giocatore";
     public static final String CHOOSE_WEAPON = "Scegli un'arma carica";
+    public static final String CHOOSE_EFFECT = "Scegli un effetto";
     public static final String CHOOSE_POWERUP = "Scegli un Power-Up";
     public static final String CHOOSE_AMMO = "Prendi un approvvigionamento";
     public static final String ERR_SQUARE = "Quadrato non raggiungibile";
