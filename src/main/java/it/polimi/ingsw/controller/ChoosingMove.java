@@ -22,7 +22,7 @@ public class ChoosingMove implements ControllerState{
      */
 
     @Override
-    public void command() throws IOException {
+    public void command(){
 
         if(this.controller.getCurrentPlayer().isDead()){
 

@@ -27,7 +27,7 @@ public class UsingNewton implements ControllerState {
     }
 
     @Override
-    public void command() throws IOException {
+    public void command(){
 
         ArrayList<Figure> targets = new ArrayList<>();
 

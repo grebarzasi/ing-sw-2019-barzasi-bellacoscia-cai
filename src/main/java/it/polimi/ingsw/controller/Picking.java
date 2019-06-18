@@ -29,7 +29,7 @@ public class Picking implements ControllerState{
      */
 
     @Override
-    public void command() throws IOException {
+    public void command() {
 
         ArrayList<Square> options;
 
@@ -92,7 +92,7 @@ public class Picking implements ControllerState{
      * asks the player to discard one and puts the rest into the player's powerup list
      */
 
-    private void choosePU(PowerUp check) throws IOException{
+    private void choosePU(PowerUp check){
 
         ArrayList<PowerUp> options = new ArrayList<>();
         options.addAll(this.controller.getCurrentPlayer().getPowerupList());

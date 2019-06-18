@@ -33,7 +33,7 @@ public class AsBot implements ControllerState{
 
 
     @Override
-    public void command() throws IOException {
+    public void command() {
 
         if(this.controller.getModel().getBot().isDead() && this.controller.getModel().getTurn() != 0){
 
@@ -115,7 +115,7 @@ public class AsBot implements ControllerState{
 
     }
 
-    public void goBack()throws IOException{
+    public void goBack(){
         this.controller.goBack();
     }
 

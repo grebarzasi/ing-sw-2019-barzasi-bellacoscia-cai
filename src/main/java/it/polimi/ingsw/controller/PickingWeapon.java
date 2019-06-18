@@ -32,7 +32,7 @@ public class PickingWeapon implements ControllerState {
      */
 
     @Override
-    public void command()throws IOException {
+    public void command(){
 
         ArrayList<Weapon> options = new ArrayList<>();
 
@@ -74,7 +74,7 @@ public class PickingWeapon implements ControllerState {
      * @param arg the weapons to choose from
      */
 
-    private void discardWeapon(Weapon arg) throws IOException{
+    private void discardWeapon(Weapon arg){
 
         ArrayList<Weapon> options = new ArrayList<>();
         options.addAll(this.controller.getCurrentPlayer().getWeaponsList());

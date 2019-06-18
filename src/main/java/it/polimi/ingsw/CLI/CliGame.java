@@ -117,10 +117,11 @@ public class CliGame implements ViewClient {
      * @return the chosen one
      */
     public String showWeapon(ArrayList<String> args) {
-        int i =1;
+        int i;
         String temp[];
         int reply=0;
         do {
+            i=1;
             System.out.print(RESET+"\n");
                 for (String s : args) {
                     temp = s.split(INNER_SEP);
@@ -311,7 +312,16 @@ public class CliGame implements ViewClient {
      * @return the user's choice
      */
     public boolean showBoolean(String message) {
-        return false;
+        System.out.println("\n"+message);
+        try {
+            if (sc.readLine().equals("Y"))
+                return true;
+            else
+                return false;
+        }catch (IOException e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /**

@@ -82,7 +82,7 @@ public class RmiClientHandler extends ClientHandler implements RmiPrefInterf {
                 e.printStackTrace();
             }
         }
-        super.getOwner().setView(new ServerCommManager(viewClient));
+        super.getOwner().setView(new ServerCommManager(this));
         ((ServerCommManager) super.getOwner().getView()).start();
 
     }

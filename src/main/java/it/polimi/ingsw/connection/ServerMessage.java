@@ -7,6 +7,12 @@ public class ServerMessage {
     public static final String RMI_COLOR=PURPLE_BOLD;
     public static final String SOCKET_COLOR=CYAN_BOLD;
 
+    public static final String CLIENT_UNREACHABLE=" disconnected from the game";
+    public static final String RETURN_IN_GAME="Sei stato sospeso dal server per inattività, tornare in gioco?";
+    public static final int INACTIVITY_TIMEOUT=10;
+
+
+
 
     public static final String SERVER_HEAD="--------------------------------\n"+YELLOW_BACKGROUND_BRIGHT+BLUE_BOLD+"*** ADRENALINA SERVER CONFIG ***"+RESET+"\n--------------------------------";
 

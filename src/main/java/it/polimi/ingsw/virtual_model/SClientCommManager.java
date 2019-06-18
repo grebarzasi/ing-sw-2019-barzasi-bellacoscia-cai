@@ -38,7 +38,6 @@ public class SClientCommManager extends Thread{
             }
 
             msg= i.readLine();
-
             switch (msg){
                 case PING:
                     o.println(PONG);

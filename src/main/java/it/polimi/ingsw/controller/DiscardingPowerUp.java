@@ -23,7 +23,7 @@ public class DiscardingPowerUp implements ControllerState{
      */
 
     @Override
-    public void command() throws IOException {
+    public void command() {
 
         ArrayList<PowerUp> options = new ArrayList<>();
         options.addAll(this.controller.getCurrentPlayer().getPowerupList());

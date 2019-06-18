@@ -38,6 +38,10 @@ public class Player extends Figure {
 
     private int maxActions;
 
+
+    private boolean disconnected;
+    private boolean inactive;
+
     private boolean startedFrenzy;
 
     public Preferences getPref() {
@@ -188,5 +192,21 @@ public class Player extends Figure {
 
     public boolean isStartedFrenzy() {
         return startedFrenzy;
+    }
+
+    public boolean isDisconnected() {
+        return disconnected;
+    }
+
+    public void setDisconnected(boolean disconnected) {
+        this.disconnected = disconnected;
+    }
+
+    public boolean isInactive() {
+        return inactive;
+    }
+
+    public void setInactive(boolean inactive) {
+        this.inactive = inactive;
     }
 }

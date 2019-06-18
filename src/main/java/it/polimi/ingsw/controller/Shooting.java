@@ -39,7 +39,7 @@ public class Shooting implements ControllerState {
 
 
     @Override
-    public void command() throws IOException {
+    public void command(){
 
 
         boolean additionalEffect = false;
@@ -185,11 +185,7 @@ public class Shooting implements ControllerState {
 
             boolean useTagback = false;
 
-            try {
                 useTagback = this.controller.getView().showBoolean("Vuoi usare la Granata Venom? \n");
-            }catch (IOException e){
-                e.printStackTrace();
-            }
 
             if(useTagback){
 
@@ -199,11 +195,8 @@ public class Shooting implements ControllerState {
                 Controller.filterPUs(options,PowerUp.TAGBACK_GRENADE);
 
                 PowerUp choice = null;
-                try {
                     choice = this.controller.getView().showPowerUp(options);
-                }catch (IOException e){
-                    e.printStackTrace();
-                }
+
 
                 if(choice != null){
                     p.inflictMark(1,tmp);
@@ -212,11 +205,7 @@ public class Shooting implements ControllerState {
 
             }
 
-            try {
                 this.controller.update();
-            }catch(IOException e){
-                e.printStackTrace();
-            }
 
         }
 
@@ -225,7 +214,7 @@ public class Shooting implements ControllerState {
     }
 
 
-    private boolean useScope()throws IOException{
+    private boolean useScope(){
 
         if(this.canUseScope())
             return this.activateScope();
@@ -252,7 +241,7 @@ public class Shooting implements ControllerState {
 
     }
 
-    private boolean activateScope()throws IOException {
+    private boolean activateScope(){
 
         boolean useScope = this.controller.getView().showBoolean("Vuoi usare anche il mirino?: \n");
 

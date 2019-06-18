@@ -26,7 +26,7 @@ public class Reloading implements ControllerState {
      */
 
     @Override
-    public void command()throws IOException {
+    public void command(){
 
         ArrayList<Weapon> options = new ArrayList<>();
         options.addAll(this.controller.getCurrentPlayer().getWeaponsList());

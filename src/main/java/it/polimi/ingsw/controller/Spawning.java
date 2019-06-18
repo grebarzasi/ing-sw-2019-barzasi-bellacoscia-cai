@@ -28,7 +28,7 @@ public class Spawning implements ControllerState {
      */
 
     @Override
-    public void command() throws IOException {
+    public void command() {
 
         if (this.controller.getModel().getTurn() >= this.controller.getModel().getPlayerList().size()) {
 
@@ -54,6 +54,8 @@ public class Spawning implements ControllerState {
 
         this.controller.getCurrentPlayer().setDead(false);
         this.controller.update();
+        if(controller.getView().isInactive()||controller.getView().isDisconnected())
+            this.controller.endTurn();
         this.controller.goBack();
 
     }
@@ -63,29 +65,27 @@ public class Spawning implements ControllerState {
      * @param options the list of power up options
      */
 
-    private PowerUp spawnOnChoice(ArrayList<PowerUp> options)throws IOException{
+    private PowerUp spawnOnChoice(ArrayList<PowerUp> options){
 
-        PowerUp choice = this.controller.getView().showPowerUp(options);
+        PowerUp choice;
 
-        if(choice == null){
-            this.command();
+        choice = this.controller.getView().showPowerUp(options);
 
-            return null;
+        if(choice==null)
+            choice=options.get(0);
 
-        }else {
+        options.remove(choice);
+        this.controller.getModel().getBoard().getPowerupDeck().getDiscarded().add(choice);
 
-            options.remove(choice);
-            this.controller.getModel().getBoard().getPowerupDeck().getDiscarded().add(choice);
+        Square spawnPoint = powerUptoSpawn(choice);
 
-            Square spawnPoint = powerUptoSpawn(choice);
+        this.controller.getCurrentPlayer().setPosition(spawnPoint);
 
-            this.controller.getCurrentPlayer().setPosition(spawnPoint);
+        choice = options.get(0);
+        return choice;
 
-            choice = options.get(0);
-            return choice;
         }
 
-    }
 
     /**
      * Matches a PowerUp colour to the spawnpoint of that colour

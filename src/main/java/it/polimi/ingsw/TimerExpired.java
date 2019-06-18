@@ -8,17 +8,17 @@ import java.util.TimerTask;
 /**
  * @author Gregorio Barzasi
  */
-public class TimerExpired extends TimerTask {
+public class TimerExpired extends Thread {
 
-    private ClientHandler cl;
+    int time;
 
-    public TimerExpired(SocketClientHandler cl){
-        this.cl=cl;
+    public TimerExpired(int time){
+        this.time=time;
     }
 
     @Override
     public void run() {
-        cl.setExpired(true);
+
     }
 
 }

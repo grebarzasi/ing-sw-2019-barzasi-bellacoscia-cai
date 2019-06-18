@@ -23,7 +23,7 @@ public class ChoosingPowerUp implements ControllerState {
      */
 
     @Override
-    public void command() throws IOException {
+    public void command() {
 
         ArrayList<PowerUp> options = new ArrayList<>();
         ArrayList<PowerUp> newtons = new ArrayList<>();

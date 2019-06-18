@@ -19,7 +19,7 @@ public class FrenzySpecialAction implements ControllerState {
 
 
     @Override
-    public void command() throws IOException {
+    public void command() {
 
         ArrayList<Square> options = this.controller.canGo(this.controller.getCurrentPlayer(), this.range);
 

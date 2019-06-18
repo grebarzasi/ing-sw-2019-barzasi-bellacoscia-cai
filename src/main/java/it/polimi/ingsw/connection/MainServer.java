@@ -47,8 +47,8 @@ public class MainServer {
         }
         System.out.print(LINE_SEP);
         System.out.println(SOCKET_MSG);
-        System.out.print("DEFAULT IP: 127.0.0.1");
-        socketServer.acquireIP();
+//        System.out.print("DEFAULT IP: 127.0.0.1");
+//        socketServer.acquireIP();
         System.out.print("DEFAULT PORT: 1234");
         socketServer.acquirePort();
         socketServer.start();

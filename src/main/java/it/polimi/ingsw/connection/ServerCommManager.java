@@ -1,14 +1,17 @@
 package it.polimi.ingsw.connection;
 
 import it.polimi.ingsw.Figure;
+import it.polimi.ingsw.Player;
 import it.polimi.ingsw.View;
 import it.polimi.ingsw.actions.Action;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Effect;
 import it.polimi.ingsw.cards.weapon.Weapon;
+import it.polimi.ingsw.connection.rmi.RmiClientHandler;
 import it.polimi.ingsw.connection.socket.SocketClientHandler;
 import it.polimi.ingsw.virtual_model.ViewClient;
+import javafx.application.Platform;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
@@ -17,24 +20,33 @@ import java.util.HashMap;
 import java.util.Set;
 
 import static it.polimi.ingsw.connection.ConnMessage.*;
+import static it.polimi.ingsw.connection.ServerMessage.*;
 
 public class ServerCommManager  extends Thread implements View {
 
     private SocketClientHandler socketClient;
+    private Player owner;
+    private RmiClientHandler rmiHandler;
     private ViewClient rmiClient;
     private boolean rmi;
     private boolean inUse =false;
+    private String rplTh;
+    private String updateBuffer;
+
 
     public ServerCommManager(SocketClientHandler socketClient){
         this.socketClient = socketClient;
         this.rmi=false;
+        this.owner=socketClient.getOwner();
     }
-    public ServerCommManager(ViewClient cl){
-        this.rmiClient=cl;
+    public ServerCommManager(RmiClientHandler cl){
+        this.rmiHandler=cl;
+        this.rmiClient=rmiHandler.getViewClient();
         this.rmi=true;
+        this.owner=rmiHandler.getOwner();
     }
 
-    public String askAndWait(String question,String args) throws IOException {
+    public String askAndWait(String question,String args) throws IOException{
 
             socketClient.getOut().println(question);
             while (!socketClient.getIn().readLine().equals(AKN));
@@ -55,22 +67,39 @@ public class ServerCommManager  extends Thread implements View {
      * then convert the string into a PU pointer and returns it
      * @param args the Powerups to show
      * @return a pu element
-     * @throws IOException
      */
-    public PowerUp showPowerUp(ArrayList<PowerUp> args)throws IOException {
+    public PowerUp showPowerUp(ArrayList<PowerUp> args) {
             String s = "";
             String rpl = "";
             String[] temp;
             for (PowerUp p : args) {
                 s = s + p.getName() + INNER_SEP + p.getAmmoOnDiscard().toString() + INFO_SEP;
             }
-            setInUse(true);
-            if (rmi)
-                rpl=rmiClient.showPowerUp(parseString(s));
-            else
-                rpl = askAndWait(SHOW_PU,s);
+            final String sTh=s;
 
-            setInUse(false);
+            /*-------------------------------------------*/
+            Thread t = new Thread(() -> {
+                try{
+                    setInUse(true);
+                    if (rmi)
+                        setRplTh(rmiClient.showPowerUp(parseString(sTh)));
+                    else
+                        setRplTh(askAndWait(SHOW_PU,sTh));
+
+                    setInUse(false);
+                }catch(IOException e){
+                    handleDisconnection();
+                    setRplTh(null);
+                }
+            });
+            t.start();
+
+            /*-------------------------------------------*/
+            if(!handleInactivity(t)){
+                return null;
+            }
+
+            rpl=rplTh;
             if(rpl==null)
                 return null;
             temp = rpl.split(INNER_SEP);
@@ -81,13 +110,14 @@ public class ServerCommManager  extends Thread implements View {
             return null;
     }
 
-    public Weapon showWeapon(ArrayList<Weapon> args)throws IOException {
+    public Weapon showWeapon(ArrayList<Weapon> args){
             String s="";
             String rpl="";
             String[] temp;
             for(Weapon p : args){
                 s=s+p.getName()+INNER_SEP+p.getChamber().toString()+INNER_SEP+p.getBasicEffect().getCost().toString().replaceFirst(p.getChamber().toString(),"")+INFO_SEP;
             }
+            try{
             setInUse(true);
             if (rmi) {
                     rpl=rmiClient.showWeapon(parseString(s));
@@ -95,6 +125,10 @@ public class ServerCommManager  extends Thread implements View {
             else
             rpl=askAndWait(SHOW_WEAPONS,s);
             setInUse(false);
+            }catch(IOException e){
+                handleDisconnection();
+                return null;
+            }
             if(rpl==null)
                 return null;
             temp=rpl.split(INNER_SEP);
@@ -105,13 +139,15 @@ public class ServerCommManager  extends Thread implements View {
         return null;
     }
 
-    public Action showActions(ArrayList<Action> args)throws IOException {
+    public Action showActions(ArrayList<Action> args) {
         String s="";
         String rpl="";
         String[] temp;
         for(Action a : args){
             s=s+a.getDescription()+INNER_SEP+a.getRange()+INFO_SEP;
         }
+
+        try{
         setInUse(true);
         if (rmi) {
                 rpl=rmiClient.showActions(parseString(s));
@@ -119,6 +155,11 @@ public class ServerCommManager  extends Thread implements View {
         else
         rpl=askAndWait(SHOW_ACTIONS,s);
         setInUse(false);
+        }catch(IOException e){
+            handleDisconnection();
+            return null;
+        }
+
         if(rpl==null)
             return null;
         temp=rpl.split(INNER_SEP);
@@ -129,19 +170,24 @@ public class ServerCommManager  extends Thread implements View {
         return null;
     }
 
-    public Square showPossibleMoves(ArrayList<Square> args, Boolean show)throws IOException {
+    public Square showPossibleMoves(ArrayList<Square> args, Boolean show) {
         String s=show.toString()+INFO_SEP;
         String rpl="";
         for(Square p : args){
             s=s+p.getPosition().getRow()+INNER_SEP+p.getPosition().getColumn()+INFO_SEP;
         }
-        setInUse(true);
-        if (rmi) {
-                rpl=rmiClient.showPossibleMoves(parseString(s));
+
+        try {
+            setInUse(true);
+            if (rmi) {
+                rpl = rmiClient.showPossibleMoves(parseString(s));
+            } else
+                rpl = askAndWait(SHOW_MOVES, s);
+            setInUse(false);
+        }catch(IOException e){
+            handleDisconnection();
+            return null;
         }
-        else
-        rpl=askAndWait(SHOW_MOVES,s);
-        setInUse(false);
         if(rpl==null)
             return null;
         for(Square p : args){
@@ -152,8 +198,9 @@ public class ServerCommManager  extends Thread implements View {
     }
 
 
-    public Boolean showBoolean(String message)throws IOException {
+    public Boolean showBoolean(String message){
         String rpl="";
+        try{
         setInUse(true);
         if (rmi) {
                 rpl=Boolean.toString(rmiClient.showBoolean(message));
@@ -161,6 +208,10 @@ public class ServerCommManager  extends Thread implements View {
         else
             rpl=askAndWait(SHOW_BOOLEAN,message);
         setInUse(false);
+        }catch(IOException e){
+            handleDisconnection();
+            return null;
+        }
         if(rpl==null)
             return null;
         if(rpl.equals("true"))
@@ -170,36 +221,45 @@ public class ServerCommManager  extends Thread implements View {
         return false;
     }
 
-    public void displayMessage(String message) throws IOException{
-        setInUse(true);
-        if (rmi) {
+    public void displayMessage(String message){
+        try {
+            setInUse(true);
+            if (rmi) {
                 rmiClient.displayMessage(message);
+            } else
+                askAndWait(SHOW_MESSAGE, message);
+            setInUse(false);
+        }catch(IOException e){
+            handleDisconnection();
         }
-        else
-            askAndWait(SHOW_MESSAGE,message);
-        setInUse(false);
     }
 
-    public void displayLeaderboard() throws IOException{
+    public void displayLeaderboard(){
     }
-    public String chooseDirection(ArrayList<Figure> args) throws IOException {
+    public String chooseDirection(ArrayList<Figure> args){
         String s="";
         String rpl="";
         for(Figure f: args)
             s=s+f.getCharacter()+INFO_SEP;
+
+        try{
         setInUse(true);
         if (rmi) {
-                rpl=rmiClient.chooseDirection(parseString(s));
+             rpl=rmiClient.chooseDirection(parseString(s));
         }
         else
              rpl= askAndWait(CHOOSE_DIRECTION,s).toUpperCase();
         setInUse(false);
+        }catch(IOException e){
+            handleDisconnection();
+            return null;
+        }
         if(rpl.equals(NOTHING))
             return null;
         return rpl;
     }
 
-    public Effect showEffects(Set<Effect> args)throws IOException {
+    public Effect showEffects(Set<Effect> args){
         String s="";
         String rpl="";
         String[] temp;
@@ -210,6 +270,7 @@ public class ServerCommManager  extends Thread implements View {
                 cost=NOTHING;
             s=s+e.getName()+INNER_SEP+cost+INFO_SEP;
         }
+        try{
         setInUse(true);
         if (rmi) {
                 rpl=rmiClient.showEffects(parseString(s));
@@ -217,6 +278,10 @@ public class ServerCommManager  extends Thread implements View {
         else
              rpl=askAndWait(SHOW_EFFECTS,s);
         setInUse(false);
+        }catch(IOException e){
+            handleDisconnection();
+            return null;
+        }
         if(rpl==null)
             return null;
         temp=rpl.split(INNER_SEP);
@@ -227,7 +292,7 @@ public class ServerCommManager  extends Thread implements View {
         return null;
     }
 
-    public ArrayList<Figure> showTargetAdvanced(Set<Figure> args,int maxNum,boolean fromDiffSquare, String msg) throws IOException{
+    public ArrayList<Figure> showTargetAdvanced(Set<Figure> args,int maxNum,boolean fromDiffSquare, String msg){
         String s="";
         String rpl="";
         String[] temp;
@@ -237,6 +302,7 @@ public class ServerCommManager  extends Thread implements View {
             s=s+a.getCharacter()+INFO_SEP;
             players.put(a.getCharacter(),a);
         }
+        try{
         setInUse(true);
         if (rmi) {
                 rpl=rmiClient.showTargetAdvanced(parseString(s));
@@ -251,6 +317,10 @@ public class ServerCommManager  extends Thread implements View {
             while (rpl.isEmpty());
         }
         setInUse(false);
+        }catch(IOException e){
+            handleDisconnection();
+            return null;
+        }
         if(rpl.equals(NOTHING))
                 return null;
 
@@ -266,15 +336,23 @@ public class ServerCommManager  extends Thread implements View {
         return target;
     }
 
-    public boolean sendsUpdate(String s)throws IOException{
+    public boolean sendsUpdate(String s){
+        updateBuffer = s;
+        if(owner.isInactive()) {
+            return true;
+        }
         setInUse(true);
-        if (rmi) {
+        try{
+            if (rmi) {
                 rmiClient.updateModel(s);
+            }
+            else {
+                askAndWait(UPDATE, s);
+            }
+            setInUse(false);
+        }catch(IOException e){
+            handleDisconnection();
         }
-        else {
-            askAndWait(UPDATE, s);
-        }
-        setInUse(false);
        return true;
     }
 
@@ -290,22 +368,62 @@ public class ServerCommManager  extends Thread implements View {
         return sList;
     }
 
+
+    public void handleDisconnection(){
+        owner.setDisconnected(true);
+        System.err.println(owner.getUsername()+CLIENT_UNREACHABLE);
+    }
+
+    public boolean handleInactivity(Thread t){
+        int i=0;
+        System.out.print("\nInactivity countdown: ");
+        for(;i<INACTIVITY_TIMEOUT;i++){
+            if(!t.isAlive())
+                return true;
+            try {
+                sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.print(INACTIVITY_TIMEOUT-i+"s ");
+        }
+        System.out.println("\n"+owner.getCharacter()+" is inactive!");
+        t.interrupt();
+        setInUse(false);
+        setInactive(true);
+        return false;
+    }
+
     @Override
     public void run(){
         try {
+
             while (true) {
-                if(!isInUse()) {
-                    if (!isRmi()) {
-                        synchronized (socketClient){}
-                        socketClient.getOut().println(PING);
-                        while (!socketClient.getIn().readLine().equals(PONG)) ;
-                    } else
-                        rmiClient.isConnected();
-                }
+                if (isInactive()&&!isDisconnected()) {
+                    if (!isInUse())
+                        sendsUpdate(updateBuffer);
+                        setInactive(!showBoolean(RETURN_IN_GAME));
+                        sendsUpdate(updateBuffer);
+                } else {
+                        if (!isInUse()) {
+                            if (!isRmi()) {
+                                synchronized (socketClient) {
+                                }
+                                socketClient.getOut().println(PING);
+                                while (!socketClient.getIn().readLine().equals(PONG)) ;
+                            } else
+                                rmiClient.isConnected();
+                        }
+                    }
                 sleep(2000);
             }
-        }catch(Exception e){
-            e.printStackTrace();
+
+
+        }catch(IOException e){
+            handleDisconnection();
+            this.interrupt();
+        }catch(InterruptedException b){
+            b.printStackTrace();
         }
     }
 
@@ -339,5 +457,29 @@ public class ServerCommManager  extends Thread implements View {
 
     public void setRmiClient(ViewClient rmiClient) {
         this.rmiClient = rmiClient;
+    }
+
+    public boolean isDisconnected() {
+        return owner.isDisconnected();
+    }
+
+    public void setDisconnected(boolean disconnected) {
+        owner.setDisconnected(disconnected);
+    }
+
+    public boolean isInactive() {
+        return owner.isInactive();
+    }
+
+    public void setInactive(boolean inactive) {
+        owner.setInactive(inactive);
+    }
+
+
+
+
+
+    public void setRplTh(String rplTh) {
+        this.rplTh = rplTh;
     }
 }

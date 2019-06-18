@@ -19,7 +19,7 @@ public interface View {
      * @return the chosen one
      */
 
-    public PowerUp showPowerUp(ArrayList<PowerUp> args)throws IOException;
+    public PowerUp showPowerUp(ArrayList<PowerUp> args);
 
     /**
      * Shows the Weapons and makes the user choose one, the returns is
@@ -27,7 +27,7 @@ public interface View {
      * @return the chosen one
      */
 
-    public Weapon showWeapon(ArrayList<Weapon> args)throws IOException;
+    public Weapon showWeapon(ArrayList<Weapon> args);
 
     /**
      * Show the possible moves that a player can perform then makes the user choose one,
@@ -36,7 +36,7 @@ public interface View {
      * @return the chosen one
      */
 
-    public Action showActions(ArrayList<Action> args)throws IOException;
+    public Action showActions(ArrayList<Action> args);
 
     /**
      * Shows the possible destinations a figure can reach and then returns the chosen value
@@ -45,7 +45,7 @@ public interface View {
      * @return the chosen one
      */
 
-    public Square showPossibleMoves(ArrayList<Square> args, Boolean show)throws IOException;
+    public Square showPossibleMoves(ArrayList<Square> args, Boolean show);
 
     /**
      * Shows the valid targets a Figure can target, then returns the targets the user decides
@@ -62,7 +62,7 @@ public interface View {
      * @return the chosen one
      */
 
-    public String chooseDirection(ArrayList<Figure> args)throws IOException;
+    public String chooseDirection(ArrayList<Figure> args);
 
     /**
      * Displays a message and makes the user make a boolean choice
@@ -79,7 +79,7 @@ public interface View {
      * @return the user's choice
      */
 
-    public Boolean showBoolean(String message)throws IOException;
+    public Boolean showBoolean(String message);
 
     /**
      * Displays a message to the user
@@ -87,19 +87,23 @@ public interface View {
      * @param message the message
      */
 
-    public void displayMessage(String message)throws IOException;
+    public void displayMessage(String message);
 
     /**
      * Displays the leaderboard of the game to the user
      */
 
-    public void displayLeaderboard()throws IOException;
+    public void displayLeaderboard();
 
-    public boolean sendsUpdate(String s)throws IOException;
+    public boolean sendsUpdate(String s);
 
-    public Effect showEffects(Set<Effect> args)throws IOException;
+    public Effect showEffects(Set<Effect> args);
 
-    public ArrayList<Figure> showTargetAdvanced(Set<Figure> args,int maxNum,boolean fromDiffSquare, String msg)throws IOException;
+    public ArrayList<Figure> showTargetAdvanced(Set<Figure> args,int maxNum,boolean fromDiffSquare, String msg);
 
+    public boolean isDisconnected();
+    public void setDisconnected(boolean b);
+    public boolean isInactive();
+    public void setInactive(boolean b);
 
     }

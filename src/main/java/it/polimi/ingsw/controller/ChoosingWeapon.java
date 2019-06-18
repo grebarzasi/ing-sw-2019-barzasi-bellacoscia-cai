@@ -26,7 +26,7 @@ public class ChoosingWeapon implements ControllerState {
      */
 
     @Override
-    public void command() throws IOException {
+    public void command() {
 
         //load the current player's weapons into "options"
         ArrayList<Weapon> options = new ArrayList<>();

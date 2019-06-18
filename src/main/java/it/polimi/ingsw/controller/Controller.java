@@ -205,7 +205,7 @@ public class Controller {
      * Goes back to choosing the move
      */
 
-    public void goBack()throws IOException{
+    public void goBack(){
         this.currentState = this.choosingMove;
         this.currentState.command();
     }
@@ -221,7 +221,7 @@ public class Controller {
      * on the player list
      */
 
-    public void endTurn()throws IOException {
+    public void endTurn() {
 
         for (Figure f : this.model.getPlayerList()) {
 
@@ -251,7 +251,7 @@ public class Controller {
 
     }
 
-    private void checkEndStatus()throws IOException{
+    private void checkEndStatus(){
 
         if(this.getBoard().getTrack().getKillsTrack().size() == this.getBoard().getTrack().getSkullMax()){
 
@@ -288,10 +288,17 @@ public class Controller {
             this.model.setCurrentPlayer(this.model.getPlayerList().get(0));
         }
 
+        //if disconnected or inactive skip turn
+        if(model.getCurrentPlayer().isDisconnected()||model.getCurrentPlayer().isInactive()) {
+            if(checkLeftPlayer())
+                iteratePlayer();
+            endGame();
+        }
+
 
     }
 
-    private void resetTurn()throws IOException{
+    private void resetTurn(){
 
         this.model.setMovesLeft(2);
         this.model.setHasBotAction(true);
@@ -302,7 +309,7 @@ public class Controller {
 
     }
 
-    private void endGame()throws IOException{
+    private void endGame(){
 
         this.view.displayLeaderboard();
 
@@ -343,10 +350,11 @@ public class Controller {
 
     }
 
-    public void update()throws IOException {
+    public void update() {
         String s = marshal.create().toString();
         for(Player p: model.getPlayerList())
-            p.getView().sendsUpdate(s);
+            if(!p.isDisconnected())
+                p.getView().sendsUpdate(s);
     }
 
     private String intToMap(int i){
@@ -384,12 +392,12 @@ public class Controller {
 
     }
 
-    public void timeOut()throws IOException{
+    public void timeOut(){
         this.goBack();
         this.decreaseMoveLeft();
     }
 
-    public void finalTimeOut() throws IOException{
+    public void finalTimeOut() {
         this.goBack();
         this.endTurn();
     }
@@ -589,6 +597,14 @@ public class Controller {
     public void setMarshal(UpdateBuilder marshal) {
         this.marshal = marshal;
     }
+
+    public boolean checkLeftPlayer() {
+        for(Player p: model.getPlayerList())
+            if(!p.isDisconnected()&&!p.isInactive())
+                return true;
+            return false;
+    }
+
 
 
 
