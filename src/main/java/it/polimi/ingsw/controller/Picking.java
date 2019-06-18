@@ -94,7 +94,9 @@ public class Picking implements ControllerState{
         PowerUp chosen = this.controller.getView().showPowerUp(options);
 
 
-        if(chosen == null){
+        if (chosen == null&&(controller.getView().isDisconnected()||controller.getView().isInactive())) {
+            controller.endTurn();
+        } else if(chosen == null){
 
             chosen = options.get(getRandom(options.size()));
             options.remove(chosen);

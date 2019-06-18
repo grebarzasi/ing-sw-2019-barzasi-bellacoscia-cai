@@ -3,6 +3,7 @@ package it.polimi.ingsw.javaFX;
 import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.connection.rmi.RmiClient;
 import it.polimi.ingsw.connection.socket.SClient;
+import it.polimi.ingsw.connection.socket.SClientCommManager;
 import it.polimi.ingsw.virtual_model.*;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;

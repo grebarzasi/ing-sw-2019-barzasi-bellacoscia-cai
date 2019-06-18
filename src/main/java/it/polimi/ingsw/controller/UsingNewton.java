@@ -39,7 +39,9 @@ public class UsingNewton implements ControllerState {
 
         ArrayList<Figure> choiceTemp = this.controller.getView().showTargetAdvanced(targetTemp,1,false,"Seleziona un bersaglio da spostare:");
 
-        if(choiceTemp == null){
+        if (choiceTemp == null&&(controller.getView().isDisconnected()||controller.getView().isInactive())) {
+            controller.endTurn();
+        } else if(choiceTemp == null){
             this.controller.goBack();
         }else {
             Figure choice = choiceTemp.get(0);
@@ -58,6 +60,10 @@ public class UsingNewton implements ControllerState {
             }
 
             Square target = this.controller.getView().showPossibleMoves(options, false);
+
+            if (target == null&&(controller.getView().isDisconnected()||controller.getView().isInactive()))
+                controller.endTurn();
+
             choice.setPosition(target);
             this.controller.getCurrentPlayer().removePowerUp(this.using);
             this.controller.getModel().getBoard().getPowerupDeck().getDiscarded().add(this.using);

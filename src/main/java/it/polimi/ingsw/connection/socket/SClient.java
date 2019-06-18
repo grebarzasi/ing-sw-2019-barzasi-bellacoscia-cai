@@ -1,13 +1,10 @@
 package it.polimi.ingsw.connection.socket;
 
 
-import it.polimi.ingsw.Lobby;
 import it.polimi.ingsw.connection.ConnectionTech;
-import it.polimi.ingsw.virtual_model.SClientCommManager;
 
 import java.io.*;
 import java.net.Socket;
-import java.rmi.RemoteException;
 
 import static it.polimi.ingsw.CLI.CliMessages.CONNECTION_ERR;
 

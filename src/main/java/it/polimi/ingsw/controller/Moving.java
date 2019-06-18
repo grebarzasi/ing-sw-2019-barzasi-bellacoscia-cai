@@ -33,7 +33,9 @@ public class Moving implements ControllerState{
 
         Square choice = this.controller.getView().showPossibleMoves(options, false);
 
-        if(choice == null){
+        if (choice == null&&(controller.getView().isDisconnected()||controller.getView().isInactive())) {
+            controller.endTurn();
+        } else if(choice == null){
 
             this.controller.update();
             this.controller.goBack();

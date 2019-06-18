@@ -3,6 +3,7 @@ package it.polimi.ingsw.CLI;
 import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.connection.rmi.RmiClient;
 import it.polimi.ingsw.connection.socket.SClient;
+import it.polimi.ingsw.connection.socket.SClientCommManager;
 import it.polimi.ingsw.virtual_model.*;
 
 import java.io.BufferedReader;
@@ -12,10 +13,8 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 
 import static it.polimi.ingsw.CLI.CLiBoardStuff.ALL_AMMO;
-import static it.polimi.ingsw.CLI.CLiBoardStuff.ALL_CHARACTERS;
 import static it.polimi.ingsw.CLI.CliColor.*;
 import static it.polimi.ingsw.CLI.CliMessages.*;
 import static it.polimi.ingsw.connection.ConnMessage.*;
@@ -312,9 +311,14 @@ public class CliGame implements ViewClient {
      * @return the user's choice
      */
     public boolean showBoolean(String message) {
-        System.out.println("\n"+message);
+        String s;
+        System.out.println("\n"+message+"(s/n)");
         try {
-            if (sc.readLine().equals("Y"))
+            do
+                s = sc.readLine();
+            while (s.isEmpty());
+
+            if (s.equals("s")||s.equals("S")||s.equals("y")||s.equals("Y"))
                 return true;
             else
                 return false;
@@ -330,7 +334,7 @@ public class CliGame implements ViewClient {
      * @param message the message
      */
     public void displayMessage(String message) {
-
+        System.out.println(message);
     }
 
     /**

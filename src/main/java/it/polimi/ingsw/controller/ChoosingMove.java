@@ -37,7 +37,9 @@ public class ChoosingMove implements ControllerState{
 
             Action choice = this.controller.getView().showActions(options);
 
-            if (choice == null) {
+            if (choice == null&&(controller.getView().isDisconnected()||controller.getView().isInactive())) {
+                controller.endTurn();
+            } else if (choice == null) {
                 this.command();
             } else {
 

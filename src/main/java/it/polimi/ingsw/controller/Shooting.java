@@ -78,26 +78,14 @@ public class Shooting implements ControllerState {
 
                         dir = shootingWith.getDirectionTemp();
                         String rpl = controller.getView().chooseDirection(new ArrayList<>(dir.getTargetTemp()));
-
-                        if (rpl == null) {
-
-                            shootingWith.resetWeapon();
-                            this.controller.goBack();
-
-                        }
-
+                        checkReplyNull(rpl);
                         dir.setDirectionTemp(rpl);
 
                     } else if (shootingWith.getAskTemp() != null) {
 
                         ask = shootingWith.getAskTemp();
                         ArrayList<Figure> rpl = controller.getView().showTargetAdvanced(ask.getTargetTemp(), ask.getNumMax(), ask.isFromDiffSquare(), ask.getMsg());
-                        if (rpl == null) {
-
-                            shootingWith.resetWeapon();
-                            this.controller.goBack();
-
-                        }
+                        checkReplyNull(rpl);
                         ask.setTargetTemp(new HashSet<>(rpl));
 
                     }else if (shootingWith.getMoveTemp() != null) {
@@ -105,10 +93,7 @@ public class Shooting implements ControllerState {
                         mv = shootingWith.getMoveTemp();
                         ArrayList<Square> options = this.controller.canGo((Figure)mv.getTargetTemp().toArray()[0],mv.getMaxSteps());
                         Square rpl = controller.getView().showPossibleMoves(options,false);
-                        if (rpl == null) {
-                            shootingWith.resetWeapon();
-                            this.controller.goBack();
-                        }
+                        checkReplyNull(rpl);
                         mv.setSquareTemp(rpl);
                     }
 
@@ -123,7 +108,6 @@ public class Shooting implements ControllerState {
                 }
                 //now the effect is been executed
 
-                ok=false;
                 additionalEffect=true;
 
                 if(!scopeUsed)
@@ -276,5 +260,15 @@ public class Shooting implements ControllerState {
 
     public void setRange(int range) {
         this.range = range;
+    }
+
+    public void checkReplyNull(Object rpl){
+        if (rpl == null&&(controller.getView().isDisconnected()||controller.getView().isInactive())) {
+            shootingWith.resetWeapon();
+            controller.endTurn();
+        } else  if (rpl == null) {
+            shootingWith.resetWeapon();
+            this.controller.goBack();
+        }
     }
 }

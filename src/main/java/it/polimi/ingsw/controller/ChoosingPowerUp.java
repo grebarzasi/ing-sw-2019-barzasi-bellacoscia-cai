@@ -41,7 +41,10 @@ public class ChoosingPowerUp implements ControllerState {
 
         //takes the player choice
         PowerUp chosen = this.controller.getView().showPowerUp(options);
-        if(chosen == null){
+
+        if (chosen == null&&(controller.getView().isDisconnected()||controller.getView().isInactive())) {
+            controller.endTurn();
+        } else if(chosen == null){
 
             this.controller.goBack();
 

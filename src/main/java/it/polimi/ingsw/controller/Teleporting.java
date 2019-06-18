@@ -44,7 +44,9 @@ public class Teleporting implements ControllerState {
         options.remove(this.controller.getCurrentPlayer().getPosition());
         Square choice = this.controller.getView().showPossibleMoves(options, false);
 
-        if(choice == null){
+        if (choice == null&&(controller.getView().isDisconnected()||controller.getView().isInactive())) {
+            controller.endTurn();
+        } else if(choice == null){
             this.controller.goBack();
         }else{
 

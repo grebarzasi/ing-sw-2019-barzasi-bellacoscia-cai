@@ -28,7 +28,9 @@ public class DiscardingPowerUp implements ControllerState{
         ArrayList<PowerUp> options = new ArrayList<>(this.controller.getCurrentPlayer().getPowerupList());
         PowerUp choice = this.controller.getView().showPowerUp(options);
 
-        if(choice == null){
+        if (choice == null&&(controller.getView().isDisconnected()||controller.getView().isInactive())) {
+            controller.endTurn();
+        } else if(choice == null){
             this.controller.goBack();
         }else {
             this.controller.getCurrentPlayer().getPersonalBoard().addAmmo(choice.getAmmoOnDiscard());

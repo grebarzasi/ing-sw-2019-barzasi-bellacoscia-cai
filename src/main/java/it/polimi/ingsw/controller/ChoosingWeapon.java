@@ -36,7 +36,9 @@ public class ChoosingWeapon implements ControllerState {
         //Displays the options to the view and the view returns the chosen weapon
         Weapon choice = this.controller.getView().showWeapon(options);
 
-        if(choice == null){
+        if (choice == null&&(controller.getView().isDisconnected()||controller.getView().isInactive())) {
+            controller.endTurn();
+        } else if(choice == null){
             this.controller.goBack();
             this.controller.choosingMove.command();
         }else {

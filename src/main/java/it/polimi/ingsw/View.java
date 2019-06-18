@@ -106,4 +106,6 @@ public interface View {
     public boolean isInactive();
     public void setInactive(boolean b);
 
-    }
+
+
+}

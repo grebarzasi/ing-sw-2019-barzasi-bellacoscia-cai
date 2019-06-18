@@ -63,79 +63,102 @@ public class ServerCommManager  extends Thread implements View {
 
     }
     /**
-     * Convert args into Strings, sends it to client and wait for a reply.
+     * Convert into Strings, sends it to client and wait for a reply.
      * then convert the string into a PU pointer and returns it
      * @param args the Powerups to show
      * @return a pu element
      */
     public PowerUp showPowerUp(ArrayList<PowerUp> args) {
-            String s = "";
-            String rpl = "";
-            String[] temp;
-            for (PowerUp p : args) {
-                s = s + p.getName() + INNER_SEP + p.getAmmoOnDiscard().toString() + INFO_SEP;
-            }
-            final String sTh=s;
+        String s = "";
+        String rpl = "";
+        String[] temp;
+        for (PowerUp p : args) {
+            s = s + p.getName() + INNER_SEP + p.getAmmoOnDiscard().toString() + INFO_SEP;
+        }
 
-            /*-------------------------------------------*/
-            Thread t = new Thread(() -> {
-                try{
-                    setInUse(true);
-                    if (rmi)
-                        setRplTh(rmiClient.showPowerUp(parseString(sTh)));
-                    else
-                        setRplTh(askAndWait(SHOW_PU,sTh));
-
-                    setInUse(false);
-                }catch(IOException e){
-                    handleDisconnection();
-                    setRplTh(null);
-                }
-            });
-            t.start();
-
-            /*-------------------------------------------*/
-            if(!handleInactivity(t)){
-                return null;
-            }
-
-            rpl=rplTh;
-            if(rpl==null)
-                return null;
-            temp = rpl.split(INNER_SEP);
-            for (PowerUp p : args) {
-                if (p.getName().equals(temp[0]) && p.getAmmoOnDiscard().toString().equals(temp[1]))
-                    return p;
-            }
-            return null;
-    }
-
-    public Weapon showWeapon(ArrayList<Weapon> args){
-            String s="";
-            String rpl="";
-            String[] temp;
-            for(Weapon p : args){
-                s=s+p.getName()+INNER_SEP+p.getChamber().toString()+INNER_SEP+p.getBasicEffect().getCost().toString().replaceFirst(p.getChamber().toString(),"")+INFO_SEP;
-            }
+        /*-------------------------------------------*/
+        final String sTh=s;
+        Thread t = new Thread(() -> {
             try{
-            setInUse(true);
-            if (rmi) {
-                    rpl=rmiClient.showWeapon(parseString(s));
-            }
-            else
-            rpl=askAndWait(SHOW_WEAPONS,s);
-            setInUse(false);
+                setInUse(true);
+                if (rmi) {
+                    setRplTh(rmiClient.showPowerUp(parseString(sTh)));
+                }
+                    else {
+                    setRplTh(askAndWait(SHOW_PU,sTh));
+                }
+
+                setInUse(false);
             }catch(IOException e){
                 handleDisconnection();
-                return null;
+                setRplTh(null);
             }
-            if(rpl==null)
-                return null;
-            temp=rpl.split(INNER_SEP);
-            for(Weapon p : args){
+        });
+        if(!handleInactivity(t)){
+            return null;
+            /*-------------------------------------------*/
+        }
+
+        rpl=rplTh;
+        if(rpl==null) {
+            return null;
+        }
+        temp = rpl.split(INNER_SEP);
+        for (PowerUp p : args) {
+            if (p.getName().equals(temp[0]) && p.getAmmoOnDiscard().toString().equals(temp[1])) {
+                return p;
+            }
+        }
+        return null;
+    }
+    /**
+     * Convert args into Strings, sends it to client and wait for a reply.
+     * then convert the string into a PU pointer and returns it
+     * @param args the Powerups to show
+     * @return a pu element
+     */
+
+    public Weapon showWeapon(ArrayList<Weapon> args){
+        String s="";
+        String rpl="";
+        String[] temp;
+        for(Weapon p : args){
+            s=s+p.getName()+INNER_SEP+p.getChamber().toString()+INNER_SEP+p.getBasicEffect().getCost().toString().replaceFirst(p.getChamber().toString(),"")+INFO_SEP;
+        }
+
+        /*-------------------------------------------*/
+        final String sTh=s;
+
+        Thread t = new Thread(() -> {
+            try{
+                setInUse(true);
+                if (rmi) {
+                    setRplTh(rmiClient.showWeapon(parseString(sTh)));
+                }
+                else {
+                    setRplTh(askAndWait(SHOW_WEAPONS,sTh));
+                }
+                setInUse(false);
+            }catch(IOException e){
+                handleDisconnection();
+                setRplTh(null);
+            }
+        });
+
+        if(!handleInactivity(t)) {
+            return null;
+        }
+        rpl=rplTh;
+        /*-------------------------------------------*/
+
+        if(rpl==null) {
+            return null;
+        }
+        temp=rpl.split(INNER_SEP);
+        for(Weapon p : args){
                 if(p.getName().equals(temp[0]))
                     return p;
-            }
+        }
         return null;
     }
 
@@ -146,20 +169,30 @@ public class ServerCommManager  extends Thread implements View {
         for(Action a : args){
             s=s+a.getDescription()+INNER_SEP+a.getRange()+INFO_SEP;
         }
+        /*-------------------------------------------*/
+        final String sTh=s;
 
-        try{
-        setInUse(true);
-        if (rmi) {
-                rpl=rmiClient.showActions(parseString(s));
-        }
-        else
-        rpl=askAndWait(SHOW_ACTIONS,s);
-        setInUse(false);
-        }catch(IOException e){
-            handleDisconnection();
+        Thread t = new Thread(() -> {
+            try{
+                setInUse(true);
+                if (rmi) {
+                    setRplTh(rmiClient.showActions(parseString(sTh)));
+                }
+                else {
+                    setRplTh(askAndWait(SHOW_ACTIONS,sTh));
+                }
+                setInUse(false);
+            }catch(IOException e){
+                handleDisconnection();
+                setRplTh(null);
+            }
+        });
+
+        if(!handleInactivity(t)) {
             return null;
         }
-
+        rpl=rplTh;
+        /*-------------------------------------------*/
         if(rpl==null)
             return null;
         temp=rpl.split(INNER_SEP);
@@ -177,17 +210,30 @@ public class ServerCommManager  extends Thread implements View {
             s=s+p.getPosition().getRow()+INNER_SEP+p.getPosition().getColumn()+INFO_SEP;
         }
 
-        try {
-            setInUse(true);
-            if (rmi) {
-                rpl = rmiClient.showPossibleMoves(parseString(s));
-            } else
-                rpl = askAndWait(SHOW_MOVES, s);
-            setInUse(false);
-        }catch(IOException e){
-            handleDisconnection();
+        /*-------------------------------------------*/
+        final String sTh=s;
+
+        Thread t = new Thread(() -> {
+            try{
+                setInUse(true);
+                if (rmi) {
+                    setRplTh(rmiClient.showPossibleMoves(parseString(sTh)));
+                }
+                else {
+                    setRplTh(askAndWait(SHOW_MOVES,sTh));
+                }
+                setInUse(false);
+            }catch(IOException e){
+                handleDisconnection();
+                setRplTh(null);
+            }
+        });
+
+        if(!handleInactivity(t)) {
             return null;
         }
+        rpl=rplTh;
+        /*-------------------------------------------*/
         if(rpl==null)
             return null;
         for(Square p : args){
@@ -200,25 +246,42 @@ public class ServerCommManager  extends Thread implements View {
 
     public Boolean showBoolean(String message){
         String rpl="";
-        try{
-        setInUse(true);
-        if (rmi) {
-                rpl=Boolean.toString(rmiClient.showBoolean(message));
+        /*-------------------------------------------*/
+        final String sTh=message;
+
+        Thread t = new Thread(() -> {
+            try{
+                setInUse(true);
+                if (rmi) {
+                    setRplTh(String.valueOf(rmiClient.showBoolean(sTh)));
+                }
+                else {
+                    setRplTh(askAndWait(SHOW_BOOLEAN,sTh));
+                }
+                setInUse(false);
+            }catch(IOException e){
+                handleDisconnection();
+                setRplTh(null);
+            }
+        });
+
+        if(isInactive()) {
+            t.start();
+            try {
+                t.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-        else
-            rpl=askAndWait(SHOW_BOOLEAN,message);
-        setInUse(false);
-        }catch(IOException e){
-            handleDisconnection();
+        else if(!handleInactivity(t))
             return null;
-        }
+
+        rpl=rplTh;
+        /*-------------------------------------------*/
         if(rpl==null)
             return null;
-        if(rpl.equals("true"))
-            return true;
-        else if( rpl.equals("false"))
-            return false;
-        return false;
+
+        return Boolean.parseBoolean(rpl);
     }
 
     public void displayMessage(String message){
@@ -242,18 +305,31 @@ public class ServerCommManager  extends Thread implements View {
         for(Figure f: args)
             s=s+f.getCharacter()+INFO_SEP;
 
-        try{
-        setInUse(true);
-        if (rmi) {
-             rpl=rmiClient.chooseDirection(parseString(s));
-        }
-        else
-             rpl= askAndWait(CHOOSE_DIRECTION,s).toUpperCase();
-        setInUse(false);
-        }catch(IOException e){
-            handleDisconnection();
+
+        /*-------------------------------------------*/
+        final String sTh=s;
+
+        Thread t = new Thread(() -> {
+            try{
+                setInUse(true);
+                if (rmi) {
+                    setRplTh(rmiClient.chooseDirection(parseString(sTh)).toUpperCase());
+                }
+                else {
+                    setRplTh(askAndWait(CHOOSE_DIRECTION,sTh).toUpperCase());
+                }
+                setInUse(false);
+            }catch(IOException e){
+                handleDisconnection();
+                setRplTh(null);
+            }
+        });
+
+        if(!handleInactivity(t)) {
             return null;
         }
+        rpl=rplTh;
+        /*-------------------------------------------*/
         if(rpl.equals(NOTHING))
             return null;
         return rpl;
@@ -270,18 +346,31 @@ public class ServerCommManager  extends Thread implements View {
                 cost=NOTHING;
             s=s+e.getName()+INNER_SEP+cost+INFO_SEP;
         }
-        try{
-        setInUse(true);
-        if (rmi) {
-                rpl=rmiClient.showEffects(parseString(s));
-        }
-        else
-             rpl=askAndWait(SHOW_EFFECTS,s);
-        setInUse(false);
-        }catch(IOException e){
-            handleDisconnection();
+        /*-------------------------------------------*/
+        final String sTh=s;
+
+        Thread t = new Thread(() -> {
+            try{
+                setInUse(true);
+                if (rmi) {
+                    setRplTh(rmiClient.showEffects(parseString(sTh)));
+                }
+                else {
+                    setRplTh(askAndWait(SHOW_EFFECTS,sTh));
+                }
+                setInUse(false);
+            }catch(IOException e){
+                handleDisconnection();
+                setRplTh(null);
+            }
+        });
+
+        if(!handleInactivity(t)) {
             return null;
         }
+        rpl=rplTh;
+        /*-------------------------------------------*/
+
         if(rpl==null)
             return null;
         temp=rpl.split(INNER_SEP);
@@ -302,27 +391,33 @@ public class ServerCommManager  extends Thread implements View {
             s=s+a.getCharacter()+INFO_SEP;
             players.put(a.getCharacter(),a);
         }
-        try{
-        setInUse(true);
-        if (rmi) {
-                rpl=rmiClient.showTargetAdvanced(parseString(s));
-        }
-        else{
-                socketClient.getOut().println(SHOW_TARGET_ADV);
-                while (!socketClient.getIn().readLine().equals(AKN)) ;
-                socketClient.getOut().println(s);
-                do {
-                    rpl = socketClient.getIn().readLine();
+        /*-------------------------------------------*/
+        final String sTh=s;
+
+        Thread t = new Thread(() -> {
+            try{
+                setInUse(true);
+                if (rmi) {
+                    setRplTh(rmiClient.showTargetAdvanced(parseString(sTh)));
                 }
-            while (rpl.isEmpty());
-        }
-        setInUse(false);
-        }catch(IOException e){
-            handleDisconnection();
+                else {
+                    setRplTh(askAndWait(SHOW_TARGET_ADV,sTh));
+                }
+                setInUse(false);
+            }catch(IOException e){
+                handleDisconnection();
+                setRplTh(null);
+            }
+        });
+
+        if(!handleInactivity(t)) {
             return null;
         }
-        if(rpl.equals(NOTHING))
-                return null;
+        rpl=rplTh;
+        /*-------------------------------------------*/
+
+        if(rpl==null)
+            return null;
 
         ArrayList<Figure> target = new ArrayList<>();
         temp=rpl.split(INFO_SEP);
@@ -356,18 +451,6 @@ public class ServerCommManager  extends Thread implements View {
        return true;
     }
 
-    public ArrayList<String> parseString(String args){
-        ArrayList<String> sList = new ArrayList<>();
-        if(args.equals(NOTHING)) {
-            return sList;
-        }
-        String[] s=args.split(INFO_SEP);
-        for(String x : s){
-            sList.add(x);
-        }
-        return sList;
-    }
-
 
     public void handleDisconnection(){
         owner.setDisconnected(true);
@@ -375,6 +458,7 @@ public class ServerCommManager  extends Thread implements View {
     }
 
     public boolean handleInactivity(Thread t){
+        t.start();
         int i=0;
         System.out.print("\nInactivity countdown: ");
         for(;i<INACTIVITY_TIMEOUT;i++){
@@ -394,39 +478,50 @@ public class ServerCommManager  extends Thread implements View {
         return false;
     }
 
+    public void ping() throws IOException {
+        if (!isRmi()) {
+            socketClient.getOut().println(PING);
+            while (!socketClient.getIn().readLine().equals(PONG)) ;
+        } else {
+            rmiClient.isConnected();
+        }
+    }
+    public void reactivatePlayer() {
+        boolean b;
+        b = showBoolean(RETURN_IN_GAME);
+        if(b) {
+            owner.setInactive(false);
+            displayMessage("PRONTO!");
+        }
+        sendsUpdate(updateBuffer);
+    }
+
     @Override
     public void run(){
+
         try {
+            //Repeat forever
 
-            while (true) {
-                if (isInactive()&&!isDisconnected()) {
-                    if (!isInUse())
-                        sendsUpdate(updateBuffer);
-                        setInactive(!showBoolean(RETURN_IN_GAME));
-                        sendsUpdate(updateBuffer);
-                } else {
-                        if (!isInUse()) {
-                            if (!isRmi()) {
-                                synchronized (socketClient) {
-                                }
-                                socketClient.getOut().println(PING);
-                                while (!socketClient.getIn().readLine().equals(PONG)) ;
-                            } else
-                                rmiClient.isConnected();
-                        }
-                    }
-                sleep(2000);
+            while(true) {
+                //if communication is free do stuff
+                if(!isInUse()) {
+                    //if the player is connected but inactive check if the player wants to return to game
+                    if (isInactive() && !isDisconnected())
+                         reactivatePlayer();
+                     else
+                        ping();
+                        //if the player is active and connected Ping the player
+                }
             }
-
 
         }catch(IOException e){
             handleDisconnection();
             this.interrupt();
-        }catch(InterruptedException b){
-            b.printStackTrace();
         }
     }
 
+
+    /*getters and setters*/
     public SocketClientHandler getSocketClient() {
         return socketClient;
     }
@@ -475,11 +570,20 @@ public class ServerCommManager  extends Thread implements View {
         owner.setInactive(inactive);
     }
 
-
-
-
-
     public void setRplTh(String rplTh) {
         this.rplTh = rplTh;
+    }
+
+    public ArrayList<String> parseString(String args){
+        ArrayList<String> argList = new ArrayList<>();
+
+        if(args.equals(NOTHING))
+            return argList;
+
+        String[] s=args.split(INFO_SEP);
+        for(String x : s){
+            argList.add(x);
+        }
+        return argList;
     }
 }
