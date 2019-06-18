@@ -19,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
@@ -101,6 +102,7 @@ public class GameJavaFX extends Application implements ViewClient {
     private boolean move;
     private boolean pick;
     private boolean shoot;
+    private boolean reset;
 
 
     private VirtualModel model;
@@ -110,6 +112,8 @@ public class GameJavaFX extends Application implements ViewClient {
     private UpdateParser parser;
 
     private Font font;
+    private Image emptyCell;
+    private Image backBtn;
 
     private String action;
 
@@ -127,6 +131,7 @@ public class GameJavaFX extends Application implements ViewClient {
     private Button btnDeck;
     private Button btnTerminator;
     private Button btnPowerUp;
+    private Button btnEmpty;
 
 
     private GridPane gridPBoard;
@@ -201,11 +206,19 @@ public class GameJavaFX extends Application implements ViewClient {
         move = false;
         pick = false;
         shoot = false;
+        reset = false;
 
         parser = new UpdateParser(model);
 
         game = new VirtualGame();
         font = new Font(20);
+        try {
+            emptyCell = new Image(new FileInputStream(PATH_EMPTY_DAMAGE),widthCenter,heightCenter,true,true);
+            backBtn = new Image(new FileInputStream(PATH_BACK_POINTS), 100, 100, true, true);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         action = "";
         decision = "";
@@ -222,6 +235,7 @@ public class GameJavaFX extends Application implements ViewClient {
         btnTerminator = new Button("Terminator");
         btnPowerUp = new Button("Power-up");
         btnDeck = new Button();
+        btnEmpty = new Button();
         gridPBoard = new GridPane();
 
         btnPwe1 = new Button();
@@ -339,6 +353,7 @@ public class GameJavaFX extends Application implements ViewClient {
         /**
          * set points.
          */
+        /*
         Image pointsBack = new Image(new FileInputStream(PATH_BACK_POINTS), 100, 100, true, true);
         BackgroundImage backgroundPoints = new BackgroundImage(pointsBack, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background backPoints = new Background(backgroundPoints);
@@ -360,6 +375,8 @@ public class GameJavaFX extends Application implements ViewClient {
         pointsField.setStyle("-fx-text-fill: grey; -fx-font-size: 20px;");
 
         grid.add(pointsField, 2, 0);
+
+         */
 
         /**
          * set Killshot track.
@@ -779,6 +796,21 @@ public class GameJavaFX extends Application implements ViewClient {
         hBtn.getChildren().add(btnShoot);
         hBtn.getChildren().add(btnEnd);
         hBtn.getChildren().add(btnCancel);
+        setButtonBack(btnMove,backBtn);
+        setButtonBack(btnPick,backBtn);
+        setButtonBack(btnPowerUp,backBtn);
+        setButtonBack(btnTerminator,backBtn);
+        setButtonBack(btnCancel,backBtn);
+        setButtonBack(btnEnd,backBtn);
+        setButtonBack(btnShoot,backBtn);
+        btnMove.setTextFill(Color.WHITE);
+        btnPick.setTextFill(Color.WHITE);
+        btnPowerUp.setTextFill(Color.WHITE);
+        btnShoot.setTextFill(Color.WHITE);
+        btnTerminator.setTextFill(Color.WHITE);
+        btnCancel.setTextFill(Color.WHITE);
+        btnEnd.setTextFill(Color.WHITE);
+
 
         VBox vmsg = new VBox(25);
         vmsg.setAlignment(Pos.CENTER);
@@ -1274,7 +1306,7 @@ public class GameJavaFX extends Application implements ViewClient {
         int k = 2;
         int no = 3;
 
-        if (!p.getpBoard().getMarks().equals(null))
+        if (!p.getpBoard().getMarks().equals(null)) {
             for (String color : p.getpBoard().getMarks()) {
                 switch (color) {
                     case "yellow": {
@@ -1335,8 +1367,20 @@ public class GameJavaFX extends Application implements ViewClient {
                 }
                 i++;
             }
+        }else{
+            for (int empty = i; empty < 3; empty++ ){
+                ImageView img = null;
 
-        if (!p.getpBoard().getDamage().equals(null))
+                try {
+                    img = new ImageView(new Image(new FileInputStream(PATH_EMPTY_DAMAGE), width, hmarks, true, true));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                grid.add(img, empty, 0);
+            }
+        }
+
+        if (!p.getpBoard().getDamage().equals(null)) {
             for (String color : p.getpBoard().getDamage()) {
                 switch (color) {
                     case "yellow": {
@@ -1397,6 +1441,18 @@ public class GameJavaFX extends Application implements ViewClient {
                 }
                 j++;
             }
+        } else {
+            for (int empty = j; empty < 12; empty++ ){
+                ImageView img = null;
+
+                try {
+                    img = new ImageView(new Image(new FileInputStream(PATH_EMPTY_DAMAGE), width, hmarks, true, true));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                grid.add(img, empty, 0);
+            }
+        }
         while (k <= 6 - p.getpBoard().getSkulls() + 1) {
 
             if (k <= no) {
@@ -1583,7 +1639,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
     public void hideBtn(Button btn, double o) {
         if (o == 0) {
-            btn.cancelButtonProperty();
+            //setButtonBack(btn,emptyCell);
         }
         btn.setOpacity(o);
 
@@ -1593,7 +1649,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
         for (Button b : btnArr) {
             Runnable run = () -> b.setOnAction(e -> {
-                if (b.getOpacity() == 0 || btnArr.indexOf(b) == 5) {
+                if (b.getOpacity() == 0 || btnArr.indexOf(b) != 5) {
                     int x = (int) Math.ceil((double) (btn + 1) / 4) - 1;
                     int y = (btn + 1) - (x * 4) - 1;
                     game.setTargetSquare(x + ":" + y);
@@ -1710,6 +1766,15 @@ public class GameJavaFX extends Application implements ViewClient {
             borderGlow.setWidth(50);
             borderGlow.setOffsetX(0f);
             borderGlow.setOffsetY(0f);
+
+            if(reset) {
+                for (ArrayList<Button> btnArr : btnCell) {
+                    for (Button btn : btnArr) {
+                    }
+                }
+
+                reset = false;
+            }
 
 
             if (model.getTurn().getCharacter().equals(model.getOwner().getCharacter())) {
@@ -1905,12 +1970,16 @@ public class GameJavaFX extends Application implements ViewClient {
             int i = 0;
             for (VirtualPlayer p : model.getAllPlayers()) {
 
-                if (p.equals(model.getOwner()) || p.getUsername().equals(TERMINATOR_NAME)) {
+                if (p.equals(model.getOwner())) {
                     continue;
                 }
 
+
+
+                if(!p.getUsername().equals(TERMINATOR_NAME)) {
+                    fillOtherAmmo(gridOtherAmmo.get(i), p.getpBoard(), widthLateral / 7, heightLateral / 7);
+                }
                 fillBoard(gridOtherBoards.get(i), p, widthBoard, heightPBoard / 5 - 10, heightPBoard / 4 - 10, heightPBoard / 5 - 10);
-                fillOtherAmmo(gridOtherAmmo.get(i), p.getpBoard(), widthLateral / 7, heightLateral / 7);
                 fillWeapon(otherWe.get(i), p, widthOCard / 3.7, heightOtherWeapon);
                 setWeapon(p, otherWe.get(i));
                 i++;
@@ -2042,6 +2111,9 @@ public class GameJavaFX extends Application implements ViewClient {
     public String showActions(ArrayList<String> args) {
 
         Runnable run = () -> {
+
+            msg.setText(CHOOSE_ACTION);
+
             for (String act : args) {
 
                 switch (act.split(INNER_SEP)[0].toLowerCase()) {
@@ -2049,7 +2121,6 @@ public class GameJavaFX extends Application implements ViewClient {
                         hideBtn(btnMove,1);
                         btnMove.setOnAction(e->{
                             move = true;
-                            System.out.println(act);
                             game.setAction(act);
                             for (ArrayList<Button> btnArr : btnCell) {
                                 chooseSquare(btnArr,btnCell.indexOf(btnArr),false);
@@ -2062,7 +2133,6 @@ public class GameJavaFX extends Application implements ViewClient {
                         hideBtn(btnPick, 1);
                         btnPick.setOnAction(e->{
                             pick = true;
-                            System.out.println(act);
 
                             game.setAction(act);
                             for (ArrayList<Button> btnArr : btnCell) {
@@ -2101,7 +2171,7 @@ public class GameJavaFX extends Application implements ViewClient {
                         });
                         break;
                     }
-                    case ("terminator"): { //terminator
+                    case ("use bot"): { //terminator
                         hideBtn(btnTerminator, 1);
                         btnTerminator.setOnAction(e->{
                             game.setAction(act);
@@ -2158,17 +2228,23 @@ public class GameJavaFX extends Application implements ViewClient {
                 game.setTargetSquare(NOTHING);
             });
 
+            msg.setText(CHOOSE_SQUARE);
+
             for (ArrayList<Button> btnArr : btnCell) {
                 hideCell(btnArr, 0.5);
             }
             args.remove(0);
             for (String s : args) {
-                hideCell(btnCell.get(getCoordinate(s)), 0);
                 for(Button btn:btnCell.get(getCoordinate(s))){
                     btn.setOnAction(e->{
                         game.setTargetSquare(s);
+                        setButtonBack(btnCell.get(model.getOwner().getRow()*4 + model.getOwner().getColumn()).get(Y),emptyCell);
+                        //btnCell.get(model.getOwner().getRow()*4 + model.getOwner().getColumn()).get(Y).setBackground(btnEmpty.getBackground());
+                        hideBtn(btnCell.get(model.getOwner().getRow()*4 + model.getOwner().getColumn()).get(Y),0.5);
                     });
                 }
+                hideCell(btnCell.get(getCoordinate(s)), 0);
+
             }
 
 
@@ -2179,6 +2255,7 @@ public class GameJavaFX extends Application implements ViewClient {
         while (game.getTargetSquare().equals("")) ;
         String res = game.getTargetSquare();
         game.setTargetSquare("");
+        reset = true;
 
         return res;
     }
@@ -2257,6 +2334,8 @@ public class GameJavaFX extends Application implements ViewClient {
 
 
         Runnable run = () -> {
+
+            msg.setText(CHOOSE_EFFECT);
 
             hideBtn(btnCancel,1);
             btnCancel.setOnAction(e->{
@@ -2405,7 +2484,6 @@ public class GameJavaFX extends Application implements ViewClient {
                             case ("yellow"): {
                                 hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(Y), 1);
                                 btnCell.get(p.getRow() * 4 + p.getColumn()).get(Y).setOnAction(e -> {
-                                    System.out.println(p.getCharacter());
                                     game.getTargetPlayers().add(p.getCharacter());
                                 });
                                 break;
@@ -2413,7 +2491,6 @@ public class GameJavaFX extends Application implements ViewClient {
                             case ("red"): {
                                 hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(R), 1);
                                 btnCell.get(p.getRow() * 4 + p.getColumn()).get(R).setOnAction(e -> {
-                                    System.out.println(p.getCharacter());
                                     game.getTargetPlayers().add(p.getCharacter());
                                 });
                                 break;
@@ -2421,7 +2498,6 @@ public class GameJavaFX extends Application implements ViewClient {
                             case ("blue"): {
                                 hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(B), 1);
                                 btnCell.get(p.getRow() * 4 + p.getColumn()).get(B).setOnAction(e -> {
-                                    System.out.println(p.getCharacter());
                                     game.getTargetPlayers().add(p.getCharacter());
                                 });
                                 break;
@@ -2429,7 +2505,6 @@ public class GameJavaFX extends Application implements ViewClient {
                             case ("green"): {
                                 hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(G), 1);
                                 btnCell.get(p.getRow() * 4 + p.getColumn()).get(G).setOnAction(e -> {
-                                    System.out.println(p.getCharacter());
                                     game.getTargetPlayers().add(p.getCharacter());
                                 });
                                 break;
@@ -2450,7 +2525,6 @@ public class GameJavaFX extends Application implements ViewClient {
         };
 
         int max = Integer.parseInt(args.get(0).split(INNER_SEP)[0]);
-        System.out.println(max);
         Platform.runLater(run);
         int k = game.getTargetPlayers().size();
         while(game.getTargetPlayers().size() != max);
@@ -2716,7 +2790,6 @@ public class GameJavaFX extends Application implements ViewClient {
     public class chooseWeapon extends Stage {
         public chooseWeapon(ArrayList<String> args) {
 
-            System.out.println(args);
             this.setTitle("SCEGLI UN'ARMA");
 
             double widthScreen = Screen.getPrimary().getBounds().getWidth() / 3;
@@ -2776,7 +2849,6 @@ public class GameJavaFX extends Application implements ViewClient {
                 if(numWe > args.size()){
                     break;
                 }
-                System.out.println(s);
                 File jsonFileWe = new File(PATH_WE);
                 try {
 
@@ -2790,7 +2862,6 @@ public class GameJavaFX extends Application implements ViewClient {
                     JsonNode chamberNodeWe = rootNodeWe.path(s.split(INNER_SEP)[0].toLowerCase());
 
                     weapon = chamberNodeWe.path("path").asText();
-                    System.out.println(weapon);
 
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -2961,8 +3032,6 @@ public class GameJavaFX extends Application implements ViewClient {
                             String[] temp;
                             temp=name.split(INNER_SEP);
                             JsonNode chamberNodePu = rootNodePu.path(temp[0]);
-                            System.out.println(temp);
-                            System.out.println(rootNodePu);
                             String powerup = null;
                             if (temp[1].equals("r")) {
                                 powerup = chamberNodePu.path("color").path("red").asText();
@@ -2972,7 +3041,6 @@ public class GameJavaFX extends Application implements ViewClient {
                                 powerup = chamberNodePu.path("color").path("yellow").asText();
                             }
 
-                            System.out.println(powerup);
                             Image imgPu = null;
                             try {
                                 imgPu = new Image(new FileInputStream(PATH_POWER_UP + powerup), widthScreen / 2 - 50, heightScreen - 50, true, true);
@@ -2984,7 +3052,6 @@ public class GameJavaFX extends Application implements ViewClient {
                             setButtonBack(btnArr.get(i),imgPu);
                             Runnable run = () -> btnArr.get(key).setOnAction(e->{
                                 game.setPowerup(n);
-                                System.out.print(n);
                                 this.close();
                             });
 
