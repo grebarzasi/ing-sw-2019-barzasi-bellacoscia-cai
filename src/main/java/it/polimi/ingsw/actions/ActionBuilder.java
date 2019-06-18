@@ -97,9 +97,12 @@ public class ActionBuilder {
 
         adrenalineStage = 0;
 
+
         if (damage > STAGE_1) {
             adrenalineStage = 1;
-        } else if (damage > STAGE_2) {
+        } else
+            //noinspection ConstantConditions
+            if (damage > STAGE_2) {
             adrenalineStage = 2;
         }
 
@@ -112,7 +115,9 @@ public class ActionBuilder {
                 actions.add(new Action(SHOOT, STAGE_0_SHOOT_RANGE));
             }
 
-        } else if (adrenalineStage == 1) {
+        } else
+            //noinspection ConstantConditions
+            if (adrenalineStage == 1) {
 
             actions.add(new Action("Pick", STAGE_1_PICK_RANGE));
             if(canShoot(p)) {
@@ -199,7 +204,7 @@ public class ActionBuilder {
                     flag = true;
                 }
             }
-            if(flag == true){
+            if(flag){
                 actions.add(new Action("PowerUp",0));
             }
         }

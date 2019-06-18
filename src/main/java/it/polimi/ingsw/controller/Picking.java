@@ -131,7 +131,7 @@ public class Picking implements ControllerState{
 
     private int getRandom(int max){
 
-        return (int)Math.random()* ((max) + 1);
+        return (int) (Math.random() * ((max) + 1));
     }
 
     public int getRange() {

@@ -68,6 +68,7 @@ public class ServerCommManager  extends Thread implements View {
      * @param args the Powerups to show
      * @return a pu element
      */
+    @Override
     public PowerUp showPowerUp(ArrayList<PowerUp> args) {
         String s = "";
         String rpl = "";

@@ -235,7 +235,7 @@ public class Controller {
      * on the player list
      */
 
-    public void endTurn() {
+    void endTurn() {
 
         for (Figure f : this.model.getPlayerList()) {
 
@@ -267,7 +267,6 @@ public class Controller {
 
     /**
      * Private method for checking if a the game should end used in end turn
-     * @throws IOException when player input error occurs in the view
      */
 
     private void checkEndStatus(){
@@ -396,7 +395,6 @@ public class Controller {
 
     /**
      * Updates the view of each player
-     * @throws IOException when player input error occurs in the view
      */
 
     public void update(){
@@ -455,20 +453,18 @@ public class Controller {
 
     /**
      * ends the current action of the player when the player times out
-     * @throws IOException when player input error occurs in the view
      */
 
-    public void timeOut()throws IOException{
+    public void timeOut(){
         this.goBack();
         this.decreaseMoveLeft();
     }
 
     /**
      * ends the turn of the player when the player times out
-     * @throws IOException when player input error occurs in the view
      */
 
-    public void finalTimeOut() throws IOException{
+    public void finalTimeOut(){
         this.goBack();
         this.endTurn();
     }

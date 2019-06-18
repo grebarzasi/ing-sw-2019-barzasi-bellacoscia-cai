@@ -163,6 +163,7 @@ public class Shooting implements ControllerState {
         for(Player p : finalTargets){
 
             this.controller.getModel().setCurrentPlayer(p);
+            this.controller.setView(this.controller.getCurrentPlayer().getView());
 
             boolean useTagback = this.controller.getView().showBoolean("Vuoi usare la Granata Venom? \n");
 
@@ -262,7 +263,7 @@ public class Shooting implements ControllerState {
         this.range = range;
     }
 
-    public void checkReplyNull(Object rpl){
+    private void checkReplyNull(Object rpl){
         if (rpl == null&&(controller.getView().isDisconnected()||controller.getView().isInactive())) {
             shootingWith.resetWeapon();
             controller.endTurn();
