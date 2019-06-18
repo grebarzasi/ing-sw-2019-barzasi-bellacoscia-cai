@@ -1,13 +1,9 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.board.map.SpawnSquare;
 import it.polimi.ingsw.board.map.Square;
-import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
-import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -22,7 +18,7 @@ public class PickingWeapon implements ControllerState {
     private Square location;
     private Controller controller;
 
-    public PickingWeapon(Controller controller) {
+    PickingWeapon(Controller controller) {
         this.controller = controller;
     }
 
@@ -34,10 +30,8 @@ public class PickingWeapon implements ControllerState {
     @Override
     public void command(){
 
-        ArrayList<Weapon> options = new ArrayList<>();
 
-
-        options.addAll(((SpawnSquare)this.location).getArmory().getWeaponList());
+        ArrayList<Weapon> options = new ArrayList<>(((SpawnSquare) this.location).getArmory().getWeaponList());
 
         Weapon choice = this.controller.getView().showWeapon(options);
 
@@ -76,8 +70,7 @@ public class PickingWeapon implements ControllerState {
 
     private void discardWeapon(Weapon arg){
 
-        ArrayList<Weapon> options = new ArrayList<>();
-        options.addAll(this.controller.getCurrentPlayer().getWeaponsList());
+        ArrayList<Weapon> options = new ArrayList<>(this.controller.getCurrentPlayer().getWeaponsList());
 
         Weapon choice = this.controller.getView().showWeapon(options);
         options.remove(choice);
@@ -96,11 +89,7 @@ public class PickingWeapon implements ControllerState {
 
     }
 
-    public Square getLocation() {
-        return location;
-    }
-
-    public void setLocation(Square location) {
+    void setLocation(Square location) {
         this.location = location;
     }
 }

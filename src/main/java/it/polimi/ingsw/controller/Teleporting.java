@@ -3,7 +3,6 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -20,7 +19,7 @@ public class Teleporting implements ControllerState {
 
     private Controller controller;
 
-    public Teleporting(Controller controller) {
+    Teleporting(Controller controller) {
         this.controller = controller;
     }
 
@@ -59,13 +58,7 @@ public class Teleporting implements ControllerState {
 
     }
 
-
-
-    public PowerUp getUsing() {
-        return using;
-    }
-
-    public void setUsing(PowerUp using) {
+    void setUsing(PowerUp using) {
         this.using = using;
     }
 

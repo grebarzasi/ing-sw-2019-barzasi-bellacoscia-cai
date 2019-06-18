@@ -138,6 +138,11 @@ public class Controller {
 
     }
 
+    /**
+     * Only for testing prurposes
+     * @param playerList the list of players to start from
+     */
+
 
     public Controller(ArrayList<Player> playerList){
 
@@ -152,7 +157,7 @@ public class Controller {
         this.hasFrenzy = true;
         this.hasBot = true;
 
-
+        //noinspection ConstantConditions
         if(this.hasBot){
 
             String botColor = firstAvailableColor(playerList);
@@ -181,8 +186,16 @@ public class Controller {
 
     }
 
+    /**
+     * Used to determine the first available figure to use as Bot
+     * @param playerList the list of all players
+     * @return the first available figure
+     */
+
     private static String firstAvailableColor(ArrayList<Player> playerList){
 
+        //marks the character names that have been taken already
+        //the characters are stored in a pre defined array
         int i;
         for(i = 0 ; i < ALL_CHARACTERS.length ; i++){
             for (Player p : playerList) {
@@ -192,6 +205,7 @@ public class Controller {
             }
         }
 
+        //returns the first unmarked character
         for(i = 0 ; i < ALL_CHARACTERS.length ; i++){
             if(!ALL_CHARACTERS[i].equals("taken")){
                 return ALL_CHARACTERS[i];
@@ -251,6 +265,11 @@ public class Controller {
 
     }
 
+    /**
+     * Private method for checking if a the game should end used in end turn
+     * @throws IOException when player input error occurs in the view
+     */
+
     private void checkEndStatus(){
 
         if(this.getBoard().getTrack().getKillsTrack().size() == this.getBoard().getTrack().getSkullMax()){
@@ -260,6 +279,10 @@ public class Controller {
                 this.startFrenzy();
                 this.getCurrentPlayer().setStartedFrenzy(true);
                 this.model.getBoard().refillSquares();
+
+                if(this.getCurrentPlayer().getStartedFrenzy()){
+                    this.decreaseMoveLeft();
+                }
 
                 this.goBack();
                 this.model.setFrenzyState(this.model.getFrenzyState() + 1);
@@ -271,7 +294,9 @@ public class Controller {
                 }
 
 
-            }else if(!this.hasFrenzy){
+            }else
+                //noinspection ConstantConditions
+                if(!this.hasFrenzy){
                 /* ****************GAME_ENDS******************* */
                 this.endGame();
                 /* ****************GAME_ENDS******************* */
@@ -279,6 +304,10 @@ public class Controller {
 
         }
     }
+
+    /**
+     * Iterates the current player to the next one
+     */
 
     void iteratePlayer(){
 
@@ -298,6 +327,12 @@ public class Controller {
 
     }
 
+    /**
+     * Restes the parameters of the turn
+     * Resets the current state to choosing move
+     * and shifts the view listened by the server
+     */
+
     private void resetTurn(){
 
         this.model.setMovesLeft(2);
@@ -309,11 +344,19 @@ public class Controller {
 
     }
 
+    /**
+     * ends the game by displaying the leaderboard
+     */
+
     private void endGame(){
 
         this.view.displayLeaderboard();
 
     }
+
+    /**
+     * Starts frenzy mode
+     */
 
     private void startFrenzy(){
         this.model.setFrenzy(true);
@@ -350,13 +393,25 @@ public class Controller {
 
     }
 
-    public void update() {
+
+    /**
+     * Updates the view of each player
+     * @throws IOException when player input error occurs in the view
+     */
+
+    public void update(){
         String s = marshal.create().toString();
         for(Player p: model.getPlayerList())
             if(!p.isDisconnected())
                 p.getView().sendsUpdate(s);
     }
 
+    /**
+     * Converts the map preference from integer to the
+     * name of the map
+     * @param i the preference expressed in int
+     * @return the corresponding name
+     */
     private String intToMap(int i){
 
         String map = "large";
@@ -381,6 +436,12 @@ public class Controller {
         return map;
     }
 
+    /**
+     * Static method that removes all Power Ups NOT of the given type
+     * from an ArrayList of Power Ups
+     * @param puList ArrayList to remove from
+     * @param toKeep All Power Ups to remove excluding this one
+     */
     static void filterPUs(ArrayList<PowerUp> puList , String toKeep){
 
         int i;
@@ -392,15 +453,31 @@ public class Controller {
 
     }
 
-    public void timeOut(){
+    /**
+     * ends the current action of the player when the player times out
+     * @throws IOException when player input error occurs in the view
+     */
+
+    public void timeOut()throws IOException{
         this.goBack();
         this.decreaseMoveLeft();
     }
 
-    public void finalTimeOut() {
+    /**
+     * ends the turn of the player when the player times out
+     * @throws IOException when player input error occurs in the view
+     */
+
+    public void finalTimeOut() throws IOException{
         this.goBack();
         this.endTurn();
     }
+
+
+    ///////////////////////
+    //Getters and Setters//
+    ///////////////////////
+
 
     public Board getBoard() {
         return this.getModel().getBoard();

@@ -5,7 +5,6 @@ import it.polimi.ingsw.Player;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;

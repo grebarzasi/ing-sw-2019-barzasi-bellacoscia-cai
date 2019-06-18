@@ -4,7 +4,6 @@ import it.polimi.ingsw.board.map.NonSpawnSquare;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -16,9 +15,7 @@ public class Picking implements ControllerState{
     private int range;
     private Controller controller;
 
-    private static final int max = 3;
-
-    public Picking(Controller controller) {
+    Picking(Controller controller) {
         this.controller = controller;
     }
 
@@ -65,8 +62,6 @@ public class Picking implements ControllerState{
                 PowerUp check = this.controller.getCurrentPlayer().pickAmmo();
 
 
-
-
                 if(check == null){
 
                     this.controller.decreaseMoveLeft();
@@ -79,7 +74,6 @@ public class Picking implements ControllerState{
 
 
                 }
-
 
             }
         }
@@ -94,8 +88,7 @@ public class Picking implements ControllerState{
 
     private void choosePU(PowerUp check){
 
-        ArrayList<PowerUp> options = new ArrayList<>();
-        options.addAll(this.controller.getCurrentPlayer().getPowerupList());
+        ArrayList<PowerUp> options = new ArrayList<>(this.controller.getCurrentPlayer().getPowerupList());
         options.add(check);
 
         PowerUp chosen = this.controller.getView().showPowerUp(options);
@@ -103,7 +96,7 @@ public class Picking implements ControllerState{
 
         if(chosen == null){
 
-            chosen = options.get(getRandom(options.size(),0));
+            chosen = options.get(getRandom(options.size()));
             options.remove(chosen);
             this.controller.getModel().getBoard().getPowerupDeck().getDiscarded().add(chosen);
 
@@ -134,11 +127,9 @@ public class Picking implements ControllerState{
     }
 
 
-    private int getRandom(int max, int min){
+    private int getRandom(int max){
 
-        int rand = (int)Math.random()* ((max - min) + 1) + min;
-
-        return rand;
+        return (int)Math.random()* ((max) + 1);
     }
 
     public int getRange() {

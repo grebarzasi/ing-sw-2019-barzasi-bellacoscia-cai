@@ -4,7 +4,6 @@ import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.board.map.Square;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,7 +20,7 @@ public class AsBot implements ControllerState{
     private Controller controller;
 
 
-    public AsBot(Controller controller) {
+    AsBot(Controller controller) {
         this.controller = controller;
 
     }
@@ -35,6 +34,7 @@ public class AsBot implements ControllerState{
     @Override
     public void command() {
 
+        //Checks if it's the first turn before spawning the bot
         if(this.controller.getModel().getBot().isDead() && this.controller.getModel().getTurn() != 0){
 
             Square spawnPoint = this.controller.getView().showPossibleMoves(this.returnSpawns(), true);
@@ -136,7 +136,7 @@ public class AsBot implements ControllerState{
 
     }
 
-    public void botHasMoved(){
+    private void botHasMoved(){
         this.controller.getModel().setHasBotAction(false);
     }
 

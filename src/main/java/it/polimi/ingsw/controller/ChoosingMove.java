@@ -4,16 +4,14 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.actions.Action;
 import it.polimi.ingsw.actions.ActionBuilder;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 
 public class ChoosingMove implements ControllerState{
 
     private Controller controller;
-    private ArrayList<Action> options;
 
-    public ChoosingMove(Controller controller) {
+    ChoosingMove(Controller controller) {
         this.controller = controller;
     }
 
@@ -24,6 +22,8 @@ public class ChoosingMove implements ControllerState{
     @Override
     public void command(){
 
+
+
         if(this.controller.getCurrentPlayer().isDead()){
 
             //Server log
@@ -33,9 +33,7 @@ public class ChoosingMove implements ControllerState{
 
         }else {
 
-            this.options = new ArrayList<>();
-
-            options = ActionBuilder.build(controller.getCurrentPlayer(), this.controller.getModel().isFrenzy());
+            ArrayList<Action> options = ActionBuilder.build(controller.getCurrentPlayer(), this.controller.getModel().isFrenzy());
 
             Action choice = this.controller.getView().showActions(options);
 
@@ -85,11 +83,13 @@ public class ChoosingMove implements ControllerState{
                         this.controller.currentState.command();
                         break;
 
+                    //sets the state to discarding a Power Up
                     case "Discard PowerUp":
                         this.controller.setCurrentState(this.controller.discardingPowerUp);
                         this.controller.currentState.command();
                         break;
 
+                    //sets the state to using the bot
                     case "Use Bot":
                         this.controller.setCurrentState(this.controller.asBot);
                         this.controller.currentState.command();

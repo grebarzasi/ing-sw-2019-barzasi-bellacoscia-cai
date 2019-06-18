@@ -2,9 +2,8 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.cards.power_up.PowerUp;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Optional;
+
 
 /**
  * Controller state of choosing a PowerUp to use
@@ -14,7 +13,7 @@ public class ChoosingPowerUp implements ControllerState {
 
     private Controller controller;
 
-    public ChoosingPowerUp(Controller controller) {
+    ChoosingPowerUp(Controller controller) {
         this.controller = controller;
     }
 
@@ -25,12 +24,13 @@ public class ChoosingPowerUp implements ControllerState {
     @Override
     public void command() {
 
-        ArrayList<PowerUp> options = new ArrayList<>();
-        ArrayList<PowerUp> newtons = new ArrayList<>();
-        ArrayList<PowerUp> teleporters = new ArrayList<>();
 
-        newtons.addAll(this.controller.getCurrentPlayer().getPowerupList());
-        teleporters.addAll(this.controller.getCurrentPlayer().getPowerupList());
+        ArrayList<PowerUp> options = new ArrayList<>();
+
+
+        //Filters the powerup list to only those that can be used
+        ArrayList<PowerUp> newtons = new ArrayList<>(this.controller.getCurrentPlayer().getPowerupList());
+        ArrayList<PowerUp> teleporters = new ArrayList<>(this.controller.getCurrentPlayer().getPowerupList());
 
         Controller.filterPUs(teleporters,PowerUp.TELEPORTER );
         Controller.filterPUs(newtons,PowerUp.NEWTON);
@@ -38,6 +38,8 @@ public class ChoosingPowerUp implements ControllerState {
         options.addAll(newtons);
         options.addAll(teleporters);
 
+
+        //takes the player choice
         PowerUp chosen = this.controller.getView().showPowerUp(options);
         if(chosen == null){
 
@@ -45,6 +47,7 @@ public class ChoosingPowerUp implements ControllerState {
 
         }else {
 
+            //sets the next state of the game accordingly
             switch (chosen.getName()) {
                 case PowerUp.NEWTON:
                     this.controller.setCurrentState(this.controller.usingNewton);

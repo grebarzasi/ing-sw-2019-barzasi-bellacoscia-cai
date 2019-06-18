@@ -10,9 +10,7 @@ import it.polimi.ingsw.cards.weapon.Weapon;
 import it.polimi.ingsw.cards.weapon.aiming.AimAskPlayer;
 import it.polimi.ingsw.cards.weapon.aiming.AimDirection;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,7 +24,7 @@ public class Shooting implements ControllerState {
     private Controller controller;
     private Weapon shootingWith;
 
-    public Shooting(Controller controller) {
+    Shooting(Controller controller) {
         this.controller = controller;
     }
 
@@ -44,7 +42,7 @@ public class Shooting implements ControllerState {
 
         boolean additionalEffect = false;
         boolean scopeUsed=false;
-        boolean ok = false;
+        boolean ok;
         AimDirection dir;
         AimAskPlayer ask;
         MoveTarget mv;
@@ -129,7 +127,7 @@ public class Shooting implements ControllerState {
                 additionalEffect=true;
 
                 if(!scopeUsed)
-                    scopeUsed=this.useScope();
+                    scopeUsed=this.useScope(choice);
 
 
                 this.controller.update();
@@ -153,7 +151,7 @@ public class Shooting implements ControllerState {
 
     }
 
-    public void askVenoms(Set<Figure> targets){
+    private void askVenoms(Set<Figure> targets){
 
         if(this.controller.hasBot()) {
             targets.remove(this.controller.getModel().getBot());
@@ -170,8 +168,7 @@ public class Shooting implements ControllerState {
 
         for(i = 0 ; i < finalTargets.size() ; i++){
 
-            ArrayList<PowerUp> filtered = new ArrayList<>();
-            filtered.addAll(finalTargets.get(i).getPowerupList());
+            ArrayList<PowerUp> filtered = new ArrayList<>(finalTargets.get(i).getPowerupList());
             Controller.filterPUs(filtered,PowerUp.TAGBACK_GRENADE);
 
             if(filtered.isEmpty()){
@@ -183,19 +180,15 @@ public class Shooting implements ControllerState {
 
             this.controller.getModel().setCurrentPlayer(p);
 
-            boolean useTagback = false;
-
-                useTagback = this.controller.getView().showBoolean("Vuoi usare la Granata Venom? \n");
+            boolean useTagback = this.controller.getView().showBoolean("Vuoi usare la Granata Venom? \n");
 
             if(useTagback){
 
-                ArrayList<PowerUp> options = new ArrayList<>();
-                options.addAll(p.getPowerupList());
+                ArrayList<PowerUp> options = new ArrayList<>(p.getPowerupList());
 
                 Controller.filterPUs(options,PowerUp.TAGBACK_GRENADE);
 
-                PowerUp choice = null;
-                    choice = this.controller.getView().showPowerUp(options);
+                PowerUp choice = this.controller.getView().showPowerUp(options);
 
 
                 if(choice != null){
@@ -214,15 +207,15 @@ public class Shooting implements ControllerState {
     }
 
 
-    private boolean useScope(){
+    private boolean useScope(Effect chosen){
 
         if(this.canUseScope())
-            return this.activateScope();
+            return this.activateScope(chosen);
         return false;
 
     }
 
-    public boolean canUseScope(){
+    private boolean canUseScope(){
 
         if(!this.controller.getCurrentPlayer().getPersonalBoard().getAmmoInventory().isEmpty()) {
 
@@ -241,23 +234,21 @@ public class Shooting implements ControllerState {
 
     }
 
-    private boolean activateScope(){
+    private boolean activateScope(Effect chosen){
 
         boolean useScope = this.controller.getView().showBoolean("Vuoi usare anche il mirino?: \n");
 
         if (useScope) {
 
-            ArrayList<PowerUp> scopes = new ArrayList<>();
-            scopes.addAll(this.controller.getCurrentPlayer().getPowerupList());
+            ArrayList<PowerUp> scopes = new ArrayList<>(this.controller.getCurrentPlayer().getPowerupList());
 
             Controller.filterPUs(scopes, PowerUp.TARGETING_SCOPE);
 
             PowerUp toUse = this.controller.getView().showPowerUp(scopes);
 
-            ArrayList<Figure> options = new ArrayList<>();
-            options.addAll(this.shootingWith.getBasicEffect().getTargetHitSet());
+            Set<Figure> options = new HashSet<>(chosen.getTargetHitSet());
 
-            ArrayList<Figure> chosenTarget = this.controller.getView().showTargetAdvanced(this.shootingWith.getBasicEffect().getTargetHitSet(),
+            ArrayList<Figure> chosenTarget = this.controller.getView().showTargetAdvanced(options,
                     1, false, "Scegli il bersaglio: \n");
 
             this.controller.getCurrentPlayer().inflictDamage(1, chosenTarget.get(0));
@@ -275,11 +266,7 @@ public class Shooting implements ControllerState {
         this.controller = controller;
     }
 
-    public Weapon getShootingWith() {
-        return shootingWith;
-    }
-
-    public void setShootingWith(Weapon shootingWith) {
+    void setShootingWith(Weapon shootingWith) {
         this.shootingWith = shootingWith;
     }
 

@@ -3,7 +3,6 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -16,7 +15,9 @@ public class FrenzySpecialAction implements ControllerState {
     private int range;
     private Controller controller;
 
-
+    FrenzySpecialAction(Controller controller) {
+        this.controller = controller;
+    }
 
     @Override
     public void command() {
@@ -32,7 +33,7 @@ public class FrenzySpecialAction implements ControllerState {
             Weapon reloadChoice = this.controller.getView().showWeapon(reloadOptions);
             boolean check = reloadChoice.reload();
 
-            if (check == false) {
+            if (!check) {
                 this.controller.getView().displayMessage("Non possiedi abbastanza risorse per caricare l'arma");
             }
 
@@ -42,10 +43,6 @@ public class FrenzySpecialAction implements ControllerState {
 
 
 
-    }
-
-    public FrenzySpecialAction(Controller controller) {
-        this.controller = controller;
     }
 
     public Controller getController() {

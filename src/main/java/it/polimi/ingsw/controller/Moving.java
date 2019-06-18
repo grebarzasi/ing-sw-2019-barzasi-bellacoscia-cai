@@ -2,7 +2,6 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.board.map.Square;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -13,12 +12,9 @@ public class Moving implements ControllerState{
 
     private int range;
 
-    private static final int HEIGHT = 3;
-    private static final int WIDTH = 4;
-
     private Controller controller;
 
-    public Moving(Controller controller) {
+    Moving(Controller controller) {
         this.controller = controller;
     }
 

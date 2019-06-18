@@ -1,10 +1,8 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.Player;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -19,7 +17,7 @@ public class Spawning implements ControllerState {
 
     private Controller controller;
 
-    public Spawning(Controller controller) {
+    Spawning(Controller controller) {
         this.controller = controller;
     }
 
@@ -32,8 +30,7 @@ public class Spawning implements ControllerState {
 
         if (this.controller.getModel().getTurn() >= this.controller.getModel().getPlayerList().size()) {
 
-            ArrayList<PowerUp> options = new ArrayList<>();
-            options.addAll(this.controller.getCurrentPlayer().getPowerupList());
+            ArrayList<PowerUp> options = new ArrayList<>(this.controller.getCurrentPlayer().getPowerupList());
             options.add((PowerUp) this.controller.getBoard().getPowerupDeck().fetch());
 
             spawnOnChoice(options);
@@ -110,7 +107,7 @@ public class Spawning implements ControllerState {
 
         System.out.println("COLOR IS: " + colour);
 
-        if(colour == "nothing"){
+        if(colour.equals("nothing")){
             return null;
         }
 

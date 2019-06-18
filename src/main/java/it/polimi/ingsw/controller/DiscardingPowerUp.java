@@ -13,7 +13,7 @@ public class DiscardingPowerUp implements ControllerState{
 
     private Controller controller;
 
-    public DiscardingPowerUp(Controller controller) {
+    DiscardingPowerUp(Controller controller) {
         this.controller = controller;
     }
 
@@ -25,8 +25,7 @@ public class DiscardingPowerUp implements ControllerState{
     @Override
     public void command() {
 
-        ArrayList<PowerUp> options = new ArrayList<>();
-        options.addAll(this.controller.getCurrentPlayer().getPowerupList());
+        ArrayList<PowerUp> options = new ArrayList<>(this.controller.getCurrentPlayer().getPowerupList());
         PowerUp choice = this.controller.getView().showPowerUp(options);
 
         if(choice == null){
