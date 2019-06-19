@@ -165,4 +165,16 @@ public class GameModel {
     public void setFrenzyState(int frenzyTurn) {
         this.frenzyTurn = frenzyTurn;
     }
+
+    public int getFrenzyTurn() {
+        return frenzyTurn;
+    }
+
+    public void setFrenzyTurn(int frenzyTurn) {
+        this.frenzyTurn = frenzyTurn;
+    }
+
+    public boolean isHasBotAction() {
+        return hasBotAction;
+    }
 }

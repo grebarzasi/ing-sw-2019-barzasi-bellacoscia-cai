@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.Player;
+import it.polimi.ingsw.board.map.Map;
 import it.polimi.ingsw.board.map.Square;
 
 import java.util.ArrayList;
@@ -14,8 +15,8 @@ import java.util.Set;
 
 public class AsBot implements ControllerState{
 
-    private static final int HEIGHT = 3;
-    private static final int WIDTH = 4;
+
+
 
     private Controller controller;
 
@@ -107,8 +108,8 @@ public class AsBot implements ControllerState{
         int row;
         int column;
 
-        for(row = 0; row < HEIGHT; row++){
-            for(column = 0; column < WIDTH; column++){
+        for(row = 0; row < Map.HEIGHT; row++){
+            for(column = 0; column < Map.WIDTH; column++){
 
                 if(this.controller.getBoard().getMap().getSquareMatrix()[row][column].isAdjacent(this.controller.getModel().getBot().getPosition())){
                     canGo.add(this.controller.getBoard().getMap().getSquareMatrix()[row][column]);
@@ -130,8 +131,8 @@ public class AsBot implements ControllerState{
         int row;
         int column;
 
-        for(row = 0; row < HEIGHT; row++){
-            for(column = 0; column < WIDTH; column ++){
+        for(row = 0; row < Map.HEIGHT; row++){
+            for(column = 0; column < Map.WIDTH; column ++){
                 if(this.controller.getBoard().getMap().getSquareMatrix()[row][column].isSpawn())
                     spawns.add(this.controller.getBoard().getMap().getSquareMatrix()[row][column]);
             }

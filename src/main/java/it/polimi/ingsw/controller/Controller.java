@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.*;
 import it.polimi.ingsw.board.Board;
+import it.polimi.ingsw.board.map.Map;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.connection.ClientHandler;
@@ -24,8 +25,8 @@ public class Controller {
         frenzyPointsVec = new int[]{2, 1, 1, 1, 0};
     }
 
-    private static final int HEIGHT = 3;
-    private static final int WIDTH = 4;
+
+
 
     private static final int DEATH_DAMAGE = 11;
     private static final int OVER_KILL_DAMAGE = 12;
@@ -415,11 +416,11 @@ public class Controller {
 
             }
 
-            this.update();
-
         }
-
         this.getModel().setCurrentPlayer(tmp);
+        this.setCurrentState(choosingMove);
+        this.currentState.command();
+        this.update();
 
     }
 
@@ -438,8 +439,8 @@ public class Controller {
 
         ArrayList<Square> options = new ArrayList<>();
 
-        for(row = 0; row < HEIGHT; row++){
-            for(column = 0; column < WIDTH; column++){
+        for(row = 0; row < Map.HEIGHT; row++){
+            for(column = 0; column < Map.WIDTH; column++){
 
                 if(p.distanceTo(this.getModel().getBoard().getMap().getSquareMatrix()[row][column])
                         <= range && ! this.getBoard().getMap().getSquareMatrix()[row][column].getRoom().getColor().equals("black")){
@@ -566,14 +567,6 @@ public class Controller {
         return this.model.getCurrentPlayer();
     }
 
-    public static int getHeight() {
-        return HEIGHT;
-    }
-
-    public static int getWidth() {
-        return WIDTH;
-    }
-
     public boolean hasBot() {
         return hasBot;
     }
@@ -582,4 +575,7 @@ public class Controller {
         this.view = view;
     }
 
+    public void setHasBot(boolean hasBot) {
+        this.hasBot = hasBot;
+    }
 }

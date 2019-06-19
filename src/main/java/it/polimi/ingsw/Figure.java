@@ -2,6 +2,7 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.actions.Action;
 import it.polimi.ingsw.board.Board;
+import it.polimi.ingsw.board.map.Map;
 import it.polimi.ingsw.board.map.Room;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
@@ -18,9 +19,7 @@ import java.util.*;
 
 public abstract class Figure {
 
-    private static final int WIDTH = 4;
-    private static final int HEIGHT = 3;
-    private static final int range = 3;
+
 
 
     //chosen character
@@ -58,8 +57,8 @@ public abstract class Figure {
 
         ArrayList<Square> destinations = new ArrayList<>();
 
-        for (row = 0; row < HEIGHT; row++) {
-            for (column = 0; column < WIDTH; column++) {
+        for (row = 0; row < Map.HEIGHT; row++) {
+            for (column = 0; column < Map.WIDTH; column++) {
                 if (this.distanceTo(this.model.getBoard().getMap().getSquareMatrix()[row][column]) <= range) {
 
                     destinations.add(this.model.getBoard().getMap().getSquareMatrix()[row][column]);

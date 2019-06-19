@@ -1,6 +1,8 @@
 package it.polimi.ingsw.actions;
 
+import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.Player;
+import it.polimi.ingsw.Terminator;
 import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.controller.Controller;
@@ -48,5 +50,18 @@ class ActionBuilderTest {
 
         assertEquals(2,trumpActions.size());
 
+        whiteHouse.getModel().setMovesLeft(0);
+
+        trumpActions = ActionBuilder.build(trump,true);
+
+        assertEquals(2,trumpActions.size());
+
+        whiteHouse.setHasBot(true);
+        whiteHouse.getModel().setTurn(1);
+        whiteHouse.getModel().setHasBotAction(true);
+
+        trumpActions = ActionBuilder.build(trump,true);
+
+        assertEquals(3,trumpActions.size());
     }
 }

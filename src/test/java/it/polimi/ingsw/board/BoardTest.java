@@ -1,5 +1,6 @@
 package it.polimi.ingsw.board;
 
+import it.polimi.ingsw.board.map.Map;
 import it.polimi.ingsw.board.map.NonSpawnSquare;
 import it.polimi.ingsw.board.map.SpawnSquare;
 import org.junit.jupiter.api.Test;
@@ -8,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
 
-    private static final int WIDTH = 4;
-    private static final int HEIGHT = 3;
+
+
 
     /**
      * Tests that the Board has been Initiated correctly with all its elements in check
@@ -23,8 +24,8 @@ class BoardTest {
         int row;
         int column;
 
-        for(row = 0; row < HEIGHT; row++){
-            for(column = 0; column < WIDTH ; column ++){
+        for(row = 0; row < Map.HEIGHT; row++){
+            for(column = 0; column < Map.WIDTH ; column ++){
 
 
                 if(fieldOfFire.getMap().getSquareMatrix()[row][column].isSpawn()){

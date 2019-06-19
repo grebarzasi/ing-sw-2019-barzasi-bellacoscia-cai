@@ -17,8 +17,6 @@ import java.io.IOException;
 
 public class MapLoader {
 
-    private static final int WIDTH = 4;
-    private static final int HEIGHT = 3;
 
     private static final String MAPS_PATH = ("src/main/resources/data_files/map_data/");
 
@@ -62,8 +60,8 @@ public class MapLoader {
 
         //loads square data for each cell
 
-        for( row = 0; row < HEIGHT; row++){
-            for( column = 0; column < WIDTH; column++){
+        for( row = 0; row < Map.HEIGHT; row++){
+            for( column = 0; column < Map.WIDTH; column++){
 
                 if(!parserList[i].getIsRespawn()) {
                     squareMatrix[row][column] = new NonSpawnSquare(new Cell(row, column), parserList[i].getRoom());

@@ -1,5 +1,6 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.board.map.Map;
 import it.polimi.ingsw.board.map.Square;
 
 import java.util.ArrayList;
@@ -10,8 +11,8 @@ import java.util.ArrayList;
 
 public class Terminator extends Figure{
 
-    private static final int WIDTH = 4;
-    private static final int HEIGHT = 3;
+
+
 
     public static final int stage2 = 5;
 
@@ -46,8 +47,8 @@ public class Terminator extends Figure{
 
         ArrayList<Square> destinations = new ArrayList<>();
 
-        for (row = 0; row < HEIGHT; row++) {
-            for (column = 0; column < WIDTH; column++) {
+        for (row = 0; row < Map.HEIGHT; row++) {
+            for (column = 0; column < Map.WIDTH; column++) {
                 if (this.getPosition().isAdjacent((this.getModel().getBoard().getMap().getSquareMatrix()[row][column]))) {
 
                     destinations.add(this.getModel().getBoard().getMap().getSquareMatrix()[row][column]);

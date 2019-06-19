@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.board.map.Map;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 
@@ -13,8 +14,8 @@ public class Teleporting implements ControllerState {
 
     private PowerUp using;
 
-    private static final int HEIGHT = 3;
-    private static final int WIDTH = 4;
+
+
 
 
     private Controller controller;
@@ -35,8 +36,8 @@ public class Teleporting implements ControllerState {
         int row;
         int column;
 
-        for (row = 0; row < HEIGHT; row++) {
-            for (column = 0; column < WIDTH; column++) {
+        for (row = 0; row < Map.HEIGHT; row++) {
+            for (column = 0; column < Map.WIDTH; column++) {
                 options.add(this.controller.getModel().getBoard().getMap().getSquareMatrix()[row][column]);
             }
         }

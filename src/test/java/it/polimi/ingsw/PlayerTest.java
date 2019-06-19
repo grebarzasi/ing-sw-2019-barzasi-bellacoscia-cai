@@ -1,6 +1,7 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.board.Board;
+import it.polimi.ingsw.board.map.Map;
 import it.polimi.ingsw.board.map.NonSpawnSquare;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.AmmoLot;
@@ -106,13 +107,11 @@ public class PlayerTest {
        Board alderaan = empire.getBoard();
        luke.setModel(empire);
 
-        final int height = 3;
-        final int width = 4;
         int row;
         int column;
 
-        for(row = 0 ; row < height ; row++){
-            for(column = 0; column < width; column ++){
+        for(row = 0 ; row < Map.HEIGHT ; row++){
+            for(column = 0; column < Map.WIDTH; column ++){
                 if(!alderaan.getMap().getSquareMatrix()[row][column].getRoom().getColor().equals("black")) {
                     luke.setPosition(alderaan.getMap().getSquareMatrix()[row][column]);
                     luke.pickAmmo();

@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.Player;
+import it.polimi.ingsw.board.map.Map;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 
@@ -18,8 +19,8 @@ public class UsingNewton implements ControllerState {
     private Controller controller;
     private PowerUp using;
 
-    private static final int WIDTH = 4;
-    private static final int HEIGHT = 3;
+
+
 
     UsingNewton(Controller controller) {
         this.controller = controller;
@@ -50,8 +51,8 @@ public class UsingNewton implements ControllerState {
             int column;
             ArrayList<Square> options = new ArrayList<>();
 
-            for (row = 0; row < HEIGHT; row++) {
-                for (column = 0; column < WIDTH; column++) {
+            for (row = 0; row < Map.HEIGHT; row++) {
+                for (column = 0; column < Map.WIDTH; column++) {
 
                     if (this.controller.getBoard().getMap().getSquareMatrix()[row][column].isAdjacent(choice.getPosition())) {
                         options.add(this.controller.getBoard().getMap().getSquareMatrix()[row][column]);

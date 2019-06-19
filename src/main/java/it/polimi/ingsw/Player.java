@@ -64,7 +64,7 @@ public class Player extends Figure {
      */
 
     public PowerUp pickAmmo(){
-        Deck deck= this.getModel().getBoard().getPowerupDeck();
+
         if(!this.getPosition().isSpawn()) {
 
             Ammo tmp = ((NonSpawnSquare) this.getPosition()).getDrop().getContent();
@@ -76,30 +76,18 @@ public class Player extends Figure {
             this.getModel().getBoard().getAmmoDeck().discard(lotTemp);
 
             if (lotTemp.hasPowerup()) {
-
                 if (this.getPowerupList().size() < MAX_PU) {
-
                     this.addPowerUp((PowerUp)this.getModel().getBoard().getPowerupDeck().fetch());
                     return null;
-
                 } else {
-
                     return (PowerUp) this.getModel().getBoard().getPowerupDeck().fetch();
-
                 }
             }else{
-
                 return null;
-
             }
-
-
         } else {
-
             return null;
-
         }
-
     }
 
     public Player(String username, String character) {
