@@ -39,13 +39,11 @@ public class Shooting implements ControllerState {
     @Override
     public void command(){
 
-
+        Effect choice=null;
         boolean additionalEffect = false;
         boolean scopeUsed=false;
         boolean ok;
-        AimDirection dir;
-        AimAskPlayer ask;
-        MoveTarget mv;
+
 
         Set<Effect> effects;
 
@@ -59,48 +57,22 @@ public class Shooting implements ControllerState {
                 break;
             }
 
-            Effect choice = this.controller.getView().showEffects(effects);
+            choice = this.controller.getView().showEffects(effects);
 
-            //if you already used a effect and you exit the second choose you can go on
+            //if null escape ( it mean you want to go back or paused for inactivity)
             if(choice==null) {
                 break;
             }
 
 
             //if the player can afford the effect execute
-
             if(this.controller.getCurrentPlayer().getPersonalBoard().getAmmoInventory().covers(choice.getCost())) {
+
                 //repeat until no more action from player are required
-
                 do {
-
-                    if (shootingWith.getDirectionTemp() != null) {
-
-                        dir = shootingWith.getDirectionTemp();
-                        String rpl = controller.getView().chooseDirection(new ArrayList<>(dir.getTargetTemp()));
-                        checkReplyNull(rpl);
-                        dir.setDirectionTemp(rpl);
-
-                    } else if (shootingWith.getAskTemp() != null) {
-
-                        ask = shootingWith.getAskTemp();
-                        ArrayList<Figure> rpl = controller.getView().showTargetAdvanced(ask.getTargetTemp(), ask.getNumMax(), ask.isFromDiffSquare(), ask.getMsg());
-                        checkReplyNull(rpl);
-                        ask.setTargetTemp(new HashSet<>(rpl));
-
-                    }else if (shootingWith.getMoveTemp() != null) {
-
-                        mv = shootingWith.getMoveTemp();
-                        ArrayList<Square> options = this.controller.canGo((Figure)mv.getTargetTemp().toArray()[0],mv.getMaxSteps());
-                        Square rpl = controller.getView().showPossibleMoves(options,false);
-                        checkReplyNull(rpl);
-                        mv.setSquareTemp(rpl);
-                    }
-
+                    checkInfoNeeded(shootingWith);
                     ok = choice.executeEffect();
                     //this.controller.getCurrentPlayer().getPersonalBoard().getAmmoInventory().substract(choice.getCost());
-
-
                 } while (!ok);
 
                 if(!additionalEffect) {
@@ -113,25 +85,16 @@ public class Shooting implements ControllerState {
                 if(!scopeUsed)
                     scopeUsed=this.useScope(choice);
 
-
                 this.controller.update();
 
-            }else{
-                if(additionalEffect)
-                    shootingWith.resetWeapon();
-                this.controller.update();
-                this.controller.goBack();
-            }
+            }else
+                controller.getView().displayMessage("Non hai le risorse necessarie per questo effeto");
 
             askVenoms(choice.getTargetHitSet());
 
         } while (true);
 
-
-        shootingWith.resetWeapon();
-        this.controller.goBack();
-
-
+        checkReplyNull(choice);
 
     }
 
@@ -269,7 +232,40 @@ public class Shooting implements ControllerState {
             controller.endTurn();
         } else  if (rpl == null) {
             shootingWith.resetWeapon();
+            this.controller.update();
             this.controller.goBack();
+        }
+    }
+
+    private void checkInfoNeeded(Weapon w){
+        AimDirection dir;
+        AimAskPlayer ask;
+        MoveTarget mv;
+
+        if (w.getDirectionTemp() != null) {
+
+            dir = w.getDirectionTemp();
+            String rpl = controller.getView().chooseDirection(new ArrayList<>(dir.getTargetTemp()));
+            checkReplyNull(rpl);
+            dir.setDirectionTemp(rpl);
+            return;
+        }
+        if (w.getAskTemp() != null) {
+
+            ask = w.getAskTemp();
+            ArrayList<Figure> rpl = controller.getView().showTargetAdvanced(ask.getTargetTemp(), ask.getNumMax(), ask.isFromDiffSquare(), ask.getMsg());
+            checkReplyNull(rpl);
+            ask.setTargetTemp(new HashSet<>(rpl));
+            return;
+        }
+        if (w.getMoveTemp() != null) {
+
+            mv = w.getMoveTemp();
+            ArrayList<Square> options = this.controller.canGo((Figure)mv.getTargetTemp().toArray()[0],mv.getMaxSteps());
+            Square rpl = controller.getView().showPossibleMoves(options,false);
+            checkReplyNull(rpl);
+            mv.setSquareTemp(rpl);
+            return;
         }
     }
 }

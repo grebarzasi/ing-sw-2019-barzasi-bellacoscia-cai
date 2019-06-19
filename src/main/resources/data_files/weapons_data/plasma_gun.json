@@ -5,7 +5,7 @@
   },
   "effects": {
     "basic": {
-      "name": "effetto base",
+      "name": "Effetto base",
       "cost": {
         "blue": 1,
         "yellow": 1
@@ -28,7 +28,7 @@
       }
     },
     "addOne": {
-      "name": "colpo sovraccarico",
+      "name": "Colpo sovraccarico",
       "cost": {
         "blue": 1
       },
@@ -44,7 +44,7 @@
       }
     },
     "extraMove": {
-      "name": "slittamento di fase",
+      "name": "Slittamento di fase",
       "cost": {
       },
       "subEffect": {

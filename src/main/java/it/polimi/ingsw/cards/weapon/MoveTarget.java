@@ -42,12 +42,12 @@ public class MoveTarget implements SubEffect {
                 squareTemp = w.getOwner().getPosition();
                 break;
         }
-        if(squareTemp==null) {
-            if (w.getMoveTemp() == null) {
+
+        if(squareTemp==null&&w.getMoveTemp()==null) {
                 targetTemp=p;
                 w.setMoveTemp(this);
                 return null;
-            }
+        }else if(w.getMoveTemp()!=null){
             p=targetTemp;
             w.setMoveTemp(null);
         }

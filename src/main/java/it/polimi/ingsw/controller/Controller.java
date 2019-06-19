@@ -271,6 +271,9 @@ public class Controller {
 
     private void checkEndStatus(){
 
+        if(!checkLeftPlayer())
+            endGame();
+
         if(this.getBoard().getTrack().getKillsTrack().size() == this.getBoard().getTrack().getSkullMax()){
 
             if(this.hasFrenzy){
@@ -309,7 +312,6 @@ public class Controller {
      */
 
     void iteratePlayer(){
-
         if (this.model.getPlayerList().indexOf(this.model.getCurrentPlayer()) != this.model.getPlayerList().size() - 1) {
             this.model.setCurrentPlayer(this.model.getPlayerList().get(this.model.getPlayerList().indexOf(model.getCurrentPlayer()) + 1));
         } else {
@@ -318,9 +320,7 @@ public class Controller {
 
         //if disconnected or inactive skip turn
         if(model.getCurrentPlayer().isDisconnected()||model.getCurrentPlayer().isInactive()) {
-            if(checkLeftPlayer())
-                iteratePlayer();
-            endGame();
+            endTurn();
         }
 
 
