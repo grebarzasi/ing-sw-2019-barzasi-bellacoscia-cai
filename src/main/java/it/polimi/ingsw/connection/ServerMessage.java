@@ -9,7 +9,7 @@ public class ServerMessage {
 
     public static final String CLIENT_UNREACHABLE=" disconnected from the game";
     public static final String RETURN_IN_GAME="Sei stato sospeso dal server per inattività, vuoi tornare in gioco?";
-    public static final int INACTIVITY_TIMEOUT=30;
+    public static final int INACTIVITY_TIMEOUT=5000;
 
 
 

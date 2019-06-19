@@ -19,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -132,6 +133,9 @@ public class GameJavaFX extends Application implements ViewClient {
     private Button btnTerminator;
     private Button btnPowerUp;
     private Button btnEmpty;
+    private Background btnEmptyBG;
+
+
 
 
     private GridPane gridPBoard;
@@ -235,7 +239,6 @@ public class GameJavaFX extends Application implements ViewClient {
         btnTerminator = new Button("Terminator");
         btnPowerUp = new Button("Power-up");
         btnDeck = new Button();
-        btnEmpty = new Button();
         gridPBoard = new GridPane();
 
         btnPwe1 = new Button();
@@ -287,6 +290,15 @@ public class GameJavaFX extends Application implements ViewClient {
         heightOtherWeapon = heightCenter / 5;
         heightOtherAmmo = heightOther / 5;
         heightOtherBoard = heightOtherAmmo * 4;
+
+        Image img = null;
+        try {
+            img = new Image(new FileInputStream(PATH_GENERAL_COLOR + "empty2.png"), 100, 100, true, true);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        BackgroundImage background = new BackgroundImage(img, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        btnEmptyBG = new Background(background);
 
     }
 
@@ -961,18 +973,27 @@ public class GameJavaFX extends Application implements ViewClient {
         Button b4 = new Button();
         Button b5 = new Button();
         Button b6 = new Button();
+
+        btnEmpty= new Button();
+
         b1.setPrefSize(w, h);
         b2.setPrefSize(w, h);
         b3.setPrefSize(w, h);
         b4.setPrefSize(w, h);
         b5.setPrefSize(w, h);
         b6.setPrefSize(w, h);
+
+        btnEmpty.setPrefSize(w, h);
+
         hideBtn(b1, 0);
         hideBtn(b2, 0);
         hideBtn(b3, 0);
         hideBtn(b4, 0);
         hideBtn(b5, 0);
         hideBtn(b6, 0);
+
+        hideBtn(btnEmpty, 0);
+
         grid.add(b1, 0, 0);
         grid.add(b2, 0, 1);
         grid.add(b3, 1, 0);
@@ -1626,6 +1647,9 @@ public class GameJavaFX extends Application implements ViewClient {
         for (Button b : btn) {
             if(btn.indexOf(b) == 5){
                 continue;
+            }
+            if(o==0.5) {
+                b.setBackground(btnEmptyBG);
             }
             b.setOpacity(o);
         }
