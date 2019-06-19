@@ -716,45 +716,62 @@ public class GameJavaFX extends Application implements ViewClient {
         setCellBoard(gridOtherBoard3, widthOther, heightOtherBoard);
         setCellBoard(gridOtherBoard4, widthOther, heightOtherBoard);
         setCellBoard(gridOtherBoard5, widthOther, heightOtherBoard);
+        /*______________________________________________________*/
 
-        int i = 0;
-        for (VirtualPlayer p : model.getAllPlayers()) {
-            if (!p.getCharacter().equals(model.getOwner().getCharacter())) {
-                switch (p.getCharacter()) {
-                    case "yellow": {
-                        imgOther1 = setBoard(p.getCharacter(), widthOther, heightOtherBoard);
-                        setGridBack(gridOtherBoards.get(i), imgOther1);
-                        weOther1 = setOtherWeapon(gridOtherWe, 0, widthOtherWeapon, heightOtherWeapon);
-                        break;
-                    }
-                    case "red": {
-                        imgOther2 = setBoard(p.getCharacter(), widthOther, heightOtherBoard);
-                        setGridBack(gridOtherBoards.get(i), imgOther2);
-                        weOther2 = setOtherWeapon(gridOtherWe, 1, widthOtherWeapon, heightOtherWeapon);
-                        break;
-                    }
-                    case "blue": {
-                        imgOther3 = setBoard(p.getCharacter(), widthOther, heightOtherBoard);
-                        setGridBack(gridOtherBoards.get(i), imgOther3);
-                        weOther3 = setOtherWeapon(gridOtherWe, 2, widthOtherWeapon, heightOtherWeapon);
-                        break;
-                    }
-                    case "green": {
-                        imgOther4 = setBoard(p.getCharacter(), widthOther, heightOtherBoard);
-                        setGridBack(gridOtherBoards.get(i), imgOther4);
-                        weOther4 = setOtherWeapon(gridOtherWe, 3, widthOtherWeapon, heightOtherWeapon);
-                        break;
-                    }
-                    case "grey": {
-                        imgOther5 = setBoard(p.getCharacter(), widthOther, heightOtherBoard);
-                        setGridBack(gridOtherBoards.get(i), imgOther5);
-                        weOther5 = setOtherWeapon(gridOtherWe, 4, widthOtherWeapon, heightOtherWeapon);
-                        break;
-                    }
-                }
-                i++;
-            }
+
+        for(int i=0; i<4; i++){
+            weOther1 = setOtherWeapon(gridOtherWe, i, widthOtherWeapon, heightOtherWeapon);
+            otherWe.add(weOther1);
         }
+        ArrayList<VirtualPlayer> allP = new ArrayList<>(model.getAllPlayers());
+        allP.remove(model.getOwner());
+        int i=0;
+        for(VirtualPlayer p : allP) {
+            imgOther1 = setBoard(p.getCharacter(), widthOther, heightOtherBoard);
+            setGridBack(gridOtherBoards.get(i), imgOther1);
+            i++;
+        }
+
+        /*______________________________________________________*/
+//
+//        int i = 0;
+//        for (VirtualPlayer p : model.getAllPlayers()) {
+//            if (!p.getCharacter().equals(model.getOwner().getCharacter())) {
+//                switch (p.getCharacter()) {
+//                    case "yellow": {
+//                        imgOther1 = setBoard(p.getCharacter(), widthOther, heightOtherBoard);
+//                        setGridBack(gridOtherBoards.get(i), imgOther1);
+//                        weOther1 = setOtherWeapon(gridOtherWe, i, widthOtherWeapon, heightOtherWeapon);
+//                        break;
+//                    }
+//                    case "red": {
+//                        imgOther2 = setBoard(p.getCharacter(), widthOther, heightOtherBoard);
+//                        setGridBack(gridOtherBoards.get(i), imgOther2);
+//                        weOther2 = setOtherWeapon(gridOtherWe, i, widthOtherWeapon, heightOtherWeapon);
+//                        break;
+//                    }
+//                    case "blue": {
+//                        imgOther3 = setBoard(p.getCharacter(), widthOther, heightOtherBoard);
+//                        setGridBack(gridOtherBoards.get(i), imgOther3);
+//                        weOther3 = setOtherWeapon(gridOtherWe, i, widthOtherWeapon, heightOtherWeapon);
+//                        break;
+//                    }
+//                    case "green": {
+//                        imgOther4 = setBoard(p.getCharacter(), widthOther, heightOtherBoard);
+//                        setGridBack(gridOtherBoards.get(i), imgOther4);
+//                        weOther4 = setOtherWeapon(gridOtherWe, i, widthOtherWeapon, heightOtherWeapon);
+//                        break;
+//                    }
+//                    case "grey": {
+//                        imgOther5 = setBoard(p.getCharacter(), widthOther, heightOtherBoard);
+//                        setGridBack(gridOtherBoards.get(i), imgOther5);
+//                        weOther5 = setOtherWeapon(gridOtherWe, i, widthOtherWeapon, heightOtherWeapon);
+//                        break;
+//                    }
+//                }
+//                i++;
+//            }
+//        }
 
         otherWe.add(weOther1);
         otherWe.add(weOther2);
@@ -775,6 +792,7 @@ public class GameJavaFX extends Application implements ViewClient {
             gridOtherSpace.get(j).add(gridOtherAmmo.get(j), 0, 1);
         }
 
+        /*______________________________________________________*/
 
         /*
         ** SET DECK **
@@ -1503,9 +1521,6 @@ public class GameJavaFX extends Application implements ViewClient {
         for (String name : p.getWeapons()) {
             wpState = name.split(INNER_SEP);
             if (!btnArr.isEmpty() && i < btnArr.size()) {
-                if(wpState[0].toLowerCase().replace(" ", "_").replace("-", "_").equals("i'm") || wpState[0].toLowerCase().replace(" ", "_").replace("-", "_").equals("the") || wpState[0].toLowerCase().replace(" ", "_").replace("-", "_").equals("terminator")){
-                    continue;
-                }
                 if (wpState[1].equals("true")) {
                     Image img = null;
                     try {
@@ -1994,18 +2009,21 @@ public class GameJavaFX extends Application implements ViewClient {
             int i = 0;
             for (VirtualPlayer p : model.getAllPlayers()) {
 
-                if (p.equals(model.getOwner())) {
+                //Owner already have his own board
+                if (p.equals(model.getOwner()))
                     continue;
-                }
 
 
+                fillBoard(gridOtherBoards.get(i), p, widthBoard, heightPBoard / 5 - 10, heightPBoard / 4 - 10, heightPBoard / 5 - 10);
 
+                //all player but not the terminator
                 if(!p.getUsername().equals(TERMINATOR_NAME)) {
                     fillOtherAmmo(gridOtherAmmo.get(i), p.getpBoard(), widthLateral / 7, heightLateral / 7);
+                    //set enemy wp
+                    fillWeapon(otherWe.get(i), p, widthOCard / 3.7, heightOtherWeapon);
+                    //set infobutton
+                    setWeapon(p, otherWe.get(i));
                 }
-                fillBoard(gridOtherBoards.get(i), p, widthBoard, heightPBoard / 5 - 10, heightPBoard / 4 - 10, heightPBoard / 5 - 10);
-                fillWeapon(otherWe.get(i), p, widthOCard / 3.7, heightOtherWeapon);
-                setWeapon(p, otherWe.get(i));
                 i++;
 
             }
@@ -2263,7 +2281,6 @@ public class GameJavaFX extends Application implements ViewClient {
                     btn.setOnAction(e->{
                         game.setTargetSquare(s);
                         setButtonBack(btnCell.get(model.getOwner().getRow()*4 + model.getOwner().getColumn()).get(Y),emptyCell);
-                        //btnCell.get(model.getOwner().getRow()*4 + model.getOwner().getColumn()).get(Y).setBackground(btnEmpty.getBackground());
                         hideBtn(btnCell.get(model.getOwner().getRow()*4 + model.getOwner().getColumn()).get(Y),0.5);
                     });
                 }
