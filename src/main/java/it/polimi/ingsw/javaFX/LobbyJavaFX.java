@@ -54,6 +54,8 @@ public class LobbyJavaFX extends Application {
     private double heightMaps;
     private double heightPlayers;
 
+    private boolean reconnected;
+
 
     private boolean terminator;
     private boolean frenzy;
@@ -75,11 +77,14 @@ public class LobbyJavaFX extends Application {
 
     private Stage primaryStage;
 
-    public LobbyJavaFX(ConnectionTech conn, VirtualPlayer owner) {
+    public LobbyJavaFX(ConnectionTech conn, VirtualPlayer owner,boolean reconnected) {
+
+        vmodel = new VirtualModel(owner);
+
+        this.reconnected = reconnected;
         this.conn = conn;
         this.owner = owner;
         this.lobby = new VirtualLobby(conn, owner);
-        vmodel = new VirtualModel(owner);
         game = new GameJavaFX(vmodel);
         terminator = false;
         frenzy = false;
@@ -103,6 +108,27 @@ public class LobbyJavaFX extends Application {
     }
 
     public void start(Stage primaryStage) throws Exception {
+
+        if(reconnected){
+            game = new GameJavaFX(vmodel);
+            try {
+                while(!vmodel.isUpdated()){
+                    sleep(500);
+                }
+
+                sleep(1000);
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            game.setStart(true);
+
+            try {
+                game.start(primaryStage);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
 
         this.primaryStage = primaryStage;
 

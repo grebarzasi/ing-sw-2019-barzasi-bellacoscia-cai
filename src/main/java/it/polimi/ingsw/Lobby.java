@@ -3,6 +3,7 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.connection.ClientHandler;
 import it.polimi.ingsw.connection.MainServer;
+import it.polimi.ingsw.controller.Controller;
 
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ import static it.polimi.ingsw.connection.ConnMessage.COUNTDOWN;
 
 public class Lobby extends Thread {
 
+    private Controller controller;
     private boolean started;
     private boolean hasTimerStarted;
     private Timer timer;
@@ -57,32 +59,21 @@ public class Lobby extends Thread {
      * if is legal, a player is added to joined players
      */
     public synchronized boolean addPlayer(ClientHandler p) {
-        if (joinedPlayers.size() < maxPlayer && usernameCheck(p) && characterCheck(p)) {
-            joinedPlayers.add(p);
-            return true;
+        if(!hasStarted()) {
+            if (joinedPlayers.size() < maxPlayer && usernameCheck(p) && characterCheck(p)) {
+                joinedPlayers.add(p);
+                return true;
+            }
+            return false;
+        }else{
+            return reconnectPlayer(p);
         }
-
-        return false;
     }
 
     /**
      * Restore session on connection start
      */
 
-    public synchronized boolean restorePlayer(ClientHandler p) {
-        if (!usernameCheck(p)) {
-            for(ClientHandler toCheck: this.joinedPlayers){
-                if(toCheck.getOwner().getUsername().equals(p.getOwner().getUsername())){
-                   if(toCheck.isExpired())
-                       return false;
-                   //HERE
-                    return true;
-                }
-            }
-
-        }
-        return false;
-    }
 
 
     /**
@@ -100,6 +91,7 @@ public class Lobby extends Thread {
         if (i == MIN_PLAYERS && !hasStarted()) {
             hasTimerStarted=true;
             System.out.println("Countdown started");
+            timer=new Timer();
             timer.schedule(new TimerGameStart(this), (COUNTDOWN * 1000));
         }
     }
@@ -138,6 +130,20 @@ public class Lobby extends Thread {
         joinedPlayers.remove(p);
         updateClients();
         System.out.print(p.getOwner().getUsername() + " has cowardly left the battle before it began\n");
+        if(joinedPlayers.size()<MIN_PLAYERS) {
+            timer.cancel();
+            updateClients();
+        }
+    }
+
+    public boolean reconnectPlayer(ClientHandler p){
+        for(Player x: controller.getModel().getPlayerList()){
+            if(x.getCharacter().equals(p.getOwner().getCharacter())&&x.getUsername().equals(p.getOwner().getUsername())&&x.isDisconnected()){
+                x.getView().reconnectPlayer(p);
+                return true;
+            }
+        }
+        return false;
     }
 
 
@@ -151,7 +157,8 @@ public class Lobby extends Thread {
         return s;
     }
 
-    //make decision on the game setup;
+    //make decision on the game setup
+
     public void prefDecision(){
         ArrayList<Integer> killPrefList=new ArrayList<>();
         ArrayList<Integer> mapPrefList=new ArrayList<>();
@@ -169,7 +176,9 @@ public class Lobby extends Thread {
         if(killPref<5||killPref>8)
             killPref=8;
         this.mapPref=(modeOf(mapPrefList));
-        this.terminatorPref=(modeOfBool(terminatorList));
+        if(joinedPlayers.size()<5)
+            this.terminatorPref=(modeOfBool(terminatorList));
+        else terminatorPref=false;
         this.finalFrenzyPref=(modeOfBool(finalFrenzyList));
     }
 
@@ -281,6 +290,14 @@ public class Lobby extends Thread {
 
     public synchronized void setStarted(boolean hasStarted) {
         this.started = hasStarted;
+    }
+
+    public Controller getController() {
+        return controller;
+    }
+
+    public void setController(Controller cotroller) {
+        this.controller = cotroller;
     }
 
     public void run() {

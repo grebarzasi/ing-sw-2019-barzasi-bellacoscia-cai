@@ -5,6 +5,7 @@ import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Effect;
 import it.polimi.ingsw.cards.weapon.Weapon;
+import it.polimi.ingsw.connection.ClientHandler;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -109,6 +110,9 @@ public interface View {
     void setDisconnected(boolean b);
     boolean isInactive();
     void setInactive(boolean b);
+
+    void reconnectPlayer(ClientHandler b);
+
 
 
 

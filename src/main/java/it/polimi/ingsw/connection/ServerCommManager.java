@@ -434,7 +434,7 @@ public class ServerCommManager  extends Thread implements View {
 
     public boolean sendsUpdate(String s){
         updateBuffer = s;
-        if(owner.isInactive()) {
+        if(owner.isInactive()||owner.isDisconnected()) {
             return true;
         }
         setInUse(true);
@@ -455,7 +455,9 @@ public class ServerCommManager  extends Thread implements View {
 
     public void handleDisconnection(){
         owner.setDisconnected(true);
+        owner.setInactive(true);
         System.err.println(owner.getUsername()+CLIENT_UNREACHABLE);
+
     }
 
     public boolean handleInactivity(Thread t){
@@ -464,6 +466,8 @@ public class ServerCommManager  extends Thread implements View {
         System.out.print("\n"+owner.getCharacter()+" Inactivity countdown: ");
         for(;i<INACTIVITY_TIMEOUT;i++){
             for(int j=0;j<1000;j++) {
+                if(isDisconnected())
+                    break;
                 if (!t.isAlive())
                     return true;
                 try {
@@ -473,6 +477,8 @@ public class ServerCommManager  extends Thread implements View {
                 }
             }
             System.out.print(INACTIVITY_TIMEOUT-i+"s ");
+            if(isDisconnected())
+                break;
         }
         System.out.println("\n"+owner.getCharacter()+" is inactive!");
         t.interrupt();
@@ -516,10 +522,17 @@ public class ServerCommManager  extends Thread implements View {
                         //if the player is active and connected Ping the player
                 }
             }
-
         }catch(IOException e){
             handleDisconnection();
-            this.interrupt();
+            while(isDisconnected()) {
+                try {
+                    sleep(1000);
+                } catch (InterruptedException d) {
+                    d.printStackTrace();
+                }
+            }
+            sendsUpdate(updateBuffer);
+            this.run();
         }
     }
 
@@ -588,5 +601,19 @@ public class ServerCommManager  extends Thread implements View {
             argList.add(x);
         }
         return argList;
+    }
+
+    @Override
+    public void reconnectPlayer(ClientHandler b) {
+        if(b.isRmi()){
+            this.rmiHandler=(RmiClientHandler)b;
+            this.rmi=true;
+            this.rmiClient=((RmiClientHandler) b).getViewClient();
+        }else{
+            this.socketClient=(SocketClientHandler)b;
+            this.rmi=false;
+        }
+        setDisconnected(false);
+        setInactive(true);
     }
 }

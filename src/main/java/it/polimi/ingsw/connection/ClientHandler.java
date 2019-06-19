@@ -22,9 +22,6 @@ public abstract class ClientHandler extends Thread {
     private boolean expired=false;
     private boolean disconnected=false;
 
-    private Timer disconnectCountdown;
-    private Timer expiredCountdown;
-
 
     //preferences
     private int mapPref;
@@ -35,8 +32,6 @@ public abstract class ClientHandler extends Thread {
     public ClientHandler(Lobby lobby){
         this.lobby=lobby;
         this.owner = new Player();
-        this.disconnectCountdown=new Timer();
-        this.expiredCountdown= new Timer();
     }
 
 
@@ -54,8 +49,8 @@ public abstract class ClientHandler extends Thread {
     public abstract void waitStart()throws IOException ;
 
     public abstract void game();
+    public abstract boolean isRmi();
 
-//    public abstract void disconnectReset();
 
     public abstract void run();
 

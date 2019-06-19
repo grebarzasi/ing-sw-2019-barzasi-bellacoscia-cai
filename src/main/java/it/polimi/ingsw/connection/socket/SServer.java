@@ -37,7 +37,7 @@ public class SServer extends ConnectionTech {
             SocketClientHandler temp;
             while(true){
                 Socket client = server.accept();
-                System.out.println( SOCKET_S_CONN+ client);
+                System.out.println( "\n"+SOCKET_S_CONN+ client);
                 temp = new SocketClientHandler(client,super.getLobby());
                 temp.start();
             }

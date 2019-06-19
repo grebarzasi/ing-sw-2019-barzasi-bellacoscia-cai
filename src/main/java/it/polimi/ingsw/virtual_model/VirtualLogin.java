@@ -10,7 +10,7 @@ public class VirtualLogin {
     private ConnectionTech connController;
     private String username;
     private String character;
-
+    private boolean reconnected;
 
 
     public VirtualLogin(String username, String character, ConnectionTech connController) {
@@ -23,14 +23,26 @@ public class VirtualLogin {
     public boolean send() throws IOException {
         boolean flag=false;
         if (connController.isRmi()) {
-            return ((RmiClient) connController).getClientHandler().login(this.username, this.character);
+            String s=((RmiClient) connController).getClientHandler().login(this.username, this.character);
+            if(s.equals("accepted"))
+                return true;
+            if(s.equals("refused"))
+                return false;
+            if(s.equals("reconnected")) {
+                reconnected = true;
+                return true;
+            }
         } else {
             SClient c = ((SClient) connController);
             System.out.println("sending");
             c.getOutput().println(username);
             c.getOutput().println(character);
             String reply = c.getInput().readLine();
-            if(reply.equals("accepted")){
+            if(reply.equals("reconnected")){
+                System.out.println(reply);
+                reconnected=true;
+                flag=true;
+            }else if(reply.equals("accepted")){
                 System.out.println(reply);
                 flag=true;
             }else if (reply.equals("refused")){
@@ -40,5 +52,11 @@ public class VirtualLogin {
         return flag;
     }
 
+    public boolean isReconnected() {
+        return reconnected;
+    }
 
+    public void setReconnected(boolean reconnected) {
+        this.reconnected = reconnected;
+    }
 }
