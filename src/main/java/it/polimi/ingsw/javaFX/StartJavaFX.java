@@ -46,6 +46,8 @@ public class StartJavaFX extends Application {
     private String connection = "Socket";
     private ConnectionTech c;
     private VirtualPlayer p;
+    private VirtualLogin login;
+
 
     double widthScreen = Screen.getPrimary().getBounds().getWidth();
     double heightScreen = Screen.getPrimary().getBounds().getHeight();
@@ -189,8 +191,7 @@ public class StartJavaFX extends Application {
         });
 
         btnLobby.setOnAction(e->{
-
-            LobbyJavaFX lobby = new LobbyJavaFX(c,p);
+            LobbyJavaFX lobby = new LobbyJavaFX(c,p,login.isReconnected());
             try {
                 lobby.start(primaryStage);
             } catch (Exception ex) {
@@ -319,7 +320,7 @@ public class StartJavaFX extends Application {
 
                 username = txtUsername.getText();
 
-                VirtualLogin login = new VirtualLogin(username,color,c);
+                login = new VirtualLogin(username,color,c);
                 try {
                     p = new VirtualPlayer(username,color);
                     if(login.send()){
@@ -333,6 +334,8 @@ public class StartJavaFX extends Application {
                     ex.printStackTrace();
                 }
                 btnLobby.setOpacity(1);
+                if(login.isReconnected())
+                    btnLobby.fire();
             });
 
         }

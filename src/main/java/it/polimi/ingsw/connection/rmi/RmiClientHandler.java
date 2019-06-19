@@ -19,14 +19,19 @@ public class RmiClientHandler extends ClientHandler implements RmiPrefInterf {
         super(lobby);
     }
 
-    public boolean login(String username, String character) throws RemoteException{
+    public String login(String username, String character) throws RemoteException{
             super.setOwner(new Player(username,character));
+
+            if(super.getLobby().hasStarted()&&super.getLobby().reconnectPlayer(this))
+                return "reconnected";
+
+
             if (super.getLobby().addPlayer(this)) {
                 System.out.println("repling to " + super.getOwner().getUsername() + ": accepted!");
-                return true;
+                return "accepted";
             }
             System.out.println("repling to " + username + ": refused!");
-            return false;
+            return "refused";
     }
     public void sendPref(Integer mapPref, Integer killPref, Boolean terminatorPref,Boolean finalFrenzyPref) throws RemoteException{
         super.setMapPref(mapPref);
@@ -99,6 +104,10 @@ public class RmiClientHandler extends ClientHandler implements RmiPrefInterf {
     //reset
     public void setView(ViewClient view) {
        setViewClient(view);
+    }
+
+    public boolean isRmi(){
+        return true;
     }
 
     public ViewClient getViewClient() {

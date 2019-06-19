@@ -34,6 +34,8 @@ public class SClientCommManager extends Thread{
         while(goOn){
 
             msg= i.readLine();
+            if(!msg.equals(PING))
+                System.out.println("\n"+msg);
             switch (msg){
                 case PING:
                     o.println(PONG);

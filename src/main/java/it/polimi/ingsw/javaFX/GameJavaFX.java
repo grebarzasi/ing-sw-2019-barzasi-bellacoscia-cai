@@ -783,6 +783,7 @@ public class GameJavaFX extends Application implements ViewClient {
         otherWe.add(weOther4);
         otherWe.add(weOther5);
 
+
         ArrayList<GridPane> gridOtherSpace = new ArrayList<>();
         gridOtherSpace.add(gridOtherSpace1);
         gridOtherSpace.add(gridOtherSpace2);

@@ -40,6 +40,12 @@ public class SocketClientHandler extends ClientHandler {
             String username=in.readLine();
             String character=in.readLine();
             super.setOwner(new Player(username,character));
+            if(super.getLobby().hasStarted()&&super.getLobby().reconnectPlayer(this)){
+                out.println("reconnected");
+                System.out.println("Reconnecting " + super.getOwner().getUsername());
+                return true;
+            }
+
             if (super.getLobby().addPlayer(this)) {
                 out.println("accepted");
                 System.out.println("repling to " + super.getOwner().getUsername() + ": accepted!");
@@ -102,6 +108,10 @@ public class SocketClientHandler extends ClientHandler {
         return in;
     }
 
+    public boolean isRmi(){
+        return false;
+    }
+
     public PrintWriter getOut() {
         return out;
     }
@@ -109,16 +119,16 @@ public class SocketClientHandler extends ClientHandler {
     public void run() {
         try {
             System.out.println("Thread started");
-            if(!super.getLobby().hasStarted()) {
+
 
                 login();
+                if(super.getLobby().hasStarted()){
+                    return;
+                }
                 waitPref();
                 waitStart();
                 game();
 
-
-
-            }
         } catch (IOException e) {
             System.err.println("Smoething went wrong, removing"+ client.getInetAddress());
             super.getLobby().disconnectPlayer(this);

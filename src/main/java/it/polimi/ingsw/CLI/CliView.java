@@ -25,6 +25,7 @@ public class CliView {
     private VirtualPlayer p;
     private CliLobby lobby;
     private CliGame view;
+    private VirtualLogin l;
 
     private String ip;
     private int port;
@@ -42,7 +43,10 @@ public class CliView {
             chooseConnection();
             login();
             lobby = new CliLobby(c,sc,p);
-            lobby.startLobby();
+            if(l.isReconnected())
+                lobby.gameStart();
+            else
+                lobby.startLobby();
         }catch(IOException e){
             System.err.println(CONNECTION_ERR);
         }
@@ -90,7 +94,6 @@ public class CliView {
 
     public void login()throws IOException{
         System.out.println("\n"+PRE_LOGIN);
-        VirtualLogin l;
         while(true){
             String username = acquireUsername();
             if(username.isEmpty()) {

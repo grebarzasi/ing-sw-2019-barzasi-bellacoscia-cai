@@ -92,6 +92,7 @@ public class Controller {
 
     public Controller(Lobby lobby) {
 
+        lobby.setController(this);
         this.marshal=new UpdateBuilder(this);
 
         ArrayList<Player> playerList = new ArrayList<>();
@@ -260,7 +261,7 @@ public class Controller {
 
         this.model.getBoard().refillSquares();
 
-
+        this.checkEndStatus();
         this.iteratePlayer();
         this.resetTurn();
 
@@ -313,15 +314,19 @@ public class Controller {
      */
 
     void iteratePlayer(){
+
         if (this.model.getPlayerList().indexOf(this.model.getCurrentPlayer()) != this.model.getPlayerList().size() - 1) {
             this.model.setCurrentPlayer(this.model.getPlayerList().get(this.model.getPlayerList().indexOf(model.getCurrentPlayer()) + 1));
         } else {
             this.model.setCurrentPlayer(this.model.getPlayerList().get(0));
         }
 
+        if(!checkLeftPlayer())
+            endGame();
+
         //if disconnected or inactive skip turn
         if(model.getCurrentPlayer().isDisconnected()||model.getCurrentPlayer().isInactive()) {
-            endTurn();
+//            endTurn();
         }
 
 
@@ -349,8 +354,8 @@ public class Controller {
      */
 
     private void endGame(){
-
         this.view.displayLeaderboard();
+
 
     }
 
@@ -463,7 +468,6 @@ public class Controller {
     public void update(){
         String s = marshal.create().toString();
         for(Player p: model.getPlayerList())
-            if(!p.isDisconnected())
                 p.getView().sendsUpdate(s);
     }
 
