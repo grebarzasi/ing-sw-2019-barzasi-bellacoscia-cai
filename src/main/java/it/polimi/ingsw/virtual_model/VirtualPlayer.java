@@ -19,6 +19,7 @@ public class VirtualPlayer {
     private ArrayList<String> weapons;
     private  ArrayList<String> powerUps;
     private VirtualPlayerBoard pBoard;
+    private boolean inactive;
 
 
 
@@ -31,6 +32,14 @@ public class VirtualPlayer {
         this.powerUps= new ArrayList<>();
     }
 
+
+    public boolean isInactive() {
+        return inactive;
+    }
+
+    public void setInactive(boolean inactive) {
+        this.inactive = inactive;
+    }
 
     public String getUsername() {
         return username;

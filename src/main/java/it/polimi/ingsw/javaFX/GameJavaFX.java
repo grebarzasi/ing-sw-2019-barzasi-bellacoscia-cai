@@ -1830,6 +1830,9 @@ public class GameJavaFX extends Application implements ViewClient {
 
             if (model.getTurn().getCharacter().equals(model.getOwner().getCharacter())) {
                 gridPBoard.setEffect(borderGlow);
+                for (GridPane g : gridOtherBoards) {
+                    g.setEffect(null);
+                }
             }else {
                 gridPBoard.setEffect(null);
                 for (GridPane grid : gridOtherBoards) {
@@ -2030,6 +2033,14 @@ public class GameJavaFX extends Application implements ViewClient {
                     fillWeapon(otherWe.get(i), p, widthOCard / 3.7, heightOtherWeapon);
                     //set infobutton
                     setWeapon(p, otherWe.get(i));
+                    if(p.isInactive()){
+                        borderGlow.setColor(Color.YELLOW);
+                        gridOtherBoards.get(i).setEffect(borderGlow);
+                        borderGlow.setColor(Color.RED);
+                    }
+
+                    if(model.getTurn().equals(p))
+                        gridOtherBoards.get(i).setEffect(borderGlow);
                 }
                 i++;
 

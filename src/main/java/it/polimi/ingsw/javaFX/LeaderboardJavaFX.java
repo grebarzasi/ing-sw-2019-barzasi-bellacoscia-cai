@@ -43,26 +43,40 @@ public class LeaderboardJavaFX extends Application {
         heightFirst = heightOther * 4;
         heightThird = heightOther * 2;
 
+        Image back1 = new Image(new FileInputStream(PATH_BACK_MSG),widthScreen,heightThird,true,true);
+        BackgroundImage backImg = new BackgroundImage(back1, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        Background background = new Background(backImg);
+
         TextField txt1 = new TextField();
         txt1.setEditable(false);
         txt1.setPrefSize(widthScreen/4,heightFirst/3);
         txt1.setFont(new Font(24));
+        txt1.setBackground(background);
+
         TextField txt2 = new TextField();
         txt2.setEditable(false);
         txt2.setPrefSize(widthScreen/4,heightSecond/3);
         txt2.setFont(new Font(20));
+        txt2.setBackground(background);
+
         TextField txt3 = new TextField();
         txt3.setEditable(false);
         txt3.setPrefSize(widthScreen/4,heightThird/3);
         txt3.setFont(new Font(18));
+        txt3.setBackground(background);
+
         TextField txt4 = new TextField();
         txt4.setEditable(false);
-        txt4.setPrefSize(widthScreen/4,heightOther);
+        txt4.setPrefSize(widthScreen/4,heightOther /2);
         txt4.setFont(new Font(14));
+        txt4.setBackground(background);
+
         TextField txt5 = new TextField();
         txt5.setEditable(false);
-        txt5.setPrefSize(widthScreen/4,heightOther);
+        txt5.setPrefSize(widthScreen/4,heightOther/2);
         txt5.setFont(new Font(14));
+        txt5.setBackground(background);
+
 
         ImageView img1 = new ImageView(new Image(new FileInputStream("src/main/resources/images/leaderboard/first.png"),widthScreen,heightFirst,true,true));
         ImageView img2 = new ImageView(new Image(new FileInputStream("src/main/resources/images/leaderboard/second.png"),widthScreen,heightSecond,true,true));
