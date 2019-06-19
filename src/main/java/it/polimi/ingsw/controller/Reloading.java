@@ -25,11 +25,7 @@ public class Reloading implements ControllerState {
 
         ArrayList<Weapon> options = new ArrayList<>(this.controller.getCurrentPlayer().getWeaponsList());
 
-        for(Weapon w: options){
-            if(w.isLoaded()){
-                options.remove(w);
-            }
-        }
+        options.removeIf(Weapon::isLoaded);
 
         Weapon choice = this.controller.getView().showWeapon(options);
 

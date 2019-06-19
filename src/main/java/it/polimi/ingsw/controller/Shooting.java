@@ -89,7 +89,7 @@ public class Shooting implements ControllerState {
             }else
                 controller.getView().displayMessage("Non hai le risorse necessarie per questo effeto");
 
-            this.controller.askVenoms(choice.getTargetHitSet());
+            this.controller.askVenoms(choice.getTargetHitSet() , this.controller.getCurrentPlayer());
 
         } while (true);
 

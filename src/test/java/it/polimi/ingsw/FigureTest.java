@@ -218,6 +218,10 @@ class FigureTest {
 
     }
 
+    /**
+     * Verifies that the points are correctly assigned after death
+     */
+
 
     @Test
     public void deathTest(){
@@ -264,6 +268,10 @@ class FigureTest {
         assertEquals(2,stu.getPoints());
 
     }
+
+    /**
+     * Verifies that the points are correctly assigned after death
+     */
 
     @Test
     public void deathTest2(){
@@ -312,6 +320,10 @@ class FigureTest {
 
     }
 
+    /**
+     * Verifies that the points are correctly assigned after death
+     */
+
     @Test
     public void deathTest3(){
 
@@ -358,6 +370,10 @@ class FigureTest {
         assertEquals(0,bill.getPoints());
 
     }
+
+    /**
+     * Verifies that the points are correctly assigned after death
+     */
 
     @Test
     public void deathTest4(){
@@ -406,8 +422,9 @@ class FigureTest {
 
     }
 
-
-
+    /**
+     * Verifies that damage are correctly inflicted
+     */
 
     @Test
     void inflictDamage() {
@@ -435,9 +452,9 @@ class FigureTest {
 
     }
 
-    @Test
-    void inflictMark() {
-    }
+    /**
+     * Asserts that the damage assignment is correct after multiple kills occured
+     */
 
     @Test
     void multipleDeaths() {
@@ -534,6 +551,51 @@ class FigureTest {
         assertEquals(5,bill.getPoints());
 
     }
+
+    /**
+     * Verifies the correct interaction between damage and marks
+     */
+
+    @Test
+    public void damageAndMark(){
+
+        Player albert = new Player ("Albert","albert");
+        Player bill = new Player("Bill","bill");
+        Player charlie = new Player("Charlie","charlie");
+        Player don = new Player("Don","don");
+        Player ed = new Player("Ed", "ed");
+
+        GameModel model = new GameModel();
+        albert.setModel(model);
+        model.setFrenzy(false);
+
+       albert.inflictMark(2,bill);
+       assertEquals(2,bill.getPersonalBoard().getMark().size());
+       assertEquals(0,bill.getPersonalBoard().getDamage().size());
+
+       albert.inflictDamage(2,bill);
+
+       assertEquals(0,bill.getPersonalBoard().getMark().size());
+       assertEquals(4,bill.getPersonalBoard().getDamage().size());
+
+       albert.inflictDamage(1,bill);
+
+       assertEquals(5,bill.getPersonalBoard().getDamage().size());
+
+       albert.inflictMark(1,bill);
+       charlie.inflictMark(2,bill);
+       ed.inflictMark(2,bill);
+
+       assertEquals(5,bill.getPersonalBoard().getDamage().size());
+       assertEquals(5,bill.getPersonalBoard().getMark().size());
+
+       charlie.inflictDamage(1,bill);
+
+       assertEquals(8,bill.getPersonalBoard().getDamage().size());
+       assertEquals(3,bill.getPersonalBoard().getMark().size());
+
+    }
+
 
 
 

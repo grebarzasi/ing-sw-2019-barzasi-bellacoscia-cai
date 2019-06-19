@@ -367,7 +367,7 @@ public class Controller {
     }
 
 
-    void askVenoms(Set<Figure> targets){
+    void askVenoms(Set<Figure> targets, Figure hitter){
 
         if(this.hasBot()) {
             targets.remove(this.getModel().getBot());
@@ -410,17 +410,20 @@ public class Controller {
 
 
                 if(choice != null){
-                    p.inflictMark(1,tmp);
+                    p.inflictMark(1,hitter);
                     p.removePowerUp(choice);
                 }
 
             }
 
         }
+
         this.getModel().setCurrentPlayer(tmp);
+        this.setView(tmp.getView());
         this.setCurrentState(choosingMove);
-        this.currentState.command();
         this.update();
+        this.currentState.command();
+
 
     }
 
@@ -505,12 +508,7 @@ public class Controller {
      */
     static void filterPUs(ArrayList<PowerUp> puList , String toKeep){
 
-        int i;
-        for(i = 0 ; i < puList.size() ; i++ ){
-            if(!puList.get(i).getName().equals(toKeep)){
-                puList.remove(i);
-            }
-        }
+        puList.removeIf(p -> !p.getName().equals(toKeep));
 
     }
 

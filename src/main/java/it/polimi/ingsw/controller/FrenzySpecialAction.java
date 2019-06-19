@@ -19,6 +19,13 @@ public class FrenzySpecialAction implements ControllerState {
         this.controller = controller;
     }
 
+    /**
+     * Takes a square input from player and moves the player to that square;
+     * Asks the player to reload, if yes asks the weapon to reload and reloads it
+     * If a player can shoot set the player state to shooting
+     */
+
+
     @Override
     public void command() {
 
@@ -27,21 +34,37 @@ public class FrenzySpecialAction implements ControllerState {
         Square choice = this.controller.getView().showPossibleMoves(options, false);
         this.controller.getCurrentPlayer().setPosition(choice);
 
-        while(this.controller.getView().showBoolean("Vuoi sfruttare la ricarica?")){
+        if(choice == null){
+            this.controller.goBack();
+        }else {
+            while (this.controller.getView().showBoolean("Vuoi sfruttare la ricarica?")) {
 
-            ArrayList<Weapon> reloadOptions = this.controller.getCurrentPlayer().getWeaponsList();
-            Weapon reloadChoice = this.controller.getView().showWeapon(reloadOptions);
-            boolean check = reloadChoice.reload();
+                ArrayList<Weapon> reloadOptions = this.controller.getCurrentPlayer().getWeaponsList();
+                Weapon reloadChoice = this.controller.getView().showWeapon(reloadOptions);
+                boolean check = reloadChoice.reload();
 
-            if (!check) {
-                this.controller.getView().displayMessage("Non possiedi abbastanza risorse per caricare l'arma");
+                if (!check) {
+                    this.controller.getView().displayMessage("Non possiedi abbastanza risorse per caricare l'arma");
+                }
+
             }
-
         }
 
-        //TODO shooting part
+        ArrayList<Weapon> weaponChoices = this.controller.getCurrentPlayer().getWeaponsList();
+        weaponChoices.removeIf(weapon -> !weapon.isLoaded());
 
+        Weapon shootingWith = this.controller.getView().showWeapon(weaponChoices);
 
+        if(shootingWith == null){
+            this.controller.decreaseMoveLeft();
+            this.controller.update();
+            this.controller.goBack();
+        }else {
+            this.controller.setCurrentState(this.controller.shooting);
+            ((Shooting) this.controller.getCurrentState()).setShootingWith(shootingWith);
+
+            this.controller.getCurrentState().command();
+        }
 
     }
 

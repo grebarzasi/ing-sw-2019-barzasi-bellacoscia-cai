@@ -4,6 +4,7 @@ import it.polimi.ingsw.Lobby;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.actions.Action;
 import it.polimi.ingsw.board.map.Square;
+import it.polimi.ingsw.cards.power_up.PowerUp;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -11,6 +12,10 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ControllerTest {
+
+    /**
+     * Tests the test controller
+     */
 
     @Test
     public void constructorTest() {
@@ -83,5 +88,32 @@ class ControllerTest {
                 }
             }
         }
+    }
+
+    /**
+     * Tests that the powerups of a different name than selected are correctly filtered
+     */
+
+    @Test
+    public void powerUpFilterTest(){
+
+        ArrayList<PowerUp> unfiltered = new ArrayList<>();
+
+        unfiltered.add(new PowerUp(null, "Mango"));
+        unfiltered.add(new PowerUp(null, "Tango"));
+        unfiltered.add(new PowerUp(null, "Tango"));
+        unfiltered.add(new PowerUp(null, "Mango"));
+        unfiltered.add(new PowerUp(null, "Salve"));
+        unfiltered.add(new PowerUp(null, "Salve"));
+        unfiltered.add(new PowerUp(null, "Clarity"));
+        unfiltered.add(new PowerUp(null, "Tango"));
+        unfiltered.add(new PowerUp(null, "Mango"));
+        unfiltered.add(new PowerUp(null, "Tango"));
+        unfiltered.add(new PowerUp(null, "Clarity"));
+
+        Controller.filterPUs(unfiltered,"Mango");
+
+        assertEquals(3,unfiltered.size());
+
     }
 }

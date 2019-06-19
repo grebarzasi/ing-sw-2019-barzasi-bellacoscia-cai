@@ -11,6 +11,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DeckTest {
 
+    /**
+     * Asserts that the draw and refill methods of the deck
+     * are properly functioning
+     *
+     * all cards are first drawn and then the deck is refilled
+     */
+
     @Test
     public void drawDiscardandRefill(){
 

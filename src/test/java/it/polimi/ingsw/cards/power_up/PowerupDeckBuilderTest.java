@@ -6,6 +6,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Asserts that the powerup deck is properly generated
+ */
+
 class PowerupDeckBuilderTest {
 
     PowerupDeckBuilder usablePU = new PowerupDeckBuilder();

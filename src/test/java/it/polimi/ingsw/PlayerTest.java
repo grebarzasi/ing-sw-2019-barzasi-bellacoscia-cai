@@ -18,6 +18,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerTest {
 
+    /**
+     * Verifies that the constructor works proper
+     */
 
     @Test
     public void constructorTest() {
