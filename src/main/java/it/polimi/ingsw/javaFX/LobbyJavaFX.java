@@ -405,26 +405,25 @@ public class LobbyJavaFX extends Application {
             }
          }
 
-        while(!vmodel.isUpdated()){
-            try {
-                sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
 
         try {
-            sleep(5000);
+        while(!vmodel.isUpdated()){
+                sleep(500);
+        }
+
+            sleep(1000);
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+            game.setStart(true);
 
         try {
-            game.setStart(true);
             game.start(primaryStage);
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
     }
 
 

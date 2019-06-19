@@ -305,7 +305,7 @@ public class GameJavaFX extends Application implements ViewClient {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) throws FileNotFoundException {
 
         this.primaryStage = primaryStage;
 
@@ -1674,12 +1674,17 @@ public class GameJavaFX extends Application implements ViewClient {
             } else
                 b.setOpacity(o);
         }
-        for (VirtualPlayer player : model.getAllPlayers()) {
+        drawPlayers();
+    }
+
+
+    public void drawPlayers() {
+        ArrayList<VirtualPlayer> temp = new ArrayList<>(model.getAllPlayers());
+        for (VirtualPlayer player : temp) {
             if (player.getRow() != -1) {
                 setPlayerOnCell(btnCell.get((player.getRow() * 4) - 1 + player.getColumn() + 1), player.getCharacter());
             }
         }
-
     }
 
     public void hideBtn(Button btn, double o) {
@@ -1989,12 +1994,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
             fillSkulls(gridSkull, model.getBoard().getSkull(), widthSkull - 5, heightLateral / 3);
 
-            for (VirtualPlayer player : model.getAllPlayers()) {
-                if (player.getRow() != -1) {
-                    setPlayerOnCell(btnCell.get((player.getRow() * 4) - 1 + player.getColumn() + 1), player.getCharacter());
-                }
-            }
-
+            drawPlayers();
             fillAmmoTiles();
 
 
