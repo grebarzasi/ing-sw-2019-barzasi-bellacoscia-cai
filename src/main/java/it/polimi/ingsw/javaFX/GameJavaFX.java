@@ -293,7 +293,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
         Image img = null;
         try {
-            img = new Image(new FileInputStream(PATH_GENERAL_COLOR + "empty2.png"), 100, 100, true, true);
+            img = new Image(new FileInputStream(PATH_GENERAL_COLOR + "GB_Logo.png"), 100, 100, true, true);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
