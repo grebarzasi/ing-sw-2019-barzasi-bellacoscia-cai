@@ -99,6 +99,8 @@ RISALIRE ALLA CELLA!!
  */
 public class GameJavaFX extends Application implements ViewClient {
 
+    private Stage primaryStage;
+
     private boolean start;
     private boolean move;
     private boolean pick;
@@ -293,7 +295,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
         Image img = null;
         try {
-            img = new Image(new FileInputStream(PATH_GENERAL_COLOR + "GB_Logo.png"), 100, 100, true, true);
+            img = new Image(new FileInputStream(PATH_EMPTY_CELL), 100, 100, true, true);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -304,6 +306,8 @@ public class GameJavaFX extends Application implements ViewClient {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+        this.primaryStage = primaryStage;
 
         primaryStage.setTitle("ADRENALINA");
 
@@ -1665,8 +1669,10 @@ public class GameJavaFX extends Application implements ViewClient {
             }
             if(o==0.5) {
                 b.setBackground(btnEmptyBG);
-            }
-            b.setOpacity(o);
+                b.setEffect(null);
+                b.setOpacity(0.7);
+            } else
+                b.setOpacity(o);
         }
         for (VirtualPlayer player : model.getAllPlayers()) {
             if (player.getRow() != -1) {
@@ -2062,7 +2068,7 @@ public class GameJavaFX extends Application implements ViewClient {
                 if(model.getOwner().getRow()*4 + model.getOwner().getColumn() == 2
                         || model.getOwner().getRow()*4 + model.getOwner().getColumn() == 4
                         || model.getOwner().getRow()*4 + model.getOwner().getColumn() == 11
-                        || pick
+                        || pick && !shoot
                 ){
                     chooseWeapon cw = new chooseWeapon(args);
                     cw.show();
@@ -2101,6 +2107,8 @@ public class GameJavaFX extends Application implements ViewClient {
     @Override
     public String showPowerUp(ArrayList<String> args) {
         Runnable run = () -> {
+
+            msg.setText(CHOOSE_POWERUP);
 
             btnCancel.setOnAction(e->{
                 update();
@@ -2263,6 +2271,8 @@ public class GameJavaFX extends Application implements ViewClient {
     public String showPossibleMoves(ArrayList<String> args) {
         Runnable run = () -> {
 
+            msg.setText(CHOOSE_SQUARE);
+
             hideBtn(btnCancel,1);
 
             btnCancel.setOnAction(e->{
@@ -2270,10 +2280,13 @@ public class GameJavaFX extends Application implements ViewClient {
                 game.setTargetSquare(NOTHING);
             });
 
-            msg.setText(CHOOSE_SQUARE);
-
             for (ArrayList<Button> btnArr : btnCell) {
                 hideCell(btnArr, 0.5);
+                for (Button btn : btnArr) {
+                    btn.setOnAction(e -> {
+                        msg.setText(ERR_SQUARE);
+                    });
+                }
             }
             args.remove(0);
             for (String s : args) {
@@ -2303,7 +2316,9 @@ public class GameJavaFX extends Application implements ViewClient {
 
     @Override
     public String chooseDirection(ArrayList<String> args) {
+
         Runnable run = () -> {
+
             msg.setText(CHOOSE_DIRECTION);
 
             hideBtn(btnCancel,1);
@@ -2499,8 +2514,6 @@ public class GameJavaFX extends Application implements ViewClient {
 
     @Override
     public String showTargetAdvanced(ArrayList<String> args) {
-        // primo: numero massimo di target:from different square (boo) : messaggio
-        // poi: colori
 
         Runnable run = () -> {
 
@@ -2605,6 +2618,12 @@ public class GameJavaFX extends Application implements ViewClient {
 
     @Override
     public void displayLeaderboard() {
+        LeaderboardJavaFX leaderboard = new LeaderboardJavaFX();
+        try {
+            leaderboard.start(primaryStage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
