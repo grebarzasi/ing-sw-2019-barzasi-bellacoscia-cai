@@ -6,7 +6,6 @@ import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Effect;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -19,7 +18,7 @@ public interface View {
      * @return the chosen one
      */
 
-    public PowerUp showPowerUp(ArrayList<PowerUp> args);
+    PowerUp showPowerUp(ArrayList<PowerUp> args);
 
     /**
      * Shows the Weapons and makes the user choose one, the returns is
@@ -27,7 +26,7 @@ public interface View {
      * @return the chosen one
      */
 
-    public Weapon showWeapon(ArrayList<Weapon> args);
+    Weapon showWeapon(ArrayList<Weapon> args);
 
     /**
      * Show the possible moves that a player can perform then makes the user choose one,
@@ -36,7 +35,7 @@ public interface View {
      * @return the chosen one
      */
 
-    public Action showActions(ArrayList<Action> args);
+    Action showActions(ArrayList<Action> args);
 
     /**
      * Shows the possible destinations a figure can reach and then returns the chosen value
@@ -45,32 +44,23 @@ public interface View {
      * @return the chosen one
      */
 
-    public Square showPossibleMoves(ArrayList<Square> args, Boolean show);
+    Square showPossibleMoves(ArrayList<Square> args, Boolean show);
 
     /**
-     * Shows the valid targets a Figure can target, then returns the targets the user decides
-     * to hit
-     * @param args the valid targets
-     * @return the chosen targets
+     * Shows the effects of the weapon a player can choose from
+     * @param args the list of effects
+     * @return the one chosen by the player
      */
 
-//    public ArrayList<Figure> showTargets(ArrayList<Figure> args);
+    Effect showEffects(Set<Effect> args);
 
     /**
-     * Shows the valid targets a Figure can target, then returns the chosen one
-     * @param args the valid targets
-     * @return the chosen one
+     * Makes the player choose the targets from a single direction
+     * @param args the potential figure a player can hit
+     * @return the direction on which the targets will be hit
      */
 
-    public String chooseDirection(ArrayList<Figure> args);
-
-    /**
-     * Displays a message and makes the user make a boolean choice
-     *
-     * @param message the question's message
-     * @return the user's choice
-     */
-//    public Figure singleTargetingShowTarget(ArrayList<Figure> args);
+    String chooseDirection(ArrayList<Figure> args);
 
     /**
      * Displays a message and makes the user make a boolean choice
@@ -79,7 +69,7 @@ public interface View {
      * @return the user's choice
      */
 
-    public Boolean showBoolean(String message);
+    Boolean showBoolean(String message);
 
     /**
      * Displays a message to the user
@@ -87,24 +77,38 @@ public interface View {
      * @param message the message
      */
 
-    public void displayMessage(String message);
+    void displayMessage(String message);
 
     /**
      * Displays the leaderboard of the game to the user
      */
 
-    public void displayLeaderboard();
+    void displayLeaderboard();
 
-    public boolean sendsUpdate(String s);
+    /**
+     * Updates the update to the players' clients
+     * @param s the string message containing the update
+     * @return outcome of the update
+     */
 
-    public Effect showEffects(Set<Effect> args);
+    boolean sendsUpdate(String s);
 
-    public ArrayList<Figure> showTargetAdvanced(Set<Figure> args,int maxNum,boolean fromDiffSquare, String msg);
+    /**
+     * Displays the list of figures a player can target with an effect of a weapon
+     * or a powerup
+     * @param args the list of targetable figures
+     * @param maxNum maximum of targets that can be selected
+     * @param fromDiffSquare true if the player cannot select targets from his own square, false otherwise
+     * @param msg description of the action
+     * @return the selected targets
+     */
 
-    public boolean isDisconnected();
-    public void setDisconnected(boolean b);
-    public boolean isInactive();
-    public void setInactive(boolean b);
+    ArrayList<Figure> showTargetAdvanced(Set<Figure> args,int maxNum,boolean fromDiffSquare, String msg);
+
+    boolean isDisconnected();
+    void setDisconnected(boolean b);
+    boolean isInactive();
+    void setInactive(boolean b);
 
 
 

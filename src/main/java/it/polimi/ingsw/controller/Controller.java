@@ -6,8 +6,8 @@ import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.connection.ClientHandler;
 
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * Main controller class, implemented with satate pattern.
@@ -21,7 +21,7 @@ public class Controller {
     private static final int[] frenzyPointsVec;
 
     static {
-        frenzyPointsVec = new int[]{2, 1, 1, 1};
+        frenzyPointsVec = new int[]{2, 1, 1, 1, 0};
     }
 
     private static final int HEIGHT = 3;
@@ -225,7 +225,7 @@ public class Controller {
     }
 
     public void decreaseMoveLeft(){
-        this.setMovesLeft(this.getMovesLeft() -1 );
+        this.setMovesLeft(this.model.getMovesLeft() -1 );
     }
 
     /**
@@ -359,6 +359,68 @@ public class Controller {
 
     private void startFrenzy(){
         this.model.setFrenzy(true);
+
+        for(Player p : this.model.getPlayerList()){
+            p.getPersonalBoard().setPointVec(frenzyPointsVec);
+        }
+    }
+
+
+    void askVenoms(Set<Figure> targets){
+
+        if(this.hasBot()) {
+            targets.remove(this.getModel().getBot());
+        }
+
+        ArrayList<Player> finalTargets = new ArrayList<>();
+
+        for(Figure p : targets){
+            finalTargets.add((Player)p);
+        }
+
+        Player tmp = this.getCurrentPlayer();
+
+        int i;
+
+        for(i = 0 ; i < finalTargets.size() ; i++){
+
+            ArrayList<PowerUp> filtered = new ArrayList<>(finalTargets.get(i).getPowerupList());
+            Controller.filterPUs(filtered,PowerUp.TAGBACK_GRENADE);
+
+            if(filtered.isEmpty()){
+                finalTargets.remove(i);
+            }
+        }
+
+        for(Player p : finalTargets){
+
+            this.getModel().setCurrentPlayer(p);
+            this.setView(this.getCurrentPlayer().getView());
+
+            boolean useTagback = this.getView().showBoolean("Vuoi usare la Granata Venom? \n");
+
+            if(useTagback){
+
+                ArrayList<PowerUp> options = new ArrayList<>(p.getPowerupList());
+
+                Controller.filterPUs(options,PowerUp.TAGBACK_GRENADE);
+
+                PowerUp choice = this.getView().showPowerUp(options);
+
+
+                if(choice != null){
+                    p.inflictMark(1,tmp);
+                    p.removePowerUp(choice);
+                }
+
+            }
+
+            this.update();
+
+        }
+
+        this.getModel().setCurrentPlayer(tmp);
+
     }
 
     /**
@@ -451,22 +513,11 @@ public class Controller {
 
     }
 
-    /**
-     * ends the current action of the player when the player times out
-     */
-
-    public void timeOut(){
-        this.goBack();
-        this.decreaseMoveLeft();
-    }
-
-    /**
-     * ends the turn of the player when the player times out
-     */
-
-    public void finalTimeOut(){
-        this.goBack();
-        this.endTurn();
+    private boolean checkLeftPlayer() {
+        for(Player p: model.getPlayerList())
+            if(!p.isDisconnected()&&!p.isInactive())
+                return true;
+        return false;
     }
 
 
@@ -479,108 +530,16 @@ public class Controller {
         return this.getModel().getBoard();
     }
 
-    public ControllerState getAsBot() {
-        return asBot;
-    }
-
-    public void setAsBot(ControllerState asBot) {
-        this.asBot = asBot;
-    }
-
-    public ControllerState getChoosingMove() {
-        return choosingMove;
-    }
-
-    public void setChoosingMove(ControllerState choosingMove) {
-        this.choosingMove = choosingMove;
-    }
-
-    public ControllerState getChoosingPowerUpToUse() {
-        return choosingPowerUpToUse;
-    }
-
-    public void setChoosingPowerUpToUse(ControllerState choosingPowerUpToUse) {
-        this.choosingPowerUpToUse = choosingPowerUpToUse;
-    }
-
-    public ControllerState getChoosingWeapon() {
-        return choosingWeapon;
-    }
-
-    public void setChoosingWeapon(ControllerState choosingWeapon) {
-        this.choosingWeapon = choosingWeapon;
-    }
-
-    public ControllerState getDiscardingPowerUp() {
-        return discardingPowerUp;
-    }
-
-    public void setDiscardingPowerUp(ControllerState discardingPowerUp) {
-        this.discardingPowerUp = discardingPowerUp;
-    }
-
-    public ControllerState getMoving() {
-        return moving;
-    }
-
-    public void setMoving(ControllerState moving) {
-        this.moving = moving;
-    }
-
-    public ControllerState getPicking() {
-        return picking;
-    }
-
-    public void setPicking(ControllerState picking) {
-        this.picking = picking;
-    }
-
-    public ControllerState getPickingWeapon() {
+    ControllerState getPickingWeapon() {
         return pickingWeapon;
     }
 
-    public void setPickingWeapon(ControllerState pickingWeapon) {
-        this.pickingWeapon = pickingWeapon;
-    }
-
-    public ControllerState getReloading() {
-        return reloading;
-    }
-
-    public void setReloading(ControllerState reloading) {
-        this.reloading = reloading;
-    }
-
-    public ControllerState getShooting() {
+    ControllerState getShooting() {
         return shooting;
-    }
-
-    public void setShooting(ControllerState shooting) {
-        this.shooting = shooting;
     }
 
     public ControllerState getSpawning() {
         return spawning;
-    }
-
-    public void setSpawning(ControllerState spawning) {
-        this.spawning = spawning;
-    }
-
-    public ControllerState getTeleporting() {
-        return teleporting;
-    }
-
-    public void setTeleporting(ControllerState teleporting) {
-        this.teleporting = teleporting;
-    }
-
-    public ControllerState getUsingNewton() {
-        return usingNewton;
-    }
-
-    public void setUsingNewton(ControllerState usingNewton) {
-        this.usingNewton = usingNewton;
     }
 
     public ControllerState getCurrentState() {
@@ -595,28 +554,16 @@ public class Controller {
         return model;
     }
 
-    public void setModel(GameModel model) {
-        this.model = model;
-    }
-
     public View getView() {
         return view;
     }
 
-    public int getMovesLeft() {
-        return this.getModel().getMovesLeft();
-    }
-
-    public void setMovesLeft(int moves) {
+    private void setMovesLeft(int moves) {
         this.model.setMovesLeft(moves);
     }
 
     public Player getCurrentPlayer() {
         return this.model.getCurrentPlayer();
-    }
-
-    public static int[] getFrenzyPointsVec() {
-        return frenzyPointsVec;
     }
 
     public static int getHeight() {
@@ -627,58 +574,12 @@ public class Controller {
         return WIDTH;
     }
 
-    public static int getDeathDamage() {
-        return DEATH_DAMAGE;
-    }
-
-    public static int getOverKillDamage() {
-        return OVER_KILL_DAMAGE;
-    }
-
-    public ControllerState getFrenzySpecialAction() {
-        return frenzySpecialAction;
-    }
-
-    public void setFrenzySpecialAction(ControllerState frenzySpecialAction) {
-        this.frenzySpecialAction = frenzySpecialAction;
-    }
-
-    public boolean isHasFrenzy() {
-        return hasFrenzy;
-    }
-
-    public void setHasFrenzy(boolean hasFrenzy) {
-        this.hasFrenzy = hasFrenzy;
-    }
-
     public boolean hasBot() {
         return hasBot;
-    }
-
-    public void setHasBot(boolean hasBot) {
-        this.hasBot = hasBot;
     }
 
     public void setView(View view) {
         this.view = view;
     }
-
-    public UpdateBuilder getMarshal() {
-        return marshal;
-    }
-
-    public void setMarshal(UpdateBuilder marshal) {
-        this.marshal = marshal;
-    }
-
-    public boolean checkLeftPlayer() {
-        for(Player p: model.getPlayerList())
-            if(!p.isDisconnected()&&!p.isInactive())
-                return true;
-            return false;
-    }
-
-
-
 
 }

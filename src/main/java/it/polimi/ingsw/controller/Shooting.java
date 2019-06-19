@@ -1,7 +1,6 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Figure;
-import it.polimi.ingsw.Player;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.cards.weapon.Effect;
@@ -90,70 +89,13 @@ public class Shooting implements ControllerState {
             }else
                 controller.getView().displayMessage("Non hai le risorse necessarie per questo effeto");
 
-            askVenoms(choice.getTargetHitSet());
+            this.controller.askVenoms(choice.getTargetHitSet());
 
         } while (true);
 
         checkReplyNull(choice);
 
     }
-
-    private void askVenoms(Set<Figure> targets){
-
-        if(this.controller.hasBot()) {
-            targets.remove(this.controller.getModel().getBot());
-        }
-
-        ArrayList<Player> finalTargets = new ArrayList<>();
-
-        for(Figure p : targets){
-            finalTargets.add((Player)p);
-        }
-
-        Player tmp = this.controller.getCurrentPlayer();
-        int i;
-
-        for(i = 0 ; i < finalTargets.size() ; i++){
-
-            ArrayList<PowerUp> filtered = new ArrayList<>(finalTargets.get(i).getPowerupList());
-            Controller.filterPUs(filtered,PowerUp.TAGBACK_GRENADE);
-
-            if(filtered.isEmpty()){
-                finalTargets.remove(i);
-            }
-        }
-
-        for(Player p : finalTargets){
-
-            this.controller.getModel().setCurrentPlayer(p);
-            this.controller.setView(this.controller.getCurrentPlayer().getView());
-
-            boolean useTagback = this.controller.getView().showBoolean("Vuoi usare la Granata Venom? \n");
-
-            if(useTagback){
-
-                ArrayList<PowerUp> options = new ArrayList<>(p.getPowerupList());
-
-                Controller.filterPUs(options,PowerUp.TAGBACK_GRENADE);
-
-                PowerUp choice = this.controller.getView().showPowerUp(options);
-
-
-                if(choice != null){
-                    p.inflictMark(1,tmp);
-                    p.removePowerUp(choice);
-                }
-
-            }
-
-                this.controller.update();
-
-        }
-
-        this.controller.getModel().setCurrentPlayer(tmp);
-
-    }
-
 
     private boolean useScope(Effect chosen){
 
@@ -265,7 +207,6 @@ public class Shooting implements ControllerState {
             Square rpl = controller.getView().showPossibleMoves(options,false);
             checkReplyNull(rpl);
             mv.setSquareTemp(rpl);
-            return;
         }
     }
 }

@@ -42,7 +42,7 @@ public class UpdateBuilder {
         return rootNode;
     }
 
-    public ObjectNode allPlayersNode(){
+    private ObjectNode allPlayersNode(){
         ArrayList<Player> players = controller.getModel().getPlayerList();
         ObjectNode playersNode = mapper.createObjectNode();
 
@@ -55,7 +55,7 @@ public class UpdateBuilder {
         return playersNode;
     }
 
-    public ObjectNode botNode(Figure p){
+    private ObjectNode botNode(Figure p){
         ObjectNode playerNode = mapper.createObjectNode();
         //username,points and position ( "row:column")
         playerNode.put("username",TERMINATOR_NAME);
@@ -90,7 +90,7 @@ public class UpdateBuilder {
     }
 
 
-    public ObjectNode playerNode(Player p){
+    private ObjectNode playerNode(Player p){
         ObjectNode playerNode = mapper.createObjectNode();
         //username,points and position ( "row:column")
         playerNode.put("username",p.getUsername());
@@ -109,9 +109,9 @@ public class UpdateBuilder {
 
         //add pu
         ObjectNode puNode = mapper.createObjectNode();
-        Integer i=0;
+        int i=0;
         for(PowerUp pu :p.getPowerupList()) {
-            puNode.put(i.toString(),pu.getName()+INNER_SEP+pu.getAmmoOnDiscard().toString());
+            puNode.put(Integer.toString(i),pu.getName()+INNER_SEP+pu.getAmmoOnDiscard().toString());
             i++;
         }
 
@@ -123,7 +123,7 @@ public class UpdateBuilder {
         return playerNode;
     }
 
-    public ObjectNode boardNode(Figure p){
+    private ObjectNode boardNode(Figure p){
 
             ObjectNode boardNode = mapper.createObjectNode();
 
@@ -154,7 +154,7 @@ public class UpdateBuilder {
 
         }
 
-        public ObjectNode mainBoardNode(){
+        private ObjectNode mainBoardNode(){
          ObjectNode mainBoardNode = mapper.createObjectNode();
          Board board=controller.getModel().getBoard();
          Map map = board.getMap();
@@ -175,19 +175,19 @@ public class UpdateBuilder {
          return mainBoardNode;
         }
 
-    public String killshottruck(){
+    private String killshottruck(){
         Board board=controller.getModel().getBoard();
         ArrayList<ArrayList<Token>> killshot = board.getTrack().getKillsTrack();
-        String s="";
+        StringBuilder s= new StringBuilder();
         for(ArrayList<Token> aT: killshot) {
             for (Token t : aT)
-                s = s+t.getOwner().getCharacter()+INNER_SEP;
-            s=s+INFO_SEP;
+                s.append(t.getOwner().getCharacter()).append(INNER_SEP);
+            s.append(INFO_SEP);
         }
-        return s;
+        return s.toString();
     }
 
-        public ObjectNode createCellNode(Map map, boolean isArmory){
+        private ObjectNode createCellNode(Map map, boolean isArmory){
         ObjectNode node = mapper.createObjectNode();
         Square[][] sq = map.getSquareMatrix();
         for(int r=0;r<3;r++)
