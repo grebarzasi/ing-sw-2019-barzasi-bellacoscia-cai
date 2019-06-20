@@ -93,6 +93,8 @@ public class UpdateBuilder {
     private ObjectNode playerNode(Player p){
         ObjectNode playerNode = mapper.createObjectNode();
         //username,points and position ( "row:column")
+        playerNode.put("inactive",p.isInactive());
+        playerNode.put("disconnected",p.isDisconnected());
         playerNode.put("username",p.getUsername());
         playerNode.put("points",p.getPoints());
 

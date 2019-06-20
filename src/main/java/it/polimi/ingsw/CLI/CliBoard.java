@@ -328,6 +328,9 @@ public class CliBoard {
         if (p.getCharacter().equals(model.getTurn().getCharacter())) {
             System.out.print(BLACK_B);
             System.out.print(WHITE_BOLD_BRIGHT);
+        }else if (p.isInactive()) {
+            System.out.print(YELLOW_B);
+            System.out.print(WHITE_BOLD_BRIGHT);
         }else {
             System.out.print(WHITE_BACKGROUND_BRIGHT);
             if(p.getUsername().equals(TERMINATOR_NAME)) {

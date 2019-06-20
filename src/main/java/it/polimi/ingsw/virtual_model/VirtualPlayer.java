@@ -20,6 +20,7 @@ public class VirtualPlayer {
     private  ArrayList<String> powerUps;
     private VirtualPlayerBoard pBoard;
     private boolean inactive;
+    private boolean disconnected;
 
 
 
@@ -111,5 +112,13 @@ public class VirtualPlayer {
 
     public void setpBoard(VirtualPlayerBoard pBoard) {
         this.pBoard = pBoard;
+    }
+
+    public boolean isDisconnected() {
+        return disconnected;
+    }
+
+    public void setDisconnected(boolean disconnected) {
+        this.disconnected = disconnected;
     }
 }
