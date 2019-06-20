@@ -25,12 +25,13 @@ public class Moving implements ControllerState{
      */
 
     @Override
-    public void command() {
+    public void executeState() {
 
         ArrayList<Square> options;
 
         options = this.controller.canGo(this.controller.getCurrentPlayer(),this.range);
 
+        this.controller.checkInactivity();
         Square choice = this.controller.getView().showPossibleMoves(options, false);
 
         if (choice == null&&(controller.getView().isDisconnected()||controller.getView().isInactive())) {

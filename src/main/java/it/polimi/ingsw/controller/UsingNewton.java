@@ -27,7 +27,7 @@ public class UsingNewton implements ControllerState {
     }
 
     @Override
-    public void command(){
+    public void executeState(){
 
         ArrayList<Figure> targets = new ArrayList<>();
 

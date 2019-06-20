@@ -54,7 +54,7 @@ public class CliView {
 
 
     /**
-     * command connection type
+     * executeState connection type
      */
 
 

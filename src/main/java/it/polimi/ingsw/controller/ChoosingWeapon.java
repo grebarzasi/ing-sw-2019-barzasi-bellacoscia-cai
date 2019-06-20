@@ -21,7 +21,7 @@ public class ChoosingWeapon implements ControllerState {
      */
 
     @Override
-    public void command() {
+    public void executeState() {
 
         //load the current player's weapons into "options"
 
@@ -29,6 +29,7 @@ public class ChoosingWeapon implements ControllerState {
 
         options.removeIf(w -> !w.isLoaded());
 
+        this.controller.checkInactivity();
         //Displays the options to the view and the view returns the chosen weapon
         Weapon choice = this.controller.getView().showWeapon(options);
 
@@ -36,12 +37,12 @@ public class ChoosingWeapon implements ControllerState {
             controller.endTurn();
         } else if(choice == null){
             this.controller.goBack();
-            this.controller.choosingMove.command();
+            this.controller.choosingMove.executeState();
         }else {
             //Sets the shooting state's weapon to the chosen one and changes the current state to shooting
             ((Shooting) this.controller.getShooting()).setShootingWith(choice);
             this.controller.setCurrentState(this.controller.shooting);
-            this.controller.currentState.command();
+            this.controller.currentState.executeState();
         }
     }
 

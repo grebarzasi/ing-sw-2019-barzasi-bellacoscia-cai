@@ -33,15 +33,22 @@ public class AsBot implements ControllerState{
 
 
     @Override
-    public void command() {
+    public void executeState() {
 
         //Checks if it's the first turn before spawning the bot
         if(this.controller.getModel().getBot().isDead() && this.controller.getModel().getTurn() != 0){
 
-            Square spawnPoint = this.controller.getView().showPossibleMoves(this.returnSpawns(), true);
-            this.controller.getModel().getBot().setPosition(spawnPoint);
-            this.controller.getModel().getBot().setDead(false);
-            this.controller.update();
+            Square spawnPoint = this.controller.getView().showPossibleMoves(this.controller.returnSpawns(), true);
+
+            if(spawnPoint != null) {
+                this.controller.getModel().getBot().setPosition(spawnPoint);
+                this.controller.getModel().getBot().setDead(false);
+                this.controller.update();
+            }else if(this.controller.getView().isInactive() || this.controller.getView().isDisconnected()){
+                this.controller.getModel().getBot().setPosition(this.controller.returnSpawns().get((int) (Math.random() * this.controller.returnSpawns().size())));
+            }else{
+                this.goBack();
+            }
 
         }
 
@@ -50,6 +57,8 @@ public class AsBot implements ControllerState{
 
         //makes the player select a destination
         Square botDestination = this.controller.getView().showPossibleMoves(canGo, false);
+
+        this.controller.checkInactivity();
         if(botDestination != null) {
 
             this.controller.getModel().getBot().setPosition(botDestination);
@@ -72,6 +81,8 @@ public class AsBot implements ControllerState{
         if(!targets.isEmpty()) {
             Set<Figure> temp=new HashSet<>(targets);
             //shoots the target
+
+            this.controller.checkInactivity();
             ArrayList<Figure> choice = this.controller.getView().showTargetAdvanced(temp,1,false,"Seleziona un bersaglio da colpire:");
 
             if(choice == null){
@@ -123,23 +134,6 @@ public class AsBot implements ControllerState{
 
     public void goBack(){
         this.controller.goBack();
-    }
-
-    private ArrayList<Square> returnSpawns(){
-
-        ArrayList<Square> spawns = new ArrayList<>();
-        int row;
-        int column;
-
-        for(row = 0; row < Map.HEIGHT; row++){
-            for(column = 0; column < Map.WIDTH; column ++){
-                if(this.controller.getBoard().getMap().getSquareMatrix()[row][column].isSpawn())
-                    spawns.add(this.controller.getBoard().getMap().getSquareMatrix()[row][column]);
-            }
-        }
-
-        return spawns;
-
     }
 
     private void botHasMoved(){

@@ -223,7 +223,7 @@ public class Controller {
 
     public void goBack(){
         this.currentState = this.choosingMove;
-        this.currentState.command();
+        this.currentState.executeState();
     }
 
     public void decreaseMoveLeft(){
@@ -257,6 +257,12 @@ public class Controller {
 
             }
 
+        }
+
+
+        if(this.hasBot && this.getModel().getBot().isDead() && this.model.getTurn()!=0){
+            this.getModel().getBot().setPosition(this.returnSpawns().get((int) (Math.random() * returnSpawns().size())));
+            this.getModel().getBot().setDead(false);
         }
 
         this.model.getBoard().refillSquares();
@@ -427,7 +433,7 @@ public class Controller {
         this.setView(tmp.getView());
         this.setCurrentState(choosingMove);
         this.update();
-        this.currentState.command();
+        this.currentState.executeState();
 
 
     }
@@ -521,6 +527,29 @@ public class Controller {
             if(!p.isDisconnected()&&!p.isInactive())
                 return true;
         return false;
+    }
+
+    void checkInactivity(){
+        if(this.getView().isInactive() || this.getView().isDisconnected()){
+            this.endTurn();
+        }
+    }
+
+    ArrayList<Square> returnSpawns(){
+
+        ArrayList<Square> spawns = new ArrayList<>();
+        int row;
+        int column;
+
+        for(row = 0; row < Map.HEIGHT; row++){
+            for(column = 0; column < Map.WIDTH; column ++){
+                if(this.getBoard().getMap().getSquareMatrix()[row][column].isSpawn())
+                    spawns.add(this.getBoard().getMap().getSquareMatrix()[row][column]);
+            }
+        }
+
+        return spawns;
+
     }
 
 
