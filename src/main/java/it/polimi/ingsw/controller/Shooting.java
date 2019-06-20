@@ -96,6 +96,9 @@ public class Shooting implements ControllerState {
 
         checkReply(choice);
 
+        this.controller.update();
+        this.controller.goBack();
+
     }
 
     private void move(){

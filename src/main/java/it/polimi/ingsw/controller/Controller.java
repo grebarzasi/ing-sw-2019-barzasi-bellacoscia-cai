@@ -434,8 +434,6 @@ public class Controller {
         //y don need this. the caller does it;
 //        this.setCurrentState(choosingMove);
         this.update();
-        this.currentState.executeState();
-
 
     }
 

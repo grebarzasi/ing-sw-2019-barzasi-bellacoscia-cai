@@ -37,36 +37,10 @@ public class AsBot implements ControllerState{
 
         //Checks if it's the first turn before spawning the bot
         if(this.controller.getModel().getBot().isDead() && this.controller.getModel().getTurn() != 0){
-
-            Square spawnPoint = this.controller.getView().showPossibleMoves(this.controller.returnSpawns(), true);
-
-            if(spawnPoint != null) {
-                this.controller.getModel().getBot().setPosition(spawnPoint);
-                this.controller.getModel().getBot().setDead(false);
-                this.controller.update();
-            }else if(this.controller.getView().isInactive() || this.controller.getView().isDisconnected()){
-                this.controller.getModel().getBot().setPosition(this.controller.returnSpawns().get((int) (Math.random() * this.controller.returnSpawns().size())));
-            }else{
-                this.goBack();
-            }
-
+            this.spawnBot();
         }
 
-
-        ArrayList<Square> canGo = botCanGo();
-
-        //makes the player select a destination
-        Square botDestination = this.controller.getView().showPossibleMoves(canGo, false);
-
-        this.controller.checkInactivity();
-        if(botDestination != null) {
-
-            this.controller.getModel().getBot().setPosition(botDestination);
-            this.controller.update();
-        }else{
-            this.goBack();
-        }
-
+        this.moveBot();
 
         //adds visible players to the target list
         ArrayList<Figure> targets = new ArrayList<>();
@@ -88,7 +62,7 @@ public class AsBot implements ControllerState{
             if(choice == null){
                 this.botHasMoved();
                 this.controller.update();
-                this.goBack();
+                this.controller.goBack();
             }else {
                 this.controller.getModel().getBot().shoot((Player) choice.get(0));
                 this.botHasMoved();
@@ -98,7 +72,7 @@ public class AsBot implements ControllerState{
                 Set<Figure> hitTarget = new HashSet<>(choice);
                 this.controller.askVenoms(hitTarget,this.controller.getModel().getBot());
 
-                this.goBack();
+                this.controller.goBack();
 
             }
 
@@ -106,8 +80,46 @@ public class AsBot implements ControllerState{
 
             this.botHasMoved();
             this.controller.update();
-            this.goBack();
+            this.controller.goBack();
         }
+
+    }
+
+    private void spawnBot(){
+
+        Square spawnPoint = this.controller.getView().showPossibleMoves(this.controller.returnSpawns(), true);
+
+        if(spawnPoint != null) {
+            this.controller.getModel().getBot().setPosition(spawnPoint);
+            this.controller.getModel().getBot().setDead(false);
+            this.controller.update();
+        }else if(this.controller.getView().isInactive() || this.controller.getView().isDisconnected()){
+            this.botHasMoved();
+            this.controller.getModel().getBot().setPosition(this.controller.returnSpawns().get((int) (Math.random() * this.controller.returnSpawns().size())));
+            this.controller.update();
+            this.controller.endTurn();
+        }else{
+            this.controller.goBack();
+        }
+
+    }
+
+    private void moveBot(){
+
+        ArrayList<Square> canGo = botCanGo();
+
+        //makes the player select a destination
+        Square botDestination = this.controller.getView().showPossibleMoves(canGo, false);
+
+        this.controller.checkInactivity();
+        if(botDestination != null) {
+
+            this.controller.getModel().getBot().setPosition(botDestination);
+            this.controller.update();
+        }else{
+            this.controller.goBack();
+        }
+
 
     }
 
@@ -132,9 +144,6 @@ public class AsBot implements ControllerState{
 
     }
 
-    public void goBack(){
-        this.controller.goBack();
-    }
 
     private void botHasMoved(){
         this.controller.getModel().setHasBotAction(false);

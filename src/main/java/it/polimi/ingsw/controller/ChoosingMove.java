@@ -38,10 +38,10 @@ public class ChoosingMove implements ControllerState{
             this.controller.checkInactivity();
             Action choice = this.controller.getView().showActions(options);
 
-            if (choice == null&&(controller.getView().isDisconnected()||controller.getView().isInactive())) {
+            if (controller.getView().isDisconnected() || controller.getView().isInactive()) {
                 controller.endTurn();
             } else if (choice == null) {
-                this.executeState();
+                this.controller.endTurn();
             } else {
 
                 switch (choice.getDescription()) {
