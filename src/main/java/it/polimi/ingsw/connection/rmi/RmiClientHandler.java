@@ -95,6 +95,8 @@ public class RmiClientHandler extends ClientHandler implements RmiPrefInterf {
     @Override
     public void run() {
         try {
+            if(super.getLobby().hasStarted())
+                return;
             waitStart();
             game();
         } catch (IOException e) {

@@ -408,7 +408,7 @@ public class LobbyJavaFX extends Application {
         if(!conn.isRmi()){
             ((SClient)conn).setCommManager(new SClientCommManager(((SClient)conn),game));
             ((SClient)conn).getCommManager().start();
-        }else if(!reconnected){
+        }else{
             try {
                 ((RmiClient)conn).getClientHandler().setView((ViewClient) UnicastRemoteObject.exportObject(game, 0));
             } catch (RemoteException e) {

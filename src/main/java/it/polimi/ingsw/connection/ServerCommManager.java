@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
+import static it.polimi.ingsw.CLI.CliColor.*;
 import static it.polimi.ingsw.connection.ConnMessage.*;
 import static it.polimi.ingsw.connection.ServerMessage.*;
 
@@ -531,6 +532,10 @@ public class ServerCommManager  extends Thread implements View {
                     d.printStackTrace();
                 }
             }
+            if(isRmi()) {
+                while (rmiHandler.getViewClient() == null) ;
+                rmiClient=rmiHandler.getViewClient();
+            }
             sendsUpdate(updateBuffer);
             this.run();
         }
@@ -609,9 +614,11 @@ public class ServerCommManager  extends Thread implements View {
             this.rmiHandler=(RmiClientHandler)b;
             this.rmi=true;
             this.rmiClient=((RmiClientHandler) b).getViewClient();
+            System.out.println(PURPLE+owner.getCharacter()+" reconnected"+RESET);
         }else{
             this.socketClient=(SocketClientHandler)b;
             this.rmi=false;
+            System.out.println(CYAN+owner.getCharacter()+" reconnected"+RESET);
         }
         setDisconnected(false);
         setInactive(false);
