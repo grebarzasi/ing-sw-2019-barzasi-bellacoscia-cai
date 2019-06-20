@@ -87,7 +87,7 @@ public class Shooting implements ControllerState {
                 this.controller.update();
 
             }else
-                controller.getView().displayMessage("Non hai le risorse necessarie per questo effeto");
+                controller.getView().displayMessage("Non hai le risorse necessarie per questo effetto");
 
             this.controller.askVenoms(choice.getTargetHitSet() , this.controller.getCurrentPlayer());
 
@@ -135,11 +135,13 @@ public class Shooting implements ControllerState {
             Controller.filterPUs(scopes, PowerUp.TARGETING_SCOPE);
 
             PowerUp toUse = this.controller.getView().showPowerUp(scopes);
+            if(toUse==null)
+                return false;
 
             Set<Figure> options = new HashSet<>(chosen.getTargetHitSet());
 
             ArrayList<Figure> chosenTarget = this.controller.getView().showTargetAdvanced(options,
-                    1, false, "Scegli il bersaglio: \n");
+                    1, false, "Scegli il bersaglio della granata venom: \n");
 
             this.controller.getCurrentPlayer().inflictDamage(1, chosenTarget.get(0));
             this.controller.getCurrentPlayer().removePowerUp(toUse);

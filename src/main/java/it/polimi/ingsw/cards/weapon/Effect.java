@@ -83,7 +83,6 @@ public class Effect {
 
     public void resetEffect(){
         indexTemp=0;
-        targetHitSet.clear();
         for(SubEffect e:effectList)
             e.resetSubEffect();
         used=false;
