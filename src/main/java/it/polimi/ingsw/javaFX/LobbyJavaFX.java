@@ -109,26 +109,6 @@ public class LobbyJavaFX extends Application {
 
     public void start(Stage primaryStage) throws Exception {
 
-        if(reconnected){
-            game = new GameJavaFX(vmodel);
-            try {
-                while(!vmodel.isUpdated()){
-                    sleep(500);
-                }
-
-                sleep(1000);
-
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            game.setStart(true);
-
-            try {
-                game.start(primaryStage);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
 
         this.primaryStage = primaryStage;
 
@@ -414,6 +394,11 @@ public class LobbyJavaFX extends Application {
         });
 
         primaryStage.setMaximized(true);
+
+        //RECONNECTION
+        if(reconnected){
+            gameStart();
+        }
         primaryStage.show();
 
     }
@@ -423,7 +408,7 @@ public class LobbyJavaFX extends Application {
         if(!conn.isRmi()){
             ((SClient)conn).setCommManager(new SClientCommManager(((SClient)conn),game));
             ((SClient)conn).getCommManager().start();
-        }else{
+        }else if(!reconnected){
             try {
                 ((RmiClient)conn).getClientHandler().setView((ViewClient) UnicastRemoteObject.exportObject(game, 0));
             } catch (RemoteException e) {
