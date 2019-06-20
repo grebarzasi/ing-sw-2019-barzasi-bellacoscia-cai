@@ -21,7 +21,7 @@ public class GUIFiles {
     public static final String PATH_RED_BOARD = "src/main/resources/images/board/red_board.png";
     public static final String PATH_BLUE_BOARD = "src/main/resources/images/board/blue_board.png";
     public static final String PATH_GREEN_BOARD = "src/main/resources/images/board/green_board.png";
-    public static final String PATH_GREY_BOARD = "src/main/resources/images/board/gray_board.png";
+    public static final String PATH_GREY_BOARD = "src/main/resources/images/board/grey_board.png";
 
     public static final String PATH_GENERAL_COLOR = "src/main/resources/images/character/";
     public static final String PATH_YELLOW = "src/main/resources/images/character/yellow.png";

@@ -311,9 +311,13 @@ public class GameJavaFX extends Application implements ViewClient {
 
         primaryStage.setTitle("ADRENALINA");
 
+        /*
+
         Group root = new Group();
         Scene theScene = new Scene(root);
         primaryStage.setScene(theScene);
+
+         */
 
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -331,7 +335,7 @@ public class GameJavaFX extends Application implements ViewClient {
          * set Background.
          */
         try {
-            Image back = new Image(new FileInputStream(PATH_BACK_GAME), widthScreen , heightScreen , true, true);
+            Image back = new Image(new FileInputStream(PATH_BACK_GAME), widthScreen + widthLateral, heightScreen + heightLateral, true, true);
             BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
             grid.setBackground(new Background(backgroundImage));
         } catch (IOException e) {
@@ -970,6 +974,8 @@ public class GameJavaFX extends Application implements ViewClient {
         msg.setText(WELCOME);
 
         //primaryStage.setFullScreen(true);
+        primaryStage.setMaximized(true);
+        primaryStage.setResizable(true);
         primaryStage.show();
     }
 
@@ -2661,6 +2667,8 @@ public class GameJavaFX extends Application implements ViewClient {
             double widthScreen = Screen.getPrimary().getBounds().getWidth() / 4;
             double heightScreen = Screen.getPrimary().getBounds().getHeight() / 4;
 
+            primaryStage.setTitle(message);
+
             Group root = new Group();
             Scene theScene = new Scene(root);
             this.setScene(theScene);
@@ -2694,6 +2702,7 @@ public class GameJavaFX extends Application implements ViewClient {
             grid.getRowConstraints().addAll(r1, r2);
 
             Text msg = new Text(message);
+            msg.setFill(Color.WHITE);
 
             Button btnY = new Button("SI");
             Button btnN = new Button("NO");
@@ -2705,12 +2714,12 @@ public class GameJavaFX extends Application implements ViewClient {
                 decision = "NO";
             });
 
-            VBox v = new VBox(20);
-            v.getChildren().add(btnY);
-            v.getChildren().add(btnN);
+            HBox h = new HBox(20);
+            h.getChildren().add(btnY);
+            h.getChildren().add(btnN);
 
             grid.add(msg, 0, 0);
-            grid.add(v, 0, 1);
+            grid.add(h, 0, 1);
 
         }
     }
@@ -2953,7 +2962,7 @@ public class GameJavaFX extends Application implements ViewClient {
                     this.close();
                 });
 
-            numWe++;
+                numWe++;
             }
             switch (args.size()){
                 case(3):{
@@ -3065,7 +3074,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
                         Image imgWe = null;
                         try {
-                            imgWe = new Image(new FileInputStream(PATH_WEAPON + weapon), widthScreen / 2 - 50, heightScreen - 50, true, true);
+                            imgWe = new Image(new FileInputStream(PATH_WEAPON + weapon), widthScreen / 3, heightScreen / 1.5, true, true);
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
                         }
@@ -3083,61 +3092,61 @@ public class GameJavaFX extends Application implements ViewClient {
                     e.printStackTrace();
                 }
             }else
-                if(pu){
+            if(pu){
 
-                    this.setTitle("Scegli un Power-up da scartare");
+                this.setTitle("Scegli un Power-up da scartare");
 
-                    File jsonFilePU = new File(PATH_PU);
+                File jsonFilePU = new File(PATH_PU);
 
+                try {
+
+                    JsonNode rootNodePu = null;
                     try {
-
-                        JsonNode rootNodePu = null;
-                        try {
-                            rootNodePu = mapper.readTree(jsonFilePU);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-
-                        int i = 0;
-                        for (String n : cards) {
-                            String name = n.toLowerCase();
-                            String[] temp;
-                            temp=name.split(INNER_SEP);
-                            JsonNode chamberNodePu = rootNodePu.path(temp[0]);
-                            String powerup = null;
-                            if (temp[1].equals("r")) {
-                                powerup = chamberNodePu.path("color").path("red").asText();
-                            } else if (temp[1].equals("b")) {
-                                powerup = chamberNodePu.path("color").path("blue").asText();
-                            } else if (temp[1].equals("y")) {
-                                powerup = chamberNodePu.path("color").path("yellow").asText();
-                            }
-
-                            Image imgPu = null;
-                            try {
-                                imgPu = new Image(new FileInputStream(PATH_POWER_UP + powerup), widthScreen / 2 - 50, heightScreen - 50, true, true);
-                            } catch (FileNotFoundException e) {
-                                e.printStackTrace();
-                            }
-
-                            final int key = i;
-                            setButtonBack(btnArr.get(i),imgPu);
-                            Runnable run = () -> btnArr.get(key).setOnAction(e->{
-                                game.setPowerup(n);
-                                this.close();
-                            });
-
-                            Platform.runLater(run);
-
-                            gridDisc.add(btnArr.get(i),i,0);
-                            i++;
-                        }
-
-                        } catch (Exception e) {
+                        rootNodePu = mapper.readTree(jsonFilePU);
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
 
+                    int i = 0;
+                    for (String n : cards) {
+                        String name = n.toLowerCase();
+                        String[] temp;
+                        temp=name.split(INNER_SEP);
+                        JsonNode chamberNodePu = rootNodePu.path(temp[0]);
+                        String powerup = null;
+                        if (temp[1].equals("r")) {
+                            powerup = chamberNodePu.path("color").path("red").asText();
+                        } else if (temp[1].equals("b")) {
+                            powerup = chamberNodePu.path("color").path("blue").asText();
+                        } else if (temp[1].equals("y")) {
+                            powerup = chamberNodePu.path("color").path("yellow").asText();
+                        }
+
+                        Image imgPu = null;
+                        try {
+                            imgPu = new Image(new FileInputStream(PATH_POWER_UP + powerup), widthScreen / 3, heightScreen / 1.5, true, true);
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+
+                        final int key = i;
+                        setButtonBack(btnArr.get(i),imgPu);
+                        Runnable run = () -> btnArr.get(key).setOnAction(e->{
+                            game.setPowerup(n);
+                            this.close();
+                        });
+
+                        Platform.runLater(run);
+
+                        gridDisc.add(btnArr.get(i),i,0);
+                        i++;
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+
+            }
         }
     }
 

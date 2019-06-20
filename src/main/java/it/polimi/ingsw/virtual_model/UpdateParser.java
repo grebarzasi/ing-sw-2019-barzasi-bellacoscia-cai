@@ -48,6 +48,10 @@ public class UpdateParser {
             model.getAllPlayers().add(new VirtualPlayer(node.path(character).path("username").asText(),character));
             VirtualPlayer player = model.findPlayer(character);
 
+
+            //parse inactivity status
+            player.setInactive(node.path(character).path("inactive").asBoolean());
+            player.setDisconnected(node.path(character).path("disconnected").asBoolean());
             //parse player points
             player.setPoints(node.path(character).path("points").asInt());
 
