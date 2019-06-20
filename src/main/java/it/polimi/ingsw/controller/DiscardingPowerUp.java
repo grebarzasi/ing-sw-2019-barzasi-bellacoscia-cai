@@ -22,9 +22,10 @@ public class DiscardingPowerUp implements ControllerState{
      */
 
     @Override
-    public void command() {
+    public void executeState() {
 
         ArrayList<PowerUp> options = new ArrayList<>(this.controller.getCurrentPlayer().getPowerupList());
+        this.controller.checkInactivity();
         PowerUp choice = this.controller.getView().showPowerUp(options);
 
         if (choice == null&&(controller.getView().isDisconnected()||controller.getView().isInactive())) {

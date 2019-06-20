@@ -7,8 +7,6 @@ import it.polimi.ingsw.controller.Controller;
 
 import java.io.IOException;
 
-import static it.polimi.ingsw.CLI.CliColor.GREEN;
-import static it.polimi.ingsw.CLI.CliColor.YELLOW;
 import static it.polimi.ingsw.CLI.CliMessages.LINE_SEP;
 import static it.polimi.ingsw.connection.ServerMessage.*;
 import static java.lang.Thread.sleep;
@@ -60,7 +58,7 @@ public class MainServer {
         contr= new Controller(lobby);
         contr.update();
         contr.setCurrentState(contr.getSpawning());
-        contr.getCurrentState().command();
+        contr.getCurrentState().executeState();
     }
 
 

@@ -27,14 +27,16 @@ public class Spawning implements ControllerState {
      */
 
     @Override
-    public void command() {
+    public void executeState() {
+
 
         if (this.controller.getModel().getTurn() >= this.controller.getModel().getPlayerList().size()) {
 
             ArrayList<PowerUp> options = new ArrayList<>(this.controller.getCurrentPlayer().getPowerupList());
             options.add((PowerUp) this.controller.getBoard().getPowerupDeck().fetch());
 
-            spawnOnChoice(options);
+            PowerUp choice = spawnOnChoice(options);
+            this.controller.getCurrentPlayer().removePowerUp(choice);
 
         } else {
 
@@ -45,8 +47,9 @@ public class Spawning implements ControllerState {
                 options.add((PowerUp) this.controller.getModel().getBoard().getPowerupDeck().fetch());
             }
 
-            PowerUp kept = spawnOnChoice(options);
-            this.controller.getCurrentPlayer().addPowerUp(kept);
+            PowerUp used = spawnOnChoice(options);
+            this.controller.getCurrentPlayer().getPowerupList().addAll(options);
+            this.controller.getCurrentPlayer().removePowerUp(used);
 
         }
 
@@ -65,12 +68,14 @@ public class Spawning implements ControllerState {
 
     private PowerUp spawnOnChoice(ArrayList<PowerUp> options){
 
+
         PowerUp choice;
 
         choice = this.controller.getView().showPowerUp(options);
 
-        if(choice==null)
-            choice=options.get(0);
+        if (choice == null || this.controller.getView().isDisconnected() || this.controller.getView().isInactive()) {
+            choice = options.get(options.size()-1);
+        }
 
         options.remove(choice);
         this.controller.getModel().getBoard().getPowerupDeck().getDiscarded().add(choice);
@@ -79,10 +84,10 @@ public class Spawning implements ControllerState {
 
         this.controller.getCurrentPlayer().setPosition(spawnPoint);
 
-        choice = options.get(0);
         return choice;
 
-        }
+
+    }
 
 
     /**

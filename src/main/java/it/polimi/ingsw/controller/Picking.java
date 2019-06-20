@@ -26,23 +26,16 @@ public class Picking implements ControllerState{
      */
 
     @Override
-    public void command() {
+    public void executeState() {
 
         ArrayList<Square> options;
 
         options = this.controller.canGo(this.controller.getCurrentPlayer(),this.range);
         options.add(this.controller.getCurrentPlayer().getPosition());
 
-        ArrayList<Square> toRemove = new ArrayList<>();
+        options.removeIf(s -> !s.isSpawn() && (((NonSpawnSquare)s).getDrop() == null) || s.getRoom().getColor().equals("black"));
 
-        for(Square s : options){
-            if((!s.isSpawn() && ((NonSpawnSquare)s).getDrop() == null) || s.getRoom().getColor().equals("black")){
-                toRemove.add(s);
-            }
-        }
-
-        options.removeAll(toRemove);
-
+        this.controller.checkInactivity();
         Square choice = this.controller.getView().showPossibleMoves(options, false);
 
         if(choice == null){
@@ -54,7 +47,7 @@ public class Picking implements ControllerState{
                 this.controller.setCurrentState(this.controller.pickingWeapon);
                 ((PickingWeapon)this.controller.getPickingWeapon()).setLocation(choice);
                 this.controller.update();
-                this.controller.getCurrentState().command();
+                this.controller.getCurrentState().executeState();
 
             } else {
 

@@ -22,7 +22,7 @@ public class ChoosingPowerUp implements ControllerState {
      */
 
     @Override
-    public void command() {
+    public void executeState() {
 
 
         ArrayList<PowerUp> options = new ArrayList<>();
@@ -38,7 +38,7 @@ public class ChoosingPowerUp implements ControllerState {
         options.addAll(newtons);
         options.addAll(teleporters);
 
-
+        this.controller.checkInactivity();
         //takes the player choice
         PowerUp chosen = this.controller.getView().showPowerUp(options);
 
@@ -55,13 +55,13 @@ public class ChoosingPowerUp implements ControllerState {
                 case PowerUp.NEWTON:
                     this.controller.setCurrentState(this.controller.usingNewton);
                     ((UsingNewton)this.controller.usingNewton).setUsing(chosen);
-                    this.controller.currentState.command();
+                    this.controller.currentState.executeState();
                     break;
 
                 case PowerUp.TELEPORTER :
                     this.controller.setCurrentState(this.controller.teleporting);
                     ((Teleporting)this.controller.teleporting).setUsing(chosen);
-                    this.controller.currentState.command();
+                    this.controller.currentState.executeState();
                     break;
             }
 

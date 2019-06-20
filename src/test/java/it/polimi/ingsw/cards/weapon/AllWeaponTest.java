@@ -26,7 +26,7 @@ public class AllWeaponTest {
         Effect choice = this.controller.getView().showEffects(effects);
         if (choice == null) {
             this.controller.goBack();
-            this.controller.choosingMove.command();
+            this.controller.choosingMove.executeState();
         }
 
         do {
@@ -36,7 +36,7 @@ public class AllWeaponTest {
                 if (rpl == null) {
                     shootingWith.resetWeapon();
                     this.controller.goBack();
-                    this.controller.choosingMove.command();
+                    this.controller.choosingMove.executeState();
                 }
                 dir.setDirectionTemp(rpl);
             } else if (shootingWith.getAskTemp() != null) {
@@ -45,7 +45,7 @@ public class AllWeaponTest {
                 if (rpl == null) {
                     shootingWith.resetWeapon();
                     this.controller.goBack();
-                    this.controller.choosingMove.command();
+                    this.controller.choosingMove.executeState();
                 }
                 ask.setTargetTemp(new HashSet<>(rpl));
             }

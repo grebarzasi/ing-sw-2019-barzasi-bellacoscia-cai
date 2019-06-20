@@ -28,11 +28,12 @@ public class PickingWeapon implements ControllerState {
      */
 
     @Override
-    public void command(){
+    public void executeState(){
 
 
         ArrayList<Weapon> options = new ArrayList<>(((SpawnSquare) this.location).getArmory().getWeaponList());
 
+        this.controller.checkInactivity();
         Weapon choice = this.controller.getView().showWeapon(options);
 
         if (choice == null&&(controller.getView().isDisconnected()||controller.getView().isInactive())) {

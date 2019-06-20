@@ -100,7 +100,7 @@ public class CliGame implements ViewClient {
         return reply;
     }
     /**
-     * Shows the PowerUps and makes the user command one, then returns it
+     * Shows the PowerUps and makes the user choose one, then returns it
      *
      * @param args the Powerups to show
      * @return the chosen one
@@ -110,7 +110,7 @@ public class CliGame implements ViewClient {
     }
 
     /**
-     * Shows the Weapons and makes the user command one, the returns is
+     * Shows the Weapons and makes the user choose one, then returns it
      *
      * @param args the Weapons to show
      * @return the chosen one
@@ -141,7 +141,7 @@ public class CliGame implements ViewClient {
     }
 
     /**
-     * Show the possible moves that a player can perform then makes the user command one,
+     * Show the possible moves that a player can perform then makes the user executeState one,
      * then returns it
      *
      * @param args the moves to show

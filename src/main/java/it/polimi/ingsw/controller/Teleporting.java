@@ -29,7 +29,7 @@ public class Teleporting implements ControllerState {
      */
 
     @Override
-    public void command(){
+    public void executeState(){
 
         ArrayList<Square> options = new ArrayList<>();
 

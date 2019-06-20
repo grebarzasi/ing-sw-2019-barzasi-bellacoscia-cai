@@ -36,13 +36,14 @@ public class Shooting implements ControllerState {
 
 
     @Override
-    public void command(){
+    public void executeState(){
 
         Effect choice=null;
         boolean additionalEffect = false;
         boolean scopeUsed=false;
         boolean ok;
 
+        this.move();
 
         Set<Effect> effects;
 
@@ -93,7 +94,22 @@ public class Shooting implements ControllerState {
 
         } while (true);
 
-        checkReplyNull(choice);
+        checkReply(choice);
+
+    }
+
+    private void move(){
+
+        if(this.range!= 0){
+            ArrayList<Square> options = this.controller.getCurrentPlayer().canGo(1);
+            Square choice = this.controller.getView().showPossibleMoves(options,false);
+
+            if(choice != null) {
+                this.controller.getCurrentPlayer().setPosition(choice);
+            }else{
+                this.controller.goBack();
+            }
+        }
 
     }
 
@@ -170,7 +186,7 @@ public class Shooting implements ControllerState {
         this.range = range;
     }
 
-    private void checkReplyNull(Object rpl){
+    private void checkReply(Object rpl){
         if (rpl == null&&(controller.getView().isDisconnected()||controller.getView().isInactive())) {
             shootingWith.resetWeapon();
             controller.endTurn();
@@ -190,7 +206,7 @@ public class Shooting implements ControllerState {
 
             dir = w.getDirectionTemp();
             String rpl = controller.getView().chooseDirection(new ArrayList<>(dir.getTargetTemp()));
-            checkReplyNull(rpl);
+            checkReply(rpl);
             dir.setDirectionTemp(rpl);
             return;
         }
@@ -198,7 +214,7 @@ public class Shooting implements ControllerState {
 
             ask = w.getAskTemp();
             ArrayList<Figure> rpl = controller.getView().showTargetAdvanced(ask.getTargetTemp(), ask.getNumMax(), ask.isFromDiffSquare(), ask.getMsg());
-            checkReplyNull(rpl);
+            checkReply(rpl);
             ask.setTargetTemp(new HashSet<>(rpl));
             return;
         }
@@ -207,7 +223,7 @@ public class Shooting implements ControllerState {
             mv = w.getMoveTemp();
             ArrayList<Square> options = this.controller.canGo((Figure)mv.getTargetTemp().toArray()[0],mv.getMaxSteps());
             Square rpl = controller.getView().showPossibleMoves(options,false);
-            checkReplyNull(rpl);
+            checkReply(rpl);
             mv.setSquareTemp(rpl);
         }
     }

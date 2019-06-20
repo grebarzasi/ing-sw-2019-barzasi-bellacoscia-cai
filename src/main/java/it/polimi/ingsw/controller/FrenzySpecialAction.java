@@ -27,10 +27,11 @@ public class FrenzySpecialAction implements ControllerState {
 
 
     @Override
-    public void command() {
+    public void executeState() {
 
         ArrayList<Square> options = this.controller.canGo(this.controller.getCurrentPlayer(), this.range);
 
+        this.controller.checkInactivity();
         Square choice = this.controller.getView().showPossibleMoves(options, false);
         this.controller.getCurrentPlayer().setPosition(choice);
 
@@ -63,7 +64,7 @@ public class FrenzySpecialAction implements ControllerState {
             this.controller.setCurrentState(this.controller.shooting);
             ((Shooting) this.controller.getCurrentState()).setShootingWith(shootingWith);
 
-            this.controller.getCurrentState().command();
+            this.controller.getCurrentState().executeState();
         }
 
     }
