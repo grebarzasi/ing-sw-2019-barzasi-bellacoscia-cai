@@ -2667,6 +2667,8 @@ public class GameJavaFX extends Application implements ViewClient {
             double widthScreen = Screen.getPrimary().getBounds().getWidth() / 4;
             double heightScreen = Screen.getPrimary().getBounds().getHeight() / 4;
 
+            primaryStage.setTitle(message);
+
             Group root = new Group();
             Scene theScene = new Scene(root);
             this.setScene(theScene);
@@ -2700,6 +2702,7 @@ public class GameJavaFX extends Application implements ViewClient {
             grid.getRowConstraints().addAll(r1, r2);
 
             Text msg = new Text(message);
+            msg.setFill(Color.WHITE);
 
             Button btnY = new Button("SI");
             Button btnN = new Button("NO");
@@ -2711,12 +2714,12 @@ public class GameJavaFX extends Application implements ViewClient {
                 decision = "NO";
             });
 
-            VBox v = new VBox(20);
-            v.getChildren().add(btnY);
-            v.getChildren().add(btnN);
+            HBox h = new HBox(20);
+            h.getChildren().add(btnY);
+            h.getChildren().add(btnN);
 
             grid.add(msg, 0, 0);
-            grid.add(v, 0, 1);
+            grid.add(h, 0, 1);
 
         }
     }
