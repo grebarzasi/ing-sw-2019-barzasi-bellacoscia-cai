@@ -431,7 +431,8 @@ public class Controller {
 
         this.getModel().setCurrentPlayer(tmp);
         this.setView(tmp.getView());
-        this.setCurrentState(choosingMove);
+        //y don need this. the caller does it;
+//        this.setCurrentState(choosingMove);
         this.update();
         this.currentState.executeState();
 

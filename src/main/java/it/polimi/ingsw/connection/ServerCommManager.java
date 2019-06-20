@@ -614,6 +614,6 @@ public class ServerCommManager  extends Thread implements View {
             this.rmi=false;
         }
         setDisconnected(false);
-        setInactive(true);
+        setInactive(false);
     }
 }

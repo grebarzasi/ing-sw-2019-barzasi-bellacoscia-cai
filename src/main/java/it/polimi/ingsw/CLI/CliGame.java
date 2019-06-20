@@ -447,7 +447,7 @@ public class CliGame implements ViewClient {
                 if (reply<=0 || args.size()<(reply)) {
                     System.out.println(SHOW_TARGET_ADV_ERR);
                     reply=0;
-                }else if (!fromDiffSquare || verifyDiffSquare(allTargets,args.get(reply))){
+                }else if (!fromDiffSquare || verifyDiffSquare(allTargets,args.get(reply-1))){
                     allTargets.add(args.get(reply-1));
                     args.remove(args.get(reply-1));
                 }
