@@ -3,6 +3,7 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.*;
 import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.map.Map;
+import it.polimi.ingsw.board.map.Room;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.connection.ClientHandler;
@@ -48,6 +49,7 @@ public class Controller {
     ControllerState spawning;
     ControllerState teleporting;
     ControllerState usingNewton;
+    ControllerState endGame;
 
 
     /**
@@ -137,6 +139,7 @@ public class Controller {
         this.shooting = new Shooting(this);
         this.spawning = new Spawning(this);
         this.frenzySpecialAction = new FrenzySpecialAction(this);
+        this.endGame = new EndGame(this);
 
     }
 
@@ -185,6 +188,7 @@ public class Controller {
         this.shooting = new Shooting(this);
         this.spawning = new Spawning(this);
         this.frenzySpecialAction = new FrenzySpecialAction(this);
+        this.endGame = new EndGame(this);
 
     }
 
@@ -360,8 +364,12 @@ public class Controller {
      */
 
     private void endGame(){
-        this.view.displayLeaderboard();
 
+        this.getModel().getBoard().getTrack().getPoints();
+        this.update();
+
+        this.setCurrentState(endGame);
+        this.currentState.executeState();
 
     }
 
@@ -409,7 +417,7 @@ public class Controller {
             this.getModel().setCurrentPlayer(p);
             this.setView(this.getCurrentPlayer().getView());
 
-            boolean useTagback = this.getView().showBoolean("Vuoi usare la Granata Venom? \n");
+            boolean useTagback = this.getView().showBoolean(ControllerMessages.ASKING_VENOM);
 
             if(useTagback){
 
@@ -456,7 +464,7 @@ public class Controller {
             for(column = 0; column < Map.WIDTH; column++){
 
                 if(p.distanceTo(this.getModel().getBoard().getMap().getSquareMatrix()[row][column])
-                        <= range && ! this.getBoard().getMap().getSquareMatrix()[row][column].getRoom().getColor().equals("black")){
+                        <= range && ! this.getBoard().getMap().getSquareMatrix()[row][column].getRoom().getColor().equals(Room.VOID)){
 
                     options.add(this.getBoard().getMap().getSquareMatrix()[row][column]);
 

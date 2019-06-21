@@ -3,6 +3,7 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.Lobby;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.actions.Action;
+import it.polimi.ingsw.board.map.Room;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 import org.junit.jupiter.api.Test;
@@ -83,7 +84,7 @@ class ControllerTest {
         for(row = 0; row < 3; row++) {
             for (column = 0; column < 4; column++) {
 
-                if (!whiteHouse.getBoard().getMap().getSquareMatrix()[row][column].getRoom().getColor().equals("black")) {
+                if (!whiteHouse.getBoard().getMap().getSquareMatrix()[row][column].getRoom().getColor().equals(Room.VOID)) {
                     assertTrue(frankCanGo.contains((whiteHouse.getBoard().getMap().getSquareMatrix()[row][column])));
                 }
             }

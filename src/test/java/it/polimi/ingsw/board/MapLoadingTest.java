@@ -1,10 +1,7 @@
 package it.polimi.ingsw.board;
 
 
-import it.polimi.ingsw.board.map.Map;
-import it.polimi.ingsw.board.map.NonSpawnSquare;
-import it.polimi.ingsw.board.map.SpawnSquare;
-import it.polimi.ingsw.board.map.Square;
+import it.polimi.ingsw.board.map.*;
 import org.junit.jupiter.api.Test;
 
 
@@ -30,7 +27,7 @@ public class MapLoadingTest {
 
         loadTerrain(selection, squareMatrix);
 
-        assertEquals("black",squareMatrix[2][0].getRoom().getColor());
+        assertEquals(Room.VOID,squareMatrix[2][0].getRoom().getColor());
 
 
     }

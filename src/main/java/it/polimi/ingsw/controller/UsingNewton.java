@@ -38,7 +38,7 @@ public class UsingNewton implements ControllerState {
         }
         Set<Figure> targetTemp=new HashSet<>(targets);
 
-        ArrayList<Figure> choiceTemp = this.controller.getView().showTargetAdvanced(targetTemp,1,false,"Seleziona un bersaglio da spostare:");
+        ArrayList<Figure> choiceTemp = this.controller.getView().showTargetAdvanced(targetTemp,1,false,ControllerMessages.ASK_NEWTON_TARGET);
 
         if (choiceTemp == null&&(controller.getView().isDisconnected()||controller.getView().isInactive())) {
             controller.endTurn();

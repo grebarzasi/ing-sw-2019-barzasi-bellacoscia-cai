@@ -12,8 +12,16 @@ import java.util.ArrayList;
 
 public class ActionBuilder {
 
-    private static final String SHOOT = "Shoot";
-
+    public static final String MOVE = "Move";
+    public static final String PICK = "Pick";
+    public static final String SHOOT = "Shoot";
+    public static final String RELOAD= "Reload";
+    public static final String POWER_UP = "PowerUp";
+    public static final String FRENZYSHOOT = "Frenzy Shoot";
+    public static final String DISCARD_POWER_UP = "Discard PowerUp";
+    public static final String USE_BOT = "Use Bot";
+    public static final String OVER = "End Turn";
+    
     private static final int STAGE_1 = 2;
     private static final int STAGE_2 = 5;
 
@@ -78,9 +86,9 @@ public class ActionBuilder {
 
     private static void generateBotActions(Player p, ArrayList<Action> actions){
         if(p.getModel().hasBotAction() && p.getModel().getController().hasBot()){
-            actions.add(new Action("Use Bot",0));
+            actions.add(new Action(USE_BOT,0));
         }
-        actions.add(new Action("End Turn", 0));
+        actions.add(new Action(OVER, 0));
     }
 
     /**
@@ -106,11 +114,11 @@ public class ActionBuilder {
             adrenalineStage = 2;
         }
 
-        actions.add(new Action("Move", STAGE_0_MOVE_RANGE));
+        actions.add(new Action(MOVE, STAGE_0_MOVE_RANGE));
 
         if (adrenalineStage == 0) {
 
-            actions.add(new Action("Pick", STAGE_0_PICK_RANGE));
+            actions.add(new Action(PICK, STAGE_0_PICK_RANGE));
             if(canShoot(p)) {
                 actions.add(new Action(SHOOT, STAGE_0_SHOOT_RANGE));
             }
@@ -119,14 +127,14 @@ public class ActionBuilder {
             //noinspection ConstantConditions
             if (adrenalineStage == 1) {
 
-            actions.add(new Action("Pick", STAGE_1_PICK_RANGE));
+            actions.add(new Action(PICK, STAGE_1_PICK_RANGE));
             if(canShoot(p)) {
                 actions.add(new Action(SHOOT, STAGE_1_SHOOT_RANGE));
             }
 
         } else if (adrenalineStage == 2) {
 
-            actions.add(new Action("Pick", STAGE_2_PICK_RANGE));
+            actions.add(new Action(PICK, STAGE_2_PICK_RANGE));
             if(canShoot(p)) {
                 actions.add(new Action(SHOOT, STAGE_2_SHOOT_RANGE));
             }
@@ -153,7 +161,7 @@ public class ActionBuilder {
         }
 
         if(canReload) {
-            actions.add(new Action("Reload", 0));
+            actions.add(new Action(RELOAD, 0));
         }
 
     }
@@ -168,15 +176,15 @@ public class ActionBuilder {
     private static void generateFrenzyActions(Player p, ArrayList<Action> actions){
 
         if (!p.getStartedFrenzy()) {
-            actions.add(new Action("Move", FRENZY_MOVE_RANGE));
-            actions.add(new Action("Pick", FRENZY_PICK_RANGE));
+            actions.add(new Action(MOVE, FRENZY_MOVE_RANGE));
+            actions.add(new Action(PICK, FRENZY_PICK_RANGE));
             if(canShoot(p)) {
-                actions.add(new Action(SHOOT, FRENZY_MOVE_RELOAD_SHOOT_RANGE));
+                actions.add(new Action(FRENZYSHOOT, FRENZY_MOVE_RELOAD_SHOOT_RANGE));
             }
         } else {
-            actions.add(new Action("Pick", FIRST_PLAYER_FRENZY_PICK_RANGE));
+            actions.add(new Action(PICK, FIRST_PLAYER_FRENZY_PICK_RANGE));
             if(canShoot(p)) {
-                actions.add(new Action(SHOOT, FIRST_PLAYER_FRENZY_MOVE_RELOAD_SHOOT_RANGE));
+                actions.add(new Action(FRENZYSHOOT, FIRST_PLAYER_FRENZY_MOVE_RELOAD_SHOOT_RANGE));
             }
 
         }
@@ -194,7 +202,7 @@ public class ActionBuilder {
         
         if(!p.getPowerupList().isEmpty()){
 
-            actions.add(new Action("Discard PowerUp",0));
+            actions.add(new Action(DISCARD_POWER_UP,0));
 
             boolean flag = false;
 
@@ -205,7 +213,7 @@ public class ActionBuilder {
                 }
             }
             if(flag){
-                actions.add(new Action("PowerUp",0));
+                actions.add(new Action(POWER_UP,0));
             }
         }
         

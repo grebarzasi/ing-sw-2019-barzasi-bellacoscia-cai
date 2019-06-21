@@ -12,6 +12,7 @@ import java.util.*;
 
 public class Room {
 
+    public static final String VOID = "black";
 
     private String color;
 

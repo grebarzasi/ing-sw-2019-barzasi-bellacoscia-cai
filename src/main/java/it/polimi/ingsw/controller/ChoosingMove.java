@@ -48,58 +48,58 @@ public class ChoosingMove implements ControllerState{
 
 
                     //sets the state to moving and sets the range accordingly
-                    case "Move":
+                    case ActionBuilder.MOVE:
                         this.controller.setCurrentState(this.controller.moving);
                         ((Moving) this.controller.moving).setRange(choice.getRange());
                         this.controller.currentState.executeState();
                         break;
 
                     //sets the state to picking and sets the range accordingly
-                    case "Pick":
+                    case ActionBuilder.PICK:
                         this.controller.setCurrentState(this.controller.picking);
                         ((Picking) this.controller.picking).setRange(choice.getRange());
                         this.controller.currentState.executeState();
                         break;
 
                     //sets the range to shooting and sets the range accordingly
-                    case "Shoot":
+                    case ActionBuilder.SHOOT:
                         this.controller.setCurrentState(this.controller.choosingWeapon);
                         ((Shooting) this.controller.shooting).setRange(choice.getRange());
                         this.controller.currentState.executeState();
                         break;
 
                     //sets the range to choosing power up
-                    case "PowerUp":
+                    case ActionBuilder.POWER_UP:
                         this.controller.setCurrentState(this.controller.choosingPowerUpToUse);
                         this.controller.currentState.executeState();
                         break;
 
                     //sets the state to reloading
-                    case "Reload":
+                    case ActionBuilder.RELOAD:
                         this.controller.setCurrentState(this.controller.reloading);
                         this.controller.currentState.executeState();
                         break;
 
-                    //sets the state to special weir useless and complicated frenzy action
-                    case "Move, Reload and Shoot":
+                    //sets the state to special weird, useless and complicated frenzy action
+                    case ActionBuilder.FRENZYSHOOT:
                         this.controller.setCurrentState(this.controller.frenzySpecialAction);
                         this.controller.currentState.executeState();
                         break;
 
                     //sets the state to discarding a Power Up
-                    case "Discard PowerUp":
+                    case ActionBuilder.DISCARD_POWER_UP:
                         this.controller.setCurrentState(this.controller.discardingPowerUp);
                         this.controller.currentState.executeState();
                         break;
 
                     //sets the state to using the bot
-                    case "Use Bot":
+                    case ActionBuilder.USE_BOT:
                         this.controller.setCurrentState(this.controller.asBot);
                         this.controller.currentState.executeState();
                         break;
 
                     //ends the turn
-                    case "End Turn":
+                    case ActionBuilder.OVER:
                         this.controller.endTurn();
                         break;
 

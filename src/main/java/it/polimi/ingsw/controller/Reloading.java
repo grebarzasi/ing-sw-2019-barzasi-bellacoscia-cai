@@ -38,7 +38,7 @@ public class Reloading implements ControllerState {
         }else {
 
             if (!check) {
-                this.controller.getView().displayMessage("Non possiedi le risorse per caricare l'arma selezionata");
+                this.controller.getView().displayMessage(ControllerMessages.CANNOT_RELOAD);
             }
 
             this.controller.update();

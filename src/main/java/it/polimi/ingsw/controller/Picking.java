@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.board.map.NonSpawnSquare;
+import it.polimi.ingsw.board.map.Room;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
 
@@ -33,7 +34,7 @@ public class Picking implements ControllerState{
         options = this.controller.canGo(this.controller.getCurrentPlayer(),this.range);
         options.add(this.controller.getCurrentPlayer().getPosition());
 
-        options.removeIf(s -> !s.isSpawn() && (((NonSpawnSquare)s).getDrop() == null) || s.getRoom().getColor().equals("black"));
+        options.removeIf(s -> !s.isSpawn() && (((NonSpawnSquare)s).getDrop() == null) || s.getRoom().getColor().equals(Room.VOID));
 
         this.controller.checkInactivity();
         Square choice = this.controller.getView().showPossibleMoves(options, false);

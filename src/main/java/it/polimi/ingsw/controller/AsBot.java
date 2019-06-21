@@ -57,7 +57,7 @@ public class AsBot implements ControllerState{
             //shoots the target
 
             this.controller.checkInactivity();
-            ArrayList<Figure> choice = this.controller.getView().showTargetAdvanced(temp,1,false,"Seleziona un bersaglio da colpire:");
+            ArrayList<Figure> choice = this.controller.getView().showTargetAdvanced(temp,1,false,ControllerMessages.ASK_TARGET);
 
             if(choice == null){
                 this.botHasMoved();

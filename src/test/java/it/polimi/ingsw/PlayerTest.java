@@ -3,6 +3,7 @@ package it.polimi.ingsw;
 import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.map.Map;
 import it.polimi.ingsw.board.map.NonSpawnSquare;
+import it.polimi.ingsw.board.map.Room;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.AmmoLot;
 import it.polimi.ingsw.cards.Deck;
@@ -115,7 +116,7 @@ public class PlayerTest {
 
         for(row = 0 ; row < Map.HEIGHT ; row++){
             for(column = 0; column < Map.WIDTH; column ++){
-                if(!alderaan.getMap().getSquareMatrix()[row][column].getRoom().getColor().equals("black")) {
+                if(!alderaan.getMap().getSquareMatrix()[row][column].getRoom().getColor().equals(Room.VOID)) {
                     luke.setPosition(alderaan.getMap().getSquareMatrix()[row][column]);
                     luke.pickAmmo();
                 }

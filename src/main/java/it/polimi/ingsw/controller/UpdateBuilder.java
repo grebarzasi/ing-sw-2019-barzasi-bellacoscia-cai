@@ -166,8 +166,8 @@ public class UpdateBuilder {
          //map
          mainBoardNode.put("map",map.getName());
 
-         //killshotTruck
-         mainBoardNode.put("killshot_truck",killshottruck());
+         //killshottrack
+         mainBoardNode.put("killshot_track",killshottrack());
          //cells
          ObjectNode cellsNode = mapper.createObjectNode();
          cellsNode.set("cells_pu",createCellNode(map,false));
@@ -177,7 +177,7 @@ public class UpdateBuilder {
          return mainBoardNode;
         }
 
-    private String killshottruck(){
+    private String killshottrack(){
         Board board=controller.getModel().getBoard();
         ArrayList<ArrayList<Token>> killshot = board.getTrack().getKillsTrack();
         StringBuilder s= new StringBuilder();

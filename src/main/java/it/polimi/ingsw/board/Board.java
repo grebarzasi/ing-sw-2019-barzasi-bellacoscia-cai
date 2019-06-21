@@ -3,6 +3,7 @@ package it.polimi.ingsw.board;
 
 import it.polimi.ingsw.board.map.Map;
 import it.polimi.ingsw.board.map.NonSpawnSquare;
+import it.polimi.ingsw.board.map.Room;
 import it.polimi.ingsw.board.map.SpawnSquare;
 import it.polimi.ingsw.cards.AmmoLot;
 import it.polimi.ingsw.cards.Deck;
@@ -74,7 +75,7 @@ public class Board{
         for(row = 0 ; row < Map.HEIGHT; row ++){
             for(column = 0; column < Map.WIDTH ; column++){
 
-                if(!this.map.getSquareMatrix()[row][column].isSpawn() && !this.map.getSquareMatrix()[row][column].getRoom().getColor().equals("black")){
+                if(!this.map.getSquareMatrix()[row][column].isSpawn() && !this.map.getSquareMatrix()[row][column].getRoom().getColor().equals(Room.VOID)){
 
                     ((NonSpawnSquare)this.map.getSquareMatrix()[row][column]).setDrop((AmmoLot)this.ammoDeck.fetch());
 
@@ -122,7 +123,7 @@ public class Board{
 
                 //if the square is not a respawn spot and if its drop has been collected
                 if (!this.getMap().getSquareMatrix()[row][column].isSpawn() && ((NonSpawnSquare)this.getMap().getSquareMatrix()[row][column]).getDrop() ==null
-                        && !this.getMap().getSquareMatrix()[row][column].getRoom().getColor().equals("black")) {
+                        && !this.getMap().getSquareMatrix()[row][column].getRoom().getColor().equals(Room.VOID)) {
 
                     //refill the drop
                     ((NonSpawnSquare) this.getMap().getSquareMatrix()[row][column]).setDrop((AmmoLot)this.ammoDeck.fetch());

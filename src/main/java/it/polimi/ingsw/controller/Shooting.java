@@ -145,7 +145,7 @@ public class Shooting implements ControllerState {
 
     private boolean activateScope(Effect chosen){
 
-        boolean useScope = this.controller.getView().showBoolean("Vuoi usare anche il mirino?: \n");
+        boolean useScope = this.controller.getView().showBoolean(ControllerMessages.ASK_SCOPE);
 
         if (useScope) {
 
@@ -160,7 +160,7 @@ public class Shooting implements ControllerState {
             Set<Figure> options = new HashSet<>(chosen.getTargetHitSet());
 
             ArrayList<Figure> chosenTarget = this.controller.getView().showTargetAdvanced(options,
-                    1, false, "Scegli il bersaglio della granata venom: \n");
+                    1, false, ControllerMessages.ASK_TARGET);
 
             this.controller.getCurrentPlayer().inflictDamage(1, chosenTarget.get(0));
             this.controller.getCurrentPlayer().removePowerUp(toUse);

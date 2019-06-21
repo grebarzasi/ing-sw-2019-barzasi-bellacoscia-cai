@@ -111,8 +111,6 @@ public class Spawning implements ControllerState {
             colour = "yellow";
         }
 
-        System.out.println("COLOR IS: " + colour);
-
         if(colour.equals("nothing")){
             return null;
         }
