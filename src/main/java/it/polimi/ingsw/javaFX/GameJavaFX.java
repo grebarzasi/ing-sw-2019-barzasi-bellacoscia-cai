@@ -8,6 +8,7 @@ import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.virtual_model.*;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -17,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -100,6 +102,9 @@ RISALIRE ALLA CELLA!!
 public class GameJavaFX extends Application implements ViewClient {
 
     private Stage primaryStage;
+
+    private GridPane grid;
+    private Scene scene;
 
     private boolean start;
     private boolean move;
@@ -272,26 +277,9 @@ public class GameJavaFX extends Application implements ViewClient {
         gridOtherAmmo = new ArrayList<>();
 
         widthScreen = Screen.getPrimary().getBounds().getWidth();
-        widthLateral = widthScreen / 4;
-        widthCenter = widthScreen / 2;
-        widthSkull = widthLateral / 9;
-        widthBoard = (widthCenter - 120) / 4;
-        widthPers = widthLateral;
-        widthCard = widthPers / 3;
-        widthOCard = widthLateral / 3;
-        widthOther = widthOCard * 2;
-        widthOtherWeapon = widthCard / 3;
+
         heightScreen = Screen.getPrimary().getBounds().getHeight();
-        heightLateral = heightScreen / 6;
-        heightCenter = heightScreen / 2;
-        heightBoard = heightCenter / 3;
-        heightPBoard = heightCenter / 3;
-        heightPCards = heightPBoard * 2;
-        heightCard = heightPCards / 2;
-        heightOther = heightCenter / 5;
-        heightOtherWeapon = heightCenter / 5;
-        heightOtherAmmo = heightOther / 5;
-        heightOtherBoard = heightOtherAmmo * 4;
+
 
         Image img = null;
         try {
@@ -319,17 +307,74 @@ public class GameJavaFX extends Application implements ViewClient {
 
          */
 
-        GridPane grid = new GridPane();
+        grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(0);
         grid.setVgap(0);
         grid.setPadding(new Insets(10, 20, 100, 10));
 
-        Scene scene = new Scene(grid, widthScreen, heightScreen);
+        scene = new Scene(grid, widthScreen, heightScreen);
         primaryStage.setScene(scene);
 
-        scene.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> grid.setPrefWidth((double) newSceneWidth));
-        scene.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> grid.setPrefHeight((double) newSceneHeight));
+        scene.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> {
+            grid.setPrefWidth((double) newSceneWidth);
+            //setAll(grid, grid.getPrefWidth(), grid.getPrefHeight());
+        });
+        scene.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> {
+            grid.setPrefHeight((double) newSceneHeight);
+            //setAll(grid, grid.getPrefWidth(), grid.getPrefHeight());
+        });
+
+        /*
+
+        ResizeListener listener = new ResizeListener();
+        scene.setOnMouseMoved(listener);
+        scene.setOnMousePressed(listener);
+        scene.setOnMouseDragged(listener);
+
+         */
+
+
+        setAll(grid,widthScreen,heightScreen);
+        msg.setText(WELCOME);
+
+        //primaryStage.setFullScreen(true);
+        primaryStage.setMaximized(true);
+        primaryStage.setResizable(true);
+        primaryStage.show();
+    }
+
+    class ResizeListener implements EventHandler<MouseEvent> {
+
+        @Override
+        public void handle(MouseEvent event) {
+            setAll(grid, scene.getWidth(), scene.getHeight());
+        }
+    }
+
+
+        public void setAll(GridPane grid, double widthScreen, double heightScreen){
+
+            widthLateral = widthScreen / 4;
+            widthCenter = widthScreen / 2;
+            widthSkull = widthLateral / 9;
+            widthBoard = (widthCenter - 120) / 4;
+            widthPers = widthLateral;
+            widthCard = widthPers / 3;
+            widthOCard = widthLateral / 3;
+            widthOther = widthOCard * 2;
+            widthOtherWeapon = widthCard / 3;
+
+            heightLateral = heightScreen / 6;
+            heightCenter = heightScreen / 2;
+            heightBoard = heightCenter / 3;
+            heightPBoard = heightCenter / 3;
+            heightPCards = heightPBoard * 2;
+            heightCard = heightPCards / 2;
+            heightOther = heightCenter / 5;
+            heightOtherWeapon = heightCenter / 5;
+            heightOtherAmmo = heightOther / 5;
+            heightOtherBoard = heightOtherAmmo * 4;
 
         /**
          * set Background.
@@ -367,7 +412,12 @@ public class GameJavaFX extends Application implements ViewClient {
         /**
          * set title.
          */
-        ImageView imgTitle = new ImageView(new Image(new FileInputStream(PATH_TITLE), widthCenter, heightLateral, true, true));
+        ImageView imgTitle = null;
+        try {
+            imgTitle = new ImageView(new Image(new FileInputStream(PATH_TITLE), widthCenter, heightLateral, true, true));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         grid.add(imgTitle, 1, 0);
 
         /**
@@ -403,7 +453,12 @@ public class GameJavaFX extends Application implements ViewClient {
          */
         gridSkull.setPadding(new Insets(100, 0, 80, 0));
 
-        Image imgTrack = new Image(new FileInputStream(PATH_TRACK), widthLateral, heightLateral, true, true);
+        Image imgTrack = null;
+        try {
+            imgTrack = new Image(new FileInputStream(PATH_TRACK), widthLateral, heightLateral, true, true);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         BackgroundImage backgroundSkull = new BackgroundImage(imgTrack, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background backSkull = new Background(backgroundSkull);
 
@@ -434,25 +489,28 @@ public class GameJavaFX extends Application implements ViewClient {
         gridBoard.setAlignment(Pos.CENTER);
         gridBoard.setPadding(new Insets(0, 60, 0, 60));
 
-
         Image imgBoard = null;
-        switch (model.getBoard().getMap().getName()) {
-            case ("medium1"): {
-                imgBoard = new Image(new FileInputStream(PATH_MEDIUM1_MAP), widthCenter, heightCenter, true, true);
-                break;
+        try {
+            switch (model.getBoard().getMap().getName()) {
+                case ("medium1"): {
+                    imgBoard = new Image(new FileInputStream(PATH_MEDIUM1_MAP), widthCenter, heightCenter, true, true);
+                    break;
+                }
+                case ("small"): {
+                    imgBoard = new Image(new FileInputStream(PATH_SMALL_MAP), widthCenter, heightCenter, true, true);
+                    break;
+                }
+                case ("large"): {
+                    imgBoard = new Image(new FileInputStream(PATH_LARGE_MAP), widthCenter, heightCenter, true, true);
+                    break;
+                }
+                case ("medium2"): {
+                    imgBoard = new Image(new FileInputStream(PATH_MEDIUM2_MAP), widthCenter, heightCenter, true, true);
+                    break;
+                }
             }
-            case ("small"): {
-                imgBoard = new Image(new FileInputStream(PATH_SMALL_MAP), widthCenter, heightCenter, true, true);
-                break;
-            }
-            case ("large"): {
-                imgBoard = new Image(new FileInputStream(PATH_LARGE_MAP), widthCenter, heightCenter, true, true);
-                break;
-            }
-            case ("medium2"): {
-                imgBoard = new Image(new FileInputStream(PATH_MEDIUM2_MAP), widthCenter, heightCenter, true, true);
-                break;
-            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
 
         BackgroundImage backgroundMap = new BackgroundImage(imgBoard, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
@@ -542,28 +600,31 @@ public class GameJavaFX extends Application implements ViewClient {
         gridPers.getRowConstraints().addAll(pr1, pr2);
 
         Image imgPBoard = null;
-
-        switch (model.getOwner().getCharacter()) {
-            case "yellow": {
-                imgPBoard = new Image(new FileInputStream(PATH_YELLOW_BOARD), widthPers, heightPBoard, true, true);
-                break;
+        try {
+            switch (model.getOwner().getCharacter()) {
+                case "yellow": {
+                    imgPBoard = new Image(new FileInputStream(PATH_YELLOW_BOARD), widthPers, heightPBoard, true, true);
+                    break;
+                }
+                case "red": {
+                    imgPBoard = new Image(new FileInputStream(PATH_RED_BOARD), widthPers, heightPBoard, true, true);
+                    break;
+                }
+                case "blue": {
+                    imgPBoard = new Image(new FileInputStream(PATH_BLUE_BOARD), widthPers, heightPBoard, true, true);
+                    break;
+                }
+                case "green": {
+                    imgPBoard = new Image(new FileInputStream(PATH_GREEN_BOARD), widthPers, heightPBoard, true, true);
+                    break;
+                }
+                case "grey": {
+                    imgPBoard = new Image(new FileInputStream(PATH_GREY_BOARD), widthPers, heightPBoard, true, true);
+                    break;
+                }
             }
-            case "red": {
-                imgPBoard = new Image(new FileInputStream(PATH_RED_BOARD), widthPers, heightPBoard, true, true);
-                break;
-            }
-            case "blue": {
-                imgPBoard = new Image(new FileInputStream(PATH_BLUE_BOARD), widthPers, heightPBoard, true, true);
-                break;
-            }
-            case "green": {
-                imgPBoard = new Image(new FileInputStream(PATH_GREEN_BOARD), widthPers, heightPBoard, true, true);
-                break;
-            }
-            case "grey": {
-                imgPBoard = new Image(new FileInputStream(PATH_GREY_BOARD), widthPers, heightPBoard, true, true);
-                break;
-            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
 
         BackgroundImage backgroundPB = new BackgroundImage(imgPBoard, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
@@ -818,7 +879,12 @@ public class GameJavaFX extends Application implements ViewClient {
         /**
          * set buttons
          */
-        Image msgBack = new Image(new FileInputStream(PATH_BACK_MSG), 300, 100, true, true);
+        Image msgBack = null;
+        try {
+            msgBack = new Image(new FileInputStream(PATH_BACK_MSG), 300, 100, true, true);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         BackgroundImage backgroundMsg = new BackgroundImage(msgBack, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background backMsg = new Background(backgroundMsg);
         msg.setBackground(backMsg);
@@ -971,14 +1037,7 @@ public class GameJavaFX extends Application implements ViewClient {
         }
 
         */
-        msg.setText(WELCOME);
-
-        //primaryStage.setFullScreen(true);
-        primaryStage.setMaximized(true);
-        primaryStage.setResizable(true);
-        primaryStage.show();
     }
-
 
     public ArrayList<Button> setGridCell(GridPane grid, double width, double height) {
 
