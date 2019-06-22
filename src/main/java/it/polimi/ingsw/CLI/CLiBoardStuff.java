@@ -2,6 +2,7 @@ package it.polimi.ingsw.CLI;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import static it.polimi.ingsw.CLI.CliColor.*;
 import static it.polimi.ingsw.CLI.CliColor.RESET;
@@ -65,5 +66,17 @@ public class CLiBoardStuff {
 
     public static final ArrayList<String> ALL_CHARACTERS=new ArrayList<>(Arrays.asList("blue", "red", "yellow", "grey", "green"));
     public static final ArrayList<String> ALL_AMMO=new ArrayList<>(Arrays.asList("B", "R", "Y"));
+    public static final HashMap<String,String> ACTION_TRANSLATION= new HashMap<>();
+    static {
+        ACTION_TRANSLATION.put("move", "Muovi");
+        ACTION_TRANSLATION.put("pick", "Raccogli");
+        ACTION_TRANSLATION.put("discard_powerup", "Converti PowerUp");
+        ACTION_TRANSLATION.put("powerup", "Usa PowerUp");
+        ACTION_TRANSLATION.put("end_turn", "Termina turno");
+        ACTION_TRANSLATION.put("shoot", "Spara");
+        ACTION_TRANSLATION.put("use_bot", "Usa il Terminator");
+        ACTION_TRANSLATION.put("frenzy_shoot", "Colpo frenetico");
+
+    }
 
 }

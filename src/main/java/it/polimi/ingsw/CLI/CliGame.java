@@ -14,6 +14,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static it.polimi.ingsw.CLI.CLiBoardStuff.ACTION_TRANSLATION;
 import static it.polimi.ingsw.CLI.CLiBoardStuff.ALL_AMMO;
 import static it.polimi.ingsw.CLI.CliColor.*;
 import static it.polimi.ingsw.CLI.CliMessages.*;
@@ -148,7 +149,31 @@ public class CliGame implements ViewClient {
      * @return the chosen one
      */
     public String showActions(ArrayList<String> args) {
-        return genericChoice(args,CHOOSE_ACTION_Q,CHOOSE_ACTION_ERR,true);
+        int i =1;
+        String temp[];
+        int reply=0;
+        do {
+            i=1;
+            System.out.print(RESET);
+
+                for (String s : args) {
+                    temp = s.split(INNER_SEP);
+                    if(ACTION_TRANSLATION.containsKey(temp[0].toLowerCase().replace(" ","_")))
+                        temp[0]=ACTION_TRANSLATION.get(temp[0].toLowerCase().replace(" ","_"));
+                    System.out.print("( "+i + "- " + temp[0]);
+                    if (!temp[1].equals("0")&&!temp[1].equals("100")) {
+                        System.out.print(": "+temp[1]);
+                    }
+                        System.out.print(" )  ");
+                    i++;
+                }
+
+            System.out.print(RESET+CHOOSE_ACTION_Q+"\n");
+            reply=chooseFromArray(args,CHOOSE_ACTION_ERR);
+        } while (reply==0);
+        if(reply==-1)
+            return NOTHING;
+        return args.get(reply-1);
     }
 
     /**
@@ -257,11 +282,12 @@ public class CliGame implements ViewClient {
             i=1;
             System.out.println(RESET+SHOW_DIRECTION_Q);
             for (String s : args) {
-                System.out.print("(");
+                System.out.print(" ");
                 board.printPawn(s);
-                System.out.print(") ");
+                System.out.print(" ");
                 i++;
             }
+            System.out.print(")");
             System.out.println();
 //            if(!allTargets.isEmpty()) {
 //                System.out.println(RESET + allTargets.size() + SHOW_TARGET_SELECTED);
