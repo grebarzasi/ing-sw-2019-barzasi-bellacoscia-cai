@@ -12,7 +12,7 @@ public class CLiBoardStuff {
 
     public static final int[] KILLSHOT_TRACK = {8,6,4,2};
     public static final int[] DEATH_TRACK = {8,6,4,2,1,1};
-    public static final int[] DEATH_TRACK_FRENZY = {2,1,1,1};
+    public static final int[] DEATH_TRACK_FRENZY = {2,1,1,1,0,0};
 
     public static final String RED_P = PURPLE_BACKGROUND_BRIGHT+" "+RESET;
     public static final String GREEN_P = GREEN_BACKGROUND_BRIGHT+" "+RESET;

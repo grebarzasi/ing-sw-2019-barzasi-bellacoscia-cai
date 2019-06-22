@@ -70,7 +70,7 @@ public class AsBot implements ControllerState{
 
                 //asks the target if he wants to use a tagback grenade
                 Set<Figure> hitTarget = new HashSet<>(choice);
-                this.controller.askVenoms(hitTarget,this.controller.getModel().getBot());
+//                this.controller.askVenoms(hitTarget,this.controller.getModel().getBot());
 
                 this.controller.goBack();
 

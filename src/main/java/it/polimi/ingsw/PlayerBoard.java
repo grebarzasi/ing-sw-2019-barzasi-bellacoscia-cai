@@ -25,6 +25,7 @@ public class PlayerBoard {
     //array of points released at death
 
     private int[] pointVec;
+    private int deathNum=0;
     //received mark tokens
 
     private ArrayList<Token> mark;
@@ -145,6 +146,7 @@ public class PlayerBoard {
             this.pointVec[i] = this.pointVec[i + 1] ;
 
         }
+        deathNum++;
 
     }
 
@@ -228,5 +230,13 @@ public class PlayerBoard {
 
     public Figure getOwner() {
         return owner;
+    }
+
+    public int getDeathNum() {
+        return deathNum;
+    }
+
+    public void setDeathNum(int deathNum) {
+        this.deathNum = deathNum;
     }
 }

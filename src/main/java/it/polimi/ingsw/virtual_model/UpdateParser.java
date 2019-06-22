@@ -126,6 +126,7 @@ public class UpdateParser {
 
     public void parseBoard(JsonNode node){
         model.getBoard().setSkull(node.path("skull").asInt());
+        model.setFrenzy(node.path("frenzy").asBoolean());
 
         //parse killshotTrack
         ArrayList<String> kills = new ArrayList<>();

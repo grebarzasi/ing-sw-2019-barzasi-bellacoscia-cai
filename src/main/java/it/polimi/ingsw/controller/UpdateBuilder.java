@@ -142,7 +142,7 @@ public class UpdateBuilder {
             boardNode.putPOJO("marks", marks);
 
             //add skulls
-            boardNode.put("skulls", p.getPersonalBoard().getPointVec().length);
+            boardNode.put("skulls", p.getPersonalBoard().getDeathNum());
 
             //create ammoNode
             ObjectNode ammoNode = mapper.createObjectNode();
@@ -162,6 +162,9 @@ public class UpdateBuilder {
          Map map = board.getMap();
          //skull
          mainBoardNode.put("skull",board.getTrack().getSkullMax());
+
+         //frenzy
+         mainBoardNode.put("frenzy",controller.getModel().isFrenzy());
 
          //map
          mainBoardNode.put("map",map.getName());

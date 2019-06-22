@@ -433,15 +433,18 @@ public class CliBoard {
 
     public void createBoard3(VirtualPlayer p) {
         int i = 0;
+        int[] track=DEATH_TRACK;
         System.out.print(RESET+"├");
         System.out.print(RESET);
 
+//        if(model.isFrenzy())
+//            track=DEATH_TRACK_FRENZY;
         //skulls
-        for(; i<(6-p.getpBoard().getSkulls()); i++){
+        for(; i<(p.getpBoard().getSkulls()); i++){
             System.out.print("["+SKULL_T+"]");
         }
-        for(; i< DEATH_TRACK.length; i++){
-            System.out.print("["+CYAN+DEATH_TRACK[i]+RESET+"]");
+        for(; i< track.length; i++){
+            System.out.print("["+CYAN+track[i]+RESET+"]");
         }
         System.out.print("┼"+RESET);
 

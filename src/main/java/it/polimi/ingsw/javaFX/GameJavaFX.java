@@ -1503,7 +1503,7 @@ public class GameJavaFX extends Application implements ViewClient {
                 grid.add(img, empty, 0);
             }
         }
-        while (k <= 6 - p.getpBoard().getSkulls() + 1) {
+        while (k <= p.getpBoard().getSkulls() + 1) {
 
             if (k <= no) {
                 k++;

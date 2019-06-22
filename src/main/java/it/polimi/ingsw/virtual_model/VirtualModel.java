@@ -15,6 +15,7 @@ public class VirtualModel {
     private VirtualBoard board;
     private VirtualPlayer owner;
     private VirtualPlayer turn;
+    private boolean frenzy;
     private boolean updated=false;
 
     public VirtualModel(VirtualPlayer owner){
@@ -69,5 +70,13 @@ public class VirtualModel {
 
     public void setUpdated(boolean updated) {
         this.updated = updated;
+    }
+
+    public boolean isFrenzy() {
+        return frenzy;
+    }
+
+    public void setFrenzy(boolean frenzy) {
+        this.frenzy = frenzy;
     }
 }

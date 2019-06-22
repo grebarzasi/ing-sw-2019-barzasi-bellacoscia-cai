@@ -37,7 +37,7 @@ public class CliMessages {
 
     /*LOBBY MSG*/
     public static final String LOBBY_HEAD = "\n\n----------------------------------------\n"+YELLOW_BACKGROUND_BRIGHT+BLUE_BOLD+"*** LOBBY! imposta le tue preferenze! ***"+RESET+"\n----------------------------------------";
-    public static final String PREFERENCE_Q =MSG_COLOR+ "\nVuoi modificare qualcosa? (Y/N)"+RESET;
+    public static final String PREFERENCE_Q =MSG_COLOR+ "\nVuoi modificare qualcosa? (S/N)"+RESET;
     public static final String PREFERENCE_Y = "\nOk,scegli nuovamente:"+RESET;
     public static final String PREFERENCE_N ="\nOK! sto inviando le tue preferenze"+RESET;
 
@@ -47,11 +47,11 @@ public class CliMessages {
     public static final String MAP_N = "\nMappa non disponibile, ancora:"+RESET;
 
     //PREFERENCES
-    public static final String TERMINATOR_Q =MSG_COLOR+ "\nVuoi assoldare un Terminator bot? (Y/N)"+RESET;
+    public static final String TERMINATOR_Q =MSG_COLOR+ "\nVuoi assoldare un Terminator bot? (S/N)"+RESET;
     public static final String TERMINATOR_Y = "\nTerminator assoldato, sei coraggioso!"+RESET;
     public static final String TERMINATOR_N = "\nTerminator rifiutato, sarà per la prossima partita."+RESET;
 
-    public static final String FRENZY_Q =MSG_COLOR+ "\nVuoi introdurre la Frenesia Finale? (Y/N)"+RESET;
+    public static final String FRENZY_Q =MSG_COLOR+ "\nVuoi introdurre la Frenesia Finale? (S/N)"+RESET;
     public static final String FRENZY_Y = "\nFrenesia Finale impostata!"+RESET;
     public static final String FRENZY_N = "\nNessuna Frenesia finale, ok!"+RESET;
 
