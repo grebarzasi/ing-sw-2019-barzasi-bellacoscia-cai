@@ -559,8 +559,8 @@ public class CliBoard {
             case "green":
                 pawn=GREEN_P;
                 break;
-            case "gray":
-                pawn=GRAY_P;
+            case "grey":
+                pawn=GREY_P;
                 break;
             default:
                 pawn="";
@@ -585,8 +585,8 @@ public class CliBoard {
             case "green":
                 pawn=GREEN_T;
                 break;
-            case "gray":
-                pawn=GRAY_T;
+            case "grey":
+                pawn=GREY_T;
                 break;
             case "":
                 pawn=" ";

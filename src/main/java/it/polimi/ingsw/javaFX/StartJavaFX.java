@@ -115,7 +115,7 @@ public class StartJavaFX extends Application {
         ImageView redV = new ImageView(new Image(new FileInputStream(PATH_RED_CHARACTER), widthScreen ,heightCharac,true,true));;
         ImageView blueV = new ImageView(new Image(new FileInputStream(PATH_BLUE_CHARACTER), widthScreen ,heightCharac,true,true));;
         ImageView greenV = new ImageView(new Image(new FileInputStream(PATH_GREEN_CHARACTER), widthScreen ,heightCharac,true,true));;
-        ImageView grayV = new ImageView(new Image(new FileInputStream(PATH_GREY_CHARACTER), widthScreen ,heightCharac,true,true));;
+        ImageView greyV = new ImageView(new Image(new FileInputStream(PATH_GREY_CHARACTER), widthScreen ,heightCharac,true,true));;
 
         HBox charList = new HBox(10);
         charList.setAlignment(Pos.BOTTOM_CENTER);
@@ -123,7 +123,7 @@ public class StartJavaFX extends Application {
         charList.getChildren().add(redV);
         charList.getChildren().add(blueV);
         charList.getChildren().add(greenV);
-        charList.getChildren().add(grayV);
+        charList.getChildren().add(greyV);
 
 
         /**

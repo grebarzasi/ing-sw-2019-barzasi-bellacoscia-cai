@@ -16,7 +16,7 @@ public class CLiBoardStuff {
     public static final String RED_P = PURPLE_BACKGROUND_BRIGHT+" "+RESET;
     public static final String GREEN_P = GREEN_BACKGROUND_BRIGHT+" "+RESET;
     public static final String BLUE_P =CYAN_BACKGROUND_BRIGHT+" "+RESET;
-    public static final String GRAY_P = WHITE_BACKGROUND_BRIGHT+" "+RESET;
+    public static final String GREY_P = WHITE_BACKGROUND_BRIGHT+" "+RESET;
     public static final String YELLOW_P = YELLOW_BACKGROUND_BRIGHT+" "+RESET;
 
     public static final String ARMORY = " W";
@@ -35,7 +35,7 @@ public class CLiBoardStuff {
     public static final String RED_T = PURPLE_BOLD_BRIGHT+"o"+RESET;
     public static final String GREEN_T = GREEN_BOLD_BRIGHT+"o"+RESET;
     public static final String BLUE_T =CYAN_BOLD_BRIGHT+"o"+RESET;
-    public static final String GRAY_T = WHITE_BOLD_BRIGHT+"o"+RESET;
+    public static final String GREY_T = WHITE_BOLD_BRIGHT+"o"+RESET;
     public static final String YELLOW_T = YELLOW_BOLD_BRIGHT+"o"+RESET;
 
     public static final String SKULL_T = RED+"*"+RESET;
@@ -63,7 +63,7 @@ public class CLiBoardStuff {
 
 
 
-    public static final ArrayList<String> ALL_CHARACTERS=new ArrayList<>(Arrays.asList("blue", "red", "yellow", "gray", "green"));
+    public static final ArrayList<String> ALL_CHARACTERS=new ArrayList<>(Arrays.asList("blue", "red", "yellow", "grey", "green"));
     public static final ArrayList<String> ALL_AMMO=new ArrayList<>(Arrays.asList("B", "R", "Y"));
 
 }

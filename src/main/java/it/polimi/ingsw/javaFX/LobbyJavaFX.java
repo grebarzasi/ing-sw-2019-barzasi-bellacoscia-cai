@@ -249,9 +249,9 @@ public class LobbyJavaFX extends Application {
                         playerBox.getChildren().add(greenV);
                         break;
                     }
-                    case "gray": {
-                        ImageView grayV = new ImageView(new Image(new FileInputStream("src/main/resources/images/dozer.png"), 150, 150, true, true));
-                        playerBox.getChildren().add(grayV);
+                    case "grey": {
+                        ImageView greyV = new ImageView(new Image(new FileInputStream("src/main/resources/images/dozer.png"), 150, 150, true, true));
+                        playerBox.getChildren().add(greyV);
                         break;
                     }
                 }
@@ -465,8 +465,8 @@ public class LobbyJavaFX extends Application {
                         break;
                     }
                     case "grey": {
-                        ImageView grayV = new ImageView(new Image(new FileInputStream(PATH_GREY_CHARACTER), widthCenter, heightPlayers, true, true));
-                        v.getChildren().add(grayV);
+                        ImageView greyV = new ImageView(new Image(new FileInputStream(PATH_GREY_CHARACTER), widthCenter, heightPlayers, true, true));
+                        v.getChildren().add(greyV);
                         break;
                     }
                 }

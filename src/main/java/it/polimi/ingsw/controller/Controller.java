@@ -11,6 +11,8 @@ import it.polimi.ingsw.connection.ClientHandler;
 import java.util.ArrayList;
 import java.util.Set;
 
+import static java.lang.Thread.sleep;
+
 /**
  * Main controller class, implemented with satate pattern.
  *
@@ -19,7 +21,7 @@ import java.util.Set;
 
 public class Controller {
 
-    private static String[] ALL_CHARACTERS = {"red","blue","yellow","green","gray"};
+    private static String[] ALL_CHARACTERS = {"red","blue","yellow","green","grey"};
     private static final int[] frenzyPointsVec;
 
     static {
@@ -485,6 +487,11 @@ public class Controller {
         String s = marshal.create().toString();
         for(Player p: model.getPlayerList())
                 p.getView().sendsUpdate(s);
+        try {
+            sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
