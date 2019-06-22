@@ -289,16 +289,6 @@ public class CliGame implements ViewClient {
             }
             System.out.print(")");
             System.out.println();
-//            if(!allTargets.isEmpty()) {
-//                System.out.println(RESET + allTargets.size() + SHOW_TARGET_SELECTED);
-//                System.out.print("[ ");
-//                for (String s : allTargets) {
-//                    board.printPawn(s);
-//                    System.out.print(" ");
-//                }
-//                System.out.print("]  ");
-//            }
-//            System.out.println();
             try {
                 while(sc.ready()) {
                     sc.read();
@@ -306,12 +296,9 @@ public class CliGame implements ViewClient {
                 reply = sc.readLine();
                 if(reply.equals(BACK))
                     return NOTHING;
-//                if(reply.equals(NEXT)) {
-//                    break;
-//                }
-                reply=reply.toUpperCase();
-                if (reply.equals("N")||reply.equals("S")||reply.equals("E")||reply.equals("O")) {
-//                    allTargets.addAll(filterDirection(args,reply));
+
+                reply=reply.toLowerCase();
+                if (reply.equals("n")||reply.equals("s")||reply.equals("e")||reply.equals("o")) {
                     break;
                 }
             } catch (IOException e) {
@@ -323,12 +310,6 @@ public class CliGame implements ViewClient {
         return reply;
     }
 
-//    ArrayList<String> filterDirection(ArrayList<String> arg, String dir){
-//        VirtualPlayer owner= board.getModel().getOwner();
-//        ArrayList<String> temp=new ArrayList<>();
-//        for(String s : arg)
-//
-//    }
 
     /**
      * Displays a message and makes the user make a boolean choice

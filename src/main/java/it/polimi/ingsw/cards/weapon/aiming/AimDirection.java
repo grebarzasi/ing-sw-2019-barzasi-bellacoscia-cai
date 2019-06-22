@@ -6,6 +6,8 @@ import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.weapon.TargetAcquisition;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,7 +30,7 @@ public class AimDirection implements AimingFilter {
     public Set<Figure> filter(Weapon w, Set<Figure> p) {
         if(w.getDirectionTemp()==null){
             w.setDirectionTemp(this);
-            targetTemp=p;
+            targetTemp=allDirectional(w.getOwner(),p);
             return null;
         }
         w.setDirectionTemp(null);
@@ -38,6 +40,20 @@ public class AimDirection implements AimingFilter {
         if (wallBang)
             return directionAll(dir, w.getOwner(), targetTemp);
         return directionWall(dir, w.getOwner(), targetTemp);
+    }
+
+    public Set<Figure> allDirectional(Figure origin, Set<Figure> p){
+        Set<Figure> temp = new HashSet<>();
+        ArrayList<String> directions= new ArrayList<>(Arrays.asList("n", "s", "e","o"));
+        if(wallBang) {
+            for (String s : directions) {
+                temp.addAll(directionWall(s,origin,p));
+            }
+        }else{
+            for (String s : directions) {
+                temp.addAll(directionAll(s,origin,p));            }
+        }
+        return temp;
     }
 
 
@@ -63,7 +79,7 @@ public class AimDirection implements AimingFilter {
                     pos=pos.getEast();
                 }
                 break;
-            case "w":
+            case "o":
                 while(pos!=null){
                     temp.addAll(pos.playersInSquare(p));
                 pos=pos.getWest();
@@ -92,7 +108,7 @@ public class AimDirection implements AimingFilter {
                     if (cTarget.getRow() != c.getRow() || cTarget.getColumn() < c.getColumn())
                         temp.remove(f);
                     break;
-                case "w":
+                case "o":
                     if (cTarget.getRow() != c.getRow() || cTarget.getColumn() > c.getColumn())
                         temp.remove(f);
                     break;

@@ -4,6 +4,8 @@ import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.virtual_model.VirtualLobby;
 import it.polimi.ingsw.virtual_model.VirtualModel;
 import it.polimi.ingsw.virtual_model.VirtualPlayer;
+
+import static it.polimi.ingsw.CLI.CliColor.*;
 import static it.polimi.ingsw.CLI.CliMessages.*;
 import static it.polimi.ingsw.connection.ConnMessage.COUNTDOWN;
 import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
@@ -70,10 +72,11 @@ public class CliLobby extends Thread{
         do {
             System.out.println(question);
             temp = sc.readLine();
-            if (temp.equals("Y")||temp.equals("y")||temp.equals("1")) {
+            temp=temp.toLowerCase();
+            if (temp.equals("s")||temp.equals("y")||temp.equals("1")) {
                 System.out.println(yes);
                 return true;
-            } else if (temp.equals("N")||temp.equals("n")||temp.equals("2")||temp.isEmpty()) {
+            } else if (temp.equals("n")||temp.equals("2")||temp.isEmpty()) {
                 System.out.println(no);
                 return false;
             }else{
@@ -138,7 +141,7 @@ public class CliLobby extends Thread{
             lobby.waitUpdate();
             for(VirtualPlayer p : lobby.getNewPlayersList() ){
                 if (!p.isPrinted()) {
-                    System.out.println(p.getUsername() + " using " + p.getCharacter() + ": is READY!");
+                    System.out.println(p.getUsername() + " con " + p.getCharacter() + ": è"+GREEN_BOLD+" Pronto!"+RESET);
                     p.setPrinted(true);
                 }
             }

@@ -4,10 +4,10 @@ import static it.polimi.ingsw.CLI.CliColor.*;
 import static it.polimi.ingsw.CLI.CliColor.RED;
 
 public class ServerMessage {
-    public static final String RMI_COLOR=PURPLE_BOLD;
+    public static final String RMI_COLOR=BLUE_BOLD;
     public static final String SOCKET_COLOR=CYAN_BOLD;
 
-    public static final String CLIENT_UNREACHABLE=" disconnected from the game";
+    public static final String CLIENT_UNREACHABLE=" disconnesso dal gioco";
     public static final String RETURN_IN_GAME="Sei stato sospeso dal server per inattività, vuoi tornare in gioco?";
     public static final int INACTIVITY_TIMEOUT=5000;
 
@@ -19,11 +19,11 @@ public class ServerMessage {
     public static final String RMI_MSG=RMI_COLOR+"[RMI SERVER]";
     public static final String SOCKET_MSG=SOCKET_COLOR+"[SOCKET SERVER]";
 
-    public static final String RMI_S_READY=GREEN+"Rmi Server is READY on port: ";
-    public static final String RMI_S_ERR=RED+"Rmi Server: Something went wrong!";
-    public static final String SOCKET_S_READY=GREEN+"Socket Server is READY on ";
-    public static final String SOCKET_S_CONN=SOCKET_COLOR+"Socket client Connected:";
-    public static final String SOCKET_S_ERR=RED+"Socket Server: Something went wrong!";
+    public static final String RMI_S_READY=GREEN+"Rmi Server è PRONTO sulla porta: ";
+    public static final String RMI_S_ERR=RED+"Rmi Server: qualcosa è andato storto!";
+    public static final String SOCKET_S_READY=GREEN+"Socket Server è PRONTO su: ";
+    public static final String SOCKET_S_CONN=SOCKET_COLOR+"Socket client connsesso:";
+    public static final String SOCKET_S_ERR=RED+"Socket Server: qualcosa è andato storto!";
 
 
     public static void clearScreen() {
