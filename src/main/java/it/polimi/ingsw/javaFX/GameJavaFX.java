@@ -1330,7 +1330,7 @@ public class GameJavaFX extends Application implements ViewClient {
         int j = 0;
         ImageView imgKill = null;
 
-        if(colors.size() != 0) {
+        if(colors.get(j).split(INNER_SEP)[0].equals(null)) {
             while (j < colors.size()) {
                 if (colors.get(j).split(INNER_SEP).length > 1) {
                     try {
