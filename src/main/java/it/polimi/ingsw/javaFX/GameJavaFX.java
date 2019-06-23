@@ -852,11 +852,11 @@ public class GameJavaFX extends Application implements ViewClient {
 
 
         VBox vmsg = new VBox(25);
-        vmsg.setAlignment(Pos.CENTER);
+        vmsg.setAlignment(Pos.BASELINE_LEFT);
         vmsg.getChildren().add(msg);
         vmsg.getChildren().add(hBtn);
 
-        grid.add(vmsg, 1, 2);
+        grid.add(vmsg, 1, 2,3,1);
 
         /**
          * set buttons' action.
@@ -1871,6 +1871,14 @@ public class GameJavaFX extends Application implements ViewClient {
             hideBtn(btnShoot, 0);
             hideBtn(btnPowerUp, 0);
 
+            btnMove.setText("Muovi");
+            btnPick.setText("Raccogli");
+            btnShoot.setText("Spara");
+            btnEnd.setText("Termina il turno");
+            btnCancel.setText("Annulla");
+            btnTerminator.setText("Terminator");
+            btnPowerUp.setText("Power-up");
+
             btnMove.setOnAction(e -> {
                 if (model.getTurn().getCharacter().equals(model.getOwner().getCharacter()) && btnShoot.getOpacity() == 1) {
 
@@ -1889,6 +1897,8 @@ public class GameJavaFX extends Application implements ViewClient {
                     msg.setText(WAIT);
 
             });
+
+
             btnPick.setOnAction(e -> {
                 if (model.getTurn().getCharacter().equals(model.getOwner().getCharacter()) && btnShoot.getOpacity() == 1) {
 
@@ -2421,6 +2431,8 @@ public class GameJavaFX extends Application implements ViewClient {
                 case (4): {
                     hideBtn(btnPowerUp,1);
                     btnPowerUp.setText(args.get(3).split(INNER_SEP)[0]);
+                    btnPowerUp.setStyle(String.format("-fx-font-size: %dpx;", (int)(0.45 * btnPowerUp.getPrefHeight())));
+
                     btnPowerUp.setOnAction(e -> {
                         game.setEffect(args.get(3).split(INNER_SEP)[0]);
                     });
@@ -2428,6 +2440,8 @@ public class GameJavaFX extends Application implements ViewClient {
                 case (3): {
                     hideBtn(btnPick,1);
                     btnPick.setText(args.get(2).split(INNER_SEP)[0]);
+                    btnPick.setStyle(String.format("-fx-font-size: %dpx;", (int)(0.45 * btnPick.getPrefHeight())));
+
                     btnPick.setOnAction(e -> {
                         game.setEffect(args.get(2).split(INNER_SEP)[0]);
                     });
@@ -2436,6 +2450,8 @@ public class GameJavaFX extends Application implements ViewClient {
                 case (2): {
                     hideBtn(btnMove,1);
                     btnMove.setText(args.get(1).split(INNER_SEP)[0]);
+                    btnMove.setStyle(String.format("-fx-font-size: %dpx;", (int)(0.45 * btnMove.getPrefHeight())));
+
                     btnMove.setOnAction(e -> {
                         game.setEffect(args.get(1).split(INNER_SEP)[0]);
                     });
@@ -2443,6 +2459,8 @@ public class GameJavaFX extends Application implements ViewClient {
                 case (1): {
                     hideBtn(btnShoot,1);
                     btnShoot.setText(args.get(0).split(INNER_SEP)[0]);
+                    btnShoot.setStyle(String.format("-fx-font-size: %dpx;", (int)(0.45 * btnShoot.getPrefHeight())));
+
                     btnShoot.setOnAction(e -> {
                         game.setEffect(args.get(0).split(INNER_SEP)[0]);
                     });
