@@ -1328,22 +1328,24 @@ public class GameJavaFX extends Application implements ViewClient {
 
         int i = skullMax  - 1 ;
         int j = 0;
+        ImageView imgKill = null;
 
         if(colors.size() != 0) {
             while (j < colors.size()) {
-                if (!colors.get(j).split(INNER_SEP)[1].equals("")) {
+                if (colors.get(j).split(INNER_SEP).length > 1) {
                     try {
-                        ImageView imgKill = new ImageView(new Image(new FileInputStream(PATH_DAMAGE + colors.get(j).split(INNER_SEP)[0].toLowerCase() + "_double.png"),w,h,true,true));
+                        imgKill = new ImageView(new Image(new FileInputStream(PATH_DAMAGE + colors.get(j).split(INNER_SEP)[0].toLowerCase() + "_double.png"),w,h,true,true));
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
                 } else {
                     try {
-                        ImageView imgKill = new ImageView(new Image(new FileInputStream(PATH_DAMAGE + colors.get(j).split(INNER_SEP)[0].toLowerCase() + ".png"),w,h,true,true));
+                        imgKill = new ImageView(new Image(new FileInputStream(PATH_DAMAGE + colors.get(j).split(INNER_SEP)[0].toLowerCase() + ".png"),w,h,true,true));
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
                 }
+                grid.add(imgKill, j, 0);
                 j++;
             }
         }
