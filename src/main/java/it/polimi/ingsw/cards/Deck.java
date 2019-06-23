@@ -48,7 +48,7 @@ public class Deck {
 
 
     public void shuffle() {
-        Collections.shuffle(this.usable);
+        //Collections.shuffle(this.usable);
     }
 
 

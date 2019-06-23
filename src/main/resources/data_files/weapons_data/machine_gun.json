@@ -6,19 +6,21 @@
 
   "effects": {
     "basic": {
-      "name": "effetto base",
+      "name": "Effetto base",
       "cost": {
         "blue": 1,
         "red": 1
       },
       "subEffect": {
         "1": {
+          "targetAcq": {
           "isVisible": {
             "visible": true
           },
           "askPlayer": {
-            "msg": "Seleziona 2 Player visibili.",
+            "msg": "Seleziona fino a 2 Player visibili.",
             "num": 2
+          }
           },
           "shootTarget": {
             "damage": 1
@@ -27,17 +29,19 @@
       }
     },
     "addOne": {
-      "name": "colpo focalizzato",
+      "name": "Colpo focalizzato",
       "cost": {
         "yellow": 1
       },
       "subEffect": {
         "1": {
-          "equals": ["basic"],
+          "targetAcq": {
+            "equals": ["basic"],
           "different": ["addTwo"],
           "askPlayer": {
             "msg": "Seleziona 1 Player fra quelli colpiti nell'effetto base.",
             "num": 1
+          }
           },
           "shootTarget": {
             "damage": 1
@@ -46,24 +50,27 @@
       }
     },
     "addTwo": {
-      "name": "tripode di supporto",
+      "name": "Tripode di supporto",
       "cost": {
         "blue": 1
       },
       "subEffect": {
         "1": {
-          "equals": ["basic"],
+          "targetAcq": {
+            "equals": ["basic"],
           "different": ["addOne"],
           "askPlayer": {
             "msg": "Seleziona 1 Player fra quelli colpiti nell'effetto base.",
             "num": 1
+          }
           },
           "shootTarget": {
             "damage": 1
           }
         },
         "2": {
-          "isVisible": {
+          "targetAcq": {
+            "isVisible": {
             "visible": true
           },
           "different": [
@@ -74,6 +81,7 @@
           "askPlayer": {
             "msg": "Seleziona 1 Player differente da quelli colpiti precedentemente.",
             "num": 1
+          }
           },
           "shootTarget": {
             "damage": 1

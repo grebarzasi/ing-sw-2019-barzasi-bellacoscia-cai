@@ -20,7 +20,6 @@ import java.util.*;
 public class Weapon extends Card {
 
     private Player owner;
-
     private String name;
     private Ammo chamber;
     private boolean isLoaded;

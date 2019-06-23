@@ -45,7 +45,7 @@
             }
           },
             "shootTarget": {
-              "damage": 1
+              "mark": 1
             }
           }
         }
