@@ -1324,29 +1324,41 @@ public class GameJavaFX extends Application implements ViewClient {
         hideBtn(btn, 1);
     }
 
-    public void fillSkulls(GridPane grid, int skullMax, double w, double h) {
+    public void fillSkulls(GridPane grid, int skullMax, double w, double h, ArrayList<String> colors) {
 
         int i = skullMax  - 1 ;
+        int j = 0;
 
-        while (i >= 0) {
+        if(colors.size() != 0) {
+            while (j < colors.size()) {
+                if (!colors.get(j).split(INNER_SEP)[1].equals("")) {
+                    try {
+                        ImageView imgKill = new ImageView(new Image(new FileInputStream(PATH_DAMAGE + colors.get(j).split(INNER_SEP)[0].toLowerCase() + "_double.png"),w,h,true,true));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        ImageView imgKill = new ImageView(new Image(new FileInputStream(PATH_DAMAGE + colors.get(j).split(INNER_SEP)[0].toLowerCase() + ".png"),w,h,true,true));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+                j++;
+            }
+        }
+        while (i >= j) {
 
             ImageView skull = null;
+             try {
+                 skull = new ImageView(new Image(new FileInputStream(PATH_SKULL), w, h, true, true));
+             } catch (FileNotFoundException e) {
+                 e.printStackTrace();
+             }
 
-            try {
-                skull = new ImageView(new Image(new FileInputStream(PATH_SKULL), w, h, true, true));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-
-            grid.add(skull, 7-i, 0);
-            i--;
+             grid.add(skull, 7 - i, 0);
+             i--;
         }
-    }
-
-    public void fillSkulls(GridPane grid, int skullMax, double w, double h, String color, boolean two) {
-
-
-
     }
 
     public void fillBoard(GridPane grid, VirtualPlayer p, double width, double hmarks, double hdamage, double hskulls) {
@@ -2012,7 +2024,7 @@ public class GameJavaFX extends Application implements ViewClient {
             }
 
 
-            fillSkulls(gridSkull, model.getBoard().getSkull(), widthSkull - 5, heightLateral / 3);
+            fillSkulls(gridSkull, model.getBoard().getSkull(), widthSkull - 5, heightLateral / 3,model.getBoard().getKillshotTrack());
 
             drawPlayers();
             fillAmmoTiles();
@@ -2671,6 +2683,34 @@ public class GameJavaFX extends Application implements ViewClient {
     public void updateModel(String message) {
 
         parser.updateModel(message);
+
+        if(model.isFrenzy()){
+
+            Image imgTmp = null;
+            try {
+                imgTmp = new Image(new FileInputStream(PATH_BOARDS + model.getOwner().getCharacter().toLowerCase() + "_frenzy.jpg"), widthLateral, heightPBoard, true, true);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            BackgroundImage backgroundTmp = new BackgroundImage(imgTmp, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+            gridPBoard.setBackground(new Background(backgroundTmp));
+
+            int i = 0;
+            for(VirtualPlayer p : model.getAllPlayers()){
+
+                Image imgTmp2 = null;
+                try {
+                    imgTmp2 = new Image(new FileInputStream(PATH_BOARDS + p.getCharacter().toLowerCase() + "_frenzy.jpg"), widthOther, heightOtherBoard, true, true);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                BackgroundImage backgroundTmp2 = new BackgroundImage(imgTmp2, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+                gridOtherBoards.get(i).setBackground(new Background(backgroundTmp2));
+
+                i++;
+            }
+        }
+
         Runnable runnable=()->{update();};
         if(model.isUpdated()){
             Platform.runLater(runnable);
