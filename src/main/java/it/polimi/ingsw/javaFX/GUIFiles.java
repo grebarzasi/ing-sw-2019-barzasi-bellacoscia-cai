@@ -17,6 +17,7 @@ public class GUIFiles {
     public static final String PATH_MEDIUM2_MAP = "src/main/resources/images/map/4.png";
     public static final String PATH_LARGE_MAP = "src/main/resources/images/map/3.png";
 
+    public static final String PATH_BOARDS = "src/main/resources/images/board/";
     public static final String PATH_YELLOW_BOARD = "src/main/resources/images/board/yellow_board.png";
     public static final String PATH_RED_BOARD = "src/main/resources/images/board/red_board.png";
     public static final String PATH_BLUE_BOARD = "src/main/resources/images/board/blue_board.png";
@@ -40,6 +41,7 @@ public class GUIFiles {
     public static final String PATH_BLUE_AMMO = "src/main/resources/images/ammo/blue_ammo.png";
     public static final String PATH_YELLOW_AMMO = "src/main/resources/images/ammo/yellow_ammo.png";
 
+    public static final String PATH_DAMAGE =  "src/main/resources/images/damage/";
     public static final String PATH_EMPTY_DAMAGE = "src/main/resources/images/damage/empty.png";
     public static final String PATH_YELLOW_DAMAGE = "src/main/resources/images/damage/yellow.png";
     public static final String PATH_RED_DAMAGE = "src/main/resources/images/damage/red.png";

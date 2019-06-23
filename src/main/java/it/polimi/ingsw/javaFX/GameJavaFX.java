@@ -852,11 +852,11 @@ public class GameJavaFX extends Application implements ViewClient {
 
 
         VBox vmsg = new VBox(25);
-        vmsg.setAlignment(Pos.CENTER);
+        vmsg.setAlignment(Pos.BASELINE_LEFT);
         vmsg.getChildren().add(msg);
         vmsg.getChildren().add(hBtn);
 
-        grid.add(vmsg, 1, 2);
+        grid.add(vmsg, 1, 2,3,1);
 
         /**
          * set buttons' action.
@@ -1324,29 +1324,41 @@ public class GameJavaFX extends Application implements ViewClient {
         hideBtn(btn, 1);
     }
 
-    public void fillSkulls(GridPane grid, int skullMax, double w, double h) {
+    public void fillSkulls(GridPane grid, int skullMax, double w, double h, ArrayList<String> colors) {
 
         int i = skullMax  - 1 ;
+        int j = 0;
 
-        while (i >= 0) {
+        if(colors.size() != 0) {
+            while (j < colors.size()) {
+                if (!colors.get(j).split(INNER_SEP)[1].equals("")) {
+                    try {
+                        ImageView imgKill = new ImageView(new Image(new FileInputStream(PATH_DAMAGE + colors.get(j).split(INNER_SEP)[0].toLowerCase() + "_double.png"),w,h,true,true));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        ImageView imgKill = new ImageView(new Image(new FileInputStream(PATH_DAMAGE + colors.get(j).split(INNER_SEP)[0].toLowerCase() + ".png"),w,h,true,true));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+                j++;
+            }
+        }
+        while (i >= j) {
 
             ImageView skull = null;
+             try {
+                 skull = new ImageView(new Image(new FileInputStream(PATH_SKULL), w, h, true, true));
+             } catch (FileNotFoundException e) {
+                 e.printStackTrace();
+             }
 
-            try {
-                skull = new ImageView(new Image(new FileInputStream(PATH_SKULL), w, h, true, true));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-
-            grid.add(skull, 7-i, 0);
-            i--;
+             grid.add(skull, 7 - i, 0);
+             i--;
         }
-    }
-
-    public void fillSkulls(GridPane grid, int skullMax, double w, double h, String color, boolean two) {
-
-
-
     }
 
     public void fillBoard(GridPane grid, VirtualPlayer p, double width, double hmarks, double hdamage, double hskulls) {
@@ -1871,6 +1883,14 @@ public class GameJavaFX extends Application implements ViewClient {
             hideBtn(btnShoot, 0);
             hideBtn(btnPowerUp, 0);
 
+            btnMove.setText("Muovi");
+            btnPick.setText("Raccogli");
+            btnShoot.setText("Spara");
+            btnEnd.setText("Termina il turno");
+            btnCancel.setText("Annulla");
+            btnTerminator.setText("Terminator");
+            btnPowerUp.setText("Power-up");
+
             btnMove.setOnAction(e -> {
                 if (model.getTurn().getCharacter().equals(model.getOwner().getCharacter()) && btnShoot.getOpacity() == 1) {
 
@@ -1889,6 +1909,8 @@ public class GameJavaFX extends Application implements ViewClient {
                     msg.setText(WAIT);
 
             });
+
+
             btnPick.setOnAction(e -> {
                 if (model.getTurn().getCharacter().equals(model.getOwner().getCharacter()) && btnShoot.getOpacity() == 1) {
 
@@ -2002,7 +2024,7 @@ public class GameJavaFX extends Application implements ViewClient {
             }
 
 
-            fillSkulls(gridSkull, model.getBoard().getSkull(), widthSkull - 5, heightLateral / 3);
+            fillSkulls(gridSkull, model.getBoard().getSkull(), widthSkull - 5, heightLateral / 3,model.getBoard().getKillshotTrack());
 
             drawPlayers();
             fillAmmoTiles();
@@ -2421,6 +2443,8 @@ public class GameJavaFX extends Application implements ViewClient {
                 case (4): {
                     hideBtn(btnPowerUp,1);
                     btnPowerUp.setText(args.get(3).split(INNER_SEP)[0]);
+                    btnPowerUp.setStyle(String.format("-fx-font-size: %dpx;", (int)(0.45 * btnPowerUp.getPrefHeight())));
+
                     btnPowerUp.setOnAction(e -> {
                         game.setEffect(args.get(3).split(INNER_SEP)[0]);
                     });
@@ -2428,6 +2452,8 @@ public class GameJavaFX extends Application implements ViewClient {
                 case (3): {
                     hideBtn(btnPick,1);
                     btnPick.setText(args.get(2).split(INNER_SEP)[0]);
+                    btnPick.setStyle(String.format("-fx-font-size: %dpx;", (int)(0.45 * btnPick.getPrefHeight())));
+
                     btnPick.setOnAction(e -> {
                         game.setEffect(args.get(2).split(INNER_SEP)[0]);
                     });
@@ -2436,6 +2462,8 @@ public class GameJavaFX extends Application implements ViewClient {
                 case (2): {
                     hideBtn(btnMove,1);
                     btnMove.setText(args.get(1).split(INNER_SEP)[0]);
+                    btnMove.setStyle(String.format("-fx-font-size: %dpx;", (int)(0.45 * btnMove.getPrefHeight())));
+
                     btnMove.setOnAction(e -> {
                         game.setEffect(args.get(1).split(INNER_SEP)[0]);
                     });
@@ -2443,6 +2471,8 @@ public class GameJavaFX extends Application implements ViewClient {
                 case (1): {
                     hideBtn(btnShoot,1);
                     btnShoot.setText(args.get(0).split(INNER_SEP)[0]);
+                    btnShoot.setStyle(String.format("-fx-font-size: %dpx;", (int)(0.45 * btnShoot.getPrefHeight())));
+
                     btnShoot.setOnAction(e -> {
                         game.setEffect(args.get(0).split(INNER_SEP)[0]);
                     });
@@ -2653,6 +2683,34 @@ public class GameJavaFX extends Application implements ViewClient {
     public void updateModel(String message) {
 
         parser.updateModel(message);
+
+        if(model.isFrenzy()){
+
+            Image imgTmp = null;
+            try {
+                imgTmp = new Image(new FileInputStream(PATH_BOARDS + model.getOwner().getCharacter().toLowerCase() + "_frenzy.jpg"), widthLateral, heightPBoard, true, true);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            BackgroundImage backgroundTmp = new BackgroundImage(imgTmp, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+            gridPBoard.setBackground(new Background(backgroundTmp));
+
+            int i = 0;
+            for(VirtualPlayer p : model.getAllPlayers()){
+
+                Image imgTmp2 = null;
+                try {
+                    imgTmp2 = new Image(new FileInputStream(PATH_BOARDS + p.getCharacter().toLowerCase() + "_frenzy.jpg"), widthOther, heightOtherBoard, true, true);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                BackgroundImage backgroundTmp2 = new BackgroundImage(imgTmp2, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+                gridOtherBoards.get(i).setBackground(new Background(backgroundTmp2));
+
+                i++;
+            }
+        }
+
         Runnable runnable=()->{update();};
         if(model.isUpdated()){
             Platform.runLater(runnable);
