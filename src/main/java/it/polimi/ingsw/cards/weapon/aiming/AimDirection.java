@@ -98,11 +98,11 @@ public class AimDirection implements AimingFilter {
             Cell cTarget = f.getPosition().getPosition();
             switch (dir) {
                 case "n":
-                    if (cTarget.getColumn() != c.getColumn() || cTarget.getRow() > c.getRow())
+                    if (cTarget.getColumn() != c.getColumn() || cTarget.getRow() < c.getRow())
                         temp.remove(f);
                     break;
                 case "s":
-                    if (cTarget.getColumn() != c.getColumn() || cTarget.getRow() < c.getRow())
+                    if (cTarget.getColumn() != c.getColumn() || cTarget.getRow() > c.getRow())
                         temp.remove(f);
                     break;
                 case "e":
@@ -114,6 +114,7 @@ public class AimDirection implements AimingFilter {
                         temp.remove(f);
                     break;
             }
+
         }
         return temp;
     }

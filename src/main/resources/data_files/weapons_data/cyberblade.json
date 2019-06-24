@@ -26,7 +26,7 @@
       }
     },
     "addTwo":{
-      "name": "modalità sminuzzare",
+      "name": "Modalità sminuzzare",
       "cost": {
         "yellow": 1
       },
@@ -47,12 +47,12 @@
       }
     },
     "extraMove": {
-      "name": "passo d'ombra",
+      "name": "Passo d'ombra",
       "cost": {},
       "subEffect": {
         "1": {
           "targetAcq": {
-            "equal": ["me"]
+            "substitute": ["me"]
           },
           "moveTarget": {
             "step": 1

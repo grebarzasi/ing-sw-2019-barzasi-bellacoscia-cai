@@ -36,7 +36,7 @@
       "subEffect": {
         "1": {
           "targetAcq": {
-            "equals": ["basic"],
+            "equal": ["basic"],
           "different": ["addTwo"],
           "askPlayer": {
             "msg": "Seleziona 1 Player fra quelli colpiti nell'effetto base.",
@@ -57,7 +57,7 @@
       "subEffect": {
         "1": {
           "targetAcq": {
-            "equals": ["basic"],
+            "equal": ["basic"],
           "different": ["addOne"],
           "askPlayer": {
             "msg": "Seleziona 1 Player fra quelli colpiti nell'effetto base.",

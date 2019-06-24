@@ -5,7 +5,7 @@
   },
   "effects": {
     "basic": {
-      "name": "modalità base",
+      "name": "Modalità base",
       "cost": {
         "yellow": 2,
         "blue": 1
@@ -28,7 +28,7 @@
       }
     },
     "alternative": {
-      "name": "modalità perforazione",
+      "name": "Modalità perforazione",
       "cost": {},
       "subEffect": {
         "1": {

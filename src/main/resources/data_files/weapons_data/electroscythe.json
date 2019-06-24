@@ -5,14 +5,14 @@
   },
   "effects": {
     "basic": {
-      "name": "modalità base",
+      "name": "Modalità base",
       "cost": {
         "blue": 1
       },
       "subEffect": {
         "1": {
           "targetAcq": {
-            "equals": ["mySquare"]
+            "equal": ["mySquare"]
           },
           "shootTarget": {
             "damage": 1
@@ -29,7 +29,7 @@
       "subEffect": {
         "1": {
           "targetAcq": {
-            "equals": ["mySquare"]
+            "equal": ["mySquare"]
           },
           "shootTarget": {
             "damage": 2

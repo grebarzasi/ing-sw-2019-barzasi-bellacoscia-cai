@@ -40,7 +40,7 @@ public class Weapon extends Card {
      *
      */
     private Effect extraMove;
-    private boolean beforeBasic=true;
+    private boolean beforeBasic;
 
     /**
      * used in some effect in order to act as a chain.
@@ -62,6 +62,7 @@ public class Weapon extends Card {
         this.directionTemp=null;
         this.askTemp=null;
         this.damaged= new HashSet<>();
+        this.beforeBasic=true;
     }
 
     /**

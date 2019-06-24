@@ -6,7 +6,7 @@
 
   "effects": {
     "basic": {
-      "name": "effetto base",
+      "name": "Effetto base",
       "cost": {
         "blue": 1,
         "red": 1
@@ -29,7 +29,7 @@
       }
     },
     "addOne": {
-      "name": "reazione a catena",
+      "name": "Reazione a catena",
       "cost": {
         "blue": 1
       },
@@ -54,7 +54,7 @@
       }
     },
     "addTwo": {
-      "name": "alta tensione",
+      "name": "Alta tensione",
       "cost": {
         "blue": 1
       },

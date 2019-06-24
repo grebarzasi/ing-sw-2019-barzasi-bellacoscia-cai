@@ -1,11 +1,12 @@
 {
   "name": "Lanciagranate",
+  "extraBeforeBasic": false,
   "chamber": {
     "red": 1
   },
   "effects": {
     "basic": {
-      "name": "effetto base",
+      "name": "Effetto base",
       "cost": {
         "red": 1
       },
@@ -27,7 +28,7 @@
       }
     },
     "addOne": {
-      "name": "granata extra",
+      "name": "Granata extra",
       "cost": {
         "red": 1
       },
@@ -50,9 +51,8 @@
       }
     },
     "extraMove": {
-      "name": "movimento extra",
+      "name": "Movimento extra",
       "cost": {},
-      "beforeBasic": false,
       "subEffect": {
         "1": {
           "targetAcq": {

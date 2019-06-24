@@ -5,7 +5,7 @@
   },
   "effects": {
     "basic": {
-      "name": "modalità base",
+      "name": "Modalità base",
       "cost": {
         "blue": 1
       },
@@ -28,7 +28,7 @@
       }
       },
     "alternative": {
-      "name": "modalità punitore",
+      "name": "Modalità punitore",
       "cost": {
         "blue": 1,
         "yellow": 1

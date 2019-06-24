@@ -40,10 +40,10 @@ public class AimComparator {
                     pSet.addAll(w.getAddTwoEffect().getTargetHitSet());
                     break;
                 case "alternative":
-                    pSet.addAll(w.getAddTwoEffect().getTargetHitSet());
+                    pSet.addAll(w.getAlternativeEffect().getTargetHitSet());
                     break;
                 case "extramove":
-                    pSet.addAll(w.getAddTwoEffect().getTargetHitSet());
+                    pSet.addAll(w.getExtraMove().getTargetHitSet());
                     break;
                 case "last":
                     pSet.add(w.getLastHit());

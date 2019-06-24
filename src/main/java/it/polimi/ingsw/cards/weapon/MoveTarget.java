@@ -35,6 +35,9 @@ public class MoveTarget implements SubEffect {
     public Set<Figure> applyEffect(Weapon w, Set<Figure> p){
         if(p==null)
             return null;
+        if(p.isEmpty())
+            return p;
+
         switch(finalPos){
             case "last":
                 squareTemp = w.getLastHit().getPosition();
@@ -42,6 +45,7 @@ public class MoveTarget implements SubEffect {
             case "me":
                 squareTemp = w.getOwner().getPosition();
                 break;
+
         }
 
         if(squareTemp==null&&w.getMoveTemp()==null) {
@@ -55,8 +59,16 @@ public class MoveTarget implements SubEffect {
         }
 
         for (Figure target : p) {
+            target.setOldPosition(target.getPosition());
             target.setPosition(squareTemp);
             w.setLastMoved(target);
+        }
+
+        if(finalPos.equals("visible")&&!w.getOwner().canSee(w.getLastMoved())) {
+            w.getLastMoved().setPosition(w.getLastMoved().getOldPosition());
+            targetTemp.addAll(p);
+            w.setMoveTemp(this);
+            return null;
         }
         return p;
     }

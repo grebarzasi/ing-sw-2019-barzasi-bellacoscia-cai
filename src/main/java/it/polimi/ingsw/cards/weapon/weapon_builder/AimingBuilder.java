@@ -103,8 +103,10 @@ public class AimingBuilder {
     public static AimEqual buildEqual(JsonNode node) {
         ArrayList<String> source = new ArrayList<>();
         Iterator<JsonNode> element = node.elements();
-        while (element.hasNext())
-            source.add(element.next().toString().replace("\"", ""));
+        while (element.hasNext()) {
+//            source.add(element.next().toString().replace("\"", ""));
+            source.add(element.next().textValue());
+        }
         return new AimEqual(source);
     }
     /**

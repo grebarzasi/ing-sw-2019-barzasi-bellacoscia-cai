@@ -130,7 +130,7 @@ public class UpdateParser {
 
         //parse killshotTrack
         ArrayList<String> kills = new ArrayList<>();
-        String all=node.path("killshot_truck").asText();
+        String all=node.path("killshot_track").asText();
         String[] outer = all.split(INFO_SEP);
 
         for(String s : outer)

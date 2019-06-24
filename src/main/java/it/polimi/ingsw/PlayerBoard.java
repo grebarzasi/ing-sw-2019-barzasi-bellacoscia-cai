@@ -13,9 +13,9 @@ import java.util.*;
 public class PlayerBoard {
 
     private static final int[] points = {8,6,4,2,1,1,0};
-    private static final int INIT_AMMO_RED = 100;
-    private static final int INIT_AMMO_BLU = 100;
-    private static final int INIT_AMMO_YELLOW = 100;
+    private static final int INIT_AMMO_RED = 99;
+    private static final int INIT_AMMO_BLU = 99;
+    private static final int INIT_AMMO_YELLOW = 99;
 
     private Figure owner;
 

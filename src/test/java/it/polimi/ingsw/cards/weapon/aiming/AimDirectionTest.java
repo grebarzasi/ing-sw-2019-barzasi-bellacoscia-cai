@@ -59,7 +59,7 @@ class AimDirectionTest {
         result.add(playerArrayList.get(4));
         result.add(playerArrayList.get(0));
         figureSet = dir.filter(w,w.getOwner().allFigures());
-        w.getDirectionTemp().setDirectionTemp("w");
+        w.getDirectionTemp().setDirectionTemp("o");
         figureSet = dir.filter(w,w.getOwner().allFigures());
         assertEquals(result,figureSet);
     }

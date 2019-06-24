@@ -76,7 +76,7 @@ class AimComparatorTest {
         AimComparator comp;
 
         //BASE
-        source.add("base");
+        source.add("basic");
         comp = new AimComparator(source);
         figureSet = comp.getPlayersFromSource(w,playerArrayList.get(0));
         assertEquals(hitSet,figureSet);

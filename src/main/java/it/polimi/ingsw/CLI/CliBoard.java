@@ -574,7 +574,7 @@ public class CliBoard {
      * convert Character info into token
      */
     public void printToken(String character){
-        String pawn;
+        String pawn="";
         switch (character){
             case "red":
                 pawn=RED_T;
@@ -594,8 +594,6 @@ public class CliBoard {
             case "":
                 pawn=" ";
                 break;
-            default:
-                pawn="";
         }
         System.out.print(pawn);
     }

@@ -65,8 +65,8 @@ public class EffectBuilder {
 
     public static MoveTarget buildMoveTarget(JsonNode node){
         Integer maxStep = node.path("step").asInt();
-        String finalPos = node.path("final").asText();
-        boolean directional = node.path("final").asBoolean();
+        String finalPos = node.path("finalPos").asText();
+        boolean directional = node.path("directional").asBoolean();
         return new MoveTarget(maxStep,finalPos,directional);
     }
 
