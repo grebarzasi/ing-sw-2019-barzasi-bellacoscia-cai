@@ -140,6 +140,8 @@ public class AsBot implements ControllerState{
             }
         }
 
+        canGo.add(this.controller.getModel().getBot().getPosition());
+
         return canGo;
 
     }

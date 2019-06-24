@@ -12,7 +12,7 @@ import java.util.*;
 
 public class PlayerBoard {
 
-    private static final int[] points = {8,6,4,2,1,1};
+    private static final int[] points = {8,6,4,2,1,1,0};
     private static final int INIT_AMMO_RED = 1;
     private static final int INIT_AMMO_BLU = 1;
     private static final int INIT_AMMO_YELLOW = 1;
@@ -56,6 +56,7 @@ public class PlayerBoard {
         this.pointVec[3]=points[3];
         this.pointVec[4]=points[4];
         this.pointVec[5]=points[5];
+        this.pointVec[6]=points[6];
 
     }
 
@@ -141,7 +142,7 @@ public class PlayerBoard {
 
         int i;
 
-        for(i=0;i<4;i++) {
+        for(i=0;i<6;i++) {
 
             this.pointVec[i] = this.pointVec[i + 1] ;
 
@@ -194,6 +195,19 @@ public class PlayerBoard {
         owner.getPersonalBoard().getAmmoInventory().setBlue(blue-a.getBlue());
         owner.getPersonalBoard().getAmmoInventory().setYellow(yellow-a.getYellow());
         return true;
+    }
+
+    /**
+     * Checks if the player must flip their board when starting frenzy mode
+     * @return true if the board should be flipped, false otherwise
+     */
+
+    public boolean canFlip(){
+        if(this.getDamage().isEmpty()){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public ArrayList<Token> getDamage() {

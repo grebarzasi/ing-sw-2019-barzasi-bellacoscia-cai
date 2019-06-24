@@ -300,7 +300,6 @@ public class Controller {
                     this.decreaseMoveLeft();
                 }
 
-                this.goBack();
                 this.model.setFrenzyState(this.model.getFrenzyState() + 1);
 
                 if(this.model.getFrenzyState() == this.model.getPlayerList().size()){
@@ -373,6 +372,12 @@ public class Controller {
         this.setCurrentState(endGame);
         this.currentState.executeState();
 
+        if(this.hasFrenzy){
+            for(Player p: this.model.getPlayerList()){
+                p.die();
+            }
+        }
+
     }
 
     /**
@@ -382,8 +387,10 @@ public class Controller {
     private void startFrenzy(){
         this.model.setFrenzy(true);
 
-        for(Player p : this.model.getPlayerList()){
-            p.getPersonalBoard().setPointVec(frenzyPointsVec);
+        for(Player p : this.model.getPlayerList()) {
+            if (p.getPersonalBoard().canFlip()) {
+                p.getPersonalBoard().setPointVec(frenzyPointsVec);
+            }
         }
     }
 
