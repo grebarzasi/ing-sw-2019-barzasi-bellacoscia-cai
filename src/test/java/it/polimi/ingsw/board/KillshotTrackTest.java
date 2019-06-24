@@ -97,6 +97,14 @@ class KillshotTrackTest {
         }
         kills.addKill(t2);
 
+        Player p3 =  new Player();
+        ArrayList <Token> t3 = new ArrayList<>();
+        for (int i = 0; i < 1; i++){
+            Token k = new Token(p3);
+            t3.add(k);
+        }
+        kills.addKill(t3);
+
         int before1 = p1.getPoints();
         int before2 = p2.getPoints();
         kills.getPoints();
@@ -104,11 +112,11 @@ class KillshotTrackTest {
         int after2 = p2.getPoints();
 
 
-        /*
-        EXPLAIN THIS
-         */
         assertNotEquals(before1,after1);
         assertNotEquals(before2,after2);
+        assertEquals(8,p1.getPoints());
+        assertEquals(4,p3.getPoints());
+        assertEquals(6,p2.getPoints());
 
     }
 

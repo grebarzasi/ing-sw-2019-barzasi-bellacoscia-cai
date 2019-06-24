@@ -115,13 +115,18 @@ public class KillshotTrack {
         int minIndex = 0;
         Integer min = 20;
 
-        for (Integer i: occ) {
-            if(i != -1 && i < min){
-                min = i;
-                minIndex = occ.indexOf(i);
+        for (Integer i = 0; i < occ.size(); i++) {
+            if(occ.get(i) != -1 && occ.get(i) < min){
+                min = occ.get(i);
+                minIndex = i;
             }
         }
         occ.set(minIndex, -1);
+        if(occ.contains(min)){
+            if(occ.indexOf(min) < minIndex) {
+                minIndex = occ.indexOf(min);
+            }
+        }
         return minIndex;
     }
 
