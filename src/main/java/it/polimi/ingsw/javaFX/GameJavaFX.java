@@ -852,11 +852,11 @@ public class GameJavaFX extends Application implements ViewClient {
 
 
         VBox vmsg = new VBox(25);
-        vmsg.setAlignment(Pos.BASELINE_LEFT);
+        vmsg.setAlignment(Pos.CENTER);
         vmsg.getChildren().add(msg);
         vmsg.getChildren().add(hBtn);
 
-        grid.add(vmsg, 1, 2,3,1);
+        grid.add(vmsg, 1, 2,3,2);
 
         /**
          * set buttons' action.
@@ -1370,8 +1370,9 @@ public class GameJavaFX extends Application implements ViewClient {
         int k = 2;
         int no = 3;
 
-        if (!p.getpBoard().getMarks().equals(null)) {
+        if (p.getpBoard().getMarks().size() < 1) {
             for (String color : p.getpBoard().getMarks()) {
+
                 switch (color) {
                     case "yellow": {
                         ImageView img = null;
@@ -1436,7 +1437,7 @@ public class GameJavaFX extends Application implements ViewClient {
                 ImageView img = null;
 
                 try {
-                    img = new ImageView(new Image(new FileInputStream(PATH_EMPTY_DAMAGE), width, hmarks, true, true));
+                    img = new ImageView(new Image(new FileInputStream(PATH_YELLOW_DAMAGE), 1, 1, true, true));
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -1444,8 +1445,9 @@ public class GameJavaFX extends Application implements ViewClient {
             }
         }
 
-        if (!p.getpBoard().getDamage().equals(null)) {
+        if (p.getpBoard().getDamage().size() < 1) {
             for (String color : p.getpBoard().getDamage()) {
+
                 switch (color) {
                     case "yellow": {
                         ImageView img = null;
@@ -1510,7 +1512,7 @@ public class GameJavaFX extends Application implements ViewClient {
                 ImageView img = null;
 
                 try {
-                    img = new ImageView(new Image(new FileInputStream(PATH_EMPTY_DAMAGE), width, hmarks, true, true));
+                    img = new ImageView(new Image(new FileInputStream(PATH_YELLOW_DAMAGE), 1, 1, true, true));
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
