@@ -25,12 +25,13 @@ public class AimDirection implements AimingFilter {
 
     public AimDirection(boolean wallBang) {
         this.wallBang = wallBang;
+        targetTemp=new HashSet<>();
     }
 
     public Set<Figure> filter(Weapon w, Set<Figure> p) {
         if(w.getDirectionTemp()==null){
             w.setDirectionTemp(this);
-            targetTemp=allDirectional(w.getOwner(),p);
+            targetTemp.addAll(allDirectional(w.getOwner(),p));
             return null;
         }
         w.setDirectionTemp(null);

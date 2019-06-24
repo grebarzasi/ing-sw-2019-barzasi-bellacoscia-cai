@@ -64,6 +64,10 @@ public class WeaponBuilder {
                         break;
                 }
             }
+
+            Ammo temp = weaponBuilt.getBasicEffect().getCost();
+            weaponBuilt.setReloadCost(temp);
+            weaponBuilt.getBasicEffect().setCost(new Ammo(0,0,0));
             return weaponBuilt;
 
         } catch (IOException e) {

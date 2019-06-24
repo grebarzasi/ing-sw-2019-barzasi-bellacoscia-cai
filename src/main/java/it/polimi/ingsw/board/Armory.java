@@ -49,7 +49,7 @@ Armory {
     public String toString(){
         String s="";
         for(Weapon w: weaponList)
-            s=s+w.getName()+INNER_SEP+w.getChamber().toString()+INNER_SEP+w.getBasicEffect().getCost().toString().replaceFirst(w.getChamber().toString(),"")+INFO_SEP;
+            s=s+w.getName()+INNER_SEP+w.getChamber().toString()+INNER_SEP+w.getReloadCost().toString().replaceFirst(w.getChamber().toString(),"")+INFO_SEP;
         return s;
     }
 }

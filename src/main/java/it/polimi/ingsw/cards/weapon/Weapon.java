@@ -22,6 +22,7 @@ public class Weapon extends Card {
     private Player owner;
     private String name;
     private Ammo chamber;
+    private Ammo reloadCost;
     private boolean isLoaded;
     private int indexTemp;
     private AimDirection directionTemp;
@@ -45,6 +46,9 @@ public class Weapon extends Card {
      * used in some effect in order to act as a chain.
      */
     private Figure lastHit;
+    private Figure lastMoved;
+    private Set<Figure> damaged;
+
 
     public Weapon(){
         this.isLoaded = true;
@@ -57,6 +61,7 @@ public class Weapon extends Card {
         this.isLoaded = true;
         this.directionTemp=null;
         this.askTemp=null;
+        this.damaged= new HashSet<>();
     }
 
     /**
@@ -66,8 +71,8 @@ public class Weapon extends Card {
      */
     public boolean reload() {
 
-        if (this.getOwner().getPersonalBoard().getAmmoInventory().covers(this.getBasicEffect().getCost())) {
-            this.getOwner().getPersonalBoard().removeAmmo(this.getBasicEffect().getCost());
+        if (this.getOwner().getPersonalBoard().getAmmoInventory().covers(reloadCost)) {
+            this.getOwner().getPersonalBoard().removeAmmo(reloadCost);
             this.setLoaded(true);
             return true;
         } else {
@@ -80,9 +85,10 @@ public class Weapon extends Card {
 
     public Set<Effect> getUsableEff(){
         Set<Effect> usable=new HashSet<>();
-        if(basicEffect!=null&&!basicEffect.isUsed())
+
+        if(basicEffect!=null&&!basicEffect.isUsed()&&(alternativeEffect==null||!alternativeEffect.isUsed()))
             usable.add(basicEffect);
-        if(alternativeEffect!=null&&!alternativeEffect.isUsed())
+        if(alternativeEffect!=null&&!alternativeEffect.isUsed()&&!basicEffect.isUsed())
             usable.add(alternativeEffect);
         if(addOneEffect!=null&&!addOneEffect.isUsed()&&basicEffect.isUsed())
             usable.add(addOneEffect);
@@ -98,6 +104,7 @@ public class Weapon extends Card {
         directionTemp=null;
         askTemp=null;
         moveTemp=null;
+        damaged.clear();
 
         if(basicEffect!=null)
             basicEffect.resetEffect();
@@ -237,4 +244,29 @@ public class Weapon extends Card {
     public void setMoveTemp(MoveTarget moveTemp) {
         this.moveTemp = moveTemp;
     }
+
+    public Ammo getReloadCost() {
+        return reloadCost;
+    }
+
+    public void setReloadCost(Ammo reloadCost) {
+        this.reloadCost = reloadCost;
+    }
+
+    public Figure getLastMoved() {
+        return lastMoved;
+    }
+
+    public void setLastMoved(Figure lastMoved) {
+        this.lastMoved = lastMoved;
+    }
+
+    public Set<Figure> getDamaged() {
+        return damaged;
+    }
+
+    public void setDamaged(Set<Figure> damaged) {
+        this.damaged = damaged;
+    }
+
 }

@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import static it.polimi.ingsw.controller.ControllerMessages.*;
+
 /**
  * State of shooting enemies in the face
  */
@@ -22,6 +24,8 @@ public class Shooting implements ControllerState {
     private int range;
     private Controller controller;
     private Weapon shootingWith;
+    boolean additionalEffect = false;
+    boolean scopeUsed=false;
 
     Shooting(Controller controller) {
         this.controller = controller;
@@ -39,9 +43,6 @@ public class Shooting implements ControllerState {
     public void executeState(){
 
         Effect choice=null;
-        boolean additionalEffect = false;
-        boolean scopeUsed=false;
-        boolean ok;
 
         this.move();
 
@@ -54,6 +55,7 @@ public class Shooting implements ControllerState {
 
             //if empty no effect are available and you can go on
             if(effects.isEmpty()) {
+                controller.getView().displayMessage(NO_USABLE_EFFECT);
                 break;
             }
 
@@ -69,33 +71,24 @@ public class Shooting implements ControllerState {
             if(this.controller.getCurrentPlayer().getPersonalBoard().getAmmoInventory().covers(choice.getCost())) {
 
                 //repeat until no more action from player are required
-                do {
-                    checkInfoNeeded(shootingWith);
-                    ok = choice.executeEffect();
-                    //this.controller.getCurrentPlayer().getPersonalBoard().getAmmoInventory().substract(choice.getCost());
-                } while (!ok);
-
-                if(!additionalEffect) {
-                    this.controller.decreaseMoveLeft();
-                }
-                //now the effect is been executed
-
-                additionalEffect=true;
-
-                if(!scopeUsed)
-                    scopeUsed=this.useScope(choice);
+                useEffect(choice);
+                postShootCheck(choice);
 
                 this.controller.update();
 
-            }else
-                controller.getView().displayMessage("Non hai le risorse necessarie per questo effetto");
+                this.controller.askVenoms(choice.getTargetHitSet(), this.controller.getCurrentPlayer());
 
-            this.controller.askVenoms(choice.getTargetHitSet() , this.controller.getCurrentPlayer());
+            }else {
+                controller.getView().displayMessage(NO_AMMO);
+            }
+
 
         } while (true);
 
         checkReply(choice);
 
+        useScope();
+        shootingWith.resetWeapon();
         this.controller.update();
         this.controller.goBack();
 
@@ -116,17 +109,15 @@ public class Shooting implements ControllerState {
 
     }
 
-    private boolean useScope(Effect chosen){
-
+    private void useScope(){
         if(this.canUseScope())
-            return this.activateScope(chosen);
-        return false;
+            this.activateScope();
 
     }
 
     private boolean canUseScope(){
 
-        if(!this.controller.getCurrentPlayer().getPersonalBoard().getAmmoInventory().isEmpty()) {
+        if(!this.controller.getCurrentPlayer().getPersonalBoard().getAmmoInventory().isEmpty()&&!shootingWith.getDamaged().isEmpty()) {
 
             for (PowerUp p : this.controller.getCurrentPlayer().getPowerupList()) {
                 if (p.getName().equals(PowerUp.TARGETING_SCOPE)) {
@@ -143,7 +134,7 @@ public class Shooting implements ControllerState {
 
     }
 
-    private boolean activateScope(Effect chosen){
+    private boolean activateScope(){
 
         boolean useScope = this.controller.getView().showBoolean(ControllerMessages.ASK_SCOPE);
 
@@ -157,7 +148,7 @@ public class Shooting implements ControllerState {
             if(toUse==null)
                 return false;
 
-            Set<Figure> options = new HashSet<>(chosen.getTargetHitSet());
+            Set<Figure> options = new HashSet<>(shootingWith.getDamaged());
 
             ArrayList<Figure> chosenTarget = this.controller.getView().showTargetAdvanced(options,
                     1, false, ControllerMessages.ASK_TARGET);
@@ -169,35 +160,44 @@ public class Shooting implements ControllerState {
         return false;
     }
 
-    public Controller getController() {
-        return controller;
-    }
-
-    public void setController(Controller controller) {
-        this.controller = controller;
-    }
-
-    void setShootingWith(Weapon shootingWith) {
-        this.shootingWith = shootingWith;
-    }
-
-    public int getRange() {
-        return range;
-    }
-
-    public void setRange(int range) {
-        this.range = range;
-    }
-
     private void checkReply(Object rpl){
         if (rpl == null&&(controller.getView().isDisconnected()||controller.getView().isInactive())) {
             shootingWith.resetWeapon();
             controller.endTurn();
-        } else  if (rpl == null) {
-            shootingWith.resetWeapon();
-            this.controller.update();
-            this.controller.goBack();
         }
+    }
+
+    private void useEffect(Effect choice){
+        boolean ok;
+        do {
+            checkInfoNeeded(shootingWith);
+            ok = choice.executeEffect();
+        } while (!ok);
+    }
+
+    private void postShootCheck(Effect choice){
+        //if you shoot someone decrease the cost and set unloaded
+        if(!choice.getTargetHitSet().isEmpty()) {
+            this.controller.getCurrentPlayer().getPersonalBoard().getAmmoInventory().subtract(choice.getCost());
+
+             shootingWith.setLoaded(false);
+
+            //if is not your addition effect, set move used
+
+            if(!additionalEffect) {
+                this.controller.decreaseMoveLeft();
+            }
+
+            //now the effect is been executed
+            additionalEffect=true;
+
+
+        }else {
+            //if you miss your hit reset effect
+            controller.getView().displayMessage(NO_HIT);
+            choice.resetEffect();
+        }
+
     }
 
     private void checkInfoNeeded(Weapon w){
@@ -230,4 +230,26 @@ public class Shooting implements ControllerState {
             mv.setSquareTemp(rpl);
         }
     }
+
+
+    public Controller getController() {
+        return controller;
+    }
+
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
+
+    void setShootingWith(Weapon shootingWith) {
+        this.shootingWith = shootingWith;
+    }
+
+    public int getRange() {
+        return range;
+    }
+
+    public void setRange(int range) {
+        this.range = range;
+    }
+
 }

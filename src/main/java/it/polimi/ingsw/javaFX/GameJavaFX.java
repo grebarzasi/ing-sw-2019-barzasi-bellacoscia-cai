@@ -852,11 +852,11 @@ public class GameJavaFX extends Application implements ViewClient {
 
 
         VBox vmsg = new VBox(25);
-        vmsg.setAlignment(Pos.CENTER);
+        vmsg.setAlignment(Pos.BASELINE_LEFT);
         vmsg.getChildren().add(msg);
         vmsg.getChildren().add(hBtn);
 
-        grid.add(vmsg, 1, 2,3,2);
+        grid.add(vmsg, 1, 2,3,1);
 
         /**
          * set buttons' action.
@@ -976,6 +976,7 @@ public class GameJavaFX extends Application implements ViewClient {
         //primaryStage.setFullScreen(true);
         primaryStage.setMaximized(true);
         primaryStage.setResizable(true);
+        primaryStage.setFullScreen(true);
         primaryStage.show();
     }
 
@@ -1330,7 +1331,7 @@ public class GameJavaFX extends Application implements ViewClient {
         int j = 0;
         ImageView imgKill = null;
 
-        if(colors.get(j).split(INNER_SEP)[0].equals(null)) {
+        if(colors.get(j).split(INNER_SEP)[1].equals(null)) {
             while (j < colors.size()) {
                 if (colors.get(j).split(INNER_SEP).length > 1) {
                     try {
@@ -1370,9 +1371,8 @@ public class GameJavaFX extends Application implements ViewClient {
         int k = 2;
         int no = 3;
 
-        if (p.getpBoard().getMarks().size() < 1) {
+        if (!p.getpBoard().getMarks().equals(null)) {
             for (String color : p.getpBoard().getMarks()) {
-
                 switch (color) {
                     case "yellow": {
                         ImageView img = null;
@@ -1437,7 +1437,7 @@ public class GameJavaFX extends Application implements ViewClient {
                 ImageView img = null;
 
                 try {
-                    img = new ImageView(new Image(new FileInputStream(PATH_YELLOW_DAMAGE), 1, 1, true, true));
+                    img = new ImageView(new Image(new FileInputStream(PATH_EMPTY_DAMAGE), width, hmarks, true, true));
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -1445,9 +1445,8 @@ public class GameJavaFX extends Application implements ViewClient {
             }
         }
 
-        if (p.getpBoard().getDamage().size() < 1) {
+        if (!p.getpBoard().getDamage().equals(null)) {
             for (String color : p.getpBoard().getDamage()) {
-
                 switch (color) {
                     case "yellow": {
                         ImageView img = null;
@@ -1512,7 +1511,7 @@ public class GameJavaFX extends Application implements ViewClient {
                 ImageView img = null;
 
                 try {
-                    img = new ImageView(new Image(new FileInputStream(PATH_YELLOW_DAMAGE), 1, 1, true, true));
+                    img = new ImageView(new Image(new FileInputStream(PATH_EMPTY_DAMAGE), width, hmarks, true, true));
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }

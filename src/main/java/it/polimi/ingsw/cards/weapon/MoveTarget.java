@@ -4,6 +4,7 @@ import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.actions.Action;
 import it.polimi.ingsw.board.map.Square;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -24,7 +25,7 @@ public class MoveTarget implements SubEffect {
         this.maxSteps=maxSteps;
         this.finalPos=finalPos;
         this.directional=directional;
-        this.targetTemp=null;
+        this.targetTemp=new HashSet<>();
     }
 
     public int getMaxSteps() {
@@ -44,23 +45,26 @@ public class MoveTarget implements SubEffect {
         }
 
         if(squareTemp==null&&w.getMoveTemp()==null) {
-                targetTemp=p;
+                targetTemp.addAll(p);
                 w.setMoveTemp(this);
                 return null;
         }else if(w.getMoveTemp()!=null){
-            p=targetTemp;
+            p.clear();
+            p.addAll(targetTemp);
             w.setMoveTemp(null);
         }
 
         for (Figure target : p) {
             target.setPosition(squareTemp);
+            w.setLastMoved(target);
         }
         return p;
     }
 
     @Override
     public void resetSubEffect() {
-        targetTemp=null;
+        targetTemp.clear();
+        squareTemp=null;
     }
 
     public void setMaxSteps(int maxSteps) {

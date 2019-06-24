@@ -18,7 +18,6 @@ public class Effect {
     private ArrayList<SubEffect> effectList;
     private Set<Figure> targetHitSet;
     private boolean used;
-    private boolean stop;
     private Weapon myWeapon;
     private int indexTemp;
 
@@ -33,6 +32,7 @@ public class Effect {
         this.cost=cost;
         this.effectList=effectList;
         this.targetHitSet= new HashSet<>();
+
         this.used= false;
         this.indexTemp=0;
 
@@ -41,6 +41,10 @@ public class Effect {
 
         public Ammo getCost() {
         return cost;
+    }
+
+    public void setCost(Ammo cost) {
+        this.cost = cost;
     }
 
     public void setMyWeapon(Weapon w){
@@ -94,10 +98,6 @@ public class Effect {
 
     public boolean isUsed() {
         return used;
-    }
-
-    public boolean isStop() {
-        return stop;
     }
 
     public Weapon getMyWeapon() {

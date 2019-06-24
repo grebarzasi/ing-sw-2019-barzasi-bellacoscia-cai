@@ -43,12 +43,14 @@ public class AimAskPlayer implements AimingFilter {
 
     public Set<Figure> filter(Weapon w, Set<Figure> p) {
         if(w.getAskTemp()==null){
-          targetTemp=p;
+          targetTemp.addAll(p);
           w.setAskTemp(this);
           return null;
        }
         w.setAskTemp(null);
-        return targetTemp;
+        p.clear();
+        p.addAll(targetTemp);
+        return p;
     }
 
 

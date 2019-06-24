@@ -125,7 +125,7 @@ public class ServerCommManager  extends Thread implements View {
         String rpl="";
         String[] temp;
         for(Weapon p : args){
-            s=s+p.getName()+INNER_SEP+p.getChamber().toString()+INNER_SEP+p.getBasicEffect().getCost().toString().replaceFirst(p.getChamber().toString(),"")+INFO_SEP;
+            s=s+p.getName()+INNER_SEP+p.getChamber().toString()+INNER_SEP+p.getReloadCost().toString().replaceFirst(p.getChamber().toString(),"")+INFO_SEP;
         }
 
         /*-------------------------------------------*/
