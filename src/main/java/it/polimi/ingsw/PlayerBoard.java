@@ -46,7 +46,7 @@ public class PlayerBoard {
 
         this.owner = owner;
         this.damage = new ArrayList<>();
-        this.pointVec = new int[6];
+        this.pointVec = new int[7];
         this.mark = new ArrayList<>();
         this.ammoInventory = new Ammo(INIT_AMMO_RED,INIT_AMMO_BLU,INIT_AMMO_YELLOW);
 
