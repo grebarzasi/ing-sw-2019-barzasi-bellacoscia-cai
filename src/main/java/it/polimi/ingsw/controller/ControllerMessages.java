@@ -1,7 +1,11 @@
 package it.polimi.ingsw.controller;
 
+/**
+ * Text messages used in controller to report the status of the controller
+ */
+
 class ControllerMessages {
-    
+
      static final String ASK_TARGET = "Scegli un bersaglio da colpire: ";
      static final String ASKING_VENOM = "Vuoi usare una Granata Venom? ";
      static final String ASK_FRENZY_RELOAD = "Vuoi sfruttare la ricarica? ";

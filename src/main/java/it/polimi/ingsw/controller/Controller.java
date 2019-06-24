@@ -9,6 +9,7 @@ import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.connection.ClientHandler;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Set;
 
 import static java.lang.Thread.sleep;
@@ -288,7 +289,7 @@ public class Controller {
         if(!checkLeftPlayer())
             endGame();
 
-        if(this.getBoard().getTrack().getKillsTrack().size() == this.getBoard().getTrack().getSkullMax()){
+        if(this.getBoard().getTrack().getKillsTrack().size() >= this.getBoard().getTrack().getSkullMax()){
 
             if(this.hasFrenzy){
 
@@ -409,15 +410,15 @@ public class Controller {
 
         Player tmp = this.getCurrentPlayer();
 
-        int i;
+        Iterator<Player> removeNoVenoms = finalTargets.iterator();
 
-        for(i = 0 ; i < finalTargets.size() ; i++){
+        while(removeNoVenoms.hasNext()){
+            Player p = removeNoVenoms.next();
+            ArrayList<PowerUp> options = p.getPowerupList();
 
-            ArrayList<PowerUp> filtered = new ArrayList<>(finalTargets.get(i).getPowerupList());
-            Controller.filterPUs(filtered,PowerUp.TAGBACK_GRENADE);
-
-            if(filtered.isEmpty()){
-                finalTargets.remove(i);
+            filterPUs(options,PowerUp.TAGBACK_GRENADE);
+            if(p.getPowerupList().isEmpty()){
+                removeNoVenoms.remove();
             }
         }
 

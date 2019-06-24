@@ -85,6 +85,11 @@ public class AsBot implements ControllerState{
 
     }
 
+    /**
+     * manages spawning of the bot, makes the player choose ont of the three spawning spots
+     * and proceeds to spawn the bot on that spot
+     */
+
     private void spawnBot(){
 
         Square spawnPoint = this.controller.getView().showPossibleMoves(this.controller.returnSpawns(), true);
@@ -104,6 +109,11 @@ public class AsBot implements ControllerState{
 
     }
 
+    /**
+     * Takes a square adjacent to the bot's position and moves the bot to that square,
+     * if the inserted square is not adjacent asks for input again
+     */
+
     private void moveBot(){
 
         ArrayList<Square> canGo = botCanGo();
@@ -122,6 +132,11 @@ public class AsBot implements ControllerState{
 
 
     }
+
+    /**
+     * Pure method that returns the list of squares a bot can go to
+     * @return the possible destinations of the bot
+     */
 
     private ArrayList<Square> botCanGo(){
 
