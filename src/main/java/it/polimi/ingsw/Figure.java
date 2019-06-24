@@ -313,7 +313,6 @@ public abstract class Figure {
     public void die(){
 
         HashMap<Figure,Integer> contributors = new HashMap<>();
-        ArrayList<Figure> murderers = new ArrayList<>();
         int tmp;
         int i;
 
@@ -334,15 +333,13 @@ public abstract class Figure {
         }
 
         //loads all players who have contributed to the kill into an Arraylist
-        for(Figure f: contributors.keySet()){
-            murderers.add(f);
-        }
+        ArrayList<Figure> murderers = new ArrayList<>(contributors.keySet());
 
 
 
         //initialising a new arraylist of ordered contributors
         ArrayList<Figure> ordered = new ArrayList<>();
-        boolean added = false;
+        boolean added;
         //inserts in order into a new list
 
 
@@ -433,10 +430,6 @@ public abstract class Figure {
         this.points += addedPoints;
     }
 
-    public void usePU(PowerUp pu) {
-
-    }
-
     /*just a bunch of setters and getters*/
 
     public Square getOldPosition() {
@@ -455,10 +448,6 @@ public abstract class Figure {
         this.character = character;
     }
 
-    public void setPoints(int points) {
-        this.points = points;
-    }
-
     public void setPosition(Square position) {
         this.position = position;
     }
@@ -469,14 +458,6 @@ public abstract class Figure {
 
     public void setPersonalBoard(PlayerBoard personalBoard) {
         this.personalBoard = personalBoard;
-    }
-
-    public Board getGameBoard() {
-        return gameBoard;
-    }
-
-    public void setGameBoard(Board gameBoard) {
-        this.gameBoard = gameBoard;
     }
 
     public GameModel getModel() {

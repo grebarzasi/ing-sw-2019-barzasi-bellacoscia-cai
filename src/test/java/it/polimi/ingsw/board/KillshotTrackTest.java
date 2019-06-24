@@ -16,6 +16,53 @@ class KillshotTrackTest {
 
     KillshotTrack kills = new KillshotTrack(8);
 
+
+    @Test
+    void rigorousTest(){
+
+        KillshotTrack nurburgring = new KillshotTrack(5);
+
+        Player sls = new Player("Mercedes","SLS");
+        Player i8 = new Player("BMW","i8");
+        Player modelS = new Player("Tesla","ModelS");
+
+        ArrayList<Token> race1 = new ArrayList<>();
+        ArrayList<Token> race2 = new ArrayList<>();
+        ArrayList<Token> race3 = new ArrayList<>();
+        ArrayList<Token> race4 = new ArrayList<>();
+        ArrayList<Token> race5 = new ArrayList<>();
+
+        race1.add(new Token(sls));
+        race1.add(new Token(sls));
+
+        race2.add(new Token(modelS));
+        race2.add(new Token(modelS));
+
+        race3.add(new Token(i8));
+        race3.add(new Token(i8));
+
+        race4.add(new Token(sls));
+        race4.add(new Token(sls));
+
+        race5.add(new Token(sls));
+        race5.add(new Token(sls));
+
+
+
+        nurburgring.addKill(race1);
+        nurburgring.addKill(race2);
+        nurburgring.addKill(race3);
+        nurburgring.addKill(race4);
+        nurburgring.addKill(race5);
+
+        nurburgring.getPoints();
+
+        assertEquals(8,sls.getPoints());
+        assertEquals(6,modelS.getPoints());
+        assertEquals(4,i8.getPoints());
+
+    }
+
     @Test
     void addKillTest() {
         int before = kills.getSkullMax();
@@ -56,6 +103,10 @@ class KillshotTrackTest {
         int after1 = p1.getPoints();
         int after2 = p2.getPoints();
 
+
+        /*
+        EXPLAIN THIS
+         */
         assertNotEquals(before1,after1);
         assertNotEquals(before2,after2);
 

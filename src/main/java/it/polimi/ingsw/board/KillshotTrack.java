@@ -10,6 +10,7 @@ import java.util.*;
  *
  * @author Carlo Bellacoscia
  */
+
 public class KillshotTrack {
 
     private int skullMax;
@@ -46,6 +47,7 @@ public class KillshotTrack {
     }
 
     public void getPoints() {
+
         if(killsTrack != null) {
             ArrayList<Figure> figureList = killerListCreator();
             ArrayList<Integer> occ = new ArrayList<>();
@@ -55,6 +57,7 @@ public class KillshotTrack {
             }
 
             switch (figureList.size()) {
+
                 case 5: {
                     figureList.get(getIndexMin(occ)).addPoints(2);
                 }
@@ -71,40 +74,6 @@ public class KillshotTrack {
                     figureList.get(getIndexMin(occ)).addPoints(8);
                 }
             }
-/*
-            switch (figureList.size()) {
-                case 5: {
-                    figureList.get(getIndexMax(occ)).addPoints(8);
-                    figureList.get(getIndexMax(occ)).addPoints(6);
-                    figureList.get(getIndexMax(occ)).addPoints(4);
-                    figureList.get(getIndexMax(occ)).addPoints(2);
-                    figureList.get(getIndexMax(occ)).addPoints(2);
-                    break;
-                }
-                case 4:{
-                    figureList.get(getIndexMax(occ)).addPoints(8);
-                    figureList.get(getIndexMax(occ)).addPoints(6);
-                    figureList.get(getIndexMax(occ)).addPoints(4);
-                    figureList.get(getIndexMax(occ)).addPoints(2);
-                    break;
-                }
-                case 3:{
-                    figureList.get(getIndexMax(occ)).addPoints(8);
-                    figureList.get(getIndexMax(occ)).addPoints(6);
-                    figureList.get(getIndexMax(occ)).addPoints(4);
-                    break;
-                }
-                case 2:{
-                    figureList.get(getIndexMax(occ)).addPoints(8);
-                    figureList.get(getIndexMax(occ)).addPoints(6);
-                    break;
-                }
-                case 1:{
-                    figureList.get(getIndexMax(occ)).addPoints(8);
-                    break;
-                }
-            }
-*/
 
         }
 
