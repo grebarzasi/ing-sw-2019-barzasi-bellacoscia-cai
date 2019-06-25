@@ -367,7 +367,7 @@ public class Controller {
 
     private void endGame(){
 
-        this.getModel().getBoard().getTrack().getPoints();
+        this.getModel().getBoard().getTrack().scorePoints();
         this.update();
 
         this.setCurrentState(endGame);
