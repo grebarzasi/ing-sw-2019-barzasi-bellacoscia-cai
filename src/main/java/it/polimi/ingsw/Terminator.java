@@ -11,10 +11,8 @@ import java.util.ArrayList;
 
 public class Terminator extends Figure{
 
-
-
-
-    public static final int stage2 = 5;
+    //damage required for adrenaline stage 2
+    public static final int BOT_ADRENALINE_THRESHOLD = 5;
 
     public Terminator(String character,GameModel model) {
 
@@ -30,7 +28,7 @@ public class Terminator extends Figure{
     public void shoot(Player p){
 
         this.inflictDamage(6,p);
-        if(this.getPersonalBoard().getDamage().size() > stage2){
+        if(this.getPersonalBoard().getDamage().size() > BOT_ADRENALINE_THRESHOLD){
 
             this.inflictMark(1,p);
 

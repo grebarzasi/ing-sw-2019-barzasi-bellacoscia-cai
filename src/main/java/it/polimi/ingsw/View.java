@@ -106,14 +106,28 @@ public interface View {
 
     ArrayList<Figure> showTargetAdvanced(Set<Figure> args,int maxNum,boolean fromDiffSquare, String msg);
 
+    /**
+     * Verifies if the player is disconnected form the game
+     * @return true if the player is disconnected, false otherwise
+     */
     boolean isDisconnected();
+
     void setDisconnected(boolean b);
+
+    /**
+     * Checks the inactivity status of the player
+     * @return true if the player is inactive, false otherwise
+     */
     boolean isInactive();
+
     void setInactive(boolean b);
 
+    /**
+     * Reconnects the player from a cient handling thread
+     * @param b the thread to reconnect the player to
+     */
+
     void reconnectPlayer(ClientHandler b);
-
-
 
 
 }

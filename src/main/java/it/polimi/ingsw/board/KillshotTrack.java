@@ -1,15 +1,14 @@
 package it.polimi.ingsw.board;
 
 import it.polimi.ingsw.Figure;
-import it.polimi.ingsw.Player;
 import it.polimi.ingsw.Token;
 
 import java.util.*;
 
 /**
- * The type Killshot track.
- *
- * @author Carlo Bellacoscia
+ * Killshot track
+ * Assigns the kill scores at the end of the game,
+ * manages disparity as per playerboard scoring system
  */
 
 public class KillshotTrack {
@@ -36,10 +35,6 @@ public class KillshotTrack {
         return killsTrack;
     }
 
-    public void setKillsTrack(ArrayList<ArrayList<Token>> killsTrack) {
-        this.killsTrack = killsTrack;
-    }
-
     public void removeSkull() {
         skullMax --;
     }
@@ -49,7 +44,13 @@ public class KillshotTrack {
         removeSkull();
     }
 
-   public void scorePoints(){
+
+    /**
+     * Assigns the points according to the game rules to the players
+     * priority checked using damagePriority method
+     */
+
+    public void scorePoints(){
 
         HashMap<Figure,Integer> killsPerPlayer = new HashMap<>();
 
@@ -112,6 +113,12 @@ public class KillshotTrack {
         }
 
    }
+
+    /**
+     * private method used by scorePoints to determine priority in case of token parity on the killshot track
+     * @param f the player inquired
+     * @return position of the first token of the player f on the killshot track
+     */
 
    private int damagePriority(Figure f){
 

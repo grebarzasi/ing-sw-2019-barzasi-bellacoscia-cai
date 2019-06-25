@@ -16,6 +16,11 @@ class KillshotTrackTest {
     KillshotTrack kills = new KillshotTrack(8);
 
 
+    /**
+     * Asserts that the scoring system behaves correctly in case of presence
+     * of token parity by two players on the track
+     */
+
     @Test
     void precedenceTest2() {
 
@@ -82,6 +87,10 @@ class KillshotTrackTest {
 
     }
 
+    /**
+     * Asserts that the scoring system behaves correctly in case of presence
+     * of token parity by two players on the track, test case 2
+     */
 
     @Test
     void precedenceTest() {
@@ -129,8 +138,9 @@ class KillshotTrackTest {
 
     }
 
-
-
+    /**
+     * Asserts that kills are correctly added to the track
+     */
 
     @Test
     void addKillTest() {
@@ -149,6 +159,9 @@ class KillshotTrackTest {
 
     }
 
+    /**
+     * Asserts that points are scored
+     */
 
     @Test
     void getPointsTest() {
