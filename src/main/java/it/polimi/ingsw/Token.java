@@ -1,5 +1,9 @@
 package it.polimi.ingsw;
 
+/**
+ * A player's token, can become a mark, damage, a kill or an overkill on the killshot track
+ */
+
 public class Token {
 
     private Figure owner;

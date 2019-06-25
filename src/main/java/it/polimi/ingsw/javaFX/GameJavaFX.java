@@ -383,7 +383,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
         pointsField.setBackground(backPoints);
         pointsField.setPrefSize(widthLateral / 3, heightLateral / 3);
-        pointsField.setText("Punti: " + model.getOwner().getPoints());
+        pointsField.setText("Punti: " + model.getOwner().scorePoints());
         pointsField.setAlignment(Pos.CENTER);
         pointsField.setEditable(false);
 

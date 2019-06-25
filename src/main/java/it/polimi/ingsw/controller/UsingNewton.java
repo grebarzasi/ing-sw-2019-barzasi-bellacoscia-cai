@@ -36,6 +36,9 @@ public class UsingNewton implements ControllerState {
                 targets.add(p);
             }
         }
+
+        targets.add(this.controller.getModel().getBot());
+
         Set<Figure> targetTemp=new HashSet<>(targets);
 
         ArrayList<Figure> choiceTemp = this.controller.getView().showTargetAdvanced(targetTemp,1,false,ControllerMessages.ASK_NEWTON_TARGET);

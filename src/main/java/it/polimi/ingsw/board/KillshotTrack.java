@@ -6,12 +6,14 @@ import it.polimi.ingsw.Token;
 import java.util.*;
 
 /**
- * The type Killshot track.
- *
- * @author Carlo Bellacoscia
+ * Killshot track
+ * Assigns the kill scores at the end of the game,
+ * manages disparity as per playerboard scoring system
  */
 
 public class KillshotTrack {
+
+    private static final int[] KILLSTRACK_POINTS_VEC = {8,6,4,2,1};
 
     private int skullMax;
 
@@ -33,10 +35,6 @@ public class KillshotTrack {
         return killsTrack;
     }
 
-    public void setKillsTrack(ArrayList<ArrayList<Token>> killsTrack) {
-        this.killsTrack = killsTrack;
-    }
-
     public void removeSkull() {
         skullMax --;
     }
@@ -46,95 +44,96 @@ public class KillshotTrack {
         removeSkull();
     }
 
-    public void getPoints() {
 
-        if(killsTrack != null) {
-            ArrayList<Figure> figureList = killerListCreator();
-            ArrayList<Integer> occ = new ArrayList<>();
+    /**
+     * Assigns the points according to the game rules to the players
+     * priority checked using damagePriority method
+     */
 
-            for (Figure p : figureList) {
-                occ.add(countOcc(p));
-            }
+    public void scorePoints(){
 
-            switch (figureList.size()) {
+        HashMap<Figure,Integer> killsPerPlayer = new HashMap<>();
 
-                case 5: {
-                    figureList.get(getIndexMin(occ)).addPoints(2);
-                }
-                case 4:{
-                    figureList.get(getIndexMin(occ)).addPoints(2);
-                }
-                case 3:{
-                    figureList.get(getIndexMin(occ)).addPoints(4);
-                }
-                case 2:{
-                    figureList.get(getIndexMin(occ)).addPoints(6);
-                }
-                case 1:{
-                    figureList.get(getIndexMin(occ)).addPoints(8);
-                }
-            }
-
-        }
-
-    }
-
-
-    public ArrayList<Figure> killerListCreator() {
-        ArrayList<Figure> figureList = new ArrayList<>();
-
-        for (ArrayList<Token> i : killsTrack) {
-            for (Token t : i) {
-                if (!figureList.contains(t.getOwner())) {
-                    figureList.add(t.getOwner());
+        for(ArrayList<Token> kill : this.killsTrack){
+            for(Token t: kill){
+                if(!killsPerPlayer.containsKey(t.getOwner())){
+                    killsPerPlayer.put(t.getOwner(),1);
+                }else{
+                    killsPerPlayer.replace(t.getOwner(),killsPerPlayer.get(t.getOwner())+1);
                 }
             }
         }
-        return figureList;
-    }
 
+        ArrayList<Figure> orderedList = new ArrayList<>();
+        ArrayList<Figure> toAdd = new ArrayList<>();
+        toAdd.addAll(killsPerPlayer.keySet());
 
-    public Integer countOcc (Figure p){
+        for(Figure f: toAdd){
 
-            Token token = new Token(p);
-            Integer occ = 0;
+            int i;
+            boolean added = false;
 
-            for (ArrayList<Token> i : killsTrack) {
-                for (Token j:i) {
-                    if (equals(j, token)) {
-                        occ++;
+            if(orderedList.isEmpty()){
+                orderedList.add(f);
+            }else {
+
+                for (i = 0; i < orderedList.size(); i++) {
+                    if (killsPerPlayer.get(f) >= killsPerPlayer.get(orderedList.get(i)) && added == false){
+                        orderedList.add(i,f);
+                        added = true;
                     }
                 }
+                if(added == false){
+                    orderedList.add(f);
+                }
 
             }
-            return occ;
         }
 
+        int i;
+        int k;
 
-    public int getIndexMin(ArrayList<Integer> occ){
-        int minIndex = 0;
-        Integer min = 20;
+        for(i = 0 ; i< orderedList.size() ; i++){
+            for(k = 0 ; k < orderedList.size() ; k++){
+                if(killsPerPlayer.get(orderedList.get(k)) == killsPerPlayer.get(orderedList.get(i)) && damagePriority(orderedList.get(k)) > damagePriority(orderedList.get(i))){
 
-        for (Integer i = 0; i < occ.size(); i++) {
-            if(occ.get(i) != -1 && occ.get(i) < min){
-                min = occ.get(i);
-                minIndex = i;
+
+                    Figure temp = orderedList.get(i);
+                    orderedList.set(i,orderedList.get(k));
+                    orderedList.set(k,temp);
+
+                }
             }
         }
-        occ.set(minIndex, -1);
-        if(occ.contains(min)){
-            if(occ.indexOf(min) < minIndex) {
-                minIndex = occ.indexOf(min);
+
+        for(i=0;i<orderedList.size();i++){
+
+            orderedList.get(i).addPoints(KILLSTRACK_POINTS_VEC[i]);
+
+        }
+
+   }
+
+    /**
+     * private method used by scorePoints to determine priority in case of token parity on the killshot track
+     * @param f the player inquired
+     * @return position of the first token of the player f on the killshot track
+     */
+
+   private int damagePriority(Figure f){
+
+        int priority = 0;
+
+        for(ArrayList<Token> kill: this.killsTrack){
+            for(Token t: kill){
+                if(f.equals(t.getOwner())){
+                    return priority;
+                }
+                priority ++;
             }
         }
-        return minIndex;
-    }
 
-    public boolean equals(Token i, Token t){
-        if(t.getOwner() == i.getOwner()){
-            return true;
-        }
-        return false;
-    }
+        return 0;
+   }
 
 }

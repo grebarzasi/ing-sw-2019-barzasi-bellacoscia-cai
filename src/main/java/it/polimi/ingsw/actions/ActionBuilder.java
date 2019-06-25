@@ -17,7 +17,7 @@ public class ActionBuilder {
     public static final String SHOOT = "Shoot";
     public static final String RELOAD= "Reload";
     public static final String POWER_UP = "PowerUp";
-    public static final String FRENZYSHOOT = "Frenzy Shoot";
+    public static final String FRENZY_SHOOT = "Frenzy Shoot";
     public static final String DISCARD_POWER_UP = "Discard PowerUp";
     public static final String USE_BOT = "Use Bot";
     public static final String OVER = "End Turn";
@@ -179,12 +179,12 @@ public class ActionBuilder {
             actions.add(new Action(MOVE, FRENZY_MOVE_RANGE));
             actions.add(new Action(PICK, FRENZY_PICK_RANGE));
             if(canShoot(p)) {
-                actions.add(new Action(FRENZYSHOOT, FRENZY_MOVE_RELOAD_SHOOT_RANGE));
+                actions.add(new Action(FRENZY_SHOOT, FRENZY_MOVE_RELOAD_SHOOT_RANGE));
             }
         } else {
             actions.add(new Action(PICK, FIRST_PLAYER_FRENZY_PICK_RANGE));
             if(canShoot(p)) {
-                actions.add(new Action(FRENZYSHOOT, FIRST_PLAYER_FRENZY_MOVE_RELOAD_SHOOT_RANGE));
+                actions.add(new Action(FRENZY_SHOOT, FIRST_PLAYER_FRENZY_MOVE_RELOAD_SHOOT_RANGE));
             }
 
         }
