@@ -425,7 +425,7 @@ public class CliGame implements ViewClient {
             }
             System.out.println();
             if(!allTargets.isEmpty()) {
-                System.out.println(RESET + allTargets.size() + SHOW_TARGET_SELECTED);
+//                System.out.println(RESET + allTargets.size() + SHOW_TARGET_SELECTED);
                 System.out.print("[ ");
                 for (String s : allTargets) {
                     board.printPawn(s);
@@ -451,9 +451,8 @@ public class CliGame implements ViewClient {
                     reply=0;
                 }
 
-                if (reply<=0 || args.size()<(reply)) {
+                if (reply<1 || args.size()<(reply)) {
                     System.out.println(SHOW_TARGET_ADV_ERR);
-                    reply=0;
                 }else if (!fromDiffSquare || verifyDiffSquare(allTargets,args.get(reply-1))){
                     allTargets.add(args.get(reply-1));
                     args.remove(args.get(reply-1));
