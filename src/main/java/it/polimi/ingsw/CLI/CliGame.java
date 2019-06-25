@@ -423,7 +423,6 @@ public class CliGame implements ViewClient {
                 System.out.print(")  ");
                 i++;
             }
-            System.out.println();
             if(!allTargets.isEmpty()) {
 //                System.out.println(RESET + allTargets.size() + SHOW_TARGET_SELECTED);
                 System.out.print("[ ");

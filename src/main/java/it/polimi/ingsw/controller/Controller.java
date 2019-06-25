@@ -495,11 +495,6 @@ public class Controller {
         String s = marshal.create().toString();
         for(Player p: model.getPlayerList())
                 p.getView().sendsUpdate(s);
-        try {
-            sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     /**

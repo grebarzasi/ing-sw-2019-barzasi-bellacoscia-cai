@@ -38,7 +38,7 @@
               "visible": true
             },
             "askPlayer": {
-              "msg": "Seleziona 3 Player che puoi vedere.",
+              "msg": "Seleziona fino a 3 Player che puoi vedere.",
               "num": 3
             }
           },

@@ -164,6 +164,11 @@ public class Shooting implements ControllerState {
         if (rpl == null&&(controller.getView().isDisconnected()||controller.getView().isInactive())) {
             shootingWith.resetWeapon();
             controller.endTurn();
+        }else if (rpl == null){
+//            useScope();
+            shootingWith.resetWeapon();
+            this.controller.update();
+            this.controller.goBack();
         }
     }
 
