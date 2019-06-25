@@ -5,7 +5,7 @@
   },
   "effects": {
     "basic": {
-      "name": "modalità base",
+      "name": "Modalità base",
       "cost": {
         "yellow": 1,
         "red": 1
@@ -21,7 +21,7 @@
               "num": 1
             }
           },
-          "shootPlayer": {
+          "shootTarget": {
             "damage": 1,
             "mark": 2
           }
@@ -29,9 +29,9 @@
       }
     },
     "alternative": {
-      "name": "modalità scanner",
+      "name": "Modalità scanner",
       "cost": {},
-      "subEffect": {
+      "subEffect": {zx
         "1": {
           "targetAcq": {
             "isVisible": {

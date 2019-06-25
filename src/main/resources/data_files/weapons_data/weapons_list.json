@@ -8,7 +8,6 @@
   "flamethrower": 1,
   "rocket_launcher": 1,
   "railgun": 1,
-  "cyberblade": 1,
   "zx_2": 1,
   "shotgun": 1,
   "power_glove": 1,
@@ -18,5 +17,6 @@
   "plasma_gun": 1,
   "furnace": 1,
   "heatseeker": 1,
-  "grenade_launcher": 1
+  "grenade_launcher": 1,
+  "cyberblade": 1
 }

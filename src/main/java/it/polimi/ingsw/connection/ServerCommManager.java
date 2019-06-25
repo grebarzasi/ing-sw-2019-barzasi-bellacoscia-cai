@@ -314,12 +314,17 @@ public class ServerCommManager  extends Thread implements View {
         Thread t = new Thread(() -> {
             try{
                 setInUse(true);
+                String x;
                 if (rmi) {
-                    setRplTh(rmiClient.chooseDirection(parseString(sTh)).toUpperCase());
+                    x=rmiClient.chooseDirection(parseString(sTh));
                 }
                 else {
-                    setRplTh(askAndWait(CHOOSE_DIRECTION,sTh).toUpperCase());
+                    x=askAndWait(CHOOSE_DIRECTION,sTh);
                 }
+                if(x==null)
+                    setRplTh(null);
+                else
+                    setRplTh(x.toUpperCase());
                 setInUse(false);
             }catch(IOException e){
                 handleDisconnection();

@@ -59,7 +59,7 @@ public class WeaponBuilder {
                         break;
                     case "extraMove":
                         weaponBuilt.setExtraMove(effBuilt);
-                        if(rootNode.path("extraMove").path("afterBasic").asBoolean())
+                        if(rootNode.path("extraMove").path("afterBasic").size()>0)
                             weaponBuilt.setBeforeBasicExtra(false);
                         break;
                 }
