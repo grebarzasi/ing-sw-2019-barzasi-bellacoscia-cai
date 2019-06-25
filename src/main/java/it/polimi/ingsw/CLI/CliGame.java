@@ -14,8 +14,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static it.polimi.ingsw.CLI.CLiBoardStuff.ACTION_TRANSLATION;
-import static it.polimi.ingsw.CLI.CLiBoardStuff.ALL_AMMO;
+import static it.polimi.ingsw.CLI.CLiBoardStuff.*;
 import static it.polimi.ingsw.CLI.CliColor.*;
 import static it.polimi.ingsw.CLI.CliMessages.*;
 import static it.polimi.ingsw.connection.ConnMessage.*;
@@ -298,7 +297,7 @@ public class CliGame implements ViewClient {
                     return NOTHING;
 
                 reply=reply.toLowerCase();
-                if (reply.equals("n")||reply.equals("s")||reply.equals("e")||reply.equals("o")) {
+                if (ALL_DIRECTIONS.contains(reply)) {
                     break;
                 }
             } catch (IOException e) {

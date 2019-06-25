@@ -1,5 +1,6 @@
 {
   "name": "Torpedine",
+  "orderedAdd": true,
   "chamber": {
     "blue": 1
   },

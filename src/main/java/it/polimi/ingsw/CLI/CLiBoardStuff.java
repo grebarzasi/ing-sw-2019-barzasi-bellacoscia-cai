@@ -20,6 +20,8 @@ public class CLiBoardStuff {
     public static final String GREY_P = WHITE_BACKGROUND_BRIGHT+" "+RESET;
     public static final String YELLOW_P = YELLOW_BACKGROUND_BRIGHT+" "+RESET;
 
+
+
     public static final String ARMORY = " W";
     //public static final String ARMORY = " ۩ ";
     public static final String AMMO = "+";
@@ -79,4 +81,9 @@ public class CLiBoardStuff {
 
     }
 
+    public static final String NORTH = "n";
+    public static final String SOUTH = "s";
+    public static final String EAST ="e";
+    public static final String WEST = "o";
+    public static final ArrayList<String> ALL_DIRECTIONS = new ArrayList<>(Arrays.asList(NORTH,SOUTH,EAST,WEST));
 }

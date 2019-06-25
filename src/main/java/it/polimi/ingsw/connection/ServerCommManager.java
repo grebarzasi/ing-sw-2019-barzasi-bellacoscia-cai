@@ -48,15 +48,15 @@ public class ServerCommManager  extends Thread implements View {
     }
 
     public String askAndWait(String question,String args) throws IOException{
-
+        String rpl;
+        synchronized (socketClient) {
             socketClient.getOut().println(question);
-            while (!socketClient.getIn().readLine().equals(AKN));
+            while (!socketClient.getIn().readLine().equals(AKN)) ;
             socketClient.getOut().println(args);
-            String rpl;
             do
-                rpl= socketClient.getIn().readLine();
-            while(rpl.isEmpty());
-
+                rpl = socketClient.getIn().readLine();
+            while (rpl.isEmpty());
+        }
             if(rpl.equals(NOTHING)) {
                 return null;
             }
@@ -495,8 +495,10 @@ public class ServerCommManager  extends Thread implements View {
 
     public void ping() throws IOException {
         if (!isRmi()) {
+            synchronized (socketClient){
             socketClient.getOut().println(PING);
             while (!socketClient.getIn().readLine().equals(PONG)) ;
+            }
         } else {
             rmiClient.isConnected();
         }

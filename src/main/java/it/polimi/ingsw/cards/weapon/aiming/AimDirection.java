@@ -11,6 +11,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import static it.polimi.ingsw.CLI.CLiBoardStuff.*;
+
 /**
  *Used by {@link TargetAcquisition} class to filter target to only ones laying on the cardinal direction selected.
  * Need an input from the player to work
@@ -45,13 +47,13 @@ public class AimDirection implements AimingFilter {
 
     public Set<Figure> allDirectional(Figure origin, Set<Figure> p){
         Set<Figure> temp = new HashSet<>();
-        ArrayList<String> directions= new ArrayList<>(Arrays.asList("n", "s", "e","o"));
+
         if(wallBang) {
-            for (String s : directions) {
+            for (String s : ALL_DIRECTIONS) {
                 temp.addAll(directionWall(s,origin,p));
             }
         }else{
-            for (String s : directions) {
+            for (String s : ALL_DIRECTIONS) {
                 temp.addAll(directionAll(s,origin,p));            }
         }
         return temp;
@@ -62,25 +64,25 @@ public class AimDirection implements AimingFilter {
         Set<Figure> temp = new HashSet<>();
         Square pos = origin.getPosition();
         switch (dir) {
-            case "n":
+            case NORTH:
                 while(pos!=null) {
                     temp.addAll(pos.playersInSquare(p));
                     pos=pos.getNorth();
                 }
                 break;
-            case "s":
+            case SOUTH:
                 while(pos!=null){
                     temp.addAll(pos.playersInSquare(p));
                     pos=pos.getSouth();
                 }
                 break;
-            case "e":
+            case EAST:
                 while(pos!=null){
                     temp.addAll(pos.playersInSquare(p));
                     pos=pos.getEast();
                 }
                 break;
-            case "o":
+            case WEST:
                 while(pos!=null){
                     temp.addAll(pos.playersInSquare(p));
                 pos=pos.getWest();
@@ -97,19 +99,19 @@ public class AimDirection implements AimingFilter {
         for (Figure f : p) {
             Cell cTarget = f.getPosition().getPosition();
             switch (dir) {
-                case "n":
+                case NORTH:
                     if (cTarget.getColumn() != c.getColumn() || cTarget.getRow() < c.getRow())
                         temp.remove(f);
                     break;
-                case "s":
+                case SOUTH:
                     if (cTarget.getColumn() != c.getColumn() || cTarget.getRow() > c.getRow())
                         temp.remove(f);
                     break;
-                case "e":
+                case EAST:
                     if (cTarget.getRow() != c.getRow() || cTarget.getColumn() < c.getColumn())
                         temp.remove(f);
                     break;
-                case "o":
+                case WEST:
                     if (cTarget.getRow() != c.getRow() || cTarget.getColumn() > c.getColumn())
                         temp.remove(f);
                     break;
