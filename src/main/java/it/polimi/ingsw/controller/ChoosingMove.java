@@ -22,8 +22,6 @@ public class ChoosingMove implements ControllerState{
     @Override
     public void executeState(){
 
-
-
         if(this.controller.getCurrentPlayer().isDead()){
 
             //Server log
@@ -107,7 +105,4 @@ public class ChoosingMove implements ControllerState{
             }
         }
     }
-
-
-
 }

@@ -82,7 +82,7 @@ public class PickingWeapon implements ControllerState {
         this.controller.getCurrentPlayer().getWeaponsList().clear();
         this.controller.getCurrentPlayer().getWeaponsList().addAll(options);
 
-        ((SpawnSquare) this.location).getArmory().getWeaponList().remove(choice);
+        ((SpawnSquare) this.location).getArmory().getWeaponList().remove(arg);
         ((SpawnSquare) this.location).getArmory().getWeaponList().add(choice);
         choice.setOwner(this.controller.getCurrentPlayer());
         this.controller.decreaseMoveLeft();

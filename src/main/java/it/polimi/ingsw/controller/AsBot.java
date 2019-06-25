@@ -15,22 +15,16 @@ import java.util.Set;
 
 public class AsBot implements ControllerState{
 
-
-
-
     private Controller controller;
-
 
     AsBot(Controller controller) {
         this.controller = controller;
 
     }
 
-
     /**
      * Makes the player choose a move and then a target to shoot
      */
-
 
     @Override
     public void executeState() {
@@ -160,7 +154,6 @@ public class AsBot implements ControllerState{
         return canGo;
 
     }
-
 
     private void botHasMoved(){
         this.controller.getModel().setHasBotAction(false);
