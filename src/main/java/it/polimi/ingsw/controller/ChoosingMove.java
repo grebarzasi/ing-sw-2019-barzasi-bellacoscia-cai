@@ -81,6 +81,7 @@ public class ChoosingMove implements ControllerState{
                     //sets the state to special weird, useless and complicated frenzy action
                     case ActionBuilder.FRENZY_SHOOT:
                         this.controller.setCurrentState(this.controller.frenzySpecialAction);
+                        ((FrenzySpecialAction)this.controller.frenzySpecialAction).setRange(choice.getRange());
                         this.controller.currentState.executeState();
                         break;
 

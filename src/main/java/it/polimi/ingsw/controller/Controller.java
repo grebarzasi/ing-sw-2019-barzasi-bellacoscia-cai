@@ -247,7 +247,9 @@ public class Controller {
 
     void endTurn() {
 
-        for (Figure f : this.model.getPlayerList()) {
+        ArrayList<Figure> deathCheckList = new ArrayList<>(this.getModel().getPlayerList());
+        deathCheckList.add(this.getModel().getBot());
+        for (Figure f : deathCheckList) {
 
             if (f.getPersonalBoard().getDamage().size() >= DEATH_DAMAGE) {
 

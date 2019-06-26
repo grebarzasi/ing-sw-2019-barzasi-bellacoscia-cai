@@ -172,16 +172,17 @@ public class Lobby extends Thread {
             finalFrenzyList.add(c.isFinalFrenzyPref());
         }
 
-        this.killPref=modeOf(killPrefList);
-        if(killPref<5||killPref>8)
-            killPref=8;
+        this.killPref=2;
+                //modeOf(killPrefList);
+        //if(killPref<5||killPref>8)
+        //    killPref=8;
         this.mapPref=(modeOf(mapPrefList));
 
         if(joinedPlayers.size()<5)
-            this.terminatorPref=(modeOfBool(terminatorList));
+            this.terminatorPref=(modeOfBool(terminatorList)||true);
         else terminatorPref=false;
 
-        this.finalFrenzyPref=(modeOfBool(finalFrenzyList));
+        this.finalFrenzyPref=(modeOfBool(finalFrenzyList)||true);
     }
 
 

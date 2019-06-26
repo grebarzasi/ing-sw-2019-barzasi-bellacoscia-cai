@@ -12,7 +12,6 @@ public class NonSpawnSquare extends Square{
 
     private AmmoLot drop;
 
-
     public NonSpawnSquare(Cell position, Room room) {
         super(position, room);
     }

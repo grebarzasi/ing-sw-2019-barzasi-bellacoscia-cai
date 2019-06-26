@@ -142,7 +142,7 @@ public class PlayerBoard {
 
         int i;
 
-        for(i=0;i<6;i++) {
+        for(i=0;i<this.pointVec.length-1;i++) {
 
             this.pointVec[i] = this.pointVec[i + 1] ;
 
