@@ -17,7 +17,7 @@ public class CLiBoardStuff {
     public static final String RED_P = PURPLE_BACKGROUND_BRIGHT+" "+RESET;
     public static final String GREEN_P = GREEN_BACKGROUND_BRIGHT+" "+RESET;
     public static final String BLUE_P =CYAN_BACKGROUND_BRIGHT+" "+RESET;
-    public static final String GREY_P = WHITE_BACKGROUND_BRIGHT+" "+RESET;
+    public static final String GREY_P = WHITE_B+" "+RESET;
     public static final String YELLOW_P = YELLOW_BACKGROUND_BRIGHT+" "+RESET;
 
 
@@ -78,6 +78,7 @@ public class CLiBoardStuff {
         ACTION_TRANSLATION.put("shoot", "Spara");
         ACTION_TRANSLATION.put("use_bot", "Usa il Terminator");
         ACTION_TRANSLATION.put("frenzy_shoot", "Colpo frenetico");
+        ACTION_TRANSLATION.put("reload", "Ricarica");
 
     }
 

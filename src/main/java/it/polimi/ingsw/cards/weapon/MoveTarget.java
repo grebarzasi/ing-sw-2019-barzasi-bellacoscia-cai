@@ -4,6 +4,7 @@ import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.actions.Action;
 import it.polimi.ingsw.board.map.Square;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -45,6 +46,12 @@ public class MoveTarget implements SubEffect {
             case "me":
                 squareTemp = w.getOwner().getPosition();
                 break;
+            case "far":
+                ArrayList<Square> pos=new ArrayList<>();
+                for(Figure f: w.getDamaged())
+                    pos.add(f.getPosition());
+                squareTemp = getFar(w.getOwner(),pos);
+                break;
 
         }
 
@@ -77,6 +84,18 @@ public class MoveTarget implements SubEffect {
     public void resetSubEffect() {
         targetTemp.clear();
         squareTemp=null;
+    }
+
+    public Square getFar(Figure p, ArrayList<Square> all) {
+        int max=0;
+        Square far=null;
+        for(Square s : all)
+            if(p.distanceTo(s)>max) {
+                max = p.distanceTo(s);
+                far = s;
+            }
+        return far;
+
     }
 
     public void setMaxSteps(int maxSteps) {

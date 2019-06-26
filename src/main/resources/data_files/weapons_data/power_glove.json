@@ -38,7 +38,7 @@
       }
     },
     "alternative": {
-      "name": "modalità cento pugni",
+      "name": "Modalità cento pugni",
       "cost": {
         "blue": 1
       },
@@ -65,7 +65,7 @@
             "substitute": ["me"]
           },
           "moveTarget": {
-            "finalPos": "last"
+            "finalPos": "far"
           }
         }
       }
