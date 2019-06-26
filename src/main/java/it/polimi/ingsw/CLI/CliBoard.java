@@ -269,13 +269,15 @@ public class CliBoard {
         int i=0;
         int h=0;
         int k=0;
-        int totalSkull=skullMax+kill.size();
+        int totalSkull=skullMax;
         for (; totalSkull < 8; totalSkull++) {
             System.out.print("[  ]");
             i=i+4;
             k++;
         }
         for(String s : kill){
+            if(kill.size()==1&&kill.get(0).isEmpty())
+                continue;
             k++;
             if(k<9) {
                 System.out.print("[");
