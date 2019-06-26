@@ -121,7 +121,7 @@ public class Controller {
         if(this.hasBot){
 
             String botColor = firstAvailableColor(playerList);
-            this.model.setBot(new Terminator(botColor,model));
+            this.model.setBot(new Terminator(botColor,this.model));
 
         }
 
@@ -397,7 +397,7 @@ public class Controller {
     }
 
 
-    void askVenoms(Set<Figure> temp, Figure hitter){
+    void askTagbacks(Set<Figure> temp, Figure hitter){
         //do not remove otherwise it will modify hitTargetSet directly!!
         Set<Figure> targets=new HashSet<>(temp);
         //---------------------------------------

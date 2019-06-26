@@ -76,7 +76,7 @@ public class Shooting implements ControllerState {
 
                 this.controller.update();
 
-                this.controller.askVenoms(choice.getTargetHitSet(), this.controller.getCurrentPlayer());
+
 
             }else {
                 controller.getView().displayMessage(NO_AMMO);
@@ -88,6 +88,8 @@ public class Shooting implements ControllerState {
         checkReply(choice);
 
         useScope();
+        this.controller.askTagbacks(this.shootingWith.getDamaged(), this.controller.getCurrentPlayer());
+
         shootingWith.resetWeapon();
         this.controller.update();
         this.controller.goBack();

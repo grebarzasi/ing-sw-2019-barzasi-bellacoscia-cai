@@ -57,29 +57,6 @@ public class GameModel {
         this.isFrenzy = false;
     }
 
-    /**
-     * Starts a model from a lobby
-     * Loads the players from a lobby to the model
-     * @param lobbyToStartFrom The lobby you want to start the game from
-     */
-
-    public GameModel(Lobby lobbyToStartFrom, Controller controller) {
-
-
-        for (ClientHandler client : lobbyToStartFrom.getJoinedPlayers()){
-           this.playerList.add(client.getOwner());
-       }
-        for (Player p : this.playerList) {
-            p.setModel(this);
-        }
-        //TODO if this game wants a bot adds a bot;
-
-        this.currentPlayer = this.playerList.get(0);
-        this.isFrenzy = false;
-
-    }
-
-
     public void askUseEffect(Set<Effect> eff){}
 
     public ArrayList<Player> getPlayerList() {
