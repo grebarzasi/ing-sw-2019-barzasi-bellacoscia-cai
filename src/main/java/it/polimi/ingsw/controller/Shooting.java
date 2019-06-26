@@ -26,6 +26,7 @@ public class Shooting implements ControllerState {
     private Weapon shootingWith;
     boolean additionalEffect = false;
     boolean scopeUsed=false;
+    int oldDamagedSize;
 
     Shooting(Controller controller) {
         this.controller = controller;
@@ -51,6 +52,7 @@ public class Shooting implements ControllerState {
 
         //Execute until no more effect is left or player go back
         do{
+            oldDamagedSize= shootingWith.getDamaged().size();
             effects = shootingWith.getUsableEff();
 
             //if empty no effect are available and you can go on
@@ -184,7 +186,7 @@ public class Shooting implements ControllerState {
 
     private void postShootCheck(Effect choice){
         //if you shoot someone decrease the cost and set unloaded
-        if(!choice.getTargetHitSet().isEmpty()) {
+        if(!choice.getTargetHitSet().isEmpty()||oldDamagedSize!=shootingWith.getDamaged().size()) {
             this.controller.getCurrentPlayer().getPersonalBoard().getAmmoInventory().subtract(choice.getCost());
 
              shootingWith.setLoaded(false);
