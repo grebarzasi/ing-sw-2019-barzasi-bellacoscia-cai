@@ -26,6 +26,7 @@ public class SocketClientHandler extends ClientHandler {
 
     public void game() {
         super.getOwner().setView(new ServerCommManager(this));
+        ((ServerCommManager) super.getOwner().getView()).setPriority(MIN_PRIORITY);
         ((ServerCommManager) super.getOwner().getView()).start();
     }
 

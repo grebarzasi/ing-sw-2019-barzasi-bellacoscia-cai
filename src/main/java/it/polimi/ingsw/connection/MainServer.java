@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import static it.polimi.ingsw.CLI.CliMessages.LINE_SEP;
 import static it.polimi.ingsw.connection.ServerMessage.*;
+import static java.lang.Thread.MIN_PRIORITY;
 import static java.lang.Thread.sleep;
 
 
@@ -31,6 +32,7 @@ public class MainServer {
     }
 
     public void startAll() {
+        lobby.setPriority(MIN_PRIORITY);
         lobby.start();
         System.out.println(SERVER_HEAD);
         System.out.println(RMI_MSG);
@@ -49,6 +51,7 @@ public class MainServer {
 //        socketServer.acquireIP();
         System.out.print("DEFAULT PORT: 1234");
         socketServer.acquirePort();
+        socketServer.setPriority(MIN_PRIORITY);
         socketServer.start();
         //rmiServer.initConnection();
 

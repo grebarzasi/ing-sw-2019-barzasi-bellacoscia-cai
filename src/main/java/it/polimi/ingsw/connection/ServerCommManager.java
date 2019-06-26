@@ -467,6 +467,7 @@ public class ServerCommManager  extends Thread implements View {
     }
 
     public boolean handleInactivity(Thread t){
+        t.setPriority(MIN_PRIORITY);
         t.start();
         int i=0;
         System.out.print("\n"+owner.getCharacter()+" Inactivity countdown: ");
