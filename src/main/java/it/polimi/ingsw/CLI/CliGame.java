@@ -18,6 +18,7 @@ import static it.polimi.ingsw.CLI.CLiBoardStuff.*;
 import static it.polimi.ingsw.CLI.CliColor.*;
 import static it.polimi.ingsw.CLI.CliMessages.*;
 import static it.polimi.ingsw.connection.ConnMessage.*;
+import static it.polimi.ingsw.connection.ServerMessage.THREAD_PRIORITY;
 import static java.lang.Thread.MIN_PRIORITY;
 import static java.lang.Thread.sleep;
 
@@ -37,7 +38,7 @@ public class CliGame implements ViewClient {
     public void gameStart(){
         if(!c.isRmi()) {
             ((SClient) c).setCommManager(new SClientCommManager(((SClient) c), this));
-            ((SClient) c).getCommManager().setPriority(MIN_PRIORITY);
+            ((SClient) c).getCommManager().setPriority(THREAD_PRIORITY);
             ((SClient) c).getCommManager().start();
         }else {
             try {

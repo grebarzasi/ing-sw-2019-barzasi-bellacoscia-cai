@@ -9,6 +9,7 @@ import static it.polimi.ingsw.CLI.CliColor.*;
 import static it.polimi.ingsw.CLI.CliMessages.*;
 import static it.polimi.ingsw.connection.ConnMessage.COUNTDOWN;
 import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
+import static it.polimi.ingsw.connection.ServerMessage.THREAD_PRIORITY;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -134,7 +135,7 @@ public class CliLobby extends Thread{
         while (!lobby.isGameStarted()){
             synchronized (count) {
                 if (lobby.hasGameTimerStarted() && !count.isAlive()) {
-                    count.setPriority(MIN_PRIORITY);
+                    count.setPriority(THREAD_PRIORITY);
                     count.start();
                     lobby.setGameTimerStarted(false);
                 }

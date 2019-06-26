@@ -9,6 +9,8 @@ import it.polimi.ingsw.virtual_model.ViewClient;
 import java.io.IOException;
 import java.rmi.RemoteException;
 
+import static it.polimi.ingsw.connection.ServerMessage.THREAD_PRIORITY;
+
 public class RmiClientHandler extends ClientHandler implements RmiPrefInterf {
 
 
@@ -88,7 +90,7 @@ public class RmiClientHandler extends ClientHandler implements RmiPrefInterf {
             }
         }
         super.getOwner().setView(new ServerCommManager(this));
-        ((ServerCommManager) super.getOwner().getView()).setPriority(MIN_PRIORITY);
+        ((ServerCommManager) super.getOwner().getView()).setPriority(THREAD_PRIORITY);
         ((ServerCommManager) super.getOwner().getView()).start();
 
     }

@@ -36,6 +36,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
+import static it.polimi.ingsw.connection.ServerMessage.THREAD_PRIORITY;
 import static it.polimi.ingsw.javaFX.GUIFiles.*;
 import static java.lang.Thread.MIN_PRIORITY;
 import static java.lang.Thread.sleep;
@@ -382,7 +383,7 @@ public class LobbyJavaFX extends Application {
 
                 btnStart.setVisible(false);
                 rotateTransition.play();
-                thread.setPriority(MIN_PRIORITY);
+                thread.setPriority(THREAD_PRIORITY);
                 thread.start();
 
             } catch (Exception ex) {
@@ -409,7 +410,7 @@ public class LobbyJavaFX extends Application {
 
         if(!conn.isRmi()){
             ((SClient)conn).setCommManager(new SClientCommManager(((SClient)conn),game));
-            ((SClient)conn).getCommManager().setPriority(MIN_PRIORITY);
+            ((SClient)conn).getCommManager().setPriority(THREAD_PRIORITY);
             ((SClient)conn).getCommManager().start();
         }else{
             try {

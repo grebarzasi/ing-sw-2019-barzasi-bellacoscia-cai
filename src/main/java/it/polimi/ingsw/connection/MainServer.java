@@ -32,7 +32,7 @@ public class MainServer {
     }
 
     public void startAll() {
-        lobby.setPriority(MIN_PRIORITY);
+        lobby.setPriority(THREAD_PRIORITY);
         lobby.start();
         System.out.println(SERVER_HEAD);
         System.out.println(RMI_MSG);
@@ -51,7 +51,7 @@ public class MainServer {
 //        socketServer.acquireIP();
         System.out.print("DEFAULT PORT: 1234");
         socketServer.acquirePort();
-        socketServer.setPriority(MIN_PRIORITY);
+        socketServer.setPriority(THREAD_PRIORITY);
         socketServer.start();
         //rmiServer.initConnection();
 

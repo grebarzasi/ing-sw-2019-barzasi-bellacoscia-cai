@@ -489,6 +489,24 @@ public class Controller {
         return options;
 
     }
+    /**
+     * Determines the squares a player can reach within a given range removing ones outside cardinal directions
+     *
+     * @param p the Player inquiring on
+     * @param range the range
+     * @return the list of possible squares in cardinal direction
+     */
+    ArrayList<Square> canGo(Figure p, int range,boolean directional){
+        ArrayList<Square> all = canGo(p,range);
+        if(!directional)
+            return all;
+        ArrayList<Square> temp = new ArrayList<>();
+        for(Square s:all){
+            if(p.getPosition().getPosition().getColumn()==s.getPosition().getColumn()||p.getPosition().getPosition().getRow()==s.getPosition().getRow())
+                temp.add(s);
+        }
+        return temp;
+    }
 
 
     /**

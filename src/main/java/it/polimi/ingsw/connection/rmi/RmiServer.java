@@ -26,7 +26,7 @@ public class RmiServer extends ConnectionTech implements RmiServerInterface{
 
     public RmiPrefInterf getClientHandler()throws RemoteException{
         RmiPrefInterf temp=new RmiClientHandler(super.getLobby());
-        ((ClientHandler)temp).setPriority(MIN_PRIORITY);
+        ((ClientHandler)temp).setPriority(THREAD_PRIORITY);
         ((ClientHandler)temp).start();
         return(RmiPrefInterf) UnicastRemoteObject.exportObject(temp, 0);
     }

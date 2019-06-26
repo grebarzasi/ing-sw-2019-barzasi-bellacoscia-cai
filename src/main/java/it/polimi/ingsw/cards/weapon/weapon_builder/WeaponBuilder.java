@@ -34,7 +34,10 @@ public class WeaponBuilder {
 
             //create a new weapon with name and chamber
             Weapon weaponBuilt = new Weapon(rootNode.path("name").textValue(), chamber);
-             weaponBuilt.setBeforeBasicExtra(rootNode.path("extraBeforeBasic").asBoolean());
+
+            if(!rootNode.path("extraBeforeBasic").asText().isEmpty())
+                 weaponBuilt.setBeforeBasicExtra(rootNode.path("extraBeforeBasic").asBoolean());
+
              weaponBuilt.setOrderedAdd(rootNode.path("orderedAdd").asBoolean());
             //create effects iterating on effects name. set correct place for each effect
             Iterator<String> effectsIterator = rootNode.path("effects").fieldNames();
