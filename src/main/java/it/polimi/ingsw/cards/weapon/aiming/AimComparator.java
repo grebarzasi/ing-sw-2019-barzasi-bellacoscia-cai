@@ -30,6 +30,9 @@ public class AimComparator {
         Set<Figure> pSet = new HashSet<>();
         for (String s : sourceList) {
             switch (s) {
+                case "all":
+                    pSet.addAll(target.allFigures());
+                    break;
                 case "basic":
                     pSet.addAll(w.getBasicEffect().getTargetHitSet());
                     break;

@@ -1,5 +1,6 @@
 {
   "name": "Torpedine",
+  "orderedAdd": true,
   "chamber": {
     "blue": 1
   },
@@ -38,7 +39,7 @@
           "targetAcq": {
             "isVisible": {
               "visible": true,
-              "origin": "basic"
+              "origin": "last"
             },
             "different": ["basic"],
             "askPlayer": {
@@ -63,9 +64,9 @@
           "targetAcq": {
             "isVisible": {
               "visible": true,
-              "origin": "addOne"
+              "origin": "last"
             },
-            "different": ["addOne", "basic"],
+            "different": ["last", "basic"],
             "askPlayer": {
               "msg": "Seleziona 1 Player visibile dal bersaglio dell'effetto addizionale 1.",
               "num": 1

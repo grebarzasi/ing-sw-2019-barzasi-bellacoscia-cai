@@ -30,6 +30,7 @@ public class Weapon extends Card {
     private MoveTarget moveTemp;
 
 
+    private boolean orderedAdd;
     private Effect basicEffect;
     private Effect addOneEffect;
     private Effect addTwoEffect;
@@ -63,6 +64,7 @@ public class Weapon extends Card {
         this.askTemp=null;
         this.damaged= new HashSet<>();
         this.beforeBasic=true;
+        this.orderedAdd=false;
     }
 
     /**
@@ -92,9 +94,10 @@ public class Weapon extends Card {
         if(alternativeEffect!=null&&!alternativeEffect.isUsed()&&!basicEffect.isUsed())
             usable.add(alternativeEffect);
         if(addOneEffect!=null&&!addOneEffect.isUsed()&&basicEffect.isUsed())
-            usable.add(addOneEffect);
+                usable.add(addOneEffect);
         if(addTwoEffect!=null&&!addTwoEffect.isUsed()&&basicEffect.isUsed())
-            usable.add(addTwoEffect);
+            if(!orderedAdd||addOneEffect.isUsed())
+                usable.add(addTwoEffect);
         if((extraMove!=null&&!extraMove.isUsed())&&(beforeBasic||basicEffect.isUsed()))
             usable.add(extraMove);
         return usable;
@@ -270,4 +273,11 @@ public class Weapon extends Card {
         this.damaged = damaged;
     }
 
+    public boolean isOrderedAdd() {
+        return orderedAdd;
+    }
+
+    public void setOrderedAdd(boolean orderedAdd) {
+        this.orderedAdd = orderedAdd;
+    }
 }

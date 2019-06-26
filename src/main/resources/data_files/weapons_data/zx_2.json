@@ -5,7 +5,7 @@
   },
   "effects": {
     "basic": {
-      "name": "modalità base",
+      "name": "Modalità base",
       "cost": {
         "yellow": 1,
         "red": 1
@@ -21,7 +21,7 @@
               "num": 1
             }
           },
-          "shootPlayer": {
+          "shootTarget": {
             "damage": 1,
             "mark": 2
           }
@@ -29,7 +29,7 @@
       }
     },
     "alternative": {
-      "name": "modalità scanner",
+      "name": "Modalità scanner",
       "cost": {},
       "subEffect": {
         "1": {
@@ -38,7 +38,7 @@
               "visible": true
             },
             "askPlayer": {
-              "msg": "Seleziona 3 Player che puoi vedere.",
+              "msg": "Seleziona fino a 3 Player che puoi vedere.",
               "num": 3
             }
           },

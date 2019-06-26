@@ -14,11 +14,11 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static it.polimi.ingsw.CLI.CLiBoardStuff.ACTION_TRANSLATION;
-import static it.polimi.ingsw.CLI.CLiBoardStuff.ALL_AMMO;
+import static it.polimi.ingsw.CLI.CLiBoardStuff.*;
 import static it.polimi.ingsw.CLI.CliColor.*;
 import static it.polimi.ingsw.CLI.CliMessages.*;
 import static it.polimi.ingsw.connection.ConnMessage.*;
+import static java.lang.Thread.MIN_PRIORITY;
 import static java.lang.Thread.sleep;
 
 public class CliGame implements ViewClient {
@@ -37,6 +37,7 @@ public class CliGame implements ViewClient {
     public void gameStart(){
         if(!c.isRmi()) {
             ((SClient) c).setCommManager(new SClientCommManager(((SClient) c), this));
+            ((SClient) c).getCommManager().setPriority(MIN_PRIORITY);
             ((SClient) c).getCommManager().start();
         }else {
             try {
@@ -298,7 +299,7 @@ public class CliGame implements ViewClient {
                     return NOTHING;
 
                 reply=reply.toLowerCase();
-                if (reply.equals("n")||reply.equals("s")||reply.equals("e")||reply.equals("o")) {
+                if (ALL_DIRECTIONS.contains(reply)) {
                     break;
                 }
             } catch (IOException e) {
@@ -423,9 +424,8 @@ public class CliGame implements ViewClient {
                 System.out.print(")  ");
                 i++;
             }
-            System.out.println();
             if(!allTargets.isEmpty()) {
-                System.out.println(RESET + allTargets.size() + SHOW_TARGET_SELECTED);
+//                System.out.println(RESET + allTargets.size() + SHOW_TARGET_SELECTED);
                 System.out.print("[ ");
                 for (String s : allTargets) {
                     board.printPawn(s);
@@ -451,9 +451,8 @@ public class CliGame implements ViewClient {
                     reply=0;
                 }
 
-                if (reply<=0 || args.size()<(reply)) {
+                if (reply<1 || args.size()<(reply)) {
                     System.out.println(SHOW_TARGET_ADV_ERR);
-                    reply=0;
                 }else if (!fromDiffSquare || verifyDiffSquare(allTargets,args.get(reply-1))){
                     allTargets.add(args.get(reply-1));
                     args.remove(args.get(reply-1));

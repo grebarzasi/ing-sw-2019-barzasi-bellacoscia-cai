@@ -88,6 +88,7 @@ public class RmiClientHandler extends ClientHandler implements RmiPrefInterf {
             }
         }
         super.getOwner().setView(new ServerCommManager(this));
+        ((ServerCommManager) super.getOwner().getView()).setPriority(MIN_PRIORITY);
         ((ServerCommManager) super.getOwner().getView()).start();
 
     }

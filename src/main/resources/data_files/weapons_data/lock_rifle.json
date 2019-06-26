@@ -5,7 +5,7 @@
   },
   "effects": {
     "basic": {
-      "name": "effetto base",
+      "name": "Effetto base",
       "cost": {
         "blue": 2
       },
@@ -28,7 +28,7 @@
       }
     },
     "addOne": {
-      "name": "secondo aggancio",
+      "name": "Secondo aggancio",
       "cost": {
         "red": 1
       },

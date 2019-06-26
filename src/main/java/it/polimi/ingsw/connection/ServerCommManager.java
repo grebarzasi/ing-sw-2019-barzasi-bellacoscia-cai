@@ -48,15 +48,15 @@ public class ServerCommManager  extends Thread implements View {
     }
 
     public String askAndWait(String question,String args) throws IOException{
-
+        String rpl;
+        synchronized (socketClient) {
             socketClient.getOut().println(question);
-            while (!socketClient.getIn().readLine().equals(AKN));
+            while (!socketClient.getIn().readLine().equals(AKN)) ;
             socketClient.getOut().println(args);
-            String rpl;
             do
-                rpl= socketClient.getIn().readLine();
-            while(rpl.isEmpty());
-
+                rpl = socketClient.getIn().readLine();
+            while (rpl.isEmpty());
+        }
             if(rpl.equals(NOTHING)) {
                 return null;
             }
@@ -314,12 +314,17 @@ public class ServerCommManager  extends Thread implements View {
         Thread t = new Thread(() -> {
             try{
                 setInUse(true);
+                String x;
                 if (rmi) {
-                    setRplTh(rmiClient.chooseDirection(parseString(sTh)).toUpperCase());
+                    x=rmiClient.chooseDirection(parseString(sTh));
                 }
                 else {
-                    setRplTh(askAndWait(CHOOSE_DIRECTION,sTh).toUpperCase());
+                    x=askAndWait(CHOOSE_DIRECTION,sTh);
                 }
+                if(x==null)
+                    setRplTh(null);
+                else
+                    setRplTh(x.toLowerCase());
                 setInUse(false);
             }catch(IOException e){
                 handleDisconnection();
@@ -332,7 +337,7 @@ public class ServerCommManager  extends Thread implements View {
         }
         rpl=rplTh;
         /*-------------------------------------------*/
-        if(rpl.equals(NOTHING))
+        if(rpl==null||rpl.equals(NOTHING))
             return null;
         return rpl;
     }
@@ -462,6 +467,7 @@ public class ServerCommManager  extends Thread implements View {
     }
 
     public boolean handleInactivity(Thread t){
+        t.setPriority(MIN_PRIORITY);
         t.start();
         int i=0;
         System.out.print("\n"+owner.getCharacter()+" Inactivity countdown: ");
@@ -490,8 +496,10 @@ public class ServerCommManager  extends Thread implements View {
 
     public void ping() throws IOException {
         if (!isRmi()) {
+            synchronized (socketClient){
             socketClient.getOut().println(PING);
             while (!socketClient.getIn().readLine().equals(PONG)) ;
+            }
         } else {
             rmiClient.isConnected();
         }

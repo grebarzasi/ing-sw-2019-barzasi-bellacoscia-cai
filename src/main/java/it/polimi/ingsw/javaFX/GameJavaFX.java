@@ -35,6 +35,7 @@ import java.time.chrono.HijrahDate;
 import java.util.ArrayList;
 import java.util.Set;
 
+import static it.polimi.ingsw.CLI.CLiBoardStuff.*;
 import static it.polimi.ingsw.connection.ConnMessage.*;
 import static it.polimi.ingsw.javaFX.GUIFiles.*;
 import static it.polimi.ingsw.CLI.CliMessages.*;
@@ -2410,7 +2411,7 @@ public class GameJavaFX extends Application implements ViewClient {
             for (; i < 2; i++) {
                 for (Button btn : btnCell.get((i * 4) + j)) {
                     btn.setOnAction(e -> {
-                        game.setDirection("east");
+                        game.setDirection(EAST);
                     });
                 }
             }
@@ -2422,7 +2423,7 @@ public class GameJavaFX extends Application implements ViewClient {
             for (; i > 0; i--) {
                 for (Button btn : btnCell.get((i * 4) + j)) {
                     btn.setOnAction(e -> {
-                        game.setDirection("west");
+                        game.setDirection(WEST);
                     });
                 }
             }
@@ -2434,7 +2435,7 @@ public class GameJavaFX extends Application implements ViewClient {
             for (; j < 3; j++) {
                 for (Button btn : btnCell.get((i * 4) + j)) {
                     btn.setOnAction(e -> {
-                        game.setDirection("north");
+                        game.setDirection(NORTH);
                     });
                 }
             }
@@ -2446,7 +2447,7 @@ public class GameJavaFX extends Application implements ViewClient {
             for (; j > 0; j--) {
                 for (Button btn : btnCell.get((i * 4) + j)) {
                     btn.setOnAction(e -> {
-                        game.setDirection("south");
+                        game.setDirection(SOUTH);
                     });
                 }
             }

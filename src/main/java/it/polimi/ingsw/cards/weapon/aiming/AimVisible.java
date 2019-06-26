@@ -1,6 +1,7 @@
 package it.polimi.ingsw.cards.weapon.aiming;
 
 import it.polimi.ingsw.Figure;
+import it.polimi.ingsw.Player;
 import it.polimi.ingsw.cards.weapon.TargetAcquisition;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
@@ -36,18 +37,33 @@ public class AimVisible implements AimingFilter {
 
 
     public Set<Figure> filter(Weapon w, Set<Figure> p) {
+        Figure x=w.getOwner();
         if(p==null)
             return null;
+
+        switch (origin){
+                case "last":
+                    x=w.getLastHit();
+                    break;
+                case "basic":
+                    x=(Figure)w.getBasicEffect().getTargetHitSet().toArray()[0];
+                    break;
+                case "addOne":
+                    x=(Figure)w.getAddOneEffect().getTargetHitSet().toArray()[0];
+                    break;
+                case "addTwo":
+                    x=(Figure)w.getAddTwoEffect().getTargetHitSet().toArray()[0];
+                    break;
+                case "alternative":
+                    x=(Figure)w.getAddTwoEffect().getTargetHitSet().toArray()[0];
+                    break;
+            }
+        Set<Figure> all = x.allCanSee();
+
         if(visible) {
-            if (origin.isEmpty())
-                p.retainAll(w.getOwner().allCanSee());
-            else if (origin.equals("last"))
-                p.retainAll(w.getLastHit().allCanSee());
+            p.retainAll(all);
         } else {
-            if (origin.isEmpty())
-                p.removeAll(w.getOwner().allCanSee());
-            else if (origin.equals("last"))
-                p.removeAll(w.getLastHit().allCanSee());
+            p.removeAll(all);
         }
         return p;
     }

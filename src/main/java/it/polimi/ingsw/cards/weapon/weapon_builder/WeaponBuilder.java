@@ -24,7 +24,7 @@ public class WeaponBuilder {
         final String path = "src/main/resources/data_files/weapons_data/";
         File jsonFile = new File(String.format("%s%s.json", path, name));
         try {
-
+            System.out.println(name);
             //open json file and start parsing
             JsonNode rootNode = mapper.readTree(jsonFile);
 
@@ -35,6 +35,7 @@ public class WeaponBuilder {
             //create a new weapon with name and chamber
             Weapon weaponBuilt = new Weapon(rootNode.path("name").textValue(), chamber);
              weaponBuilt.setBeforeBasicExtra(rootNode.path("extraBeforeBasic").asBoolean());
+             weaponBuilt.setOrderedAdd(rootNode.path("orderedAdd").asBoolean());
             //create effects iterating on effects name. set correct place for each effect
             Iterator<String> effectsIterator = rootNode.path("effects").fieldNames();
             while (effectsIterator.hasNext()) {
@@ -59,7 +60,7 @@ public class WeaponBuilder {
                         break;
                     case "extraMove":
                         weaponBuilt.setExtraMove(effBuilt);
-                        if(rootNode.path("extraMove").path("afterBasic").asBoolean())
+                        if(rootNode.path("extraMove").path("afterBasic").size()>0)
                             weaponBuilt.setBeforeBasicExtra(false);
                         break;
                 }

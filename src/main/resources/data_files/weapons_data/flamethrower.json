@@ -5,7 +5,7 @@
   },
   "effects": {
     "basic": {
-      "name": "modalità base",
+      "name": "Modalità base",
       "cost": {
         "red": 1
       },
@@ -30,7 +30,7 @@
       }
     },
     "alternative": {
-      "name": "modalità barbecue",
+      "name": "Modalità barbecue",
       "cost": {
         "yellow": 2
       },

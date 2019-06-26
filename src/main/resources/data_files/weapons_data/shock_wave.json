@@ -5,7 +5,7 @@
   },
   "effects": {
     "basic":{
-      "name": "modalità base",
+      "name": "Modalità base",
       "cost": {
         "yellow": 1
       },
@@ -29,7 +29,7 @@
       }
     },
     "alternative": {
-      "name": "modalità tsunami",
+      "name": "Modalità tsunami",
       "cost": {
         "yellow": 1
       },

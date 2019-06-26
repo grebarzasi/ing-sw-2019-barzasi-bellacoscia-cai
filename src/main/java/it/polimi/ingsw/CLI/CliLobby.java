@@ -134,6 +134,7 @@ public class CliLobby extends Thread{
         while (!lobby.isGameStarted()){
             synchronized (count) {
                 if (lobby.hasGameTimerStarted() && !count.isAlive()) {
+                    count.setPriority(MIN_PRIORITY);
                     count.start();
                     lobby.setGameTimerStarted(false);
                 }

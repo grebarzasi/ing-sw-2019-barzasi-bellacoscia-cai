@@ -9,6 +9,7 @@ import it.polimi.ingsw.cards.power_up.PowerUp;
 import it.polimi.ingsw.connection.ClientHandler;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -396,7 +397,10 @@ public class Controller {
     }
 
 
-    void askVenoms(Set<Figure> targets, Figure hitter){
+    void askVenoms(Set<Figure> temp, Figure hitter){
+        //do not remove otherwise it will modify hitTargetSet directly!!
+        Set<Figure> targets=new HashSet<>(temp);
+        //---------------------------------------
 
         if(this.hasBot()) {
             targets.remove(this.getModel().getBot());
@@ -495,11 +499,6 @@ public class Controller {
         String s = marshal.create().toString();
         for(Player p: model.getPlayerList())
                 p.getView().sendsUpdate(s);
-        try {
-            sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     /**
