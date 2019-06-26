@@ -59,21 +59,21 @@
         "1": {
           "targetAcq": {
             "equal": [
-              "basic"
+              "last"
             ]
-          }
-        },
-        "2": {
-          "targetAcq": {
-            "equal": [
-              "oldSquare","basic"
-            ]
-          },
-          "sootTarget": {
-            "damage": 1
+          }},
+          "2": {
+            "targetAcq": {
+              "substitute": [
+                "oldSquare",
+                "last"
+              ]
+            },
+            "shootTarget": {
+              "damage": 1
+            }
           }
         }
       }
     }
   }
-}
