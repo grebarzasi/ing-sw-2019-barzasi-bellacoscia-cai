@@ -23,6 +23,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -822,12 +823,12 @@ public class GameJavaFX extends Application implements ViewClient {
         /**
          * set buttons
          */
-        Image msgBack = new Image(new FileInputStream(PATH_BACK_MSG), 300, 100, true, true);
+        Image msgBack = new Image(new FileInputStream(PATH_BACK_MSG), widthCenter, heightLateral/4, true, true);
         BackgroundImage backgroundMsg = new BackgroundImage(msgBack, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background backMsg = new Background(backgroundMsg);
         msg.setBackground(backMsg);
         msg.setAlignment(Pos.CENTER);
-        msg.setFont(font);
+        msg.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         msg.setEditable(false);
 
         HBox hBtn = new HBox(30);
@@ -859,7 +860,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
 
         VBox vmsg = new VBox(25);
-        vmsg.setAlignment(Pos.BOTTOM_LEFT);
+        vmsg.setAlignment(Pos.CENTER);
         vmsg.getChildren().add(msg);
         vmsg.getChildren().add(hBtn);
 
@@ -980,8 +981,8 @@ public class GameJavaFX extends Application implements ViewClient {
         */
         msg.setText(WELCOME);
 
-        //primaryStage.setFullScreen(true);
-        primaryStage.setMaximized(true);
+        primaryStage.setFullScreen(true);
+        //primaryStage.setMaximized(true);
         primaryStage.setResizable(true);
 
 
@@ -1155,6 +1156,7 @@ public class GameJavaFX extends Application implements ViewClient {
         System.out.println(board.getAmmoBlue());
         System.out.println(board.getAmmoYellow());
 
+        grid.getChildren().clear();
 
         while (red < board.getAmmoRed()) {
             ImageView imgAR = null;
@@ -1217,6 +1219,8 @@ public class GameJavaFX extends Application implements ViewClient {
         int red = board.getAmmoRed();
         int blue = board.getAmmoBlue();
         int yellow = board.getAmmoYellow();
+
+        grid.getChildren().clear();
 
         while (red > 0) {
             ImageView imgAR = null;
@@ -1344,6 +1348,8 @@ public class GameJavaFX extends Application implements ViewClient {
         int j = 0;
         ImageView imgKill = null;
 
+        grid.getChildren().clear();
+
         if(colors.get(j).split(INNER_SEP)[0].equals(null)) {
             while (j < colors.size()) {
                 if (colors.get(j).split(INNER_SEP).length > 1) {
@@ -1383,6 +1389,30 @@ public class GameJavaFX extends Application implements ViewClient {
         int j = 2;
         int k = 2;
         int no = 3;
+/*
+        for (int e = 0; e < 3; e++ ){
+            ImageView img = null;
+
+            try {
+                img = new ImageView(new Image(new FileInputStream(PATH_EMPTY_DAMAGE), width, hmarks, true, true));
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            }
+            grid.add(img, e, 0);
+        }
+
+        for (int e = 0; e < 12; e++ ){
+            ImageView img = null;
+
+            try {
+                img = new ImageView(new Image(new FileInputStream(PATH_EMPTY_DAMAGE), width, hdamage, true, true));
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            }
+            grid.add(img, e, 0);
+        }
+ */
+        grid.getChildren().clear();
 
         if (!p.getpBoard().getMarks().isEmpty()) {
             for (String color : p.getpBoard().getMarks()) {
@@ -1444,17 +1474,6 @@ public class GameJavaFX extends Application implements ViewClient {
                     }
                 }
                 i++;
-            }
-        }else{
-            for (int empty = i; empty < 3; empty++ ){
-                ImageView img = null;
-
-                try {
-                    img = new ImageView(new Image(new FileInputStream(PATH_GREY_DAMAGE), 1, 1, true, true));
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-                grid.add(img, empty, 0);
             }
         }
 
@@ -1520,18 +1539,8 @@ public class GameJavaFX extends Application implements ViewClient {
                 }
                 j++;
             }
-        } else {
-            for (int empty = j; empty < 12; empty++ ){
-                ImageView img = null;
-
-                try {
-                    img = new ImageView(new Image(new FileInputStream(PATH_GREY_DAMAGE), 1, 1, true, true));
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-                grid.add(img, empty, 0);
-            }
         }
+
         while (k <= p.getpBoard().getSkulls() + 1) {
 
             if (k <= no) {
