@@ -8,6 +8,8 @@ import it.polimi.ingsw.connection.ServerCommManager;
 import java.io.*;
 import java.net.Socket;
 
+import static it.polimi.ingsw.connection.ServerMessage.THREAD_PRIORITY;
+
 public class SocketClientHandler extends ClientHandler {
     private Socket client;
     private BufferedReader in;
@@ -26,7 +28,7 @@ public class SocketClientHandler extends ClientHandler {
 
     public void game() {
         super.getOwner().setView(new ServerCommManager(this));
-        ((ServerCommManager) super.getOwner().getView()).setPriority(MIN_PRIORITY);
+        ((ServerCommManager) super.getOwner().getView()).setPriority(THREAD_PRIORITY);
         ((ServerCommManager) super.getOwner().getView()).start();
     }
 

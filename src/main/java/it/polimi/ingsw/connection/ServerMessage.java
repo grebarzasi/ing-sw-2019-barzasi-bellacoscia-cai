@@ -4,6 +4,8 @@ import static it.polimi.ingsw.CLI.CliColor.*;
 import static it.polimi.ingsw.CLI.CliColor.RED;
 
 public class ServerMessage {
+    public static final int THREAD_PRIORITY=3;
+
     public static final String RMI_COLOR=BLUE_BOLD;
     public static final String SOCKET_COLOR=CYAN_BOLD;
 

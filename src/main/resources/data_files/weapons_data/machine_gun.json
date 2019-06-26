@@ -57,10 +57,12 @@
       "subEffect": {
         "1": {
           "targetAcq": {
-            "equal": ["basic"],
-          "different": ["addOne"],
+            "isVisible": {
+              "visible": true
+            },
+          "different": ["basic"],
           "askPlayer": {
-            "msg": "Seleziona 1 Player fra quelli colpiti nell'effetto base.",
+            "msg": "Seleziona 1 Player diverso da quelli colpiti precedentemente.",
             "num": 1
           }
           },
@@ -70,21 +72,14 @@
         },
         "2": {
           "targetAcq": {
-            "substitute": ["all"],
-            "isVisible": {
-            "visible": true
-          },
+            "substitute": ["basic"],
           "different": [
-              "me",
-              "addOne",
-              "addTwo",
-              "basic"
-          ],
+              "addOne"],
           "askPlayer": {
-            "msg": "Seleziona 1 Player differente da quelli colpiti precedentemente.",
+            "msg": "Seleziona l'altro Player tra quelli colpiti nell'effetto base.",
             "num": 1
-          }
-          },
+          }}
+        },
           "shootTarget": {
             "damage": 1
           }

@@ -66,7 +66,7 @@
         "2": {
           "targetAcq": {
             "equal": [
-              "oldSquare"
+              "oldSquare","basic"
             ]
           },
           "sootTarget": {

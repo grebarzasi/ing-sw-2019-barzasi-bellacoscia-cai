@@ -26,6 +26,8 @@ public class AimSubstitute extends AimComparator implements AimingFilter{
     public Set<Figure> filter(Weapon w, Set<Figure> p) {
         if(p==null)
             return null;
+        if(p.isEmpty())
+            p.add(w.getOwner());
         Figure target = (Figure)p.toArray()[0];
         p=getPlayersFromSource(w, target);
         return p;

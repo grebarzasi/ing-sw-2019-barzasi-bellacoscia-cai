@@ -229,7 +229,7 @@ public class Shooting implements ControllerState {
         if (w.getMoveTemp() != null) {
 
             mv = w.getMoveTemp();
-            ArrayList<Square> options = this.controller.canGo((Figure)mv.getTargetTemp().toArray()[0],mv.getMaxSteps());
+            ArrayList<Square> options = this.controller.canGo((Figure)mv.getTargetTemp().toArray()[0],mv.getMaxSteps(),mv.isDirectional());
             Square rpl = controller.getView().showPossibleMoves(options,false);
             checkReply(rpl);
             mv.setSquareTemp(rpl);
