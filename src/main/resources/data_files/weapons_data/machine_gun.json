@@ -1,5 +1,6 @@
 {
   "name": "Mitragliatrice",
+  "orderedAdd": true,
   "chamber": {
     "blue": 1
   },
@@ -37,7 +38,6 @@
         "1": {
           "targetAcq": {
             "equal": ["basic"],
-          "different": ["addTwo"],
           "askPlayer": {
             "msg": "Seleziona 1 Player fra quelli colpiti nell'effetto base.",
             "num": 1
@@ -70,10 +70,12 @@
         },
         "2": {
           "targetAcq": {
+            "substitute": ["all"],
             "isVisible": {
             "visible": true
           },
           "different": [
+              "me",
               "addOne",
               "addTwo",
               "basic"

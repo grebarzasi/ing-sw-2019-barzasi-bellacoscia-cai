@@ -25,21 +25,6 @@
           },
           "shootTarget": {
             "damage": 2
-          }
-        }
-      }
-    },
-    "addOne": {
-      "name": "razzi portatili",
-      "cost": {
-        "blue": 1
-      },
-      "subEffect": {
-        "1": {
-          "targetAcq": {
-            "equal": [
-              "basic"
-            ]
           },
           "moveTarget": {
             "step": 1
@@ -47,8 +32,26 @@
         }
       }
     },
-    "addTwo": {
-      "name": "testata a frammentazione",
+    "extraMove": {
+      "name": "Razzi portatili",
+      "cost": {
+        "blue": 1
+      },
+      "subEffect": {
+        "1": {
+          "targetAcq": {
+            "substitute": [
+              "me"
+            ]
+          },
+          "moveTarget": {
+            "step": 2
+          }
+        }
+      }
+    },
+    "addOne": {
+      "name": "Testata a frammentazione",
       "cost": {
         "yellow": 1
       },
@@ -68,23 +71,6 @@
           },
           "sootTarget": {
             "damage": 1
-          }
-        }
-      }
-    },
-    "extraMove": {
-      "cost": {
-        "blue": 1
-      },
-      "subEffect": {
-        "1": {
-          "targetAcq": {
-            "substitute": [
-              "me"
-            ]
-          },
-          "moveTarget": {
-            "step": 2
           }
         }
       }

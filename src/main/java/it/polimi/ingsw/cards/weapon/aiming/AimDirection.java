@@ -6,8 +6,6 @@ import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.weapon.TargetAcquisition;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,6 +30,7 @@ public class AimDirection implements AimingFilter {
 
     public Set<Figure> filter(Weapon w, Set<Figure> p) {
         if(w.getDirectionTemp()==null){
+            targetTemp.clear();
             w.setDirectionTemp(this);
             targetTemp.addAll(allDirectional(w.getOwner(),p));
             return null;
@@ -41,8 +40,8 @@ public class AimDirection implements AimingFilter {
             return null;
         String dir = directionTemp;
         if (wallBang)
-            return directionAll(dir, w.getOwner(), targetTemp);
-        return directionWall(dir, w.getOwner(), targetTemp);
+            return directionWallBang(dir, w.getOwner(), targetTemp);
+        return directionWallBlock(dir, w.getOwner(), targetTemp);
     }
 
     public Set<Figure> allDirectional(Figure origin, Set<Figure> p){
@@ -50,17 +49,18 @@ public class AimDirection implements AimingFilter {
 
         if(wallBang) {
             for (String s : ALL_DIRECTIONS) {
-                temp.addAll(directionWall(s,origin,p));
+                temp.addAll(directionWallBang(s,origin,p));
             }
         }else{
             for (String s : ALL_DIRECTIONS) {
-                temp.addAll(directionAll(s,origin,p));            }
+                temp.addAll(directionWallBlock(s,origin,p));
+            }
         }
         return temp;
     }
 
 
-    public Set<Figure> directionWall(String dir,Figure origin, Set<Figure> p) {
+    public Set<Figure> directionWallBlock(String dir, Figure origin, Set<Figure> p) {
         Set<Figure> temp = new HashSet<>();
         Square pos = origin.getPosition();
         switch (dir) {
@@ -92,7 +92,7 @@ public class AimDirection implements AimingFilter {
     return temp;
     }
 
-    public Set<Figure> directionAll(String dir,Figure origin, Set<Figure> p) {
+    public Set<Figure> directionWallBang(String dir, Figure origin, Set<Figure> p) {
         //Remove all player outside a given direction
         Cell c = origin.getPosition().getPosition();
         Set<Figure> temp = new HashSet<>(p);

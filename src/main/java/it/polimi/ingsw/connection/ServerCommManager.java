@@ -324,7 +324,7 @@ public class ServerCommManager  extends Thread implements View {
                 if(x==null)
                     setRplTh(null);
                 else
-                    setRplTh(x.toUpperCase());
+                    setRplTh(x.toLowerCase());
                 setInUse(false);
             }catch(IOException e){
                 handleDisconnection();
@@ -337,7 +337,7 @@ public class ServerCommManager  extends Thread implements View {
         }
         rpl=rplTh;
         /*-------------------------------------------*/
-        if(rpl.equals(NOTHING))
+        if(rpl==null||rpl.equals(NOTHING))
             return null;
         return rpl;
     }

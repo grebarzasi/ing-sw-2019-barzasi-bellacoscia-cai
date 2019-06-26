@@ -14,7 +14,7 @@
         "1": {
           "targetAcq": {
             "direction": {
-              "wallBang": true
+              "wallBang": false
             },
             "askPlayer": {
               "msg": "Seleziona un player sulla direzione scelta",
