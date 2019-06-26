@@ -1,11 +1,9 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.actions.Action;
-import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.map.Map;
 import it.polimi.ingsw.board.map.Room;
 import it.polimi.ingsw.board.map.Square;
-import it.polimi.ingsw.cards.power_up.PowerUp;
 
 import java.util.*;
 
@@ -41,8 +39,6 @@ public abstract class Figure {
     //The Playes's Playerboard
 
     private PlayerBoard personalBoard;
-
-    private Board gameBoard;
 
     private GameModel model;
 
