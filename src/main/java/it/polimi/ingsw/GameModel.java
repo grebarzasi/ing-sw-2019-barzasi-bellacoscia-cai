@@ -17,7 +17,7 @@ import java.util.Set;
 
 public class GameModel {
 
-    private int frenzyTurn;
+    private int frenzyTurn = 0;
 
     private ArrayList<Player> playerList=new ArrayList<>();
 

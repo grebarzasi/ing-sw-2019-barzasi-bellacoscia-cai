@@ -24,8 +24,12 @@ public class EndGame implements ControllerState {
         for(Player p: this.controller.getModel().getPlayerList()){
 
             p.getView().displayLeaderboard();
+            p.getView().displayMessage("GAME IS FUCKING OVER BOYS");
 
         }
+
+        System.out.println("GAME IS FUCKING OVER BOYS");
+
     }
 
 

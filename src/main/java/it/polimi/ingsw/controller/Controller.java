@@ -13,8 +13,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import static java.lang.Thread.sleep;
-
 /**
  * Main controller class, implemented with satate pattern.
  *
@@ -282,12 +280,13 @@ public class Controller {
 
         this.model.getBoard().refillSquares();
 
+        this.checkEndStatus();
+        this.iteratePlayer();
+
         if(this.getModel().isFrenzy() && this.model.getPlayerList().indexOf(getCurrentPlayer()) == 0){
             this.oneAction = true;
         }
 
-        this.checkEndStatus();
-        this.iteratePlayer();
         this.resetTurn();
 
     }
@@ -303,7 +302,7 @@ public class Controller {
 
         if(this.getBoard().getTrack().getKillsTrack().size() >= this.getBoard().getTrack().getSkullMax()){
 
-            if(this.hasFrenzy && this.model.isFrenzy() == false){
+            if(this.hasFrenzy && !this.model.isFrenzy() && this.model.getFrenzyState()==0){
 
                 this.startFrenzy();
                 this.model.getBoard().refillSquares();
@@ -311,12 +310,12 @@ public class Controller {
                 this.model.setFrenzyState(1);
 
             }else if(this.hasFrenzy){
-                if (this.model.getFrenzyState() == this.model.getPlayerList().size()) {
+                if (this.model.getFrenzyState() >= this.model.getPlayerList().size()) {
                     /* ****************GAME_ENDS******************* */
                     this.endGame();
                     /* ****************GAME_ENDS******************* */
                 }
-                this.model.setFrenzyState(this.model.getFrenzyState() + 1);
+
             }else{
                 //noinspection ConstantConditions
                 if (!this.hasFrenzy) {
@@ -325,6 +324,7 @@ public class Controller {
                     /* ****************GAME_ENDS******************* */
                 }
             }
+            this.model.setFrenzyState(this.model.getFrenzyState() + 1);
         }
     }
 
@@ -370,11 +370,7 @@ public class Controller {
 
      private int getMoves(){
 
-        if(!this.hasFrenzy || (this.hasFrenzy && !this.model.isFrenzy())){
-            return 2;
-        }else if(this.model.isFrenzy() || this.model.getPlayerList().indexOf(getCurrentPlayer()) ==0 ){
-            return 1;
-        }else if(this.oneAction){
+        if(this.isOneAction()){
             return 1;
         }else{
             return 2;

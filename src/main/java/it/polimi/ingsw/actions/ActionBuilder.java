@@ -175,7 +175,7 @@ public class ActionBuilder {
 
     private static void generateFrenzyActions(Player p, ArrayList<Action> actions){
 
-        if (p.getModel().getController().isOneAction()) {
+        if (!p.getModel().getController().isOneAction()) {
             actions.add(new Action(MOVE, FRENZY_MOVE_RANGE));
             actions.add(new Action(PICK, FRENZY_PICK_RANGE));
             if(!p.getWeaponsList().isEmpty()) {

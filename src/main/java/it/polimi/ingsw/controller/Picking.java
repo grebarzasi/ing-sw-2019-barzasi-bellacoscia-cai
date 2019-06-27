@@ -55,7 +55,6 @@ public class Picking implements ControllerState{
                 this.controller.getCurrentPlayer().setPosition(choice);
                 PowerUp check = this.controller.getCurrentPlayer().pickAmmo();
 
-
                 if(check == null){
 
                     this.controller.decreaseMoveLeft();
@@ -66,13 +65,9 @@ public class Picking implements ControllerState{
 
                     this.choosePU(check);
 
-
                 }
-
             }
         }
-
-
     }
 
     /**
@@ -98,7 +93,6 @@ public class Picking implements ControllerState{
 
             this.substitute(options);
 
-
         }else {
 
             options.remove(chosen);
@@ -118,7 +112,6 @@ public class Picking implements ControllerState{
 
         this.controller.getCurrentPlayer().getPowerupList().clear();
         this.controller.getCurrentPlayer().getPowerupList().addAll(options);
-
 
     }
 
