@@ -175,15 +175,16 @@ public class ActionBuilder {
 
     private static void generateFrenzyActions(Player p, ArrayList<Action> actions){
 
-        if (!p.getStartedFrenzy()) {
+        if (p.getModel().getController().isOneAction()) {
             actions.add(new Action(MOVE, FRENZY_MOVE_RANGE));
             actions.add(new Action(PICK, FRENZY_PICK_RANGE));
-            if(canShoot(p)) {
+            if(!p.getWeaponsList().isEmpty()) {
                 actions.add(new Action(FRENZY_SHOOT, FRENZY_MOVE_RELOAD_SHOOT_RANGE));
             }
+
         } else {
             actions.add(new Action(PICK, FIRST_PLAYER_FRENZY_PICK_RANGE));
-            if(canShoot(p)) {
+            if(!p.getWeaponsList().isEmpty()) {
                 actions.add(new Action(FRENZY_SHOOT, FIRST_PLAYER_FRENZY_MOVE_RELOAD_SHOOT_RANGE));
             }
 

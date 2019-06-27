@@ -42,8 +42,6 @@ public class Player extends Figure {
     private boolean disconnected;
     private boolean inactive;
 
-    private boolean startedFrenzy;
-
     public Preferences getPref() {
         return pref;
     }
@@ -96,7 +94,6 @@ public class Player extends Figure {
         this.username = username;
         this.weaponsList = new ArrayList<>();
         this.powerupList = new ArrayList<>();
-        this.startedFrenzy = false;
 
     }
 
@@ -106,7 +103,6 @@ public class Player extends Figure {
         this.username = username;
         this.weaponsList = new ArrayList<>();
         this.powerupList = new ArrayList<>();
-        this.startedFrenzy = false;
 
     }
 
@@ -162,24 +158,12 @@ public class Player extends Figure {
         this.maxActions = maxActions;
     }
 
-    public boolean getStartedFrenzy() {
-        return startedFrenzy;
-    }
-
-    public void setStartedFrenzy(boolean startedFrenzy) {
-        this.startedFrenzy = startedFrenzy;
-    }
-
     public View getView() {
         return view;
     }
 
     public void setView(View view) {
         this.view = view;
-    }
-
-    public boolean isStartedFrenzy() {
-        return startedFrenzy;
     }
 
     public boolean isDisconnected() {

@@ -90,6 +90,11 @@ public class Controller {
      */
     private UpdateBuilder marshal;
 
+    /**
+     * Keeps track of the actions to generate in case of frenzy
+     */
+    private boolean oneAction = false;
+
 
     /**
      * Starts the game reading parameters from a lobby
@@ -277,6 +282,10 @@ public class Controller {
 
         this.model.getBoard().refillSquares();
 
+        if(this.getModel().isFrenzy() && this.model.getPlayerList().indexOf(getCurrentPlayer()) == 0){
+            this.oneAction = true;
+        }
+
         this.checkEndStatus();
         this.iteratePlayer();
         this.resetTurn();
@@ -294,33 +303,28 @@ public class Controller {
 
         if(this.getBoard().getTrack().getKillsTrack().size() >= this.getBoard().getTrack().getSkullMax()){
 
-            if(this.hasFrenzy){
+            if(this.hasFrenzy && this.model.isFrenzy() == false){
 
                 this.startFrenzy();
-                this.getCurrentPlayer().setStartedFrenzy(true);
                 this.model.getBoard().refillSquares();
 
-                if(this.getCurrentPlayer().getStartedFrenzy()){
-                    this.decreaseMoveLeft();
-                }
+                this.model.setFrenzyState(1);
 
-                this.model.setFrenzyState(this.model.getFrenzyState() + 1);
-
-                if(this.model.getFrenzyState() == this.model.getPlayerList().size()){
+            }else if(this.hasFrenzy){
+                if (this.model.getFrenzyState() == this.model.getPlayerList().size()) {
                     /* ****************GAME_ENDS******************* */
                     this.endGame();
                     /* ****************GAME_ENDS******************* */
                 }
-
-
-            }else
+                this.model.setFrenzyState(this.model.getFrenzyState() + 1);
+            }else{
                 //noinspection ConstantConditions
-                if(!this.hasFrenzy){
-                /* ****************GAME_ENDS******************* */
-                this.endGame();
-                /* ****************GAME_ENDS******************* */
+                if (!this.hasFrenzy) {
+                    /* ****************GAME_ENDS******************* */
+                    this.endGame();
+                    /* ****************GAME_ENDS******************* */
+                }
             }
-
         }
     }
 
@@ -330,20 +334,20 @@ public class Controller {
 
     void iteratePlayer(){
 
+
         if (this.model.getPlayerList().indexOf(this.model.getCurrentPlayer()) != this.model.getPlayerList().size() - 1) {
             this.model.setCurrentPlayer(this.model.getPlayerList().get(this.model.getPlayerList().indexOf(model.getCurrentPlayer()) + 1));
         } else {
             this.model.setCurrentPlayer(this.model.getPlayerList().get(0));
         }
 
-        if(!checkLeftPlayer())
+        if (!checkLeftPlayer())
             endGame();
 
         //if disconnected or inactive skip turn
-        if(model.getCurrentPlayer().isDisconnected()||model.getCurrentPlayer().isInactive()) {
+        if (model.getCurrentPlayer().isDisconnected() || model.getCurrentPlayer().isInactive()) {
 //            endTurn();
         }
-
 
     }
 
@@ -355,7 +359,7 @@ public class Controller {
 
     private void resetTurn(){
 
-        this.model.setMovesLeft(2);
+        this.model.setMovesLeft(this.getMoves());
         this.model.setHasBotAction(true);
         this.model.setTurn(this.model.getTurn() + 1);
         this.view = this.getCurrentPlayer().getView();
@@ -363,6 +367,19 @@ public class Controller {
         this.goBack();
 
     }
+
+     private int getMoves(){
+
+        if(!this.hasFrenzy || (this.hasFrenzy && !this.model.isFrenzy())){
+            return 2;
+        }else if(this.model.isFrenzy() || this.model.getPlayerList().indexOf(getCurrentPlayer()) ==0 ){
+            return 1;
+        }else if(this.oneAction){
+            return 1;
+        }else{
+            return 2;
+        }
+     }
 
     /**
      * ends the game by displaying the leaderboard
@@ -649,5 +666,9 @@ public class Controller {
 
     public void setHasBot(boolean hasBot) {
         this.hasBot = hasBot;
+    }
+
+    public boolean isOneAction() {
+        return oneAction;
     }
 }

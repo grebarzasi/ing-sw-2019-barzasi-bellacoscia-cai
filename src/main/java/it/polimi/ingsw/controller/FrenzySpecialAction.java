@@ -35,6 +35,9 @@ public class FrenzySpecialAction implements ControllerState {
         Square choice = this.controller.getView().showPossibleMoves(options, false);
         this.controller.getCurrentPlayer().setPosition(choice);
 
+        this.controller.decreaseMoveLeft();
+        this.controller.update();
+
         if(choice == null){
             this.controller.goBack();
         }else {
@@ -57,7 +60,6 @@ public class FrenzySpecialAction implements ControllerState {
         Weapon shootingWith = this.controller.getView().showWeapon(weaponChoices);
 
         if(shootingWith == null){
-            this.controller.decreaseMoveLeft();
             this.controller.update();
             this.controller.goBack();
         }else {
