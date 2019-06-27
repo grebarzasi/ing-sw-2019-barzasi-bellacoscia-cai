@@ -101,6 +101,8 @@ public class Lobby extends Thread {
      */
 
     public boolean usernameCheck(ClientHandler p){
+        if(p.getOwner().getUsername().equals("null"))
+            return false;
         if(p.getOwner().getUsername().isEmpty())
             return false;
         for(ClientHandler toCheck: joinedPlayers){

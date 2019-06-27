@@ -15,6 +15,9 @@ import it.polimi.ingsw.virtual_model.VirtualPlayer;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.rmi.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -59,33 +62,45 @@ public class CliView {
 
 
     public void chooseConnection() throws IOException {
-        System.out.println("\n"+SELECT_CONN);
-        String temp="";
-        temp = sc.readLine();
-        if(temp.equals("R")||temp.equals("RMI")||temp.equals("1")||temp.equals("r")){
-            c= new RmiClient();
-            c.setRmi(true);
-            System.out.println(RMI);
-        }else if(temp.equals("S")||temp.equals("Socket")||temp.equals("2")||temp.equals("s")||temp.isEmpty()){
-            c= new SClient();
-            c.setRmi(false);
-            System.out.println(SOCKET);
+        do {
+            System.out.println("\n" + SELECT_CONN);
+            String temp = "";
+            boolean flag = true;
+            do {
+                temp = sc.readLine();
+                temp = temp.toLowerCase();
+                if (temp.equals("r") || temp.equals("rmi") || temp.equals("1")) {
+                    c = new RmiClient();
+                    c.setRmi(true);
+                    System.out.println(RMI);
+                    flag = false;
+                } else if (temp.equals("s") || temp.equals("socket") || temp.equals("2") || temp.isEmpty()) {
+                    c = new SClient();
+                    c.setRmi(false);
+                    System.out.println(SOCKET);
+                    flag = false;
+                } else
+                    System.out.println(SELECT_CONN_ERR);
+            } while (flag);
 
-        }
-        port=acquirePort();
-        ip=acquireIp();
-        if(port!=0)
-            c.setPort(port);
-        else
-            System.out.println(DEFAULT+" "+ c.getPort()+"\n");
+            ip = acquireIp();
+            if (!ip.isEmpty())
+                c.setIp(ip);
+            else
+                System.out.println(DEFAULT + " " + c.getIp() + "\n");
 
-        if(!ip.isEmpty())
-            c.setIp(ip);
-        else
-            System.out.println(DEFAULT+" "+c.getIp()+"\n");
-        System.out.println(LINE_SEP);
-        c.run();
-        System.out.println(LINE_SEP);
+
+            port = acquirePort();
+            if (port != 0) {
+                c.setPort(port);
+            } else {
+                System.out.println(DEFAULT + " " + c.getPort() + "\n");
+            }
+
+            System.out.println(LINE_SEP);
+            c.run();
+            System.out.println(LINE_SEP);
+        }while(!c.connected());
     }
 
     /**
@@ -143,7 +158,28 @@ public class CliView {
 
     public String acquireIp()throws IOException{
         System.out.println("\n"+IP_SELECT);
-        return sc.readLine();
+        boolean flag =true;
+        String ip;
+        InetAddress test;
+        do{
+            ip=sc.readLine();
+            try {
+            if(ip.isEmpty())
+                test=Inet4Address.getLocalHost();
+            else
+                test = InetAddress.getByName(ip);
+
+            }catch(java.net.UnknownHostException e){
+                System.out.println("\n"+IP_SELECT_ERR);
+                continue;
+            }
+
+            if(test.isReachable(1000))
+                flag=false;
+            else
+              System.out.println("\n"+IP_SELECT_ERR);
+        }while (flag);
+        return ip;
     }
 
     /**

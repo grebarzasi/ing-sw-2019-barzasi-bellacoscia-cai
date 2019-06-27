@@ -26,6 +26,7 @@ public class PlayerBoard {
 
     private int[] pointVec;
     private int deathNum=0;
+    private boolean flipped;
     //received mark tokens
 
     private ArrayList<Token> mark;
@@ -57,6 +58,8 @@ public class PlayerBoard {
         this.pointVec[4]=points[4];
         this.pointVec[5]=points[5];
         this.pointVec[6]=points[6];
+
+        this.flipped=false;
 
     }
 
@@ -248,6 +251,14 @@ public class PlayerBoard {
 
     public int getDeathNum() {
         return deathNum;
+    }
+
+    public boolean isFlipped() {
+        return flipped;
+    }
+
+    public void setFlipped(boolean flipped) {
+        this.flipped = flipped;
     }
 
     public void setDeathNum(int deathNum) {

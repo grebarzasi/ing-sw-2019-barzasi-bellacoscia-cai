@@ -439,8 +439,8 @@ public class CliBoard {
         System.out.print(RESET+"├");
         System.out.print(RESET);
 
-//        if(model.isFrenzy())
-//            track=DEATH_TRACK_FRENZY;
+        if(p.getpBoard().isFlipped())
+            track=DEATH_TRACK_FRENZY;
         //skulls
         for(; i<(p.getpBoard().getSkulls()); i++){
             System.out.print("["+SKULL_T+"]");

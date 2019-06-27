@@ -2,11 +2,13 @@ package it.polimi.ingsw.connection.socket;
 
 
 import it.polimi.ingsw.connection.ConnectionTech;
+import it.polimi.ingsw.connection.DisconnectionHandler;
 
 import java.io.*;
 import java.net.Socket;
 
 import static it.polimi.ingsw.CLI.CliMessages.CONNECTION_ERR;
+import static it.polimi.ingsw.CLI.CliMessages.CONNECTION_OK;
 
 /**
  * Client side Socket connection
@@ -19,6 +21,7 @@ public class SClient extends ConnectionTech {
     private BufferedReader in;
     private PrintWriter out;
     private SClientCommManager commManager;
+    private boolean connected=false;
 
     /**
      * Initialize connection and input and output streams
@@ -26,19 +29,21 @@ public class SClient extends ConnectionTech {
 
         public void run() {
             try {
-                System.out.println("Connecting");
                 this.server = new Socket(super.getIp(), super.getPort());
-                System.out.println("Connection established\n");
+                connected=true;
+                System.out.println(CONNECTION_OK);
                 this.in = new BufferedReader(new InputStreamReader(server.getInputStream()));
                 this.out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(server.getOutputStream())), true);
             }catch(IOException e){
-                System.err.println(CONNECTION_ERR);
+                DisconnectionHandler.client(false);
             }
         }
 
     public Socket getServer() {
         return server;
     }
+
+    public boolean connected(){return connected;};
 
     public PrintWriter getOutput() {
         return out;

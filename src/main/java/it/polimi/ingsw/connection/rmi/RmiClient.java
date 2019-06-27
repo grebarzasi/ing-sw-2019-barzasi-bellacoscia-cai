@@ -4,15 +4,19 @@ package it.polimi.ingsw.connection.rmi;
  * @author Gregorio Barzasi
  */
 import it.polimi.ingsw.connection.ConnectionTech;
+import it.polimi.ingsw.connection.DisconnectionHandler;
 import it.polimi.ingsw.virtual_model.ViewClient;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
+import static it.polimi.ingsw.CLI.CliMessages.CONNECTION_OK;
+
 public class RmiClient extends ConnectionTech implements RmiCInterf{
 
     private RmiPrefInterf clientHandler;
+    private boolean connected=false;
 
 
     public void run() {
@@ -20,13 +24,14 @@ public class RmiClient extends ConnectionTech implements RmiCInterf{
             Registry serverRegistry = LocateRegistry.getRegistry(super.getIp(),super.getPort());
             RmiServerInterface server = (RmiServerInterface) serverRegistry.lookup("Server");
             clientHandler = server.getClientHandler();
-            System.out.println("RMI connection established\n");
+            System.out.println(CONNECTION_OK);
+            connected=true;
         } catch (Exception e) {
-            System.err.println("RMI connection error\n");
-            e.printStackTrace();
-
+            DisconnectionHandler.client(true);
         }
     }
+
+    public boolean connected(){return connected;};
 
     public RmiPrefInterf getClientHandler() {
         return clientHandler;

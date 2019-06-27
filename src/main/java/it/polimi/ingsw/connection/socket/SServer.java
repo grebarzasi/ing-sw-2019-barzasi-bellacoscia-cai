@@ -3,6 +3,7 @@ package it.polimi.ingsw.connection.socket;
 import it.polimi.ingsw.CLI.CliView;
 import it.polimi.ingsw.Lobby;
 import it.polimi.ingsw.connection.ConnectionTech;
+import it.polimi.ingsw.connection.DisconnectionHandler;
 import it.polimi.ingsw.connection.MainServer;
 
 import java.io.IOException;
@@ -46,13 +47,10 @@ public class SServer extends ConnectionTech {
 
 
         } catch (Exception e) {
-            System.err.println(SOCKET_S_ERR);
-            e.printStackTrace();
+            DisconnectionHandler.server(false);
         }
 
     }
+    public boolean connected(){return true;};
 
-//    public void game() {
-//        System.out.println("*SERVER IN GAME*");
-//    }
 }

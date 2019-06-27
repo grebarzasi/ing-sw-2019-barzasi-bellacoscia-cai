@@ -9,6 +9,7 @@ public class VirtualPlayerBoard {
     private int ammoRed = 3;
     private int ammoBlue = 3;
     private int ammoYellow = 3;
+    private boolean flipped;
 
     public ArrayList<String> getDamage() {
         return damage;
@@ -56,5 +57,13 @@ public class VirtualPlayerBoard {
 
     public void setAmmoYellow(int ammoYellow) {
         this.ammoYellow = ammoYellow;
+    }
+
+    public boolean isFlipped() {
+        return flipped;
+    }
+
+    public void setFlipped(boolean flipped) {
+        this.flipped = flipped;
     }
 }

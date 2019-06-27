@@ -116,6 +116,7 @@ public class UpdateParser {
 
         //set skull
         board.setSkulls(node.path("skulls").asInt());
+        board.setFlipped(node.path("flipped").asBoolean());
 
         //set ammo
         JsonNode ammoNode =node.path("ammo");

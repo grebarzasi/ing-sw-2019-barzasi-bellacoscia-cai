@@ -3,6 +3,7 @@ package it.polimi.ingsw.connection.rmi;
 import it.polimi.ingsw.connection.ClientHandler;
 import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.Lobby;
+import it.polimi.ingsw.connection.DisconnectionHandler;
 import it.polimi.ingsw.virtual_model.ViewClient;
 
 import java.rmi.RemoteException;
@@ -31,6 +32,8 @@ public class RmiServer extends ConnectionTech implements RmiServerInterface{
         return(RmiPrefInterf) UnicastRemoteObject.exportObject(temp, 0);
     }
 
+    public boolean connected(){return true;};
+
     public void run(){
 
         try {
@@ -42,8 +45,7 @@ public class RmiServer extends ConnectionTech implements RmiServerInterface{
             System.out.println(RMI_S_READY+super.getPort());
 
         } catch (Exception e) {
-            System.out.println(RMI_S_ERR);
-            e.printStackTrace();
+            DisconnectionHandler.server(true);
         }
     }
 

@@ -27,7 +27,7 @@ public class Terminator extends Figure{
 
     public void shoot(Player p){
 
-        this.inflictDamage(6,p);
+        this.inflictDamage(12,p);
         if(this.getPersonalBoard().getDamage().size() > BOT_ADRENALINE_THRESHOLD){
 
             this.inflictMark(1,p);

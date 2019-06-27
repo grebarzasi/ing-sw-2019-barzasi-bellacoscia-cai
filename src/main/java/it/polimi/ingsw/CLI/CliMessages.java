@@ -11,7 +11,9 @@ public class CliMessages {
 
     public static final String MSG_COLOR=PURPLE;
     public static final String HEAD_MSG="--------------------------------\n"+YELLOW_BACKGROUND_BRIGHT+BLUE_BOLD+"*** Benvenuti in ADRENALINA! ***"+RESET+"\n--------------------------------";
-    public static final String SELECT_CONN = MSG_COLOR+"Seleziona la tipologia di connessione: (RMI/SOCKET)"+RESET;
+    public static final String SELECT_CONN = MSG_COLOR+"Seleziona la tipologia di connessione: (1-RMI/2-SOCKET)"+RESET;
+    public static final String SELECT_CONN_ERR = RED+"Connessione non disponibile, riprova:"+RESET;
+
 
     //LOGIN
     public static final String PRE_LOGIN =MSG_COLOR+ "E' tempo di fare il login!"+RESET;
@@ -25,8 +27,11 @@ public class CliMessages {
 
     public static final String PORT_SELECT = MSG_COLOR+"Inserisci la porta: (lascia vuoto per i valori di default)"+RESET;
     public static final String IP_SELECT = MSG_COLOR+"Inserisci l'ip: (lascia vuoto per i valori di default)"+RESET;
+    public static final String IP_SELECT_ERR = RED+"Ip non disponibile o non raggiungibile, riprova:"+RESET;
+
     public static final String PORT_ERR = "Porta non disponibile, cambiala!"+RESET;
     public static final String CONNECTION_ERR = "Qualcosa è andato storto, verifica la connessione con il server!"+RESET;
+    public static final String CONNECTION_OK = "Connessione stabilita\n"+RESET;
 
     public static final String USERNAME =MSG_COLOR+ "Inserisci l'username:"+RESET;
     public static final String CHARACTER = MSG_COLOR+"Inserisci il tuo colore: (red, yellow, blue, grey, green)"+RESET;

@@ -407,8 +407,12 @@ public class Controller {
         for(Player p : this.model.getPlayerList()) {
             if (p.getPersonalBoard().canFlip()) {
                 p.getPersonalBoard().setPointVec(frenzyPointsVec);
+                p.getPersonalBoard().setFlipped(true);
+                p.getPersonalBoard().setDeathNum(0);
             }
         }
+
+
     }
 
 

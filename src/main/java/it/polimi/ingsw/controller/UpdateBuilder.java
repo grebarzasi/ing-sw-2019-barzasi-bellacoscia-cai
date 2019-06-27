@@ -140,6 +140,7 @@ public class UpdateBuilder {
             }
             boardNode.putPOJO("damage", damage);
             boardNode.putPOJO("marks", marks);
+             boardNode.put("flipped",p.getPersonalBoard().isFlipped());
 
             //add skulls
             boardNode.put("skulls", p.getPersonalBoard().getDeathNum());

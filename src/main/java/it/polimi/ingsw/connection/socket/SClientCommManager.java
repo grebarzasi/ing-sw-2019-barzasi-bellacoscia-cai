@@ -1,5 +1,6 @@
 package it.polimi.ingsw.connection.socket;
 
+import it.polimi.ingsw.connection.DisconnectionHandler;
 import it.polimi.ingsw.connection.socket.SClient;
 import it.polimi.ingsw.virtual_model.ViewClient;
 
@@ -107,7 +108,7 @@ public class SClientCommManager extends Thread{
 
         }
            } catch (IOException e) {
-            System.err.print(CONNECTION_ERR);
+            DisconnectionHandler.generic();
         }
     }
 
