@@ -92,6 +92,26 @@ public class GUIFiles {
     public static final String WAIT = "Aspetta il tuo turno...";
 
 
+    public static final String YELLOW = "yellow";
+    public static final String RED = "red";
+    public static final String BLUE = "blue";
+    public static final String GREEN = "green";
+    public static final String GREY = "grey";
+    public static final String SHOOT = "Spara";
+    public static final String MOVE = "Muovi";
+    public static final String PICK = "Raccogli";
+    public static final String TERMINATOR = "Terminator";
+    public static final String CANCEL = "Annulla";
+    public static final String RELOAD = "Ricarica";
+    public static final String POWER_UP = "Power-up";
+    public static final String DISCARD = "Scarta Power-up";
+    public static final String END = "Termina turno";
+
+    public static final String AMMO_RED_ID = "r";
+    public static final String AMMO_BLUE_ID = "b";
+    public static final String AMMO_YELLOW_ID = "y";
+
+
     public static final int R = 4;
     public static final int B = 3;
     public static final int Y = 0;
