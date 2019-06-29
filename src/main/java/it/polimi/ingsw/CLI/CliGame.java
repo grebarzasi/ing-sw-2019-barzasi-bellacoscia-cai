@@ -349,7 +349,7 @@ public class CliGame implements ViewClient {
     /**
      * Displays the leaderboard of the game to the user
      */
-    public void displayLeaderboard() {
+    public void displayLeaderboard(ArrayList<String> args) {
 
     }
 

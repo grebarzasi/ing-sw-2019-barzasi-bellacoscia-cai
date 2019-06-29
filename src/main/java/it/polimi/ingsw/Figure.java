@@ -428,6 +428,8 @@ public abstract class Figure {
 
     /*just a bunch of setters and getters*/
 
+
+
     public Square getOldPosition() {
         return oldPosition;
     }

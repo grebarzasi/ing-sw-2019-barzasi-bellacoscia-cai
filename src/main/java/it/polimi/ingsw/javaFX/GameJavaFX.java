@@ -2710,7 +2710,7 @@ public class GameJavaFX extends Application implements ViewClient {
     }
 
     @Override
-    public void displayLeaderboard() {
+    public void displayLeaderboard(ArrayList<String> args) {
         LeaderboardJavaFX leaderboard = new LeaderboardJavaFX();
         try {
             leaderboard.start(primaryStage);

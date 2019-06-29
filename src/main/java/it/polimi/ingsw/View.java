@@ -80,11 +80,13 @@ public interface View {
 
     void displayMessage(String message);
 
+
     /**
-     * Displays the leaderboard of the game to the user
+     * Displays the leaderboard of the game given players' ranking
+     * @param args the Players ranked by score and priority on the killshot track if even
      */
 
-    void displayLeaderboard(ArrayList<Player> args);
+    void displayLeaderboard(ArrayList<Figure> args);
 
     /**
      * Updates the update to the players' clients

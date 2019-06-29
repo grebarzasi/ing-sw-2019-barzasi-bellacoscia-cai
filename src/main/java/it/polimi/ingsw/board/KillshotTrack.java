@@ -52,17 +52,7 @@ public class KillshotTrack {
 
     public void scorePoints(){
 
-        HashMap<Figure,Integer> killsPerPlayer = new HashMap<>();
-
-        for(ArrayList<Token> kill : this.killsTrack){
-            for(Token t: kill){
-                if(!killsPerPlayer.containsKey(t.getOwner())){
-                    killsPerPlayer.put(t.getOwner(),1);
-                }else{
-                    killsPerPlayer.replace(t.getOwner(),killsPerPlayer.get(t.getOwner())+1);
-                }
-            }
-        }
+        HashMap<Figure,Integer> killsPerPlayer = this.mapKillsPerPlayer();
 
         ArrayList<Figure> orderedList = new ArrayList<>();
         ArrayList<Figure> toAdd = new ArrayList<>();
@@ -97,7 +87,6 @@ public class KillshotTrack {
             for(k = 0 ; k < orderedList.size() ; k++){
                 if(killsPerPlayer.get(orderedList.get(k)) == killsPerPlayer.get(orderedList.get(i)) && damagePriority(orderedList.get(k)) > damagePriority(orderedList.get(i))){
 
-
                     Figure temp = orderedList.get(i);
                     orderedList.set(i,orderedList.get(k));
                     orderedList.set(k,temp);
@@ -112,6 +101,23 @@ public class KillshotTrack {
 
         }
 
+   }
+
+   public HashMap<Figure, Integer> mapKillsPerPlayer(){
+
+       HashMap<Figure,Integer> killsPerPlayer = new HashMap<>();
+
+       for(ArrayList<Token> kill : this.killsTrack){
+           for(Token t: kill){
+               if(!killsPerPlayer.containsKey(t.getOwner())){
+                   killsPerPlayer.put(t.getOwner(),1);
+               }else{
+                   killsPerPlayer.replace(t.getOwner(),killsPerPlayer.get(t.getOwner())+1);
+               }
+           }
+       }
+
+       return killsPerPlayer;
    }
 
     /**

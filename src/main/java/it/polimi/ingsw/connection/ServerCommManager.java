@@ -299,10 +299,10 @@ public class ServerCommManager  extends Thread implements View {
         }
     }
 
-    public void displayLeaderboard(ArrayList<Player> all){
+    public void displayLeaderboard(ArrayList<Figure> all){
         String s="";
-        for(Player p : all)
-            s=p.getCharacter()+INFO_SEP;
+        for(Figure f: all)
+            s=f.getCharacter()+INFO_SEP;
 
         try {
             setInUse(true);

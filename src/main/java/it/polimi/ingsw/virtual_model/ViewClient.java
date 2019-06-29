@@ -1,6 +1,8 @@
 package it.polimi.ingsw.virtual_model;
 
 
+import it.polimi.ingsw.Figure;
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -87,7 +89,7 @@ public interface ViewClient extends Remote {
      * Displays the leaderboard of the game to the user
      */
 
-    public void displayLeaderboard(ArrayList<String> s)throws RemoteException;
+    public void displayLeaderboard(ArrayList<String> args)throws RemoteException;
 
     public String showEffects(ArrayList<String> args)throws RemoteException;
 
