@@ -33,6 +33,11 @@ public class VirtualPlayer {
         this.powerUps= new ArrayList<>();
     }
 
+    public boolean equals(String s){
+        if(character.equals(s))
+            return true;
+        return false;
+    }
 
     public boolean isInactive() {
         return inactive;

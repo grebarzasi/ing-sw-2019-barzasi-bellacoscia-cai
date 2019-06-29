@@ -153,19 +153,19 @@ public abstract class Figure {
 
     public boolean canSeeSquare(Square s){
 
-        if (getPosition().getRoom() == s.getRoom()) {
+        if (position.getRoom() == s.getRoom()) {
             return true;
 
-        } else if (getPosition().getNorth() != null && getPosition().getNorth().getRoom() == s.getRoom()) {
+        } else if (position.getNorth() != null && position.getNorth().getRoom().equals(s.getRoom())) {
             return true;
 
-        } else if (getPosition().getEast() != null && getPosition().getNorth().getRoom() == s.getRoom()) {
+        } else if (position.getEast() != null && position.getEast().getRoom().equals(s.getRoom())) {
             return true;
 
-        } else if (getPosition().getWest() != null && getPosition().getNorth().getRoom() == s.getRoom()) {
+        } else if (position.getWest() != null && position.getWest().getRoom().equals(s.getRoom())) {
             return true;
 
-        } else return getPosition().getSouth() != null && getPosition().getNorth().getRoom() == s.getRoom();
+        } else return position.getSouth() != null && position.getSouth().getRoom().equals(s.getRoom());
         //intellij simplification return false if last condition is not verified
     }
 
@@ -209,6 +209,8 @@ public abstract class Figure {
         }
         return visible;
     }
+
+
     /**
      * @return a list of all players.
      * @author Gregorio Barzasi

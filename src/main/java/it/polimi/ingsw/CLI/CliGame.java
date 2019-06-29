@@ -350,6 +350,11 @@ public class CliGame implements ViewClient {
      * Displays the leaderboard of the game to the user
      */
     public void displayLeaderboard(ArrayList<String> args) {
+        int i=0;
+        for(String s: args){
+            int index= board.getModel().getAllPlayers().indexOf(s);
+            System.out.println(i+"-"+board.getModel().getAllPlayers().get(index).getUsername()+" con "+s);
+        }
 
     }
 

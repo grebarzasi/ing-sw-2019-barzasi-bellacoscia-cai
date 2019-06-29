@@ -2,10 +2,12 @@ package it.polimi.ingsw.cards.weapon;
 
 import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.Player;
+import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.cards.Card;
 import it.polimi.ingsw.cards.weapon.aiming.AimAskPlayer;
 import it.polimi.ingsw.cards.weapon.aiming.AimDirection;
+import it.polimi.ingsw.cards.weapon.aiming.AimSquare;
 
 import java.util.*;
 
@@ -28,6 +30,7 @@ public class Weapon extends Card {
     private AimDirection directionTemp;
     private AimAskPlayer askTemp;
     private MoveTarget moveTemp;
+    private AimSquare squareTemp;
 
 
     private boolean orderedAdd;
@@ -49,6 +52,8 @@ public class Weapon extends Card {
     private Figure lastHit;
     private Figure lastMoved;
     private Set<Figure> damaged;
+    private Set<Figure> prevSelected;
+    private Square selected;
 
 
     public Weapon(){
@@ -63,6 +68,7 @@ public class Weapon extends Card {
         this.directionTemp=null;
         this.askTemp=null;
         this.damaged= new HashSet<>();
+        this.prevSelected= new HashSet<>();
         this.beforeBasic=true;
         this.orderedAdd=false;
     }
@@ -108,6 +114,9 @@ public class Weapon extends Card {
         directionTemp=null;
         askTemp=null;
         moveTemp=null;
+        squareTemp=null;
+        selected=null;
+        prevSelected.clear();
         damaged.clear();
 
         if(basicEffect!=null)
@@ -279,5 +288,29 @@ public class Weapon extends Card {
 
     public void setOrderedAdd(boolean orderedAdd) {
         this.orderedAdd = orderedAdd;
+    }
+
+    public Set<Figure> getPrevSelected() {
+        return prevSelected;
+    }
+
+    public void setPrevSelected(Set<Figure> prevSelected) {
+        this.prevSelected = prevSelected;
+    }
+
+    public Square getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Square selected) {
+        this.selected = selected;
+    }
+
+    public AimSquare getSquareTemp() {
+        return squareTemp;
+    }
+
+    public void setSquareTemp(AimSquare squareTemp) {
+        this.squareTemp = squareTemp;
     }
 }

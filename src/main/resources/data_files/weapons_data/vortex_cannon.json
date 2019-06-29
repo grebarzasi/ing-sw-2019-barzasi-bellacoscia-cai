@@ -1,0 +1,64 @@
+{
+  "name": "Cannone Vortex",
+  "chamber": {
+    "red": 1
+  },
+  "effects": {
+    "basic": {
+      "name": "Modalità base",
+      "cost": {
+        "blue": 1,
+        "red": 1
+      },
+      "subEffect": {
+        "1": {
+          "targetAcq": {
+            "substitute": ["me"],
+            "visibleSquare": {
+              "msg": "Seleziona 1 Quadrato che puoi vedere",
+              "mine": false,
+              "rangeMin": 0,
+              "rangeMax": 1
+            },
+            "askPlayer": {
+              "msg": "Seleziona 1 Player",
+              "num": 1
+            }
+          },
+          "shootTarget": {
+            "damage": 2
+          },
+          "moveTarget": {
+            "finalPos": "selected"
+          }
+        }
+      }
+    },
+    "addOne": {
+      "name": "Modalità buco nero",
+      "cost": {
+        "red": 1
+      },
+      "subEffect": {
+        "1": {
+          "targetAcq": {
+            "substitute": {
+              "origin": "prevSelected"
+            },
+            "different": ["last"],
+            "askPlayer": {
+              "msg": "Seleziona altri 2 Player",
+              "num": 2
+            }
+          },
+          "shootTarget": {
+            "damage": 1
+          },
+          "moveTarget": {
+            "finalPos": "selected"
+          }
+        }
+      }
+    }
+  }
+}

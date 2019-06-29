@@ -43,6 +43,9 @@ public class MoveTarget implements SubEffect {
             case "last":
                 squareTemp = w.getLastHit().getPosition();
                 break;
+            case "selected":
+                squareTemp = w.getSelected();
+                break;
             case "me":
                 squareTemp = w.getOwner().getPosition();
                 break;

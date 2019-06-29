@@ -33,6 +33,9 @@ public class AimComparator {
                 case "all":
                     pSet.addAll(target.allFigures());
                     break;
+                case "prevSelected":
+                    pSet.addAll(w.getPrevSelected());
+                    break;
                 case "basic":
                     pSet.addAll(w.getBasicEffect().getTargetHitSet());
                     break;

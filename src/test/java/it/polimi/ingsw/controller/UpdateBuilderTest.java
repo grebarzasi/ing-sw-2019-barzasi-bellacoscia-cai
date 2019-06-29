@@ -274,9 +274,9 @@ class UpdateBuilderTest {
         assertTrue(vP3.getpBoard().getMarks().containsAll(marks));
 
         //skulls
-        assertEquals(6,vP1.getpBoard().getSkulls());
-        assertEquals(6,vP2.getpBoard().getSkulls());
-        assertEquals(5,vP3.getpBoard().getSkulls());
+        assertEquals(0,vP1.getpBoard().getSkulls());
+        assertEquals(0,vP2.getpBoard().getSkulls());
+        assertEquals(0,vP3.getpBoard().getSkulls());
 
         //ammo
         assertEquals(p1.getPersonalBoard().getAmmoInventory().getRed(),vP1.getpBoard().getAmmoRed());

@@ -8,6 +8,7 @@ import it.polimi.ingsw.cards.weapon.MoveTarget;
 import it.polimi.ingsw.cards.weapon.Weapon;
 import it.polimi.ingsw.cards.weapon.aiming.AimAskPlayer;
 import it.polimi.ingsw.cards.weapon.aiming.AimDirection;
+import it.polimi.ingsw.cards.weapon.aiming.AimSquare;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -213,7 +214,22 @@ public class Shooting implements ControllerState {
         AimDirection dir;
         AimAskPlayer ask;
         MoveTarget mv;
+        AimSquare sq;
 
+        if (w.getSquareTemp() != null) {
+            sq = w.getSquareTemp();
+            ArrayList<Square> options = this.controller.visibleSquare((Figure)sq.getTargetTemp().toArray()[0]);
+            if(!sq.isMine())
+                options.remove(shootingWith.getOwner().getPosition());
+            Square rpl = controller.getView().showPossibleMoves(options,false);
+            checkReply(rpl);
+            shootingWith.setSelected(rpl);
+            Set<Figure> temp= new HashSet<>(controller.playersInRange(rpl,sq.getMinDistance(),sq.getMaxDistance()));
+            temp.remove(shootingWith.getOwner());
+            sq.setTargetTemp(temp);
+            shootingWith.setPrevSelected(new HashSet<>(temp));
+            return;
+        }
         if (w.getDirectionTemp() != null) {
 
             dir = w.getDirectionTemp();

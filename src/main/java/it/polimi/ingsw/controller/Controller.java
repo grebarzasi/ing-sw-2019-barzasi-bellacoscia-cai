@@ -527,6 +527,51 @@ public class Controller {
         return temp;
     }
 
+    /**
+     * Determines the squares a player can reach within a given range removing ones outside cardinal directions
+     *
+     * @param p the Player inquiring on
+     * @return the list of possible squares in cardinal direction
+     */
+    ArrayList<Square> visibleSquare(Figure p){
+        ArrayList<Square> options =new ArrayList<>();
+        int row;
+        int column;
+
+        Square[][] matrix= this.getModel().getBoard().getMap().getSquareMatrix();
+
+        for(row = 0; row < Map.HEIGHT; row++){
+            for(column = 0; column < Map.WIDTH; column++){
+
+                if(p.canSeeSquare(matrix[row][column])&& ! matrix[row][column].getRoom().getColor().equals(Room.VOID)){
+                    options.add(matrix[row][column]);
+                }
+            }
+        }
+
+        return options;
+    }
+
+    /**
+     * Determines the squares a player can reach within a given range removing ones outside cardinal directions
+     *
+     * @return the list of possible squares in cardinal direction
+     */
+    ArrayList<Figure> playersInRange(Square s, int min,int max){
+        ArrayList<Figure> options =new ArrayList<>();
+        int dist;
+        Set<Figure> allFig = new HashSet<>(model.getPlayerList());
+        if(model.getBot()!=null)
+            allFig.add(model.getBot());
+
+        for(Figure p:allFig){
+            dist = p.distanceTo(s);
+            if(dist<=max&&dist>=min)
+                options.add(p);
+        }
+        return options;
+    }
+
 
     /**
      * Updates the view of each player

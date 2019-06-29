@@ -26,7 +26,7 @@ public class Lobby extends Thread {
     private boolean hasTimerStarted;
     private Timer timer;
 
-    private static final int MIN_PLAYERS=2;
+    private static final int MIN_PLAYERS=3;
 
     private int mapPref;
     private int killPref;

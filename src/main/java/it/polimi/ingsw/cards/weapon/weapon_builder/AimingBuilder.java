@@ -30,6 +30,10 @@ public class AimingBuilder {
                     aimRoutine.add(buildIsVisible(aimFilterNode));
                     break;
 
+                case "visibleSquare":
+                    aimRoutine.add(buildVisibleSquare(aimFilterNode));
+                    break;
+
                 case "different":
                     aimRoutine.add(buildDifferent(aimFilterNode));
                     break;
@@ -56,6 +60,26 @@ public class AimingBuilder {
             }
         }
         return new TargetAcquisition(aimRoutine);
+    }
+
+    /**
+     * Method that build the AimVisible filter. Throws NullPointerException in case some required field is missing or
+     * bad named;     *
+     *
+     * @param node containing well built json
+     * @return {@link AimVisible} Object
+     */
+
+    public static AimSquare buildVisibleSquare(JsonNode node) {
+        try {
+            boolean mine = node.get("mine").asBoolean();
+            String msg = node.path("msg").asText();
+            int min = node.path("rangeMin").asInt();
+            int max = node.path("rangeMax").asInt();
+            return new AimSquare(mine,msg,min,max);
+        } catch (NullPointerException e) {
+            throw new NullPointerException("Bad json");
+        }
     }
 
     /**

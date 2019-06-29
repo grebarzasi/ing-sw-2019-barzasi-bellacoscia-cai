@@ -13,6 +13,7 @@ public class Terminator extends Figure{
 
     //damage required for adrenaline stage 2
     public static final int BOT_ADRENALINE_THRESHOLD = 5;
+    public static final int BOT_DAMAGE = 2;
 
     public Terminator(String character,GameModel model) {
 
@@ -27,7 +28,7 @@ public class Terminator extends Figure{
 
     public void shoot(Player p){
 
-        this.inflictDamage(12,p);
+        this.inflictDamage(BOT_DAMAGE,p);
         if(this.getPersonalBoard().getDamage().size() > BOT_ADRENALINE_THRESHOLD){
 
             this.inflictMark(1,p);
