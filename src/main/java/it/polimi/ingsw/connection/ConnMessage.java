@@ -15,6 +15,7 @@ public class ConnMessage {
     public static final String SHOW_SINGLE_TARGET = "*SHOW_SingleTarget*";
     public static final String SHOW_BOOLEAN = "*SHOW_Boolean*";
     public static final String SHOW_MESSAGE = "*SHOW_Message*";
+    public static final String DISPLAY_LEADERBOARD = "*DISPLAY_Leaderboard*";
     public static final String SHOW_EFFECTS = "*SHOW_Effects*";
 
     public static final String CHOOSE_DIRECTION = "*CHOOSE_Direction";

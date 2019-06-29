@@ -84,7 +84,7 @@ public interface View {
      * Displays the leaderboard of the game to the user
      */
 
-    void displayLeaderboard();
+    void displayLeaderboard(ArrayList<Player> args);
 
     /**
      * Updates the update to the players' clients

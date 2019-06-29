@@ -299,7 +299,21 @@ public class ServerCommManager  extends Thread implements View {
         }
     }
 
-    public void displayLeaderboard(){
+    public void displayLeaderboard(ArrayList<Player> all){
+        String s="";
+        for(Player p : all)
+            s=p.getCharacter()+INFO_SEP;
+
+        try {
+            setInUse(true);
+            if (rmi) {
+                rmiClient.displayLeaderboard(parseString(s));
+            } else
+                askAndWait(SHOW_MESSAGE, s);
+            setInUse(false);
+        }catch(IOException e){
+            handleDisconnection();
+        }
     }
     public String chooseDirection(ArrayList<Figure> args){
         String s="";

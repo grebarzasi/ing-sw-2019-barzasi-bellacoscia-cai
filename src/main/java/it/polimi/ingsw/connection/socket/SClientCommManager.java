@@ -98,6 +98,12 @@ public class SClientCommManager extends Thread{
                     args=i.readLine();
                     o.println(v.showBoolean(args));
                     break;
+                case DISPLAY_LEADERBOARD:
+                    o.println(AKN);
+                    args=i.readLine();
+                    v.displayLeaderboard(parseString(args));
+                    o.println(AKN);
+                    break;
                 case UPDATE:
                     o.println(AKN);
                     args=i.readLine();

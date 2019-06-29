@@ -87,7 +87,7 @@ public interface ViewClient extends Remote {
      * Displays the leaderboard of the game to the user
      */
 
-    public void displayLeaderboard()throws RemoteException;
+    public void displayLeaderboard(ArrayList<String> s)throws RemoteException;
 
     public String showEffects(ArrayList<String> args)throws RemoteException;
 
