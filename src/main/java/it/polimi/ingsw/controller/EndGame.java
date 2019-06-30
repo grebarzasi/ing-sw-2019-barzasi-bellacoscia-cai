@@ -69,10 +69,6 @@ public class EndGame implements ControllerState {
 
         HashMap<Figure,Integer> killsPerPlayer = this.controller.getModel().getBoard().getTrack().mapKillsPerPlayer();
 
-        System.out.println(leaderBoard.size());
-        System.out.println(killsPerPlayer.keySet().size());
-        System.out.println(killsPerPlayer.get(leaderBoard.get(2)));
-
         int i;
         int k;
 

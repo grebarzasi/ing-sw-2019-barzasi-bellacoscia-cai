@@ -266,8 +266,6 @@ public class Controller {
                 f.die();
                 f.setPosition(null);
 
-                this.checkEndStatus();
-
             }
 
         }
@@ -310,7 +308,7 @@ public class Controller {
                 this.model.setFrenzyState(1);
 
             }else if(this.hasFrenzy){
-                if (this.model.getFrenzyState() >= this.model.getPlayerList().size()) {
+                if (this.model.getFrenzyState() > this.model.getPlayerList().size()) {
                     /* ****************GAME_ENDS******************* */
                     this.endGame();
                     /* ****************GAME_ENDS******************* */
@@ -324,6 +322,9 @@ public class Controller {
                     /* ****************GAME_ENDS******************* */
                 }
             }
+
+            System.out.println("\nFrenzyState: "+this.model.getFrenzyState());
+            System.out.println("playerlist size ：" +this.model.getPlayerList().size());
             this.model.setFrenzyState(this.model.getFrenzyState() + 1);
         }
     }
