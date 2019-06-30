@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.Set;
 
 /**
- *Used by {@link TargetAcquisition} class to filter target including only ones in the field "sourceList"
+ *Used by {@link TargetAcquisition} class to filter target retaining only ones in the field "sourceList" and the
+ * input list
  *
  * @author Gregorio Barzasi
  */

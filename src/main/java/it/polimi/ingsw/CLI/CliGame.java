@@ -22,6 +22,13 @@ import static it.polimi.ingsw.connection.ServerMessage.THREAD_PRIORITY;
 import static java.lang.Thread.MIN_PRIORITY;
 import static java.lang.Thread.sleep;
 
+/**
+ * this class implements all methods needed in game to actually play the game. it receives request from server and
+ * let the player reply
+ *
+ * @author Gregorio Barzasi
+ */
+
 public class CliGame implements ViewClient {
 
     private BufferedReader sc=new BufferedReader(new InputStreamReader(System.in));

@@ -11,6 +11,11 @@ import java.rmi.RemoteException;
 
 import static it.polimi.ingsw.connection.ServerMessage.THREAD_PRIORITY;
 
+/**
+ * the client handler "handle" the communication with client. in this case ones using rmi technology
+ *
+ * @author Gregorio Barzasi
+ */
 public class RmiClientHandler extends ClientHandler implements RmiPrefInterf {
 
 
@@ -21,6 +26,10 @@ public class RmiClientHandler extends ClientHandler implements RmiPrefInterf {
         super(lobby);
     }
 
+
+    /**
+     * receives the login info and reply to client the result of login.
+     */
     public String login(String username, String character) throws RemoteException{
             super.setOwner(new Player(username,character));
 
@@ -35,6 +44,10 @@ public class RmiClientHandler extends ClientHandler implements RmiPrefInterf {
             System.out.println("repling to " + username + ": refused!");
             return "refused";
     }
+
+    /**
+     * receives preferences from client and add it to lobby
+     */
     public void sendPref(Integer mapPref, Integer killPref, Boolean terminatorPref,Boolean finalFrenzyPref) throws RemoteException{
         super.setMapPref(mapPref);
         super.setKillPref(killPref);

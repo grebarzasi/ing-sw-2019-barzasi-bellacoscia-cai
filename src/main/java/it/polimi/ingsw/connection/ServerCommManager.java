@@ -23,6 +23,12 @@ import static it.polimi.ingsw.CLI.CliColor.*;
 import static it.polimi.ingsw.connection.ConnMessage.*;
 import static it.polimi.ingsw.connection.ServerMessage.*;
 
+        /**
+         * when servers need to communicate with clients uses this class
+         * it mainly converts a list of arguments into a long string of info separated by ; or :
+         * @author Gregorio Barzasi
+        */
+
 public class ServerCommManager  extends Thread implements View {
 
     private SocketClientHandler socketClient;

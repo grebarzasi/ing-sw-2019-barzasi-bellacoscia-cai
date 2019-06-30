@@ -3,6 +3,8 @@ package it.polimi.ingsw.CLI;
 import static it.polimi.ingsw.CLI.CliMessages.*;
 
 /**
+ * prints the count down when you're in waiting room
+ *
  * @author Gregorio Barzasi
  */
 public class CliCountDown extends Thread {

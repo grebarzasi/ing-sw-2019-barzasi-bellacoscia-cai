@@ -7,6 +7,9 @@ import java.util.HashMap;
 import static it.polimi.ingsw.CLI.CliColor.*;
 import static it.polimi.ingsw.CLI.CliColor.RESET;
 
+/**
+ * some cli info like pawn and special char
+ */
 public class CLiBoardStuff {
 
 

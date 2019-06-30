@@ -5,6 +5,11 @@ import it.polimi.ingsw.Lobby;
 
 import java.io.IOException;
 
+        /**
+        * Conatins basic info to connect a client and a server using Rmi or Socket technology
+        * @author Gregorio Barzasi
+        */
+
 public abstract class ConnectionTech extends Thread {
 
     private Lobby lobby;

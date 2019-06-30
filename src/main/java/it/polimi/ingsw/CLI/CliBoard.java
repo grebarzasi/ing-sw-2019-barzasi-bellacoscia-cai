@@ -17,6 +17,10 @@ import static it.polimi.ingsw.CLI.CliMessages.TERMINATOR_NAME;
 import static it.polimi.ingsw.connection.ConnMessage.INFO_SEP;
 import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
 
+/**
+ * Build the cli board line by line. reads the maps from file and parse special tokens to know when and where place
+ * game info like players board and killshot truck.
+ */
 
 public class CliBoard {
     private File f;
@@ -231,7 +235,9 @@ public class CliBoard {
     }
 
     /*PLAYER BOARD ZONE*/
-
+    /**
+     * print armory with weapons cost info
+     */
     public void createAmory(){
         int i = 1;
         int h = 0;
@@ -260,7 +266,9 @@ public class CliBoard {
         }
     }
 
-
+    /**
+     * print killshottrack on top of the board with tokens or skull.
+     */
     public void createKillshotTrack(){
         ArrayList<String> kill=model.getBoard().getKillshotTrack();
         int skullMax= model.getBoard().getSkull();

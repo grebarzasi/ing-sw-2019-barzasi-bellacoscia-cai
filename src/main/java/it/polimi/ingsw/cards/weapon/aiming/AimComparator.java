@@ -1,13 +1,18 @@
 package it.polimi.ingsw.cards.weapon.aiming;
 
 import it.polimi.ingsw.Figure;
+import it.polimi.ingsw.cards.weapon.TargetAcquisition;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+
 /**
+ *Used by {@link AimDifferent}{@link AimEqual} and {@link AimSubstitute}  classes
+ * to build a set of target based on a source list.
+ * after that classes uses the built list in different ways.
  *
  * @author Gregorio Barzasi
  */

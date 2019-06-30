@@ -15,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 /**
+ * class used to log into the game
  * @author Gregorio Barzasi
  */
 public class CliLobby extends Thread{

@@ -21,6 +21,11 @@ import java.rmi.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * class that initializes the connection with server and let you proceed with login
+ *
+ * @author Gregorio Barzasi
+ */
 public class CliView {
 
     private ConnectionTech c;
@@ -134,7 +139,9 @@ public class CliView {
     public ConnectionTech getConnection(){
        return this.c;
     }
-
+    /**
+     * acquire port for connection
+     */
     public int acquirePort()throws IOException {
         int port;
         System.out.println("\n"+PORT_SELECT);
@@ -155,7 +162,9 @@ public class CliView {
         } while (port <= 1023 || port > 49151);
         return port;
     }
-
+    /**
+     * acquire ip for connection checking validity of the input
+     */
     public String acquireIp()throws IOException{
         System.out.println("\n"+IP_SELECT);
         boolean flag =true;

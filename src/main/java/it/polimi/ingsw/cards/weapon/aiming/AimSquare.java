@@ -9,8 +9,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+
 /**
- *Used by {@link TargetAcquisition} class to filter target excluding ones in the field "sourceList"
+ *Used by {@link TargetAcquisition} class to filter target to only ones layng on selected square or ones in a given range
+ * starting from the selected square.
+ * Need an input from the player to work.
+ *
  *
  * @author Gregorio Barzasi
  */

@@ -8,7 +8,6 @@ import it.polimi.ingsw.Player;
 public abstract class Card {
 
     public Card(){
-
     }
 
 }

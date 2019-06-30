@@ -1,19 +1,20 @@
 package it.polimi.ingsw.connection.rmi;
 
 /**
+ * Client-side Rmi connection
+ *
  * @author Gregorio Barzasi
  */
 import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.connection.DisconnectionHandler;
-import it.polimi.ingsw.virtual_model.ViewClient;
 
+import java.rmi.Remote;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.rmi.server.UnicastRemoteObject;
 
 import static it.polimi.ingsw.CLI.CliMessages.CONNECTION_OK;
 
-public class RmiClient extends ConnectionTech implements RmiCInterf{
+public class RmiClient extends ConnectionTech implements Remote {
 
     private RmiPrefInterf clientHandler;
     private boolean connected=false;

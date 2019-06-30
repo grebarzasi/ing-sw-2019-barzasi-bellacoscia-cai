@@ -90,7 +90,9 @@ public class Weapon extends Card {
     }
 
 
-
+    /**
+     * @return a set of usable effect in any given time. used by {@link it.polimi.ingsw.controller.Shooting}
+     */
 
     public Set<Effect> getUsableEff(){
         Set<Effect> usable=new HashSet<>();
@@ -109,6 +111,9 @@ public class Weapon extends Card {
         return usable;
     }
 
+    /**
+     * reset all weapon and his effects to original state.
+     */
     public void resetWeapon() {
 
         directionTemp=null;

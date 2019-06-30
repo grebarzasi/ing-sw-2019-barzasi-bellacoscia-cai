@@ -1,5 +1,9 @@
 package it.polimi.ingsw.connection;
 
+/**
+        * Communication messages
+        * @author Gregorio Barzasi
+        */
 public class ConnMessage {
 
     public static final String PING = "*PING*";

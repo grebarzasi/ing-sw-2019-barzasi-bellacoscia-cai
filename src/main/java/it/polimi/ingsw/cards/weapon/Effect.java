@@ -85,6 +85,12 @@ public class Effect {
         return true;
     }
 
+    /**
+     *Used by {@link Weapon} class to reset the state of the effect and sub effect in order to ake it available for further use
+     *
+     *
+     * @author Gregorio Barzasi
+     */
     public void resetEffect(){
         indexTemp=0;
         for(SubEffect e:effectList)

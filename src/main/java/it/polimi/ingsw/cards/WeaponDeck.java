@@ -2,6 +2,13 @@ package it.polimi.ingsw.cards;
 
 import java.util.ArrayList;
 
+
+/**
+ * A deck of weapons
+ * differ from simple cards one because is limited and never re-shuffled when is finished.
+ * you cannot discard a weapon, only replace it with one from an armory
+ */
+
 public class WeaponDeck extends Deck {
 
     public WeaponDeck(ArrayList<Card> w){

@@ -15,6 +15,7 @@ import static it.polimi.ingsw.connection.ServerMessage.*;
 import static java.lang.Thread.sleep;
 
 /**
+ * Server side communication class. Rmi technology.
  * @author Gregorio Barzasi
  */
 public class RmiServer extends ConnectionTech implements RmiServerInterface{
@@ -24,7 +25,9 @@ public class RmiServer extends ConnectionTech implements RmiServerInterface{
         super(lobby);
     }
 
-
+    /**
+     * after connection clients use this method to obtain {@link RmiPrefInterf} reference.
+     */
     public RmiPrefInterf getClientHandler()throws RemoteException{
         RmiPrefInterf temp=new RmiClientHandler(super.getLobby());
         ((ClientHandler)temp).setPriority(THREAD_PRIORITY);

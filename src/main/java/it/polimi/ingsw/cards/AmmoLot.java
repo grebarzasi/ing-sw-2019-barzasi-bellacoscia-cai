@@ -1,5 +1,6 @@
 package it.polimi.ingsw.cards;
 
+
 public class AmmoLot extends Card {
 
 

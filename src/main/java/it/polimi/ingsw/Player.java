@@ -4,9 +4,7 @@ import it.polimi.ingsw.board.map.NonSpawnSquare;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.Ammo;
 import it.polimi.ingsw.cards.AmmoLot;
-import it.polimi.ingsw.cards.Deck;
 import it.polimi.ingsw.cards.power_up.PowerUp;
-import it.polimi.ingsw.cards.weapon.Preferences;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
 import java.util.ArrayList;
@@ -20,8 +18,6 @@ import java.util.ArrayList;
 public class Player extends Figure {
 
     private static final int MAX_PU = 3;
-
-    private Preferences pref;
 
     private View view;
     //chosen username
@@ -42,13 +38,6 @@ public class Player extends Figure {
     private boolean disconnected;
     private boolean inactive;
 
-    public Preferences getPref() {
-        return pref;
-    }
-
-    public void setPref(Preferences pref) {
-        this.pref = pref;
-    }
 
     public Player(){
         super();

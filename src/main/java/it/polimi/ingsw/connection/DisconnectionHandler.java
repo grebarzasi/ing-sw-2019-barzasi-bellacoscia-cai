@@ -4,6 +4,10 @@ import static it.polimi.ingsw.CLI.CliMessages.CONNECTION_ERR;
 import static it.polimi.ingsw.connection.ServerMessage.RMI_S_ERR;
 import static it.polimi.ingsw.connection.ServerMessage.SOCKET_S_ERR;
 
+        /**
+        * Called when a disconnection occurs
+        * @author Gregorio Barzasi
+        */
 public class DisconnectionHandler {
     public static void server(boolean rmi){
         if(rmi)

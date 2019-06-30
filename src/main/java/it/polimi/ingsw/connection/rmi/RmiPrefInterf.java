@@ -6,6 +6,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
+ * interface used by clients to call remote server methods
  * @author Gregorio Barzasi
  */
 public interface RmiPrefInterf extends Remote {

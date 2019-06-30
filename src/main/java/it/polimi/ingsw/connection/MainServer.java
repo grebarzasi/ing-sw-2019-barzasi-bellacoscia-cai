@@ -13,6 +13,12 @@ import static java.lang.Thread.MIN_PRIORITY;
 import static java.lang.Thread.sleep;
 
 
+/**
+ * Class that initializes rmi and socket servers in order to handle connection from both simultaneously
+ * @author Gregorio Barzasi
+ */
+
+
 public class MainServer {
 
     private SServer socketServer;

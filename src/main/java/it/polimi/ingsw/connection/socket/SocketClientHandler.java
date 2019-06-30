@@ -10,6 +10,9 @@ import java.net.Socket;
 
 import static it.polimi.ingsw.connection.ServerMessage.THREAD_PRIORITY;
 
+/**
+ * handle the clients connected using socket technology
+ */
 public class SocketClientHandler extends ClientHandler {
     private Socket client;
     private BufferedReader in;

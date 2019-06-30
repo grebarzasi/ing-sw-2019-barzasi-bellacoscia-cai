@@ -210,6 +210,11 @@ public class Shooting implements ControllerState {
 
     }
 
+    /**
+     * check if a input from player is needed to execute effect. it pauses the weapon used an after the info is received
+     * the state of the weapon is restored and the effect applied
+ * @author Gregorio Barzasi
+ */
     private void checkInfoNeeded(Weapon w){
         AimDirection dir;
         AimAskPlayer ask;

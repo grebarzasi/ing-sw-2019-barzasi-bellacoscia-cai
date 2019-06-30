@@ -4,7 +4,8 @@ package it.polimi.ingsw.CLI;
 import static it.polimi.ingsw.CLI.CliColor.*;
 import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
 
-/**r
+/**
+ * Collects all messages used in command line interface
  * @author Gregorio Barzasi
  */
 public class CliMessages {

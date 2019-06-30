@@ -2,6 +2,7 @@ package it.polimi.ingsw.cards;
 
 
 /**
+ * Class that represents the ammo in game. used widely in model is one of the main component of the game.
  * @author Gregorio Barzasi
  */
 public class Ammo{
@@ -43,11 +44,6 @@ public class Ammo{
 
     public String toString(){
         String s="";
-//        if(yellow==1)
-//            return "yellow";
-//        if(blue==1)
-//            return "blue";
-//        return "red";
         for(int i=0;i<yellow;i++)
             s=s+"Y";
         for(int i=0;i<blue;i++)

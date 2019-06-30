@@ -1,5 +1,8 @@
 package it.polimi.ingsw.CLI;
 
+/**
+ * classes that collect all colors available in terminal
+ */
 public class CliColor {
     public static final String RESET = "\u001B[0m";
 
