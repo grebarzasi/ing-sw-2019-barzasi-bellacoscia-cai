@@ -74,4 +74,18 @@ public class CliColor {
     public static final String PURPLE_BACKGROUND_BRIGHT = "\033[0;105m"; // PURPLE
     public static final String CYAN_BACKGROUND_BRIGHT = "\033[0;106m";  // CYAN
     public static final String WHITE_BACKGROUND_BRIGHT = "\033[0;107m";   // WHITE
+
+    public static final String F =YELLOW_BRIGHT+"(_)" +CYAN_BOLD_BRIGHT;
+
+    public static final String ADRENALINA_HEAD = "\n" + YELLOW_BRIGHT+
+            "        (     (          )        (    (       )         \n" +
+            "   (    )\\ )  )\\ )    ( /(  (     )\\ ) )\\ ) ( /(  (      \n" +
+            "   )\\  (()/( (()/(( "+"  )\\()) )\\   (()/((()/( )\\()) )\\     \n" +
+            "((((_)( /(_)) "+"/(_))\\ ((_)((((_)(  /(_))/(_)|(_)((((_)(   \n" +
+            " )\\ _ )(_))_ (_))((_) _((_)\\ _ )\\(_)) (_))  _((_)\\ _ )\\  \n" +
+            " "+F+"_\\"+F+"   \\| _ \\ __| \\| "+F+"_\\"+F+" |  |_ _|| \\| "+F+"_\\"+F+" \n" +
+            "  / _ \\ | |) |   / _|| .` |/ _ \\ | |__ | | | .` |/ _ \\   \n" +
+            " /_/ \\_\\|___/|_|_\\___|_|\\_/_/ \\_\\|____|___||_|\\_/_/ \\_\\  \n" +
+            "                                                         \n"; // BLACK
+
 }

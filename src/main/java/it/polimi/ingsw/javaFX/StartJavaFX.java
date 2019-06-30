@@ -1,11 +1,14 @@
 package it.polimi.ingsw.javaFX;
 
+import it.polimi.ingsw.CLI.CliColor;
+import it.polimi.ingsw.CLI.CliView;
 import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.connection.rmi.RmiClient;
 import it.polimi.ingsw.connection.socket.SClient;
 import it.polimi.ingsw.virtual_model.VirtualLogin;
 import it.polimi.ingsw.virtual_model.VirtualPlayer;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -23,11 +26,12 @@ import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.rmi.RemoteException;
 
+import static it.polimi.ingsw.CLI.CliColor.*;
+import static it.polimi.ingsw.CLI.CliColor.GREEN;
+import static it.polimi.ingsw.CLI.CliColor.RED;
 import static it.polimi.ingsw.javaFX.GUIFiles.*;
 
 
@@ -57,11 +61,37 @@ public class StartJavaFX extends Application {
 
     Button btnLobby = new Button("Lobby");
 
+    /**
+     * entry point for client side.
+     */
 
 
     public static void main(String[] args){
+        boolean flag=true;
+        BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
 
-        launch(args);
+        System.out.println(ADRENALINA_HEAD+RESET);
+        String rpl="";
+        do {
+            System.out.println(PURPLE_BOLD_BRIGHT+"Che interfaccia vuoi utilizzare?\n"+RESET);
+            System.out.println("1- Linea di comando ("+ GREEN+"CLI"+RESET+")");
+            System.out.println("2- Interfaccia grafica ("+ GREEN+"GUI"+RESET+")");
+            try {
+                rpl=sc.readLine();
+                rpl=rpl.toLowerCase();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if(rpl.equals("1")||rpl.equals("cli")) {
+                CliView cliView = new CliView();
+                cliView.start();
+                flag=false;
+            }else if (rpl.equals("2")||rpl.equals("gui")) {
+                launch(args);
+                flag=false;
+            }else
+                System.out.println(RED+"non disponibile, nuovamente:"+RESET);
+        }while (flag);
     }
 
     @Override
