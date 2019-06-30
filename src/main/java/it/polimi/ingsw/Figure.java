@@ -218,7 +218,7 @@ public abstract class Figure {
     public Set<Figure> allFigures(){
         Set<Figure> f = new HashSet<>(model.getPlayerList());
         if(model.getBot()!=null)
-         f.add(model.getBot());
+            f.add(model.getBot());
         return f;
     }
 
@@ -261,7 +261,10 @@ public abstract class Figure {
         int i;
         LinkedList<Square> next = new LinkedList<>();
         HashSet<Square> visited = new HashSet<>();
-        next.add(this.getPosition());
+        Square sq=this.getPosition();
+        if (sq==null)
+            return -1;
+        next.add(sq);
 
         while(!next.isEmpty()) {
 
