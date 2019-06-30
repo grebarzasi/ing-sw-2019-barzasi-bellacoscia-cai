@@ -90,14 +90,6 @@ public class Shooting implements ControllerState {
 
         choice=null;
         checkReply(choice);
-//
-//        useScope();
-//        this.controller.askTagbacks(this.shootingWith.getDamaged(), this.controller.getCurrentPlayer());
-//
-//        shootingWith.resetWeapon();
-//        this.controller.update();
-//        this.controller.goBack();
-
     }
 
     private void move(){
@@ -142,9 +134,9 @@ public class Shooting implements ControllerState {
 
     private boolean activateScope(){
 
-        boolean useScope = this.controller.getView().showBoolean(ControllerMessages.ASK_SCOPE);
+        Boolean useScope = this.controller.getView().showBoolean(ControllerMessages.ASK_SCOPE);
 
-        if (useScope) {
+        if (useScope!=null&&useScope) {
 
             ArrayList<PowerUp> scopes = new ArrayList<>(this.controller.getCurrentPlayer().getPowerupList());
 

@@ -450,9 +450,9 @@ public class Controller {
             this.getModel().setCurrentPlayer(p);
             this.setView(this.getCurrentPlayer().getView());
 
-            boolean useTagback = this.getView().showBoolean(ControllerMessages.ASKING_VENOM);
+            Boolean useTagback = this.getView().showBoolean(ControllerMessages.ASKING_VENOM);
 
-            if(useTagback){
+            if(useTagback!=null&&useTagback){
 
                 ArrayList<PowerUp> options = new ArrayList<>(p.getPowerupList());
 

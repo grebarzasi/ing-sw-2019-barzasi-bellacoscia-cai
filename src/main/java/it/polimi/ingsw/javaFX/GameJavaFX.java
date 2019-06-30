@@ -2678,6 +2678,9 @@ public class GameJavaFX extends Application implements ViewClient {
             btnMove.setText("SI");
             btnPick.setText("NO");
 
+            btnMove.setOpacity(1);
+            btnPick.setOpacity(1);
+
             btnMove.setOnAction(e->{
                 decision = "SI";
             });
@@ -2686,12 +2689,18 @@ public class GameJavaFX extends Application implements ViewClient {
             });
         };
 
+
         Platform.runLater(run);
 
-        while (decision.equals("")) ;
-        String res = decision;
+        String res = "";
+        while (res.isEmpty()) {
+            res = decision;
+        }
         decision = "";
-
+        btnMove.setOpacity(0);
+        btnPick.setOpacity(0);
+        Runnable up = this::update;
+        Platform.runLater(up);
         if (res.equals("SI")) {
             return true;
         } else {
