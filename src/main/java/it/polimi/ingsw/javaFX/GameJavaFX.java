@@ -2589,64 +2589,68 @@ public class GameJavaFX extends Application implements ViewClient {
 
         Runnable run = () -> {
 
-            msg.setText(args.get(0).split(INNER_SEP)[2]);
+            if(args.size() > 0) {
+                msg.setText(args.get(0).split(INNER_SEP)[2]);
 
-            hideBtn(btnCancel,1);
-            btnCancel.setOnAction(e->{
-                update();
-                game.setTargetPlayer(NOTHING);
-            });
+                hideBtn(btnCancel, 1);
+                btnCancel.setOnAction(e -> {
+                    update();
+                    game.setTargetPlayer(NOTHING);
+                });
 
-            for (ArrayList<Button> btnArr : btnCell) {
-                hideCell(btnArr, 0.5);
-            }
+                for (ArrayList<Button> btnArr : btnCell) {
+                    hideCell(btnArr, 0.5);
+                }
 
-            Boolean diff = Boolean.parseBoolean(args.get(0).split(INNER_SEP)[1]);
-            args.remove(0);
-            for (String color : args) {
-                for (VirtualPlayer p : model.getAllPlayers()) {
-                    if (p.getCharacter().equals(color) && (!diff || verifyDiffSquare(game.getTargetPlayers(),p.getCharacter()) )) {
-                        switch (p.getCharacter()) {
-                            case (YELLOW): {
-                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(Y), 1);
-                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(Y).setOnAction(e -> {
-                                    game.getTargetPlayers().add(p.getCharacter());
-                                });
-                                break;
-                            }
-                            case (RED): {
-                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(R), 1);
-                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(R).setOnAction(e -> {
-                                    game.getTargetPlayers().add(p.getCharacter());
-                                });
-                                break;
-                            }
-                            case (BLUE): {
-                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(B), 1);
-                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(B).setOnAction(e -> {
-                                    game.getTargetPlayers().add(p.getCharacter());
-                                });
-                                break;
-                            }
-                            case (GREEN): {
-                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(G), 1);
-                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(G).setOnAction(e -> {
-                                    game.getTargetPlayers().add(p.getCharacter());
-                                });
-                                break;
-                            }
-                            case (GREY): {
-                                hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(GR), 1);
-                                btnCell.get(p.getRow() * 4 + p.getColumn()).get(GR).setOnAction(e -> {
-                                    System.out.println(p.getCharacter());
-                                    game.getTargetPlayers().add(p.getCharacter());
-                                });
-                                break;
+                Boolean diff = Boolean.parseBoolean(args.get(0).split(INNER_SEP)[1]);
+                args.remove(0);
+                for (String color : args) {
+                    for (VirtualPlayer p : model.getAllPlayers()) {
+                        if (p.getCharacter().equals(color) && (!diff || verifyDiffSquare(game.getTargetPlayers(), p.getCharacter()))) {
+                            switch (p.getCharacter()) {
+                                case (YELLOW): {
+                                    hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(Y), 1);
+                                    btnCell.get(p.getRow() * 4 + p.getColumn()).get(Y).setOnAction(e -> {
+                                        game.getTargetPlayers().add(p.getCharacter());
+                                    });
+                                    break;
+                                }
+                                case (RED): {
+                                    hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(R), 1);
+                                    btnCell.get(p.getRow() * 4 + p.getColumn()).get(R).setOnAction(e -> {
+                                        game.getTargetPlayers().add(p.getCharacter());
+                                    });
+                                    break;
+                                }
+                                case (BLUE): {
+                                    hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(B), 1);
+                                    btnCell.get(p.getRow() * 4 + p.getColumn()).get(B).setOnAction(e -> {
+                                        game.getTargetPlayers().add(p.getCharacter());
+                                    });
+                                    break;
+                                }
+                                case (GREEN): {
+                                    hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(G), 1);
+                                    btnCell.get(p.getRow() * 4 + p.getColumn()).get(G).setOnAction(e -> {
+                                        game.getTargetPlayers().add(p.getCharacter());
+                                    });
+                                    break;
+                                }
+                                case (GREY): {
+                                    hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(GR), 1);
+                                    btnCell.get(p.getRow() * 4 + p.getColumn()).get(GR).setOnAction(e -> {
+                                        System.out.println(p.getCharacter());
+                                        game.getTargetPlayers().add(p.getCharacter());
+                                    });
+                                    break;
+                                }
                             }
                         }
                     }
-                }
 
+                }
+            }else{
+                msg.setText(ERR_PLAYER);
             }
         };
 
@@ -2666,8 +2670,20 @@ public class GameJavaFX extends Application implements ViewClient {
     @Override
     public boolean showBoolean(String message) {
         Runnable run = () -> {
+            /*
             decisionWindow dw = new decisionWindow(message);
             dw.show();
+            */
+            msg.setText(message);
+            btnMove.setText("SI");
+            btnPick.setText("NO");
+
+            btnMove.setOnAction(e->{
+                decision = "SI";
+            });
+            btnPick.setOnAction(e->{
+                decision = "NO";
+            });
         };
 
         Platform.runLater(run);
@@ -2690,7 +2706,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
     @Override
     public void displayLeaderboard(ArrayList<String> args) {
-        LeaderboardJavaFX leaderboard = new LeaderboardJavaFX();
+        LeaderboardJavaFX leaderboard = new LeaderboardJavaFX(args, model);
         try {
             leaderboard.start(primaryStage);
         } catch (Exception e) {
