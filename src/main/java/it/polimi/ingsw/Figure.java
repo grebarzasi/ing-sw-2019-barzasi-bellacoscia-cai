@@ -319,7 +319,9 @@ public abstract class Figure {
 
         //give point to the player who inflicted first blood
         if(!this.model.isFrenzy()) {
-            this.getPersonalBoard().getDamage().get(0).getOwner().addPoints(1);
+            if(!this.getPersonalBoard().getDamage().isEmpty()) {
+                this.getPersonalBoard().getDamage().get(0).getOwner().addPoints(1);
+            }
         }
 
         //maps each player with their contribution to the list
