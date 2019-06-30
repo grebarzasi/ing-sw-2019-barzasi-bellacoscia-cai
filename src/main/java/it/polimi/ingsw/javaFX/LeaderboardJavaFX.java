@@ -1,5 +1,6 @@
 package it.polimi.ingsw.javaFX;
 
+import it.polimi.ingsw.virtual_model.VirtualModel;
 import it.polimi.ingsw.virtual_model.VirtualPlayer;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -31,6 +32,13 @@ public class LeaderboardJavaFX extends Application {
     private double heightThird;
     private double heightOther;
 
+    private VirtualModel model;
+    private ArrayList<String> players;
+
+    public LeaderboardJavaFX(ArrayList<String> players, VirtualModel model) {
+        this.model = model;
+        this.players = players;
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -83,28 +91,6 @@ public class LeaderboardJavaFX extends Application {
         ImageView img3 = new ImageView(new Image(new FileInputStream("src/main/resources/images/leaderboard/third.png"),widthScreen,heightThird,true,true));
         ImageView img4 = new ImageView(new Image(new FileInputStream("src/main/resources/images/leaderboard/fourth.png"),widthScreen,heightOther,true,true));
         ImageView img5 = new ImageView(new Image(new FileInputStream("src/main/resources/images/leaderboard/fifth.png"),widthScreen,heightOther,true,true));
-
-
-        // HARDCODED TEST
-        VirtualPlayer p1 = new VirtualPlayer("Mimmo","yellow");
-        p1.setPoints(40);
-        VirtualPlayer p2 = new VirtualPlayer("Woz","blue");
-        p2.setPoints(39);
-        VirtualPlayer p3 = new VirtualPlayer("Gandalf","green");
-        p3.setPoints(38);
-        VirtualPlayer p4 = new VirtualPlayer("Piton","red");
-        p4.setPoints(37);
-        VirtualPlayer p5 = new VirtualPlayer("AcquaMan","grey");
-        p5.setPoints(36);
-
-        ArrayList<VirtualPlayer> allPlayers = new ArrayList<>();
-        allPlayers.add(p1);
-        allPlayers.add(p2);
-        allPlayers.add(p3);
-        allPlayers.add(p4);
-        allPlayers.add(p5);
-
-
 
         primaryStage.setTitle("Classifica");
 
@@ -174,21 +160,30 @@ public class LeaderboardJavaFX extends Application {
         h4.setAlignment(Pos.CENTER);
         h5.setAlignment(Pos.CENTER);
 
-        switch (allPlayers.size()){
+        switch (players.size()){
             case(5):{
-                txt5.setText(allPlayers.get(4).getUsername());
+                txt5.setText(model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(4))).getUsername() + " : " + model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(4))).getPoints() + " punti");
+                txt5.setStyle("-fx-text-fill:" + model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(4))).getCharacter() );
             }
             case(4):{
-                txt4.setText(allPlayers.get(3).getUsername());
+                txt4.setText(model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(3))).getUsername() + " : " + model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(3))).getPoints() + " punti");
+                txt4.setStyle("-fx-text-fill:" + model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(3))).getCharacter() );
+
             }
             case(3):{
-                txt3.setText(allPlayers.get(2).getUsername());
+                txt3.setText(model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(2))).getUsername() + " : " + model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(2))).getPoints() + " punti");
+                txt3.setStyle("-fx-text-fill:" + model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(2))).getCharacter() );
+
             }
             case(2):{
-                txt2.setText(allPlayers.get(1).getUsername());
+                txt2.setText(model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(1))).getUsername() + " : " + model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(1))).getPoints() + " punti");
+                txt2.setStyle("-fx-text-fill:" + model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(1))).getCharacter() );
+
             }
             case(1):{
-                txt1.setText(allPlayers.get(0).getUsername());
+                txt1.setText(model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(0))).getUsername() + " : " + model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(0))).getPoints() + " punti");
+                txt1.setStyle("-fx-text-fill:" + model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(0))).getCharacter() );
+
             }
         }
 
@@ -199,6 +194,7 @@ public class LeaderboardJavaFX extends Application {
         grid.add(h5,0,5);
 
 
+        primaryStage.setFullScreen(true);
         primaryStage.show();
     }
 }
