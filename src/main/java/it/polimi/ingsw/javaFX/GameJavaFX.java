@@ -1386,31 +1386,9 @@ public class GameJavaFX extends Application implements ViewClient {
 
         int i = 10;
         int j = 2;
-        int k = 2;
+        int k = 4;
         int no = 3;
-/*
-        for (int e = 0; e < 3; e++ ){
-            ImageView img = null;
 
-            try {
-                img = new ImageView(new Image(new FileInputStream(PATH_EMPTY_DAMAGE), width, hmarks, true, true));
-            } catch (FileNotFoundException ex) {
-                ex.printStackTrace();
-            }
-            grid.add(img, e, 0);
-        }
-
-        for (int e = 0; e < 12; e++ ){
-            ImageView img = null;
-
-            try {
-                img = new ImageView(new Image(new FileInputStream(PATH_EMPTY_DAMAGE), width, hdamage, true, true));
-            } catch (FileNotFoundException ex) {
-                ex.printStackTrace();
-            }
-            grid.add(img, e, 0);
-        }
-*/
         grid.getChildren().clear();
 
         if (!p.getpBoard().getMarks().isEmpty()) {
@@ -1540,8 +1518,9 @@ public class GameJavaFX extends Application implements ViewClient {
             }
         }
 
-        while (k <= p.getpBoard().getSkulls() + 1) {
+        while (k < p.getpBoard().getSkulls() + 4) {
 
+            System.out.println(p.getpBoard().getSkulls());
             if (k <= no) {
                 k++;
                 continue;
@@ -2733,7 +2712,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
             Image imgTmp = null;
             try {
-                imgTmp = new Image(new FileInputStream(PATH_BOARDS + model.getOwner().getCharacter().toLowerCase() + "_frenzy.jpg"), widthLateral, heightPBoard, true, true);
+                imgTmp = new Image(new FileInputStream(PATH_BOARDS + model.getOwner().getCharacter().toLowerCase() + "_board_frenzy.jpg"), widthLateral, heightPBoard, true, true);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -2743,9 +2722,12 @@ public class GameJavaFX extends Application implements ViewClient {
             int i = 0;
             for(VirtualPlayer p : model.getAllPlayers()){
 
+                if(p.equals(model.getOwner()))
+                    continue;
+
                 Image imgTmp2 = null;
                 try {
-                    imgTmp2 = new Image(new FileInputStream(PATH_BOARDS + p.getCharacter().toLowerCase() + "_frenzy.jpg"), widthOther, heightOtherBoard, true, true);
+                    imgTmp2 = new Image(new FileInputStream(PATH_BOARDS + p.getCharacter().toLowerCase() + "_board_frenzy.jpg"), widthOther, heightOtherBoard, true, true);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
