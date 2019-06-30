@@ -46,11 +46,7 @@ public class MainServer {
         System.out.print("DEFAULT PORT: 1235");
         rmiServer.acquirePort();
         rmiServer.run();
-        try {
-            sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         System.out.print(LINE_SEP);
         System.out.println(SOCKET_MSG);
 //        System.out.print("DEFAULT IP: 127.0.0.1");

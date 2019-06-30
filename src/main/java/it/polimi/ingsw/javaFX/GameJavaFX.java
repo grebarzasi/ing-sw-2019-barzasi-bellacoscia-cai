@@ -2382,6 +2382,9 @@ public class GameJavaFX extends Application implements ViewClient {
     public String chooseDirection(ArrayList<String> args) {
 
         Runnable run = () -> {
+            //hide all
+            for(ArrayList<Button> b : btnCell)
+                hideCell(b,0.5);
 
             msg.setText(CHOOSE_DIRECTION);
 
@@ -2391,48 +2394,51 @@ public class GameJavaFX extends Application implements ViewClient {
                 game.setDirection(NOTHING);
             });
 
-            int i = model.getOwner().getRow();
-            int j = model.getOwner().getColumn();
+            int row = model.getOwner().getRow();
+            int column = model.getOwner().getColumn();
 
+            //set south
+            for (int i= row; i < 3; i++) {
 
-            for (; i < 2; i++) {
-                for (Button btn : btnCell.get((i * 4) + j)) {
+                ArrayList<Button> myCell=btnCell.get((i * 4) + column);
+                hideCell(myCell,0);
+
+                for (Button btn : myCell) {
                     btn.setOnAction(e -> {
-                        game.setDirection(EAST);
+                        game.setDirection(SOUTH);
                     });
                 }
             }
 
-            i = model.getOwner().getRow();
-            j = model.getOwner().getColumn();
 
+            //set north
+            for (int i = row; i >= 0; i--) {
+                ArrayList<Button> myCell=btnCell.get((i * 4) + column);
+                hideCell(myCell,0);
 
-            for (; i > 0; i--) {
-                for (Button btn : btnCell.get((i * 4) + j)) {
-                    btn.setOnAction(e -> {
-                        game.setDirection(WEST);
-                    });
-                }
-            }
-
-            i = model.getOwner().getRow();
-            j = model.getOwner().getColumn();
-
-
-            for (; j < 3; j++) {
-                for (Button btn : btnCell.get((i * 4) + j)) {
+                for (Button btn : myCell) {
                     btn.setOnAction(e -> {
                         game.setDirection(NORTH);
                     });
                 }
             }
 
-            i = model.getOwner().getRow();
-            j = model.getOwner().getColumn();
+            //set east
+            for (int j=column; j < 4; j++) {
+                ArrayList<Button> myCell=btnCell.get((row * 4) + j);
+                hideCell(myCell,0);
+                for (Button btn : myCell) {
+                    btn.setOnAction(e -> {
+                        game.setDirection(EAST);
+                    });
+                }
+            }
 
-
-            for (; j > 0; j--) {
-                for (Button btn : btnCell.get((i * 4) + j)) {
+            //set west
+            for (int j= column; j >= 0; j--) {
+                ArrayList<Button> myCell=btnCell.get((row * 4) + j);
+                hideCell(myCell,0);
+                for (Button btn : myCell) {
                     btn.setOnAction(e -> {
                         game.setDirection(SOUTH);
                     });
@@ -2442,7 +2448,8 @@ public class GameJavaFX extends Application implements ViewClient {
 
         Platform.runLater(run);
 
-        while (game.getDirection().equals("")) ;
+        while (game.getDirection().isEmpty());
+
         String res = game.getDirection();
         game.setDirection("");
 
@@ -2606,6 +2613,9 @@ public class GameJavaFX extends Application implements ViewClient {
                 args.remove(0);
                 for (String color : args) {
                     for (VirtualPlayer p : model.getAllPlayers()) {
+                        //remove not spawned players
+                        if(p.getRow()==-1)
+                            continue;
                         if (p.getCharacter().equals(color) && (!diff || verifyDiffSquare(game.getTargetPlayers(), p.getCharacter()))) {
                             switch (p.getCharacter()) {
                                 case (YELLOW): {

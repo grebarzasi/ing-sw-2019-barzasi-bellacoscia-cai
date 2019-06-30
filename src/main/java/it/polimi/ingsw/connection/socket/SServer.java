@@ -31,7 +31,7 @@ public class SServer extends ConnectionTech {
         try {
             ServerSocket server = new ServerSocket(super.getPort());
 
-            System.out.println(SOCKET_S_READY + super.getIp() + " : "+super.getPort());
+            System.out.println(SOCKET_S_READY +" : "+super.getPort());
 
             //loops until game start waiting for other players
 

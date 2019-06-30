@@ -23,7 +23,7 @@ public class ServerMessage {
 
     public static final String RMI_S_READY=GREEN+"Rmi Server è PRONTO sulla porta: ";
     public static final String RMI_S_ERR=RED+"Rmi Server: qualcosa è andato storto!";
-    public static final String SOCKET_S_READY=GREEN+"Socket Server è PRONTO su: ";
+    public static final String SOCKET_S_READY=GREEN+"Socket Server è PRONTO sulla porta: ";
     public static final String SOCKET_S_CONN=SOCKET_COLOR+"Socket client connsesso:";
     public static final String SOCKET_S_ERR=RED+"Socket Server: qualcosa è andato storto!";
 
