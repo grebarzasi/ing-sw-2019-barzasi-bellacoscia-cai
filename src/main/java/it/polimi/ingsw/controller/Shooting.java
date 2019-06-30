@@ -88,14 +88,15 @@ public class Shooting implements ControllerState {
 
         } while (true);
 
+        choice=null;
         checkReply(choice);
-
-        useScope();
-        this.controller.askTagbacks(this.shootingWith.getDamaged(), this.controller.getCurrentPlayer());
-
-        shootingWith.resetWeapon();
-        this.controller.update();
-        this.controller.goBack();
+//
+//        useScope();
+//        this.controller.askTagbacks(this.shootingWith.getDamaged(), this.controller.getCurrentPlayer());
+//
+//        shootingWith.resetWeapon();
+//        this.controller.update();
+//        this.controller.goBack();
 
     }
 
@@ -170,7 +171,8 @@ public class Shooting implements ControllerState {
             shootingWith.resetWeapon();
             controller.endTurn();
         }else if (rpl == null){
-//            useScope();
+            useScope();
+            this.controller.askTagbacks(this.shootingWith.getDamaged(), this.controller.getCurrentPlayer());
             shootingWith.resetWeapon();
             this.controller.update();
             this.controller.goBack();

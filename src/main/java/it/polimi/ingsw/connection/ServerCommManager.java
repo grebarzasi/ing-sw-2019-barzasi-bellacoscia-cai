@@ -300,6 +300,11 @@ public class ServerCommManager  extends Thread implements View {
             } else
                 askAndWait(SHOW_MESSAGE, message);
             setInUse(false);
+            try {
+                sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }catch(IOException e){
             handleDisconnection();
         }
