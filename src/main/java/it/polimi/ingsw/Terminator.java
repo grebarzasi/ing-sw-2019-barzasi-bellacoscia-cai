@@ -13,7 +13,7 @@ public class Terminator extends Figure{
 
     //damage required for adrenaline stage 2
     public static final int BOT_ADRENALINE_THRESHOLD = 5;
-    public static final int BOT_DAMAGE = 2;
+    public static final int BOT_DAMAGE = 11;
 
     public Terminator(String character,GameModel model) {
 

@@ -1,11 +1,9 @@
 package it.polimi.ingsw.cards.weapon.aiming;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import it.polimi.ingsw.Figure;
 import it.polimi.ingsw.cards.weapon.TargetAcquisition;
 import it.polimi.ingsw.cards.weapon.Weapon;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
