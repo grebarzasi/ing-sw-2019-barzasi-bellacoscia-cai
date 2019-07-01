@@ -22,13 +22,30 @@ import static it.polimi.ingsw.controller.ControllerMessages.*;
 
 public class Shooting implements ControllerState {
 
+    /**
+     * Movements that the player can perform before shooting
+     */
     private int range;
+
+    /**
+     * the controller reference
+     */
     private Controller controller;
+
+    /**
+     * The weapon the player is shooting with
+     */
     private Weapon shootingWith;
+
+
     boolean additionalEffect = false;
     boolean scopeUsed=false;
     int oldDamagedSize;
 
+    /**
+     * Default constructor
+     * @param controller the reference controller
+     */
     Shooting(Controller controller) {
         this.controller = controller;
     }

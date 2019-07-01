@@ -10,8 +10,16 @@ import it.polimi.ingsw.cards.AmmoLot;
 
 public class NonSpawnSquare extends Square{
 
+    /**
+     * Ammolot drop on the square, can be collected by a player
+     */
     private AmmoLot drop;
 
+    /**
+     * Default constructor
+     * @param position cell within the matrix
+     * @param room the room color
+     */
     public NonSpawnSquare(Cell position, Room room) {
         super(position, room);
     }

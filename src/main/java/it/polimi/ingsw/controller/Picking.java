@@ -13,9 +13,20 @@ import java.util.ArrayList;
 
 public class Picking implements ControllerState{
 
+    /**
+     * the amount of movements the player can make before picking
+     */
     private int range;
+
+    /**
+     * the controller reference
+     */
     private Controller controller;
 
+    /**
+     * Default constructor
+     * @param controller the reference controller
+     */
     Picking(Controller controller) {
         this.controller = controller;
     }

@@ -9,15 +9,22 @@ import java.util.*;
 
 public class Deck {
 
-    // cards that are still in the game and can be drawn
+    /**
+     * Cards that can be drawn from the deck
+     */
 
     private ArrayList<Card> usable;
 
-    // cards which are discarded from the game, can be reshuffled into the deck if usable is empty
+    /**
+     * Cards that have been discarded, will be shuffled back into the deck when usable is empty
+     */
 
     private ArrayList<Card> discarded;
 
-
+    /**
+     * Default constructor
+     * @param cards the list of cards of the deck, all fresh cards are still usable
+     */
 
     public Deck(ArrayList<Card> cards) {
         this.usable = cards;
@@ -45,14 +52,19 @@ public class Deck {
         this.discarded = discarded;
     }
 
-
+    /**
+     * Shuffles the deck
+     */
 
     public void shuffle() {
         Collections.shuffle(this.usable);
     }
 
 
-    //NEWER
+    /**
+     * Pops the top of the deck, if empty the deck is reset
+     * @return the popped card
+     */
     public Card fetch(){
 
         Card temp;
@@ -74,8 +86,9 @@ public class Deck {
 
     }
 
-
-
+    /**
+     * Puts the discarded cards back into the usable deck
+     */
     public void reset(){
 
         this.usable.clear();
@@ -86,6 +99,10 @@ public class Deck {
 
     }
 
+    /**
+     * Adds a card into the discarded pile
+     * @param c the card to discard
+     */
     public void discard(Card c){
         this.discarded.add(c);
     }

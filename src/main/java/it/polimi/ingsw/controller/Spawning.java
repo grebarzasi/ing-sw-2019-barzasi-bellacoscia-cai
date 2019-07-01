@@ -12,12 +12,15 @@ import java.util.ArrayList;
 
 public class Spawning implements ControllerState {
 
-
-
-
-
+    /**
+     * the controller reference
+     */
     private Controller controller;
 
+    /**
+     * Default constructor
+     * @param controller the reference controller
+     */
     Spawning(Controller controller) {
         this.controller = controller;
     }

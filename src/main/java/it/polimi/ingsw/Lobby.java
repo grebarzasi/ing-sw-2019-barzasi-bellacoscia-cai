@@ -21,7 +21,14 @@ import static it.polimi.ingsw.connection.ConnMessage.COUNTDOWN;
 
 public class Lobby extends Thread {
 
+    /**
+     * The controller of the game
+     */
     private Controller controller;
+
+    /**
+     * True if the game has started, false otherwise
+     */
     private boolean started;
     private boolean hasTimerStarted;
     private Timer timer;

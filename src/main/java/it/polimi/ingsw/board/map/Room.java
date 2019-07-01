@@ -12,8 +12,14 @@ import java.util.*;
 
 public class Room {
 
+    /**
+     * Identifier for an empty cell
+     */
     public static final String VOID = "black";
 
+    /**
+     * the color of the room
+     */
     private String color;
 
     public Room(String color) {

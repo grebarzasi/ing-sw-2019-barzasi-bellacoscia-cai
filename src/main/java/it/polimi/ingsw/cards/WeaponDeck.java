@@ -11,6 +11,10 @@ import java.util.ArrayList;
 
 public class WeaponDeck extends Deck {
 
+    /**
+     * Default constructor
+     * @param w the weapons to add to the deck
+     */
     public WeaponDeck(ArrayList<Card> w){
         super(w);
     }

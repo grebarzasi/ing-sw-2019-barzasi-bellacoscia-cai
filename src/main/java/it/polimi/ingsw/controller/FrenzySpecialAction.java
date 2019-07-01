@@ -12,9 +12,20 @@ import java.util.ArrayList;
 public class FrenzySpecialAction implements ControllerState {
 
 
+    /**
+     * the amount of movement the player can perform before reloading and then shoot
+     */
     private int range;
+
+    /**
+     * the controller reference
+     */
     private Controller controller;
 
+    /**
+     * Default constructor
+     * @param controller the reference controller
+     */
     FrenzySpecialAction(Controller controller) {
         this.controller = controller;
     }

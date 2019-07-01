@@ -12,7 +12,14 @@ import static it.polimi.ingsw.board.map.MapLoader.loadTerrain;
 
 public class Map {
 
+    /**
+     * The matrix containing all the squares that form the map
+     */
     private Square[][] squareMatrix;
+
+    /**
+     * The selected size of the map
+     */
     private String name;
 
     //Standard sizes of a map

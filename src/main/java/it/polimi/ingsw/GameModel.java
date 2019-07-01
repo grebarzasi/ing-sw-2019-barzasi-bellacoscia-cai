@@ -17,29 +17,76 @@ import java.util.Set;
 
 public class GameModel {
 
+    /**
+     * The number of turns the game has gone into frenzy for
+     */
+
     private int frenzyTurn = 0;
+
+    /**
+     * The list of players in the game
+     */
 
     private ArrayList<Player> playerList=new ArrayList<>();
 
+    /**
+     * The player performing the turn
+     */
+
     private Player currentPlayer;
+
+    /**
+     * The number of Actions that the current player cna perform
+     */
 
     private int movesLeft;
 
+    /**
+     * True if the bot can be moved, false otherwise
+     */
+
     private boolean hasBotAction;
+
+    /**
+     * The bot of the game if it has one
+     */
 
     private Terminator bot;
 
+    /**
+     * The game's Board
+     */
+
     private Board board;
+
+    /**
+     * True if the game is in frenzy mode, false otherwise
+     */
 
     private boolean isFrenzy;
 
+    /**
+     * The turn number the game is at
+     */
+
     private int turn;
+
+    /**
+     * The game's controller
+     */
 
     private Controller controller;
 
+    /**
+     * empty constructor
+     */
     public GameModel(){
 
     }
+
+    /**
+     * Default constructor
+     */
 
     public GameModel(ArrayList<Player> playerList, String map, Controller controller) {
 

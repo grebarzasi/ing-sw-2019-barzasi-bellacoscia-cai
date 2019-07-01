@@ -10,10 +10,20 @@ import java.util.ArrayList;
 
 public class Moving implements ControllerState{
 
+    /**
+     * the amount of possible movements
+     */
     private int range;
 
+    /**
+     * the controller reference
+     */
     private Controller controller;
 
+    /**
+     * Default constructor
+     * @param controller the reference controller
+     */
     Moving(Controller controller) {
         this.controller = controller;
     }

@@ -6,6 +6,9 @@ package it.polimi.ingsw;
 
 public class Token {
 
+    /**
+     * The player who inflicted the token
+     */
     private Figure owner;
 
     public Token(Figure owner) {

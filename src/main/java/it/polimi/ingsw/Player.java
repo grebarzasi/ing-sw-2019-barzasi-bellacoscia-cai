@@ -19,23 +19,36 @@ public class Player extends Figure {
 
     private static final int MAX_PU = 3;
 
+    /**
+     * The player's view
+     */
     private View view;
-    //chosen username
 
+    /**
+     * The player's username
+     */
     private String username;
 
-    //list of weapons available to the player
 
+    /**
+     * The list of weapons in possession of the player
+     */
     private ArrayList<Weapon> weaponsList;
 
-    //list of powerups available to the player
 
+    /**
+     * The list of PowerUps in possession of the player
+     */
     private ArrayList<PowerUp> powerupList;
 
-    private int maxActions;
-
-
+    /**
+     * True if the player is disconnected, false otherwise
+     */
     private boolean disconnected;
+
+    /**
+     * True if the player is inactive, false otherwise
+     */
     private boolean inactive;
 
 
@@ -137,14 +150,6 @@ public class Player extends Figure {
 
     public void setCharacter(String character){
         super.setCharacter(character);
-    }
-
-    public int getMaxActions() {
-        return maxActions;
-    }
-
-    public void setMaxActions(int maxActions) {
-        this.maxActions = maxActions;
     }
 
     public View getView() {

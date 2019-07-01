@@ -8,9 +8,6 @@ public class AmmoLot extends Card {
 
     private Ammo content;
 
-    public void useCare() {
-    }
-
     public AmmoLot(boolean powerup, Ammo content) {
         this.powerup = powerup;
         this.content = content;
@@ -26,10 +23,6 @@ public class AmmoLot extends Card {
 
     public Ammo getContent() {
         return content;
-    }
-
-    public void setContent(Ammo content) {
-        this.content = content;
     }
 
     public String toString(){

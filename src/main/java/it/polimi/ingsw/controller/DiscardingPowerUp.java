@@ -10,8 +10,15 @@ import java.util.ArrayList;
 
 public class DiscardingPowerUp implements ControllerState{
 
+    /**
+     * controller reference
+     */
     private Controller controller;
 
+    /**
+     * Default constructor
+     * @param controller the reference controller
+     */
     DiscardingPowerUp(Controller controller) {
         this.controller = controller;
     }
@@ -37,6 +44,7 @@ public class DiscardingPowerUp implements ControllerState{
             this.controller.getCurrentPlayer().getPowerupList().remove(choice);
             this.controller.getBoard().getPowerupDeck().getDiscarded().add(choice);
 
+            this.controller.update();
             this.controller.goBack();
         }
 

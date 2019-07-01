@@ -18,6 +18,9 @@ import java.io.IOException;
 public class MapLoader {
 
 
+    /**
+     * Path to the map .json files
+     */
     private static final String MAPS_PATH = ("src/main/resources/data_files/map_data/");
 
     /**

@@ -17,27 +17,44 @@ public class PlayerBoard {
     private static final int INIT_AMMO_BLU = 1;
     private static final int INIT_AMMO_YELLOW = 1;
 
+    /**
+     * The board's owner
+     */
     private Figure owner;
 
-        //received damage tokens
-
+    /**
+     * The damage which a player has received from other players
+     */
     private ArrayList<Token> damage;
-    //array of points released at death
 
+    /**
+     * Array of points released at death in order of contribution
+     */
     private int[] pointVec;
+
+    /**
+     * the number which the player has died
+     */
     private int deathNum=0;
+
+    /**
+     * True if the board has been flipped, false otherwise
+     */
     private boolean flipped;
-    //received mark tokens
 
+    /**
+     * The amount of marks the player has received
+     */
     private ArrayList<Token> mark;
-    //available ammunition
 
+    /**
+     * The amount of ammunition available to the player
+     */
     private Ammo ammoInventory;
     private static final int maxammo = 3;
 
     private static final int maxhealth = 11;
 
-    public PlayerBoard(){}
     /**
      * Initiates the board with default values
      * @param owner the board's player
@@ -62,16 +79,6 @@ public class PlayerBoard {
         this.flipped=false;
 
     }
-
-    public PlayerBoard(Figure owner, ArrayList<Token> damage, int[] pointVec, ArrayList<Token> marks, Ammo ammoInventory) {
-
-        this.owner = owner;
-        this.damage = damage;
-        this.pointVec = pointVec;
-        this.mark = marks;
-        this.ammoInventory = ammoInventory;
-    }
-
 
     /**
      * Adds a damage token to the player's board
@@ -212,6 +219,9 @@ public class PlayerBoard {
             return false;
         }
     }
+
+
+    ///Getters and Setters///
 
     public ArrayList<Token> getDamage() {
         return damage;

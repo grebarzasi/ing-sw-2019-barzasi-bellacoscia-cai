@@ -15,9 +15,20 @@ public class PickingWeapon implements ControllerState {
 
     private static final int max = 3;
 
+    /**
+     * the location the player is picking from
+     */
     private Square location;
+
+    /**
+     * the controller reference
+     */
     private Controller controller;
 
+    /**
+     * Default constructor
+     * @param controller the reference controller
+     */
     PickingWeapon(Controller controller) {
         this.controller = controller;
     }

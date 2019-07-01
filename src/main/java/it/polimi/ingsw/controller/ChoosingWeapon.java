@@ -9,8 +9,15 @@ import java.util.ArrayList;
 
 public class ChoosingWeapon implements ControllerState {
 
+    /**
+     * the controller reference
+     */
     private Controller controller;
 
+    /**
+     * Default constructor
+     * @param controller the reference controller
+     */
     ChoosingWeapon(Controller controller) {
         this.controller = controller;
     }

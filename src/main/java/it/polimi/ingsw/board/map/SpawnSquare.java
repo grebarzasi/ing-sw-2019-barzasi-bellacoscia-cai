@@ -10,7 +10,10 @@ import it.polimi.ingsw.board.Armory;
 
 public class SpawnSquare extends Square {
 
-    //armory containing 3 weapons max
+
+    /**
+     * Armory containing three weapons max
+     */
     private Armory armory;
 
 

@@ -12,14 +12,21 @@ import java.util.ArrayList;
 
 public class Teleporting implements ControllerState {
 
+
+    /**
+     * The PowerUp being currently used
+     */
     private PowerUp using;
 
-
-
-
-
+    /**
+     * the controller reference
+     */
     private Controller controller;
 
+    /**
+     * Default constructor
+     * @param controller the reference controller
+     */
     Teleporting(Controller controller) {
         this.controller = controller;
     }

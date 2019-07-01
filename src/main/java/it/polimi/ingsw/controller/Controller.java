@@ -21,7 +21,14 @@ import java.util.Set;
 
 public class Controller {
 
+    /**
+     * All the characters from the game
+     */
     private static String[] ALL_CHARACTERS = {"red","blue","yellow","green","grey"};
+
+    /**
+     * frenzy points
+     */
     private static final int[] frenzyPointsVec;
 
     static {
@@ -154,8 +161,6 @@ public class Controller {
      * Only for testing prurposes
      * @param playerList the list of players to start from
      */
-
-
     public Controller(ArrayList<Player> playerList){
 
         this.marshal=new UpdateBuilder(this);
@@ -204,7 +209,6 @@ public class Controller {
      * @param playerList the list of all players
      * @return the first available figure
      */
-
     private static String firstAvailableColor(ArrayList<Player> playerList){
 
         //marks the character names that have been taken already
@@ -231,12 +235,14 @@ public class Controller {
     /**
      * Goes back to choosing the move
      */
-
     public void goBack(){
         this.currentState = this.choosingMove;
         this.currentState.executeState();
     }
 
+    /**
+     * decreases the remaining actions by one
+     */
     public void decreaseMoveLeft(){
         this.setMovesLeft(this.model.getMovesLeft() -1 );
     }
@@ -369,6 +375,11 @@ public class Controller {
 
     }
 
+    /**
+     * returns the available actions at the start of the turn
+     * @return the number of available actions
+     */
+
      private int getMoves(){
 
         if(this.isOneAction()){
@@ -417,6 +428,11 @@ public class Controller {
     }
 
 
+    /**
+     * Inquires all the player that were hit by an effect and have a tagback grenade if they want to use it
+     * @param temp the list of players to inquire
+     * @param hitter the player who inflited damage
+     */
     void askTagbacks(Set<Figure> temp, Figure hitter){
         //do not remove otherwise it will modify hitTargetSet directly!!
         Set<Figure> targets=new HashSet<>(temp);
@@ -626,6 +642,10 @@ public class Controller {
 
     }
 
+    /**
+     * checks if a player has left
+     * @return
+     */
     private boolean checkLeftPlayer() {
         for(Player p: model.getPlayerList())
             if(!p.isDisconnected()&&!p.isInactive())
@@ -633,12 +653,19 @@ public class Controller {
         return false;
     }
 
+    /**
+     * checks if the current player is inactive
+     */
     void checkInactivity(){
         if(this.getView().isInactive() || this.getView().isDisconnected()){
             this.endTurn();
         }
     }
 
+    /**
+     * Return the list of all Spawn squares on the map
+     * @return the list of spawn squares
+     */
     ArrayList<Square> returnSpawns(){
 
         ArrayList<Square> spawns = new ArrayList<>();

@@ -16,12 +16,20 @@ import java.util.Set;
 
 public class UsingNewton implements ControllerState {
 
+    /**
+     * the controller reference
+     */
     private Controller controller;
+
+    /**
+     * The PowerUp being currently used
+     */
     private PowerUp using;
 
-
-
-
+    /**
+     * Default constructor
+     * @param controller the reference controller
+     */
     UsingNewton(Controller controller) {
         this.controller = controller;
     }

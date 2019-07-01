@@ -14,8 +14,15 @@ import java.util.HashMap;
 
 public class EndGame implements ControllerState {
 
+    /**
+     * the controller reference
+     */
     private Controller controller;
 
+    /**
+     * Default constructor
+     * @param controller the reference controller
+     */
     public EndGame(Controller controller) {
         this.controller = controller;
     }

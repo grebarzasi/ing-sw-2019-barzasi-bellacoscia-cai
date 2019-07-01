@@ -15,7 +15,16 @@ import java.util.Set;
 
 public class AsBot implements ControllerState{
 
+    /**
+     * the controller reference
+     */
+
     private Controller controller;
+
+    /**
+     * Default constructor
+     * @param controller the reference controller
+     */
 
     AsBot(Controller controller) {
         this.controller = controller;

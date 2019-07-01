@@ -18,33 +18,59 @@ import java.util.*;
 public abstract class Figure {
 
 
-
-
-    //chosen character
+    /**
+     * Chosen character
+     */
 
     private String character;
 
-    //the score of the player
+    /**
+     * The score of the player
+     */
 
     private int points;
 
-    //the square to which the figure belongs
+    /**
+     * The Player's current position
+     */
 
     private Square position;
 
-    //needed in some weapon effect
+    /**
+     * Previous position of the player, needed in some weapon's effects
+     */
 
     private Square oldPosition;
 
-    //The Playes's Playerboard
+    /**
+     * The player's board
+     */
 
     private PlayerBoard personalBoard;
 
+    /**
+     * Main model reference
+     */
+
     private GameModel model;
+
+    /**
+     * List of available actions
+     */
 
     private ArrayList<Action> actions;
 
+    /**
+     * true is the player is dead, false otherwise
+     */
+
     private boolean isDead;
+
+    /**
+     * returns the list of squares within the range
+     * @param range the range within the player can move
+     * @return the list of possible destinations
+     */
 
     public ArrayList<Square> canGo(int range) {
 
@@ -66,6 +92,10 @@ public abstract class Figure {
         return destinations;
     }
 
+    /**
+     * default constructor
+     * @param character the chosen character
+     */
 
     public Figure(String character){
 
@@ -80,17 +110,18 @@ public abstract class Figure {
 
     }
 
-    //for testing purposes only
+
+    /**
+     * For testing only
+     */
     public Figure(String character, Square position) {
         this.character = character;
         this.position = position;
     }
 
-    //for testing purposes only
-    public Figure(String character, PlayerBoard personalBoard) {
-        this.character = character;
-        this.personalBoard = personalBoard;
-    }
+    /**
+     * Default constructor
+     */
     public Figure(String character, GameModel model) {
         this.character = character;
         this.model = model;
@@ -104,6 +135,9 @@ public abstract class Figure {
 
     }
 
+    /**
+     * Default constructor
+     */
     public Figure() {
         this.points = 0;
         this.position = null;

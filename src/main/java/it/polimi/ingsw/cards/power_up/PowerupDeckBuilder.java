@@ -15,6 +15,10 @@ import java.util.Iterator;
 public class PowerupDeckBuilder {
 
 
+    /**
+     * Builds the PowerUp deck from .json file
+     * @return the created deck
+     */
     public Deck PowerUpBuilder() {
 
         ObjectMapper mapper = new ObjectMapper();

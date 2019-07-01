@@ -7,10 +7,27 @@ package it.polimi.ingsw.cards;
  */
 public class Ammo{
 
+    /**
+     * Number of red ammunition
+     */
     private int red;
+
+    /**
+     * Number of blue ammunition
+     */
     private int blue;
+
+    /**
+     * Number of yellow ammunition
+     */
     private int yellow;
 
+    /**
+     * Default Cnstructor
+     * @param red amount of red ammunition
+     * @param blue amount of blue ammunition
+     * @param yellow amount of yellow ammunition
+     */
     public Ammo(int red,int blue,int yellow) {
         this.red=red;
         this.blue=blue;
@@ -42,6 +59,10 @@ public class Ammo{
         this.yellow = yellow;
     }
 
+    /**
+     * converts the ammunition into a parsable String
+     * @return the coded Ammo
+     */
     public String toString(){
         String s="";
         for(int i=0;i<yellow;i++)
@@ -67,6 +88,10 @@ public class Ammo{
         return true;
     }
 
+    /**
+     * Checks if the ammo is an empty one
+     * @return true if this is empty, false otherwise
+     */
     public boolean isEmpty(){
 
         if(this.red == 0 && this.blue == 0 && this.yellow == 0){
@@ -77,6 +102,10 @@ public class Ammo{
 
     }
 
+    /**
+     * Substracts another Ammo from this
+     * @param a this after removing a from this
+     */
     public void subtract(Ammo a){
         this.red = this.red - a.red;
         this.blue = this.blue - a.blue;

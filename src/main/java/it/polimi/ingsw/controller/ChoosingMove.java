@@ -9,8 +9,16 @@ import java.util.ArrayList;
 
 public class ChoosingMove implements ControllerState{
 
+    /**
+     * the controller reference
+     */
+
     private Controller controller;
 
+    /**
+     * Default constructor
+     * @param controller the reference controller
+     */
     ChoosingMove(Controller controller) {
         this.controller = controller;
     }

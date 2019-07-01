@@ -11,8 +11,14 @@ import java.util.ArrayList;
 
 public class Terminator extends Figure{
 
-    //damage required for adrenaline stage 2
+    /**
+     * The amount of damage a bot has to receive before changing adrenaline stage
+     */
     public static final int BOT_ADRENALINE_THRESHOLD = 5;
+
+    /**
+     * the amount of damage inflicted by the bot
+     */
     public static final int BOT_DAMAGE = 11;
 
     public Terminator(String character,GameModel model) {
@@ -37,6 +43,11 @@ public class Terminator extends Figure{
     }
 
 
+    /**
+     * Since the bot can only make one move the breadth first search can be simplified to a single condition check
+     * @param range the range within the player can move
+     * @return the list of adjacent squares
+     */
     @Override
     public ArrayList<Square> canGo(int range) {
 

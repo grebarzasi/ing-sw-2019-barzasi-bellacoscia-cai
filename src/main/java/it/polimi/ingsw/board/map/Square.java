@@ -14,25 +14,49 @@ import java.util.Collection;
 public abstract class Square {
 
 
-    //position of the square within the matrix
+    /**
+     * Position of the square within the matrix
+     */
 
     private Cell position;
 
-    //the room to which the square belongs
+    /**
+     * the room of the square
+     */
 
     private Room room;
 
 
-    /*the square adjacent to this in that direction
-    *in case of a wall or an edge of the map the field is NULL
-    *a square belonging to another room in a direction implies the presence of a door
-    *a door concept is therefore not needed
-     */
-
-
+    /**
+    * The square adjacent to this square's north
+    * in case of a wall or an edge of the map the field is NULL
+    * a square belonging to another room in a direction implies the presence of a door
+    * a door concept is therefore not needed
+    */
     private Square north;
+
+    /**
+     * The square adjacent to this square's east
+     * in case of a wall or an edge of the map the field is NULL
+     * a square belonging to another room in a direction implies the presence of a door
+     * a door concept is therefore not needed
+     */
     private Square east;
+
+    /**
+     * The square adjacent tto this square's south
+     * in case of a wall or an edge of the map the field is NULL
+     * a square belonging to another room in a direction implies the presence of a door
+     * a door concept is therefore not needed
+     */
     private Square south;
+
+    /**
+     * The square adjacent to this square's west
+     * in case of a wall or an edge of the map the field is NULL
+     * a square belonging to another room in a direction implies the presence of a door
+     * a door concept is therefore not needed
+     */
     private Square west;
 
 
@@ -48,16 +72,6 @@ public abstract class Square {
         this.south = null;
         this.west = null;
 
-    }
-
-    //only for testing purposes
-    public Square(Cell position, Room room, Square north, Square east, Square south, Square west) {
-        this.position = position;
-        this.room = room;
-        this.north = north;
-        this.east = east;
-        this.south = south;
-        this.west = west;
     }
 
     /**
@@ -78,7 +92,11 @@ public abstract class Square {
         return playersHere;
     }
 
-
+    /**
+     * Checks if another square is adjacent to this one
+     * @param s the inquired Square
+     * @return true if s is adjacent, false otherwise
+     */
     public boolean isAdjacent(Square s){
 
         return this.getNorth() == s || this.getEast() == s || this.getSouth() == s || this.getWest() == s;

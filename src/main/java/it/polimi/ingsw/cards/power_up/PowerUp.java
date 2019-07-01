@@ -18,8 +18,14 @@ public class PowerUp extends Card {
     public static final String TARGETING_SCOPE = "Mirino";
     public static final String TAGBACK_GRENADE = "Granata Venom";
 
+    /**
+     * The ammo that the player can gain discarding this powerup
+     */
     private Ammo ammoOnDiscard;
 
+    /**
+     * Type of PowerUp
+     */
     private String name;
 
     public PowerUp(Ammo ammoOnDiscard, String name) {
