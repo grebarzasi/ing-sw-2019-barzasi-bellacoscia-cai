@@ -129,7 +129,7 @@ public class LeaderboardJavaFX extends Application {
          * set Background
          */
         try {
-            Image back = new Image(new FileInputStream(PATH_BACK_GAME), widthScreen , heightScreen -50, true, true);
+            Image back = new Image(new FileInputStream(PATH_BACK_GAME), widthScreen + 300 , heightScreen + 300, true, true);
             BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
             grid.setBackground(new Background(backgroundImage));
         } catch (IOException e) {

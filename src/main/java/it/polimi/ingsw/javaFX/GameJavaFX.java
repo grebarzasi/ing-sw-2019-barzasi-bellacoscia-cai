@@ -823,7 +823,7 @@ public class GameJavaFX extends Application implements ViewClient {
         /**
          * set buttons
          */
-        Image msgBack = new Image(new FileInputStream(PATH_BACK_MSG), widthCenter, heightLateral/4, true, true);
+        Image msgBack = new Image(new FileInputStream(PATH_BACK_MSG), widthCenter, heightLateral/4, false, true);
         BackgroundImage backgroundMsg = new BackgroundImage(msgBack, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background backMsg = new Background(backgroundMsg);
         msg.setBackground(backMsg);
@@ -2685,6 +2685,8 @@ public class GameJavaFX extends Application implements ViewClient {
             dw.show();
             */
             msg.setText(message);
+            hideBtn(btnMove,1);
+            hideBtn(btnPick,1);
             btnMove.setText("SI");
             btnPick.setText("NO");
 
@@ -2702,6 +2704,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
         Platform.runLater(run);
 
+        /*
         String res = "";
         while (res.isEmpty()) {
             res = decision;
@@ -2711,6 +2714,13 @@ public class GameJavaFX extends Application implements ViewClient {
         btnPick.setOpacity(0);
         Runnable up = this::update;
         Platform.runLater(up);
+        */
+
+        while(decision.equals(""));
+
+        String res = decision;
+        decision = "";
+
         if (res.equals("SI")) {
             return true;
         } else {
