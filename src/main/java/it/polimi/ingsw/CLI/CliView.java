@@ -182,11 +182,12 @@ public class CliView {
                 System.out.println("\n"+IP_SELECT_ERR);
                 continue;
             }
-
-            if(test.isReachable(1000))
                 flag=false;
-            else
-              System.out.println("\n"+IP_SELECT_ERR);
+//
+//            if(test.isReachable(2000))
+//                flag=false;
+//            else
+//              System.out.println("\n"+IP_SELECT_ERR);
         }while (flag);
         return ip;
     }

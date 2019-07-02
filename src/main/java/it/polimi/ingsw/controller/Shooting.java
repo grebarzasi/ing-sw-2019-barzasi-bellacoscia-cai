@@ -124,12 +124,17 @@ public class Shooting implements ControllerState {
 
     }
 
+    /**
+     * if you can use scope, use it.
+     */
     private void useScope(){
         if(this.canUseScope())
             this.activateScope();
 
     }
-
+    /**
+     * check if you can use scope or not
+     */
     private boolean canUseScope(){
 
         if(!this.controller.getCurrentPlayer().getPersonalBoard().getAmmoInventory().isEmpty()&&!shootingWith.getDamaged().isEmpty()) {
@@ -149,6 +154,9 @@ public class Shooting implements ControllerState {
 
     }
 
+    /**
+     * use the scope powerup
+     */
     private boolean activateScope(){
 
         Boolean useScope = this.controller.getView().showBoolean(ControllerMessages.ASK_SCOPE);
@@ -175,6 +183,10 @@ public class Shooting implements ControllerState {
         return false;
     }
 
+    /**
+     * check if the nullity of rpl is caused by a disconnection / inactivity or the player want to go back
+     * @author Gregorio Barzasi
+     */
     private void checkReply(Object rpl){
         if (rpl == null&&(controller.getView().isDisconnected()||controller.getView().isInactive())) {
             shootingWith.resetWeapon();
@@ -187,7 +199,10 @@ public class Shooting implements ControllerState {
             this.controller.goBack();
         }
     }
-
+    /**
+     * use the weapon effect
+     * @author Gregorio Barzasi
+     */
     private void useEffect(Effect choice){
         boolean ok;
         do {
@@ -195,6 +210,11 @@ public class Shooting implements ControllerState {
             ok = choice.executeEffect();
         } while (!ok);
     }
+
+    /**
+     * check weapon hit someone and if true subtract the cost of that effect to Ammo Inventory
+     * @author Gregorio Barzasi
+     */
 
     private void postShootCheck(Effect choice){
         //if you shoot someone decrease the cost and set unloaded

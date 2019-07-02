@@ -320,7 +320,7 @@ public class ServerCommManager  extends Thread implements View {
             if (rmi) {
                 rmiClient.displayLeaderboard(parseString(s));
             } else
-                askAndWait(SHOW_MESSAGE, s);
+                askAndWait(DISPLAY_LEADERBOARD, s);
             setInUse(false);
         }catch(IOException e){
             handleDisconnection();

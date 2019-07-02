@@ -89,15 +89,19 @@ public class CliMessages {
     public static final String CHOOSE_SQUARE_Q = MSG_COLOR+"\nSeleziona una destinazione (riga+colonna):"+RESET;
     public static final String CHOOSE_SQUARE_ERR = RED+"\nNon disponibile"+RESET;
 
+
     public static final String SHOW_TARGET_ADV_Q = MSG_COLOR+"\nSeleziona i target"+RESET;
     public static final String SHOW_TARGET_ADV_ERR = RED+"\nNon disponibile"+RESET;
     public static final String SHOW_TARGET_SELECTED = " bersagli selezionati:"+RESET;
 
+
     public static final String SHOW_DIRECTION_Q = MSG_COLOR+"Scegli una direzione (N/S/E/O)"+RESET+"\n(Bersagli attualmente colpibili:";
     public static final String SHOW_DIRECTION_ERR = RED+"Direzione non disponibile"+RESET;
 
+
     public static final String SHOW_EFFECTS_Q = MSG_COLOR+"\nScegli un effetto da utilizzare:"+RESET;
     public static final String SHOW_EFFECTS_ERR = RED+"Direzione non disponibile"+RESET;
+
 
     public static final String BACK = "<";
     public static final String NEXT = ">";

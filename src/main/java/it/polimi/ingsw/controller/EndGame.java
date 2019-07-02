@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 
+import static it.polimi.ingsw.controller.ControllerMessages.GAME_OVER;
+
 /**
  * controller state of the endgame status
  */
@@ -36,12 +38,12 @@ public class EndGame implements ControllerState {
 
         for(Player p: this.controller.getModel().getPlayerList()){
 
+            p.getView().displayMessage(GAME_OVER);
             p.getView().displayLeaderboard(this.generateLeaderBoard());
-            p.getView().displayMessage("GAME IS FUCKING OVER BOYS");
 
         }
 
-        System.out.println("GAME IS FUCKING OVER BOYS");
+        System.out.println(GAME_OVER);
 
 
     }
