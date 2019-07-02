@@ -4,7 +4,7 @@ import it.polimi.ingsw.cards.weapon.Weapon;
 import java.util.ArrayList;
 
 /**
- * Controller state of choosing a weapon
+ * controller state of choosing a weapon
  */
 
 public class ChoosingWeapon implements ControllerState {

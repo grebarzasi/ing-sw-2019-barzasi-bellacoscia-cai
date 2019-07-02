@@ -37,12 +37,14 @@ public class Reloading implements ControllerState {
         this.controller.checkInactivity();
         Weapon choice = this.controller.getView().showWeapon(options);
 
-        boolean check = choice.reload();
+
 
         //noinspection ConstantConditions
+
         if(choice == null){
             this.controller.goBack();
         }else {
+            boolean check = choice.reload();
 
             if (!check) {
                 this.controller.getView().displayMessage(ControllerMessages.CANNOT_RELOAD);

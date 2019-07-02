@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 
 /**
- * Controller state of choosing a PowerUp to use
+ * controller state of choosing a PowerUp to use
  */
 
 public class ChoosingPowerUp implements ControllerState {
