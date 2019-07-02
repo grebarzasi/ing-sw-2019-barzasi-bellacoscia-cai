@@ -1544,6 +1544,7 @@ public class GameJavaFX extends Application implements ViewClient {
         int i = 0;
 
         for (String name : p.getWeapons()) {
+
             wpState = name.split(INNER_SEP);
             if (!btnArr.isEmpty() && i < btnArr.size()) {
                 if (wpState[1].equals("true")) {
@@ -1998,8 +1999,8 @@ public class GameJavaFX extends Application implements ViewClient {
 
              */
 
-
-            for (VirtualPlayer player : model.getAllPlayers()) {
+            ArrayList<VirtualPlayer> all = new ArrayList<>(model.getAllPlayers());
+            for (VirtualPlayer player : all) {
                 if (player.getRow() != -1) {
                     setPlayerOnCell(btnCell.get(player.getRow() * 4 + player.getColumn()), player.getCharacter());
                 }
