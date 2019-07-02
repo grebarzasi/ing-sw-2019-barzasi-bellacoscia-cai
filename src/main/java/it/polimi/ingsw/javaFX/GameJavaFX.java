@@ -1832,12 +1832,19 @@ public class GameJavaFX extends Application implements ViewClient {
         if(start) {
             msg.setText(CLEAR);
 
-            DropShadow borderGlow = new DropShadow();
-            borderGlow.setColor(Color.RED);
-            borderGlow.setHeight(50);
-            borderGlow.setWidth(50);
-            borderGlow.setOffsetX(0f);
-            borderGlow.setOffsetY(0f);
+            DropShadow borderGlow1 = new DropShadow();
+            borderGlow1.setColor(Color.RED);
+            borderGlow1.setHeight(50);
+            borderGlow1.setWidth(50);
+            borderGlow1.setOffsetX(0f);
+            borderGlow1.setOffsetY(0f);
+
+            DropShadow borderGlow2 = new DropShadow();
+            borderGlow2.setColor(Color.YELLOW);
+            borderGlow2.setHeight(50);
+            borderGlow2.setWidth(50);
+            borderGlow2.setOffsetX(0f);
+            borderGlow2.setOffsetY(0f);
 
             if(reset) {
                 for (ArrayList<Button> btnArr : btnCell) {
@@ -1850,7 +1857,11 @@ public class GameJavaFX extends Application implements ViewClient {
 
 
             if (model.getTurn().getCharacter().equals(model.getOwner().getCharacter())) {
-                gridPBoard.setEffect(borderGlow);
+                if(!model.getOwner().isInactive()){
+                    gridPBoard.setEffect(borderGlow1);
+                } else {
+                    gridPBoard.setEffect(borderGlow2);
+                }
                 for (GridPane g : gridOtherBoards) {
                     g.setEffect(null);
                 }
@@ -2076,13 +2087,11 @@ public class GameJavaFX extends Application implements ViewClient {
                     //set infobutton
                     setWeapon(p, otherWe.get(i));
                     if(p.isInactive()){
-                        borderGlow.setColor(Color.YELLOW);
-                        gridOtherBoards.get(i).setEffect(borderGlow);
-                        borderGlow.setColor(Color.RED);
+                        gridOtherBoards.get(i).setEffect(borderGlow2);
                     }
 
                     if(model.getTurn().equals(p))
-                        gridOtherBoards.get(i).setEffect(borderGlow);
+                        gridOtherBoards.get(i).setEffect(borderGlow1);
                 }
                 i++;
 
@@ -2694,9 +2703,11 @@ public class GameJavaFX extends Application implements ViewClient {
 
             btnMove.setOnAction(e->{
                 game.setDecision("SI");
+                update();
             });
             btnPick.setOnAction(e->{
                 game.setDecision("NO");
+                update();
             });
         };
 
@@ -2771,7 +2782,7 @@ public class GameJavaFX extends Application implements ViewClient {
             int i = 0;
             for(VirtualPlayer p : model.getAllPlayers()){
 
-                if(p.equals(model.getOwner()) && !p.getpBoard().isFlipped())
+                if(p.equals(model.getOwner()) || !p.getpBoard().isFlipped())
                     continue;
 
                 Image imgTmp2 = null;

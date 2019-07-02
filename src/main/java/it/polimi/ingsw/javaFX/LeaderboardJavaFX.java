@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 import static it.polimi.ingsw.javaFX.GUIFiles.*;
@@ -119,6 +120,12 @@ public class LeaderboardJavaFX extends Application {
         grid.getRowConstraints().addAll(r1,r2,r3,r4,r5,r6);
         grid.getColumnConstraints().add(c);
 
+        HashMap<Integer, VirtualPlayer> all = new HashMap<>();
+        for (VirtualPlayer p : model.getAllPlayers()) {
+            all.put(players.indexOf(p.getCharacter()), p);
+        }
+
+
         /**
          * set Title
          */
@@ -162,27 +169,30 @@ public class LeaderboardJavaFX extends Application {
 
         switch (players.size()){
             case(5):{
-                txt5.setText(model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(4))).getUsername() + " : " + model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(4))).getPoints() + " punti");
-                txt5.setStyle("-fx-text-fill:" + model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(4))).getCharacter() );
+                txt5.setText(all.get(4).getUsername() + " : " + all.get(4).getPoints() + " punti");
+                txt5.setStyle("-fx-text-fill:" + all.get(4).getCharacter() );
             }
             case(4):{
-                txt4.setText(model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(3))).getUsername() + " : " + model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(3))).getPoints() + " punti");
-                txt4.setStyle("-fx-text-fill:" + model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(3))).getCharacter() );
+                txt4.setText(all.get(3).getUsername() + " : " + all.get(3).getPoints() + " punti");
+                txt4.setStyle("-fx-text-fill:" + all.get(3).getCharacter() );
 
             }
             case(3):{
-                txt3.setText(model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(2))).getUsername() + " : " + model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(2))).getPoints() + " punti");
-                txt3.setStyle("-fx-text-fill:" + model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(2))).getCharacter() );
+                txt3.setText(all.get(2).getUsername() + " : " + all.get(2).getPoints() + " punti");
+                txt3.setStyle("-fx-text-fill:" + all.get(2).getCharacter() );
 
             }
             case(2):{
-                txt2.setText(model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(1))).getUsername() + " : " + model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(1))).getPoints() + " punti");
-                txt2.setStyle("-fx-text-fill:" + model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(1))).getCharacter() );
+                txt2.setText(all.get(1).getUsername() + " : " + all.get(1).getPoints() + " punti");
+                txt2.setStyle("-fx-text-fill:" + all.get(1).getCharacter() );
 
             }
             case(1):{
-                txt1.setText(model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(0))).getUsername() + " : " + model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(0))).getPoints() + " punti");
-                txt1.setStyle("-fx-text-fill:" + model.getAllPlayers().get(model.getAllPlayers().indexOf(players.get(0))).getCharacter() );
+                txt1.setText(all.get(0).getUsername() + " : " + all.get(0).getPoints() + " punti");
+                txt1.setStyle("-fx-text-fill:" + all.get(0).getCharacter() );
+
+            }
+            default:{
 
             }
         }
