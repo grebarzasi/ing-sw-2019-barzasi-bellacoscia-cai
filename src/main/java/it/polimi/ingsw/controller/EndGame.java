@@ -37,10 +37,7 @@ public class EndGame implements ControllerState {
     public void executeState() {
 
         for(Player p: this.controller.getModel().getPlayerList()){
-
-            p.getView().displayMessage(GAME_OVER);
             p.getView().displayLeaderboard(this.generateLeaderBoard());
-
         }
 
         System.out.println(GAME_OVER);

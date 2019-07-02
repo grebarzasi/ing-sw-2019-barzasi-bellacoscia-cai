@@ -101,8 +101,9 @@ public class SClientCommManager extends Thread{
                 case DISPLAY_LEADERBOARD:
                     o.println(AKN);
                     args=i.readLine();
-                    v.displayLeaderboard(parseString(args));
                     o.println(AKN);
+                    //time consuming
+                    v.displayLeaderboard(parseString(args));
                     break;
                 case UPDATE:
                     o.println(AKN);

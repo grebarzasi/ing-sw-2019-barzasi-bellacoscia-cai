@@ -357,13 +357,21 @@ public class CliGame implements ViewClient {
      * Displays the leaderboard of the game to the user
      */
     public void displayLeaderboard(ArrayList<String> args) {
-        int i=0;
-        for(String s: args){
-            int index= board.getModel().getAllPlayers().indexOf(s);
-            System.out.println(i+"-"+board.getModel().getAllPlayers().get(index).getUsername()+" con "+s);
+        HashMap<Integer,VirtualPlayer> leaderBoard = new HashMap<>();
+
+        for(VirtualPlayer p : board.getModel().getAllPlayers())
+            leaderBoard.put(args.indexOf(p.getCharacter()),p);
+        System.out.println(ADRENALINA_HEAD);
+        System.out.println();
+        for(int i=0; i<args.size();i++) {
+            VirtualPlayer k=leaderBoard.get(i);
+            System.out.println(PURPLE_B);
+            System.out.print(i+1 + "-" + k.getUsername() + " con " + k.getCharacter()+" ");
+            board.printPawn(k.getCharacter());
+            System.out.println(" " +k.getPoints());
+        }
         }
 
-    }
 
     public String showEffects(ArrayList<String> args) {
         System.out.println("\n"+args);
