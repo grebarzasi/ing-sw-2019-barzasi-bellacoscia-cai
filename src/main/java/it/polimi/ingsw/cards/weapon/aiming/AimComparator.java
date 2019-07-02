@@ -18,6 +18,9 @@ import java.util.Set;
  */
 
 public class AimComparator {
+    /**
+     * saves the source of the search
+     */
     private ArrayList<String> sourceList;
 
     public ArrayList<String> getSourceList() {
@@ -28,7 +31,11 @@ public class AimComparator {
         this.sourceList=s;
     }
 
-
+    /**
+     * @return all player corresponding to source list parameters
+     * @param w is the weapon actually in use
+     * @param target is the set of hittable players at that moment
+     */
     public Set<Figure> getPlayersFromSource(Weapon w, Figure target) {
         if(target==null)
             return null;

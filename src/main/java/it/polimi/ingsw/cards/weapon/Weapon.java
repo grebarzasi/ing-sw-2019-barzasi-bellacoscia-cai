@@ -20,23 +20,67 @@ import java.util.*;
 
 
 public class Weapon extends Card {
-
+    /**
+     * the owner of the weapon
+     */
     private Player owner;
+    /**
+     * the name of the weapon
+     */
     private String name;
+    /**
+     * the already loaded ammo
+     */
     private Ammo chamber;
+    /**
+     * the reload cost of the weapon
+     */
     private Ammo reloadCost;
+    /**
+     * indicates that your weapon is loaded
+     */
     private boolean isLoaded;
+    /**
+     * saves the state of the weapon
+     */
     private int indexTemp;
+
+    /**
+     * if not null indicates that a filter need an action from a player to determine a direction
+     */
     private AimDirection directionTemp;
+    /**
+     * if not null indicates that a filter need an action from a player to determine a set of target
+     */
     private AimAskPlayer askTemp;
+    /**
+     * if not null indicates that a filter need an action from a player to determine a destination
+     */
     private MoveTarget moveTemp;
+    /**
+     * if not null indicates that a filter need an action from a player to determine a square target
+     */
     private AimSquare squareTemp;
 
-
+    /**
+     * indicates that additional effect has to be executed in a order
+     * */
     private boolean orderedAdd;
+    /**
+     * basic effect
+     */
     private Effect basicEffect;
+    /**
+     * additional effect
+     */
     private Effect addOneEffect;
+    /**
+     * second additional effect
+     */
     private Effect addTwoEffect;
+    /**
+     * alternative effect
+     */
     private Effect alternativeEffect;
 
     /**
@@ -44,15 +88,30 @@ public class Weapon extends Card {
      *
      */
     private Effect extraMove;
+    /**
+     * indicates that the extra move can be done at any time
+     */
     private boolean beforeBasic;
 
     /**
-     * used in some effect in order to act as a chain.
+     * save the last target hit
      */
     private Figure lastHit;
+    /**
+     * save the last target moved
+     */
     private Figure lastMoved;
+    /**
+     * save all damaged targets
+     */
     private Set<Figure> damaged;
+    /**
+     * save the target selected by aim square
+     */
     private Set<Figure> prevSelected;
+    /**
+     * save the selected square
+     */
     private Square selected;
 
 

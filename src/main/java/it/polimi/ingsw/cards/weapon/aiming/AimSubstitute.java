@@ -22,7 +22,12 @@ public class AimSubstitute extends AimComparator implements AimingFilter{
 
     }
 
-    //does the substitution between the set of available target and the one from source
+    /**
+     * does the substitution between the set of available target and the one from source
+     *
+     * @param w is the weapon used
+     * @param p is the set of hittable players at that moment
+     */
     public Set<Figure> filter(Weapon w, Set<Figure> p) {
         if(p==null)
             return null;

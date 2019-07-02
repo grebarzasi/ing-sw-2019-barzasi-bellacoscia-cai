@@ -9,8 +9,13 @@ import java.util.Set;
  * @author Gregorio Barzasi
  */
 public class ShootTarget implements SubEffect {
-
+    /**
+     * the damage num that has to be inflicted to targets
+     */
     private int damageNum;
+    /**
+     * the mark num that has to be inflicted to targets
+     */
     private int markNum;
 
     public ShootTarget(int damage, int mark) {
@@ -26,7 +31,10 @@ public class ShootTarget implements SubEffect {
         return markNum;
     }
 
-
+    /**
+     * inflicts damage and/or marks to the target set
+     * @param p the set of target that have to be hit
+     */
     public Set<Figure> applyEffect(Weapon w, Set<Figure> p){
         if(p==null)
             return null;

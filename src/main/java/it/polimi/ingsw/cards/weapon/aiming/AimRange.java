@@ -16,8 +16,15 @@ import java.util.Set;
 public class AimRange implements AimingFilter {
 
 
-
+    /**
+     * minimum distance from square allowed
+     *
+     */
     private Integer minDistance;
+    /**
+     * maximum distance from square allowed
+     *
+     */
     private Integer maxDistance;
 
     public Integer getMinDistance() {
@@ -36,6 +43,12 @@ public class AimRange implements AimingFilter {
             this.maxDistance = maxDistance;
     }
 
+    /**
+     * aims all player within a certain range from a chosen target
+     *
+     * @param w is the weapon used
+     * @param p is the set of hittable players at that moment
+     */
     public Set<Figure> filter(Weapon w, Set<Figure> p) {
         if(p==null)
             return null;

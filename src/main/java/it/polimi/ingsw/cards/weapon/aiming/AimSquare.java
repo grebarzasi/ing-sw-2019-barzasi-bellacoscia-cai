@@ -19,11 +19,32 @@ import java.util.Set;
 
 
 public class AimSquare implements AimingFilter{
+    /**
+     * minimum distance from square allowed
+     *
+     */
 
     private Integer minDistance;
+
+    /**
+     * maximum distance from square allowed
+     *
+     */
     private Integer maxDistance;
+
+    /**
+     * indicates that you can target your own square
+     *
+     */
     private boolean mine;
+    /**
+     * Temporary set of hittable players
+     */
     private Set<Figure> targetTemp;
+
+    /**
+     * message shown to players during square choice
+     */
     private String msg;
 
 
@@ -35,6 +56,9 @@ public class AimSquare implements AimingFilter{
     public Integer getMaxDistance() {
         return maxDistance;
     }
+
+
+
 
     public AimSquare(Boolean mine,String msg,Integer minDistance, Integer maxDistance){
         this.minDistance = minDistance;
@@ -49,7 +73,16 @@ public class AimSquare implements AimingFilter{
 
     }
 
-    //does the exclusion between the set of available target and the one from source
+    /**
+     * aims all player within a certain range from a chosen square
+     * if controller already set the preference it goes on to the next filter, if not it pauses itself saving the
+     * weapon state and return to controller. once a player set the preferences the state is restored and the effect can
+     * continue.
+     *
+     * @param w is the weapon used
+     * @param p is the set of hittable players at that moment
+     */
+
     public Set<Figure> filter(Weapon w, Set<Figure> p) {
         if(w.getSquareTemp()==null){
             targetTemp.clear();

@@ -18,16 +18,36 @@ import static it.polimi.ingsw.CLI.CLiBoardStuff.*;
  * @author Gregorio Barzasi
  */
 public class AimDirection implements AimingFilter {
-
+    /**
+     * indicates that you can shoot through walls
+     *
+     */
     private boolean wallBang;
+
+    /**
+     * temporary saves the direction chosen
+     *
+     */
     private String directionTemp="";
+    /**
+     * temporary saves the target received
+     *
+     */
     private Set<Figure> targetTemp;
 
     public AimDirection(boolean wallBang) {
         this.wallBang = wallBang;
         targetTemp=new HashSet<>();
     }
-
+    /**
+     * filter out all players outside a certain direction
+     * if controller already set the preference it goes on to the next filter, if not it pauses itself saving the
+     * weapon state and return to controller. once a player set the preferences the state is restored and the effect can
+     * continue.
+     *
+     * @param w is the weapon used
+     * @param p is the set of hittable players at that moment
+     */
     public Set<Figure> filter(Weapon w, Set<Figure> p) {
         if(w.getDirectionTemp()==null){
             targetTemp.clear();
@@ -44,6 +64,12 @@ public class AimDirection implements AimingFilter {
         return directionWallBlock(dir, w.getOwner(), targetTemp);
     }
 
+
+    /**
+     * @return all player hittable on cardinal direction
+     * @param origin is the source of direction search
+     * @param p is the set of hittable players at that moment
+     */
     public Set<Figure> allDirectional(Figure origin, Set<Figure> p){
         Set<Figure> temp = new HashSet<>();
 
@@ -59,7 +85,12 @@ public class AimDirection implements AimingFilter {
         return temp;
     }
 
-
+    /**
+     * @return all player laying on a certain direction but not behind walls
+     * @param dir is the direction chosen
+     * @param origin is the origin of the search
+     * @param p is the set of hittable players at that moment
+     */
     public Set<Figure> directionWallBlock(String dir, Figure origin, Set<Figure> p) {
         Set<Figure> temp = new HashSet<>();
         Square pos = origin.getPosition();
@@ -91,7 +122,12 @@ public class AimDirection implements AimingFilter {
         }
     return temp;
     }
-
+    /**
+     * @return all player laying on a certain direction
+     * @param dir is the direction chosen
+     * @param origin is the origin of the search
+     * @param p is the set of hittable players at that moment
+     */
     public Set<Figure> directionWallBang(String dir, Figure origin, Set<Figure> p) {
         //Remove all player outside a given direction
         Cell c = origin.getPosition().getPosition();

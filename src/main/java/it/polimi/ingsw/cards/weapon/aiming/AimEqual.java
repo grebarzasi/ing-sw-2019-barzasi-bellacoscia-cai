@@ -18,8 +18,12 @@ public class AimEqual extends AimComparator implements AimingFilter {
     public AimEqual(ArrayList<String> sourceList){
         super(sourceList);
     }
-
-    //does the intersection between the set of available target and the one from source
+    /**
+     * does the intersection between the set of available target and the one from source
+     *
+     * @param w is the weapon used
+     * @param p is the set of hittable players at that moment
+     */
     public Set<Figure> filter(Weapon w, Set<Figure> p) {
         if(p==null)
             return null;

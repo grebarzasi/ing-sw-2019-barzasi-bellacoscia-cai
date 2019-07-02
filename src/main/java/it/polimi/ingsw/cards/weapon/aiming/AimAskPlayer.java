@@ -16,23 +16,26 @@ import java.util.Set;
  */
 public class AimAskPlayer implements AimingFilter {
 
+    /**
+     * Max num of player you can hit
+     */
     private Integer numMax;
+    /**
+     * indicates that players can only belong to different square
+     */
     private boolean fromDiffSquare;
+    /**
+     * the message shown to players
+     */
     private String msg;
+    /**
+     * Temporary set of targettable players
+     */
     private Set<Figure> targetTemp;
 
-    public Integer getNumMax() {
-        return numMax;
-    }
-
-    public String getMsg(){
-        return this.msg;
-    }
-
-    public boolean isFromDiffSquare() {
-        return fromDiffSquare;
-    }
-
+    /**
+     * Creates the instance of {@link AimAskPlayer} and initializes target temp to a new hashset
+     */
     public AimAskPlayer(String msg,Integer numMax, boolean fromDiffSquare) {
         this.numMax = numMax;
         this.fromDiffSquare = fromDiffSquare;
@@ -40,6 +43,14 @@ public class AimAskPlayer implements AimingFilter {
         this.targetTemp=new HashSet<>();
     }
 
+    /**
+     * if controller already set the preference it goes on to the next filter, if not it pauses itself saving the
+     * weapon state and return to controller. once a player set the preferences the state is restored and the effect can
+     * continue.
+     *
+     * @param w is the weapon used
+     * @param p is the set of hittable players at that moment
+     */
 
     public Set<Figure> filter(Weapon w, Set<Figure> p) {
         if(w.getAskTemp()==null){
@@ -54,7 +65,9 @@ public class AimAskPlayer implements AimingFilter {
         return p;
     }
 
-
+    /**
+     * reset the state of the filter to a default state.
+     */
     public void resetFilter() {
         targetTemp.clear();
     }
@@ -63,8 +76,20 @@ public class AimAskPlayer implements AimingFilter {
         this.numMax = numMax;
     }
 
+    public boolean isFromDiffSquare() {
+        return fromDiffSquare;
+    }
+
     public void setFromDiffSquare(boolean fromDiffSquare) {
         this.fromDiffSquare = fromDiffSquare;
+    }
+
+    public Integer getNumMax() {
+        return numMax;
+    }
+
+    public String getMsg(){
+        return this.msg;
     }
 
     public void setMsg(String msg) {

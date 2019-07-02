@@ -6,6 +6,7 @@ import it.polimi.ingsw.cards.weapon.Effect;
 import it.polimi.ingsw.cards.weapon.MoveTarget;
 import it.polimi.ingsw.cards.weapon.ShootTarget;
 import it.polimi.ingsw.cards.weapon.SubEffect;
+import it.polimi.ingsw.cards.weapon.aiming.AimEqual;
 import it.polimi.ingsw.cards.weapon.weapon_builder.AimingBuilder;
 
 import java.util.ArrayList;
@@ -62,20 +63,35 @@ public class EffectBuilder {
         //return the created Effect Object
         return new Effect(name,cost,subEffList);
     }
-
+    /**
+     * Method that build the MoveTarget sub effect
+     *
+     * @param node containing well built json
+     * @return {@link MoveTarget} Object
+     */
     public static MoveTarget buildMoveTarget(JsonNode node){
         Integer maxStep = node.path("step").asInt();
         String finalPos = node.path("finalPos").asText();
         boolean directional = node.path("directional").asBoolean();
         return new MoveTarget(maxStep,finalPos,directional);
     }
-
+    /**
+     * Method that build the ShootTarget sub effect
+     *
+     * @param node containing well built json
+     * @return {@link ShootTarget} Object
+     */
     public static ShootTarget buildShootTarget(JsonNode node){
             Integer damage = node.path("damage").asInt();
             Integer mark = node.path("mark").asInt();
             return new ShootTarget(damage, mark);
     }
-
+    /**
+     * Method that build the Cost of a specific effect
+     *
+     * @param node containing well built json
+     * @return {@link Ammo} Object
+     */
     public static Ammo buildCost(JsonNode node){
         return new Ammo(node.path("red").asInt(),node.path("blue").asInt(),node.path("yellow").asInt());
     }

@@ -16,7 +16,14 @@ import java.util.Set;
 
 public class AimVisible implements AimingFilter {
 
+    /**
+     * visible  property indicates that filter have to return only visible or not visible players
+     *
+     */
     private boolean visible;
+    /**
+     * is the origin of the "search" of visible / not visible players
+     */
     private String origin="";
 
     public AimVisible(boolean visible,String origin){
@@ -27,15 +34,17 @@ public class AimVisible implements AimingFilter {
     public AimVisible(boolean visible){
         this.visible=visible;
     }
-    public boolean isVisible() {
-        return visible;
-    }
-
     public String getOrigin() {
         return origin;
     }
 
-
+    /**
+     * @return all visible or not visible players based on a origin. the origin can be the last player it or the players
+     * hit in other effects
+     *
+     * @param w is the weapon used
+     * @param p is the set of hittable players at that moment
+     */
     public Set<Figure> filter(Weapon w, Set<Figure> p) {
         Figure x=w.getOwner();
         if(p==null)
@@ -67,6 +76,10 @@ public class AimVisible implements AimingFilter {
         }
         return p;
     }
+
     public void resetFilter() {
+    }
+    public boolean isVisible() {
+        return visible;
     }
 }

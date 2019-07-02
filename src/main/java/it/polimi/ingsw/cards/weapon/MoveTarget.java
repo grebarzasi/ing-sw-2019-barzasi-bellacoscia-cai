@@ -16,10 +16,25 @@ import java.util.Set;
 
 public class MoveTarget implements SubEffect {
 
+    /**
+     * the max step allowed in move action
+     */
     private int maxSteps;
+    /**
+     * the constraint on final position
+     */
     private String finalPos;
+    /**
+     * indicates that move has to be done only on one cardinal direction
+     */
     private boolean directional;
+    /**
+     * temporary saves the chosen square
+     */
     private Square squareTemp;
+    /**
+     * temporary saves the hittable targets
+     */
     private Set<Figure> targetTemp;
 
     public MoveTarget(int maxSteps, String finalPos, boolean directional) {
@@ -33,6 +48,9 @@ public class MoveTarget implements SubEffect {
         return maxSteps;
     }
 
+    /**
+     * moves your target to a certain position verifying that the final position is allowed.
+     */
     public Set<Figure> applyEffect(Weapon w, Set<Figure> p){
         if(p==null)
             return null;
@@ -89,6 +107,9 @@ public class MoveTarget implements SubEffect {
         squareTemp=null;
     }
 
+    /**
+     * @return the furthest square from a target
+     */
     public Square getFar(Figure p, ArrayList<Square> all) {
         int max=0;
         Square far=null;

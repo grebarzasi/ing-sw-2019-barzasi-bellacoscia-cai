@@ -20,10 +20,6 @@ public class WeaponDeck extends Deck {
     }
 
     @Override
-    public void shuffle() {
-    }
-
-    @Override
     public Card fetch() {
 
         if(super.getUsable().isEmpty()){

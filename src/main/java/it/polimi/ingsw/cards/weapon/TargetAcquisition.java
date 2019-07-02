@@ -26,7 +26,10 @@ public class TargetAcquisition implements SubEffect {
     public ArrayList<AimingFilter> getAimRoutine() {
         return aimRoutine;
     }
-
+    /**
+     * step by step reduces the target set to only the hittable player
+     * @param p the set of target that have to filtered
+     */
     public Set<Figure> applyEffect(Weapon w, Set<Figure> p){
         if(p==null)
             return null;

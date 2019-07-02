@@ -13,12 +13,38 @@ import java.util.Set;
  * @author Gregorio Barzasi
  */
 public class Effect {
+
+    /**
+     * the name of the effect
+     */
     private String name;
+
+    /**
+     * cost of the effect
+     */
     private Ammo cost;
+    /**
+     * the core of the effect: this is the list of sub effect that composed create the actual effect
+     */
     private ArrayList<SubEffect> effectList;
+
+    /**
+     * the target hit by the effect
+     */
     private Set<Figure> targetHitSet;
+
+    /**
+     * true if effect is been used
+     */
     private boolean used;
+
+    /**
+     * the weapon who owns the effect
+     */
     private Weapon myWeapon;
+    /**
+     * indx of sub effect that needs more info from player, is the state of the effect
+     */
     private int indexTemp;
 
 
@@ -63,6 +89,10 @@ public class Effect {
         return targetHitSet;
     }
 
+    /**
+     * @return true if the effect is executed correctly, false if more info are required to continue.
+     * in this case effects saves the state in indexTemp and return to caller
+     */
     public boolean executeEffect() {
         SubEffect e;
         targetHitSet=myWeapon.getOwner().allFigures();
