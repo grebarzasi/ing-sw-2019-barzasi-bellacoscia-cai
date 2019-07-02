@@ -31,20 +31,23 @@ public class ChoosingMove implements ControllerState{
     @Override
     public void executeState(){
 
-        Player tmp = this.controller.getCurrentPlayer();
-
         for(Player p: this.controller.getModel().getPlayerList()) {
-            if (this.controller.getCurrentPlayer().isDead()) {
-                this.controller.getModel().setCurrentPlayer(p);
-                this.controller.setView(this.controller.getCurrentPlayer().getView());
 
+            if (p.isDead() && this.controller.getModel().getTurn()>=this.controller.getModel().getPlayerList().size()) {
+
+                ((Spawning)this.controller.spawning).setReviving(p);
                 this.controller.setCurrentState(this.controller.spawning);
                 this.controller.currentState.executeState();
-
             }
         }
 
-        this.controller.getModel().setCurrentPlayer(tmp);
+        this.controller.update();
+
+        if(this.controller.getCurrentPlayer().isDead()){
+            ((Spawning)this.controller.spawning).setReviving(this.controller.getCurrentPlayer());
+            this.controller.setCurrentState(this.controller.spawning);
+            this.controller.currentState.executeState();
+        }
 
         ArrayList<Action> options = ActionBuilder.build(controller.getCurrentPlayer(), this.controller.getModel().isFrenzy());
 
@@ -119,5 +122,8 @@ public class ChoosingMove implements ControllerState{
 
             }
         }
+
     }
+
+
 }

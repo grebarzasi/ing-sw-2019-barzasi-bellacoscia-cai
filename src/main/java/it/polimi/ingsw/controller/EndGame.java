@@ -53,7 +53,7 @@ public class EndGame implements ControllerState {
         }
 
         System.out.println(GAME_OVER);
-        return;
+        System.exit(0);
 
 
     }

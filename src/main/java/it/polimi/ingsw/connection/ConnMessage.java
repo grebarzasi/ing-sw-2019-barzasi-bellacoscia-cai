@@ -28,6 +28,6 @@ public class ConnMessage {
     public static final String INFO_SEP = ";";
     public static final String INNER_SEP = ":";
     public static final String CONNECTION_ERR = "Something went wrong, check server connection";
-    public static final int COUNTDOWN = 30;
+    public static final int COUNTDOWN = 1;
 
 }

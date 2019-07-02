@@ -744,4 +744,8 @@ public class Controller {
     public boolean isOneAction() {
         return oneAction;
     }
+
+    public ControllerState getChoosingMove() {
+        return choosingMove;
+    }
 }

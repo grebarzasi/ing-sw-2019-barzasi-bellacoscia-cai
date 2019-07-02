@@ -1,5 +1,7 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.Player;
+import it.polimi.ingsw.View;
 import it.polimi.ingsw.board.map.Map;
 import it.polimi.ingsw.board.map.Square;
 import it.polimi.ingsw.cards.power_up.PowerUp;
@@ -16,6 +18,7 @@ public class Spawning implements ControllerState {
      * the controller reference
      */
     private Controller controller;
+    private Player reviving;
 
     /**
      * Default constructor
@@ -32,6 +35,10 @@ public class Spawning implements ControllerState {
     @Override
     public void executeState() {
 
+        Player tmp = this.controller.getCurrentPlayer();
+
+        this.controller.getModel().setCurrentPlayer(reviving);
+        this.controller.setView(this.reviving.getView());
 
         if (this.controller.getModel().getTurn() >= this.controller.getModel().getPlayerList().size()) {
 
@@ -60,6 +67,9 @@ public class Spawning implements ControllerState {
         this.controller.update();
         if(controller.getView().isInactive()||controller.getView().isDisconnected())
             this.controller.endTurn();
+
+        this.controller.getModel().setCurrentPlayer(tmp);
+        this.controller.setView(tmp.getView());
         this.controller.goBack();
 
     }
@@ -135,5 +145,11 @@ public class Spawning implements ControllerState {
         return null;
     }
 
+    public Player getReviving() {
+        return reviving;
+    }
 
+    public void setReviving(Player reviving) {
+        this.reviving = reviving;
+    }
 }

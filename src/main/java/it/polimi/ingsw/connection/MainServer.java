@@ -62,7 +62,7 @@ public class MainServer {
     public void startGame()throws IOException {
         contr= new Controller(lobby);
         contr.update();
-        contr.setCurrentState(contr.getSpawning());
+        contr.setCurrentState(contr.getChoosingMove());
         contr.getCurrentState().executeState();
     }
 
