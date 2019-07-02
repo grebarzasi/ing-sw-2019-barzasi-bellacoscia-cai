@@ -2735,11 +2735,16 @@ public class GameJavaFX extends Application implements ViewClient {
     @Override
     public void displayLeaderboard(ArrayList<String> args) {
         LeaderboardJavaFX leaderboard = new LeaderboardJavaFX(args, model);
-        try {
-            leaderboard.start(primaryStage);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Runnable run = () -> {
+            try {
+                leaderboard.start(primaryStage);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        };
+
+        Platform.runLater(run);
+
     }
 
     @Override
