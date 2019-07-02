@@ -127,7 +127,6 @@ public class GameJavaFX extends Application implements ViewClient {
     private TextField msg;
     private TextField pointsField;
     private GridPane gridSkull;
-    private String decision;
 
     private Button btnMove;
     private Button btnPick;
@@ -231,7 +230,6 @@ public class GameJavaFX extends Application implements ViewClient {
         }
 
         action = "";
-        decision = "";
 
         btnCell = new ArrayList<>();
         msg = new TextField();
@@ -2694,10 +2692,10 @@ public class GameJavaFX extends Application implements ViewClient {
             btnPick.setOpacity(1);
 
             btnMove.setOnAction(e->{
-                decision = "SI";
+                game.setDecision("SI");
             });
             btnPick.setOnAction(e->{
-                decision = "NO";
+                game.setDecision("NO");
             });
         };
 
@@ -2716,10 +2714,10 @@ public class GameJavaFX extends Application implements ViewClient {
         Platform.runLater(up);
         */
 
-        while(decision.equals(""));
+        while(game.getDecision().equals(""));
 
-        String res = decision;
-        decision = "";
+        String res = game.getDecision();
+        game.setDecision("");
 
         if (res.equals("SI")) {
             return true;
@@ -2789,71 +2787,6 @@ public class GameJavaFX extends Application implements ViewClient {
         }
     }
 
-
-    public class decisionWindow extends Stage {
-
-        public decisionWindow(String message) {
-
-            double widthScreen = Screen.getPrimary().getBounds().getWidth() / 4;
-            double heightScreen = Screen.getPrimary().getBounds().getHeight() / 4;
-
-            primaryStage.setTitle(message);
-
-            Group root = new Group();
-            Scene theScene = new Scene(root);
-            this.setScene(theScene);
-
-            GridPane grid = new GridPane();
-            grid.setAlignment(Pos.CENTER);
-            grid.setHgap(30);
-            grid.setVgap(20);
-            grid.setPadding(new Insets(0, 0, 0, 0));
-
-            try {
-                Image back = new Image(new FileInputStream(PATH_BACK_GAME), 2190, 1920, true, true);
-                BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-                grid.setBackground(new Background(backgroundImage));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            Scene scene = new Scene(grid, widthScreen, heightScreen);
-            this.setScene(scene);
-
-            scene.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> grid.setPrefWidth((double) newSceneWidth));
-            scene.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> grid.setPrefHeight((double) newSceneHeight));
-
-            ColumnConstraints c1 = new ColumnConstraints(widthScreen);
-
-            RowConstraints r1 = new RowConstraints(heightScreen);
-            RowConstraints r2 = new RowConstraints(heightScreen);
-
-            grid.getColumnConstraints().add(c1);
-            grid.getRowConstraints().addAll(r1, r2);
-
-            Label msg = new Label(message);
-            msg.setTextFill(Color.WHITE);
-
-            Button btnY = new Button("SI");
-            Button btnN = new Button("NO");
-
-            btnY.setOnAction(e -> {
-                decision = "SI";
-            });
-            btnN.setOnAction(e -> {
-                decision = "NO";
-            });
-
-            HBox h = new HBox(20);
-            h.setAlignment(Pos.CENTER);
-            h.getChildren().add(btnY);
-            h.getChildren().add(btnN);
-
-            grid.add(msg, 0, 0);
-            grid.add(h, 0, 1);
-
-        }
-    }
 
     public class infoWindow extends Stage {
 

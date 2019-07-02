@@ -12,7 +12,7 @@ public class VirtualGame {
 
     private String weapon = "";
     private String powerup = "";
-
+    private String decision = "";
 
     private String effect = "";
     private String direction = "";
@@ -25,6 +25,14 @@ public class VirtualGame {
 
 
     public VirtualGame() {
+    }
+
+    public synchronized String getDecision() {
+        return decision;
+    }
+
+    public synchronized void setDecision(String decision) {
+        this.decision = decision;
     }
 
     public synchronized ArrayList<String> getTargetPlayers() {
