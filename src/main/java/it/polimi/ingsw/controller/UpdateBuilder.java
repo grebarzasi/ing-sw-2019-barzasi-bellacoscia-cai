@@ -68,9 +68,9 @@ public class UpdateBuilder {
 
         //add Weapon
         ObjectNode weaponNode = mapper.createObjectNode();
-        weaponNode.put("I'M",true);
-        weaponNode.put("THE",true);
-        weaponNode.put("TERMINATOR",true);
+        weaponNode.put("HASTA",true);
+        weaponNode.put("LA",true);
+        weaponNode.put("VISTA",true);
         playerNode.set("weapons",weaponNode);
 
 //        //add pu

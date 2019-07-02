@@ -1,7 +1,6 @@
 package it.polimi.ingsw.cards.weapon;
 
 import it.polimi.ingsw.Figure;
-import it.polimi.ingsw.actions.Action;
 import it.polimi.ingsw.board.map.Square;
 
 import java.util.ArrayList;
@@ -71,7 +70,7 @@ public class MoveTarget implements SubEffect {
                 ArrayList<Square> pos=new ArrayList<>();
                 for(Figure f: w.getDamaged())
                     pos.add(f.getPosition());
-                squareTemp = getFar(w.getOwner(),pos);
+                squareTemp = getFarthest(w.getOwner(),pos);
                 break;
 
         }
@@ -108,9 +107,9 @@ public class MoveTarget implements SubEffect {
     }
 
     /**
-     * @return the furthest square from a target
+     * @return the farthest square from a target
      */
-    public Square getFar(Figure p, ArrayList<Square> all) {
+    public Square getFarthest(Figure p, ArrayList<Square> all) {
         int max=0;
         Square far=null;
         for(Square s : all)

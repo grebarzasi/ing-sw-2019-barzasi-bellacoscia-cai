@@ -100,7 +100,7 @@ public class Deck {
     }
 
     /**
-     * Adds a card into the discarded pile
+     * Adds a Card into the discarded pile
      * @param c the card to discard
      */
     public void discard(Card c){
