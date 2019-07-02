@@ -37,10 +37,23 @@ public class EndGame implements ControllerState {
     public void executeState() {
 
         for(Player p: this.controller.getModel().getPlayerList()){
+
+            p.getView().displayMessage(GAME_OVER);
             p.getView().displayLeaderboard(this.generateLeaderBoard());
+
+            ArrayList<Figure> tmp = this.generateLeaderBoard();
+
+            int i = 1;
+            for(Figure f: tmp){
+                System.out.println(f.getCharacter()+" Has gotten: "+f.getPoints()+" points\n");
+                System.out.println(i);
+                i++;
+            }
+
         }
 
         System.out.println(GAME_OVER);
+        return;
 
 
     }
