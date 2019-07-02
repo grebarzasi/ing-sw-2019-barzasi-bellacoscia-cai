@@ -52,16 +52,18 @@ public class FrenzySpecialAction implements ControllerState {
         if(choice == null){
             this.controller.goBack();
         }else {
-            while (this.controller.getView().showBoolean(ControllerMessages.ASK_FRENZY_RELOAD)) {
+            if (this.controller.getView().showBoolean(ControllerMessages.ASK_FRENZY_RELOAD)) {
 
                 ArrayList<Weapon> reloadOptions = this.controller.getCurrentPlayer().getWeaponsList();
                 Weapon reloadChoice = this.controller.getView().showWeapon(reloadOptions);
-                boolean check = reloadChoice.reload();
+                if(reloadChoice != null) {
 
-                if (!check) {
-                    this.controller.getView().displayMessage(ControllerMessages.CANNOT_RELOAD);
+                    boolean check = reloadChoice.reload();
+
+                    if (!check) {
+                        this.controller.getView().displayMessage(ControllerMessages.CANNOT_RELOAD);
+                    }
                 }
-
             }
         }
 
