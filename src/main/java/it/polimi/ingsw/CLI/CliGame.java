@@ -365,11 +365,13 @@ public class CliGame implements ViewClient {
         System.out.println();
         for(int i=0; i<args.size();i++) {
             VirtualPlayer k=leaderBoard.get(i);
-            System.out.println(PURPLE_B);
-            System.out.print(i+1 + "-" + k.getUsername() + " con " + k.getCharacter()+" ");
+            System.out.print(RESET+"├{"+GREEN +(i+1)+RESET + "}-" +PURPLE_BOLD_BRIGHT);
+            System.out.print( k.getUsername() + " con " + k.getCharacter()+RESET+" (");
             board.printPawn(k.getCharacter());
-            System.out.println(" " +k.getPoints());
+            System.out.println(") " +k.getPoints());
         }
+
+        System.exit(0);
         }
 
 
