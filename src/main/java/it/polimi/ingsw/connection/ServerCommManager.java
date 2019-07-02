@@ -313,7 +313,7 @@ public class ServerCommManager  extends Thread implements View {
     public void displayLeaderboard(ArrayList<Figure> all){
         String s="";
         for(Figure f: all)
-            s=f.getCharacter()+INFO_SEP;
+            s=s+f.getCharacter()+INFO_SEP;
 
         try {
             setInUse(true);
