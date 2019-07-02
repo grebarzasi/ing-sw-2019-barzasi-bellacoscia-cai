@@ -55,23 +55,28 @@ public class PickingWeapon implements ControllerState {
 
         }else {
 
-            if (this.controller.getCurrentPlayer().getWeaponsList().size() < max) {
+            if (this.controller.getCurrentPlayer().getPersonalBoard().getAmmoInventory().covers(choice.getReloadCost().unchambered(choice.getChamber()))){
+                if (this.controller.getCurrentPlayer().getWeaponsList().size() < max) {
 
-                this.controller.getCurrentPlayer().getWeaponsList().add(choice);
-                this.controller.decreaseMoveLeft();
-                ((SpawnSquare) this.location).getArmory().getWeaponList().remove(choice);
+                    this.controller.getCurrentPlayer().getWeaponsList().add(choice);
+                    this.controller.decreaseMoveLeft();
+                    ((SpawnSquare) this.location).getArmory().getWeaponList().remove(choice);
 
-                choice.setOwner(this.controller.getCurrentPlayer());
+                    choice.setOwner(this.controller.getCurrentPlayer());
 
-                this.controller.getCurrentPlayer().setPosition(this.location);
+                    this.controller.getCurrentPlayer().setPosition(this.location);
 
-                this.controller.update();
+                    this.controller.update();
+                    this.controller.goBack();
+
+                } else {
+
+                    this.discardWeapon(choice);
+
+                }
+            }else{
+                this.controller.getView().displayMessage(ControllerMessages.CANNOT_RELOAD);
                 this.controller.goBack();
-
-            } else {
-
-                this.discardWeapon(choice);
-
             }
         }
     }

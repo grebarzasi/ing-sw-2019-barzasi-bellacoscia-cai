@@ -111,4 +111,15 @@ public class Ammo{
         this.blue = this.blue - a.blue;
         this.yellow = this.yellow - a.yellow;
     }
+    
+    public Ammo unchambered(Ammo chamber){
+        Ammo tmp = new Ammo(this.red,this.blue,this.yellow);
+        
+        tmp.red = tmp.red - chamber.red;
+        tmp.blue = tmp.blue - chamber.blue;
+        tmp.yellow = tmp.yellow - chamber.yellow;
+
+        return tmp;
+        
+    }
 }
