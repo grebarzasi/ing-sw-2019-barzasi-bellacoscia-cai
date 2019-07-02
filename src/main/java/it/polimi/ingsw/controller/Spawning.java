@@ -7,7 +7,7 @@ import it.polimi.ingsw.cards.power_up.PowerUp;
 import java.util.ArrayList;
 
 /**
- * Controller state corresponding to the spawning phase
+ * controller state corresponding to the spawning phase
  */
 
 public class Spawning implements ControllerState {

@@ -5,7 +5,7 @@ import it.polimi.ingsw.cards.power_up.PowerUp;
 import java.util.ArrayList;
 
 /**
- * Controller state of discarding a powerup to convert to ammunition
+ * controller state of discarding a powerup to convert to ammunition
  */
 
 public class DiscardingPowerUp implements ControllerState{

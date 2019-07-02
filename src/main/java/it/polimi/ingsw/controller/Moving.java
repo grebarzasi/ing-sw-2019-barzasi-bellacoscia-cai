@@ -5,7 +5,7 @@ import it.polimi.ingsw.board.map.Square;
 import java.util.ArrayList;
 
 /**
- * Controller state of moving your figure
+ * controller state of moving your figure
  */
 
 public class Moving implements ControllerState{

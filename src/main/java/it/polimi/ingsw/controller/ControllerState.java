@@ -7,7 +7,7 @@ package it.polimi.ingsw.controller;
 public interface ControllerState {
 
     /**
-     * Controller's interaction method, interacts with the user through the view interface
+     * controller's interaction method, interacts with the user through the view interface
      */
 
     void executeState();

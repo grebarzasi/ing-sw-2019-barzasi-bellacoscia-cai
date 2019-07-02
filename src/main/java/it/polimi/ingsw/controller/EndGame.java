@@ -9,7 +9,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 
 /**
- * Controller state of the endgame status
+ * controller state of the endgame status
  */
 
 public class EndGame implements ControllerState {

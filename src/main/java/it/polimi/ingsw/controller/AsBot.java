@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Controller state corresponding to the phase of using a bot
+ * controller state corresponding to the phase of using a bot
  */
 
 public class AsBot implements ControllerState{

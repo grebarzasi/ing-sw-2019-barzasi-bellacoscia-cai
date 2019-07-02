@@ -7,7 +7,7 @@ import it.polimi.ingsw.cards.weapon.Weapon;
 import java.util.ArrayList;
 
 /**
- * Controller state of picking a weapon
+ * controller state of picking a weapon
  */
 
 
@@ -56,6 +56,7 @@ public class PickingWeapon implements ControllerState {
         }else {
 
             if (this.controller.getCurrentPlayer().getPersonalBoard().getAmmoInventory().covers(choice.getReloadCost().unchambered(choice.getChamber()))){
+                this.controller.getCurrentPlayer().getPersonalBoard().getAmmoInventory().subtract(choice.getReloadCost().unchambered(choice.getChamber()));
                 if (this.controller.getCurrentPlayer().getWeaponsList().size() < max) {
 
                     this.controller.getCurrentPlayer().getWeaponsList().add(choice);
