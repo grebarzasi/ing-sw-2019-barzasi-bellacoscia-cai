@@ -2766,7 +2766,7 @@ public class GameJavaFX extends Application implements ViewClient {
             int i = 0;
             for(VirtualPlayer p : model.getAllPlayers()){
 
-                if(p.equals(model.getOwner()))
+                if(p.equals(model.getOwner()) && !p.getpBoard().isFlipped())
                     continue;
 
                 Image imgTmp2 = null;
