@@ -12,6 +12,9 @@ public class ServerMessage {
     public static final String CLIENT_UNREACHABLE=" disconnesso dal gioco";
     public static final String RETURN_IN_GAME="Sei stato sospeso dal server per inattività, vuoi tornare in gioco?";
     public static final int INACTIVITY_TIMEOUT=20;
+    public static final String TEST_MODE = PURPLE_BOLD_BRIGHT+"Attivare testMode?"+RESET;
+    public static final String LINE_SEP ="------------------------------\n"+RESET;
+    public static final String GENERIC_N = "\nNon disponibile, ancora:"+RESET;
 
 
 

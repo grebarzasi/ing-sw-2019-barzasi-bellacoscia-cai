@@ -197,27 +197,6 @@ public class CliView {
 
 
 
-    /**
-     * method for general question with y/n answer
-     */
-    public boolean testMode()throws IOException{
-        String temp;
-        do {
-            System.out.println(TEST_MODE);
-            temp = sc.readLine();
-            temp=temp.toLowerCase();
-            if (temp.equals("s")||temp.equals("y")||temp.equals("1")) {
-                System.out.println("ATTIVATA!");
-                return true;
-            } else if (temp.equals("n")||temp.equals("2")||temp.isEmpty()) {
-                System.out.println("DISATTIVATA!");
-                return false;
-            }else{
-                System.err.println(GENERIC_N);
-            }
-        }while(true);
-
-    }
 
     /**
      * parse character
