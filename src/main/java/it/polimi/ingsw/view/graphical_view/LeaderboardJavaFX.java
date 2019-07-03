@@ -102,11 +102,11 @@ public class LeaderboardJavaFX extends Application {
         txt5.setBackground(background);
 
 
-        ImageView img1 = new ImageView(new Image(new FileInputStream("src/main/resources/images/leaderboard/first.png"),widthScreen,heightFirst,true,true));
-        ImageView img2 = new ImageView(new Image(new FileInputStream("src/main/resources/images/leaderboard/second.png"),widthScreen,heightSecond,true,true));
-        ImageView img3 = new ImageView(new Image(new FileInputStream("src/main/resources/images/leaderboard/third.png"),widthScreen,heightThird,true,true));
-        ImageView img4 = new ImageView(new Image(new FileInputStream("src/main/resources/images/leaderboard/fourth.png"),widthScreen,heightOther,true,true));
-        ImageView img5 = new ImageView(new Image(new FileInputStream("src/main/resources/images/leaderboard/fifth.png"),widthScreen,heightOther,true,true));
+        ImageView img1 = new ImageView(new Image(new FileInputStream("/images/leaderboard/first.png"),widthScreen,heightFirst,true,true));
+        ImageView img2 = new ImageView(new Image(new FileInputStream("/images/leaderboard/second.png"),widthScreen,heightSecond,true,true));
+        ImageView img3 = new ImageView(new Image(new FileInputStream("/images/leaderboard/third.png"),widthScreen,heightThird,true,true));
+        ImageView img4 = new ImageView(new Image(new FileInputStream("/images/leaderboard/fourth.png"),widthScreen,heightOther,true,true));
+        ImageView img5 = new ImageView(new Image(new FileInputStream("/images/leaderboard/fifth.png"),widthScreen,heightOther,true,true));
 
         primaryStage.setTitle("Classifica");
 
