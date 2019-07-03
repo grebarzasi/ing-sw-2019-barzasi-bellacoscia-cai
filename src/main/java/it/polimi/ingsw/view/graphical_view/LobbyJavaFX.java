@@ -78,6 +78,12 @@ public class LobbyJavaFX extends Application {
 
     private Stage primaryStage;
 
+    /**
+     *
+     * @param conn the connection used
+     * @param owner the owner player
+     * @param reconnected if is a reconnected player
+     */
     public LobbyJavaFX(ConnectionTech conn, VirtualPlayer owner,boolean reconnected) {
 
         vmodel = new VirtualModel(owner);
@@ -108,6 +114,11 @@ public class LobbyJavaFX extends Application {
         return owner;
     }
 
+    /**
+     *
+     * @param primaryStage the stage
+     * @throws Exception
+     */
     public void start(Stage primaryStage) throws Exception {
 
 
@@ -154,16 +165,12 @@ public class LobbyJavaFX extends Application {
         Text title = new Text("Lobby");
         title.setFont(titleFont);
 
-            /**
-             * set background
-             */
+        //set background
         Image back = new Image(new FileInputStream(PATH_BACK), widthScreen * 2, heightScreen * 2, true, true);
         BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         lobbyGrid.setBackground(new Background(backgroundImage));
 
-            /**
-             * skulls choise
-             */
+        // skulls choise
         javafx.scene.control.Label lblSkulls = new javafx.scene.control.Label("Numero di teschi:");
         lblSkulls.setFont(font);
         ObservableList<String> skuItems = FXCollections.observableArrayList("5", "6", "7", "8");
@@ -172,10 +179,8 @@ public class LobbyJavaFX extends Application {
         skuH.getChildren().add(lblSkulls);
         skuH.getChildren().add(skuBox);
 
-            /**
-             * terminator choise
-             */
-        javafx.scene.control.Label lblTerminator = new javafx.scene.control.Label("Aggiungere Terminator?");
+        //terminator choise
+       javafx.scene.control.Label lblTerminator = new javafx.scene.control.Label("Aggiungere Terminator?");
         lblTerminator.setFont(font);
         ObservableList<String> terItems = FXCollections.observableArrayList("SI", "NO");
         ComboBox terBox = new ComboBox(terItems);
@@ -183,9 +188,7 @@ public class LobbyJavaFX extends Application {
         terH.getChildren().add(lblTerminator);
         terH.getChildren().add(terBox);
 
-        /**
-             * frenzy choise
-             */
+        //frenzy choise
         javafx.scene.control.Label lblFrenzy = new javafx.scene.control.Label("Aggiungere Frenesia Finale?");
         lblFrenzy.setFont(font);
         ObservableList<String> freItems = FXCollections.observableArrayList("SI", "NO");
@@ -194,9 +197,7 @@ public class LobbyJavaFX extends Application {
         freH.getChildren().add(lblFrenzy);
         freH.getChildren().add(freBox);
 
-            /**
-             * map Buttons
-             */
+        //map Buttons
         Label lblMap = new Label("Scegli una mappa:");
         lblMap.setFont(font);
         Button map1 = new Button();
@@ -222,60 +223,15 @@ public class LobbyJavaFX extends Application {
         HBox playerBox = new HBox();
 
 
-/*
 
-            Label lblPlayer = new Label("Player connessi:");
-            lblPlayer.setFont(font);
-            HBox playerBox = new HBox();
-            HBox usernameBox = new HBox();
-            for (VirtualPlayer p : joinedPlayers) {
-                switch (p.getCharacter()) {
-                    case "yellow": {
-                        ImageView yellowV = new ImageView(new Image(new FileInputStream("src/main/resources/images/D-struct-0R.png"), 150, 150, true, true));
-                        playerBox.getChildren().add(yellowV);
-                        break;
-                    }
-                    case "red": {
-                        ImageView redV = new ImageView(new Image(new FileInputStream("src/main/resources/images/violet.png"), 150, 150, true, true));
-                        playerBox.getChildren().add(redV);
-                        break;
-                    }
-                    case "blue": {
-                        ImageView blueV = new ImageView(new Image(new FileInputStream("src/main/resources/images/banshee.png"), 150, 150, true, true));
-                        playerBox.getChildren().add(blueV);
-                        break;
-                    }
-                    case "green": {
-                        ImageView greenV = new ImageView(new Image(new FileInputStream("src/main/resources/images/sprog.png"), 150, 150, true, true));
-                        playerBox.getChildren().add(greenV);
-                        break;
-                    }
-                    case "grey": {
-                        ImageView greyV = new ImageView(new Image(new FileInputStream("src/main/resources/images/dozer.png"), 150, 150, true, true));
-                        playerBox.getChildren().add(greyV);
-                        break;
-                    }
-                }
-                TextField txtUsername = new TextField(p.getUsername());
-                txtUsername.setPrefSize(150, 30);
-                txtUsername.setFont(font);
-                usernameBox.getChildren().add(txtUsername);
-            }
-
-*/
 
         Button btnStart = new Button("PRONTO");
         btnStart.setAlignment(Pos.CENTER);
         btnStart.setFont(font);
 
-        //Button btnBack = new Button("Indietro");
-        //btnBack.setAlignment(Pos.CENTER);
 
-            /**
-             * merge layout
-             */
 
-        //lobbyGrid.add(btnBack, 0, 0);
+        //merge layout
         lobbyGrid.add(title, 1, 1);
         lobbyGrid.add(skuH, 1, 2);
         lobbyGrid.add(terH, 1, 3);
@@ -303,24 +259,11 @@ public class LobbyJavaFX extends Application {
         lobbyGrid.add(finalLoad, 2, 10);
 
 
-        /**
-         * buttons action
-         */
-
-        skuBox.setOnAction(e -> {
+        //buttons action
+         skuBox.setOnAction(e -> {
             skull = Integer.parseInt(skuBox.getValue().toString());
         });
 
-        /*
-        btnBack.setOnAction(e -> {
-            MainView start = new MainView();
-            try {
-                start.start(primaryStage);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        });
-        */
 
         terBox.setOnAction(e -> {
             if (terBox.getValue().toString().equals("SI")) {
@@ -405,6 +348,9 @@ public class LobbyJavaFX extends Application {
 
     }
 
+    /**
+     * starts the game
+     */
     public void gameStart(){
 
         if(!conn.isRmi()){
@@ -440,7 +386,12 @@ public class LobbyJavaFX extends Application {
 
     }
 
-
+    /**
+     * add a player in the list of players connected
+     *
+     * @param p player connected
+     * @return
+     */
     public VBox setJoinedPlayers(VirtualPlayer p){
 
             VBox v = new VBox();

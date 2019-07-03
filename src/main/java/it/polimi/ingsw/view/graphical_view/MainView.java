@@ -61,8 +61,6 @@ public class MainView extends Application {
     /**
      * entry point for client side.
      */
-
-
     public static void main(String[] args){
         boolean flag=true;
         BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
@@ -190,7 +188,6 @@ public class MainView extends Application {
         layout.getChildren().add(v);
         layout.getChildren().add(charList);
 
-        //grid.add(layout,1,1);
         grid.add(titleV,0,0);
         grid.add(v,0,1);
         grid.add(charList,0,2);
@@ -368,6 +365,9 @@ public class MainView extends Application {
         }
     }
 
+    /**
+     * the settings window
+     */
     public class settingWindow extends Stage{
         public settingWindow(){
 
@@ -425,6 +425,10 @@ public class MainView extends Application {
         }
     }
 
+    /**
+     * set the background to the gridpane.
+     * @param grid
+     */
     public  void setBackground(GridPane grid){
         try {
             Image back = new Image(new FileInputStream(PATH_BACK), widthScreen , heightScreen , true, true);
