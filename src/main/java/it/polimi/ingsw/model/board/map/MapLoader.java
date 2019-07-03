@@ -2,9 +2,10 @@ package it.polimi.ingsw.model.board.map;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import it.polimi.ingsw.utils.FileLoader;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * loads the map into squareMatrix from .json file
@@ -17,11 +18,14 @@ import java.io.IOException;
 
 public class MapLoader {
 
+    private MapLoader() {
+
+    }
 
     /**
      * Path to the map .json files
      */
-    private static final String MAPS_PATH = ("src/main/resources/data_files/map_data/");
+    private static final String MAPS_PATH = ("/data_files/map_data/");
 
     /**
      * Loads the map information into a given matrix of squares
@@ -29,15 +33,13 @@ public class MapLoader {
      * @param selection the map selection
      * @param squareMatrix The SquareMatrix to load
      */
-
-
     public static void loadTerrain(String selection, Square[][] squareMatrix) {
 
         ObjectMapper mapper = new ObjectMapper();
+        FileLoader fileLoader = new FileLoader();
 
-        File squareFile = new File(MAPS_PATH + selection + ".json");
-        File confinementFile = new File (MAPS_PATH + selection + "_confinements.json");
-
+        InputStream squareFile = fileLoader.getResource(MAPS_PATH + selection + ".json");
+        InputStream confinementFile = fileLoader.getResource(MAPS_PATH + selection + "_confinements.json");
 
         int row;
         int column;
@@ -111,6 +113,6 @@ public class MapLoader {
         }
     }
 }
-    
-    
+
+
 

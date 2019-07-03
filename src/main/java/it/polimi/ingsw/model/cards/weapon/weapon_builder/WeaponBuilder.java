@@ -17,6 +17,10 @@ import java.util.Iterator;
  */
 public class WeaponBuilder {
 
+    private WeaponBuilder() {
+
+    }
+
     public static Weapon buildWeapon(String name) {
 
         ObjectMapper mapper = new ObjectMapper();
