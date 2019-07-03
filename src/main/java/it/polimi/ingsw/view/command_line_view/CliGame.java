@@ -1,9 +1,10 @@
 package it.polimi.ingsw.view.command_line_view;
 
+import it.polimi.ingsw.ViewClient;
 import it.polimi.ingsw.connection.ConnectionTech;
-import it.polimi.ingsw.connection.rmi.RmiClient;
-import it.polimi.ingsw.connection.socket.SClient;
-import it.polimi.ingsw.connection.socket.SClientCommManager;
+import it.polimi.ingsw.connection.client.rmi.RmiClient;
+import it.polimi.ingsw.connection.client.socket.SClient;
+import it.polimi.ingsw.connection.client.socket.SClientCommManager;
 import it.polimi.ingsw.view.virtual_model.*;
 
 import java.io.BufferedReader;
@@ -15,10 +16,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static it.polimi.ingsw.view.command_line_view.CLiBoardStuff.*;
-import static it.polimi.ingsw.view.command_line_view.CliColor.*;
+import static it.polimi.ingsw.Color.*;
 import static it.polimi.ingsw.view.command_line_view.CliMessages.*;
 import static it.polimi.ingsw.connection.ConnMessage.*;
-import static it.polimi.ingsw.connection.ServerMessage.THREAD_PRIORITY;
+import static it.polimi.ingsw.connection.server.ServerMessage.THREAD_PRIORITY;
 import static java.lang.Thread.sleep;
 
 /**

@@ -5,9 +5,9 @@ import it.polimi.ingsw.model.board.map.Map;
 import it.polimi.ingsw.model.board.map.Room;
 import it.polimi.ingsw.model.board.map.Square;
 import it.polimi.ingsw.model.cards.power_up.PowerUp;
-import it.polimi.ingsw.connection.ClientHandler;
+import it.polimi.ingsw.controller.client_handler.ClientHandler;
 import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.view.View;
+import it.polimi.ingsw.View;
 
 import java.util.ArrayList;
 import java.util.HashSet;

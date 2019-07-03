@@ -1,10 +1,17 @@
-package it.polimi.ingsw.connection;
+package it.polimi.ingsw.connection.server;
 
-import static it.polimi.ingsw.view.command_line_view.CliColor.*;
-import static it.polimi.ingsw.view.command_line_view.CliColor.RED;
+
+import static it.polimi.ingsw.Color.*;
 
 public class ServerMessage {
     public static final int THREAD_PRIORITY=3;
+
+    public static final String PORT_SELECT = PURPLE+"Inserisci la porta: (lascia vuoto per i valori di default)"+RESET;
+    public static final String IP_SELECT = PURPLE+"Inserisci l'ip: (lascia vuoto per i valori di default)"+RESET;
+    public static final String IP_SELECT_ERR = RED+"Ip non disponibile o non raggiungibile, riprova:"+RESET;
+    public static final String PORT_ERR = "Porta non disponibile, cambiala!"+RESET;
+    public static final String CONNECTION_ERR = "Qualcosa è andato storto, verifica la connessione con il server!"+RESET;
+    public static final String CONNECTION_OK = "Connessione stabilita\n"+RESET;
 
     public static final String RMI_COLOR=BLUE_BOLD;
     public static final String SOCKET_COLOR=CYAN_BOLD;
@@ -18,6 +25,7 @@ public class ServerMessage {
     public static final String TEST_MODE = PURPLE_BOLD_BRIGHT+"Attivare testMode?"+RESET;
     public static final String LINE_SEP ="------------------------------\n"+RESET;
     public static final String GENERIC_N = "\nNon disponibile, ancora:"+RESET;
+
 
 
 

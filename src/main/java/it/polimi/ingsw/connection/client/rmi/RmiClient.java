@@ -1,4 +1,4 @@
-package it.polimi.ingsw.connection.rmi;
+package it.polimi.ingsw.connection.client.rmi;
 
 /**
  * Client-side Rmi connection
@@ -7,12 +7,14 @@ package it.polimi.ingsw.connection.rmi;
  */
 import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.connection.DisconnectionHandler;
+import it.polimi.ingsw.connection.server.RmiServerInterface;
 
 import java.rmi.Remote;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-import static it.polimi.ingsw.view.command_line_view.CliMessages.CONNECTION_OK;
+import static it.polimi.ingsw.connection.server.ServerMessage.CONNECTION_OK;
+
 
 public class RmiClient extends ConnectionTech implements Remote {
 

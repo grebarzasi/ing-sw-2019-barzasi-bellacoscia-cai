@@ -1,16 +1,18 @@
-package it.polimi.ingsw.connection.rmi;
+package it.polimi.ingsw.connection.server;
 
-import it.polimi.ingsw.connection.ClientHandler;
+import it.polimi.ingsw.connection.client.rmi.RmiPrefInterf;
+import it.polimi.ingsw.controller.client_handler.ClientHandler;
 import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.controller.Lobby;
 import it.polimi.ingsw.connection.DisconnectionHandler;
+import it.polimi.ingsw.controller.client_handler.RmiClientHandler;
 
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-import static it.polimi.ingsw.connection.ServerMessage.*;
+import static it.polimi.ingsw.connection.server.ServerMessage.*;
 import static java.lang.Thread.sleep;
 
 /**

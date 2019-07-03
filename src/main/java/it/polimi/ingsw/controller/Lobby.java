@@ -1,18 +1,18 @@
 package it.polimi.ingsw.controller;
 
 
-import it.polimi.ingsw.connection.ClientHandler;
+import it.polimi.ingsw.controller.client_handler.ClientHandler;
 import it.polimi.ingsw.connection.MainServer;
 import it.polimi.ingsw.model.Player;
 
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.Timer;
 
 import static it.polimi.ingsw.connection.ConnMessage.COUNTDOWN;
+import static it.polimi.ingsw.controller.UpdateBuilder.TERMINATOR_NAME;
 
 
 /**
@@ -111,6 +111,9 @@ public class Lobby extends Thread {
      */
 
     public boolean usernameCheck(ClientHandler p){
+
+        if(p.getOwner().getUsername().equals(TERMINATOR_NAME))
+            return false;
         if(p.getOwner().getUsername().equals("null"))
             return false;
         if(p.getOwner().getUsername().isEmpty())

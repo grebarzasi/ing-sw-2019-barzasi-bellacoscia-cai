@@ -4,10 +4,10 @@ import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.view.virtual_model.VirtualLobby;
 import it.polimi.ingsw.view.virtual_model.VirtualPlayer;
 
-import static it.polimi.ingsw.view.command_line_view.CliColor.*;
+import static it.polimi.ingsw.Color.*;
 import static it.polimi.ingsw.view.command_line_view.CliMessages.*;
 import static it.polimi.ingsw.connection.ConnMessage.COUNTDOWN;
-import static it.polimi.ingsw.connection.ServerMessage.THREAD_PRIORITY;
+import static it.polimi.ingsw.connection.server.ServerMessage.THREAD_PRIORITY;
 
 import java.io.BufferedReader;
 import java.io.IOException;

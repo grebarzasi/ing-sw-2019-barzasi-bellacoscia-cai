@@ -10,8 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import static it.polimi.ingsw.view.command_line_view.CliColor.*;
-import static it.polimi.ingsw.view.command_line_view.CliMessages.TERMINATOR_NAME;
+import static it.polimi.ingsw.Color.*;
 import static it.polimi.ingsw.connection.ConnMessage.INFO_SEP;
 import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
 
@@ -21,6 +20,7 @@ import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
  */
 
 public class CliBoard {
+    public static final String TERMINATOR_NAME = "THANOS";
     /**
      * saves the map itself
      */

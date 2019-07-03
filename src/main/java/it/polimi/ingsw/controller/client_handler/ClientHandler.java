@@ -1,4 +1,4 @@
-package it.polimi.ingsw.connection;
+package it.polimi.ingsw.controller.client_handler;
 
 
 import it.polimi.ingsw.controller.Lobby;

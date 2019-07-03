@@ -1,7 +1,7 @@
 
 package it.polimi.ingsw.view.command_line_view;
 
-import static it.polimi.ingsw.view.command_line_view.CliColor.*;
+import static it.polimi.ingsw.Color.*;
 
 /**
  * Collects all messages used in command line interface
@@ -71,7 +71,6 @@ public class CliMessages {
     public static final String WAITINGROOM_HEAD ="\n\n-------------------\n"+YELLOW_BACKGROUND_BRIGHT+BLUE_BOLD +"*** Waiting room..."+RESET +"\n-------------------\n";
     public static final String COUNTDOWN_START = "Countdown avviato!"+RESET;
     public static final String GAME_START = "Gioco Iniziato!"+RESET;
-    public static final String TERMINATOR_NAME = "THANOS";
 
 
     //Game msg
@@ -107,6 +106,18 @@ public class CliMessages {
     public static final String BACK = "<";
     public static final String NEXT = ">";
 
+    public static final String F =YELLOW_BRIGHT+"(_)" +CYAN_BOLD_BRIGHT;
+
+    public static final String ADRENALINA_HEAD = "\n" + YELLOW_BRIGHT+
+            "        (     (          )        (    (       )         \n" +
+            "   (    )\\ )  )\\ )    ( /(  (     )\\ ) )\\ ) ( /(  (      \n" +
+            "   )\\  (()/( (()/(( "+"  )\\()) )\\   (()/((()/( )\\()) )\\     \n" +
+            "((((_)( /(_)) "+"/(_))\\ ((_)((((_)(  /(_))/(_)|(_)((((_)(   \n" +
+            " )\\ _ )(_))_ (_))((_) _((_)\\ _ )\\(_)) (_))  _((_)\\ _ )\\  \n" +
+            " "+F+"_\\"+F+"   \\| _ \\ __| \\| "+F+"_\\"+F+" |  |_ _|| \\| "+F+"_\\"+F+" \n" +
+            "  / _ \\ | |) |   / _|| .` |/ _ \\ | |__ | | | .` |/ _ \\   \n" +
+            " /_/ \\_\\|___/|_|_\\___|_|\\_/_/ \\_\\|____|___||_|\\_/_/ \\_\\  \n" +
+            "                                                         \n"; // BLACK
 
     static void clearScreen() {
         final int CLEAR_NUM=20;

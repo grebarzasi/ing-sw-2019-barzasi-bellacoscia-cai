@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
+import it.polimi.ingsw.ViewClient;
 import it.polimi.ingsw.view.virtual_model.*;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 
 import static it.polimi.ingsw.view.command_line_view.CLiBoardStuff.*;
 import static it.polimi.ingsw.connection.ConnMessage.*;
+import static it.polimi.ingsw.view.command_line_view.CliBoard.TERMINATOR_NAME;
 import static it.polimi.ingsw.view.graphical_view.GUIFiles.*;
 import static it.polimi.ingsw.view.command_line_view.CliMessages.*;
 import static it.polimi.ingsw.view.graphical_view.GUIFiles.CHOOSE_DIRECTION;

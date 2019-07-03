@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import static it.polimi.ingsw.view.command_line_view.CliColor.*;
-import static it.polimi.ingsw.view.command_line_view.CliColor.RESET;
+import static it.polimi.ingsw.Color.*;
+import static it.polimi.ingsw.Color.RESET;
 
 /**
  * some cli info like pawn and special char

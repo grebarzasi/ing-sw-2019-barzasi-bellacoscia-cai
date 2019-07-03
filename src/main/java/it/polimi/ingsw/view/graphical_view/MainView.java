@@ -2,8 +2,8 @@ package it.polimi.ingsw.view.graphical_view;
 
 import it.polimi.ingsw.view.command_line_view.CliView;
 import it.polimi.ingsw.connection.ConnectionTech;
-import it.polimi.ingsw.connection.rmi.RmiClient;
-import it.polimi.ingsw.connection.socket.SClient;
+import it.polimi.ingsw.connection.client.rmi.RmiClient;
+import it.polimi.ingsw.connection.client.socket.SClient;
 import it.polimi.ingsw.view.virtual_model.VirtualLogin;
 import it.polimi.ingsw.view.virtual_model.VirtualPlayer;
 import javafx.application.Application;
@@ -26,9 +26,10 @@ import javafx.stage.Stage;
 
 import java.io.*;
 
-import static it.polimi.ingsw.view.command_line_view.CliColor.*;
-import static it.polimi.ingsw.view.command_line_view.CliColor.GREEN;
-import static it.polimi.ingsw.view.command_line_view.CliColor.RED;
+import static it.polimi.ingsw.Color.*;
+import static it.polimi.ingsw.Color.GREEN;
+import static it.polimi.ingsw.Color.RED;
+import static it.polimi.ingsw.view.command_line_view.CliMessages.ADRENALINA_HEAD;
 import static it.polimi.ingsw.view.graphical_view.GUIFiles.*;
 
 

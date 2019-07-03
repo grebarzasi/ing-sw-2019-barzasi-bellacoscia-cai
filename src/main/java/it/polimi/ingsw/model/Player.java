@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.view.View;
+import it.polimi.ingsw.View;
 import it.polimi.ingsw.model.board.map.NonSpawnSquare;
 import it.polimi.ingsw.model.board.map.Square;
 import it.polimi.ingsw.model.cards.Ammo;

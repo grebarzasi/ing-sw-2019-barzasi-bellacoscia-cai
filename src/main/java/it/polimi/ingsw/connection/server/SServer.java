@@ -1,13 +1,14 @@
-package it.polimi.ingsw.connection.socket;
+package it.polimi.ingsw.connection.server;
 
 import it.polimi.ingsw.controller.Lobby;
 import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.connection.DisconnectionHandler;
+import it.polimi.ingsw.controller.client_handler.SocketClientHandler;
 
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import static it.polimi.ingsw.connection.ServerMessage.*;
+import static it.polimi.ingsw.connection.server.ServerMessage.*;
 
 /**
  * Client side Socket connection
