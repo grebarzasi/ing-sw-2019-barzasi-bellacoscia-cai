@@ -57,7 +57,13 @@
       <artifactId>javafx-controls</artifactId>
       <version>11.0.2</version>
     </dependency>
-    <!--end of JAVA FX-->
+      <dependency>
+          <groupId>org.jetbrains</groupId>
+          <artifactId>annotations</artifactId>
+          <version>RELEASE</version>
+          <scope>compile</scope>
+      </dependency>
+      <!--end of JAVA FX-->
 
 
   </dependencies>
