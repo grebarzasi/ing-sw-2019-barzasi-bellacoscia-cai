@@ -475,27 +475,28 @@ public class Controller {
 
         for(Player p : finalTargets){
 
-            this.getModel().setCurrentPlayer(p);
-            this.setView(this.getCurrentPlayer().getView());
+            if(!p.isInactive()){
 
-            Boolean useTagback = this.getView().showBoolean(ControllerMessages.ASKING_VENOM);
+                this.getModel().setCurrentPlayer(p);
+                this.setView(this.getCurrentPlayer().getView());
 
-            if(useTagback!=null&&useTagback){
+                Boolean useTagback = this.getView().showBoolean(ControllerMessages.ASKING_VENOM);
 
-                ArrayList<PowerUp> options = new ArrayList<>(p.getPowerupList());
+                if(useTagback!=null&&useTagback) {
 
-                Controller.filterPUs(options,PowerUp.TAGBACK_GRENADE);
+                    ArrayList<PowerUp> options = new ArrayList<>(p.getPowerupList());
 
-                PowerUp choice = this.getView().showPowerUp(options);
+                    Controller.filterPUs(options, PowerUp.TAGBACK_GRENADE);
+
+                    PowerUp choice = this.getView().showPowerUp(options);
 
 
-                if(choice != null){
-                    p.inflictMark(1,hitter);
-                    p.removePowerUp(choice);
+                    if (choice != null) {
+                        p.inflictMark(1, hitter);
+                        p.removePowerUp(choice);
+                    }
                 }
-
             }
-
         }
 
         this.getModel().setCurrentPlayer(tmp);
