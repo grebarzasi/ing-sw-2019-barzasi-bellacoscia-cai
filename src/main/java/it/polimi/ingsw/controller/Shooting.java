@@ -105,6 +105,7 @@ public class Shooting implements ControllerState {
 
         } while (true);
 
+        additionalEffect=false;
         choice=null;
         checkReply(choice);
     }

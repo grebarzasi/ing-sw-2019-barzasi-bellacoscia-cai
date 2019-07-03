@@ -38,19 +38,18 @@ public class EndGame implements ControllerState {
     public void executeState() {
 
         for(Player p: this.controller.getModel().getPlayerList()){
-
-            p.getView().displayMessage(GAME_OVER);
+            if(p.isDisconnected())
+                continue;
             p.getView().displayLeaderboard(this.generateLeaderBoard());
 
-            ArrayList<Figure> tmp = this.generateLeaderBoard();
+        }
 
-            int i = 1;
-            for(Figure f: tmp){
-                System.out.println(f.getCharacter()+" Has gotten: "+f.getPoints()+" points\n");
-                System.out.println(i);
-                i++;
-            }
-
+        ArrayList<Figure> tmp = this.generateLeaderBoard();
+        int i = 1;
+        for(Figure f: tmp){
+            System.out.println(f.getCharacter()+" Has gotten: "+f.getPoints()+" points\n");
+            System.out.println(i);
+            i++;
         }
 
         System.out.println(GAME_OVER);
@@ -73,6 +72,7 @@ public class EndGame implements ControllerState {
         for(Figure f : allPlayers){
             int i;
             boolean added = false;
+
 
             if(leaderBoard.isEmpty()){
                 leaderBoard.add(f);
