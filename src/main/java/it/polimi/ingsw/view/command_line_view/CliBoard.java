@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.command_line_view;
 
 
+import it.polimi.ingsw.utils.FileLoader;
 import it.polimi.ingsw.view.virtual_model.VirtualCell;
 import it.polimi.ingsw.view.virtual_model.VirtualModel;
 import it.polimi.ingsw.view.virtual_model.VirtualPlayer;
@@ -76,7 +77,7 @@ public class CliBoard {
         String[] splitLine;
         try {
             while ((line = in.readLine()) != null) {
-                splitLine = line.split(";");
+                splitLine = line.split(INFO_SEP);
                 for (String s : splitLine) {
                     plotString(s);
                 }
@@ -85,9 +86,17 @@ public class CliBoard {
             System.err.print("something went wrong drawing the board");
         }
     }
+
+
     public void loadMap(){
+        FileLoader fileLoader = new FileLoader();
+        String all="";
+        InputStream stream = fileLoader.getResource("/cli_files/cli_" + model.getBoard().getMap().getName() +".txt");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+        String temp;
         try {
-            all=new String(Files.readAllBytes(Paths.get("src/main/resources/cli_files/cli_" + model.getBoard().getMap().getName() +".txt")));
+        while((temp = reader.readLine())!=null)
+            all=all+temp;
         } catch (IOException e) {
             e.printStackTrace();
         }

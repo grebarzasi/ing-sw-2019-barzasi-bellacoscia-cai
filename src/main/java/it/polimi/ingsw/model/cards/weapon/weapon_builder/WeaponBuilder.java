@@ -5,9 +5,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import it.polimi.ingsw.model.cards.Ammo;
 import it.polimi.ingsw.model.cards.weapon.Effect;
 import it.polimi.ingsw.model.cards.weapon.Weapon;
+import it.polimi.ingsw.utils.FileLoader;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Iterator;
 
 /**
@@ -16,17 +18,17 @@ import java.util.Iterator;
  * @author Gregorio Barzasi
  */
 public class WeaponBuilder {
+    private final static String PATH = "/data_files/weapons_data/";
 
     private WeaponBuilder() {
 
     }
 
     public static Weapon buildWeapon(String name) {
-
+        FileLoader fileLoader = new FileLoader();
         ObjectMapper mapper = new ObjectMapper();
         // path of weapons data
-        final String path = "src/main/resources/data_files/weapons_data/";
-        File jsonFile = new File(String.format("%s%s.json", path, name));
+        InputStream jsonFile = fileLoader.getResource(String.format("%s%s.json", PATH, name));
         try {
             //open json file and start parsing
             JsonNode rootNode = mapper.readTree(jsonFile);
