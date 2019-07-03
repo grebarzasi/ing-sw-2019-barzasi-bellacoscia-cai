@@ -22,7 +22,7 @@ public class WeaponDeckBuilder {
         ObjectMapper mapper = new ObjectMapper();
 
         // path of weapons list
-        final String path = "src/main/resources/data_files/weapons_data/weapons_list.json";
+        final String path = "/data_files/weapons_data/weapons_list.json";
 
         File jsonFile = new File(path);
         try {
