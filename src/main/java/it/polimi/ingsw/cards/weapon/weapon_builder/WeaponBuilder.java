@@ -24,7 +24,6 @@ public class WeaponBuilder {
         final String path = "src/main/resources/data_files/weapons_data/";
         File jsonFile = new File(String.format("%s%s.json", path, name));
         try {
-            System.out.println(name);
             //open json file and start parsing
             JsonNode rootNode = mapper.readTree(jsonFile);
 

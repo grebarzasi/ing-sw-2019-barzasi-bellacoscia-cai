@@ -1,8 +1,12 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.board.Board;
 import it.polimi.ingsw.board.map.Room;
 import it.polimi.ingsw.board.map.Square;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 import static it.polimi.ingsw.board.map.MapLoader.loadTerrain;
 import static org.junit.jupiter.api.Assertions.*;
@@ -596,6 +600,56 @@ class FigureTest {
 
     }
 
+
+    /**
+     * Verifies all canSee method returns all Figures that the a given arg can actuall see,
+     * and asserts that allFIgure returns all igures in the game
+     */
+    
+    @Test
+    public void allCanSeeAndAllFiguresTest(){
+
+        Player underwood = new Player("frank", "president");
+        Player russo = new Player("peter", "corpse");
+        Player barnes = new Player("zoe", "flat corpse");
+        Player stamper = new Player("doug", "chief of staff");
+        Player tusk = new Player("raymond", "nuclear guy");
+        
+        ArrayList<Player> people = new ArrayList<>();
+
+
+        people.add(underwood);
+        people.add(russo);
+        people.add(barnes);
+        people.add(stamper);
+        people.add(tusk);
+        
+        GameModel washington = new GameModel(people, "large", null);
+        
+        for(Player p: people){
+            p.setModel(washington);
+        }
+
+        underwood.setPosition(washington.getBoard().getMap().getSquareMatrix()[1][1]);
+        russo.setPosition(washington.getBoard().getMap().getSquareMatrix()[1][1]);
+        barnes.setPosition(washington.getBoard().getMap().getSquareMatrix()[0][0]);
+        stamper.setPosition(washington.getBoard().getMap().getSquareMatrix()[2][0]);
+        tusk.setPosition(washington.getBoard().getMap().getSquareMatrix()[0][2]);
+
+        Set<Figure> underwoodCanSee = underwood.allCanSee();
+
+        assertTrue(underwoodCanSee.contains(russo));
+        assertTrue(!underwoodCanSee.contains(barnes));
+        assertTrue(underwoodCanSee.contains(stamper));
+        assertTrue(underwoodCanSee.contains(tusk));
+        assertTrue(underwoodCanSee.contains(underwood));
+
+        Set<Figure> allPeople = underwood.allFigures();
+
+        assertTrue(allPeople.containsAll(people));
+        
+        
+    }
 
 
 

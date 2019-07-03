@@ -130,7 +130,7 @@ public class PlayerTest {
 
     }
 
-   // @Test
+   @Test
     public void consecutivePickingOnSameSpot() {
 
 
@@ -138,20 +138,16 @@ public class PlayerTest {
         Player luke = new Player("Luke", "Jedi");
         ArrayList<Player> empirePlayers = new ArrayList<>();
         empirePlayers.add(luke);
-        GameModel empire = new GameModel(empirePlayers, "small", null);
+        GameModel empire = new GameModel(empirePlayers, "large", null);
         Board alderaan = empire.getBoard();
         luke.setModel(empire);
 
         int i;
 
-        for(i = 0;i<100;i++) {
+        for(i = 0;i<10;i++) {
 
             luke.setPosition(alderaan.getMap().getSquareMatrix()[0][0]);
             luke.pickAmmo();
-            Deck deck=  alderaan.getAmmoDeck();
-            System.out.println("\nCycle number: " + i);
-            System.out.println("Usable: "+ deck.getUsable().size());
-            System.out.println("Discarded: "+ deck.getDiscarded().size());
             alderaan.refillSquares();
 
         }

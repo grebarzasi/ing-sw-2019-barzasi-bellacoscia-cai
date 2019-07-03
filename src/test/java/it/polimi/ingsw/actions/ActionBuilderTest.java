@@ -12,8 +12,15 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Tests that actions are correctly generated
+ *
+ */
 class ActionBuilderTest {
 
+    /**
+     * Builds several actions for multiple players and asserts that the actions are correct
+     */
     @Test
     void build() {
 

@@ -45,7 +45,9 @@ public class UsingNewton implements ControllerState {
             }
         }
 
-        targets.add(this.controller.getModel().getBot());
+        if(this.controller.hasBot()) {
+            targets.add(this.controller.getModel().getBot());
+        }
 
         Set<Figure> targetTemp=new HashSet<>(targets);
 
