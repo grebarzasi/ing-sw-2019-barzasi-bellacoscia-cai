@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * State in which a player can move, reload and shoot
  */
 
-public class FrenzySpecialAction implements ControllerState {
+public class FrenzyShooting implements ControllerState {
 
 
     /**
@@ -26,7 +26,7 @@ public class FrenzySpecialAction implements ControllerState {
      * Default constructor
      * @param controller the reference controller
      */
-    FrenzySpecialAction(Controller controller) {
+    FrenzyShooting(Controller controller) {
         this.controller = controller;
     }
 

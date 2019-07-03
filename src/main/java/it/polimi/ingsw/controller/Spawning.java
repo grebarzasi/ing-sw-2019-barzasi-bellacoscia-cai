@@ -18,6 +18,10 @@ public class Spawning implements ControllerState {
      * the controller reference
      */
     private Controller controller;
+
+    /**
+     * the player currently being revived
+     */
     private Player reviving;
 
     /**
@@ -31,7 +35,6 @@ public class Spawning implements ControllerState {
     /**
      * Spawning a player
      */
-
     @Override
     public void executeState() {
 
@@ -78,7 +81,6 @@ public class Spawning implements ControllerState {
      * Makes the player choose a powerup and spawns the player on the corresponding spot
      * @param options the list of power up options
      */
-
     private PowerUp spawnOnChoice(ArrayList<PowerUp> options){
 
 
@@ -108,31 +110,30 @@ public class Spawning implements ControllerState {
      * @param toMatch the PowerUp to match
      * @return the corresponding spawn point
      */
-
-    private Square powerUptoSpawn(PowerUp toMatch){
+    private Square powerUptoSpawn(PowerUp toMatch) {
 
         int row;
         int column;
 
         String colour = "nothing";
 
-        if(toMatch.getAmmoOnDiscard().getRed() == 1){
+        if (toMatch.getAmmoOnDiscard().getRed() == 1) {
             colour = "red";
-        }else if(toMatch.getAmmoOnDiscard().getBlue() == 1){
+        } else if (toMatch.getAmmoOnDiscard().getBlue() == 1) {
             colour = "blue";
-        }else if(toMatch.getAmmoOnDiscard().getYellow() == 1){
+        } else if (toMatch.getAmmoOnDiscard().getYellow() == 1) {
             colour = "yellow";
         }
 
-        if(colour.equals("nothing")){
+        if (colour.equals("nothing")) {
             return null;
         }
 
         for (row = 0; row < Map.HEIGHT; row++) {
             for (column = 0; column < Map.WIDTH; column++) {
 
-                if(this.controller.getBoard().getMap().getSquareMatrix()[row][column].getRoom().getColor().equals(colour) &&
-                        this.controller.getBoard().getMap().getSquareMatrix()[row][column].isSpawn()){
+                if (this.controller.getBoard().getMap().getSquareMatrix()[row][column].getRoom().getColor().equals(colour) &&
+                        this.controller.getBoard().getMap().getSquareMatrix()[row][column].isSpawn()) {
 
 
                     System.out.println("SPAWNING IN : " + this.controller.getBoard().getMap().getSquareMatrix()[row][column].getRoom().getColor());
@@ -143,10 +144,6 @@ public class Spawning implements ControllerState {
         }
 
         return null;
-    }
-
-    public Player getReviving() {
-        return reviving;
     }
 
     public void setReviving(Player reviving) {

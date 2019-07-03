@@ -116,10 +116,6 @@ public class Player extends Figure {
         this.powerupList.remove(toRemove);
     }
 
-    public void addWeapon(Weapon weaponToAdd){
-        this.weaponsList.add(weaponToAdd);
-    }
-
     public String getUsername() {
         return username;
     }
@@ -139,7 +135,6 @@ public class Player extends Figure {
     public ArrayList<PowerUp> getPowerupList() {
         return powerupList;
     }
-
     public void setPowerupList(ArrayList<PowerUp> powerupList) {
         this.powerupList = powerupList;
     }

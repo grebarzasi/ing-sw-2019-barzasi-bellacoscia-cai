@@ -104,8 +104,6 @@ public class GameModel {
         this.isFrenzy = false;
     }
 
-    public void askUseEffect(Set<Effect> eff){}
-
     public ArrayList<Player> getPlayerList() {
         return playerList;
     }
@@ -190,15 +188,4 @@ public class GameModel {
         this.frenzyTurn = frenzyTurn;
     }
 
-    public int getFrenzyTurn() {
-        return frenzyTurn;
-    }
-
-    public void setFrenzyTurn(int frenzyTurn) {
-        this.frenzyTurn = frenzyTurn;
-    }
-
-    public boolean isHasBotAction() {
-        return hasBotAction;
-    }
 }

@@ -159,7 +159,7 @@ public class Controller {
         this.usingNewton = new UsingNewton(this);
         this.shooting = new Shooting(this);
         this.spawning = new Spawning(this);
-        this.frenzySpecialAction = new FrenzySpecialAction(this);
+        this.frenzySpecialAction = new FrenzyShooting(this);
         this.endGame = new EndGame(this);
 
     }
@@ -206,7 +206,7 @@ public class Controller {
         this.usingNewton = new UsingNewton(this);
         this.shooting = new Shooting(this);
         this.spawning = new Spawning(this);
-        this.frenzySpecialAction = new FrenzySpecialAction(this);
+        this.frenzySpecialAction = new FrenzyShooting(this);
         this.endGame = new EndGame(this);
 
     }
@@ -264,7 +264,11 @@ public class Controller {
     void endTurn() {
 
         ArrayList<Figure> deathCheckList = new ArrayList<>(this.getModel().getPlayerList());
-        deathCheckList.add(this.getModel().getBot());
+
+        if(this.hasBot) {
+            deathCheckList.add(this.getModel().getBot());
+        }
+
         for (Figure f : deathCheckList) {
 
             if (f.getPersonalBoard().getDamage().size() >= DEATH_DAMAGE) {

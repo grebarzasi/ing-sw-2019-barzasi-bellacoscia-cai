@@ -8,6 +8,10 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Set;
 
+/**
+ * Adapts the view interface from server end to a client end which only reads strings
+ */
+
 public interface ViewClient extends Remote {
 
     /**
@@ -86,12 +90,26 @@ public interface ViewClient extends Remote {
     public void displayMessage(String message)throws RemoteException;
 
     /**
-     * Displays the leaderboard of the game to the user
+     * Dispays the leaderboard at the end of the game
+     * @param args the list of players in ascending position order
+     * @throws RemoteException
      */
 
     public void displayLeaderboard(ArrayList<String> args)throws RemoteException;
 
+    /**
+     * Displays the effects
+     * @param args the list of effects available
+     * @return the chosen effect
+     * @throws RemoteException
+     */
     public String showEffects(ArrayList<String> args)throws RemoteException;
+
+    /**
+     *
+     * @param message
+     * @throws RemoteException
+     */
 
     public void updateModel(String message)throws RemoteException;
 
