@@ -1,9 +1,9 @@
 package it.polimi.ingsw.controller;
 
 
-import it.polimi.ingsw.Player;
-import it.polimi.ingsw.actions.Action;
-import it.polimi.ingsw.actions.ActionBuilder;
+import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.controller.actions.Action;
+import it.polimi.ingsw.controller.actions.ActionBuilder;
 
 import java.util.ArrayList;
 

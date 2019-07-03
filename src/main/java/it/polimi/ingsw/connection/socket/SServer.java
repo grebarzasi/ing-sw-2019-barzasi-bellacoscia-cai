@@ -1,12 +1,9 @@
 package it.polimi.ingsw.connection.socket;
 
-import it.polimi.ingsw.CLI.CliView;
-import it.polimi.ingsw.Lobby;
+import it.polimi.ingsw.controller.Lobby;
 import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.connection.DisconnectionHandler;
-import it.polimi.ingsw.connection.MainServer;
 
-import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 

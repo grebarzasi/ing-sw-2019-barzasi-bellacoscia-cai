@@ -7,8 +7,7 @@ import it.polimi.ingsw.connection.DisconnectionHandler;
 import java.io.*;
 import java.net.Socket;
 
-import static it.polimi.ingsw.CLI.CliMessages.CONNECTION_ERR;
-import static it.polimi.ingsw.CLI.CliMessages.CONNECTION_OK;
+import static it.polimi.ingsw.view.command_line_view.CliMessages.CONNECTION_OK;
 
 /**
  * Client side Socket connection

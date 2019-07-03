@@ -1,9 +1,9 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.board.map.NonSpawnSquare;
-import it.polimi.ingsw.board.map.Room;
-import it.polimi.ingsw.board.map.Square;
-import it.polimi.ingsw.cards.power_up.PowerUp;
+import it.polimi.ingsw.model.board.map.NonSpawnSquare;
+import it.polimi.ingsw.model.board.map.Room;
+import it.polimi.ingsw.model.board.map.Square;
+import it.polimi.ingsw.model.cards.power_up.PowerUp;
 
 import java.util.ArrayList;
 

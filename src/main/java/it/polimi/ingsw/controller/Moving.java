@@ -1,6 +1,6 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.board.map.Square;
+import it.polimi.ingsw.model.board.map.Square;
 
 import java.util.ArrayList;
 

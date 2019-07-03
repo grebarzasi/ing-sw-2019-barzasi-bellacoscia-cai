@@ -1,12 +1,9 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.Figure;
-import it.polimi.ingsw.Player;
-import it.polimi.ingsw.board.KillshotTrack;
+import it.polimi.ingsw.model.Figure;
+import it.polimi.ingsw.model.Player;
 
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 
 import static it.polimi.ingsw.controller.ControllerMessages.GAME_OVER;

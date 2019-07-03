@@ -1,6 +1,6 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.cards.power_up.PowerUp;
+import it.polimi.ingsw.model.cards.power_up.PowerUp;
 
 import java.util.ArrayList;
 

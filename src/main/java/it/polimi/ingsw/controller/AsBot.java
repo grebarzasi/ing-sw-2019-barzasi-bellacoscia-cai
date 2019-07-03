@@ -1,9 +1,9 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.Figure;
-import it.polimi.ingsw.Player;
-import it.polimi.ingsw.board.map.Map;
-import it.polimi.ingsw.board.map.Square;
+import it.polimi.ingsw.model.Figure;
+import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.board.map.Map;
+import it.polimi.ingsw.model.board.map.Square;
 
 import java.util.ArrayList;
 import java.util.HashSet;

@@ -1,9 +1,6 @@
 package it.polimi.ingsw.controller;
 
 
-import static it.polimi.ingsw.CLI.CliColor.RESET;
-import static it.polimi.ingsw.CLI.CliColor.YELLOW;
-
 /**
  * Text messages used in controller to report the status of the controller
  */

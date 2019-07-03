@@ -1,8 +1,8 @@
 package it.polimi.ingsw.connection;
 
 
-import it.polimi.ingsw.CLI.CliMessages;
-import it.polimi.ingsw.Lobby;
+import it.polimi.ingsw.view.command_line_view.CliMessages;
+import it.polimi.ingsw.controller.Lobby;
 import it.polimi.ingsw.connection.rmi.RmiServer;
 import it.polimi.ingsw.connection.socket.SServer;
 import it.polimi.ingsw.controller.Controller;

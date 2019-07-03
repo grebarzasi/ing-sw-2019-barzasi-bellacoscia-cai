@@ -4,23 +4,23 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import it.polimi.ingsw.Figure;
-import it.polimi.ingsw.Player;
-import it.polimi.ingsw.Token;
-import it.polimi.ingsw.board.Armory;
-import it.polimi.ingsw.board.Board;
-import it.polimi.ingsw.board.map.Map;
-import it.polimi.ingsw.board.map.NonSpawnSquare;
-import it.polimi.ingsw.board.map.SpawnSquare;
-import it.polimi.ingsw.board.map.Square;
-import it.polimi.ingsw.cards.Ammo;
-import it.polimi.ingsw.cards.AmmoLot;
-import it.polimi.ingsw.cards.power_up.PowerUp;
-import it.polimi.ingsw.cards.weapon.Weapon;
+import it.polimi.ingsw.model.Figure;
+import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.Token;
+import it.polimi.ingsw.model.board.Armory;
+import it.polimi.ingsw.model.board.Board;
+import it.polimi.ingsw.model.board.map.Map;
+import it.polimi.ingsw.model.board.map.NonSpawnSquare;
+import it.polimi.ingsw.model.board.map.SpawnSquare;
+import it.polimi.ingsw.model.board.map.Square;
+import it.polimi.ingsw.model.cards.Ammo;
+import it.polimi.ingsw.model.cards.AmmoLot;
+import it.polimi.ingsw.model.cards.power_up.PowerUp;
+import it.polimi.ingsw.model.cards.weapon.Weapon;
 
 import java.util.ArrayList;
 
-import static it.polimi.ingsw.CLI.CliMessages.TERMINATOR_NAME;
+import static it.polimi.ingsw.view.command_line_view.CliMessages.TERMINATOR_NAME;
 import static it.polimi.ingsw.connection.ConnMessage.*;
 
 public class UpdateBuilder {

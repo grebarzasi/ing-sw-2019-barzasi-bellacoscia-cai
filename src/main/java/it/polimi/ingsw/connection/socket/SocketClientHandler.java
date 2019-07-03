@@ -1,7 +1,7 @@
 package it.polimi.ingsw.connection.socket;
 
-import it.polimi.ingsw.Lobby;
-import it.polimi.ingsw.Player;
+import it.polimi.ingsw.controller.Lobby;
+import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.connection.ClientHandler;
 import it.polimi.ingsw.connection.ServerCommManager;
 

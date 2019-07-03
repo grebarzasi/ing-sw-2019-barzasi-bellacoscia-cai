@@ -12,7 +12,7 @@ import java.rmi.Remote;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-import static it.polimi.ingsw.CLI.CliMessages.CONNECTION_OK;
+import static it.polimi.ingsw.view.command_line_view.CliMessages.CONNECTION_OK;
 
 public class RmiClient extends ConnectionTech implements Remote {
 

@@ -1,14 +1,13 @@
 package it.polimi.ingsw.connection;
 
-import it.polimi.ingsw.CLI.CliView;
-import it.polimi.ingsw.Lobby;
+import it.polimi.ingsw.controller.Lobby;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import static it.polimi.ingsw.CLI.CliMessages.PORT_ERR;
-import static it.polimi.ingsw.CLI.CliMessages.PORT_SELECT;
+import static it.polimi.ingsw.view.command_line_view.CliMessages.PORT_ERR;
+import static it.polimi.ingsw.view.command_line_view.CliMessages.PORT_SELECT;
 
 /**
         * Conatins basic info to connect a client and a server using Rmi or Socket technology

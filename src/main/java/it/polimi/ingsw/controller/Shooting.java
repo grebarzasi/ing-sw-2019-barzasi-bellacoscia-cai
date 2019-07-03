@@ -1,14 +1,14 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.Figure;
-import it.polimi.ingsw.board.map.Square;
-import it.polimi.ingsw.cards.power_up.PowerUp;
-import it.polimi.ingsw.cards.weapon.Effect;
-import it.polimi.ingsw.cards.weapon.MoveTarget;
-import it.polimi.ingsw.cards.weapon.Weapon;
-import it.polimi.ingsw.cards.weapon.aiming.AimAskPlayer;
-import it.polimi.ingsw.cards.weapon.aiming.AimDirection;
-import it.polimi.ingsw.cards.weapon.aiming.AimSquare;
+import it.polimi.ingsw.model.Figure;
+import it.polimi.ingsw.model.board.map.Square;
+import it.polimi.ingsw.model.cards.power_up.PowerUp;
+import it.polimi.ingsw.model.cards.weapon.Effect;
+import it.polimi.ingsw.model.cards.weapon.MoveTarget;
+import it.polimi.ingsw.model.cards.weapon.Weapon;
+import it.polimi.ingsw.model.cards.weapon.aiming.AimAskPlayer;
+import it.polimi.ingsw.model.cards.weapon.aiming.AimDirection;
+import it.polimi.ingsw.model.cards.weapon.aiming.AimSquare;
 
 import java.util.ArrayList;
 import java.util.HashSet;

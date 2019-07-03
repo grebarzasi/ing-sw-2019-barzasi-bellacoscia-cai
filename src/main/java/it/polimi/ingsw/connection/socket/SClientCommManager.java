@@ -1,8 +1,7 @@
 package it.polimi.ingsw.connection.socket;
 
 import it.polimi.ingsw.connection.DisconnectionHandler;
-import it.polimi.ingsw.connection.socket.SClient;
-import it.polimi.ingsw.virtual_model.ViewClient;
+import it.polimi.ingsw.view.virtual_model.ViewClient;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -2,9 +2,8 @@ package it.polimi.ingsw.connection.rmi;
 
 import it.polimi.ingsw.connection.ClientHandler;
 import it.polimi.ingsw.connection.ConnectionTech;
-import it.polimi.ingsw.Lobby;
+import it.polimi.ingsw.controller.Lobby;
 import it.polimi.ingsw.connection.DisconnectionHandler;
-import it.polimi.ingsw.virtual_model.ViewClient;
 
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;

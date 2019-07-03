@@ -1,5 +1,5 @@
 package it.polimi.ingsw.controller;
-import it.polimi.ingsw.cards.weapon.Weapon;
+import it.polimi.ingsw.model.cards.weapon.Weapon;
 
 import java.util.ArrayList;
 

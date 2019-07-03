@@ -1,25 +1,23 @@
 package it.polimi.ingsw.connection;
 
-import it.polimi.ingsw.Figure;
-import it.polimi.ingsw.Player;
-import it.polimi.ingsw.View;
-import it.polimi.ingsw.actions.Action;
-import it.polimi.ingsw.board.map.Square;
-import it.polimi.ingsw.cards.power_up.PowerUp;
-import it.polimi.ingsw.cards.weapon.Effect;
-import it.polimi.ingsw.cards.weapon.Weapon;
+import it.polimi.ingsw.model.Figure;
+import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.view.View;
+import it.polimi.ingsw.controller.actions.Action;
+import it.polimi.ingsw.model.board.map.Square;
+import it.polimi.ingsw.model.cards.power_up.PowerUp;
+import it.polimi.ingsw.model.cards.weapon.Effect;
+import it.polimi.ingsw.model.cards.weapon.Weapon;
 import it.polimi.ingsw.connection.rmi.RmiClientHandler;
 import it.polimi.ingsw.connection.socket.SocketClientHandler;
-import it.polimi.ingsw.virtual_model.ViewClient;
-import javafx.application.Platform;
+import it.polimi.ingsw.view.virtual_model.ViewClient;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
-import static it.polimi.ingsw.CLI.CliColor.*;
+import static it.polimi.ingsw.view.command_line_view.CliColor.*;
 import static it.polimi.ingsw.connection.ConnMessage.*;
 import static it.polimi.ingsw.connection.ServerMessage.*;
 

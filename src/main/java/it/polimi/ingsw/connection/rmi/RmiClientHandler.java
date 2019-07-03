@@ -1,10 +1,10 @@
 package it.polimi.ingsw.connection.rmi;
 
-import it.polimi.ingsw.Lobby;
-import it.polimi.ingsw.Player;
+import it.polimi.ingsw.controller.Lobby;
+import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.connection.ClientHandler;
 import it.polimi.ingsw.connection.ServerCommManager;
-import it.polimi.ingsw.virtual_model.ViewClient;
+import it.polimi.ingsw.view.virtual_model.ViewClient;
 
 import java.io.IOException;
 import java.rmi.RemoteException;

@@ -1,6 +1,6 @@
 package it.polimi.ingsw.connection;
 
-import static it.polimi.ingsw.CLI.CliMessages.CONNECTION_ERR;
+import static it.polimi.ingsw.view.command_line_view.CliMessages.CONNECTION_ERR;
 import static it.polimi.ingsw.connection.ServerMessage.RMI_S_ERR;
 import static it.polimi.ingsw.connection.ServerMessage.SOCKET_S_ERR;
 

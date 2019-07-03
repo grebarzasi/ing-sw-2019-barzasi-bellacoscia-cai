@@ -1,13 +1,10 @@
 package it.polimi.ingsw.connection;
 
 
-import it.polimi.ingsw.Lobby;
-import it.polimi.ingsw.Player;
-import it.polimi.ingsw.View;
+import it.polimi.ingsw.controller.Lobby;
+import it.polimi.ingsw.model.Player;
 
 import java.io.*;
-
-import java.util.Timer;
 
 /**
  * A thread for each client that handle the communication using Socket tech

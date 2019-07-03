@@ -1,7 +1,7 @@
 package it.polimi.ingsw.connection;
 
-import static it.polimi.ingsw.CLI.CliColor.*;
-import static it.polimi.ingsw.CLI.CliColor.RED;
+import static it.polimi.ingsw.view.command_line_view.CliColor.*;
+import static it.polimi.ingsw.view.command_line_view.CliColor.RED;
 
 public class ServerMessage {
     public static final int THREAD_PRIORITY=3;
