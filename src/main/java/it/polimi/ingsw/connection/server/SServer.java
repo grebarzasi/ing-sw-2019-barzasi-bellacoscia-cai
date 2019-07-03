@@ -46,6 +46,7 @@ public class SServer extends ConnectionTech {
 
         } catch (Exception e) {
             DisconnectionHandler.server(false);
+
         }
 
     }
