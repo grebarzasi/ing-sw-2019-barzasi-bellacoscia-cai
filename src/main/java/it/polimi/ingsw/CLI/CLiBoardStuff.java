@@ -41,7 +41,7 @@ public class CLiBoardStuff {
     public static final String RED_T = PURPLE_BOLD_BRIGHT+"o"+RESET;
     public static final String GREEN_T = GREEN_BOLD_BRIGHT+"o"+RESET;
     public static final String BLUE_T =CYAN_BOLD_BRIGHT+"o"+RESET;
-    public static final String GREY_T = WHITE_BOLD_BRIGHT+"o"+RESET;
+    public static final String GREY_T = WHITE_BOLD+"o"+RESET;
     public static final String YELLOW_T = YELLOW_BOLD_BRIGHT+"o"+RESET;
 
     public static final String SKULL_T = RED+"*"+RESET;

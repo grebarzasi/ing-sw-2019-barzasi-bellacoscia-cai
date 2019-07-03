@@ -53,6 +53,9 @@ public class CliMessages {
     public static final String MAP_Y = "\nPerfetto! hai selezionato la mappa numero "+RESET;
     public static final String MAP_N = "\nMappa non disponibile, ancora:"+RESET;
 
+    public static final String TEST_MODE = MSG_COLOR+"Attivare testMode?"+RESET;
+
+
     //PREFERENCES
     public static final String TERMINATOR_Q =MSG_COLOR+ "\nVuoi assoldare un Terminator bot? (S/N)"+RESET;
     public static final String TERMINATOR_Y = "\nTerminator assoldato, sei coraggioso!"+RESET;

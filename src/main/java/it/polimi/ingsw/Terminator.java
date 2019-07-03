@@ -19,11 +19,20 @@ public class Terminator extends Figure{
     /**
      * the amount of damage inflicted by the bot
      */
-    public static final int BOT_DAMAGE = 11;
+    private  int damage = 1;
 
     public Terminator(String character,GameModel model) {
 
         super(character,model);
+
+    }
+
+    public Terminator(String character,GameModel model,boolean testMode) {
+
+        super(character,model);
+        if(testMode)
+            damage=12;
+
 
     }
 
@@ -34,7 +43,7 @@ public class Terminator extends Figure{
 
     public void shoot(Player p){
 
-        this.inflictDamage(BOT_DAMAGE,p);
+        this.inflictDamage(damage,p);
         if(this.getPersonalBoard().getDamage().size() > BOT_ADRENALINE_THRESHOLD){
 
             this.inflictMark(1,p);

@@ -40,6 +40,9 @@ public class Lobby extends Thread {
     private boolean terminatorPref;
     private boolean finalFrenzyPref;
 
+    private boolean testMode;
+
+
     private MainServer god;
 
     private final int maxPlayer = 5;
@@ -181,14 +184,16 @@ public class Lobby extends Thread {
             finalFrenzyList.add(c.isFinalFrenzyPref());
         }
 
-        this.killPref=2;
-                //modeOf(killPrefList);
-        //if(killPref<5||killPref>8)
-        //    killPref=8;
+
+        modeOf(killPrefList);
+        if(killPref<5||killPref>8)
+            killPref=8;
+        if(testMode)
+            killPref=2;
         this.mapPref=(modeOf(mapPrefList));
 
         if(joinedPlayers.size()<5)
-            this.terminatorPref=(modeOfBool(terminatorList)||true);
+            this.terminatorPref=(modeOfBool(terminatorList)||testMode);
         else terminatorPref=false;
 
         this.finalFrenzyPref=(modeOfBool(finalFrenzyList)||true);
@@ -308,8 +313,16 @@ public class Lobby extends Thread {
         return controller;
     }
 
-    public void setController(Controller cotroller) {
-        this.controller = cotroller;
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
+
+    public boolean isTestMode() {
+        return testMode;
+    }
+
+    public void setTestMode(boolean testMode) {
+        this.testMode = testMode;
     }
 
     public void run() {

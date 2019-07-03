@@ -1,7 +1,6 @@
 package it.polimi.ingsw.CLI;
 
 
-import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.virtual_model.GameInitializer;
 import it.polimi.ingsw.virtual_model.VirtualCell;
 import it.polimi.ingsw.virtual_model.VirtualModel;
@@ -40,6 +39,9 @@ public class CliBoard {
         this.model=model;
     }
 
+    /**
+     * draw the board
+     */
     public void draw(){
         armory.clear();
         if(all.isEmpty())
@@ -69,6 +71,10 @@ public class CliBoard {
         }
     }
 
+
+    /**
+     * reads and replace special tag in map file
+     */
     public void plotString(String s){
 
         switch(s){
@@ -114,7 +120,7 @@ public class CliBoard {
             case"#y":
                 System.out.print(YELLOW_B);
                 lastBackground=YELLOW_B;
-                 ;
+                break;
             case"#w":
                 System.out.print(WHITE_B);
                 lastBackground=WHITE_B;

@@ -100,6 +100,11 @@ public class Controller {
      */
     private boolean oneAction = false;
 
+    /**
+     * Indicates test mode is on
+     */
+    private boolean testMode = false;
+
 
     /**
      * Starts the game reading parameters from a lobby
@@ -109,6 +114,8 @@ public class Controller {
     public Controller(Lobby lobby) {
 
         lobby.setController(this);
+
+        testMode=lobby.isTestMode();
         this.marshal=new UpdateBuilder(this);
 
         ArrayList<Player> playerList = new ArrayList<>();
@@ -131,7 +138,7 @@ public class Controller {
         if(this.hasBot){
 
             String botColor = firstAvailableColor(playerList);
-            this.model.setBot(new Terminator(botColor,this.model));
+            this.model.setBot(new Terminator(botColor,this.model,testMode));
 
         }
 

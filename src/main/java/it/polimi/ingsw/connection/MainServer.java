@@ -1,5 +1,7 @@
 package it.polimi.ingsw.connection;
 
+import it.polimi.ingsw.CLI.CliLobby;
+import it.polimi.ingsw.CLI.CliView;
 import it.polimi.ingsw.Lobby;
 import it.polimi.ingsw.connection.rmi.RmiServer;
 import it.polimi.ingsw.connection.socket.SServer;
@@ -41,6 +43,12 @@ public class MainServer {
         lobby.setPriority(THREAD_PRIORITY);
         lobby.start();
         System.out.println(SERVER_HEAD);
+        try {
+            lobby.setTestMode(new CliView().testMode());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println();
         System.out.println(RMI_MSG);
         rmiServer.setPort(1235);
         System.out.print("DEFAULT PORT: 1235");
@@ -56,6 +64,7 @@ public class MainServer {
         socketServer.setPriority(THREAD_PRIORITY);
         socketServer.start();
         //rmiServer.initConnection();
+
 
     }
 
