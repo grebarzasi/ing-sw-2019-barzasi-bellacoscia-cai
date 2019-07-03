@@ -35,7 +35,7 @@ public class MapLoadingTest {
     /**
      * Test asserts there are no one way doors, if a square has another square as north that square must have the
      *first square as south, does not test a method, only verifies that the files have been written correctly.
-     * Done for each map.
+     * Done for the large map
      * */
 
     @Test
@@ -74,6 +74,11 @@ public class MapLoadingTest {
         }
     }
 
+    /**
+     * Test asserts there are no one way doors, if a square has another square as north that square must have the
+     *first square as south, does not test a method, only verifies that the files have been written correctly.
+     * Done for the medium map 1
+     * */
 
     @Test
     public void testNoOneWayDoorsMedium1() {
@@ -110,6 +115,11 @@ public class MapLoadingTest {
         }
     }
 
+    /**
+     * Test asserts there are no one way doors, if a square has another square as north that square must have the
+     *first square as south, does not test a method, only verifies that the files have been written correctly.
+     * Done for the medium map 2
+     * */
 
     @Test
     public void testNoOneWayDoorsMedium2() {
@@ -146,6 +156,11 @@ public class MapLoadingTest {
         }
     }
 
+    /**
+     * Test asserts there are no one way doors, if a square has another square as north that square must have the
+     *first square as south, does not test a method, only verifies that the files have been written correctly.
+     * Done for the small map
+     * */
 
     @Test
     public void testNoOneWayDoorsSmall() {
@@ -185,7 +200,7 @@ public class MapLoadingTest {
     /**
      * Test asserts there are no one way walls, if a square has null in a direction, the square
      * adjacent to it in that direction should have null in the opposite corresponding direction
-     * Done for each map
+     * Done for the large map
      * */
 
     @Test
@@ -223,6 +238,13 @@ public class MapLoadingTest {
         }
     }
 
+
+    /**
+     * Test asserts there are no one way walls, if a square has null in a direction, the square
+     * adjacent to it in that direction should have null in the opposite corresponding direction
+     * Done for the medium map 1
+     * */
+
     @Test
 
     public void testNoOneWayWallsMedium1() {
@@ -257,6 +279,12 @@ public class MapLoadingTest {
             }
         }
     }
+
+    /**
+     * Test asserts there are no one way walls, if a square has null in a direction, the square
+     * adjacent to it in that direction should have null in the opposite corresponding direction
+     * Done for the medium map 2
+     * */
 
     @Test
 
@@ -293,6 +321,13 @@ public class MapLoadingTest {
         }
     }
 
+
+    /**
+     * Test asserts there are no one way walls, if a square has null in a direction, the square
+     * adjacent to it in that direction should have null in the opposite corresponding direction
+     * Done for the small map
+     * */
+
     @Test
 
     public void testNoOneWayWallsSmall() {
@@ -327,13 +362,4 @@ public class MapLoadingTest {
             }
         }
     }
-
-
-
-
-
-
-
-
-
 }

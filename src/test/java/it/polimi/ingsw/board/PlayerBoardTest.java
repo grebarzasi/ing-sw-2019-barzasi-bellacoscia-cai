@@ -1,6 +1,7 @@
 package it.polimi.ingsw.board;
 
 import it.polimi.ingsw.Player;
+import it.polimi.ingsw.PlayerBoard;
 import it.polimi.ingsw.Token;
 import it.polimi.ingsw.cards.Ammo;
 import org.junit.jupiter.api.Test;
@@ -311,13 +312,50 @@ class PlayerBoardTest {
 
     }
 
+    /**
+     * Asserts that when skulls are added the player's point vector is correctly shifted
+     */
 
     @Test
     void addSkull() {
+
+        Player joer = new Player("Mormont","Lord Commander");
+
+        int i;
+        for(i=0;i<7;i++) {
+            assertEquals(joer.getPersonalBoard().getPointVec()[i], PlayerBoard.points[i]);
+        }
+
+        joer.getPersonalBoard().addSkull();
+
+        for(i=0;i<6;i++) {
+            assertEquals(joer.getPersonalBoard().getPointVec()[i], PlayerBoard.points[i+1]);
+        }
+
+        joer.getPersonalBoard().addSkull();
+
+        for(i=0;i<5;i++) {
+            assertEquals(joer.getPersonalBoard().getPointVec()[i], PlayerBoard.points[i+2]);
+        }
+
+        joer.getPersonalBoard().addSkull();
+        joer.getPersonalBoard().addSkull();
+        joer.getPersonalBoard().addSkull();
+        joer.getPersonalBoard().addSkull();
+        joer.getPersonalBoard().addSkull();
+        joer.getPersonalBoard().addSkull();
+
+        for(i=0;i<joer.getPersonalBoard().getPointVec().length;i++) {
+            assertEquals(joer.getPersonalBoard().getPointVec()[i],0);
+        }
+
     }
 
+    /**
+     * tests that ammo is correctly added to the player's inventory
+     */
     @Test
-    void addAmmo() {
+    void addAndRemoveAmmo() {
 
         Ammo a = new Ammo(1,0,0);
         Ammo b = new Ammo(2,1,0);
@@ -334,9 +372,16 @@ class PlayerBoardTest {
         assertEquals(1,pip.getPersonalBoard().getAmmoInventory().getBlue());
         assertEquals(1,pip.getPersonalBoard().getAmmoInventory().getYellow());
 
+        pip.getPersonalBoard().addAmmo(b);
+        pip.getPersonalBoard().addAmmo(b);
+        pip.getPersonalBoard().addAmmo(b);
+        pip.getPersonalBoard().addAmmo(b);
+
+        assertEquals(3,pip.getPersonalBoard().getAmmoInventory().getRed());
+        assertEquals(3,pip.getPersonalBoard().getAmmoInventory().getBlue());
+        assertEquals(1,pip.getPersonalBoard().getAmmoInventory().getYellow());
+
+
     }
 
-    @Test
-    void removeAmmo() {
-    }
 }
