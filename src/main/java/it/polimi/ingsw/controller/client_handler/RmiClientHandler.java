@@ -1,15 +1,14 @@
-package it.polimi.ingsw.connection.rmi;
+package it.polimi.ingsw.controller.client_handler;
 
+import it.polimi.ingsw.connection.client.rmi.RmiPrefInterf;
 import it.polimi.ingsw.controller.Lobby;
 import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.connection.ClientHandler;
-import it.polimi.ingsw.connection.ServerCommManager;
-import it.polimi.ingsw.view.virtual_model.ViewClient;
+import it.polimi.ingsw.ViewClient;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
 
-import static it.polimi.ingsw.connection.ServerMessage.THREAD_PRIORITY;
+import static it.polimi.ingsw.connection.server.ServerMessage.THREAD_PRIORITY;
 
 /**
  * the client handler "handle" the communication with client. in this case ones using rmi technology

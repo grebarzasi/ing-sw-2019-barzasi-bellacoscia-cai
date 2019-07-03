@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view.virtual_model;
+package it.polimi.ingsw;
 
 
 import java.rmi.Remote;

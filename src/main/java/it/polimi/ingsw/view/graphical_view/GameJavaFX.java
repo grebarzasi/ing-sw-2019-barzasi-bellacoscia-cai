@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
+import it.polimi.ingsw.ViewClient;
 import it.polimi.ingsw.view.virtual_model.*;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 
 import static it.polimi.ingsw.view.command_line_view.CLiBoardStuff.*;
 import static it.polimi.ingsw.connection.ConnMessage.*;
+import static it.polimi.ingsw.view.command_line_view.CliBoard.TERMINATOR_NAME;
 import static it.polimi.ingsw.view.graphical_view.GUIFiles.*;
 import static it.polimi.ingsw.view.command_line_view.CliMessages.*;
 import static it.polimi.ingsw.view.graphical_view.GUIFiles.CHOOSE_DIRECTION;
@@ -283,9 +285,7 @@ public class GameJavaFX extends Application implements ViewClient {
         scene.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> grid.setPrefWidth((double) newSceneWidth));
         scene.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> grid.setPrefHeight((double) newSceneHeight));
 
-        /**
-         * set Background.
-         */
+        //set Background.
         try {
             Image back = new Image(new FileInputStream(PATH_BACK_GAME), widthScreen + widthLateral, heightScreen + heightLateral, true, true);
             BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
@@ -294,9 +294,7 @@ public class GameJavaFX extends Application implements ViewClient {
             e.printStackTrace();
         }
 
-        /**
-         * set space in grid.
-         */
+        //set space in grid.
         ColumnConstraints c1 = new ColumnConstraints(widthLateral);
         ColumnConstraints c2 = new ColumnConstraints(widthCenter);
         ColumnConstraints c3 = new ColumnConstraints(widthLateral);
@@ -316,16 +314,12 @@ public class GameJavaFX extends Application implements ViewClient {
         grid.getColumnConstraints().addAll(c1, c2, c3);
         grid.getRowConstraints().addAll(r1, r2, r3);
 
-        /**
-         * set title.
-         */
+        //set title.
         ImageView imgTitle = new ImageView(new Image(new FileInputStream(PATH_TITLE), widthCenter, heightLateral, true, true));
         grid.add(imgTitle, 1, 0);
 
 
-        /**
-         * set Killshot track.
-         */
+        //set Killshot track.
         gridSkull.setPadding(new Insets(100, 0, 80, 0));
 
         Image imgTrack = new Image(new FileInputStream(PATH_TRACK), widthLateral, heightLateral, true, true);
@@ -352,9 +346,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
         grid.add(gridSkull, 0, 0);
 
-        /**
-         * set map.
-         */
+        //set map.
         GridPane gridBoard = new GridPane();
         gridBoard.setAlignment(Pos.CENTER);
         gridBoard.setPadding(new Insets(0, 60, 0, 60));
@@ -399,9 +391,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
         grid.add(gridBoard, 1, 1);
 
-        /**
-         * set a grid in cells.
-         */
+        //set a grid in cells.
         GridPane gridCell1 = new GridPane();
         GridPane gridCell2 = new GridPane();
         GridPane gridCell3 = new GridPane();
@@ -453,9 +443,7 @@ public class GameJavaFX extends Application implements ViewClient {
         btnCell.add(btnCell11);
         btnCell.add(btnCell12);
 
-        /**
-         * set personal space.
-         */
+        //set personal space.
         GridPane gridPers = new GridPane();
 
         ColumnConstraints pc1 = new ColumnConstraints(widthPers);
@@ -547,9 +535,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
         grid.add(gridPers, 0, 1);
 
-        /**
-         * set personal ammo
-         */
+        //set personal ammo
         gridPAmmo.setAlignment(Pos.CENTER);
 
         double widthAmmo = 50;
@@ -568,9 +554,7 @@ public class GameJavaFX extends Application implements ViewClient {
         grid.add(gridPAmmo, 0, 2);
 
 
-        /**
-         * set other boards
-         */
+        //set other boards
         gridOtherBoards.add(gridOtherBoard1);
         gridOtherBoards.add(gridOtherBoard2);
         gridOtherBoards.add(gridOtherBoard3);
@@ -649,7 +633,6 @@ public class GameJavaFX extends Application implements ViewClient {
         setCellBoard(gridOtherBoard3, widthOther, heightOtherBoard);
         setCellBoard(gridOtherBoard4, widthOther, heightOtherBoard);
         setCellBoard(gridOtherBoard5, widthOther, heightOtherBoard);
-        /*______________________________________________________*/
 
 
         for(int i=0; i<4; i++){
@@ -687,9 +670,7 @@ public class GameJavaFX extends Application implements ViewClient {
         }
 
 
-        /**
-         * set buttons
-         */
+        //set buttons
         Image msgBack = new Image(new FileInputStream(PATH_BACK_MSG), widthCenter, heightLateral/4, false, true);
         BackgroundImage backgroundMsg = new BackgroundImage(msgBack, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background backMsg = new Background(backgroundMsg);
@@ -732,10 +713,6 @@ public class GameJavaFX extends Application implements ViewClient {
         vmsg.getChildren().add(hBtn);
 
         grid.add(vmsg, 1, 2,3,1);
-
-        /**
-         * set buttons' action.
-         */
 
         update();
 

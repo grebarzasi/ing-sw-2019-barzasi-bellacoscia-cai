@@ -20,10 +20,10 @@ import it.polimi.ingsw.model.cards.weapon.Weapon;
 
 import java.util.ArrayList;
 
-import static it.polimi.ingsw.view.command_line_view.CliMessages.TERMINATOR_NAME;
 import static it.polimi.ingsw.connection.ConnMessage.*;
 
 public class UpdateBuilder {
+    public static final String TERMINATOR_NAME = "THANOS";
     private Controller controller;
 
     private ObjectMapper mapper = new ObjectMapper();

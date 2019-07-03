@@ -1,11 +1,11 @@
-package it.polimi.ingsw.view;
+package it.polimi.ingsw;
 
 import it.polimi.ingsw.controller.actions.Action;
 import it.polimi.ingsw.model.board.map.Square;
 import it.polimi.ingsw.model.cards.power_up.PowerUp;
 import it.polimi.ingsw.model.cards.weapon.Effect;
 import it.polimi.ingsw.model.cards.weapon.Weapon;
-import it.polimi.ingsw.connection.ClientHandler;
+import it.polimi.ingsw.controller.client_handler.ClientHandler;
 import it.polimi.ingsw.model.Figure;
 
 import java.util.ArrayList;

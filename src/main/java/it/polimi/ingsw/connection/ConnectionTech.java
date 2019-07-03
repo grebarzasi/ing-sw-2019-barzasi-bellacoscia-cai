@@ -6,8 +6,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import static it.polimi.ingsw.view.command_line_view.CliMessages.PORT_ERR;
-import static it.polimi.ingsw.view.command_line_view.CliMessages.PORT_SELECT;
+import static it.polimi.ingsw.connection.server.ServerMessage.PORT_ERR;
+import static it.polimi.ingsw.connection.server.ServerMessage.PORT_SELECT;
+
 
 /**
         * Conatins basic info to connect a client and a server using Rmi or Socket technology

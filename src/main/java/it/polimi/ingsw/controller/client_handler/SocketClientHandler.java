@@ -1,14 +1,12 @@
-package it.polimi.ingsw.connection.socket;
+package it.polimi.ingsw.controller.client_handler;
 
 import it.polimi.ingsw.controller.Lobby;
 import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.connection.ClientHandler;
-import it.polimi.ingsw.connection.ServerCommManager;
 
 import java.io.*;
 import java.net.Socket;
 
-import static it.polimi.ingsw.connection.ServerMessage.THREAD_PRIORITY;
+import static it.polimi.ingsw.connection.server.ServerMessage.THREAD_PRIORITY;
 
 /**
  * handle the clients connected using socket technology

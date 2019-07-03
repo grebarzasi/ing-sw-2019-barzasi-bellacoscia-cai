@@ -23,6 +23,9 @@ import java.util.HashMap;
 
 import static it.polimi.ingsw.view.graphical_view.GUIFiles.*;
 
+/**
+ * @author Carlo Bellacoscia
+ */
 public class LeaderboardJavaFX extends Application {
 
     private double widthScreen;
@@ -36,11 +39,23 @@ public class LeaderboardJavaFX extends Application {
     private VirtualModel model;
     private ArrayList<String> players;
 
+    /**
+     * Create a leaderboard.
+     *
+     * @param players colors of players in the leaderboard.
+     * @param model the model.
+     */
     public LeaderboardJavaFX(ArrayList<String> players, VirtualModel model) {
         this.model = model;
         this.players = players;
     }
 
+    /**
+     *  Set the leaderboard's layout
+     *
+     * @param primaryStage the stage
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -126,15 +141,11 @@ public class LeaderboardJavaFX extends Application {
         }
 
 
-        /**
-         * set Title
-         */
+        //set Title
         ImageView imgTitle = new ImageView(new Image(new FileInputStream(PATH_TITLE), widthScreen, heightTitle, true, true));
         grid.add(imgTitle, 0, 0);
 
-        /**
-         * set Background
-         */
+        //set Background
         try {
             Image back = new Image(new FileInputStream(PATH_BACK_GAME), widthScreen + 300 , heightScreen + 300, true, true);
             BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
@@ -143,9 +154,7 @@ public class LeaderboardJavaFX extends Application {
             e.printStackTrace();
         }
 
-        /**
-         * set leaderboard
-         */
+        //set leaderboard
         HBox h1 = new HBox(20);
         HBox h2 = new HBox(20);
         HBox h3 = new HBox(20);

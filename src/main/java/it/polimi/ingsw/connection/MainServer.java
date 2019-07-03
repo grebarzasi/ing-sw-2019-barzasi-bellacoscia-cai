@@ -1,10 +1,10 @@
 package it.polimi.ingsw.connection;
 
 
-import it.polimi.ingsw.view.command_line_view.CliMessages;
+
 import it.polimi.ingsw.controller.Lobby;
-import it.polimi.ingsw.connection.rmi.RmiServer;
-import it.polimi.ingsw.connection.socket.SServer;
+import it.polimi.ingsw.connection.server.RmiServer;
+import it.polimi.ingsw.connection.server.SServer;
 import it.polimi.ingsw.controller.Controller;
 
 import java.io.BufferedReader;
@@ -12,9 +12,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 
-import static it.polimi.ingsw.connection.ServerMessage.*;
-import static it.polimi.ingsw.connection.ServerMessage.GENERIC_N;
-import static it.polimi.ingsw.connection.ServerMessage.LINE_SEP;
+import static it.polimi.ingsw.connection.server.ServerMessage.*;
+import static it.polimi.ingsw.connection.server.ServerMessage.GENERIC_N;
+import static it.polimi.ingsw.connection.server.ServerMessage.LINE_SEP;
 
 
 /**
@@ -129,7 +129,7 @@ public class MainServer {
             {num=0;
             }
             if(num<1){
-                System.err.println(CliMessages.GENERIC_N);
+                System.err.println(GENERIC_N);
             }
         }while(num<1);
         countdown=num;
