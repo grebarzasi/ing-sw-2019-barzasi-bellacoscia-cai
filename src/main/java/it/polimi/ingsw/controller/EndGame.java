@@ -38,7 +38,8 @@ public class EndGame implements ControllerState {
     public void executeState() {
 
         for(Player p: this.controller.getModel().getPlayerList()){
-
+            if(p.isDisconnected())
+                continue;
             p.getView().displayLeaderboard(this.generateLeaderBoard());
 
         }

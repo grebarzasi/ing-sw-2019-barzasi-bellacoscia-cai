@@ -497,13 +497,13 @@ public class ServerCommManager  extends Thread implements View {
         int i=0;
         System.out.print("\n"+owner.getCharacter()+" Inactivity countdown: ");
         for(;i<INACTIVITY_TIMEOUT;i++){
-            for(int j=0;j<1000;j++) {
+            for(int j=0;j<100;j++) {
                 if(isDisconnected())
                     break;
                 if (!t.isAlive())
                     return true;
                 try {
-                    sleep(1);
+                    sleep(10);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

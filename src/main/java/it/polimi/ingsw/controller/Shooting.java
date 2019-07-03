@@ -38,9 +38,8 @@ public class Shooting implements ControllerState {
     private Weapon shootingWith;
 
 
-    boolean additionalEffect = false;
-    boolean scopeUsed=false;
-    int oldDamagedSize;
+    private boolean additionalEffect = false;
+    private  int oldDamagedSize;
 
     /**
      * Default constructor
@@ -105,6 +104,7 @@ public class Shooting implements ControllerState {
 
         } while (true);
 
+        additionalEffect=false;
         choice=null;
         checkReply(choice);
     }

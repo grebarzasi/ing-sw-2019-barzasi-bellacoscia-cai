@@ -1,18 +1,18 @@
 package it.polimi.ingsw.connection;
 
-import it.polimi.ingsw.CLI.CliLobby;
-import it.polimi.ingsw.CLI.CliView;
+
 import it.polimi.ingsw.Lobby;
 import it.polimi.ingsw.connection.rmi.RmiServer;
 import it.polimi.ingsw.connection.socket.SServer;
 import it.polimi.ingsw.controller.Controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
-import static it.polimi.ingsw.CLI.CliMessages.LINE_SEP;
+
 import static it.polimi.ingsw.connection.ServerMessage.*;
-import static java.lang.Thread.MIN_PRIORITY;
-import static java.lang.Thread.sleep;
+
 
 
 /**
@@ -44,7 +44,7 @@ public class MainServer {
         lobby.start();
         System.out.println(SERVER_HEAD);
         try {
-            lobby.setTestMode(new CliView().testMode());
+            lobby.setTestMode(testMode());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -57,13 +57,10 @@ public class MainServer {
 
         System.out.print(LINE_SEP);
         System.out.println(SOCKET_MSG);
-//        System.out.print("DEFAULT IP: 127.0.0.1");
-//        socketServer.acquireIP();
         System.out.print("DEFAULT PORT: 1234");
         socketServer.acquirePort();
         socketServer.setPriority(THREAD_PRIORITY);
         socketServer.start();
-        //rmiServer.initConnection();
 
 
     }
@@ -75,7 +72,28 @@ public class MainServer {
         contr.getCurrentState().executeState();
     }
 
+    /**
+     * advanced setting
+     */
+    public boolean testMode()throws IOException{
+        BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
+        String temp;
+        do {
+            System.out.println(TEST_MODE);
+            temp = sc.readLine();
+            temp=temp.toLowerCase();
+            if (temp.equals("s")||temp.equals("y")||temp.equals("1")) {
+                System.out.println("ATTIVATA!");
+                return true;
+            } else if (temp.equals("n")||temp.equals("2")||temp.isEmpty()) {
+                System.out.println("DISATTIVATA!");
+                return false;
+            }else{
+                System.err.println(GENERIC_N);
+            }
+        }while(true);
 
+    }
     public SServer getSocketServer() {
         return socketServer;
     }

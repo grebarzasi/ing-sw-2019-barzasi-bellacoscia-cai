@@ -196,7 +196,7 @@ public class Lobby extends Thread {
             this.terminatorPref=(modeOfBool(terminatorList)||testMode);
         else terminatorPref=false;
 
-        this.finalFrenzyPref=(modeOfBool(finalFrenzyList)||true);
+        this.finalFrenzyPref=(modeOfBool(finalFrenzyList));
     }
 
 
