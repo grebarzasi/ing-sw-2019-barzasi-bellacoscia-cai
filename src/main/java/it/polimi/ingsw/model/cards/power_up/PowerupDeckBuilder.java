@@ -6,9 +6,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import it.polimi.ingsw.model.cards.Ammo;
 import it.polimi.ingsw.model.cards.Card;
 import it.polimi.ingsw.model.cards.Deck;
+import it.polimi.ingsw.utils.FileLoader;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -20,12 +22,12 @@ public class PowerupDeckBuilder {
      * @return the created deck
      */
     public Deck PowerUpBuilder() {
-
+        FileLoader fileLoader = new FileLoader();
         ObjectMapper mapper = new ObjectMapper();
 
-        String PATH = "src/main/resources/data_files/deck_data/";
+        String PATH = "/data_files/deck_data/";
 
-        File jsonFile = new File(PATH + "power_up_data.json");
+        InputStream jsonFile = fileLoader.getResource(PATH + "power_up_data.json");
 
         ArrayList<Card> usablePU = new ArrayList<>();
 

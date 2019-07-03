@@ -4,9 +4,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.polimi.ingsw.model.cards.Card;
 import it.polimi.ingsw.model.cards.WeaponDeck;
+import it.polimi.ingsw.utils.FileLoader;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -18,13 +21,13 @@ import java.util.Iterator;
 public class WeaponDeckBuilder {
 
     public static WeaponDeck buildDeck(){
-
+        FileLoader fileLoader = new FileLoader();
         ObjectMapper mapper = new ObjectMapper();
 
         // path of weapons list
-        final String path = "src/main/resources/data_files/weapons_data/weapons_list.json";
+        final String path = "/data_files/weapons_data/weapons_list.json";
 
-        File jsonFile = new File(path);
+        InputStream jsonFile = fileLoader.getResource(path);
         try {
             ArrayList<Card> usableWList = new ArrayList<>();
 

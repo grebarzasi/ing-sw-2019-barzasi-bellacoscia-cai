@@ -5,72 +5,72 @@ public class GUIFiles {
     /**
      * All Path.
      */
-    public static final String PATH_BACK_GAME = "src/main/resources/images/background/game_background.jpg";
-    public static final String PATH_BACK = "src/main/resources/images/background/background.jpg";
-    public static final String PATH_BACK_WEAPON = "src/main/resources/images/background/weapon.png";
-    public static final String PATH_BACK_POWERUP = "src/main/resources/images/background/powerup.png";
-    public static final String PATH_BACK_MSG = "src/main/resources/images/background/img854.png";
-    public static final String PATH_BACK_POINTS = "src/main/resources/images/background/img5006.jpg";
+    public static final String PATH_BACK_GAME = "/images/background/game_background.jpg";
+    public static final String PATH_BACK = "/images/background/background.jpg";
+    public static final String PATH_BACK_WEAPON = "/images/background/weapon.png";
+    public static final String PATH_BACK_POWERUP = "/images/background/powerup.png";
+    public static final String PATH_BACK_MSG = "/images/background/img854.png";
+    public static final String PATH_BACK_POINTS = "/images/background/img5006.jpg";
 
-    public static final String PATH_SMALL_MAP = "src/main/resources/images/map/2.png";
-    public static final String PATH_MEDIUM1_MAP = "src/main/resources/images/map/1.png";
-    public static final String PATH_MEDIUM2_MAP = "src/main/resources/images/map/4.png";
-    public static final String PATH_LARGE_MAP = "src/main/resources/images/map/3.png";
+    public static final String PATH_SMALL_MAP = "/images/map/2.png";
+    public static final String PATH_MEDIUM1_MAP = "/images/map/1.png";
+    public static final String PATH_MEDIUM2_MAP = "/images/map/4.png";
+    public static final String PATH_LARGE_MAP = "/images/map/3.png";
 
-    public static final String PATH_BOARDS = "src/main/resources/images/board/";
-    public static final String PATH_YELLOW_BOARD = "src/main/resources/images/board/yellow_board.png";
-    public static final String PATH_RED_BOARD = "src/main/resources/images/board/red_board.png";
-    public static final String PATH_BLUE_BOARD = "src/main/resources/images/board/blue_board.png";
-    public static final String PATH_GREEN_BOARD = "src/main/resources/images/board/green_board.png";
-    public static final String PATH_GREY_BOARD = "src/main/resources/images/board/grey_board.png";
+    public static final String PATH_BOARDS = "/images/board/";
+    public static final String PATH_YELLOW_BOARD = "/images/board/yellow_board.png";
+    public static final String PATH_RED_BOARD = "/images/board/red_board.png";
+    public static final String PATH_BLUE_BOARD = "/images/board/blue_board.png";
+    public static final String PATH_GREEN_BOARD = "/images/board/green_board.png";
+    public static final String PATH_GREY_BOARD = "/images/board/grey_board.png";
 
-    public static final String PATH_GENERAL_COLOR = "src/main/resources/images/character/";
-    public static final String PATH_YELLOW = "src/main/resources/images/character/yellow.png";
-    public static final String PATH_RED = "src/main/resources/images/character/red.png";
-    public static final String PATH_BLUE = "src/main/resources/images/character/blue.png";
-    public static final String PATH_GREEN = "src/main/resources/images/character/green.png";
-    public static final String PATH_GREY = "src/main/resources/images/character/grey.png";
-    public static final String PATH_YELLOW_CHARACTER = "src/main/resources/images/character/D-struct-0R.png";
-    public static final String PATH_RED_CHARACTER = "src/main/resources/images/character/violet.png";
-    public static final String PATH_BLUE_CHARACTER = "src/main/resources/images/character/banshee.png";
-    public static final String PATH_GREEN_CHARACTER = "src/main/resources/images/character/sprog.png";
-    public static final String PATH_GREY_CHARACTER = "src/main/resources/images/character/dozer.png";
-    public static final String PATH_EMPTY_CELL = "src/main/resources/images/character/empty2.png";
+    public static final String PATH_GENERAL_COLOR = "/images/character/";
+    public static final String PATH_YELLOW = "/images/character/yellow.png";
+    public static final String PATH_RED = "/images/character/red.png";
+    public static final String PATH_BLUE = "/images/character/blue.png";
+    public static final String PATH_GREEN = "/images/character/green.png";
+    public static final String PATH_GREY = "/images/character/grey.png";
+    public static final String PATH_YELLOW_CHARACTER = "/images/character/D-struct-0R.png";
+    public static final String PATH_RED_CHARACTER = "/images/character/violet.png";
+    public static final String PATH_BLUE_CHARACTER = "/images/character/banshee.png";
+    public static final String PATH_GREEN_CHARACTER = "/images/character/sprog.png";
+    public static final String PATH_GREY_CHARACTER = "/images/character/dozer.png";
+    public static final String PATH_EMPTY_CELL = "/images/character/empty2.png";
 
-    public static final String PATH_RED_AMMO = "src/main/resources/images/ammo/red_ammo.png";
-    public static final String PATH_BLUE_AMMO = "src/main/resources/images/ammo/blue_ammo.png";
-    public static final String PATH_YELLOW_AMMO = "src/main/resources/images/ammo/yellow_ammo.png";
+    public static final String PATH_RED_AMMO = "/images/ammo/red_ammo.png";
+    public static final String PATH_BLUE_AMMO = "/images/ammo/blue_ammo.png";
+    public static final String PATH_YELLOW_AMMO = "/images/ammo/yellow_ammo.png";
 
-    public static final String PATH_DAMAGE =  "src/main/resources/images/damage/";
-    public static final String PATH_EMPTY_DAMAGE = "src/main/resources/images/damage/empty.png";
-    public static final String PATH_YELLOW_DAMAGE = "src/main/resources/images/damage/yellow.png";
-    public static final String PATH_RED_DAMAGE = "src/main/resources/images/damage/red.png";
-    public static final String PATH_BLUE_DAMAGE = "src/main/resources/images/damage/blue.png";
-    public static final String PATH_GREEN_DAMAGE = "src/main/resources/images/damage/green.png";
-    public static final String PATH_GREY_DAMAGE = "src/main/resources/images/damage/grey.png";
-    public static final String PATH_YELLOW_DAMAGE_DOUBLE = "src/main/resources/images/damage/yellow_double.png";
-    public static final String PATH_RED_DAMAGE_DOUBLE = "src/main/resources/images/damage/red_double.png";
-    public static final String PATH_BLUE_DAMAGE_DOUBLE = "src/main/resources/images/damage/blue_double.png";
-    public static final String PATH_GREEN_DAMAGE_DOUBLE = "src/main/resources/images/damage/green_double.png";
-    public static final String PATH_GREY_DAMAGE_DOUBLE = "src/main/resources/images/damage/grey_double.png";
+    public static final String PATH_DAMAGE =  "/images/damage/";
+    public static final String PATH_EMPTY_DAMAGE = "/images/damage/empty.png";
+    public static final String PATH_YELLOW_DAMAGE = "/images/damage/yellow.png";
+    public static final String PATH_RED_DAMAGE = "/images/damage/red.png";
+    public static final String PATH_BLUE_DAMAGE = "/images/damage/blue.png";
+    public static final String PATH_GREEN_DAMAGE = "/images/damage/green.png";
+    public static final String PATH_GREY_DAMAGE = "/images/damage/grey.png";
+    public static final String PATH_YELLOW_DAMAGE_DOUBLE = "/images/damage/yellow_double.png";
+    public static final String PATH_RED_DAMAGE_DOUBLE = "/images/damage/red_double.png";
+    public static final String PATH_BLUE_DAMAGE_DOUBLE = "/images/damage/blue_double.png";
+    public static final String PATH_GREEN_DAMAGE_DOUBLE = "/images/damage/green_double.png";
+    public static final String PATH_GREY_DAMAGE_DOUBLE = "/images/damage/grey_double.png";
 
-    public static final String PATH_WEAPON = "src/main/resources/images/weapon/weapon/";
-    public static final String PATH_INFO = "src/main/resources/images/weapon/info/";
-    public static final String PATH_POWER_UP = "src/main/resources/images/power-up/";
-    public static final String PATH_AMMO = "src/main/resources/images/ammo/";
+    public static final String PATH_WEAPON = "/images/weapon/weapon/";
+    public static final String PATH_INFO = "/images/weapon/info/";
+    public static final String PATH_POWER_UP = "/images/power-up/";
+    public static final String PATH_AMMO = "/images/ammo/";
 
-    public static final String PATH_TITLE = "src/main/resources/images/title.png";
-    public static final String PATH_TRACK = "src/main/resources/images/killshotrack.png";
-    public static final String PATH_SKULL = "src/main/resources/images/skull.png";
-    public static final String PATH_LOADING = "src/main/resources/images/loading.png";
-    public static final String PATH_RULES = "src/main/resources/images/rules.jpg";
-    public static final String PATH_LOGIN = "src/main/resources/images/login.png";
-    public static final String PATH_SETTINGS = "src/main/resources/images/settings.png";
+    public static final String PATH_TITLE = "/images/title.png";
+    public static final String PATH_TRACK = "/images/killshotrack.png";
+    public static final String PATH_SKULL = "/images/skull.png";
+    public static final String PATH_LOADING = "/images/loading.png";
+    public static final String PATH_RULES = "/images/rules.jpg";
+    public static final String PATH_LOGIN = "/images/login.png";
+    public static final String PATH_SETTINGS = "/images/settings.png";
 
 
 
-    public static final String PATH_PU = "src/main/resources/data_files/gui_data/power_up_data.json";
-    public static final String PATH_WE = "src/main/resources/data_files/gui_data/weapon.json";
+    public static final String PATH_PU = "/data_files/gui_data/power_up_data.json";
+    public static final String PATH_WE = "/data_files/gui_data/weapon.json";
 
 
     /**

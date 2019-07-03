@@ -67,12 +67,14 @@ public class CliBoard {
      */
     public void draw(){
         armory.clear();
-        if(all.isEmpty())
-            loadMap();
+//        if(all.isEmpty())
+//            loadMap();
         cellsPlnum=12;
         cellsCPnum=12;
         boardPrinted=0;
-        BufferedReader in = new BufferedReader(new StringReader(all));
+        FileLoader fileLoader = new FileLoader();
+        InputStream stream = fileLoader.getResource("/cli_files/cli_" + model.getBoard().getMap().getName() +".txt");
+        BufferedReader in = new BufferedReader(new InputStreamReader(stream));
         String line;
         String[] splitLine;
         try {
@@ -89,17 +91,7 @@ public class CliBoard {
 
 
     public void loadMap(){
-        FileLoader fileLoader = new FileLoader();
-        String all="";
-        InputStream stream = fileLoader.getResource("/cli_files/cli_" + model.getBoard().getMap().getName() +".txt");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-        String temp;
-        try {
-        while((temp = reader.readLine())!=null)
-            all=all+temp;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 
 
@@ -282,7 +274,7 @@ public class CliBoard {
         String[] temp2;
         for (String s: armory) {
             temp2=s.split(INFO_SEP);
-            System.out.print(BLACK + i +"- " );
+            System.out.print(WHITE + i +"- " );
             for(String k:temp2) {
                 h=0;
                 temp = k.split(INNER_SEP);
@@ -294,7 +286,7 @@ public class CliBoard {
                     colorizeCP(temp[2]);
                     h=h+temp[2].length();
                 }
-                System.out.print(BLACK);
+                System.out.print(WHITE);
                 for(;h<ARMORY_SPACE;h++)
                     System.out.print(" ");
             }
