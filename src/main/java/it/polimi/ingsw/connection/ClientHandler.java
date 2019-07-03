@@ -15,7 +15,7 @@ import java.util.Timer;
  */
 public abstract class ClientHandler extends Thread {
 
-    private static final int DISCONNECT_TIMER = 30;
+    private int countdown;
     private Lobby lobby;
     private Player owner;
     private boolean ready=false;
@@ -29,7 +29,8 @@ public abstract class ClientHandler extends Thread {
     private boolean terminatorPref;
     private boolean finalFrenzyPref;
 
-    public ClientHandler(Lobby lobby){
+    public ClientHandler(Lobby lobby, int countdown){
+        this.countdown=countdown;
         this.lobby=lobby;
         this.owner = new Player();
     }
@@ -127,6 +128,14 @@ public abstract class ClientHandler extends Thread {
 
     public void setDisconnected(boolean disconnected) {
         this.disconnected = disconnected;
+    }
+
+    public int getCountdown() {
+        return countdown;
+    }
+
+    public void setCountdown(int countdown) {
+        this.countdown = countdown;
     }
 
     @Override

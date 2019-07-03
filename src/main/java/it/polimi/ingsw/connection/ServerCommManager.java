@@ -31,6 +31,7 @@ import static it.polimi.ingsw.connection.ServerMessage.*;
 
 public class ServerCommManager  extends Thread implements View {
 
+    private int countdown;
     private SocketClientHandler socketClient;
     private Player owner;
     private RmiClientHandler rmiHandler;
@@ -41,12 +42,14 @@ public class ServerCommManager  extends Thread implements View {
     private String updateBuffer;
 
 
-    public ServerCommManager(SocketClientHandler socketClient){
+    public ServerCommManager(SocketClientHandler socketClient,int countdown){
+        this.countdown=countdown;
         this.socketClient = socketClient;
         this.rmi=false;
         this.owner=socketClient.getOwner();
     }
-    public ServerCommManager(RmiClientHandler cl){
+    public ServerCommManager(RmiClientHandler cl, int countdown){
+        this.countdown=countdown;
         this.rmiHandler=cl;
         this.rmiClient=rmiHandler.getViewClient();
         this.rmi=true;
@@ -496,7 +499,7 @@ public class ServerCommManager  extends Thread implements View {
         t.start();
         int i=0;
         System.out.print("\n"+owner.getCharacter()+" Inactivity countdown: ");
-        for(;i<INACTIVITY_TIMEOUT;i++){
+        for(;i<countdown;i++){
             for(int j=0;j<100;j++) {
                 if(isDisconnected())
                     break;
@@ -508,7 +511,7 @@ public class ServerCommManager  extends Thread implements View {
                     e.printStackTrace();
                 }
             }
-            System.out.print(INACTIVITY_TIMEOUT-i+"s ");
+            System.out.print(countdown-i+"s ");
             if(isDisconnected())
                 break;
         }
@@ -530,9 +533,9 @@ public class ServerCommManager  extends Thread implements View {
         }
     }
     public void reactivatePlayer() {
-        boolean b;
+        Boolean b;
         b = showBoolean(RETURN_IN_GAME);
-        if(b) {
+        if(b!=null&&b) {
             owner.setInactive(false);
         }
         sendsUpdate(updateBuffer);

@@ -29,7 +29,7 @@ public class RmiServer extends ConnectionTech implements RmiServerInterface{
      * after connection clients use this method to obtain {@link RmiPrefInterf} reference.
      */
     public RmiPrefInterf getClientHandler()throws RemoteException{
-        RmiPrefInterf temp=new RmiClientHandler(super.getLobby());
+        RmiPrefInterf temp=new RmiClientHandler(super.getLobby(),super.getCountdown());
         ((ClientHandler)temp).setPriority(THREAD_PRIORITY);
         ((ClientHandler)temp).start();
         return(RmiPrefInterf) UnicastRemoteObject.exportObject(temp, 0);

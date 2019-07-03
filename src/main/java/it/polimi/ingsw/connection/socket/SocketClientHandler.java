@@ -19,18 +19,18 @@ public class SocketClientHandler extends ClientHandler {
     private PrintWriter out;
 
     public SocketClientHandler(Lobby lobby){
-        super(lobby);
+        super(lobby,30);
     }
 
-    public SocketClientHandler(Socket s, Lobby lobby) throws IOException{
-        super(lobby);
+    public SocketClientHandler(Socket s, Lobby lobby, int countdown) throws IOException{
+        super(lobby, countdown);
         this.client = s;
         this.in = new BufferedReader(new InputStreamReader(client.getInputStream()));
         this.out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(client.getOutputStream())),true);
     }
 
     public void game() {
-        super.getOwner().setView(new ServerCommManager(this));
+        super.getOwner().setView(new ServerCommManager(this,super.getCountdown()));
         ((ServerCommManager) super.getOwner().getView()).setPriority(THREAD_PRIORITY);
         ((ServerCommManager) super.getOwner().getView()).start();
     }

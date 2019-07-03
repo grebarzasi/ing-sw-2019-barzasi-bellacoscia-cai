@@ -11,6 +11,7 @@ import java.util.Iterator;
 import static it.polimi.ingsw.connection.ConnMessage.*;
 
 /**
+ * This class parse the json update sent by the server into virtual model classes
  * @author Gregorio Barzasi
  */
 public class UpdateParser {

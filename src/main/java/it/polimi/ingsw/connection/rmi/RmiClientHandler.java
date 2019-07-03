@@ -22,8 +22,8 @@ public class RmiClientHandler extends ClientHandler implements RmiPrefInterf {
     public String tempPlayer;
     public ViewClient viewClient;
 
-    public RmiClientHandler(Lobby lobby){
-        super(lobby);
+    public RmiClientHandler(Lobby lobby, int countdown){
+        super(lobby,countdown);
     }
 
 
@@ -102,7 +102,7 @@ public class RmiClientHandler extends ClientHandler implements RmiPrefInterf {
                 e.printStackTrace();
             }
         }
-        super.getOwner().setView(new ServerCommManager(this));
+        super.getOwner().setView(new ServerCommManager(this,super.getCountdown()));
         ((ServerCommManager) super.getOwner().getView()).setPriority(THREAD_PRIORITY);
         ((ServerCommManager) super.getOwner().getView()).start();
 

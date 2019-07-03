@@ -39,7 +39,7 @@ public class SServer extends ConnectionTech {
             while(true){
                 Socket client = server.accept();
                 System.out.println( "\n"+SOCKET_S_CONN+ client);
-                temp = new SocketClientHandler(client,super.getLobby());
+                temp = new SocketClientHandler(client,super.getLobby(),super.getCountdown());
                 temp.setPriority(THREAD_PRIORITY);
                 temp.start();
             }

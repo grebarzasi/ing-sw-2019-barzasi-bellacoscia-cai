@@ -1,7 +1,6 @@
 package it.polimi.ingsw.CLI;
 
 
-import it.polimi.ingsw.virtual_model.GameInitializer;
 import it.polimi.ingsw.virtual_model.VirtualCell;
 import it.polimi.ingsw.virtual_model.VirtualModel;
 import it.polimi.ingsw.virtual_model.VirtualPlayer;
@@ -18,21 +17,44 @@ import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
 
 /**
  * Build the cli board line by line. reads the maps from file and parse special tokens to know when and where place
- * game info like players board and killshot truck.
+ * game info like players board and kill shot truck.
  */
 
 public class CliBoard {
-    private File f;
+    /**
+     * saves the map itself
+     */
     private String all="";
-    private String lastColor="";
-    private String lastBackground="";
-    private int cellsPlnum=12;
-    private int cellsCPnum=12;
-    private int boardPrinted=0;
 
+    /**
+     * saves the last color used in the drawing process
+     */
+    private String lastColor="";
+    /**
+     * saves the last background used in the drawing process
+     */
+    private String lastBackground="";
+    /**
+     * the number of cell
+     */
+    private int cellsPlnum=12;
+    /**
+     * the number of cell
+     */
+    private int cellsCPnum=12;
+    /**
+     * the number of board printed
+     */
+    private int boardPrinted=0;
+    /**
+     * saves the armory
+     */
     private ArrayList<String> armory=new ArrayList<>();
 
     private ArrayList<String> weaponTemp;
+    /**
+     * the virtual model, it stores info of the game
+     */
     private VirtualModel model;
 
     public CliBoard(VirtualModel model){
@@ -500,6 +522,9 @@ public class CliBoard {
     }
 
 
+    /**
+     * print the weapon section of the playerboard
+     */
     public void printWeapon(int k,VirtualPlayer p){
         int i=0;
         String s="";
@@ -520,6 +545,9 @@ public class CliBoard {
         System.out.print(WHITE+"}┤"+RESET);
     }
 
+    /**
+     * print the power up section of the playerboard
+     */
     public void printPU(int k,VirtualPlayer p){
         if(!model.getOwner().equals(p))
             return;
@@ -622,15 +650,4 @@ public class CliBoard {
         this.model = model;
     }
 
-    public static void main(String[] args){
-        GameInitializer game = new GameInitializer();
-        try {
-            game.initAll();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        CliBoard cli= new  CliBoard(game.getVmodel());
-        cli.draw();
-
-    }
 }

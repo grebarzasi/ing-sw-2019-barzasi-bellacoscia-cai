@@ -16,14 +16,29 @@ import static it.polimi.ingsw.CLI.CliMessages.PORT_SELECT;
         */
 
 public abstract class ConnectionTech extends Thread {
-
+    /**
+     * game lobby
+     */
     private Lobby lobby;
-    //default 127.0.0.1:1234
+
+    /**
+     * port number for connection, default: 1234
+     */
+
     private int port=1234;
+    /**
+     * ip address of connection, default: 127.0.0.1
+     */
     private String ip = "127.0.0.1";
 
-    //default is rmi
+    /**
+     * indicates that the connection used is rmi. default is socket
+     */
     private boolean rmi=false;
+    /**
+     * saves the inactivity countdown used in game
+     */
+    private int countdown;
 
     public ConnectionTech(Lobby lobby){
         this.lobby=lobby;
@@ -31,7 +46,9 @@ public abstract class ConnectionTech extends Thread {
     public ConnectionTech(){
     }
 
-
+    /**
+     * acquire the port for connection
+     */
     public void acquirePort(){
         try {
             int port=readPort();
@@ -43,7 +60,7 @@ public abstract class ConnectionTech extends Thread {
     }
 
     /**
-     * acquire port for connection
+     * read port for connection from terminal
      */
     public int readPort()throws IOException {
         BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
@@ -94,6 +111,14 @@ public abstract class ConnectionTech extends Thread {
 
     public abstract void run();
     public abstract boolean connected();
+
+    public int getCountdown() {
+        return countdown;
+    }
+
+    public void setCountdown(int countdown) {
+        this.countdown = countdown;
+    }
 
     public Lobby getLobby() {
         return lobby;
