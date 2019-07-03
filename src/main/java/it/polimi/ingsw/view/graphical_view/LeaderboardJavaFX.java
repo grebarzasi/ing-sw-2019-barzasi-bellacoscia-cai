@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.graphical_view;
 
+import it.polimi.ingsw.utils.FileLoader;
 import it.polimi.ingsw.view.virtual_model.VirtualModel;
 import it.polimi.ingsw.view.virtual_model.VirtualPlayer;
 import javafx.application.Application;
@@ -35,7 +36,7 @@ public class LeaderboardJavaFX extends Application {
     private double heightSecond;
     private double heightThird;
     private double heightOther;
-
+    private FileLoader fileLoader = new FileLoader();
     private VirtualModel model;
     private ArrayList<String> players;
 
@@ -67,7 +68,7 @@ public class LeaderboardJavaFX extends Application {
         heightFirst = heightOther * 4;
         heightThird = heightOther * 2;
 
-        Image back1 = new Image(new FileInputStream(PATH_BACK_MSG),widthScreen,heightThird,true,true);
+        Image back1 = new Image(fileLoader.getResource(PATH_BACK_MSG),widthScreen,heightThird,true,true);
         BackgroundImage backImg = new BackgroundImage(back1, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background background = new Background(backImg);
 
@@ -102,11 +103,11 @@ public class LeaderboardJavaFX extends Application {
         txt5.setBackground(background);
 
 
-        ImageView img1 = new ImageView(new Image(new FileInputStream("/images/leaderboard/first.png"),widthScreen,heightFirst,true,true));
-        ImageView img2 = new ImageView(new Image(new FileInputStream("/images/leaderboard/second.png"),widthScreen,heightSecond,true,true));
-        ImageView img3 = new ImageView(new Image(new FileInputStream("/images/leaderboard/third.png"),widthScreen,heightThird,true,true));
-        ImageView img4 = new ImageView(new Image(new FileInputStream("/images/leaderboard/fourth.png"),widthScreen,heightOther,true,true));
-        ImageView img5 = new ImageView(new Image(new FileInputStream("/images/leaderboard/fifth.png"),widthScreen,heightOther,true,true));
+        ImageView img1 = new ImageView(new Image(fileLoader.getResource("/images/leaderboard/first.png"),widthScreen,heightFirst,true,true));
+        ImageView img2 = new ImageView(new Image(fileLoader.getResource("/images/leaderboard/second.png"),widthScreen,heightSecond,true,true));
+        ImageView img3 = new ImageView(new Image(fileLoader.getResource("/images/leaderboard/third.png"),widthScreen,heightThird,true,true));
+        ImageView img4 = new ImageView(new Image(fileLoader.getResource("/images/leaderboard/fourth.png"),widthScreen,heightOther,true,true));
+        ImageView img5 = new ImageView(new Image(fileLoader.getResource("/images/leaderboard/fifth.png"),widthScreen,heightOther,true,true));
 
         primaryStage.setTitle("Classifica");
 
@@ -142,17 +143,15 @@ public class LeaderboardJavaFX extends Application {
 
 
         //set Title
-        ImageView imgTitle = new ImageView(new Image(new FileInputStream(PATH_TITLE), widthScreen, heightTitle, true, true));
+        ImageView imgTitle = new ImageView(new Image(fileLoader.getResource(PATH_TITLE), widthScreen, heightTitle, true, true));
         grid.add(imgTitle, 0, 0);
 
         //set Background
-        try {
-            Image back = new Image(new FileInputStream(PATH_BACK_GAME), widthScreen + 300 , heightScreen + 300, true, true);
+
+            Image back = new Image(fileLoader.getResource(PATH_BACK_GAME), widthScreen + 300 , heightScreen + 300, true, true);
             BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
             grid.setBackground(new Background(backgroundImage));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
 
         //set leaderboard
         HBox h1 = new HBox(20);

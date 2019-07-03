@@ -5,6 +5,7 @@ import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.connection.client.rmi.RmiClient;
 import it.polimi.ingsw.connection.client.socket.SClient;
 import it.polimi.ingsw.connection.client.socket.SClientCommManager;
+import it.polimi.ingsw.utils.FileLoader;
 import it.polimi.ingsw.view.virtual_model.*;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
@@ -65,7 +66,7 @@ public class LobbyJavaFX extends Application {
     private int skull;
     private ConnectionTech conn;
     private VirtualPlayer owner;
-
+    private FileLoader fileLoader = new FileLoader();
     private VirtualModel vmodel;
     private GameJavaFX game;
 
@@ -167,7 +168,7 @@ public class LobbyJavaFX extends Application {
         title.setFont(titleFont);
 
         //set background
-        Image back = new Image(new FileInputStream(PATH_BACK), widthScreen * 2, heightScreen * 2, true, true);
+        Image back = new Image(fileLoader.getResource(PATH_BACK), widthScreen * 2, heightScreen * 2, true, true);
         BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         lobbyGrid.setBackground(new Background(backgroundImage));
 
@@ -202,16 +203,16 @@ public class LobbyJavaFX extends Application {
         Label lblMap = new Label("Scegli una mappa:");
         lblMap.setFont(font);
         Button map1 = new Button();
-        javafx.scene.image.Image img1 = new Image(new FileInputStream(PATH_MEDIUM1_MAP), 150, 150, true, true);
+        javafx.scene.image.Image img1 = new Image(fileLoader.getResource(PATH_MEDIUM1_MAP), 150, 150, true, true);
         map1.setGraphic(new ImageView(img1));
         Button map2 = new Button();
-        javafx.scene.image.Image img2 = new Image(new FileInputStream(PATH_SMALL_MAP), 150, 150, true, true);
+        javafx.scene.image.Image img2 = new Image(fileLoader.getResource(PATH_SMALL_MAP), 150, 150, true, true);
         map2.setGraphic(new ImageView(img2));
         Button map3 = new Button();
-        javafx.scene.image.Image img3 = new Image(new FileInputStream(PATH_LARGE_MAP), 150, 150, true, true);
+        javafx.scene.image.Image img3 = new Image(fileLoader.getResource(PATH_LARGE_MAP), 150, 150, true, true);
         map3.setGraphic(new ImageView(img3));
         Button map4 = new Button();
-        javafx.scene.image.Image img4 = new Image(new FileInputStream(PATH_MEDIUM2_MAP), 150, 150, true, true);
+        javafx.scene.image.Image img4 = new Image(fileLoader.getResource(PATH_MEDIUM2_MAP), 150, 150, true, true);
         map4.setGraphic(new ImageView(img4));
         HBox mapBox = new HBox(50);
         mapBox.setAlignment(Pos.CENTER);
@@ -246,11 +247,9 @@ public class LobbyJavaFX extends Application {
         lobbyGrid.add(btnStart, 1, 9);
 
         ImageView load = null;
-        try {
-            load = new ImageView(new Image(new FileInputStream(PATH_LOADING), heightRows, heightRows, true, true));
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-        }
+
+            load = new ImageView(new Image(fileLoader.getResource(PATH_LOADING), heightRows, heightRows, true, true));
+
         RotateTransition rotateTransition = new RotateTransition(Duration.millis(3000), load);
         rotateTransition.setFromAngle(0);
         rotateTransition.setToAngle(360);
@@ -397,37 +396,35 @@ public class LobbyJavaFX extends Application {
 
             VBox v = new VBox();
 
-            try {
+
                 switch (p.getCharacter()) {
                     case "yellow": {
-                        ImageView yellowV = new ImageView(new Image(new FileInputStream(PATH_YELLOW_CHARACTER), widthCenter, heightPlayers, true, true));
+                        ImageView yellowV = new ImageView(new Image(fileLoader.getResource(PATH_YELLOW_CHARACTER), widthCenter, heightPlayers, true, true));
                         v.getChildren().add(yellowV);
                         break;
                     }
                     case "red": {
-                        ImageView redV = new ImageView(new Image(new FileInputStream(PATH_RED_CHARACTER), widthCenter, heightPlayers, true, true));
+                        ImageView redV = new ImageView(new Image(fileLoader.getResource(PATH_RED_CHARACTER), widthCenter, heightPlayers, true, true));
                         v.getChildren().add(redV);
                         break;
                     }
                     case "blue": {
-                        ImageView blueV = new ImageView(new Image(new FileInputStream(PATH_BLUE_CHARACTER), widthCenter, heightPlayers, true, true));
+                        ImageView blueV = new ImageView(new Image(fileLoader.getResource(PATH_BLUE_CHARACTER), widthCenter, heightPlayers, true, true));
                         v.getChildren().add(blueV);
                         break;
                     }
                     case "green": {
-                        ImageView greenV = new ImageView(new Image(new FileInputStream(PATH_GREEN_CHARACTER), widthCenter, heightPlayers, true, true));
+                        ImageView greenV = new ImageView(new Image(fileLoader.getResource(PATH_GREEN_CHARACTER), widthCenter, heightPlayers, true, true));
                         v.getChildren().add(greenV);
                         break;
                     }
                     case "grey": {
-                        ImageView greyV = new ImageView(new Image(new FileInputStream(PATH_GREY_CHARACTER), widthCenter, heightPlayers, true, true));
+                        ImageView greyV = new ImageView(new Image(fileLoader.getResource(PATH_GREY_CHARACTER), widthCenter, heightPlayers, true, true));
                         v.getChildren().add(greyV);
                         break;
                     }
                 }
-            }catch (IOException e){
-                e.printStackTrace();
-            }
+
 
             TextField txtUsername = new TextField(p.getUsername());
             txtUsername.setPrefSize(widthCenter/5, heightRows);

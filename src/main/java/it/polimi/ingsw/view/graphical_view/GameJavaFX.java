@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 import it.polimi.ingsw.ViewClient;
+import it.polimi.ingsw.utils.FileLoader;
 import it.polimi.ingsw.view.virtual_model.*;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -24,10 +25,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 import static it.polimi.ingsw.view.command_line_view.CLiBoardStuff.*;
@@ -143,6 +141,8 @@ public class GameJavaFX extends Application implements ViewClient {
     private double heightOtherAmmo;
     private double heightOtherBoard;
 
+    private FileLoader fileLoader = new FileLoader();
+
     /**
      * Is start boolean.
      *
@@ -180,13 +180,10 @@ public class GameJavaFX extends Application implements ViewClient {
 
         game = new VirtualGame();
         font = new Font(20);
-        try {
-            emptyCell = new Image(new FileInputStream(PATH_EMPTY_DAMAGE),widthCenter,heightCenter,true,true);
-            backBtn = new Image(new FileInputStream(PATH_BACK_POINTS), 100, 100, true, true);
+            emptyCell = new Image(fileLoader.getResource(PATH_EMPTY_DAMAGE),widthCenter,heightCenter,true,true);
+            backBtn = new Image(fileLoader.getResource(PATH_BACK_POINTS), 100, 100, true, true);
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+
 
         action = "";
 
@@ -256,11 +253,9 @@ public class GameJavaFX extends Application implements ViewClient {
         heightOtherBoard = heightOtherAmmo * 4;
 
         Image img = null;
-        try {
-            img = new Image(new FileInputStream(PATH_EMPTY_CELL), 100, 100, true, true);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+
+            img = new Image(fileLoader.getResource(PATH_EMPTY_CELL), 100, 100, true, true);
+
         BackgroundImage background = new BackgroundImage(img, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         btnEmptyBG = new Background(background);
 
@@ -268,7 +263,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
-
+        FileLoader fileLoader = new FileLoader();
         this.primaryStage = primaryStage;
 
         primaryStage.setTitle("ADRENALINA");
@@ -286,13 +281,10 @@ public class GameJavaFX extends Application implements ViewClient {
         scene.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> grid.setPrefHeight((double) newSceneHeight));
 
         //set Background.
-        try {
-            Image back = new Image(new FileInputStream(PATH_BACK_GAME), widthScreen + widthLateral, heightScreen + heightLateral, true, true);
-            BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+            Image back1 = new Image(fileLoader.getResource(PATH_BACK_GAME), widthScreen + widthLateral, heightScreen + heightLateral, true, true);
+            BackgroundImage backgroundImage = new BackgroundImage(back1, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
             grid.setBackground(new Background(backgroundImage));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
 
         //set space in grid.
         ColumnConstraints c1 = new ColumnConstraints(widthLateral);
@@ -315,14 +307,14 @@ public class GameJavaFX extends Application implements ViewClient {
         grid.getRowConstraints().addAll(r1, r2, r3);
 
         //set title.
-        ImageView imgTitle = new ImageView(new Image(new FileInputStream(PATH_TITLE), widthCenter, heightLateral, true, true));
+        ImageView imgTitle = new ImageView(new Image(fileLoader.getResource(PATH_TITLE), widthCenter, heightLateral, true, true));
         grid.add(imgTitle, 1, 0);
 
 
         //set Killshot track.
         gridSkull.setPadding(new Insets(100, 0, 80, 0));
 
-        Image imgTrack = new Image(new FileInputStream(PATH_TRACK), widthLateral, heightLateral, true, true);
+        Image imgTrack = new Image(fileLoader.getResource(PATH_TRACK), widthLateral, heightLateral, true, true);
         BackgroundImage backgroundSkull = new BackgroundImage(imgTrack, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background backSkull = new Background(backgroundSkull);
 
@@ -355,19 +347,19 @@ public class GameJavaFX extends Application implements ViewClient {
         Image imgBoard = null;
         switch (model.getBoard().getMap().getName()) {
             case ("medium1"): {
-                imgBoard = new Image(new FileInputStream(PATH_MEDIUM1_MAP), widthCenter, heightCenter, true, true);
+                imgBoard = new Image(fileLoader.getResource(PATH_MEDIUM1_MAP), widthCenter, heightCenter, true, true);
                 break;
             }
             case ("small"): {
-                imgBoard = new Image(new FileInputStream(PATH_SMALL_MAP), widthCenter, heightCenter, true, true);
+                imgBoard = new Image(fileLoader.getResource(PATH_SMALL_MAP), widthCenter, heightCenter, true, true);
                 break;
             }
             case ("large"): {
-                imgBoard = new Image(new FileInputStream(PATH_LARGE_MAP), widthCenter, heightCenter, true, true);
+                imgBoard = new Image(fileLoader.getResource(PATH_LARGE_MAP), widthCenter, heightCenter, true, true);
                 break;
             }
             case ("medium2"): {
-                imgBoard = new Image(new FileInputStream(PATH_MEDIUM2_MAP), widthCenter, heightCenter, true, true);
+                imgBoard = new Image(fileLoader.getResource(PATH_MEDIUM2_MAP), widthCenter, heightCenter, true, true);
                 break;
             }
         }
@@ -458,23 +450,23 @@ public class GameJavaFX extends Application implements ViewClient {
 
         switch (model.getOwner().getCharacter()) {
             case YELLOW: {
-                imgPBoard = new Image(new FileInputStream(PATH_YELLOW_BOARD), widthPers, heightPBoard, true, true);
+                imgPBoard = new Image(fileLoader.getResource(PATH_YELLOW_BOARD), widthPers, heightPBoard, true, true);
                 break;
             }
             case RED: {
-                imgPBoard = new Image(new FileInputStream(PATH_RED_BOARD), widthPers, heightPBoard, true, true);
+                imgPBoard = new Image(fileLoader.getResource(PATH_RED_BOARD), widthPers, heightPBoard, true, true);
                 break;
             }
             case BLUE: {
-                imgPBoard = new Image(new FileInputStream(PATH_BLUE_BOARD), widthPers, heightPBoard, true, true);
+                imgPBoard = new Image(fileLoader.getResource(PATH_BLUE_BOARD), widthPers, heightPBoard, true, true);
                 break;
             }
             case GREEN: {
-                imgPBoard = new Image(new FileInputStream(PATH_GREEN_BOARD), widthPers, heightPBoard, true, true);
+                imgPBoard = new Image(fileLoader.getResource(PATH_GREEN_BOARD), widthPers, heightPBoard, true, true);
                 break;
             }
             case GREY: {
-                imgPBoard = new Image(new FileInputStream(PATH_GREY_BOARD), widthPers, heightPBoard, true, true);
+                imgPBoard = new Image(fileLoader.getResource(PATH_GREY_BOARD), widthPers, heightPBoard, true, true);
                 break;
             }
         }
@@ -671,7 +663,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
 
         //set buttons
-        Image msgBack = new Image(new FileInputStream(PATH_BACK_MSG), widthCenter, heightLateral/4, false, true);
+        Image msgBack = new Image(fileLoader.getResource(PATH_BACK_MSG), widthCenter, heightLateral/4, false, true);
         BackgroundImage backgroundMsg = new BackgroundImage(msgBack, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background backMsg = new Background(backgroundMsg);
         msg.setBackground(backMsg);
@@ -834,32 +826,30 @@ public class GameJavaFX extends Application implements ViewClient {
 
         Image img = null;
 
-        try {
+
             switch (color) {
                 case YELLOW: {
-                    img = new Image(new FileInputStream(PATH_YELLOW_BOARD), widthOB, heightOB, true, true);
+                    img = new Image(fileLoader.getResource(PATH_YELLOW_BOARD), widthOB, heightOB, true, true);
                     break;
                 }
                 case RED: {
-                    img = new Image(new FileInputStream(PATH_RED_BOARD), widthOB, heightOB, true, true);
+                    img = new Image(fileLoader.getResource(PATH_RED_BOARD), widthOB, heightOB, true, true);
                     break;
                 }
                 case BLUE: {
-                    img = new Image(new FileInputStream(PATH_BLUE_BOARD), widthOB, heightOB, true, true);
+                    img = new Image(fileLoader.getResource(PATH_BLUE_BOARD), widthOB, heightOB, true, true);
                     break;
                 }
                 case GREEN: {
-                    img = new Image(new FileInputStream(PATH_GREEN_BOARD), widthOB, heightOB, true, true);
+                    img = new Image(fileLoader.getResource(PATH_GREEN_BOARD), widthOB, heightOB, true, true);
                     break;
                 }
                 case GREY: {
-                    img = new Image(new FileInputStream(PATH_GREY_BOARD), widthOB, heightOB, true, true);
+                    img = new Image(fileLoader.getResource(PATH_GREY_BOARD), widthOB, heightOB, true, true);
                     break;
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
 
         return img;
     }
@@ -937,33 +927,27 @@ public class GameJavaFX extends Application implements ViewClient {
         while (red < board.getAmmoRed()) {
             ImageView imgAR = null;
 
-            try {
-                imgAR = new ImageView(new Image(new FileInputStream(PATH_RED_AMMO), w, h, true, true));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+
+                imgAR = new ImageView(new Image(fileLoader.getResource(PATH_RED_AMMO), w, h, true, true));
+
             grid.add(imgAR, red, 0);
             red++;
         }
         while (blue < board.getAmmoBlue()) {
             ImageView imgAB = null;
 
-            try {
-                imgAB = new ImageView(new Image(new FileInputStream(PATH_BLUE_AMMO), w, h, true, true));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+                imgAB = new ImageView(new Image(fileLoader.getResource(PATH_BLUE_AMMO), w, h, true, true));
+
+
+
             grid.add(imgAB, blue, 1);
             blue++;
         }
         while (yellow < board.getAmmoYellow()) {
             ImageView imgAY = null;
 
-            try {
-                imgAY = new ImageView(new Image(new FileInputStream(PATH_YELLOW_AMMO), w, h, true, true));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+            imgAY = new ImageView(new Image(fileLoader.getResource(PATH_YELLOW_AMMO), w, h, true, true));
+
             grid.add(imgAY, yellow, 2);
             yellow++;
         }
@@ -1008,33 +992,26 @@ public class GameJavaFX extends Application implements ViewClient {
         while (red > 0) {
             ImageView imgAR = null;
 
-            try {
-                imgAR = new ImageView(new Image(new FileInputStream(PATH_RED_AMMO), w, h, true, true));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+
+                imgAR = new ImageView(new Image(fileLoader.getResource(PATH_RED_AMMO), w, h, true, true));
+
             grid.add(imgAR, 3 - red, 0);
             red--;
         }
         while (blue > 0) {
             ImageView imgAB = null;
 
-            try {
-                imgAB = new ImageView(new Image(new FileInputStream(PATH_BLUE_AMMO), w, h, true, true));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+
+                imgAB = new ImageView(new Image(fileLoader.getResource(PATH_BLUE_AMMO), w, h, true, true));
+
             grid.add(imgAB, 6 - blue, 0);
             blue--;
         }
         while (yellow > 0) {
             ImageView imgAY = null;
 
-            try {
-                imgAY = new ImageView(new Image(new FileInputStream(PATH_YELLOW_AMMO), w, h, true, true));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+                imgAY = new ImageView(new Image(fileLoader.getResource(PATH_YELLOW_AMMO), w, h, true, true));
+
             grid.add(imgAY, 9 - yellow, 0);
             yellow--;
         }
@@ -1091,11 +1068,9 @@ public class GameJavaFX extends Application implements ViewClient {
         String image = color + ".png";
 
         Image img = null;
-        try {
-            img = new Image(new FileInputStream(PATH_GENERAL_COLOR + image), 50, 50, true, true);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+
+            img = new Image(fileLoader.getResource(PATH_GENERAL_COLOR + image), 50, 50, true, true);
+
 
         switch (color) {
             case (RED): {
@@ -1167,17 +1142,13 @@ public class GameJavaFX extends Application implements ViewClient {
         if(!colors.get(k).split(INNER_SEP)[0].equals("")) {
             while (k < colors.size()) {
                 if (colors.get(k).split(INNER_SEP).length > 1) {
-                    try {
-                        imgKill = new ImageView(new Image(new FileInputStream(PATH_DAMAGE + colors.get(k).split(INNER_SEP)[0].toLowerCase() + "_double.png"),w,h,true,true));
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
+
+                        imgKill = new ImageView(new Image(fileLoader.getResource(PATH_DAMAGE + colors.get(k).split(INNER_SEP)[0].toLowerCase() + "_double.png"),w,h,true,true));
+
                 } else {
-                    try {
-                        imgKill = new ImageView(new Image(new FileInputStream(PATH_DAMAGE + colors.get(k).split(INNER_SEP)[0].toLowerCase() + ".png"),w,h,true,true));
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
+
+                        imgKill = new ImageView(new Image(fileLoader.getResource(PATH_DAMAGE + colors.get(k).split(INNER_SEP)[0].toLowerCase() + ".png"),w,h,true,true));
+
                 }
                 grid.add(imgKill, j, 0);
                 k++;
@@ -1188,11 +1159,9 @@ public class GameJavaFX extends Application implements ViewClient {
         while (i >= j) {
 
             ImageView skull = null;
-             try {
-                 skull = new ImageView(new Image(new FileInputStream(PATH_SKULL), w, h, true, true));
-             } catch (FileNotFoundException e) {
-                 e.printStackTrace();
-             }
+
+                 skull = new ImageView(new Image(fileLoader.getResource(PATH_SKULL), w, h, true, true));
+
 
              grid.add(skull, i, 0);
              i--;
@@ -1224,55 +1193,47 @@ public class GameJavaFX extends Application implements ViewClient {
                     case YELLOW: {
                         ImageView img = null;
 
-                        try {
-                            img = new ImageView(new Image(new FileInputStream(PATH_YELLOW_DAMAGE), width, hmarks, true, true));
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
+
+                            img = new ImageView(new Image(fileLoader.getResource(PATH_YELLOW_DAMAGE), width, hmarks, true, true));
+
+
+
                         grid.add(img, i, 0);
                         break;
                     }
                     case RED: {
                         ImageView img = null;
 
-                        try {
-                            img = new ImageView(new Image(new FileInputStream(PATH_RED_DAMAGE), width, hmarks, true, true));
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
+
+                            img = new ImageView(new Image(fileLoader.getResource(PATH_RED_DAMAGE), width, hmarks, true, true));
+
                         grid.add(img, i, 0);
                         break;
                     }
                     case BLUE: {
                         ImageView img = null;
 
-                        try {
-                            img = new ImageView(new Image(new FileInputStream(PATH_BLUE_DAMAGE), width, hmarks, true, true));
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
+
+                            img = new ImageView(new Image(fileLoader.getResource(PATH_BLUE_DAMAGE), width, hmarks, true, true));
+
                         grid.add(img, i, 0);
                         break;
                     }
                     case GREEN: {
                         ImageView img = null;
 
-                        try {
-                            img = new ImageView(new Image(new FileInputStream(PATH_GREEN_DAMAGE), width, hmarks, true, true));
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
+
+                            img = new ImageView(new Image(fileLoader.getResource(PATH_GREEN_DAMAGE), width, hmarks, true, true));
+
                         grid.add(img, i, 0);
                         break;
                     }
                     case GREY: {
                         ImageView img = null;
 
-                        try {
-                            img = new ImageView(new Image(new FileInputStream(PATH_GREY_DAMAGE), width, hmarks, true, true));
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
+
+                            img = new ImageView(new Image(fileLoader.getResource(PATH_GREY_DAMAGE), width, hmarks, true, true));
+
                         grid.add(img, i, 0);
                         break;
                     }
@@ -1288,55 +1249,45 @@ public class GameJavaFX extends Application implements ViewClient {
                     case YELLOW: {
                         ImageView img = null;
 
-                        try {
-                            img = new ImageView(new Image(new FileInputStream(PATH_YELLOW_DAMAGE), width, hdamage, true, true));
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
+
+                            img = new ImageView(new Image(fileLoader.getResource(PATH_YELLOW_DAMAGE), width, hdamage, true, true));
+
                         grid.add(img, j, 1);
                         break;
                     }
                     case RED: {
                         ImageView img = null;
 
-                        try {
-                            img = new ImageView(new Image(new FileInputStream(PATH_RED_DAMAGE), width, hdamage, true, true));
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
+
+                            img = new ImageView(new Image(fileLoader.getResource(PATH_RED_DAMAGE), width, hdamage, true, true));
+
                         grid.add(img, j, 1);
                         break;
                     }
                     case BLUE: {
                         ImageView img = null;
 
-                        try {
-                            img = new ImageView(new Image(new FileInputStream(PATH_BLUE_DAMAGE), width, hdamage, true, true));
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
+
+                            img = new ImageView(new Image(fileLoader.getResource(PATH_BLUE_DAMAGE), width, hdamage, true, true));
+
                         grid.add(img, j, 1);
                         break;
                     }
                     case GREEN: {
                         ImageView img = null;
 
-                        try {
-                            img = new ImageView(new Image(new FileInputStream(PATH_GREEN_DAMAGE), width, hdamage, true, true));
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
+
+                            img = new ImageView(new Image(fileLoader.getResource(PATH_GREEN_DAMAGE), width, hdamage, true, true));
+
                         grid.add(img, j, 1);
                         break;
                     }
                     case GREY: {
                         ImageView img = null;
 
-                        try {
-                            img = new ImageView(new Image(new FileInputStream(PATH_GREY_DAMAGE), width, hdamage, true, true));
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
+
+                            img = new ImageView(new Image(fileLoader.getResource(PATH_GREY_DAMAGE), width, hdamage, true, true));
+
                         grid.add(img, j, 1);
                         break;
                     }
@@ -1355,11 +1306,9 @@ public class GameJavaFX extends Application implements ViewClient {
 
             ImageView skull = null;
 
-            try {
-                skull = new ImageView(new Image(new FileInputStream(PATH_SKULL), width, hskulls, true, true));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+
+                skull = new ImageView(new Image(fileLoader.getResource(PATH_SKULL), width, hskulls, true, true));
+
 
             grid.add(skull, k, 2);
             k++;
@@ -1386,21 +1335,17 @@ public class GameJavaFX extends Application implements ViewClient {
             if (!btnArr.isEmpty() && i < btnArr.size()) {
                 if (wpState[1].equals("true")) {
                     Image img = null;
-                    try {
-                        img = new Image(new FileInputStream(PATH_WEAPON + wpState[0].toLowerCase().replace(" ", "_").replace("-", "_") + ".png"), width, height, true, true);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
+
+                        img = new Image(fileLoader.getResource(PATH_WEAPON + wpState[0].toLowerCase().replace(" ", "_").replace("-", "_") + ".png"), width, height, true, true);
+
                     setButtonBack(btnArr.get(i), img);
                     hideBtn(btnArr.get(i), 1);
                     i++;
                 } else {
                     Image img = null;
-                    try {
-                        img = new Image(new FileInputStream(PATH_BACK_WEAPON), width, height, true, true);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
+
+                        img = new Image(fileLoader.getResource(PATH_BACK_WEAPON), width, height, true, true);
+
                     setButtonBack(btnArr.get(i), img);
                     hideBtn(btnArr.get(i), 1);
                     i++;
@@ -1443,11 +1388,9 @@ public class GameJavaFX extends Application implements ViewClient {
             try {
 
                 Image imgPu = null;
-                try {
-                    imgPu = new Image(new FileInputStream(PATH_POWER_UP + name + "_" + color + ".png"), widthCard - 20, heightCard - 20, true, true);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+
+                    imgPu = new Image(fileLoader.getResource(PATH_POWER_UP + name + "_" + color + ".png"), widthCard - 20, heightCard - 20, true, true);
+
 
                 setButtonBack(btnArr.get(i), imgPu);
                 i++;
@@ -1479,8 +1422,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
 
                 if (i == 2 || i == 4 || i == 11) {
-                    try {
-                        Image img = new Image(new FileInputStream(PATH_BACK_WEAPON), w, h, true, true);
+                        Image img = new Image(fileLoader.getResource(PATH_BACK_WEAPON), w, h, true, true);
                         BackgroundImage background = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
                         Background back = new Background(background);
                         btnCell.get(i).get(5).setBackground(back);
@@ -1489,9 +1431,6 @@ public class GameJavaFX extends Application implements ViewClient {
                         borderGlow.setColor(Color.LIGHTGREEN);
                         btnCell.get(i).get(5).setEffect(borderGlow);
 
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
                     continue;
                 }
                 int x = (int) Math.ceil((double) (i + 1) / 4) - 1;
@@ -1499,8 +1438,8 @@ public class GameJavaFX extends Application implements ViewClient {
                 String key = x + ":" + y;
 
 
-                try {
-                    Image img = new Image(new FileInputStream(PATH_AMMO + model.getBoard().getMap().getCells().get(key).getContent() + ".png"), w, h, true, true);
+
+                    Image img = new Image(fileLoader.getResource(PATH_AMMO + model.getBoard().getMap().getCells().get(key).getContent() + ".png"), w, h, true, true);
                     BackgroundImage background = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
                     Background back = new Background(background);
                     btnCell.get(i).get(5).setBackground(back);
@@ -1508,9 +1447,7 @@ public class GameJavaFX extends Application implements ViewClient {
                     borderGlow.setColor(Color.LIGHTCYAN);
                     btnCell.get(i).get(5).setEffect(borderGlow);
 
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+
             }
         };
 
@@ -2572,11 +2509,9 @@ public class GameJavaFX extends Application implements ViewClient {
         if(model.isFrenzy()){
 
             Image imgTmp = null;
-            try {
-                imgTmp = new Image(new FileInputStream(PATH_BOARDS + model.getOwner().getCharacter().toLowerCase() + "_board_frenzy.jpg"), widthLateral, heightPBoard, true, true);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+
+                imgTmp = new Image(fileLoader.getResource(PATH_BOARDS + model.getOwner().getCharacter().toLowerCase() + "_board_frenzy.jpg"), widthLateral, heightPBoard, true, true);
+
             BackgroundImage backgroundTmp = new BackgroundImage(imgTmp, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
             gridPBoard.setBackground(new Background(backgroundTmp));
 
@@ -2587,11 +2522,9 @@ public class GameJavaFX extends Application implements ViewClient {
                     continue;
 
                 Image imgTmp2 = null;
-                try {
-                    imgTmp2 = new Image(new FileInputStream(PATH_BOARDS + p.getCharacter().toLowerCase() + "_board_frenzy.jpg"), widthOther, heightOtherBoard, true, true);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+
+                    imgTmp2 = new Image(fileLoader.getResource(PATH_BOARDS + p.getCharacter().toLowerCase() + "_board_frenzy.jpg"), widthOther, heightOtherBoard, true, true);
+
                 BackgroundImage backgroundTmp2 = new BackgroundImage(imgTmp2, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
                 gridOtherBoards.get(i).setBackground(new Background(backgroundTmp2));
 
@@ -2642,13 +2575,9 @@ public class GameJavaFX extends Application implements ViewClient {
             grid.setVgap(0);
             grid.setPadding(new Insets(0, 0, 0, 0));
 
-            try {
-                Image back = new Image(new FileInputStream(PATH_BACK_GAME), 2190, 1920, true, true);
+                Image back = new Image(fileLoader.getResource(PATH_BACK_GAME), 2190, 1920, true, true);
                 BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
                 grid.setBackground(new Background(backgroundImage));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
 
             Scene scene = new Scene(grid, widthScreen + 50, heightScreen + 50);
             this.setScene(scene);
@@ -2670,7 +2599,7 @@ public class GameJavaFX extends Application implements ViewClient {
             if (!pu && i<p.getWeapons().size()) {
 
 
-                File jsonFileWe = new File(PATH_WE);
+                InputStream jsonFileWe = fileLoader.getResource(PATH_WE);
                 try {
 
                     JsonNode rootNodeWe = null;
@@ -2690,18 +2619,14 @@ public class GameJavaFX extends Application implements ViewClient {
                 }
 
                 ImageView imgWe = null;
-                try {
-                    imgWe = new ImageView(new Image(new FileInputStream(PATH_WEAPON + weapon), widthScreen / 2 - 50, heightScreen - 50, true, true));
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+
+                    imgWe = new ImageView(new Image(fileLoader.getResource(PATH_WEAPON + weapon), widthScreen / 2 - 50, heightScreen - 50, true, true));
+
 
                 ImageView imgWe2 = null;
-                try {
-                    imgWe2 = new ImageView(new Image(new FileInputStream(PATH_INFO + textWe), widthScreen / 2 + 20, heightScreen + 20, true, true));
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+
+                    imgWe2 = new ImageView(new Image(fileLoader.getResource(PATH_INFO + textWe), widthScreen / 2 + 20, heightScreen + 20, true, true));
+
 
                 grid.add(imgWe, 0, 0);
                 grid.add(imgWe2, 1, 0);
@@ -2710,7 +2635,7 @@ public class GameJavaFX extends Application implements ViewClient {
             } else if (pu && i<p.getPowerUps().size()) {
 
 
-                File jsonFilePU = new File(PATH_PU);
+                InputStream jsonFilePU = fileLoader.getResource(PATH_PU);
 
                 try {
 
@@ -2733,18 +2658,14 @@ public class GameJavaFX extends Application implements ViewClient {
                         textPu = chamberNodePu.path("info").asText();
 
                         ImageView imgPu = null;
-                        try {
-                            imgPu = new ImageView(new Image(new FileInputStream(PATH_POWER_UP + powerup), widthScreen / 2 - 50, heightScreen - 50, true, true));
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
+
+                            imgPu = new ImageView(new Image(fileLoader.getResource(PATH_POWER_UP + powerup), widthScreen / 2 - 50, heightScreen - 50, true, true));
+
 
                         ImageView imgPu2 = null;
-                        try {
-                            imgPu2 = new ImageView(new Image(new FileInputStream(PATH_POWER_UP + textPu), widthScreen / 2 + 20, heightScreen + 20, true, true));
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
+
+                            imgPu2 = new ImageView(new Image(fileLoader.getResource(PATH_POWER_UP + textPu), widthScreen / 2 + 20, heightScreen + 20, true, true));
+
 
                         grid.add(imgPu, 0, 0);
                         grid.add(imgPu2, 1, 0);
@@ -2785,13 +2706,10 @@ public class GameJavaFX extends Application implements ViewClient {
             grid.setAlignment(Pos.CENTER);
             grid.setPadding(new Insets(0, 0, 0, 0));
 
-            try {
-                Image back = new Image(new FileInputStream(PATH_BACK_GAME), 2190, 1920, true, true);
+                Image back = new Image(fileLoader.getResource(PATH_BACK_GAME), 2190, 1920, true, true);
                 BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
                 grid.setBackground(new Background(backgroundImage));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
 
             Scene scene = new Scene(grid, widthScreen + 50, heightScreen + 50);
             this.setScene(scene);
@@ -2830,7 +2748,7 @@ public class GameJavaFX extends Application implements ViewClient {
                 if(numWe > args.size()){
                     break;
                 }
-                File jsonFileWe = new File(PATH_WE);
+                InputStream jsonFileWe = fileLoader.getResource(PATH_WE);
                 try {
 
                     JsonNode rootNodeWe = null;
@@ -2849,11 +2767,9 @@ public class GameJavaFX extends Application implements ViewClient {
                 }
 
                 Image imgWe = null;
-                try {
-                    imgWe = new Image(new FileInputStream(PATH_WEAPON + weapon), widthScreen, heightScreen, true, true);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+
+                    imgWe = new Image(fileLoader.getResource(PATH_WEAPON + weapon), widthScreen, heightScreen, true, true);
+
 
                 setButtonBack(btnArr.get(numWe),imgWe);
                 hideBtn(btnArr.get(numWe),1);
@@ -2913,13 +2829,11 @@ public class GameJavaFX extends Application implements ViewClient {
             gridDisc.setVgap(0);
             gridDisc.setPadding(new Insets(50, 50, 50, 50));
 
-            try {
-                Image back = new Image(new FileInputStream(PATH_BACK_GAME), widthScreen * 3, heightScreen * 3, true, true);
+
+                Image back = new Image(fileLoader.getResource(PATH_BACK_GAME), widthScreen * 3, heightScreen * 3, true, true);
                 BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
                 gridDisc.setBackground(new Background(backgroundImage));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
 
             Scene scene = new Scene(gridDisc, widthScreen + 200, heightScreen + 100);
             this.setScene(scene);
@@ -2963,7 +2877,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
                 this.setTitle("Scegli un'arma da scartare");
 
-                File jsonFileWe = new File(PATH_WE);
+                InputStream jsonFileWe = fileLoader.getResource(PATH_WE);
                 try {
 
 
@@ -2982,11 +2896,9 @@ public class GameJavaFX extends Application implements ViewClient {
                         String weapon = chamberNodeWe.path("path").asText();
 
                         Image imgWe = null;
-                        try {
-                            imgWe = new Image(new FileInputStream(PATH_WEAPON + weapon), widthScreen / 3, heightScreen / 1.5, true, true);
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
+
+                            imgWe = new Image(fileLoader.getResource(PATH_WEAPON + weapon), widthScreen / 3, heightScreen / 1.5, true, true);
+
 
                         setButtonBack(btnArr.get(cards.indexOf(name)),imgWe);
                         btnArr.get(cards.indexOf(name)).setOnAction(e->{
@@ -3005,7 +2917,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
                 this.setTitle("Scegli un Power-up da scartare");
 
-                File jsonFilePU = new File(PATH_PU);
+                InputStream jsonFilePU = fileLoader.getResource(PATH_PU);
 
                 try {
 
@@ -3032,11 +2944,9 @@ public class GameJavaFX extends Application implements ViewClient {
                         }
 
                         Image imgPu = null;
-                        try {
-                            imgPu = new Image(new FileInputStream(PATH_POWER_UP + powerup), widthScreen / 3, heightScreen / 1.5, true, true);
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
+
+                            imgPu = new Image(fileLoader.getResource(PATH_POWER_UP + powerup), widthScreen / 3, heightScreen / 1.5, true, true);
+
 
                         final int key = i;
                         setButtonBack(btnArr.get(i),imgPu);

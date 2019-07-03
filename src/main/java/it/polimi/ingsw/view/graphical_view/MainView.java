@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.graphical_view;
 
+import it.polimi.ingsw.utils.FileLoader;
 import it.polimi.ingsw.view.command_line_view.CliView;
 import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.connection.client.rmi.RmiClient;
@@ -56,7 +57,7 @@ public class MainView extends Application {
     double heightBtn = heightScreen / 15;
     double heightTitle = heightBtn * 4;
     double heightCharac = heightBtn * 5;
-
+    FileLoader fileLoader = new FileLoader();
     Button btnLobby = new Button("Lobby");
 
     /**
@@ -128,7 +129,7 @@ public class MainView extends Application {
          */
         Image title;
         ImageView titleV;
-        title = new Image(new FileInputStream(PATH_TITLE),widthScreen,heightTitle,true,true);
+        title = new Image(fileLoader.getResource(PATH_TITLE),widthScreen,heightTitle,true,true);
         titleV = new ImageView(title);
         VBox ver = new VBox();
         ver.setAlignment(Pos.TOP_CENTER);
@@ -137,11 +138,11 @@ public class MainView extends Application {
         /**
          * set bottom characters
          */
-        ImageView yellowV = new ImageView(new Image(new FileInputStream(PATH_YELLOW_CHARACTER), widthScreen ,heightCharac,true,true));
-        ImageView redV = new ImageView(new Image(new FileInputStream(PATH_RED_CHARACTER), widthScreen ,heightCharac,true,true));;
-        ImageView blueV = new ImageView(new Image(new FileInputStream(PATH_BLUE_CHARACTER), widthScreen ,heightCharac,true,true));;
-        ImageView greenV = new ImageView(new Image(new FileInputStream(PATH_GREEN_CHARACTER), widthScreen ,heightCharac,true,true));;
-        ImageView greyV = new ImageView(new Image(new FileInputStream(PATH_GREY_CHARACTER), widthScreen ,heightCharac,true,true));;
+        ImageView yellowV = new ImageView(new Image(fileLoader.getResource(PATH_YELLOW_CHARACTER), widthScreen ,heightCharac,true,true));
+        ImageView redV = new ImageView(new Image(fileLoader.getResource(PATH_RED_CHARACTER), widthScreen ,heightCharac,true,true));;
+        ImageView blueV = new ImageView(new Image(fileLoader.getResource(PATH_BLUE_CHARACTER), widthScreen ,heightCharac,true,true));;
+        ImageView greenV = new ImageView(new Image(fileLoader.getResource(PATH_GREEN_CHARACTER), widthScreen ,heightCharac,true,true));;
+        ImageView greyV = new ImageView(new Image(fileLoader.getResource(PATH_GREY_CHARACTER), widthScreen ,heightCharac,true,true));;
 
         HBox charList = new HBox(10);
         charList.setAlignment(Pos.BOTTOM_CENTER);
@@ -158,11 +159,11 @@ public class MainView extends Application {
         Button btnRules = new Button();
         Button btnLogin = new Button("Login");
         Button btnSettings = new Button("Settings");
-        Image imgLogin = new Image(new FileInputStream(PATH_LOGIN),widthScreen/3,heightBtn,true,true);
+        Image imgLogin = new Image(fileLoader.getResource(PATH_LOGIN),widthScreen/3,heightBtn,true,true);
         btnLogin.setGraphic(new ImageView(imgLogin));
-        Image imgSettings = new Image(new FileInputStream(PATH_SETTINGS),widthScreen/3,heightBtn,true,true);
+        Image imgSettings = new Image(fileLoader.getResource(PATH_SETTINGS),widthScreen/3,heightBtn,true,true);
         btnSettings.setGraphic(new ImageView(imgSettings));
-        Image imgRules = new Image(new FileInputStream(PATH_RULES),widthScreen/3,heightBtn,true,true);
+        Image imgRules = new Image(fileLoader.getResource(PATH_RULES),widthScreen/3,heightBtn,true,true);
         btnRules.setGraphic(new ImageView(imgRules));
 
         HBox buttonList = new HBox(20);
@@ -289,25 +290,23 @@ public class MainView extends Application {
             Button buttonG = new Button();
             Image imgGr;
             Button buttonGr = new Button();
-            try {
-                imgY = new Image(new FileInputStream(PATH_YELLOW),100,100,true,true);
+
+                imgY = new Image(fileLoader.getResource(PATH_YELLOW),100,100,true,true);
                 buttonY.setGraphic(new ImageView(imgY));
 
-                imgR = new Image(new FileInputStream(PATH_RED),100,100,true,true);
+                imgR = new Image(fileLoader.getResource(PATH_RED),100,100,true,true);
                 buttonR.setGraphic(new ImageView(imgR));
 
-                imgB = new Image(new FileInputStream(PATH_BLUE),100,100,true,true);
+                imgB = new Image(fileLoader.getResource(PATH_BLUE),100,100,true,true);
                 buttonB.setGraphic(new ImageView(imgB));
 
-                imgG = new Image(new FileInputStream(PATH_GREEN),100,100,true,true);
+                imgG = new Image(fileLoader.getResource(PATH_GREEN),100,100,true,true);
                 buttonG.setGraphic(new ImageView(imgG));
 
-                imgGr = new Image(new FileInputStream(PATH_GREY),100,100,true,true);
+                imgGr = new Image(fileLoader.getResource(PATH_GREY),100,100,true,true);
                 buttonGr.setGraphic(new ImageView(imgGr));
 
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+
 
             HBox colorList = new HBox(10);
             colorList.getChildren().add(buttonY);
@@ -431,12 +430,9 @@ public class MainView extends Application {
      * @param grid
      */
     public  void setBackground(GridPane grid){
-        try {
-            Image back = new Image(new FileInputStream(PATH_BACK), widthScreen , heightScreen , true, true);
+            Image back = new Image(fileLoader.getResource(PATH_BACK), widthScreen , heightScreen , true, true);
             BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
             grid.setBackground(new Background(backgroundImage));
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+
     }
 }
