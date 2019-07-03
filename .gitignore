@@ -6,4 +6,6 @@
 !deliverables/
 !data_files/
 !manifest/
+!out/
+!client_manifest/
 !src/
