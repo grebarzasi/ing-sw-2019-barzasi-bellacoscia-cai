@@ -63,7 +63,10 @@ public class EndGame implements ControllerState {
 
         ArrayList<Figure> allPlayers = new ArrayList<>();
         allPlayers.addAll(this.controller.getModel().getPlayerList());
-        allPlayers.add(this.controller.getModel().getBot());
+
+        if(this.controller.hasBot()) {
+            allPlayers.add(this.controller.getModel().getBot());
+        }
 
         ArrayList<Figure> leaderBoard = new ArrayList<>();
 
