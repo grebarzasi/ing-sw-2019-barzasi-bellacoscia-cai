@@ -27,6 +27,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.net.InetAddress;
 
 import static it.polimi.ingsw.Color.*;
 import static it.polimi.ingsw.Color.GREEN;
@@ -194,8 +195,28 @@ public class MainView extends Application {
         btnLogin.setOnAction(e -> {
 
             try {
-                loginWindow lw = new loginWindow();
-                lw.show();
+
+                if(connection.equals("RMI")){
+                    c = new RmiClient();
+                    c.setRmi(true);
+                }else if(connection.equals("Socket")){
+                    c = new SClient();
+                    c.setRmi(false);
+                }
+
+                if(!ip.isEmpty()){
+                    c.setIp(ip);
+                }
+                if(port != 0){
+                    c.setPort(port);
+                }
+                c.run();
+
+                if(c.connected()) {
+
+                    loginWindow lw = new loginWindow();
+                    lw.show();
+                }
             }catch (Exception a){
                 a.printStackTrace();
             }
@@ -235,24 +256,6 @@ public class MainView extends Application {
 
         public loginWindow(){
 
-            if(connection.equals("RMI")){
-                c = new RmiClient();
-                c.setRmi(true);
-            }else if(connection.equals("Socket")){
-                c = new SClient();
-                c.setRmi(false);
-            }
-
-                if(!ip.isEmpty()){
-                    c.setIp(ip);
-                }
-                if(port != 0){
-                    c.setPort(port);
-                }
-                c.run();
-
-             if(!c.connected())
-                 this.close();
 
             Scene scene = new Scene(new BorderPane(),700,400);
             this.setTitle("Login");
@@ -408,14 +411,24 @@ public class MainView extends Application {
             settingsGrid.add(connBox,2,5);
 
             btnPort.setOnAction(e->{
+                try {
+                    port = Integer.parseInt(txtPort.getText());
+                }catch(NumberFormatException x){
+                    port=0;
+                }
 
-                port = Integer.parseInt(txtPort.getText());
 
             });
 
             btnIP.setOnAction(e->{
 
                 ip = txtIP.getText();
+                try {
+                    if(!ip.isEmpty())
+                        InetAddress.getByName(ip);
+
+                }catch(java.net.UnknownHostException x){}
+
             });
 
             connBox.setOnAction(e->{

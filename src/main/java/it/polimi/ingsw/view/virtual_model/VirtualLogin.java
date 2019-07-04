@@ -44,9 +44,9 @@ public class VirtualLogin {
                 return true;
             }
         } else {
-            if(username==null||username.isEmpty()||character==null||character.isEmpty())
-                return false;
             SClient c = ((SClient) connController);
+            if(username==null||username.isEmpty()||character==null||character.isEmpty()||c.getOutput()==null)
+                return false;
             System.out.println("sending");
             c.getOutput().println(username);
             c.getOutput().println(character);

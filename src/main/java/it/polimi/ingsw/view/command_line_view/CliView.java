@@ -159,14 +159,11 @@ public class CliView {
         System.out.println("\n"+IP_SELECT);
         boolean flag =true;
         String ip;
-        InetAddress test;
         do{
             ip=sc.readLine();
             try {
-            if(ip.isEmpty())
-                test=Inet4Address.getLocalHost();
-            else
-                test = InetAddress.getByName(ip);
+            if(!ip.isEmpty())
+                InetAddress.getByName(ip);
 
             }catch(java.net.UnknownHostException e){
                 System.out.println("\n"+IP_SELECT_ERR);
