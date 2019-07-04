@@ -1835,7 +1835,7 @@ public class GameJavaFX extends Application implements ViewClient {
             ArrayList<String> infoWe = new ArrayList<>();
             for (ArrayList<Button> btnArr : btnCell) {
                 btnArr.get(5).setOnAction(e -> {
-                    if (btnCell.indexOf(btnArr) == 2 || btnCell.indexOf(btnArr) == 4 || btnCell.indexOf(btnArr) == 11) {
+                    if ((btnCell.indexOf(btnArr) == 2 || btnCell.indexOf(btnArr) == 4 || btnCell.indexOf(btnArr) == 11) && !pick) {
 
                         for (String pos : model.getBoard().getMap().getCells().keySet()) {
 
