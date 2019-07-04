@@ -36,7 +36,9 @@ To start the client run MainView in the view package.
 
 ### With JAR
 
-run the fullowing lines in the command prompt or use the .sh files, it is important to use a monospace font.
+Run the fullowing lines in the command prompt or use the .sh files, it is important to use a monospace font when running the CLI.
+(suggested font: Courier New)
+
 
 ##### For Client
 java -jar -Dfile.encoding=UTF8 client.jar
