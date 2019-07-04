@@ -32,6 +32,4 @@ public class AimEqual extends AimComparator implements AimingFilter {
         return p;
     }
 
-    public void resetFilter() {
-    }
 }

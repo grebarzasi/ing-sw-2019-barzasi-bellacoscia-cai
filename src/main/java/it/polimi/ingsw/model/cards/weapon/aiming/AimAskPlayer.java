@@ -65,12 +65,6 @@ public class AimAskPlayer implements AimingFilter {
         return p;
     }
 
-    /**
-     * reset the state of the filter to a default state.
-     */
-    public void resetFilter() {
-        targetTemp.clear();
-    }
 
     public void setNumMax(Integer numMax) {
         this.numMax = numMax;

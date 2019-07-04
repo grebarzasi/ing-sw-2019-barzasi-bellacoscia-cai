@@ -53,6 +53,7 @@ public class AimDirection implements AimingFilter {
             targetTemp.clear();
             w.setDirectionTemp(this);
             targetTemp.addAll(allDirectional(w.getOwner(),p));
+            directionTemp="";
             return null;
         }
         w.setDirectionTemp(null);
@@ -183,8 +184,4 @@ public class AimDirection implements AimingFilter {
         this.targetTemp = targetTemp;
     }
 
-    public void resetFilter() {
-        directionTemp="";
-        targetTemp.clear();
-    }
 }
