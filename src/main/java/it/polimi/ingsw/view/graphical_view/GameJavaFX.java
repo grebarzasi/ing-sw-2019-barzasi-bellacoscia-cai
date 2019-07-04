@@ -1870,7 +1870,7 @@ public class GameJavaFX extends Application implements ViewClient {
             fillAmmoTiles();
 
 
-            fillBoard(gridPBoard, model.getOwner(), widthBoard, heightPBoard / 4 - 6, heightPBoard / 4, heightPBoard / 3 - 6);
+            fillBoard(gridPBoard, model.getOwner(), widthBoard, heightPBoard / 4 - 6, heightPBoard / 4, heightPBoard / 4 - 6);
             fillAmmo(gridPAmmo, model.getOwner().getpBoard(), widthLateral / 7, heightLateral / 7);
 
 

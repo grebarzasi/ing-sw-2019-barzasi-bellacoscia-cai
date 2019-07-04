@@ -1,6 +1,6 @@
 package it.polimi.ingsw.connection;
 
-import static it.polimi.ingsw.view.command_line_view.CliMessages.*;
+import static it.polimi.ingsw.Color.RESET;
 
 /**
  * prints the count down when you're in waiting room
@@ -8,6 +8,10 @@ import static it.polimi.ingsw.view.command_line_view.CliMessages.*;
  * @author Gregorio Barzasi
  */
 public class PrintCountDown extends Thread {
+
+    public static final String COUNTDOWN_START = "Countdown avviato!"+RESET;
+    public static final String GAME_START = "Gioco Iniziato!"+RESET;
+
     private int time;
     public PrintCountDown(int time){
         this.time=time;

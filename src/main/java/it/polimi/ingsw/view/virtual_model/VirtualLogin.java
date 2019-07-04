@@ -30,6 +30,10 @@ public class VirtualLogin {
     public boolean send() throws IOException {
         boolean flag=false;
         if (connController.isRmi()) {
+            if(((RmiClient) connController).getClientHandler()==null)
+                return false;
+            if(username==null||username.isEmpty()||character==null||character.isEmpty())
+                return false;
             String s=((RmiClient) connController).getClientHandler().login(this.username, this.character);
             if(s.equals("accepted"))
                 return true;
@@ -40,6 +44,8 @@ public class VirtualLogin {
                 return true;
             }
         } else {
+            if(username==null||username.isEmpty()||character==null||character.isEmpty())
+                return false;
             SClient c = ((SClient) connController);
             System.out.println("sending");
             c.getOutput().println(username);

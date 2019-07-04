@@ -6,10 +6,11 @@ import it.polimi.ingsw.model.board.map.Square;
 import it.polimi.ingsw.model.cards.weapon.TargetAcquisition;
 import it.polimi.ingsw.model.cards.weapon.Weapon;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import static it.polimi.ingsw.view.command_line_view.CLiBoardStuff.*;
 
 /**
  *Used by {@link TargetAcquisition} class to filter target to only ones laying on the cardinal direction selected.
@@ -18,6 +19,14 @@ import static it.polimi.ingsw.view.command_line_view.CLiBoardStuff.*;
  * @author Gregorio Barzasi
  */
 public class AimDirection implements AimingFilter {
+
+
+    public static final String NORTH = "n";
+    public static final String SOUTH = "s";
+    public static final String EAST ="e";
+    public static final String WEST = "o";
+    public static final ArrayList<String> ALL_DIRECTIONS = new ArrayList<>(Arrays.asList(NORTH,SOUTH,EAST,WEST));
+
     /**
      * indicates that you can shoot through walls
      *
