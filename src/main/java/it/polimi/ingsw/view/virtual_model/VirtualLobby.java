@@ -67,8 +67,9 @@ public class VirtualLobby {
                 gameStarted = true;
                 return;
             }
-            if(((RmiClient) conn).getClientHandler().isTimerStarted()) {
+            if(!gameTimerStarted&&((RmiClient) conn).getClientHandler().isTimerStarted()) {
                 gameTimerStarted = true;
+                return;
             }
             all = ((RmiClient) conn).getClientHandler().waitUpdate();
         } else {
@@ -93,6 +94,8 @@ public class VirtualLobby {
      * Updates in game players info.
      */
     private synchronized void updatePlayers(String s){
+        if(s==null)
+            return;
         String [] allPl = s.split(INFO_SEP);
         for(String p : allPl){
             String [] plStat = p.split(",");

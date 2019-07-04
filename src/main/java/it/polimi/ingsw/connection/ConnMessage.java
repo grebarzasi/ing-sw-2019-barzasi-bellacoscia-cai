@@ -25,6 +25,4 @@ public class ConnMessage {
     public static final String NOTHING = "*NULL*";
     public static final String INFO_SEP = ";";
     public static final String INNER_SEP = ":";
-    public static final int COUNTDOWN = 5;
-
 }

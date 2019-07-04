@@ -20,7 +20,8 @@ public class ServerMessage {
     public static final String RETURN_IN_GAME="Sei stato sospeso dal server per inattività, vuoi tornare in gioco?";
 
     public static final String ADV_MODE = PURPLE_BOLD_BRIGHT+"Modalità avanzata?"+RESET;
-    public static final String ASK_TIMER = PURPLE_BOLD_BRIGHT+"Countdown di inattività?(tempo in secondi)"+RESET;
+    public static final String ASK_TIMER_I = PURPLE_BOLD_BRIGHT+"Countdown di inattività?(tempo in secondi)"+RESET;
+    public static final String ASK_TIMER_L = PURPLE_BOLD_BRIGHT+"Countdown della Lobby?(tempo in secondi)"+RESET;
 
     public static final String TEST_MODE = PURPLE_BOLD_BRIGHT+"Attivare testMode?"+RESET;
     public static final String LINE_SEP ="------------------------------\n"+RESET;

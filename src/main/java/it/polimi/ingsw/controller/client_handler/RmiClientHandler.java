@@ -17,9 +17,9 @@ import static it.polimi.ingsw.connection.server.ServerMessage.THREAD_PRIORITY;
  */
 public class RmiClientHandler extends ClientHandler implements RmiPrefInterf {
 
-
-    public String tempPlayer;
-    public ViewClient viewClient;
+    private boolean connected=true;
+    private String tempPlayer;
+    private ViewClient viewClient;
 
     public RmiClientHandler(Lobby lobby, int countdown){
         super(lobby,countdown);
@@ -62,10 +62,11 @@ public class RmiClientHandler extends ClientHandler implements RmiPrefInterf {
      */
     @Override
     public void updateLobby() { setTempPlayer(super.getLobby().toString());
-
     }
 
-    public String waitUpdate() { return getTempPlayer();
+    public String waitUpdate() {
+        connected=true;
+        return getTempPlayer();
     }
 
     public boolean isGameStarted() { return super.getLobby().hasStarted();
@@ -137,6 +138,14 @@ public class RmiClientHandler extends ClientHandler implements RmiPrefInterf {
 
     public synchronized String getTempPlayer() {
         return tempPlayer;
+    }
+
+    public boolean isConnectedLobby() {
+        return connected;
+    }
+
+    public void setConnected(boolean connected) {
+        this.connected = connected;
     }
 
     public synchronized void setTempPlayer(String tempPlayer) {

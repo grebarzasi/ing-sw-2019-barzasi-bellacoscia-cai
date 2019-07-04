@@ -29,9 +29,13 @@ public class MainServer {
      */
    private BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
     /**
-     * saves the countdown, default is 30 s
+     * saves the inactivity countdown, default is 30 s
      */
     private int countdown=30;
+    /**
+     * saves the countdown, default is 30 s
+     */
+    private int lobbyCountdown=30;
     /**
      * the server of socket connection
      */
@@ -109,16 +113,17 @@ public class MainServer {
         if(!ynAsk(ADV_MODE))
             return;
         lobby.setTestMode(ynAsk(TEST_MODE));
-        askTimer();
+        countdown=askTimer(ASK_TIMER_I);
+        lobbyCountdown=askTimer(ASK_TIMER_L);
 
     }
     /**
      * you can set your own countdown timer
      */
-    public void askTimer()throws IOException{
+    public int askTimer(String msg)throws IOException{
         String temp;
         int num=0;
-        do {System.out.println(ASK_TIMER);
+        do {System.out.println(msg);
             temp = sc.readLine();
             if(temp.isEmpty())
                 temp="30";
@@ -132,7 +137,7 @@ public class MainServer {
                 System.err.println(GENERIC_N);
             }
         }while(num<1);
-        countdown=num;
+        return num;
     }
 
     /**
@@ -175,6 +180,14 @@ public class MainServer {
 
     public Lobby getLobby() {
         return lobby;
+    }
+
+    public int getLobbyCountdown() {
+        return lobbyCountdown;
+    }
+
+    public void setLobbyCountdown(int lobbyCountdown) {
+        this.lobbyCountdown = lobbyCountdown;
     }
 
     public void setLobby(Lobby lobby) {

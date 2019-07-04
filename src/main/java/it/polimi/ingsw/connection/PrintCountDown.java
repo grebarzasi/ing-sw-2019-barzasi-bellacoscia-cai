@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view.command_line_view;
+package it.polimi.ingsw.connection;
 
 import static it.polimi.ingsw.view.command_line_view.CliMessages.*;
 
@@ -7,9 +7,9 @@ import static it.polimi.ingsw.view.command_line_view.CliMessages.*;
  *
  * @author Gregorio Barzasi
  */
-public class CliCountDown extends Thread {
+public class PrintCountDown extends Thread {
     private int time;
-    public CliCountDown(int time){
+    public PrintCountDown(int time){
         this.time=time;
     }
     @Override
@@ -21,7 +21,7 @@ public class CliCountDown extends Thread {
             try {
                 Thread.sleep(5*1000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                return;
             }
         }
         System.out.println(GAME_START);

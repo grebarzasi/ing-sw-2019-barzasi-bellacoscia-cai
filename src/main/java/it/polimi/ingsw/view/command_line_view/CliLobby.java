@@ -6,7 +6,6 @@ import it.polimi.ingsw.view.virtual_model.VirtualPlayer;
 
 import static it.polimi.ingsw.Color.*;
 import static it.polimi.ingsw.view.command_line_view.CliMessages.*;
-import static it.polimi.ingsw.connection.ConnMessage.COUNTDOWN;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,13 +22,11 @@ public class CliLobby extends Thread{
     private ConnectionTech c;
     private BufferedReader sc;
     private VirtualPlayer p;
-    private final CliCountDown count;
 
     public CliLobby(ConnectionTech c, BufferedReader sc, VirtualPlayer p){
         this.c=c;
         this.sc=sc;
         this.p=p;
-        this.count=new CliCountDown(COUNTDOWN);
     }
 
     public void startLobby()throws IOException{
@@ -132,15 +129,12 @@ public class CliLobby extends Thread{
     public void waitingRoom()throws IOException {
         clearScreen();
         System.out.println(WAITINGROOM_HEAD);
-
+        Boolean flag=true;
         while (!lobby.isGameStarted()){
-            synchronized (count) {
-                if (lobby.hasGameTimerStarted() && !count.isAlive()) {
-                    count.setPriority(THREAD_PRIORITY);
-                    count.start();
-                    lobby.setGameTimerStarted(false);
+                if (flag&&lobby.hasGameTimerStarted()) {
+                    System.out.println(COUNTDOWN_START);
+                    flag=false;
                 }
-            }
             lobby.waitUpdate();
             for(VirtualPlayer p : lobby.getNewPlayersList() ){
                 if (!p.isPrinted()) {
