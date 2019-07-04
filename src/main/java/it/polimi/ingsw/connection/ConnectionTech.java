@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 
-import static it.polimi.ingsw.connection.server.ServerMessage.PORT_ERR;
-import static it.polimi.ingsw.connection.server.ServerMessage.PORT_SELECT;
+import static it.polimi.ingsw.Color.PURPLE;
+import static it.polimi.ingsw.Color.RESET;
 
 
 /**
@@ -17,13 +17,12 @@ import static it.polimi.ingsw.connection.server.ServerMessage.PORT_SELECT;
         */
 
 public abstract class ConnectionTech extends Thread {
-    public static final String RESET = "\u001B[0m";
-    public static final String CONNECTION_OK = "Connessione stabilita\n"+RESET;
 
-    /**
-     * game lobby
-     */
-    private Lobby lobby;
+    public static final String CONNECTION_OK = "Connessione stabilita\n"+RESET;
+    public static final String PORT_ERR = "Porta non disponibile, cambiala!"+RESET;
+    public static final String PORT_SELECT = PURPLE+"Inserisci la porta: (lascia vuoto per i valori di default)"+RESET;
+
+
 
     /**
      * port number for connection, default: 1234
@@ -44,9 +43,6 @@ public abstract class ConnectionTech extends Thread {
      */
     private int countdown;
 
-    public ConnectionTech(Lobby lobby){
-        this.lobby=lobby;
-    }
     public ConnectionTech(){
     }
 
@@ -122,13 +118,5 @@ public abstract class ConnectionTech extends Thread {
 
     public void setCountdown(int countdown) {
         this.countdown = countdown;
-    }
-
-    public Lobby getLobby() {
-        return lobby;
-    }
-
-    public void setLobby(Lobby lobby) {
-        this.lobby = lobby;
     }
 }

@@ -17,10 +17,10 @@ import static it.polimi.ingsw.connection.server.ServerMessage.*;
  */
 public class SServer extends ConnectionTech {
 
-
+    private Lobby lobby;
 
     public SServer(Lobby lobby){
-        super(lobby);
+    this.lobby=lobby;
     }
     /**
      * Initialize connection and wait for client to connect
@@ -37,7 +37,7 @@ public class SServer extends ConnectionTech {
             while(true){
                 Socket client = server.accept();
                 System.out.println( "\n"+SOCKET_S_CONN+ client);
-                temp = new SocketClientHandler(client,super.getLobby(),super.getCountdown());
+                temp = new SocketClientHandler(client,lobby,super.getCountdown());
                 temp.setPriority(THREAD_PRIORITY);
                 temp.start();
             }

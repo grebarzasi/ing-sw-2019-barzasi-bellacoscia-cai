@@ -22,16 +22,17 @@ import static java.lang.Thread.sleep;
  */
 public class RmiServer extends ConnectionTech implements RmiServerInterface {
 
+    private Lobby lobby;
+
 
     public RmiServer(Lobby lobby){
-        super(lobby);
-    }
+        this.lobby=lobby;    }
 
     /**
      * after connection clients use this method to obtain {@link RmiPrefInterf} reference.
      */
     public RmiPrefInterf getClientHandler()throws RemoteException{
-        RmiPrefInterf temp=new RmiClientHandler(super.getLobby(),super.getCountdown());
+        RmiPrefInterf temp=new RmiClientHandler(lobby,super.getCountdown());
         ((ClientHandler)temp).setPriority(THREAD_PRIORITY);
         ((ClientHandler)temp).start();
         return(RmiPrefInterf) UnicastRemoteObject.exportObject(temp, 0);
