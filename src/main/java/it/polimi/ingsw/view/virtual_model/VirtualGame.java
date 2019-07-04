@@ -1,7 +1,9 @@
 package it.polimi.ingsw.view.virtual_model;
 
 import java.util.ArrayList;
-
+/**
+ *used from gui to temporary save some info
+ */
 public class VirtualGame {
 
     private String targetSquare = "";
@@ -16,7 +18,6 @@ public class VirtualGame {
     private String direction = "";
 
     private ArrayList<String> hideSquare = new ArrayList<>();
-    private ArrayList<String> ammoTiles = new ArrayList<>();
 
     private ArrayList<String> actions = new ArrayList<>();
     private String action = "";
@@ -73,10 +74,6 @@ public class VirtualGame {
         this.targetSquare = targetSquare;
     }
 
-    public synchronized String getTargetPlayer() {
-        return targetPlayer;
-    }
-
     public synchronized void setTargetPlayer(String targetPlayer) {
         this.targetPlayer = targetPlayer;
     }
@@ -109,15 +106,4 @@ public class VirtualGame {
         return hideSquare;
     }
 
-    public synchronized void setHideSquare(ArrayList<String> hideSquare) {
-        this.hideSquare = hideSquare;
-    }
-
-    public synchronized ArrayList<String> getAmmoTiles() {
-        return ammoTiles;
-    }
-
-    public synchronized void setAmmoTiles(ArrayList<String> ammoTiles) {
-        this.ammoTiles = ammoTiles;
-    }
 }

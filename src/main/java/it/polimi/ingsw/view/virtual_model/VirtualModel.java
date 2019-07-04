@@ -2,6 +2,11 @@ package it.polimi.ingsw.view.virtual_model;
 
 import java.util.ArrayList;
 
+/**
+ *
+ * manages all game info. its constantly updated by the server
+ *
+ */
 public class VirtualModel {
 
     private ArrayList<VirtualPlayer> allPlayers;
@@ -20,7 +25,9 @@ public class VirtualModel {
     }
 
 
-
+    /**
+     *locate a player given the character
+     */
     public VirtualPlayer findPlayer(String character){
         for (VirtualPlayer p : allPlayers){
             if(p.getCharacter().equals(character))

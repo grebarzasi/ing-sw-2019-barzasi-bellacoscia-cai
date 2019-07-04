@@ -5,8 +5,11 @@ import it.polimi.ingsw.connection.client.SClient;
 import it.polimi.ingsw.connection.client.RmiClient;
 
 import java.io.IOException;
-
+/**
+ * communicates with the server about your login info
+ * */
 public class VirtualLogin {
+
     private ConnectionTech connController;
     private String username;
     private String character;
@@ -19,7 +22,11 @@ public class VirtualLogin {
         this.connController=connController;
     }
 
-
+    /**
+     *
+     * sends your login info and wait until an accept or a refused
+     *
+     * */
     public boolean send() throws IOException {
         boolean flag=false;
         if (connController.isRmi()) {
@@ -54,9 +61,5 @@ public class VirtualLogin {
 
     public boolean isReconnected() {
         return reconnected;
-    }
-
-    public void setReconnected(boolean reconnected) {
-        this.reconnected = reconnected;
     }
 }

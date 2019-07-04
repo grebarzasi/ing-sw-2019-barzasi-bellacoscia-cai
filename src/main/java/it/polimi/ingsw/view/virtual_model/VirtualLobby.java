@@ -55,6 +55,8 @@ public class VirtualLobby {
             }
         }
     }
+
+
     /**
      * wait lobby update from server
      */
@@ -110,36 +112,18 @@ public class VirtualLobby {
     public synchronized boolean hasGameTimerStarted() {
         return gameTimerStarted;
     }
-    public synchronized void setGameTimerStarted(boolean time) {
-        this.gameTimerStarted=time;
-    }
-
-    public int getMapPref() {
-        return mapPref;
-    }
 
     public synchronized void setMapPref(int mapPref) {
         this.mapPref = mapPref;
-    }
-
-    public int getKillPref() {
-        return killPref;
     }
 
     public void setKillPref(int killPref) {
         this.killPref = killPref;
     }
 
-    public boolean isTerminatorPref() {
-        return terminatorPref;
-    }
 
     public void setTerminatorPref(boolean terminatorPref) {
         this.terminatorPref = terminatorPref;
-    }
-
-    public boolean isFinalFrenzyPref() {
-        return finalFrenzyPref;
     }
 
     public synchronized boolean isGameStarted() {
@@ -160,9 +144,6 @@ public class VirtualLobby {
 
     public synchronized ArrayList<VirtualPlayer> getNewPlayersList() {
         return newPlayersList;
-    }
-    public synchronized void setNewPlayersList(ArrayList<VirtualPlayer> list) {
-        this.newPlayersList = list;
     }
 
     public synchronized HashMap<String, VirtualPlayer> getPlayers() {

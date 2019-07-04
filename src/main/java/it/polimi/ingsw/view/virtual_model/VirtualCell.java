@@ -1,5 +1,8 @@
 package it.polimi.ingsw.view.virtual_model;
-
+/**
+ *smalles piece of a map.if is armory content contains ammo info, else in contains care package info
+ *
+ */
 public class VirtualCell {
     private String content="";
     private boolean armory;

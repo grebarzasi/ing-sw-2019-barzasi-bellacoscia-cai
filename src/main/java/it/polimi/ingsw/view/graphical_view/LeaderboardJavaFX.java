@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -179,25 +180,30 @@ public class LeaderboardJavaFX extends Application {
             case(5):{
                 txt5.setText(all.get(4).getUsername() + " : " + all.get(4).getPoints() + " punti");
                 txt5.setStyle("-fx-text-fill:" + all.get(4).getCharacter() );
+                txt5.setFont(Font.font("Verdana", FontWeight.BOLD,14));
             }
             case(4):{
                 txt4.setText(all.get(3).getUsername() + " : " + all.get(3).getPoints() + " punti");
                 txt4.setStyle("-fx-text-fill:" + all.get(3).getCharacter() );
+                txt4.setFont(Font.font("Verdana", FontWeight.BOLD,14));
 
             }
             case(3):{
                 txt3.setText(all.get(2).getUsername() + " : " + all.get(2).getPoints() + " punti");
                 txt3.setStyle("-fx-text-fill:" + all.get(2).getCharacter() );
+                txt3.setFont(Font.font("Verdana", FontWeight.BOLD,18));
 
             }
             case(2):{
                 txt2.setText(all.get(1).getUsername() + " : " + all.get(1).getPoints() + " punti");
                 txt2.setStyle("-fx-text-fill:" + all.get(1).getCharacter() );
+                txt2.setFont(Font.font("Verdana", FontWeight.BOLD,20));
 
             }
             case(1):{
                 txt1.setText(all.get(0).getUsername() + " : " + all.get(0).getPoints() + " punti");
                 txt1.setStyle("-fx-text-fill:" + all.get(0).getCharacter() );
+                txt1.setFont(Font.font("Verdana", FontWeight.BOLD,24));
 
             }
             default:{

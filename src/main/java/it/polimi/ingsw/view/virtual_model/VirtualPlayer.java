@@ -8,17 +8,49 @@ import java.util.ArrayList;
  */
 public class VirtualPlayer {
 
+    /**
+     *username of the player
+     */
     private String username;
+    /**
+     *character of the player
+     */
     private String character;
+    /**
+     *row position of the player
+     */
     private int row;
+    /**
+     *column position of the player
+     */
     private int column;
+    /**
+     *indicates that the board has been already printed
+     */
     private boolean printed;
+    /**
+     *saves player point
+     */
     private int points;
-//    private HashMap<String,Boolean> weapons;
+    /**
+     *weapons owned by the player
+     */
     private ArrayList<String> weapons;
+    /**
+     *powerups owned by the player
+     */
     private  ArrayList<String> powerUps;
+    /**
+     *player personal board
+     */
     private VirtualPlayerBoard pBoard;
+    /**
+     *player inactivity state
+     */
     private boolean inactive;
+    /**
+     *client connection state
+     */
     private boolean disconnected;
 
 
@@ -112,10 +144,6 @@ public class VirtualPlayer {
 
     public VirtualPlayerBoard getpBoard() {
         return pBoard;
-    }
-
-    public void setpBoard(VirtualPlayerBoard pBoard) {
-        this.pBoard = pBoard;
     }
 
     public boolean isDisconnected() {

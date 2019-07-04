@@ -1,7 +1,9 @@
 package it.polimi.ingsw.view.virtual_model;
 
 import java.util.ArrayList;
-
+/**
+ *saves all personal info
+ */
 public class VirtualPlayerBoard {
     private ArrayList<String> damage=new ArrayList<>();
     private ArrayList<String> marks= new ArrayList<>();

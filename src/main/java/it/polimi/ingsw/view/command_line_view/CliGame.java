@@ -391,9 +391,11 @@ public class CliGame implements ViewClient {
         System.exit(0);
         }
 
-
+    /**
+     *Shows the effect of weapon actually in use
+     *
+     */
     public String showEffects(ArrayList<String> args) {
-        System.out.println("\n"+args);
         int i;
         String temp[];
         int reply=0;
@@ -421,16 +423,12 @@ public class CliGame implements ViewClient {
      * @param message update info
      */
     public void updateModel(String message) {
-        System.out.println(message);
         parser.updateModel(message);
         clearScreen();
         board.draw();
     }
 
 
-    public String singleTargetingShowTarget(ArrayList<String> args) {
-        return null;
-    }
 
     /**
      * Show the possible target that a player can hit then makes the user choose one,

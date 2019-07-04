@@ -1,24 +1,24 @@
 package it.polimi.ingsw.view.virtual_model;
 
-import it.polimi.ingsw.connection.ConnectionTech;
 
 import java.util.ArrayList;
-
+/**
+ *Represent The board client side.
+ * */
 public class VirtualBoard {
-    private ConnectionTech conn;
+    /**
+     *number of skulls on board
+     */
     private int skull;
+    /**
+     *killshot track info saved under the form of arraylist of string made like this:
+     * char;char; (char = the color of the player ) where every place indicates a token
+     */
     private ArrayList<String> killshotTrack=new ArrayList<>();
+    /**
+     *game map
+     */
     private VirtualMap map = new VirtualMap();
-
-
-
-    public ConnectionTech getConn() {
-        return conn;
-    }
-
-    public void setConn(ConnectionTech conn) {
-        this.conn = conn;
-    }
 
     public int getSkull() {
         return skull;
