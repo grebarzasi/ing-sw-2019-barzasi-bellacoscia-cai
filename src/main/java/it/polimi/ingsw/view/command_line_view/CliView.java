@@ -28,17 +28,11 @@ public class CliView {
     private BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
     private VirtualPlayer p;
     private CliLobby lobby;
-    private CliGame view;
     private VirtualLogin l;
 
     private String ip;
     private int port;
 
-
-    public static void main(String args[]) {
-        CliView cliView = new CliView();
-        cliView.start();
-    }
 
 
     public void start(){
