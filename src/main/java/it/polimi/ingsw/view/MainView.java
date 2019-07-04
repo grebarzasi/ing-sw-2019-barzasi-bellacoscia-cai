@@ -213,7 +213,6 @@ public class MainView extends Application {
                 c.run();
 
                 if(c.connected()) {
-
                     loginWindow lw = new loginWindow();
                     lw.show();
                 }
@@ -350,6 +349,7 @@ public class MainView extends Application {
                 try {
                     p = new VirtualPlayer(username,color);
                     if(login.send()){
+                        btnLobby.fire();
                         this.close();
                     }else{
                         actiontarget.setFill(Color.RED);
@@ -359,9 +359,10 @@ public class MainView extends Application {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-                btnLobby.setOpacity(1);
-                if(login.isReconnected())
+                if(login.isReconnected()) {
                     btnLobby.fire();
+                    this.close();
+                }
             });
 
         }
