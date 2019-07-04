@@ -22,6 +22,10 @@ import java.util.ArrayList;
 
 import static it.polimi.ingsw.connection.ConnMessage.*;
 
+/**
+ * This class build a json string with all model info.
+ * @author Gregorio Barzasi
+ */
 public class UpdateBuilder {
     public static final String TERMINATOR_NAME = "THANOS";
     private Controller controller;
@@ -32,7 +36,9 @@ public class UpdateBuilder {
         this.controller=conn;
     }
 
-
+    /**
+     * @return the created json node
+     */
     public JsonNode create(){
         ObjectNode rootNode = mapper.createObjectNode();
         rootNode.set("players",allPlayersNode());
@@ -41,7 +47,9 @@ public class UpdateBuilder {
 
         return rootNode;
     }
-
+    /**
+     * @return the created json node with all players info
+     */
     private ObjectNode allPlayersNode(){
         ArrayList<Player> players = controller.getModel().getPlayerList();
         ObjectNode playersNode = mapper.createObjectNode();
@@ -54,7 +62,9 @@ public class UpdateBuilder {
 
         return playersNode;
     }
-
+    /**
+     * @return the created json node with bot info if is present
+     */
     private ObjectNode botNode(Figure p){
         ObjectNode playerNode = mapper.createObjectNode();
         //username,points and position ( "row:column")
@@ -72,15 +82,7 @@ public class UpdateBuilder {
         weaponNode.put("LA",true);
         weaponNode.put("VISTA",true);
         playerNode.set("weapons",weaponNode);
-
-//        //add pu
-            ObjectNode puNode = mapper.createObjectNode();
-//        Integer i=0;
-//        for(PowerUp pu :p.getPowerupList()) {
-//            puNode.put(i.toString(),pu.getName()+INNER_SEP+pu.getAmmoOnDiscard().toString());
-//            i++;
-//        }
-
+        ObjectNode puNode = mapper.createObjectNode();
         playerNode.set("powerups",puNode);
 
         //add board section
@@ -89,7 +91,9 @@ public class UpdateBuilder {
         return playerNode;
     }
 
-
+    /**
+     * @return the created json node with a player info such as state and points
+     */
     private ObjectNode playerNode(Player p){
         ObjectNode playerNode = mapper.createObjectNode();
         //username,points and position ( "row:column")
@@ -125,6 +129,10 @@ public class UpdateBuilder {
         return playerNode;
     }
 
+    /**
+     * @return the created json node with player board info given a player
+     * @param p the player who need to be read
+     */
     private ObjectNode boardNode(Figure p){
 
             ObjectNode boardNode = mapper.createObjectNode();
@@ -157,6 +165,9 @@ public class UpdateBuilder {
 
         }
 
+    /**
+     * @return build the info from main board
+     */
         private ObjectNode mainBoardNode(){
          ObjectNode mainBoardNode = mapper.createObjectNode();
          Board board=controller.getModel().getBoard();
@@ -181,6 +192,9 @@ public class UpdateBuilder {
          return mainBoardNode;
         }
 
+    /**
+     * @return the string with info relative to killshottrack
+     */
     private String killshottrack(){
         Board board=controller.getModel().getBoard();
         ArrayList<ArrayList<Token>> killshot = board.getTrack().getKillsTrack();
@@ -192,7 +206,9 @@ public class UpdateBuilder {
         }
         return s.toString();
     }
-
+    /**
+     * @return the created json node map cells
+     */
         private ObjectNode createCellNode(Map map, boolean isArmory){
         ObjectNode node = mapper.createObjectNode();
         Square[][] sq = map.getSquareMatrix();
