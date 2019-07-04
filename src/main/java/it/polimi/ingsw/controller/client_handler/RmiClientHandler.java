@@ -1,6 +1,6 @@
 package it.polimi.ingsw.controller.client_handler;
 
-import it.polimi.ingsw.connection.client.rmi.RmiPrefInterf;
+import it.polimi.ingsw.connection.RmiPrefInterf;
 import it.polimi.ingsw.controller.Lobby;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.ViewClient;

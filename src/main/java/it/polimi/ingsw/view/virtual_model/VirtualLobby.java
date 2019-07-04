@@ -1,8 +1,8 @@
 package it.polimi.ingsw.view.virtual_model;
 
 import it.polimi.ingsw.connection.ConnectionTech;
-import it.polimi.ingsw.connection.client.rmi.RmiClient;
-import it.polimi.ingsw.connection.client.socket.SClient;
+import it.polimi.ingsw.connection.client.RmiClient;
+import it.polimi.ingsw.connection.client.SClient;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package it.polimi.ingsw.connection.client.socket;
+package it.polimi.ingsw.connection.client;
 
 import it.polimi.ingsw.connection.DisconnectionHandler;
 import it.polimi.ingsw.ViewClient;

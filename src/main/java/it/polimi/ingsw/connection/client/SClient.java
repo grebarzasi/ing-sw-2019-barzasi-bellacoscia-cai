@@ -1,4 +1,4 @@
-package it.polimi.ingsw.connection.client.socket;
+package it.polimi.ingsw.connection.client;
 
 
 import it.polimi.ingsw.connection.ConnectionTech;
@@ -7,7 +7,7 @@ import it.polimi.ingsw.connection.DisconnectionHandler;
 import java.io.*;
 import java.net.Socket;
 
-import static it.polimi.ingsw.connection.server.ServerMessage.CONNECTION_OK;
+
 
 
 /**

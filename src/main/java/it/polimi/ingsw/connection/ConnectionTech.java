@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+
 import static it.polimi.ingsw.connection.server.ServerMessage.PORT_ERR;
 import static it.polimi.ingsw.connection.server.ServerMessage.PORT_SELECT;
 
@@ -16,6 +17,9 @@ import static it.polimi.ingsw.connection.server.ServerMessage.PORT_SELECT;
         */
 
 public abstract class ConnectionTech extends Thread {
+    public static final String RESET = "\u001B[0m";
+    public static final String CONNECTION_OK = "Connessione stabilita\n"+RESET;
+
     /**
      * game lobby
      */

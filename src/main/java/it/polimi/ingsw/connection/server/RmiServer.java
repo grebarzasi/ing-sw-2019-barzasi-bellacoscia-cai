@@ -1,6 +1,7 @@
 package it.polimi.ingsw.connection.server;
 
-import it.polimi.ingsw.connection.client.rmi.RmiPrefInterf;
+import it.polimi.ingsw.connection.RmiServerInterface;
+import it.polimi.ingsw.connection.RmiPrefInterf;
 import it.polimi.ingsw.controller.client_handler.ClientHandler;
 import it.polimi.ingsw.connection.ConnectionTech;
 import it.polimi.ingsw.controller.Lobby;
@@ -19,7 +20,7 @@ import static java.lang.Thread.sleep;
  * Server side communication class. Rmi technology.
  * @author Gregorio Barzasi
  */
-public class RmiServer extends ConnectionTech implements RmiServerInterface{
+public class RmiServer extends ConnectionTech implements RmiServerInterface {
 
 
     public RmiServer(Lobby lobby){

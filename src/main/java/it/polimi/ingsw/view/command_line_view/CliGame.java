@@ -2,9 +2,9 @@ package it.polimi.ingsw.view.command_line_view;
 
 import it.polimi.ingsw.ViewClient;
 import it.polimi.ingsw.connection.ConnectionTech;
-import it.polimi.ingsw.connection.client.rmi.RmiClient;
-import it.polimi.ingsw.connection.client.socket.SClient;
-import it.polimi.ingsw.connection.client.socket.SClientCommManager;
+import it.polimi.ingsw.connection.client.RmiClient;
+import it.polimi.ingsw.connection.client.SClient;
+import it.polimi.ingsw.connection.client.SClientCommManager;
 import it.polimi.ingsw.view.virtual_model.*;
 
 import java.io.BufferedReader;

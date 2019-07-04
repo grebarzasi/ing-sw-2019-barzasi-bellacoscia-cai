@@ -2,9 +2,9 @@ package it.polimi.ingsw.view.graphical_view;
 
 import it.polimi.ingsw.ViewClient;
 import it.polimi.ingsw.connection.ConnectionTech;
-import it.polimi.ingsw.connection.client.rmi.RmiClient;
-import it.polimi.ingsw.connection.client.socket.SClient;
-import it.polimi.ingsw.connection.client.socket.SClientCommManager;
+import it.polimi.ingsw.connection.client.RmiClient;
+import it.polimi.ingsw.connection.client.SClient;
+import it.polimi.ingsw.connection.client.SClientCommManager;
 import it.polimi.ingsw.utils.FileLoader;
 import it.polimi.ingsw.view.virtual_model.*;
 import javafx.animation.Interpolator;
@@ -31,7 +31,6 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.rmi.RemoteException;
