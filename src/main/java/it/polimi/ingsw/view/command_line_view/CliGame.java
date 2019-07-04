@@ -41,7 +41,9 @@ public class CliGame implements ViewClient {
         this.parser=new UpdateParser(board.getModel());
         this.c=c;
     }
-
+    /**
+     *Initilize the communication and starts the game session
+     */
     public void gameStart(){
         if(!c.isRmi()) {
             ((SClient) c).setCommManager(new SClientCommManager(((SClient) c), this));
@@ -54,9 +56,11 @@ public class CliGame implements ViewClient {
                 e.printStackTrace();
             }
         }
-        System.out.print("\nWaiting for board to deploy\n");
+        System.out.print("\nAttendi lo spawn della board\n");
     }
-
+    /**
+     *Offer a generic choice to the player between elemets of an array
+     */
     public String genericChoice(ArrayList<String> args,String q, String error, boolean printArgs) {
         int i =1;
         String temp[];
@@ -84,7 +88,9 @@ public class CliGame implements ViewClient {
             return NOTHING;
         return args.get(reply-1);
     }
-
+    /**
+     *print array element and verify that the reply is in the array
+     */
     public int chooseFromArray(ArrayList<String>args, String err){
         String s ="";
         int reply=0;
@@ -242,6 +248,11 @@ public class CliGame implements ViewClient {
         return reply;
     }
 
+    /**
+     * Shows the Cells
+     *
+     * @param args the Cells to show
+     */
     public void printCells(ArrayList<String> args) {
         HashMap<String,String> orizontal=new HashMap<>();
         orizontal.put("0","A");
@@ -371,6 +382,12 @@ public class CliGame implements ViewClient {
             System.out.println(") " +k.getPoints());
         }
 
+        System.out.println("\nPremi un tasto per chiudere");
+        try {
+            sc.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         System.exit(0);
         }
 
@@ -398,7 +415,11 @@ public class CliGame implements ViewClient {
             return NOTHING;
         return args.get(reply-1);
     }
-
+    /**
+     *calls the update
+     *
+     * @param message update info
+     */
     public void updateModel(String message) {
         System.out.println(message);
         parser.updateModel(message);
@@ -406,23 +427,18 @@ public class CliGame implements ViewClient {
         board.draw();
     }
 
-    /**
-     * Show the possible moves that a player can perform then makes the user choose one,
-     * then returns it
-     *
-     * @param args the moves to show
-     * @return the chosen one
-     */
-    /**
-     * Displays a message and makes the user make a boolean choice
-     *
-     * @param args
-     * @return the user's choice
-     */
+
     public String singleTargetingShowTarget(ArrayList<String> args) {
         return null;
     }
 
+    /**
+     * Show the possible target that a player can hit then makes the user choose one,
+     * then returns it
+     *
+     * @param args the target to show
+     * @return the target choice
+     */
     public String showTargetAdvanced(ArrayList<String> args) {
         clearScreen();
         board.draw();
@@ -491,7 +507,10 @@ public class CliGame implements ViewClient {
 
         return def;
     }
-
+    /**
+     * Verify that players are from different square
+     *
+     */
     public boolean verifyDiffSquare(ArrayList<String> args,String test){
         VirtualPlayer p = board.getModel().findPlayer(test);
         VirtualPlayer v;

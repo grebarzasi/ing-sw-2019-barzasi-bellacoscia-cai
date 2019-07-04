@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import static it.polimi.ingsw.connection.ConnMessage.*;
 /**
+ * This class handle the communication between Scocket server and socket client
  * @author Gregorio Barzasi
  */
 public class SClientCommManager extends Thread{
@@ -26,7 +27,9 @@ public class SClientCommManager extends Thread{
         this.i=s.getInput();
         this.v=v;
     }
-
+    /**
+     *listen the socket input stream and does stuff based on the input
+     */
     public void listen(){
         String msg;
         String args;
@@ -34,8 +37,8 @@ public class SClientCommManager extends Thread{
         while(goOn){
 
             msg= i.readLine();
-            if(!msg.equals(PING))
-                System.out.println("\n"+msg);
+//            if(!msg.equals(PING))
+//                System.out.println("\n"+msg);
             switch (msg){
                 case PING:
                     o.println(PONG);
@@ -66,20 +69,10 @@ public class SClientCommManager extends Thread{
                     args=i.readLine();
                     o.println(v.showPossibleMoves(parseString(args)));
                     break;
-                case SHOW_TARGETS:
-                    o.println(AKN);
-                    args=i.readLine();
-                    o.println(v.showTargets(parseString(args)));
-                    break;
                 case CHOOSE_DIRECTION:
                     o.println(AKN);
                     args=i.readLine();
                     o.println(v.chooseDirection(parseString(args)));
-                    break;
-                case SHOW_SINGLE_TARGET:
-                    o.println(AKN);
-                    args=i.readLine();
-                    o.println(v.singleTargetingShowTarget(parseString(args)));
                     break;
                 case SHOW_TARGET_ADV:
                     o.println(AKN);
@@ -118,7 +111,9 @@ public class SClientCommManager extends Thread{
         }
     }
 
-    //Parse args info
+    /**
+     *parse string info into an array list
+     */
     public ArrayList<String> parseString(String args){
         ArrayList<String> sList = new ArrayList<>();
         if(args.equals(NOTHING)) {

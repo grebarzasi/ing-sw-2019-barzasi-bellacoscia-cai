@@ -2346,8 +2346,6 @@ public class GameJavaFX extends Application implements ViewClient {
         return res;
     }
 
-    @Override
-    public String showTargets(ArrayList<String> args) {return null;}
 
 
     @Override
@@ -2498,8 +2496,6 @@ public class GameJavaFX extends Application implements ViewClient {
 
     }
 
-    @Override
-    public String singleTargetingShowTarget(ArrayList<String> args) { return null; }
 
     @Override
     public void updateModel(String message) {

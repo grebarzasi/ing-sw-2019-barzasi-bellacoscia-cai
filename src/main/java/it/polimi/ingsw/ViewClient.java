@@ -45,14 +45,6 @@ public interface ViewClient extends Remote {
 
     public String showPossibleMoves(ArrayList<String> args)throws RemoteException;
 
-    /**
-     * Shows the valid targets a Figure can target, then returns the targets the user decides
-     * to hit
-     * @param args the valid targets
-     * @return the chosen targets
-     */
-
-    public String showTargets(ArrayList<String> args)throws RemoteException;
 
     /**
      * returns the chosen one direction
@@ -61,13 +53,6 @@ public interface ViewClient extends Remote {
 
     public String chooseDirection(ArrayList<String> args)throws RemoteException;
 
-    /**
-     * Displays a message and makes the user make a boolean choice
-     *
-     *
-     * @return the user's choice
-     */
-    public String singleTargetingShowTarget(ArrayList<String> args)throws RemoteException;
 
     /**
      * Displays a message and makes the user make a boolean choice

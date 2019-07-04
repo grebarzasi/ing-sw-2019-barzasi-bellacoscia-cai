@@ -21,9 +21,10 @@ public class UpdateParser {
         this.model=model;
     }
 
-
+    /**
+     * manage the update process
+     */
     public void updateModel(String s){
-        //System.out.println(s);
         ObjectMapper mapper = new ObjectMapper();
         // path of weapons data
         try {
@@ -38,6 +39,10 @@ public class UpdateParser {
         }
         model.setUpdated(true);
     }
+
+    /**
+     * read players info
+     */
 
     public void parsePlayers(JsonNode node){
         Iterator<String> characterIterator = node.fieldNames();
@@ -76,7 +81,9 @@ public class UpdateParser {
         }
         model.setOwner(model.findPlayer(model.getOwner().getCharacter()));
     }
-
+    /**
+     * read weapon info and put them into virtual model
+     */
     public  ArrayList<String> parseWeapon(JsonNode node){
         Iterator<String> weaponsIterator = node.fieldNames();
         ArrayList<String> weaponsOwned = new  ArrayList<>();
@@ -88,7 +95,9 @@ public class UpdateParser {
         }
         return weaponsOwned;
     }
-
+    /**
+     * parse pu info
+     */
     public ArrayList<String> parsePowerUp(JsonNode node){
         Iterator<String> puIterator = node.fieldNames();
         ArrayList<String> puOwned =new ArrayList<>();
@@ -98,9 +107,10 @@ public class UpdateParser {
         }
         return puOwned;
     }
-
+    /**
+     *parse damage and marks, then set to the player
+     */
     public void parsePlayerBoard(JsonNode node,VirtualPlayerBoard board){
-        //parse damage and marks, then set to the player
         ArrayList<String> damage = new ArrayList<>();
         ArrayList<String> marks = new ArrayList<>();
 
@@ -124,7 +134,9 @@ public class UpdateParser {
         board.setAmmoBlue(ammoNode.path("blue").asInt());
         board.setAmmoYellow(ammoNode.path("yellow").asInt());
     }
-
+    /**
+     *Read board info and fill vmodel
+     */
     public void parseBoard(JsonNode node){
         model.getBoard().setSkull(node.path("skull").asInt());
         model.setFrenzy(node.path("frenzy").asBoolean());
@@ -144,7 +156,9 @@ public class UpdateParser {
 
     }
 
-
+    /**
+     *parse cells info and set armory
+     */
     public void parseCell(JsonNode node,boolean armory) {
 
         Iterator<String> cellsIterator = node.fieldNames();
@@ -156,7 +170,9 @@ public class UpdateParser {
                 model.getBoard().getMap().getCells().put(cell,new VirtualCell(node.path(cell).asText(),armory));
         }
     }
-
+    /**
+     *parse armory cells and not spawn cells
+     */
     public void parseMap(JsonNode node) {
 
         //parse pU cells
