@@ -27,17 +27,28 @@
 
 ## Instructions for starting the game
 
+## Running the App
+
 ### From IntelliJ
+
+To start the server run MainServer located in the connection package. 
+To start the client run MainView in the view package.
+
+### With JAR
+
+To be updated
+
+## Getting Started
 
 #### Starting the Server
 
-To start the server run MainServer located in the connection package. To run the server locally leave all fields empty by just pressing enter, rmi and socket ports will be set to default (IP: 127.0.0.1, port: 1234).
+To run the server locally leave all fields empty by just pressing enter, rmi and socket ports will be set to default (IP: 127.0.0.1, port: 1234).
 
 Advanced mode enables customisation of timer setting and test mode. In test mode the KillShot track is initialised with two skulls to allow the game to end faster and the bot deals 11 Damage.
 
 #### Starting the Client
 
-To start the client run MainView in the view package. Upon starting the game the user will be asked to select between a Graphical Interface and a Command Line Interface, the interface can be selected by entering a number (1 for CLI and 2 for GUI) or by entering the type of the desired interface (gui or cli, the selection is not case sensitive).
+Upon starting the game the user will be asked to select between a Graphical Interface and a Command Line Interface, the interface can be selected by entering a number (1 for CLI and 2 for GUI) or by entering the type of the desired interface (gui or cli, the selection is not case sensitive).
 
 #### From CLI
 
@@ -55,6 +66,3 @@ After being accepted the player will be asked to decide the game preferences (in
 
 After a countdown the game will be started.
 
-### With JAR
-
-To be updated
