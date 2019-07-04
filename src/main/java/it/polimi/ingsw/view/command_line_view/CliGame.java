@@ -19,8 +19,6 @@ import static it.polimi.ingsw.view.command_line_view.CLiBoardStuff.*;
 import static it.polimi.ingsw.Color.*;
 import static it.polimi.ingsw.view.command_line_view.CliMessages.*;
 import static it.polimi.ingsw.connection.ConnMessage.*;
-import static it.polimi.ingsw.connection.server.ServerMessage.THREAD_PRIORITY;
-import static java.lang.Thread.sleep;
 
 /**
  * this class implements all methods needed in game to actually play the game. it receives request from server and
@@ -30,6 +28,8 @@ import static java.lang.Thread.sleep;
  */
 
 public class CliGame implements ViewClient {
+
+    public static final int THREAD_PRIORITY=3;
 
     private BufferedReader sc=new BufferedReader(new InputStreamReader(System.in));
     private CliBoard board;

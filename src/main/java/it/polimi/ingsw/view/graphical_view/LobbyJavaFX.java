@@ -37,7 +37,6 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-import static it.polimi.ingsw.connection.server.ServerMessage.THREAD_PRIORITY;
 import static it.polimi.ingsw.view.graphical_view.GUIFiles.*;
 import static java.lang.Thread.sleep;
 
@@ -46,6 +45,8 @@ import static java.lang.Thread.sleep;
  * @author Carlo Bellacoscia
  */
 public class LobbyJavaFX extends Application {
+
+    public static final int THREAD_PRIORITY=3;
 
     private double widthScreen;
     private double widthLateral;

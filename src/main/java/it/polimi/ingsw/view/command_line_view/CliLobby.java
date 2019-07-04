@@ -7,7 +7,6 @@ import it.polimi.ingsw.view.virtual_model.VirtualPlayer;
 import static it.polimi.ingsw.Color.*;
 import static it.polimi.ingsw.view.command_line_view.CliMessages.*;
 import static it.polimi.ingsw.connection.ConnMessage.COUNTDOWN;
-import static it.polimi.ingsw.connection.server.ServerMessage.THREAD_PRIORITY;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,6 +16,9 @@ import java.io.IOException;
  * @author Gregorio Barzasi
  */
 public class CliLobby extends Thread{
+
+    public static final int THREAD_PRIORITY=3;
+
     private VirtualLobby lobby;
     private ConnectionTech c;
     private BufferedReader sc;
