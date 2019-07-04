@@ -27,6 +27,7 @@ public class WeaponBuilder {
     public static Weapon buildWeapon(String name) {
         FileLoader fileLoader = new FileLoader();
         ObjectMapper mapper = new ObjectMapper();
+
         // path of weapons data
         InputStream jsonFile = fileLoader.getResource(String.format("%s%s.json", PATH, name));
         try {
