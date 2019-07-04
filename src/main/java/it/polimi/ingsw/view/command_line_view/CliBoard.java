@@ -365,13 +365,13 @@ public class CliBoard {
         //System.out.print(WHITE+"╲");
         System.out.print(RESET+""+BLACK_BOLD+"");
         if (p.getCharacter().equals(model.getTurn().getCharacter())) {
-            System.out.print(BLACK_B);
-            System.out.print(WHITE_BOLD_BRIGHT);
+            System.out.print(WHITE_B);
+            System.out.print(BLACK_BOLD_BRIGHT);
         }else if (p.isInactive()) {
             System.out.print(YELLOW_B);
-            System.out.print(WHITE_BOLD_BRIGHT);
+            System.out.print(BLACK_BOLD_BRIGHT);
         }else {
-            System.out.print(WHITE_BACKGROUND_BRIGHT);
+            System.out.print(BLACK_BACKGROUND_BRIGHT);
             if(p.getUsername().equals(TERMINATOR_NAME)) {
                 System.out.print(RED_BOLD_BRIGHT);
             }
@@ -387,7 +387,7 @@ public class CliBoard {
         printPawn(p.getCharacter());
         //Print marks
         //System.out.print(WHITE+"╱"+"╲"+WHITE_UNDERLINED+" ╭");
-        System.out.print(WHITE_UNDERLINED+"   ["+BLACK_BOLD+(model.getAllPlayers().indexOf(p)+1)+""+WHITE_UNDERLINED+"] ╭"+WHITE);
+        System.out.print(WHITE_UNDERLINED+"   ["+WHITE_BOLD+(model.getAllPlayers().indexOf(p)+1)+""+WHITE_UNDERLINED+"] ╭"+WHITE);
 
         for (String d : p.getpBoard().getMarks()) {
             printToken(d);
@@ -423,7 +423,7 @@ public class CliBoard {
         int i = 0;
         System.out.print(RESET+"├");
         //UsernameSpace
-        System.out.print(WHITE+"╾");
+        System.out.print(WHITE+"");
         for (String d : p.getpBoard().getDamage()) {
             if(i==2||i==5||i==10){
                 System.out.print(WHITE_UNDERLINED+"╮╭"+RESET);
