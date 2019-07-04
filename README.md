@@ -40,9 +40,11 @@ run the fullowing lines in the command prompt or use the .sh files, it is import
 
 ##### For Client
 java -jar -Dfile.encoding=UTF8 client.jar
+
 PAUSE
 ##### For Server
 java -jar -Dfile.encoding=UTF8 server.jar
+
 PAUSE
 
 ## Getting Started
