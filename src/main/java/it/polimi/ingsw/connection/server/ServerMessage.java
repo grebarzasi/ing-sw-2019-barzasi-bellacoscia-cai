@@ -19,7 +19,7 @@ public class ServerMessage {
     public static final String CLIENT_UNREACHABLE=" disconnesso dal gioco";
     public static final String RETURN_IN_GAME="Sei stato sospeso dal server per inattività, vuoi tornare in gioco?";
 
-    public static final String ADV_MODE = PURPLE_BOLD_BRIGHT+"Modalità avanzata?"+RESET;
+    public static final String ADV_MODE = PURPLE_BOLD_BRIGHT+"Impostazioni avanzate?"+RESET;
     public static final String ASK_TIMER_I = PURPLE_BOLD_BRIGHT+"Countdown di inattività?(tempo in secondi)"+RESET;
     public static final String ASK_TIMER_L = PURPLE_BOLD_BRIGHT+"Countdown della Lobby?(tempo in secondi)"+RESET;
 
@@ -42,12 +42,6 @@ public class ServerMessage {
     public static final String SOCKET_S_CONN=SOCKET_COLOR+"Socket client connsesso:";
     public static final String SOCKET_S_ERR=RED+"Socket Server: qualcosa è andato storto!";
 
-
-    public static void clearScreen() {
-            final int CLEAR_NUM=20;
-            for(int i =0; i<CLEAR_NUM;i++)
-                System.out.print("\n");
-        }
 
     }
 

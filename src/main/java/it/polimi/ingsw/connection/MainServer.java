@@ -10,8 +10,12 @@ import it.polimi.ingsw.controller.Controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 
+import static it.polimi.ingsw.Color.BLUE;
+import static it.polimi.ingsw.Color.GREEN;
 import static it.polimi.ingsw.connection.server.ServerMessage.*;
 import static it.polimi.ingsw.connection.server.ServerMessage.GENERIC_N;
 import static it.polimi.ingsw.connection.server.ServerMessage.LINE_SEP;
@@ -78,6 +82,11 @@ public class MainServer {
 
         rmiServer.setCountdown(countdown);
         socketServer.setCountdown(countdown);
+
+        try {
+            System.out.println(GREEN+"\nYOUR IP: "+InetAddress.getLocalHost().getHostAddress());
+        } catch (UnknownHostException e) {
+        }
 
         System.out.println();
         System.out.println(RMI_MSG);
@@ -162,21 +171,7 @@ public class MainServer {
 
     }
 
-    public SServer getSocketServer() {
-        return socketServer;
-    }
 
-    public void setSocketServer(SServer socketServer) {
-        this.socketServer = socketServer;
-    }
-
-    public RmiServer getRmiServer() {
-        return rmiServer;
-    }
-
-    public void setRmiServer(RmiServer rmiServer) {
-        this.rmiServer = rmiServer;
-    }
 
     public Lobby getLobby() {
         return lobby;
@@ -184,10 +179,6 @@ public class MainServer {
 
     public int getLobbyCountdown() {
         return lobbyCountdown;
-    }
-
-    public void setLobbyCountdown(int lobbyCountdown) {
-        this.lobbyCountdown = lobbyCountdown;
     }
 
     public void setLobby(Lobby lobby) {
