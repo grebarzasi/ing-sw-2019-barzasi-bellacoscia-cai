@@ -157,19 +157,15 @@ public class MainView extends Application {
         /**
          * set buttons
          */
-        Button btnRules = new Button();
         Button btnLogin = new Button("Login");
         Button btnSettings = new Button("Settings");
         Image imgLogin = new Image(fileLoader.getResource(PATH_LOGIN),widthScreen/3,heightBtn,true,true);
         btnLogin.setGraphic(new ImageView(imgLogin));
         Image imgSettings = new Image(fileLoader.getResource(PATH_SETTINGS),widthScreen/3,heightBtn,true,true);
         btnSettings.setGraphic(new ImageView(imgSettings));
-        Image imgRules = new Image(fileLoader.getResource(PATH_RULES),widthScreen/3,heightBtn,true,true);
-        btnRules.setGraphic(new ImageView(imgRules));
 
         HBox buttonList = new HBox(20);
         buttonList.setAlignment(Pos.CENTER);
-        buttonList.getChildren().add(btnRules);
         buttonList.getChildren().add(btnLogin);
         buttonList.getChildren().add(btnSettings);
 
@@ -255,6 +251,8 @@ public class MainView extends Application {
                 }
                 c.run();
 
+             if(!c.connected())
+                 this.close();
 
             Scene scene = new Scene(new BorderPane(),700,400);
             this.setTitle("Login");
