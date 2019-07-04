@@ -413,21 +413,22 @@ public class MainView extends Application {
 
             btnPort.setOnAction(e->{
                 try {
-                    port = Integer.parseInt(txtPort.getText());
+                    int temp = Integer.parseInt(txtPort.getText());
+                    if (!(temp <= 1023 || temp > 49151))
+                        port = temp;
                 }catch(NumberFormatException x){
-                    port=0;
                 }
 
 
             });
 
             btnIP.setOnAction(e->{
-
-                ip = txtIP.getText();
+                String temp;
+                temp = txtIP.getText();
                 try {
-                    if(!ip.isEmpty())
-                        InetAddress.getByName(ip);
-
+                    if(!temp.isEmpty())
+                        InetAddress.getByName(temp);
+                        ip=temp;
                 }catch(java.net.UnknownHostException x){}
 
             });
