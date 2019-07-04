@@ -10,7 +10,6 @@ public class ServerMessage {
     public static final String IP_SELECT = PURPLE+"Inserisci l'ip: (lascia vuoto per i valori di default)"+RESET;
     public static final String IP_SELECT_ERR = RED+"Ip non disponibile o non raggiungibile, riprova:"+RESET;
     public static final String PORT_ERR = "Porta non disponibile, cambiala!"+RESET;
-    public static final String CONNECTION_ERR = "Qualcosa è andato storto, verifica la connessione con il server!"+RESET;
     public static final String CONNECTION_OK = "Connessione stabilita\n"+RESET;
 
     public static final String RMI_COLOR=BLUE_BOLD;
@@ -37,10 +36,10 @@ public class ServerMessage {
     public static final String SOCKET_MSG=SOCKET_COLOR+"[SOCKET SERVER]";
 
     public static final String RMI_S_READY=GREEN+"Rmi Server è PRONTO sulla porta: ";
-    public static final String RMI_S_ERR=RED+"Rmi Server: qualcosa è andato storto!";
     public static final String SOCKET_S_READY=GREEN+"Socket Server è PRONTO sulla porta: ";
     public static final String SOCKET_S_CONN=SOCKET_COLOR+"Socket client connsesso:";
     public static final String SOCKET_S_ERR=RED+"Socket Server: qualcosa è andato storto!";
+    public static final String RMI_S_ERR=RED+"Rmi Server: qualcosa è andato storto!";
 
 
     }
