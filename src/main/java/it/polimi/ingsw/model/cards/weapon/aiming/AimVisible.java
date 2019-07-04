@@ -76,8 +76,6 @@ public class AimVisible implements AimingFilter {
         return p;
     }
 
-    public void resetFilter() {
-    }
     public boolean isVisible() {
         return visible;
     }

@@ -115,6 +115,10 @@ public interface View {
      */
     boolean isDisconnected();
 
+    /**
+     * sets the disconnection status of the player
+     * @param b the status to set to
+     */
     void setDisconnected(boolean b);
 
     /**
@@ -123,6 +127,10 @@ public interface View {
      */
     boolean isInactive();
 
+    /**
+     * sets the inactivity status of the player
+     * @param b the status to set to
+     */
     void setInactive(boolean b);
 
     /**

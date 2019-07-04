@@ -36,7 +36,6 @@ public class FrenzyShooting implements ControllerState {
      * If a player can shoot set the player state to shooting
      */
 
-
     @Override
     public void executeState() {
 

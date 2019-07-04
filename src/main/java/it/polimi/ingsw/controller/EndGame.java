@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 import static it.polimi.ingsw.controller.ControllerMessages.GAME_OVER;
 
@@ -50,11 +51,20 @@ public class EndGame implements ControllerState {
         }
 
         System.out.println(GAME_OVER);
+        try {
+            TimeUnit.SECONDS.sleep(30);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         System.exit(0);
 
 
     }
 
+    /**
+     * Generates the list of players ascending ranking order
+     * @return the list of players
+     */
     public ArrayList<Figure> generateLeaderBoard(){
 
         ArrayList<Figure> allPlayers = new ArrayList<>();

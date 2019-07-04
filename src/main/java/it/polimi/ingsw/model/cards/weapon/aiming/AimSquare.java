@@ -96,12 +96,6 @@ public class AimSquare implements AimingFilter{
         return p;
     }
 
-
-
-    public void resetFilter() {
-        targetTemp.clear();
-    }
-
     public void setMinDistance(Integer minDistance) {
         this.minDistance = minDistance;
     }
