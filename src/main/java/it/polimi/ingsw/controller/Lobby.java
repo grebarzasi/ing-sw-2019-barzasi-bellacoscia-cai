@@ -212,7 +212,7 @@ public class Lobby extends Thread {
         }
         joinedPlayers=temp;
 
-        modeOf(killPrefList);
+        killPref=modeOf(killPrefList);
         if(killPref<5||killPref>8)
             killPref=8;
         if(testMode)
