@@ -75,5 +75,12 @@ After being accepted the player will be asked to decide the game preferences (in
 ###### Map Size(1: Small - 4: Large) default: medium 1
 ###### Reselect Preferences: (Yes/No) default: no
 
-After a countdown the game will be started.
+Upon reaching a minimum quota of three players, after a brief countdown of 30 seconds or immediatly if a the game reaches 5 players the game will be started.
 
+#### From GUI
+
+Upon starting the GUI the connection must first be set up using the settings menu, after entering the IP adress and port simply cick the update button on the side, the connection type is selected by clicking the desired type (RMI or socket) in the choice box, once the network settings have been defined simply close the window.
+
+After having correctly set up the network click the login button, insert an username and choose a figure by clicking on it, press login to enter the lobby.
+
+Inside the lobby the preferences are chosen using the ChoiceBoxes, same as previously explained. Click the Ready! button once all the preferences are set, you are now waiting for the game to start. Upon reaching a minimum quota of three players, after a brief countdown of 30 seconds or immediatly if a the game reaches 5 players the game will be started.
