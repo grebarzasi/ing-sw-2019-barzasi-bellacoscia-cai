@@ -5,7 +5,6 @@ import it.polimi.ingsw.controller.client_handler.ClientHandler;
 import it.polimi.ingsw.connection.MainServer;
 import it.polimi.ingsw.controller.client_handler.RmiClientHandler;
 import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.connection.PrintCountDown;
 
 
 import java.util.ArrayList;
@@ -182,7 +181,8 @@ public class Lobby extends Thread {
     public synchronized String toString() {
         String s="";
         for(ClientHandler c: joinedPlayers){
-            s= s + c.toString()+";";
+            if(c.isReady())
+                s= s + c.toString()+";";
         }
         return s;
     }
@@ -197,13 +197,20 @@ public class Lobby extends Thread {
         ArrayList<Boolean> terminatorList=new ArrayList<>();
         ArrayList<Boolean> finalFrenzyList=new ArrayList<>();
 
-        for(ClientHandler c: joinedPlayers){
+        //remove not ready player
+        ArrayList<ClientHandler> temp = new ArrayList<>(joinedPlayers);
+        for(ClientHandler c: temp){
+            if(!c.isReady()) {
+                temp.remove(c);
+                continue;
+            }
+
             killPrefList.add(c.getKillPref());
             mapPrefList.add(c.getMapPref());
             terminatorList.add(c.isTerminatorPref());
             finalFrenzyList.add(c.isFinalFrenzyPref());
         }
-
+        joinedPlayers=temp;
 
         modeOf(killPrefList);
         if(killPref<5||killPref>8)
@@ -331,6 +338,7 @@ public class Lobby extends Thread {
         }
 
         prefDecision();
+
         System.out.println(killPref);
         System.out.println(finalFrenzyPref);
         System.out.println(mapPref);

@@ -33,7 +33,6 @@ public abstract class ClientHandler extends Thread {
     }
 
 
-
     /**
      * sends updates to client
      */
@@ -137,7 +136,7 @@ public abstract class ClientHandler extends Thread {
 
     @Override
     public synchronized String toString() {
-        return owner.getUsername() + "," + owner.getCharacter();
+        return owner.getUsername() + ":" + owner.getCharacter();
     }
 }
 

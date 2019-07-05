@@ -18,6 +18,7 @@ public class VirtualLobby {
     private ConnectionTech conn;
     private HashMap<String,VirtualPlayer> players;
     private ArrayList<VirtualPlayer> newPlayersList;
+    private ArrayList<VirtualPlayer> disconnectedList;
     private VirtualPlayer owner;
     private int mapPref;
     private int killPref;
@@ -61,6 +62,9 @@ public class VirtualLobby {
      * wait lobby update from server
      */
 
+    public synchronized void pingRmi()throws IOException {
+        ((RmiClient) conn).getClientHandler().waitUpdate();
+    }
 
     public synchronized void waitUpdate()throws IOException {
         String all;
@@ -100,7 +104,7 @@ public class VirtualLobby {
             return;
         String [] allPl = s.split(INFO_SEP);
         for(String p : allPl){
-            String [] plStat = p.split(",");
+            String [] plStat = p.split(":");
             if(!players.containsKey(plStat[0])){
                 VirtualPlayer pla = new VirtualPlayer(plStat[0],plStat[1]);
                 players.put(plStat[0],pla);

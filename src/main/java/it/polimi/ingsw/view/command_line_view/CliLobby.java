@@ -5,6 +5,7 @@ import it.polimi.ingsw.view.virtual_model.VirtualLobby;
 import it.polimi.ingsw.view.virtual_model.VirtualPlayer;
 
 import static it.polimi.ingsw.Color.*;
+import static it.polimi.ingsw.connection.ConnMessage.SHOW_WEAPONS;
 import static it.polimi.ingsw.view.command_line_view.CliMessages.*;
 
 import java.io.BufferedReader;
@@ -17,7 +18,7 @@ import java.io.IOException;
 public class CliLobby extends Thread{
 
     public static final int THREAD_PRIORITY=3;
-
+    private Thread t;
     private VirtualLobby lobby;
     private ConnectionTech c;
     private BufferedReader sc;
@@ -34,7 +35,8 @@ public class CliLobby extends Thread{
             gameSetup();
             clearScreen();
         }while(ynAsk(PREFERENCE_Q,PREFERENCE_Y,PREFERENCE_N));
-
+        if(t.isAlive())
+            t.interrupt();
         lobby.sendPref();
         clearScreen();
         waitingRoom();
@@ -90,7 +92,19 @@ public class CliLobby extends Thread{
      */
 
     public void gameSetup() throws IOException {
+
         lobby= new VirtualLobby(c,p);
+        t = new Thread(() -> {
+            try {
+                while(true) {
+                    lobby.pingRmi();
+                    sleep(500);
+                }
+            } catch (IOException e) {
+            }catch (InterruptedException x){}
+        });
+
+        t.start();
         System.out.println(LOBBY_HEAD);
 
         String temp;
