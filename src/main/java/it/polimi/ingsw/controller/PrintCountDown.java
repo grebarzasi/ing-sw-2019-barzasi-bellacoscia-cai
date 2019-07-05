@@ -1,4 +1,4 @@
-package it.polimi.ingsw.connection;
+package it.polimi.ingsw.controller;
 
 import static it.polimi.ingsw.Color.RESET;
 
