@@ -324,7 +324,7 @@ public class Lobby extends Thread {
         while(!hasStarted()){
             all=new ArrayList<>(joinedPlayers);
             for(ClientHandler p:all) {
-                if (!p.isRmi()||!p.isReady())
+                if (!p.isRmi())
                     continue;
                 if(((RmiClientHandler)p).isConnectedLobby())
                     ((RmiClientHandler)p).setConnectedLobby(false);

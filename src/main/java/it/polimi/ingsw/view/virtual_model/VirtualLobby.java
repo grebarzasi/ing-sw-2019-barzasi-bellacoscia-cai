@@ -62,6 +62,9 @@ public class VirtualLobby {
      * wait lobby update from server
      */
 
+    public synchronized void pingRmi()throws IOException {
+        ((RmiClient) conn).getClientHandler().waitUpdate();
+    }
 
     public synchronized void waitUpdate()throws IOException {
         String all;

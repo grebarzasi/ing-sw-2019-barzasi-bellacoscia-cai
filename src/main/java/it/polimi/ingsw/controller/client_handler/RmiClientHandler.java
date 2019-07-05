@@ -18,7 +18,7 @@ import static it.polimi.ingsw.connection.server.ServerMessage.THREAD_PRIORITY;
 public class RmiClientHandler extends ClientHandler implements RmiPrefInterf {
 
     private boolean connected=true;
-    private String tempPlayer;
+    private String tempPlayer="";
     private ViewClient viewClient;
 
     public RmiClientHandler(Lobby lobby, int countdown){
