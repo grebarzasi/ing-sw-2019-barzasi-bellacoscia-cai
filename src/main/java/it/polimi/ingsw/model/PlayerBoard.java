@@ -10,7 +10,12 @@ import java.util.*;
 
 public class PlayerBoard {
 
-    public static final int[] points = {8,6,4,2,1,1,0};
+    public static final int[] points;
+
+    static {
+        points = new int[]{8, 6, 4, 2, 1, 1, 0};
+    }
+
     private static final int INIT_AMMO_RED = 1;
     private static final int INIT_AMMO_BLU = 1;
     private static final int INIT_AMMO_YELLOW = 1;
@@ -49,9 +54,9 @@ public class PlayerBoard {
      * The amount of ammunition available to the player
      */
     private Ammo ammoInventory;
-    private static final int maxammo = 3;
+    private static final int MAX_AMMO = 3;
 
-    private static final int maxhealth = 11;
+    private static final int MAX_HEALTH = 11;
 
     /**
      * Initiates the board with default values
@@ -85,10 +90,10 @@ public class PlayerBoard {
 
     public void damage(Token t) {
 
-        if(this.damage.size() < maxhealth){
+        if(this.damage.size() < MAX_HEALTH){
 
             this.damage.add(t);
-        } else if (this.damage.size() == maxhealth) {
+        } else if (this.damage.size() == MAX_HEALTH) {
 
             this.damage.add(t);
             t.getOwner().getPersonalBoard().addMark(new Token(this.owner));
@@ -170,16 +175,16 @@ public class PlayerBoard {
         owner.getPersonalBoard().getAmmoInventory().setBlue(a.getBlue() + owner.getPersonalBoard().getAmmoInventory().getBlue());
         owner.getPersonalBoard().getAmmoInventory().setYellow(a.getYellow() + owner.getPersonalBoard().getAmmoInventory().getYellow());
 
-        if(owner.getPersonalBoard().getAmmoInventory().getRed() > maxammo){
-            owner.getPersonalBoard().getAmmoInventory().setRed(maxammo);
+        if(owner.getPersonalBoard().getAmmoInventory().getRed() > MAX_AMMO){
+            owner.getPersonalBoard().getAmmoInventory().setRed(MAX_AMMO);
         }
 
-        if(owner.getPersonalBoard().getAmmoInventory().getBlue() > maxammo){
-            owner.getPersonalBoard().getAmmoInventory().setBlue(maxammo);
+        if(owner.getPersonalBoard().getAmmoInventory().getBlue() > MAX_AMMO){
+            owner.getPersonalBoard().getAmmoInventory().setBlue(MAX_AMMO);
         }
 
-        if(owner.getPersonalBoard().getAmmoInventory().getYellow() > maxammo){
-            owner.getPersonalBoard().getAmmoInventory().setYellow(maxammo);
+        if(owner.getPersonalBoard().getAmmoInventory().getYellow() > MAX_AMMO){
+            owner.getPersonalBoard().getAmmoInventory().setYellow(MAX_AMMO);
         }
     }
 
@@ -211,11 +216,7 @@ public class PlayerBoard {
      */
 
     public boolean canFlip(){
-        if(this.getDamage().isEmpty()){
-            return true;
-        }else{
-            return false;
-        }
+        return this.getDamage().isEmpty();
     }
 
 

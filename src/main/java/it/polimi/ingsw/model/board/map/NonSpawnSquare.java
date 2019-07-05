@@ -20,7 +20,7 @@ public class NonSpawnSquare extends Square{
      * @param position cell within the matrix
      * @param room the room color
      */
-    public NonSpawnSquare(Cell position, Room room) {
+    NonSpawnSquare(Cell position, Room room) {
         super(position, room);
     }
 

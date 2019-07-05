@@ -8,7 +8,7 @@ public class AmmoLot extends Card {
 
     private Ammo content;
 
-    public AmmoLot(boolean powerup, Ammo content) {
+    AmmoLot(boolean powerup, Ammo content) {
         this.powerup = powerup;
         this.content = content;
     }

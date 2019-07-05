@@ -3,7 +3,7 @@ package it.polimi.ingsw.model.cards;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.polimi.ingsw.utils.FileLoader;
 
-import java.io.File;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -16,7 +16,11 @@ import java.io.InputStream;
 
 public class AmmoDeckLoader {
 
-    private static final int size = 36;
+    private AmmoDeckLoader(){
+
+    }
+
+    private static final int SIZE = 36;
     private static final String AMMO_PATH = ("/data_files/deck_data/ammo.json");
 
     public static void loadDeck(Deck deckToLoad){
@@ -26,7 +30,7 @@ public class AmmoDeckLoader {
 
         InputStream deckFile = fileLoader.getResource(AMMO_PATH);
 
-        AmmoParser[] parserList = new AmmoParser[size];
+        AmmoParser[] parserList = new AmmoParser[SIZE];
 
         //loads files into parsers
 
@@ -39,7 +43,7 @@ public class AmmoDeckLoader {
         }
 
 
-        for(int i=0;i<size;i++){
+        for(int i=0;i<SIZE;i++){
 
             deckToLoad.getUsable().add(new AmmoLot(parserList[i].hasPowerup(), new Ammo(parserList[i].getRed(),parserList[i].getBlue(),parserList[i].getYellow())));
 

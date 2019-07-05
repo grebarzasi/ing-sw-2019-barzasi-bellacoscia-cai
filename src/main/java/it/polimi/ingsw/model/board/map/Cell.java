@@ -23,7 +23,7 @@ public class Cell {
      * @param row row in the matrix
      * @param tmp column in the matrix
      */
-    public Cell(int row, int tmp) {
+    Cell(int row, int tmp) {
         this.row = row;
         this.column = tmp;
     }

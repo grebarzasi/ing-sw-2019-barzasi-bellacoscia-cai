@@ -341,7 +341,7 @@ public abstract class Figure {
      * RIP
      * Manages player death, should be invoked and the end of the turn in which the player is killed
      * distributes points to the players who contributed to this player's death
-     * re-dimensions this players's point vector
+     * shifts this players's point vector
      * resets this player's damage array
      */
 
@@ -462,6 +462,11 @@ public abstract class Figure {
     public int getPoints() {
         return points;
     }
+
+    /**
+     * adds a desired amount of points to the player
+     * @param addedPoints desired amount of points
+     */
 
     public void addPoints(int addedPoints){
         this.points += addedPoints;

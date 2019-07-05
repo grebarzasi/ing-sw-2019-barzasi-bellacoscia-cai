@@ -14,7 +14,7 @@ public class AmmoParser {
     private int blue;
 
 
-    public boolean hasPowerup() {
+    boolean hasPowerup() {
         return powerup;
     }
 

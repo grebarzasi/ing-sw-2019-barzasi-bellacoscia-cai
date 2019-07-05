@@ -37,31 +37,16 @@ public class SquareConfinementParser {
         return north;
     }
 
-    public void setNorth(Boolean north) {
-        this.north = north;
-    }
-
     public Boolean getEast() {
         return east;
-    }
-
-    public void setEast(Boolean east) {
-        this.east = east;
     }
 
     public Boolean getSouth() {
         return south;
     }
 
-    public void setSouth(Boolean south) {
-        this.south = south;
-    }
-
     public Boolean getWest() {
         return west;
     }
 
-    public void setWest(Boolean west) {
-        this.west = west;
-    }
 }

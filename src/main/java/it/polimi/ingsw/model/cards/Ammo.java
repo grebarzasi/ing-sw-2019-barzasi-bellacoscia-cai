@@ -82,10 +82,7 @@ public class Ammo{
      */
     public boolean covers(Ammo a) {
 
-        if (this.getBlue() - a.getBlue() < 0 || this.getRed() - a.getRed() < 0 || this.getYellow() - a.getYellow() < 0) {
-            return false;
-        }
-        return true;
+        return this.getBlue() - a.getBlue() >= 0 && this.getRed() - a.getRed() >= 0 && this.getYellow() - a.getYellow() >= 0;
     }
 
     /**
@@ -94,11 +91,7 @@ public class Ammo{
      */
     public boolean isEmpty(){
 
-        if(this.red == 0 && this.blue == 0 && this.yellow == 0){
-            return true;
-        }else{
-            return false;
-        }
+        return this.red == 0 && this.blue == 0 && this.yellow == 0;
 
     }
 

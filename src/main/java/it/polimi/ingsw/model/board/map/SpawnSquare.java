@@ -17,7 +17,7 @@ public class SpawnSquare extends Square {
     private Armory armory;
 
 
-    public SpawnSquare(Cell position, Room room) {
+    SpawnSquare(Cell position, Room room) {
         super(position, room);
     }
 
@@ -29,6 +29,7 @@ public class SpawnSquare extends Square {
         this.armory = armory;
     }
 
+    @Override
     public boolean isSpawn(){
         return true;
     }
