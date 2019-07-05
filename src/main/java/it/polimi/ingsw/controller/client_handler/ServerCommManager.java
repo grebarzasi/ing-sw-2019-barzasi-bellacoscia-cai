@@ -580,7 +580,7 @@ public class ServerCommManager  extends Thread implements View {
         return rmi;
     }
 
-    public synchronized void setRmi(boolean rmi) {
+    public void setRmi(boolean rmi) {
         this.rmi = rmi;
     }
 
