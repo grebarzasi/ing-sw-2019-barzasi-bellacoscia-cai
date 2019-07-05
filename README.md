@@ -51,11 +51,15 @@ PAUSE
 
 ## Getting Started
 
+
+The login process has been designed to be intuitive, instructions should not be needed. If any problem occurs, you can cunsult the detailed procedure of the login process below:
+
+
 #### Starting the Server
 
 To run the server locally leave all fields empty by just pressing enter, rmi and socket ports will be set to default (IP: 127.0.0.1, port: 1234).
 
-Advanced mode enables customisation of timer setting and test mode. In test mode the KillShot track is initialised with two skulls to allow the game to end faster and the bot deals 11 Damage.
+##### Advanced mode enables customisation of timer setting and test mode. In test mode the KillShot track is initialised with two skulls to allow the game to end faster and the bot deals 11 Damage.
 
 #### Starting the Client
 
