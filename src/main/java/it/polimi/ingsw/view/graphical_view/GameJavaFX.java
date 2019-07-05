@@ -2415,6 +2415,16 @@ public class GameJavaFX extends Application implements ViewClient {
             msg.setText(message);
             hideBtn(btnMove,1);
             hideBtn(btnPick,1);
+
+            hideBtn(btnShoot,0);
+            hideBtn(btnPowerUp,0);
+            hideBtn(btnCancel,0);
+            hideBtn(btnDiscard,0);
+            hideBtn(btnTerminator,0);
+            hideBtn(btnEnd,0);
+
+
+
             btnMove.setText("SI");
             btnPick.setText("NO");
 
