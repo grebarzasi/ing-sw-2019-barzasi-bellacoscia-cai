@@ -49,6 +49,7 @@ public class GameJavaFX extends Application implements ViewClient {
     private boolean move;
     private boolean pick;
     private boolean shoot;
+    private boolean reset;
 
 
     private VirtualModel model;
@@ -57,12 +58,14 @@ public class GameJavaFX extends Application implements ViewClient {
 
     private UpdateParser parser;
 
+    private Font font;
     private Image emptyCell;
     private Image backBtn;
 
 
     private ArrayList<ArrayList<Button>> btnCell;
     private TextField msg;
+    private TextField pointsField;
     private GridPane gridSkull;
 
     private Button btnMove;
@@ -252,7 +255,6 @@ public class GameJavaFX extends Application implements ViewClient {
 
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
-        FileLoader fileLoader1 = new FileLoader();
         this.primaryStage = primaryStage;
 
         primaryStage.setTitle("ADRENALINA");
@@ -270,7 +272,7 @@ public class GameJavaFX extends Application implements ViewClient {
         scene.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> grid.setPrefHeight((double) newSceneHeight));
 
         //set Background.
-            Image back1 = new Image(fileLoader1.getResource(PATH_BACK_GAME), widthScreen + widthLateral, heightScreen + heightLateral, true, true);
+            Image back1 = new Image(fileLoader.getResource(PATH_BACK_GAME), widthScreen + widthLateral, heightScreen + heightLateral, true, true);
             BackgroundImage backgroundImage = new BackgroundImage(back1, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
             grid.setBackground(new Background(backgroundImage));
 
@@ -296,14 +298,14 @@ public class GameJavaFX extends Application implements ViewClient {
         grid.getRowConstraints().addAll(r1, r2, r3);
 
         //set title.
-        ImageView imgTitle = new ImageView(new Image(fileLoader1.getResource(PATH_TITLE), widthCenter, heightLateral, true, true));
+        ImageView imgTitle = new ImageView(new Image(fileLoader.getResource(PATH_TITLE), widthCenter, heightLateral, true, true));
         grid.add(imgTitle, 1, 0);
 
 
         //set Killshot track.
         gridSkull.setPadding(new Insets(100, 0, 80, 0));
 
-        Image imgTrack = new Image(fileLoader1.getResource(PATH_TRACK), widthLateral, heightLateral, true, true);
+        Image imgTrack = new Image(fileLoader.getResource(PATH_TRACK), widthLateral, heightLateral, true, true);
         BackgroundImage backgroundSkull = new BackgroundImage(imgTrack, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background backSkull = new Background(backgroundSkull);
 
@@ -336,19 +338,19 @@ public class GameJavaFX extends Application implements ViewClient {
         Image imgBoard = null;
         switch (model.getBoard().getMap().getName()) {
             case ("medium1"): {
-                imgBoard = new Image(fileLoader1.getResource(PATH_MEDIUM1_MAP), widthCenter, heightCenter, true, true);
+                imgBoard = new Image(fileLoader.getResource(PATH_MEDIUM1_MAP), widthCenter, heightCenter, true, true);
                 break;
             }
             case ("small"): {
-                imgBoard = new Image(fileLoader1.getResource(PATH_SMALL_MAP), widthCenter, heightCenter, true, true);
+                imgBoard = new Image(fileLoader.getResource(PATH_SMALL_MAP), widthCenter, heightCenter, true, true);
                 break;
             }
             case ("large"): {
-                imgBoard = new Image(fileLoader1.getResource(PATH_LARGE_MAP), widthCenter, heightCenter, true, true);
+                imgBoard = new Image(fileLoader.getResource(PATH_LARGE_MAP), widthCenter, heightCenter, true, true);
                 break;
             }
             case ("medium2"): {
-                imgBoard = new Image(fileLoader1.getResource(PATH_MEDIUM2_MAP), widthCenter, heightCenter, true, true);
+                imgBoard = new Image(fileLoader.getResource(PATH_MEDIUM2_MAP), widthCenter, heightCenter, true, true);
                 break;
             }
         }
@@ -439,23 +441,23 @@ public class GameJavaFX extends Application implements ViewClient {
 
         switch (model.getOwner().getCharacter()) {
             case YELLOW: {
-                imgPBoard = new Image(fileLoader1.getResource(PATH_YELLOW_BOARD), widthPers, heightPBoard, true, true);
+                imgPBoard = new Image(fileLoader.getResource(PATH_YELLOW_BOARD), widthPers, heightPBoard, true, true);
                 break;
             }
             case RED: {
-                imgPBoard = new Image(fileLoader1.getResource(PATH_RED_BOARD), widthPers, heightPBoard, true, true);
+                imgPBoard = new Image(fileLoader.getResource(PATH_RED_BOARD), widthPers, heightPBoard, true, true);
                 break;
             }
             case BLUE: {
-                imgPBoard = new Image(fileLoader1.getResource(PATH_BLUE_BOARD), widthPers, heightPBoard, true, true);
+                imgPBoard = new Image(fileLoader.getResource(PATH_BLUE_BOARD), widthPers, heightPBoard, true, true);
                 break;
             }
             case GREEN: {
-                imgPBoard = new Image(fileLoader1.getResource(PATH_GREEN_BOARD), widthPers, heightPBoard, true, true);
+                imgPBoard = new Image(fileLoader.getResource(PATH_GREEN_BOARD), widthPers, heightPBoard, true, true);
                 break;
             }
             case GREY: {
-                imgPBoard = new Image(fileLoader1.getResource(PATH_GREY_BOARD), widthPers, heightPBoard, true, true);
+                imgPBoard = new Image(fileLoader.getResource(PATH_GREY_BOARD), widthPers, heightPBoard, true, true);
                 break;
             }
         }
@@ -652,7 +654,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
 
         //set buttons
-        Image msgBack = new Image(fileLoader1.getResource(PATH_BACK_MSG), widthCenter, heightLateral/4, false, true);
+        Image msgBack = new Image(fileLoader.getResource(PATH_BACK_MSG), widthCenter, heightLateral/4, false, true);
         BackgroundImage backgroundMsg = new BackgroundImage(msgBack, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background backMsg = new Background(backgroundMsg);
         msg.setBackground(backMsg);
@@ -2395,8 +2397,8 @@ public class GameJavaFX extends Application implements ViewClient {
 
         int max = Integer.parseInt(args.get(0).split(INNER_SEP)[0]);
         Platform.runLater(run);
-        int k = game.getTargetPlayers().size();
-        while(k != max);
+
+        while(game.getTargetPlayers().size() != max);
 
         String res = "";
         for(String targ : game.getTargetPlayers()){
