@@ -34,7 +34,7 @@ public class MainServer {
     /**
      * saves the inactivity countdown, default is 30 s
      */
-    private int countdown=30;
+    private int countdown=60;
     /**
      * saves the countdown, default is 30 s
      */

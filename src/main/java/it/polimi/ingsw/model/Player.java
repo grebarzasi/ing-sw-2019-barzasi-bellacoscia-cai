@@ -47,6 +47,7 @@ public class Player extends Figure {
      */
     private boolean disconnected;
 
+
     /**
      * True if the player is inactive, false otherwise
      */

@@ -461,12 +461,12 @@ public class ServerCommManager  extends Thread implements View {
 
     public void sendsUpdate(String s){
         updateBuffer = s;
-        if(owner.isInactive()||owner.isDisconnected()) {
+        if(owner.isInactive()||owner.isDisconnected()||rmiClient==null) {
             return;
         }
         setInUse(true);
         try{
-            if (rmi && rmiClient != null) {
+            if (rmi) {
                 rmiClient.updateModel(s);
             }
             else {
@@ -561,6 +561,7 @@ public class ServerCommManager  extends Thread implements View {
                 while (rmiHandler.getViewClient() == null) ;
                 rmiClient=rmiHandler.getViewClient();
             }
+            setInactive(false);
             sendsUpdate(updateBuffer);
             this.run();
         }
@@ -638,7 +639,6 @@ public class ServerCommManager  extends Thread implements View {
         if(b.isRmi()){
             this.rmiHandler=(RmiClientHandler)b;
             this.rmi=true;
-            this.rmiClient=((RmiClientHandler) b).getViewClient();
             System.out.println(PURPLE+owner.getCharacter()+" reconnected"+RESET);
         }else{
             this.socketClient=(SocketClientHandler)b;
@@ -646,6 +646,5 @@ public class ServerCommManager  extends Thread implements View {
             System.out.println(CYAN+owner.getCharacter()+" reconnected"+RESET);
         }
         setDisconnected(false);
-        setInactive(false);
     }
 }

@@ -120,7 +120,7 @@ public class RmiClientHandler extends ClientHandler implements RmiPrefInterf {
     }
     }
     //reset
-    public void setView(ViewClient view) {
+    public synchronized void setView(ViewClient view) {
        setViewClient(view);
     }
 
