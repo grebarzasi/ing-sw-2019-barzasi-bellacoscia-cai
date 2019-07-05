@@ -135,8 +135,15 @@ public class LobbyJavaFX extends Application {
             }
         });
 
-        if(conn.isRmi()) {
+        if(conn.isRmi()&&!reconnected) {
             t.start();
+        }
+
+
+        //RECONNECTION
+        if(reconnected){
+            primaryStage.setMaximized(true);
+            gameStart();
         }
 
         this.primaryStage = primaryStage;

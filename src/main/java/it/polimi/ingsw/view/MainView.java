@@ -360,10 +360,6 @@ public class MainView extends Application {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-                if(login.isReconnected()) {
-                    btnLobby.fire();
-                    this.close();
-                }
             });
 
         }
