@@ -96,20 +96,8 @@ public class AimSquare implements AimingFilter{
         return p;
     }
 
-    public void setMinDistance(Integer minDistance) {
-        this.minDistance = minDistance;
-    }
-
-    public void setMaxDistance(Integer maxDistance) {
-        this.maxDistance = maxDistance;
-    }
-
     public boolean isMine() {
         return mine;
-    }
-
-    public void setMine(boolean mine) {
-        this.mine = mine;
     }
 
     public Set<Figure> getTargetTemp() {

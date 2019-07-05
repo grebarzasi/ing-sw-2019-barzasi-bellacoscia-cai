@@ -65,17 +65,8 @@ public class AimAskPlayer implements AimingFilter {
         return p;
     }
 
-
-    public void setNumMax(Integer numMax) {
-        this.numMax = numMax;
-    }
-
     public boolean isFromDiffSquare() {
         return fromDiffSquare;
-    }
-
-    public void setFromDiffSquare(boolean fromDiffSquare) {
-        this.fromDiffSquare = fromDiffSquare;
     }
 
     public Integer getNumMax() {

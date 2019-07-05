@@ -136,11 +136,4 @@ public class Effect {
         return used;
     }
 
-    public Weapon getMyWeapon() {
-        return myWeapon;
-    }
-
-    public int getIndexTemp() {
-        return indexTemp;
-    }
 }

@@ -169,28 +169,12 @@ public class AimDirection implements AimingFilter {
         return temp;
     }
 
-    public boolean isWallBang() {
-        return wallBang;
-    }
-
-    public void setWallBang(boolean wallBang) {
-        this.wallBang = wallBang;
-    }
-
-    public String getDirectionTemp() {
-        return directionTemp;
-    }
-
     public void setDirectionTemp(String directionTemp) {
         this.directionTemp = directionTemp;
     }
 
     public Set<Figure> getTargetTemp() {
         return targetTemp;
-    }
-
-    public void setTargetTemp(Set<Figure> targetTemp) {
-        this.targetTemp = targetTemp;
     }
 
 }

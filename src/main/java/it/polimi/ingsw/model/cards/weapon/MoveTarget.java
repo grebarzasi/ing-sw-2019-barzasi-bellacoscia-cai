@@ -121,28 +121,8 @@ public class MoveTarget implements SubEffect {
 
     }
 
-    public void setMaxSteps(int maxSteps) {
-        this.maxSteps = maxSteps;
-    }
-
-    public String getFinalPos() {
-        return finalPos;
-    }
-
-    public void setFinalPos(String finalPos) {
-        this.finalPos = finalPos;
-    }
-
     public boolean isDirectional() {
         return directional;
-    }
-
-    public void setDirectional(boolean directional) {
-        this.directional = directional;
-    }
-
-    public Square getSquareTemp() {
-        return squareTemp;
     }
 
     public void setSquareTemp(Square squareTemp) {
@@ -153,7 +133,4 @@ public class MoveTarget implements SubEffect {
         return targetTemp;
     }
 
-    public void setTargetTemp(Set<Figure> targetTemp) {
-        this.targetTemp = targetTemp;
-    }
 }

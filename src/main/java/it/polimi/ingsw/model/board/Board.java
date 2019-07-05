@@ -174,23 +174,12 @@ public class Board{
         return ammoDeck;
     }
 
-    public void setAmmoDeck(Deck ammoDeck) {
-        this.ammoDeck = ammoDeck;
-    }
-
     public Deck getPowerupDeck() {
         return powerupDeck;
-    }
-
-    public void setPowerupDeck(Deck powerupDeck) {
-        this.powerupDeck = powerupDeck;
     }
 
     public WeaponDeck getWeaponDeck() {
         return weaponDeck;
     }
 
-    public void setWeaponDeck(WeaponDeck weaponDeck) {
-        this.weaponDeck = weaponDeck;
-    }
 }

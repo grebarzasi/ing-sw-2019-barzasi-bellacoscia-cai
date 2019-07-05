@@ -29,6 +29,7 @@ public class MapTest {
         assertEquals(map.getSquareMatrix()[0][0].getEast(),map.getSquareMatrix()[0][1]);
         assertEquals(map.getSquareMatrix()[0][0].getSouth(),map.getSquareMatrix()[2][0].getNorth());
 
+        assertEquals(map.getName(),"large");
 
     }
 }

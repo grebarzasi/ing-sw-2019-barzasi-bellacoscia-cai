@@ -36,10 +36,6 @@ public class PowerUp extends Card {
         return ammoOnDiscard;
     }
 
-    public void setAmmoOnDiscard(Ammo ammoOnDiscard) {
-        this.ammoOnDiscard = ammoOnDiscard;
-    }
-
     public String getName() {
         return name;
     }

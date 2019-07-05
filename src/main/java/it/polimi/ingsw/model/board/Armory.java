@@ -15,9 +15,15 @@ public class
 
 Armory {
 
-    //list of weapons in an armory
+    /**
+     * List of weapons in the armory
+     */
 
     private ArrayList<Weapon> weaponList;
+
+    /**
+     * Defines the maximum capacity
+     */
     private static final int maxCapacity = 3;
 
     /**
@@ -40,12 +46,6 @@ Armory {
         return weaponList;
     }
 
-    public void setWeaponList(ArrayList<Weapon> weaponList) {
-        this.weaponList = weaponList;
-    }
-
-    public Armory() {
-    }
     public String toString(){
         String s="";
         for(Weapon w: weaponList)

@@ -280,24 +280,6 @@ public class Weapon extends Card {
         this.chamber = chamber;
     }
 
-
-    public boolean isBeforeBasic() {
-        return beforeBasic;
-    }
-
-    public void setBeforeBasic(boolean beforeBasic) {
-        this.beforeBasic = beforeBasic;
-    }
-
-    public int getIndexTemp() {
-        return indexTemp;
-    }
-
-    public void setIndexTemp(int indexTemp) {
-        this.indexTemp = indexTemp;
-    }
-
-
     public AimAskPlayer getAskTemp() {
         return askTemp;
     }
@@ -340,14 +322,6 @@ public class Weapon extends Card {
 
     public Set<Figure> getDamaged() {
         return damaged;
-    }
-
-    public void setDamaged(Set<Figure> damaged) {
-        this.damaged = damaged;
-    }
-
-    public boolean isOrderedAdd() {
-        return orderedAdd;
     }
 
     public void setOrderedAdd(boolean orderedAdd) {
