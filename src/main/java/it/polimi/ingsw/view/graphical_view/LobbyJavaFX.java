@@ -306,6 +306,7 @@ public class LobbyJavaFX extends Application {
 
         Thread thread = new Thread(()->{
             System.out.println("thread");
+
             if(t.isAlive())
                 t.interrupt();
 

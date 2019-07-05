@@ -350,8 +350,8 @@ public class MainView extends Application {
                 try {
                     p = new VirtualPlayer(username,color);
                     if(login.send()){
-                        btnLobby.fire();
                         this.close();
+                        btnLobby.fire();
                     }else{
                         actiontarget.setFill(Color.RED);
                         actiontarget.setText("Username o personaggio non disponibile!");

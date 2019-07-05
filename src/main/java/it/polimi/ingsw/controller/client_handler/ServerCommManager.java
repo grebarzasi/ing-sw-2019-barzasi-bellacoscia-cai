@@ -461,7 +461,7 @@ public class ServerCommManager  extends Thread implements View {
 
     public void sendsUpdate(String s){
         updateBuffer = s;
-        if(owner.isInactive()||owner.isDisconnected()||rmiClient==null) {
+        if(owner.isInactive()||owner.isDisconnected()||(rmi && rmiClient==null)) {
             return;
         }
         setInUse(true);
@@ -558,7 +558,8 @@ public class ServerCommManager  extends Thread implements View {
                 } catch (InterruptedException d) {}
             }
             if(isRmi()) {
-                while (rmiHandler.getViewClient() == null) ;
+                while (rmiHandler.getViewClient() == null);
+                System.out.println("view set");
                 rmiClient=rmiHandler.getViewClient();
             }
             setInactive(false);
