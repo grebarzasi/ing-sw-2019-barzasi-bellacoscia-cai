@@ -368,6 +368,9 @@ public class CliGame implements ViewClient {
      * Displays the leaderboard of the game to the user
      */
     public void displayLeaderboard(ArrayList<String> args) {
+
+
+
         HashMap<Integer,VirtualPlayer> leaderBoard = new HashMap<>();
 
         for(VirtualPlayer p : board.getModel().getAllPlayers())
@@ -381,14 +384,16 @@ public class CliGame implements ViewClient {
             board.printPawn(k.getCharacter());
             System.out.println(") " +k.getPoints());
         }
-
-        System.out.println("\nPremi un tasto per chiudere");
-        try {
-            sc.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.exit(0);
+        Thread t = new Thread(() -> {
+            System.out.println("\nPremi un tasto per chiudere");
+            try {
+                sc.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.exit(0);
+        });
+        t.start();
         }
 
     /**

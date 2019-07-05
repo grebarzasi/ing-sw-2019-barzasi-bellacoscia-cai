@@ -67,6 +67,7 @@ public class CliView {
                 if (temp.equals("r") || temp.equals("rmi") || temp.equals("1")) {
                     c = new RmiClient();
                     c.setRmi(true);
+                    c.setPort(1235);
                     System.out.println(RMI);
                     flag = false;
                 } else if (temp.equals("s") || temp.equals("socket") || temp.equals("2") || temp.isEmpty()) {

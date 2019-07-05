@@ -199,6 +199,7 @@ public class MainView extends Application {
                 if(connection.equals("RMI")){
                     c = new RmiClient();
                     c.setRmi(true);
+                    c.setPort(1235);
                 }else if(connection.equals("Socket")){
                     c = new SClient();
                     c.setRmi(false);

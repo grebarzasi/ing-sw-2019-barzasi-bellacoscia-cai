@@ -8,6 +8,7 @@ import it.polimi.ingsw.controller.client_handler.SocketClientHandler;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import static it.polimi.ingsw.Color.RESET;
 import static it.polimi.ingsw.connection.server.ServerMessage.*;
 
 /**
@@ -30,7 +31,7 @@ public class SServer extends ConnectionTech {
             ServerSocket server = new ServerSocket(super.getPort());
 
             System.out.println(SOCKET_S_READY +" : "+super.getPort());
-
+            System.out.print(RESET);
             //loops until game start waiting for other players
 
             SocketClientHandler temp;

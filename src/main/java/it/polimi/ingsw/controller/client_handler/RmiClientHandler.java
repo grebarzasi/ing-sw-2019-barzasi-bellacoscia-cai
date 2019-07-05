@@ -144,7 +144,7 @@ public class RmiClientHandler extends ClientHandler implements RmiPrefInterf {
         return connected;
     }
 
-    public void setConnected(boolean connected) {
+    public void setConnectedLobby(boolean connected) {
         this.connected = connected;
     }
 

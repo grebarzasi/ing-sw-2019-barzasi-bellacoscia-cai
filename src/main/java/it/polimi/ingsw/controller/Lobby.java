@@ -187,7 +187,9 @@ public class Lobby extends Thread {
         return s;
     }
 
-    //make decision on the game setup
+    /**
+     * make preference decision on the game setup
+     */
 
     public void prefDecision(){
         ArrayList<Integer> killPrefList=new ArrayList<>();
@@ -218,6 +220,9 @@ public class Lobby extends Thread {
     }
 
 
+    /**
+     * get the mode of a boolean array
+     */
     public Boolean modeOfBool(ArrayList<Boolean> list){
         int def=0;
         for(Boolean s : list){
@@ -233,6 +238,9 @@ public class Lobby extends Thread {
         return false;
     }
 
+    /**
+     * get the mode of a int array
+     */
     public Integer modeOf(ArrayList<Integer> list){
         HashMap<Integer,Integer> occ = new HashMap<>();
         for(Integer s : list){
@@ -300,7 +308,9 @@ public class Lobby extends Thread {
     public void setTestMode(boolean testMode) {
         this.testMode = testMode;
     }
-
+    /**
+     * wait for game start
+     */
     public void run() {
         ArrayList<ClientHandler> all;
         while(!hasStarted()){
@@ -309,7 +319,7 @@ public class Lobby extends Thread {
                 if (!p.isRmi())
                     continue;
                 if(((RmiClientHandler)p).isConnectedLobby())
-                    ((RmiClientHandler)p).setConnected(false);
+                    ((RmiClientHandler)p).setConnectedLobby(false);
                 else
                     disconnectPlayer(p);
             }

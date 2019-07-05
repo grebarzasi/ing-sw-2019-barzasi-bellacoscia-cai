@@ -14,8 +14,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 
-import static it.polimi.ingsw.Color.BLUE;
-import static it.polimi.ingsw.Color.GREEN;
+import static it.polimi.ingsw.Color.*;
 import static it.polimi.ingsw.connection.server.ServerMessage.*;
 import static it.polimi.ingsw.connection.server.ServerMessage.GENERIC_N;
 import static it.polimi.ingsw.connection.server.ServerMessage.LINE_SEP;
@@ -101,7 +100,7 @@ public class MainServer {
         socketServer.acquirePort();
         socketServer.setPriority(THREAD_PRIORITY);
         socketServer.start();
-
+        System.out.print(RESET);
 
     }
 
