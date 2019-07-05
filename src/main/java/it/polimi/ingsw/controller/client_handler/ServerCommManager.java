@@ -466,7 +466,7 @@ public class ServerCommManager  extends Thread implements View {
         }
         setInUse(true);
         try{
-            if (rmi) {
+            if (rmi && rmiClient != null) {
                 rmiClient.updateModel(s);
             }
             else {
