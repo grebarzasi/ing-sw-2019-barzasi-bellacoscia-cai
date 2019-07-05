@@ -12,6 +12,7 @@ class ControllerMessages {
      static final String ASKING_VENOM = "Vuoi usare una Granata Venom? ";
      static final String ASK_FRENZY_RELOAD = "Vuoi sfruttare la ricarica? ";
      static final String CANNOT_RELOAD = "Non possiedi abbastanza risorse per ricaricare l'arma ";
+     static final String CANNOT_PICK_WEAPON = "Non possiedi abbastanza risorse per prendere l'arma ";
      static final String ASK_SCOPE = "Vuoi usare il Mirno? ";
      static final String ASK_NEWTON_TARGET = "Seleziona il bersaglio da spostare ";
      static final String NO_USABLE_EFFECT ="Non puoi utilizzare nessun altro effetto";

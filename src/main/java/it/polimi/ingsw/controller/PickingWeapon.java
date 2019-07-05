@@ -76,7 +76,7 @@ public class PickingWeapon implements ControllerState {
 
                 }
             }else{
-                this.controller.getView().displayMessage(ControllerMessages.CANNOT_RELOAD);
+                this.controller.getView().displayMessage(ControllerMessages.CANNOT_PICK_WEAPON);
                 this.controller.goBack();
             }
         }
@@ -93,18 +93,24 @@ public class PickingWeapon implements ControllerState {
         ArrayList<Weapon> options = new ArrayList<>(this.controller.getCurrentPlayer().getWeaponsList());
 
         Weapon choice = this.controller.getView().showWeapon(options);
-        options.remove(choice);
-        options.add(arg);
 
-        this.controller.getCurrentPlayer().getWeaponsList().clear();
-        this.controller.getCurrentPlayer().getWeaponsList().addAll(options);
+        if(choice != null) {
+            options.remove(choice);
+            options.add(arg);
 
-        ((SpawnSquare) this.location).getArmory().getWeaponList().remove(arg);
-        ((SpawnSquare) this.location).getArmory().getWeaponList().add(choice);
-        choice.setLoaded(true);
-        arg.setOwner(this.controller.getCurrentPlayer());
-        this.controller.decreaseMoveLeft();
+            this.controller.getCurrentPlayer().getWeaponsList().clear();
+            this.controller.getCurrentPlayer().getWeaponsList().addAll(options);
+
+            ((SpawnSquare) this.location).getArmory().getWeaponList().remove(arg);
+            ((SpawnSquare) this.location).getArmory().getWeaponList().add(choice);
+            choice.setLoaded(true);
+            arg.setOwner(this.controller.getCurrentPlayer());
+            this.controller.decreaseMoveLeft();
+            this.controller.getCurrentPlayer().setPosition(this.location);
+        }
+
         this.controller.getCurrentPlayer().setPosition(this.location);
+        this.controller.decreaseMoveLeft();
         this.controller.update();
         this.controller.goBack();
 

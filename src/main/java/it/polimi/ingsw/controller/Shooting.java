@@ -192,8 +192,8 @@ public class Shooting implements ControllerState {
             shootingWith.resetWeapon();
             controller.endTurn();
         }else if (rpl == null){
-            useScope();
             this.controller.askTagbacks(this.shootingWith.getDamaged(), this.controller.getCurrentPlayer());
+            useScope();
             shootingWith.resetWeapon();
             this.controller.update();
             this.controller.goBack();
