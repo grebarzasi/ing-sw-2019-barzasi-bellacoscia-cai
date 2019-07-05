@@ -140,11 +140,6 @@ public class LobbyJavaFX extends Application {
         }
 
 
-        //RECONNECTION
-        if(reconnected){
-            primaryStage.setMaximized(true);
-            gameStart();
-        }
 
         this.primaryStage = primaryStage;
 
