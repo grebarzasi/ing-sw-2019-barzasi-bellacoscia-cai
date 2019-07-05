@@ -462,7 +462,7 @@ public class Controller {
             ArrayList<PowerUp> options = new ArrayList<>(p.getPowerupList());
 
             filterPUs(options,PowerUp.TAGBACK_GRENADE);
-            if(p.getPowerupList().isEmpty()){
+            if(options.isEmpty()){
                 removeNoVenoms.remove();
             }
         }
