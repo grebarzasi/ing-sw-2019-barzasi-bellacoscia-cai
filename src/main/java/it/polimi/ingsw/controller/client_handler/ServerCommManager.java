@@ -482,6 +482,10 @@ public class ServerCommManager  extends Thread implements View {
     public void handleDisconnection(){
         owner.setDisconnected(true);
         owner.setInactive(true);
+
+        this.rmiHandler=null;
+        this.rmiClient=null;
+        this.rmi=false;
         System.err.println(owner.getUsername()+CLIENT_UNREACHABLE);
 
     }
