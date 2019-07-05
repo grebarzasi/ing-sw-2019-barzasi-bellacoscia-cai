@@ -66,8 +66,14 @@ public class CliLobby extends Thread{
     }
 
     /**
-     * method for general question with y/n answer
+     *
+     * @param question
+     * @param yes
+     * @param no
+     * @return
+     * @throws IOException
      */
+
     public boolean ynAsk(String question, String yes, String no)throws IOException{
         String temp;
         do {
