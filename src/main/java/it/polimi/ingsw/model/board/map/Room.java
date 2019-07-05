@@ -49,10 +49,10 @@ public class Room {
         Collection<Figure> playersHere = new HashSet<>();
 
         for (Figure figure : figureList) {
-            if (figure.getPosition().getRoom().equals(this)) {
+            if (figure.getPosition()!= null && figure.getPosition().getRoom().equals(this)) {
                 playersHere.add(figure);
-            }
         }
+    }
 
         return playersHere;
     }
