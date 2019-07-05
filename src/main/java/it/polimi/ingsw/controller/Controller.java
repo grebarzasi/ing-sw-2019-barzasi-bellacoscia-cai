@@ -600,8 +600,12 @@ public class Controller {
 
     public void update(){
         String s = marshal.create().toString();
-        for(Player p: model.getPlayerList())
-                p.getView().sendsUpdate(s);
+        for(Player p: model.getPlayerList()) {
+            if (p.getView() == null) {
+                continue;
+            }
+            p.getView().sendsUpdate(s);
+        }
     }
 
     /**
