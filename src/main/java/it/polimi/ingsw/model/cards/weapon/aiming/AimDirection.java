@@ -143,7 +143,7 @@ public class AimDirection implements AimingFilter {
         Cell c = origin.getPosition().getPosition();
         Set<Figure> temp = new HashSet<>(p);
         for (Figure f : p) {
-            if(f.getPosition()==null)
+            if(f.isDead()||f.getPosition()==null)
                 continue;
             Cell cTarget = f.getPosition().getPosition();
             switch (dir) {
