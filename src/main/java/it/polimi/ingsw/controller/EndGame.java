@@ -54,7 +54,6 @@ public class EndGame implements ControllerState {
         try {
             TimeUnit.SECONDS.sleep(30);
         } catch (InterruptedException e) {
-            e.printStackTrace();
         }
         System.exit(0);
 
@@ -84,12 +83,12 @@ public class EndGame implements ControllerState {
                 leaderBoard.add(f);
             }else {
                 for (i = 0; i < leaderBoard.size(); i++) {
-                    if (f.getPoints() >= leaderBoard.get(i).getPoints() && added == false){
+                    if (f.getPoints() >= leaderBoard.get(i).getPoints() && !added){
                         leaderBoard.add(i,f);
                         added = true;
                     }
                 }
-                if(added == false){
+                if(!added){
                     leaderBoard.add(f);
                 }
 

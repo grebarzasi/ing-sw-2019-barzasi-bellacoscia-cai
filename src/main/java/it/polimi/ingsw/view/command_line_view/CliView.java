@@ -14,7 +14,6 @@ import it.polimi.ingsw.view.virtual_model.VirtualPlayer;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.Inet4Address;
 import java.net.InetAddress;
 
 /**

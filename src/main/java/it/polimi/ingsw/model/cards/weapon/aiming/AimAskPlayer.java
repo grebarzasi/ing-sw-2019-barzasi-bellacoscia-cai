@@ -57,6 +57,7 @@ public class AimAskPlayer implements AimingFilter {
             targetTemp.clear();
           targetTemp.addAll(p);
           w.setAskTemp(this);
+          //returning null is the expected behaviour. it means that there's not enough info to complete execution
           return null;
        }
         w.setAskTemp(null);

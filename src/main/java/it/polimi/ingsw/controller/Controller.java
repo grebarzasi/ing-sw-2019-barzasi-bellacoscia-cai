@@ -183,12 +183,9 @@ public class Controller {
         this.hasBot = true;
 
         //noinspection ConstantConditions
-        if(this.hasBot){
+        String botColor = firstAvailableColor(playerList);
+        this.model.setBot(new Terminator(botColor,model));
 
-            String botColor = firstAvailableColor(playerList);
-            this.model.setBot(new Terminator(botColor,model));
-
-        }
 
         this.getModel().getBoard().getTrack().setSkullMax(8);
 
@@ -363,10 +360,6 @@ public class Controller {
         if (!checkLeftPlayer())
             endGame();
 
-        //if disconnected or inactive skip turn
-        if (model.getCurrentPlayer().isDisconnected() || model.getCurrentPlayer().isInactive()) {
-//            endTurn();
-        }
 
     }
 
@@ -502,8 +495,6 @@ public class Controller {
 
         this.getModel().setCurrentPlayer(tmp);
         this.setView(tmp.getView());
-        //y don need this. the caller does it;
-//        this.setCurrentState(choosingMove);
         this.update();
 
     }

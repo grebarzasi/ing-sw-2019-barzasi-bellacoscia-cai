@@ -33,7 +33,6 @@ public class AimSubstitute extends AimComparator implements AimingFilter{
             return null;
         if(p.isEmpty()){
             return p;
-//            p.add(w.getOwner());
         }
         Figure target = (Figure)p.toArray()[0];
         p=getPlayersFromSource(w, target);

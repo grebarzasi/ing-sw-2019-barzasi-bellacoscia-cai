@@ -23,6 +23,7 @@ public class RmiClient extends ConnectionTech implements Remote {
     private boolean connected=false;
 
 
+    @Override
     public void run() {
         try {
             Registry serverRegistry = LocateRegistry.getRegistry(super.getIp(),super.getPort());

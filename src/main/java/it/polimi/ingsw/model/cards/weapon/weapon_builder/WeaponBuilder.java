@@ -7,7 +7,6 @@ import it.polimi.ingsw.model.cards.weapon.Effect;
 import it.polimi.ingsw.model.cards.weapon.Weapon;
 import it.polimi.ingsw.utils.FileLoader;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
@@ -42,7 +41,7 @@ public class WeaponBuilder {
             Weapon weaponBuilt = new Weapon(rootNode.path("name").textValue(), chamber);
 
             if(!rootNode.path("extraBeforeBasic").asText().isEmpty())
-                 weaponBuilt.setBeforeBasicExtra(rootNode.path("extraBeforeBasic").asBoolean());
+                 weaponBuilt.setBeforeBasicExtra(false);
 
              weaponBuilt.setOrderedAdd(rootNode.path("orderedAdd").asBoolean());
             //create effects iterating on effects name. set correct place for each effect
@@ -69,8 +68,6 @@ public class WeaponBuilder {
                         break;
                     case "extraMove":
                         weaponBuilt.setExtraMove(effBuilt);
-                        if(rootNode.path("extraMove").path("afterBasic").size()>0)
-                            weaponBuilt.setBeforeBasicExtra(false);
                         break;
                 }
             }

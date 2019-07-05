@@ -48,7 +48,7 @@ public abstract class ClientHandler extends Thread {
     public abstract void game();
     public abstract boolean isRmi();
 
-
+    @Override
     public abstract void run();
 
 

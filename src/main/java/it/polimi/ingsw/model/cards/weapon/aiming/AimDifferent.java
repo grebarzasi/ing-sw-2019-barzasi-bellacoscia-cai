@@ -29,6 +29,7 @@ public class AimDifferent extends AimComparator implements AimingFilter{
      * @param p is the set of hittable players at that moment
      */
     public Set<Figure> filter(Weapon w, Set<Figure> p) {
+        //returning null is the expected behaviour. it means that there's not enough info to complete execution
         if(p==null)
             return null;
         Figure target = (Figure)p.toArray()[0];

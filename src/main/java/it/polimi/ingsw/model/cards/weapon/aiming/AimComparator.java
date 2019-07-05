@@ -36,6 +36,7 @@ public class AimComparator {
      * @param target is the set of hittable players at that moment
      */
     public Set<Figure> getPlayersFromSource(Weapon w, Figure target) {
+        //returning null is the expected behaviour. it means that there's not enough info to complete execution
         if(target==null)
             return null;
         Set<Figure> pSet = new HashSet<>();
@@ -83,7 +84,6 @@ public class AimComparator {
                 case "me":
                     pSet.add(w.getOwner());
                     break;
-
 
             }
         }

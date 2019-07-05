@@ -26,6 +26,7 @@ public class SServer extends ConnectionTech {
     /**
      * Initialize connection and wait for client to connect
      */
+    @Override
     public void run() {
         try {
             ServerSocket server = new ServerSocket(super.getPort());

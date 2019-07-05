@@ -63,7 +63,7 @@ public class CliGame implements ViewClient {
      */
     public String genericChoice(ArrayList<String> args,String q, String error, boolean printArgs) {
         int i =1;
-        String temp[];
+        String[] temp;
         int reply=0;
         do {
             i=1;
@@ -95,6 +95,7 @@ public class CliGame implements ViewClient {
         String s ="";
         int reply=0;
         try {
+            //clean the input
             while(sc.ready()) {
                 sc.read();
             }
@@ -133,7 +134,7 @@ public class CliGame implements ViewClient {
      */
     public String showWeapon(ArrayList<String> args) {
         int i;
-        String temp[];
+        String[] temp;
         int reply=0;
         do {
             i=1;
@@ -165,7 +166,7 @@ public class CliGame implements ViewClient {
      */
     public String showActions(ArrayList<String> args) {
         int i =1;
-        String temp[];
+        String[] temp;
         int reply=0;
         do {
             i=1;
@@ -293,10 +294,8 @@ public class CliGame implements ViewClient {
     public String chooseDirection(ArrayList<String> args) {
         clearScreen();
         board.draw();
-        String[] temp;
-        ArrayList<String> allTargets=new ArrayList<>();
 
-        int i =1;
+        int i=0;
         String reply="";
         while(true){
             i=1;
@@ -345,12 +344,9 @@ public class CliGame implements ViewClient {
                 s = sc.readLine();
             while (s.isEmpty());
 
-            if (s.equals("s")||s.equals("S")||s.equals("y")||s.equals("Y"))
-                return true;
-            else
-                return false;
+            return (s.equals("s")||s.equals("S")||s.equals("y")||s.equals("Y"));
+
         }catch (IOException e){
-            e.printStackTrace();
             return false;
         }
     }
@@ -402,7 +398,7 @@ public class CliGame implements ViewClient {
      */
     public String showEffects(ArrayList<String> args) {
         int i;
-        String temp[];
+        String[] temp;
         int reply=0;
         do {
             i=1;
@@ -467,7 +463,6 @@ public class CliGame implements ViewClient {
                 i++;
             }
             if(!allTargets.isEmpty()) {
-//                System.out.println(RESET + allTargets.size() + SHOW_TARGET_SELECTED);
                 System.out.print("[ ");
                 for (String s : allTargets) {
                     board.printPawn(s);
@@ -478,6 +473,7 @@ public class CliGame implements ViewClient {
             System.out.println();
             String s;
             try {
+                //clean the input
                 while(sc.ready()) {
                     sc.read();
                 }

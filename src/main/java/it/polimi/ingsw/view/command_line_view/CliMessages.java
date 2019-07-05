@@ -125,4 +125,5 @@ public class CliMessages {
            System.out.print("\n");
     }
 
+    private CliMessages(){}
 }

@@ -6,10 +6,8 @@ import it.polimi.ingsw.model.cards.Card;
 import it.polimi.ingsw.model.cards.WeaponDeck;
 import it.polimi.ingsw.utils.FileLoader;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -19,6 +17,8 @@ import java.util.Iterator;
  */
 
 public class WeaponDeckBuilder {
+
+    private WeaponDeckBuilder(){}
 
     public static WeaponDeck buildDeck(){
         FileLoader fileLoader = new FileLoader();

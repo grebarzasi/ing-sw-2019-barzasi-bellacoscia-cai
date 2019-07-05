@@ -27,6 +27,7 @@ public class SClient extends ConnectionTech {
      * Initialize connection and input and output streams
      */
 
+        @Override
         public void run() {
             try {
                 this.server = new Socket(super.getIp(), super.getPort());

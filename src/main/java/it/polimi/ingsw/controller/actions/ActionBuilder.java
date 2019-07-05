@@ -42,7 +42,8 @@ public class ActionBuilder {
     private static final int FIRST_PLAYER_FRENZY_PICK_RANGE = 3;
     private static final int FIRST_PLAYER_FRENZY_MOVE_RELOAD_SHOOT_RANGE = 2;
 
-
+    private  ActionBuilder(){
+    }
     /**
      * Generates available actions based on information taken from the game
      *

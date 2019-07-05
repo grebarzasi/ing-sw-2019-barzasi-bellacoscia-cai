@@ -1727,7 +1727,7 @@ public class GameJavaFX extends Application implements ViewClient {
                         hideCell(btnCell.get(getCoordinate(s)), 0.5);
                     }
                 } else
-                    msg.setText(WAIT);
+                    msg.setText(WAIT_TURN);
 
             });
 
@@ -1747,7 +1747,7 @@ public class GameJavaFX extends Application implements ViewClient {
                     }
 
                 } else
-                    msg.setText(WAIT);
+                    msg.setText(WAIT_TURN);
             });
 
             btnShoot.setOnAction(e -> {
@@ -1765,7 +1765,7 @@ public class GameJavaFX extends Application implements ViewClient {
                         }
                     }
                 } else
-                    msg.setText(WAIT);
+                    msg.setText(WAIT_TURN);
             });
 
             btnPowerUp.setOnAction(e -> {

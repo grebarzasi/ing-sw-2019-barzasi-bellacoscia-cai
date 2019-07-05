@@ -40,6 +40,7 @@ public class RmiServer extends ConnectionTech implements RmiServerInterface {
 
     public boolean connected(){return true;};
 
+    @Override
     public void run(){
 
         try {

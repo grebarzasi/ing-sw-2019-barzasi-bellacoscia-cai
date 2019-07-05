@@ -13,6 +13,9 @@ import java.util.Iterator;
  * @author Gregorio Barzasi
  */
 public class AimingBuilder {
+
+    private AimingBuilder(){}
+
     public static TargetAcquisition buildTargetAcquisition(JsonNode targetNode) {
 
         //create aiming filter array
@@ -128,7 +131,6 @@ public class AimingBuilder {
         ArrayList<String> source = new ArrayList<>();
         Iterator<JsonNode> element = node.elements();
         while (element.hasNext()) {
-//            source.add(element.next().toString().replace("\"", ""));
             source.add(element.next().textValue());
         }
         return new AimEqual(source);

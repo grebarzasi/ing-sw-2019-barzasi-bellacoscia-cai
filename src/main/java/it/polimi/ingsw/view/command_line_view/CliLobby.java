@@ -5,7 +5,6 @@ import it.polimi.ingsw.view.virtual_model.VirtualLobby;
 import it.polimi.ingsw.view.virtual_model.VirtualPlayer;
 
 import static it.polimi.ingsw.Color.*;
-import static it.polimi.ingsw.connection.ConnMessage.SHOW_WEAPONS;
 import static it.polimi.ingsw.view.command_line_view.CliMessages.*;
 
 import java.io.BufferedReader;
@@ -15,9 +14,8 @@ import java.io.IOException;
  * class used to log into the game
  * @author Gregorio Barzasi
  */
-public class CliLobby extends Thread{
+public class CliLobby{
 
-    public static final int THREAD_PRIORITY=3;
     private Thread t;
     private VirtualLobby lobby;
     private ConnectionTech c;
@@ -98,13 +96,16 @@ public class CliLobby extends Thread{
             try {
                 while(true) {
                     lobby.pingRmi();
-                    sleep(500);
+                    Thread.sleep(500);
                 }
-            } catch (IOException e) {
-            }catch (InterruptedException x){}
+            } catch (IOException | InterruptedException ignored) {
+            }
         });
 
-        t.start();
+        if(c.isRmi()) {
+            t.start();
+        }
+
         System.out.println(LOBBY_HEAD);
 
         String temp;
@@ -150,10 +151,10 @@ public class CliLobby extends Thread{
                     flag=false;
                 }
             lobby.waitUpdate();
-            for(VirtualPlayer p : lobby.getNewPlayersList() ){
-                if (!p.isPrinted()) {
-                    System.out.println(p.getUsername() + " con " + p.getCharacter() + ": è"+GREEN_BOLD+" Pronto!"+RESET);
-                    p.setPrinted(true);
+            for(VirtualPlayer e : lobby.getNewPlayersList() ){
+                if (!e.isPrinted()) {
+                    System.out.println(e.getUsername() + " con " + e.getCharacter() + ": è"+GREEN_BOLD+" Pronto!"+RESET);
+                    e.setPrinted(true);
                 }
             }
 

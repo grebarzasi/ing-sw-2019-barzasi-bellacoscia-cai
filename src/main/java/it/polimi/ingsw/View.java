@@ -95,7 +95,7 @@ public interface View {
      * @return outcome of the update
      */
 
-    boolean sendsUpdate(String s);
+    void sendsUpdate(String s);
 
     /**
      * Displays the list of figures a player can target with an effect of a weapon

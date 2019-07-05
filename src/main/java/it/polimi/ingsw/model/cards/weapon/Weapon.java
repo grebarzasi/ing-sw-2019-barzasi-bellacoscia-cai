@@ -40,10 +40,7 @@ public class Weapon implements Card {
      * indicates that your weapon is loaded
      */
     private boolean isLoaded;
-    /**
-     * saves the state of the weapon
-     */
-    private int indexTemp;
+
 
     /**
      * if not null indicates that a filter need an action from a player to determine a direction
@@ -158,14 +155,13 @@ public class Weapon implements Card {
 
         if(basicEffect!=null&&!basicEffect.isUsed()&&(alternativeEffect==null||!alternativeEffect.isUsed()))
             usable.add(basicEffect);
-        if(alternativeEffect!=null&&!alternativeEffect.isUsed()&&!basicEffect.isUsed())
+        if(alternativeEffect!=null&&!alternativeEffect.isUsed()&&(basicEffect!=null&&!basicEffect.isUsed()))
             usable.add(alternativeEffect);
-        if(addOneEffect!=null&&!addOneEffect.isUsed()&&basicEffect.isUsed())
+        if(addOneEffect!=null&&!addOneEffect.isUsed()&&(basicEffect!=null&&basicEffect.isUsed()))
                 usable.add(addOneEffect);
-        if(addTwoEffect!=null&&!addTwoEffect.isUsed()&&basicEffect.isUsed())
-            if(!orderedAdd||addOneEffect.isUsed())
-                usable.add(addTwoEffect);
-        if((extraMove!=null&&!extraMove.isUsed())&&(beforeBasic||basicEffect.isUsed()))
+        if (addTwoEffect != null && !addTwoEffect.isUsed() && (basicEffect != null && basicEffect.isUsed()) && (!orderedAdd || (addOneEffect != null && addOneEffect.isUsed())))
+            usable.add(addTwoEffect);
+        if((extraMove!=null&&!extraMove.isUsed())&&(beforeBasic||(basicEffect!=null&&basicEffect.isUsed())))
             usable.add(extraMove);
         return usable;
     }
@@ -197,7 +193,7 @@ public class Weapon implements Card {
 
     //setters&getters
     public void setBeforeBasicExtra(boolean b){
-        this.beforeBasic=false;
+        this.beforeBasic=b;
     }
 
     public String getName() {

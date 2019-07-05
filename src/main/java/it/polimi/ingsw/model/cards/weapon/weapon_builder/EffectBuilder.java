@@ -17,6 +17,7 @@ import java.util.Iterator;
  */
 public class EffectBuilder {
 
+    private EffectBuilder(){}
     public static Effect buildEffect(JsonNode effectsNode){
         //initialize effect cost
         Ammo cost = buildCost(effectsNode.path("cost"));

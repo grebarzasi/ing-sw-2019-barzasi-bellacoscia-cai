@@ -89,7 +89,7 @@ public class GUIFiles {
     public static final String ERR_PLAYER = "Giocatore non disponibile";
     public static final String ERR_WEAPON = "Arma scarica";
     public static final String CHOOSE_DIRECTION = "Scegli un quadrato nella direzione desiderata";
-    public static final String WAIT = "Aspetta il tuo turno...";
+    public static final String WAIT_TURN = "Aspetta il tuo turno...";
 
 
     public static final String YELLOW = "yellow";
@@ -117,5 +117,7 @@ public class GUIFiles {
     public static final int Y = 0;
     public static final int G = 2;
     public static final int GR = 1;
+
+    private GUIFiles(){}
 
 }

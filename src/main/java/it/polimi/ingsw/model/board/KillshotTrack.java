@@ -68,12 +68,12 @@ public class KillshotTrack {
             }else {
 
                 for (i = 0; i < orderedList.size(); i++) {
-                    if (killsPerPlayer.get(f) >= killsPerPlayer.get(orderedList.get(i)) && added == false){
+                    if (killsPerPlayer.get(f) >= killsPerPlayer.get(orderedList.get(i)) && !added){
                         orderedList.add(i,f);
                         added = true;
                     }
                 }
-                if(added == false){
+                if(!added){
                     orderedList.add(f);
                 }
 

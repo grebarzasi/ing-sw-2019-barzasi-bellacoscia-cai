@@ -7,8 +7,6 @@ import it.polimi.ingsw.view.virtual_model.VirtualModel;
 import it.polimi.ingsw.view.virtual_model.VirtualPlayer;
 import static it.polimi.ingsw.view.command_line_view.CLiBoardStuff.*;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import static it.polimi.ingsw.Color.*;
@@ -22,10 +20,7 @@ import static it.polimi.ingsw.connection.ConnMessage.INNER_SEP;
 
 public class CliBoard {
     public static final String TERMINATOR_NAME = "THANOS";
-    /**
-     * saves the map itself
-     */
-    private String all="";
+
 
     /**
      * saves the last color used in the drawing process
@@ -67,8 +62,6 @@ public class CliBoard {
      */
     public void draw(){
         armory.clear();
-//        if(all.isEmpty())
-//            loadMap();
         cellsPlnum=12;
         cellsCPnum=12;
         boardPrinted=0;
@@ -85,14 +78,10 @@ public class CliBoard {
                 }
             }
         }catch(IOException e){
-            System.err.print("something went wrong drawing the board");
+            System.err.println("Qualcosa è andato storto nella scrittura della board di gioco");
         }
     }
 
-
-    public void loadMap(){
-
-    }
 
 
     /**
@@ -359,10 +348,8 @@ public class CliBoard {
 
     public void createBoard1(VirtualPlayer p) {
         int i = 0;
-        //System.out.print(RESET+BOARD_LEFT);
 
         //UsernameSpace
-        //System.out.print(WHITE+"╲");
         System.out.print(RESET+""+BLACK_BOLD+"");
         if (p.getCharacter().equals(model.getTurn().getCharacter())) {
             System.out.print(WHITE_B);
@@ -386,7 +373,6 @@ public class CliBoard {
 
         printPawn(p.getCharacter());
         //Print marks
-        //System.out.print(WHITE+"╱"+"╲"+WHITE_UNDERLINED+" ╭");
         System.out.print(WHITE_UNDERLINED+"   ["+WHITE_BOLD+(model.getAllPlayers().indexOf(p)+1)+""+WHITE_UNDERLINED+"] ╭"+WHITE);
 
         for (String d : p.getpBoard().getMarks()) {
@@ -552,7 +538,7 @@ public class CliBoard {
     public void printPU(int k,VirtualPlayer p){
         if(!model.getOwner().equals(p))
             return;
-        String pu[];
+        String[] pu;
         if(model.getOwner().getPowerUps().size()>k){
             pu= model.getOwner().getPowerUps().get(k).split(":");
             System.out.print("├──< "+pu[0]+" [");

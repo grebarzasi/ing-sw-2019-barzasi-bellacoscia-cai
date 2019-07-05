@@ -277,7 +277,6 @@ public class ServerCommManager  extends Thread implements View {
             try {
                 t.join();
             } catch (InterruptedException e) {
-                e.printStackTrace();
             }
         }
         else if(!handleInactivity(t))
@@ -301,9 +300,7 @@ public class ServerCommManager  extends Thread implements View {
             setInUse(false);
             try {
                 sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            } catch (InterruptedException e){}
         }catch(IOException e){
             handleDisconnection();
         }
@@ -462,10 +459,10 @@ public class ServerCommManager  extends Thread implements View {
         return target;
     }
 
-    public boolean sendsUpdate(String s){
+    public void sendsUpdate(String s){
         updateBuffer = s;
         if(owner.isInactive()||owner.isDisconnected()) {
-            return true;
+            return;
         }
         setInUse(true);
         try{
@@ -479,7 +476,6 @@ public class ServerCommManager  extends Thread implements View {
         }catch(IOException e){
             handleDisconnection();
         }
-       return true;
     }
 
 
@@ -504,7 +500,6 @@ public class ServerCommManager  extends Thread implements View {
                 try {
                     sleep(10);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }
             }
             System.out.print(countdown-i+"s ");
@@ -560,9 +555,7 @@ public class ServerCommManager  extends Thread implements View {
             while(isDisconnected()) {
                 try {
                     sleep(1000);
-                } catch (InterruptedException d) {
-                    d.printStackTrace();
-                }
+                } catch (InterruptedException d) {}
             }
             if(isRmi()) {
                 while (rmiHandler.getViewClient() == null) ;
@@ -587,7 +580,7 @@ public class ServerCommManager  extends Thread implements View {
         return rmi;
     }
 
-    public void setRmi(boolean rmi) {
+    public synchronized void setRmi(boolean rmi) {
         this.rmi = rmi;
     }
 
