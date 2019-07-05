@@ -33,10 +33,12 @@ import javafx.util.Duration;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.ConnectException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
+import static it.polimi.ingsw.view.command_line_view.CliMessages.CONNECTION_ERR;
 import static it.polimi.ingsw.view.graphical_view.GUIFiles.*;
 import static java.lang.Thread.sleep;
 
@@ -58,7 +60,7 @@ public class LobbyJavaFX extends Application {
     private double heightPlayers;
 
     private boolean reconnected;
-
+    private Thread t;
 
     private boolean terminator;
     private boolean frenzy;
@@ -123,6 +125,19 @@ public class LobbyJavaFX extends Application {
      */
     public void start(Stage primaryStage) throws Exception {
 
+        t = new Thread(() -> {
+            try {
+                while(true) {
+                    lobby.pingRmi();
+                    Thread.sleep(500);
+                }
+            } catch (IOException | InterruptedException ignored) {
+            }
+        });
+
+        if(conn.isRmi()) {
+            t.start();
+        }
 
         this.primaryStage = primaryStage;
 
@@ -291,7 +306,9 @@ public class LobbyJavaFX extends Application {
             System.out.println("thread");
             while(!lobby.isGameStarted()){
                 try {
-                    lobby.waitUpdate();
+                        lobby.waitUpdate();
+
+
                     for (VirtualPlayer p : lobby.getNewPlayersList()) {
                         if(!p.isPrinted()) {
                             Platform.runLater(() -> {
@@ -303,7 +320,8 @@ public class LobbyJavaFX extends Application {
                     }
 
                 } catch (IOException ex) {
-                    ex.printStackTrace();
+                    System.err.println(CONNECTION_ERR);
+                    System.exit(0);
                 }
             }
             System.out.println("game started");
@@ -352,6 +370,8 @@ public class LobbyJavaFX extends Application {
      * starts the game
      */
     public void gameStart(){
+
+        t.interrupt();
 
         if(!conn.isRmi()){
             ((SClient)conn).setCommManager(new SClientCommManager(((SClient)conn),game));

@@ -9,6 +9,7 @@ import static it.polimi.ingsw.view.command_line_view.CliMessages.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.net.ConnectException;
 
 /**
  * class used to log into the game
@@ -156,7 +157,11 @@ public class CliLobby{
                     System.out.println(COUNTDOWN_START);
                     flag=false;
                 }
-            lobby.waitUpdate();
+                try {
+                    lobby.waitUpdate();
+                }catch(ConnectException x){
+                    System.err.println(CONNECTION_ERR);
+                }
             for(VirtualPlayer e : lobby.getNewPlayersList() ){
                 if (!e.isPrinted()) {
                     System.out.println(e.getUsername() + " con " + e.getCharacter() + ": è"+GREEN_BOLD+" Pronto!"+RESET);

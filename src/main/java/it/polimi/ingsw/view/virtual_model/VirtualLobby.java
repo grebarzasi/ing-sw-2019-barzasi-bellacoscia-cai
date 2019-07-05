@@ -5,6 +5,7 @@ import it.polimi.ingsw.connection.client.RmiClient;
 import it.polimi.ingsw.connection.client.SClient;
 
 import java.io.IOException;
+import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -105,6 +106,8 @@ public class VirtualLobby {
         String [] allPl = s.split(INFO_SEP);
         for(String p : allPl){
             String [] plStat = p.split(":");
+            if(plStat[0].isEmpty())
+                break;
             if(!players.containsKey(plStat[0])){
                 VirtualPlayer pla = new VirtualPlayer(plStat[0],plStat[1]);
                 players.put(plStat[0],pla);
