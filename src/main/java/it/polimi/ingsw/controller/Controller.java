@@ -459,7 +459,7 @@ public class Controller {
 
         while(removeNoVenoms.hasNext()){
             Player p = removeNoVenoms.next();
-            ArrayList<PowerUp> options = p.getPowerupList();
+            ArrayList<PowerUp> options = new ArrayList<>(p.getPowerupList());
 
             filterPUs(options,PowerUp.TAGBACK_GRENADE);
             if(p.getPowerupList().isEmpty()){
