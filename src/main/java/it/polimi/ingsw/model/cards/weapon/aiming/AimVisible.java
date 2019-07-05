@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.Figure;
 import it.polimi.ingsw.model.cards.weapon.TargetAcquisition;
 import it.polimi.ingsw.model.cards.weapon.Weapon;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -71,6 +72,12 @@ public class AimVisible implements AimingFilter {
         if(visible) {
             p.retainAll(all);
         } else {
+            //remove not spawned players
+            Set<Figure> temp = new HashSet<>(all);
+            for(Figure f : temp) {
+                if (f.isDead())
+                    all.remove(f);
+            }
             p.removeAll(all);
         }
         return p;
