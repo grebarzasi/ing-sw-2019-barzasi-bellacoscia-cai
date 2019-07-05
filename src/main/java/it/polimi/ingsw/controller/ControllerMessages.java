@@ -7,6 +7,10 @@ package it.polimi.ingsw.controller;
 
 class ControllerMessages {
 
+     private ControllerMessages(){
+
+     }
+
      static final String ASK_TARGET = "Scegli un bersaglio da colpire: ";
      static final String GAME_OVER = "Game is over ";
      static final String ASKING_VENOM = "Vuoi usare una Granata Venom? ";

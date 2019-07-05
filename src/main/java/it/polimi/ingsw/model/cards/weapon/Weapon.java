@@ -19,7 +19,7 @@ import java.util.*;
  */
 
 
-public class Weapon extends Card {
+public class Weapon implements Card {
     /**
      * the owner of the weapon
      */

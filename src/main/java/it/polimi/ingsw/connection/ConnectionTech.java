@@ -108,6 +108,7 @@ public abstract class ConnectionTech extends Thread {
     }
 
     public abstract void run();
+
     public abstract boolean connected();
 
     public int getCountdown() {

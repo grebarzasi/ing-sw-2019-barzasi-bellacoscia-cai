@@ -4,6 +4,11 @@ package it.polimi.ingsw;
  * classes that collect all colors available in terminal
  */
 public class Color {
+
+    private Color(){
+
+    }
+
     public static final String RESET = "\u001B[0m";
 
     public static final String BLACK = "\u001B[30m";

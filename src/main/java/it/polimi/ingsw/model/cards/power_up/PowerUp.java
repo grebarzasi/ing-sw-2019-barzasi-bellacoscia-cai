@@ -9,7 +9,7 @@ import it.polimi.ingsw.model.cards.Card;
  * @author Carlo Bellacoscia
  */
 
-public class PowerUp extends Card {
+public class PowerUp implements Card {
 
 
     public static final String TELEPORTER = "Teletrasporto";

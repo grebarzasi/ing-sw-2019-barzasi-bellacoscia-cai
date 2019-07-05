@@ -24,7 +24,7 @@ Armory {
     /**
      * Defines the maximum capacity
      */
-    private static final int maxCapacity = 3;
+    private static final int MAX_CAPACITY = 3;
 
     /**
      * Checks if the armory is at maximum capacity of 3
@@ -35,7 +35,7 @@ Armory {
 
     public boolean isFull(){
 
-        return this.weaponList.size() == maxCapacity;
+        return this.weaponList.size() == MAX_CAPACITY;
     }
 
     public Armory(ArrayList<Weapon> weaponList) {

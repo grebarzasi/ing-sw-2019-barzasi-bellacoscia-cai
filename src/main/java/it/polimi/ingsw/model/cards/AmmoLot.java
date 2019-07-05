@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.cards;
 
 
-public class AmmoLot extends Card {
+public class AmmoLot implements Card {
 
 
     private boolean powerup;

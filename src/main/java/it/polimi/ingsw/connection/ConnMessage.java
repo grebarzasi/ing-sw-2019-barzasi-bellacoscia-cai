@@ -6,6 +6,10 @@ package it.polimi.ingsw.connection;
         */
 public class ConnMessage {
 
+    private ConnMessage(){
+
+    }
+
     public static final String PING = "*PING*";
     public static final String PONG = "*PONG*";
     public static final String AKN = "*OK*";

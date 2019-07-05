@@ -9,6 +9,10 @@ import static it.polimi.ingsw.Color.RESET;
         */
 public class DisconnectionHandler {
 
+    private DisconnectionHandler(){
+
+    }
+
     public static final String CONNECTION_ERR = "Qualcosa è andato storto, verifica la connessione con il server!"+RESET;
     public static final String SOCKET_S_ERR=RED+"Socket Server: qualcosa è andato storto!";
     public static final String RMI_S_ERR=RED+"Rmi Server: qualcosa è andato storto!";
