@@ -304,6 +304,9 @@ public class LobbyJavaFX extends Application {
 
         Thread thread = new Thread(()->{
             System.out.println("thread");
+            if(t.isAlive())
+                t.interrupt();
+
             while(!lobby.isGameStarted()){
                 try {
                         lobby.waitUpdate();
@@ -371,7 +374,7 @@ public class LobbyJavaFX extends Application {
      */
     public void gameStart(){
 
-        t.interrupt();
+
 
         if(!conn.isRmi()){
             ((SClient)conn).setCommManager(new SClientCommManager(((SClient)conn),game));

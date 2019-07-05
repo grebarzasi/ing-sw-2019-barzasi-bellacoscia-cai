@@ -49,9 +49,9 @@ public abstract class ConnectionTech extends Thread {
      */
     public void acquirePort(){
         try {
-            int p=readPort();
-            if(p!=0)
-                setPort(p);
+            int port=readPort();
+            if(port!=0)
+                setPort(port);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -63,7 +63,7 @@ public abstract class ConnectionTech extends Thread {
     public int readPort()throws IOException {
         BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
 
-        int p;
+        int port;
         System.out.println("\n"+PORT_SELECT);
 
         do {
@@ -72,15 +72,15 @@ public abstract class ConnectionTech extends Thread {
                 return 0;
             }
             try {
-                p = Integer.parseInt(s);
+                port = Integer.parseInt(s);
             }catch(NumberFormatException e){
-                p=0;
+                port=0;
             }
-            if (p <= 1023 || p > 49151) {
+            if (port <= 1023 || port > 49151) {
                 System.out.println(PORT_ERR);
             }
-        } while (p <= 1023 || p > 49151);
-        return p;
+        } while (port <= 1023 || port > 49151);
+        return port;
     }
 
     public void setIp(String ip) {
