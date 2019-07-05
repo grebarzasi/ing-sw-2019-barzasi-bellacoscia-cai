@@ -206,9 +206,6 @@ public class LeaderboardJavaFX extends Application {
                 txt1.setFont(Font.font("Verdana", FontWeight.BOLD,24));
 
             }
-            default:{
-
-            }
         }
 
         grid.add(h1,0,1);

@@ -32,7 +32,6 @@ import static it.polimi.ingsw.view.command_line_view.CLiBoardStuff.*;
 import static it.polimi.ingsw.connection.ConnMessage.*;
 import static it.polimi.ingsw.view.command_line_view.CliBoard.TERMINATOR_NAME;
 import static it.polimi.ingsw.view.graphical_view.GUIFiles.*;
-import static it.polimi.ingsw.view.command_line_view.CliMessages.*;
 import static it.polimi.ingsw.view.graphical_view.GUIFiles.CHOOSE_DIRECTION;
 import static java.lang.Thread.sleep;
 
@@ -50,7 +49,6 @@ public class GameJavaFX extends Application implements ViewClient {
     private boolean move;
     private boolean pick;
     private boolean shoot;
-    private boolean reset;
 
 
     private VirtualModel model;
@@ -59,15 +57,12 @@ public class GameJavaFX extends Application implements ViewClient {
 
     private UpdateParser parser;
 
-    private Font font;
     private Image emptyCell;
     private Image backBtn;
 
-    private String action;
 
     private ArrayList<ArrayList<Button>> btnCell;
     private TextField msg;
-    private TextField pointsField;
     private GridPane gridSkull;
 
     private Button btnMove;
@@ -75,15 +70,13 @@ public class GameJavaFX extends Application implements ViewClient {
     private Button btnShoot;
     private Button btnEnd;
     private Button btnCancel;
-    private Button btnDeck;
     private Button btnTerminator;
     private Button btnPowerUp;
     private Button btnDiscard;
     private Button btnEmpty;
     private Background btnEmptyBG;
 
-
-
+    private String action;
 
     private GridPane gridPBoard;
 
@@ -174,14 +167,12 @@ public class GameJavaFX extends Application implements ViewClient {
         move = false;
         pick = false;
         shoot = false;
-        reset = false;
 
         parser = new UpdateParser(model);
 
         game = new VirtualGame();
-        font = new Font(20);
-            emptyCell = new Image(fileLoader.getResource(PATH_EMPTY_DAMAGE),widthCenter,heightCenter,true,true);
-            backBtn = new Image(fileLoader.getResource(PATH_BACK_POINTS), 100, 100, true, true);
+        emptyCell = new Image(fileLoader.getResource(PATH_EMPTY_DAMAGE),widthCenter,heightCenter,true,true);
+        backBtn = new Image(fileLoader.getResource(PATH_BACK_POINTS), 100, 100, true, true);
 
 
 
@@ -189,7 +180,6 @@ public class GameJavaFX extends Application implements ViewClient {
 
         btnCell = new ArrayList<>();
         msg = new TextField();
-        pointsField = new TextField();
         gridSkull = new GridPane();
         btnMove = new Button(MOVE);
         btnPick = new Button(PICK);
@@ -199,7 +189,6 @@ public class GameJavaFX extends Application implements ViewClient {
         btnTerminator = new Button(TERMINATOR);
         btnDiscard = new Button(DISCARD);
         btnPowerUp = new Button(POWER_UP);
-        btnDeck = new Button();
         gridPBoard = new GridPane();
 
         btnPwe1 = new Button();
@@ -263,7 +252,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
-        FileLoader fileLoader = new FileLoader();
+        FileLoader fileLoader1 = new FileLoader();
         this.primaryStage = primaryStage;
 
         primaryStage.setTitle("ADRENALINA");
@@ -281,7 +270,7 @@ public class GameJavaFX extends Application implements ViewClient {
         scene.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> grid.setPrefHeight((double) newSceneHeight));
 
         //set Background.
-            Image back1 = new Image(fileLoader.getResource(PATH_BACK_GAME), widthScreen + widthLateral, heightScreen + heightLateral, true, true);
+            Image back1 = new Image(fileLoader1.getResource(PATH_BACK_GAME), widthScreen + widthLateral, heightScreen + heightLateral, true, true);
             BackgroundImage backgroundImage = new BackgroundImage(back1, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
             grid.setBackground(new Background(backgroundImage));
 
@@ -307,14 +296,14 @@ public class GameJavaFX extends Application implements ViewClient {
         grid.getRowConstraints().addAll(r1, r2, r3);
 
         //set title.
-        ImageView imgTitle = new ImageView(new Image(fileLoader.getResource(PATH_TITLE), widthCenter, heightLateral, true, true));
+        ImageView imgTitle = new ImageView(new Image(fileLoader1.getResource(PATH_TITLE), widthCenter, heightLateral, true, true));
         grid.add(imgTitle, 1, 0);
 
 
         //set Killshot track.
         gridSkull.setPadding(new Insets(100, 0, 80, 0));
 
-        Image imgTrack = new Image(fileLoader.getResource(PATH_TRACK), widthLateral, heightLateral, true, true);
+        Image imgTrack = new Image(fileLoader1.getResource(PATH_TRACK), widthLateral, heightLateral, true, true);
         BackgroundImage backgroundSkull = new BackgroundImage(imgTrack, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background backSkull = new Background(backgroundSkull);
 
@@ -347,19 +336,19 @@ public class GameJavaFX extends Application implements ViewClient {
         Image imgBoard = null;
         switch (model.getBoard().getMap().getName()) {
             case ("medium1"): {
-                imgBoard = new Image(fileLoader.getResource(PATH_MEDIUM1_MAP), widthCenter, heightCenter, true, true);
+                imgBoard = new Image(fileLoader1.getResource(PATH_MEDIUM1_MAP), widthCenter, heightCenter, true, true);
                 break;
             }
             case ("small"): {
-                imgBoard = new Image(fileLoader.getResource(PATH_SMALL_MAP), widthCenter, heightCenter, true, true);
+                imgBoard = new Image(fileLoader1.getResource(PATH_SMALL_MAP), widthCenter, heightCenter, true, true);
                 break;
             }
             case ("large"): {
-                imgBoard = new Image(fileLoader.getResource(PATH_LARGE_MAP), widthCenter, heightCenter, true, true);
+                imgBoard = new Image(fileLoader1.getResource(PATH_LARGE_MAP), widthCenter, heightCenter, true, true);
                 break;
             }
             case ("medium2"): {
-                imgBoard = new Image(fileLoader.getResource(PATH_MEDIUM2_MAP), widthCenter, heightCenter, true, true);
+                imgBoard = new Image(fileLoader1.getResource(PATH_MEDIUM2_MAP), widthCenter, heightCenter, true, true);
                 break;
             }
         }
@@ -450,23 +439,23 @@ public class GameJavaFX extends Application implements ViewClient {
 
         switch (model.getOwner().getCharacter()) {
             case YELLOW: {
-                imgPBoard = new Image(fileLoader.getResource(PATH_YELLOW_BOARD), widthPers, heightPBoard, true, true);
+                imgPBoard = new Image(fileLoader1.getResource(PATH_YELLOW_BOARD), widthPers, heightPBoard, true, true);
                 break;
             }
             case RED: {
-                imgPBoard = new Image(fileLoader.getResource(PATH_RED_BOARD), widthPers, heightPBoard, true, true);
+                imgPBoard = new Image(fileLoader1.getResource(PATH_RED_BOARD), widthPers, heightPBoard, true, true);
                 break;
             }
             case BLUE: {
-                imgPBoard = new Image(fileLoader.getResource(PATH_BLUE_BOARD), widthPers, heightPBoard, true, true);
+                imgPBoard = new Image(fileLoader1.getResource(PATH_BLUE_BOARD), widthPers, heightPBoard, true, true);
                 break;
             }
             case GREEN: {
-                imgPBoard = new Image(fileLoader.getResource(PATH_GREEN_BOARD), widthPers, heightPBoard, true, true);
+                imgPBoard = new Image(fileLoader1.getResource(PATH_GREEN_BOARD), widthPers, heightPBoard, true, true);
                 break;
             }
             case GREY: {
-                imgPBoard = new Image(fileLoader.getResource(PATH_GREY_BOARD), widthPers, heightPBoard, true, true);
+                imgPBoard = new Image(fileLoader1.getResource(PATH_GREY_BOARD), widthPers, heightPBoard, true, true);
                 break;
             }
         }
@@ -663,7 +652,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
 
         //set buttons
-        Image msgBack = new Image(fileLoader.getResource(PATH_BACK_MSG), widthCenter, heightLateral/4, false, true);
+        Image msgBack = new Image(fileLoader1.getResource(PATH_BACK_MSG), widthCenter, heightLateral/4, false, true);
         BackgroundImage backgroundMsg = new BackgroundImage(msgBack, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background backMsg = new Background(backgroundMsg);
         msg.setBackground(backMsg);
@@ -797,11 +786,11 @@ public class GameJavaFX extends Application implements ViewClient {
         GridPane grid = new GridPane();
 
         double heightAmmo = heightBoard / 3;
-        double heightOther = heightAmmo * 2;
+        double heightOther1 = heightAmmo * 2;
 
         ColumnConstraints c1 = new ColumnConstraints(widthBoard);
 
-        RowConstraints r1 = new RowConstraints(heightOther);
+        RowConstraints r1 = new RowConstraints(heightOther1);
         RowConstraints r2 = new RowConstraints(heightAmmo);
 
         grid.getColumnConstraints().add(c1);
@@ -1298,7 +1287,6 @@ public class GameJavaFX extends Application implements ViewClient {
 
         while (k < p.getpBoard().getSkulls() + 4) {
 
-            System.out.println(p.getpBoard().getSkulls());
             if (k <= no) {
                 k++;
                 continue;
@@ -1537,10 +1525,6 @@ public class GameJavaFX extends Application implements ViewClient {
 
                     String key = x + ":" + y;
 
-                    if(x+y == 2 || x+y == 4 || x+y == 11 ){
-                        //chooseWeapon cw = new chooseWeapon(model.getBoard().getMap().getCells().get(key).getContent());
-                        //cw.show();
-                    }
 
 
                     hideBtn(btnCancel, 0);
@@ -1668,15 +1652,6 @@ public class GameJavaFX extends Application implements ViewClient {
             borderGlow2.setOffsetX(0f);
             borderGlow2.setOffsetY(0f);
 
-            if(reset) {
-                for (ArrayList<Button> btnArr : btnCell) {
-                    for (Button btn : btnArr) {
-                    }
-                }
-
-                reset = false;
-            }
-
 
             if (model.getTurn().getCharacter().equals(model.getOwner().getCharacter())) {
                 if(!model.getOwner().isInactive()){
@@ -1693,7 +1668,6 @@ public class GameJavaFX extends Application implements ViewClient {
                     grid.setEffect(null);
                 }
 
-                ArrayList<Button> btns = new ArrayList<>();
                 String turn = model.getTurn().getCharacter();
                 for (VirtualPlayer p: model.getAllPlayers()) {
                     if(turn.equals(p.getCharacter())){
@@ -2196,7 +2170,6 @@ public class GameJavaFX extends Application implements ViewClient {
         while (game.getTargetSquare().equals("")) ;
         String res = game.getTargetSquare();
         game.setTargetSquare("");
-        reset = true;
 
         return res;
     }
@@ -2406,7 +2379,6 @@ public class GameJavaFX extends Application implements ViewClient {
                                 case (GREY): {
                                     hideBtn(btnCell.get(p.getRow() * 4 + p.getColumn()).get(GR), 1);
                                     btnCell.get(p.getRow() * 4 + p.getColumn()).get(GR).setOnAction(e -> {
-                                        System.out.println(p.getCharacter());
                                         game.getTargetPlayers().add(p.getCharacter());
                                     });
                                     break;
@@ -2424,7 +2396,7 @@ public class GameJavaFX extends Application implements ViewClient {
         int max = Integer.parseInt(args.get(0).split(INNER_SEP)[0]);
         Platform.runLater(run);
         int k = game.getTargetPlayers().size();
-        while(game.getTargetPlayers().size() != max);
+        while(k != max);
 
         String res = "";
         for(String targ : game.getTargetPlayers()){
@@ -2437,10 +2409,7 @@ public class GameJavaFX extends Application implements ViewClient {
     @Override
     public boolean showBoolean(String message) {
         Runnable run = () -> {
-            /*
-            decisionWindow dw = new decisionWindow(message);
-            dw.show();
-            */
+
             msg.setText(message);
             hideBtn(btnMove,1);
             hideBtn(btnPick,1);
@@ -2558,8 +2527,8 @@ public class GameJavaFX extends Application implements ViewClient {
             String powerup = null;
             String textPu = null;
 
-            double widthScreen = Screen.getPrimary().getBounds().getWidth() / 3;
-            double heightScreen = Screen.getPrimary().getBounds().getHeight() / 3;
+            double widthScreenInfo = Screen.getPrimary().getBounds().getWidth() / 3;
+            double heightScreenInfo = Screen.getPrimary().getBounds().getHeight() / 3;
 
             Group root = new Group();
             Scene theScene = new Scene(root);
@@ -2575,16 +2544,16 @@ public class GameJavaFX extends Application implements ViewClient {
                 BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
                 grid.setBackground(new Background(backgroundImage));
 
-            Scene scene = new Scene(grid, widthScreen + 50, heightScreen + 50);
+            Scene scene = new Scene(grid, widthScreenInfo + 50, heightScreenInfo + 50);
             this.setScene(scene);
 
             scene.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> grid.setPrefWidth((double) newSceneWidth));
             scene.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> grid.setPrefHeight((double) newSceneHeight));
 
-            ColumnConstraints c1 = new ColumnConstraints(widthScreen / 2);
-            ColumnConstraints c2 = new ColumnConstraints(widthScreen / 2);
+            ColumnConstraints c1 = new ColumnConstraints(widthScreenInfo / 2);
+            ColumnConstraints c2 = new ColumnConstraints(widthScreenInfo / 2);
 
-            RowConstraints r1 = new RowConstraints(heightScreen);
+            RowConstraints r1 = new RowConstraints(heightScreenInfo);
 
             grid.getColumnConstraints().addAll(c1, c2);
             grid.getRowConstraints().add(r1);
@@ -2599,11 +2568,8 @@ public class GameJavaFX extends Application implements ViewClient {
                 try {
 
                     JsonNode rootNodeWe = null;
-                    try {
-                        rootNodeWe = mapper.readTree(jsonFileWe);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    rootNodeWe = mapper.readTree(jsonFileWe);
+
 
                     JsonNode chamberNodeWe = rootNodeWe.path(p.getWeapons().get(i).split(INNER_SEP)[0].toLowerCase());
 
@@ -2616,12 +2582,12 @@ public class GameJavaFX extends Application implements ViewClient {
 
                 ImageView imgWe = null;
 
-                    imgWe = new ImageView(new Image(fileLoader.getResource(PATH_WEAPON + weapon), widthScreen / 2 - 50, heightScreen - 50, true, true));
+                    imgWe = new ImageView(new Image(fileLoader.getResource(PATH_WEAPON + weapon), widthScreenInfo / 2 - 50, heightScreenInfo - 50, true, true));
 
 
                 ImageView imgWe2 = null;
 
-                    imgWe2 = new ImageView(new Image(fileLoader.getResource(PATH_INFO + textWe), widthScreen / 2 + 20, heightScreen + 20, true, true));
+                    imgWe2 = new ImageView(new Image(fileLoader.getResource(PATH_INFO + textWe), widthScreenInfo / 2 + 20, heightScreenInfo + 20, true, true));
 
 
                 grid.add(imgWe, 0, 0);
@@ -2636,11 +2602,8 @@ public class GameJavaFX extends Application implements ViewClient {
                 try {
 
                     JsonNode rootNodePu = null;
-                    try {
-                        rootNodePu = mapper.readTree(jsonFilePU);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    rootNodePu = mapper.readTree(jsonFilePU);
+
                     if (i < p.getPowerUps().size()) {
                         JsonNode chamberNodePu = rootNodePu.path(p.getPowerUps().get(i).split(INNER_SEP)[0].toLowerCase());
 
@@ -2655,12 +2618,12 @@ public class GameJavaFX extends Application implements ViewClient {
 
                         ImageView imgPu = null;
 
-                            imgPu = new ImageView(new Image(fileLoader.getResource(PATH_POWER_UP + powerup), widthScreen / 2 - 50, heightScreen - 50, true, true));
+                            imgPu = new ImageView(new Image(fileLoader.getResource(PATH_POWER_UP + powerup), widthScreenInfo / 2 - 50, heightScreenInfo - 50, true, true));
 
 
                         ImageView imgPu2 = null;
 
-                            imgPu2 = new ImageView(new Image(fileLoader.getResource(PATH_POWER_UP + textPu), widthScreen / 2 + 20, heightScreen + 20, true, true));
+                            imgPu2 = new ImageView(new Image(fileLoader.getResource(PATH_POWER_UP + textPu), widthScreenInfo / 2 + 20, heightScreenInfo + 20, true, true));
 
 
                         grid.add(imgPu, 0, 0);
@@ -2690,8 +2653,8 @@ public class GameJavaFX extends Application implements ViewClient {
 
             this.setTitle("SCEGLI UN'ARMA");
 
-            double widthScreen = Screen.getPrimary().getBounds().getWidth() / 3;
-            double heightScreen = Screen.getPrimary().getBounds().getHeight() / 3;
+            double widthScreenWe = Screen.getPrimary().getBounds().getWidth() / 3;
+            double heightScreenWe = Screen.getPrimary().getBounds().getHeight() / 3;
 
             Group root = new Group();
             Scene theScene = new Scene(root);
@@ -2707,17 +2670,17 @@ public class GameJavaFX extends Application implements ViewClient {
                 grid.setBackground(new Background(backgroundImage));
 
 
-            Scene scene = new Scene(grid, widthScreen + 50, heightScreen + 50);
+            Scene scene = new Scene(grid, widthScreenWe + 50, heightScreenWe + 50);
             this.setScene(scene);
 
             scene.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> grid.setPrefWidth((double) newSceneWidth));
             scene.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> grid.setPrefHeight((double) newSceneHeight));
 
-            ColumnConstraints c1 = new ColumnConstraints(widthScreen / 3);
-            ColumnConstraints c2 = new ColumnConstraints(widthScreen / 3);
-            ColumnConstraints c3 = new ColumnConstraints(widthScreen / 3);
+            ColumnConstraints c1 = new ColumnConstraints(widthScreenWe / 3);
+            ColumnConstraints c2 = new ColumnConstraints(widthScreenWe / 3);
+            ColumnConstraints c3 = new ColumnConstraints(widthScreenWe / 3);
 
-            RowConstraints r = new RowConstraints(heightScreen);
+            RowConstraints r = new RowConstraints(heightScreenWe);
 
             grid.getColumnConstraints().addAll(c1, c2, c3);
             grid.getRowConstraints().add(r);
@@ -2725,9 +2688,9 @@ public class GameJavaFX extends Application implements ViewClient {
             Button we1 = new Button();
             Button we2 = new Button();
             Button we3 = new Button();
-            we1.setPrefSize(widthScreen,heightScreen);
-            we2.setPrefSize(widthScreen,heightScreen);
-            we3.setPrefSize(widthScreen,heightScreen);
+            we1.setPrefSize(widthScreenWe,heightScreenWe);
+            we2.setPrefSize(widthScreenWe,heightScreenWe);
+            we3.setPrefSize(widthScreenWe,heightScreenWe);
             hideBtn(we1,0);
             hideBtn(we2,0);
             hideBtn(we3,0);
@@ -2748,11 +2711,7 @@ public class GameJavaFX extends Application implements ViewClient {
                 try {
 
                     JsonNode rootNodeWe = null;
-                    try {
-                        rootNodeWe = mapper.readTree(jsonFileWe);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    rootNodeWe = mapper.readTree(jsonFileWe);
 
                     JsonNode chamberNodeWe = rootNodeWe.path(s.split(INNER_SEP)[0].toLowerCase());
 
@@ -2764,7 +2723,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
                 Image imgWe = null;
 
-                    imgWe = new Image(fileLoader.getResource(PATH_WEAPON + weapon), widthScreen, heightScreen, true, true);
+                    imgWe = new Image(fileLoader.getResource(PATH_WEAPON + weapon), widthScreenWe, heightScreenWe, true, true);
 
 
                 setButtonBack(btnArr.get(numWe),imgWe);
@@ -2812,8 +2771,8 @@ public class GameJavaFX extends Application implements ViewClient {
         public discardCards(ArrayList<String> cards, boolean pu) {
 
 
-            double widthScreen = Screen.getPrimary().getBounds().getWidth() / 3;
-            double heightScreen = Screen.getPrimary().getBounds().getHeight() / 3;
+            double widthScreenDisc = Screen.getPrimary().getBounds().getWidth() / 3;
+            double heightScreenDisc = Screen.getPrimary().getBounds().getHeight() / 3;
 
             Group root = new Group();
             Scene theScene = new Scene(root);
@@ -2826,24 +2785,24 @@ public class GameJavaFX extends Application implements ViewClient {
             gridDisc.setPadding(new Insets(50, 50, 50, 50));
 
 
-                Image back = new Image(fileLoader.getResource(PATH_BACK_GAME), widthScreen * 3, heightScreen * 3, true, true);
+                Image back = new Image(fileLoader.getResource(PATH_BACK_GAME), widthScreenDisc * 3, heightScreenDisc * 3, true, true);
                 BackgroundImage backgroundImage = new BackgroundImage(back, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
                 gridDisc.setBackground(new Background(backgroundImage));
 
 
-            Scene scene = new Scene(gridDisc, widthScreen + 200, heightScreen + 100);
+            Scene scene = new Scene(gridDisc, widthScreenDisc + 200, heightScreenDisc + 100);
             this.setScene(scene);
 
             scene.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> gridDisc.setPrefWidth((double) newSceneWidth));
             scene.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> gridDisc.setPrefHeight((double) newSceneHeight));
 
-            ColumnConstraints c1 = new ColumnConstraints(widthScreen / 4);
-            ColumnConstraints c2 = new ColumnConstraints(widthScreen / 4);
-            ColumnConstraints c3 = new ColumnConstraints(widthScreen / 4);
-            ColumnConstraints c4 = new ColumnConstraints(widthScreen / 4);
+            ColumnConstraints c1 = new ColumnConstraints(widthScreenDisc / 4);
+            ColumnConstraints c2 = new ColumnConstraints(widthScreenDisc / 4);
+            ColumnConstraints c3 = new ColumnConstraints(widthScreenDisc / 4);
+            ColumnConstraints c4 = new ColumnConstraints(widthScreenDisc / 4);
 
 
-            RowConstraints r = new RowConstraints(heightScreen);
+            RowConstraints r = new RowConstraints(heightScreenDisc);
 
             gridDisc.getColumnConstraints().addAll(c1, c2, c3, c4);
             gridDisc.getRowConstraints().add(r);
@@ -2852,10 +2811,10 @@ public class GameJavaFX extends Application implements ViewClient {
             Button btn2 = new Button();
             Button btn3 = new Button();
             Button btn4 = new Button();
-            btn1.setPrefSize(widthScreen / 4, heightScreen);
-            btn2.setPrefSize(widthScreen / 4, heightScreen);
-            btn3.setPrefSize(widthScreen / 4, heightScreen);
-            btn4.setPrefSize(widthScreen / 4, heightScreen);
+            btn1.setPrefSize(widthScreenDisc / 4, heightScreenDisc);
+            btn2.setPrefSize(widthScreenDisc / 4, heightScreenDisc);
+            btn3.setPrefSize(widthScreenDisc / 4, heightScreenDisc);
+            btn4.setPrefSize(widthScreenDisc / 4, heightScreenDisc);
             hideBtn(btn1, 0);
             hideBtn(btn2, 0);
             hideBtn(btn3, 0);
@@ -2878,11 +2837,8 @@ public class GameJavaFX extends Application implements ViewClient {
 
 
                     JsonNode rootNodeWe = null;
-                    try {
-                        rootNodeWe = mapper.readTree(jsonFileWe);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    rootNodeWe = mapper.readTree(jsonFileWe);
+
 
 
                     for (String name : cards) {
@@ -2893,7 +2849,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
                         Image imgWe = null;
 
-                            imgWe = new Image(fileLoader.getResource(PATH_WEAPON + weapon), widthScreen / 3, heightScreen / 1.5, true, true);
+                            imgWe = new Image(fileLoader.getResource(PATH_WEAPON + weapon), widthScreenDisc / 3, heightScreenDisc / 1.5, true, true);
 
 
                         setButtonBack(btnArr.get(cards.indexOf(name)),imgWe);
@@ -2909,7 +2865,6 @@ public class GameJavaFX extends Application implements ViewClient {
                     e.printStackTrace();
                 }
             }else
-            if(pu){
 
                 this.setTitle("Scegli un Power-up da scartare");
 
@@ -2918,11 +2873,8 @@ public class GameJavaFX extends Application implements ViewClient {
                 try {
 
                     JsonNode rootNodePu = null;
-                    try {
-                        rootNodePu = mapper.readTree(jsonFilePU);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    rootNodePu = mapper.readTree(jsonFilePU);
+
 
                     int i = 0;
                     for (String n : cards) {
@@ -2941,7 +2893,7 @@ public class GameJavaFX extends Application implements ViewClient {
 
                         Image imgPu = null;
 
-                            imgPu = new Image(fileLoader.getResource(PATH_POWER_UP + powerup), widthScreen / 3, heightScreen / 1.5, true, true);
+                            imgPu = new Image(fileLoader.getResource(PATH_POWER_UP + powerup), widthScreenDisc / 3, heightScreenDisc / 1.5, true, true);
 
 
                         final int key = i;
@@ -2961,7 +2913,7 @@ public class GameJavaFX extends Application implements ViewClient {
                     e.printStackTrace();
                 }
 
-            }
+
         }
     }
 
