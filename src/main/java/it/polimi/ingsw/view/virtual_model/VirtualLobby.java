@@ -18,6 +18,7 @@ public class VirtualLobby {
     private ConnectionTech conn;
     private HashMap<String,VirtualPlayer> players;
     private ArrayList<VirtualPlayer> newPlayersList;
+    private ArrayList<VirtualPlayer> disconnectedList;
     private VirtualPlayer owner;
     private int mapPref;
     private int killPref;
@@ -100,7 +101,7 @@ public class VirtualLobby {
             return;
         String [] allPl = s.split(INFO_SEP);
         for(String p : allPl){
-            String [] plStat = p.split(",");
+            String [] plStat = p.split(":");
             if(!players.containsKey(plStat[0])){
                 VirtualPlayer pla = new VirtualPlayer(plStat[0],plStat[1]);
                 players.put(plStat[0],pla);
